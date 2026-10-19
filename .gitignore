@@ -6,6 +6,12 @@
 /img/*.jpeg
 /img/*.png
 
+# Ready-meal photos: originals and the full-size WebP stay local; the site uses webp350 and webp500
+/img/ready/*.jpg
+/img/ready/*.jpeg
+/img/ready/*.png
+/img/ready/webp1000/
+
 # Mockups and reference images made while designing
 /mockup-cooking-guide.png
 /flowchart-carbonara.png

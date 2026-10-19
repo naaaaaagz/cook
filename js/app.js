@@ -4,64 +4,44 @@
   // ---------- Text (English only for now) ----------
   var STRINGS = {
     en: {
-      appName: 'Cook',
-      welcome: "Let's get you set up.",
       options: 'Options',
       theme: 'Theme',
       themeSystem: 'System',
       themeLight: 'Light',
       themeDark: 'Dark',
       close: 'Close',
+      save: 'Save',
+      share: 'Share',
       language: 'Language',
       kitchenLayout: 'Kitchen layout',
-      optional: '(optional)',
       setupLayout: 'Set up kitchen layout',
-      layoutDefault: 'Using the default layout.',
+      layoutNone: 'Not set up yet.',
       layoutSaved: 'Your kitchen layout is saved.',
-      continue: 'Continue',
       landscapeNote: 'Use your device in landscape mode to set up!',
       layoutHelp: 'Drag to move, drag the corner to resize. Things can only overlap the countertop.',
       cancel: 'Cancel',
-      save: 'Save',
       rotate: 'Turn your device sideways to set up your kitchen.',
       back: 'Back',
       pickRecipe: 'Pick a recipe',
-      people: 'people',
+      filters: 'Filters',
+      noResults: 'No recipes match these filters.',
+      cat_soup: 'Soup',
+      cat_main: 'Main',
+      cat_dessert: 'Dessert',
+      cat_side: 'Side dish',
+      readInstead: 'Read instead',
       min: 'min',
-      diet: 'Diet',
-      allergens: 'Allergens',
-      perPerson: 'Per person (estimated)',
-      perPerson_jar: 'Per jar (estimated)',
-      perPerson_batch: 'Per batch (estimated)',
-      howMany: 'For how many people?',
-      howMany_jar: 'How many jars?',
-      howMany_batch: 'How many batches?',
-      count: '{n} people',
-      count_jar: '{n} jars',
-      count_batch: '{n} batches',
-      count1: '1 person',
-      count1_jar: '1 jar',
-      count1_batch: '1 batch',
-      perServing: 'per person',
-      perServing_jar: 'per jar',
-      perServing_batch: 'per batch',
       hours: '{h} h {m} min',
-      carbsShort: 'carbs',
-      proteinShort: 'protein',
-      guideMode: 'How should we guide you?',
-      modeDetailed: 'Detail every step',
-      modeQuick: "I know what I'm doing",
-      showIngredients: 'Show ingredients',
-      hasMeat: 'Has meat',
-      noMeat: 'No meat',
-      pork: 'pork',
-      hasSeafood: 'Has seafood',
-      noSeafood: 'No seafood',
-      vegetarian: 'Vegetarian',
-      notVegetarian: 'Not vegetarian',
-      vegan: 'Vegan',
-      notVegan: 'Not vegan',
-      none: 'None',
+      diet_vegan: 'Vegan',
+      diet_veg: 'Vegetarian',
+      diet_lacto: 'Lacto-Vegetarian',
+      diet_ovo: 'Ovo-Vegetarian',
+      diet_lactoOvo: 'Lacto-Ovo Vegetarian',
+      diet_pesc: 'Pescetarian',
+      meat: 'Meat',
+      pork: 'Pork',
+      fish: 'Fish',
+      containsLabel: 'Contains',
       kcal: 'Energy',
       carbs: 'Carbohydrate',
       protein: 'Protein',
@@ -69,31 +49,82 @@
       satFat: 'of which saturated',
       fiber: 'Fibre',
       salt: 'Salt',
+      carbsShort: 'carbs',
+      proteinShort: 'protein',
+      perServing: 'per person',
+      perServing_jar: 'per jar',
+      perServing_batch: 'per batch',
+      perPerson: 'Per person (estimated)',
+      perPerson_jar: 'Per jar (estimated)',
+      perPerson_batch: 'Per batch (estimated)',
+      guideMode: 'Do you need guidance for every single step?',
+      modeDetailed: 'Detail every step',
+      modeQuick: "I know what I'm doing",
+      howMany: 'For how many people?',
+      howMany_jar: 'How many jars?',
+      howMany_batch: 'How many batches?',
+      adults: 'Adults',
+      adults_jar: 'Jars',
+      adults_batch: 'Batches',
+      children: 'Children',
+      kidsNote: 'Children get half a portion.',
+      fewer: 'Fewer',
+      more: 'More',
+      hazard_alcohol: 'alcohol',
+      hazard_spicy: 'hot spices',
+      hazard_rawEgg: 'raw egg',
+      kidsOmitted: 'this recipe has {x}, we have omitted it in the recipe options below.',
+      kidsSure: 'this recipe has {x}. Are you sure you want to serve this for kids?',
+      warning: 'Warning:',
+      and: 'and',
+      yourWay: 'Do it your way!',
+      ingredients: 'Ingredients',
       ingredientsFor: 'Ingredients for {x}',
+      n_adults: '{n} adults',
+      one_adult: '1 adult',
+      n_children: '{n} children',
+      one_child: '1 child',
+      n_jar: '{n} jars',
+      one_jar: '1 jar',
+      n_batch: '{n} batches',
+      one_batch: '1 batch',
       addShopping: 'Add to shopping list',
       gotEverything: "I got everything, let's start!",
       exit: 'Exit',
       exitConfirm: 'Stop cooking? Your progress will be lost.',
+      elapsed: 'Time',
+      timeLeft: 'Time left',
+      startNow: 'Start now',
       stepsDone: '{d} of {n} steps done',
       mapView: 'Map view',
       listView: 'List view',
+      noLayout: 'No kitchen layout set up. Do it before your next cooking!',
       start: 'Start',
       done: "I'm done",
+      doneMark: '✓ Done',
+      reopen: 'Re-open',
+      fold: 'Fold',
       doneWhen: 'Done when: ',
-      about: 'about {t}',
-      left: '{t} left',
-      over: "Time's up +{t}",
+      waitingFor: 'Waiting for: {x}',
+      firstOthers: 'Finish other steps first!',
+      doThis: 'Do this!',
+      left: 'left',
+      over: 'over',
       newThing: 'New thing to do!',
-      ingredientsHere: 'Ingredients here',
       dontOverdo: "Don't overdo!",
-      stars: '{n} of 5 stars',
+      ingredientsHere: 'Ingredients here',
       tip: 'Tip',
       tipPlaceholder: 'Tip placeholder',
       dismissTip: 'Dismiss tip',
       finishedTitle: 'You did it! Bon appétit!',
       howTaste: 'How does it taste?',
+      stars: '{n} of 5 stars',
+      star1: 'total fail',
+      star2: 'had worse',
+      star3: 'room for improvement',
+      star4: 'pretty good',
+      star5: 'am I chef now?',
       uploadPhoto: 'Upload photo',
-      share: 'Share',
       backHome: 'Back to home',
       moveHint: 'arrow keys move, Alt + arrow keys resize',
       moveArea: 'Move {a} (drag, or use arrow keys)',
@@ -109,7 +140,8 @@
   var lang = 'en';
 
   function t(key, vars) {
-    var s = STRINGS[lang][key] || key;
+    var s = STRINGS[lang][key];
+    if (s === undefined) s = key;
     if (vars) Object.keys(vars).forEach(function (k) { s = s.replace('{' + k + '}', vars[k]); });
     return s;
   }
@@ -127,23 +159,88 @@
   var $ = function (id) { return document.getElementById(id); };
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
 
-  // ---------- Options: theme and language ----------
   // In memory only: this is a one-shot test, nothing is stored on the device.
-  // Changes apply right away; Save or a click outside the popup closes it.
-  $('btn-options').addEventListener('click', function () { $('options-dialog').showModal(); });
-  $('options-dialog').addEventListener('click', function (e) {
-    if (e.target === e.currentTarget) e.currentTarget.close();
+  var state = {
+    screen: 'recipes',
+    layout: null,
+    layoutSaved: false,
+    recipe: null,
+    choices: null,
+    built: null,
+    mapView: false, // desktop toggle
+    filters: { cat: [], cuisine: [] },
+    returnTo: 'recipes'
+  };
+
+  // ---------- Screens ----------
+  var SCREENS = ['recipes', 'layout', 'details', 'cook'];
+  function show(name) {
+    state.screen = name;
+    SCREENS.forEach(function (s) { $('screen-' + s).hidden = s !== name; });
+    window.scrollTo(0, 0);
+  }
+
+  document.addEventListener('click', function (e) {
+    var go = e.target.closest('[data-go]');
+    if (go) {
+      stopCooking();
+      show(go.getAttribute('data-go'));
+    }
   });
+
+  // Dialogs close when you click outside them.
+  document.querySelectorAll('dialog').forEach(function (d) {
+    d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+  });
+
+  // ---------- Options: theme, language, kitchen layout ----------
+  $('btn-options').addEventListener('click', function () { $('options-dialog').showModal(); });
   document.querySelectorAll('input[name="theme"]').forEach(function (r) {
     r.addEventListener('change', function () { document.documentElement.setAttribute('data-theme', r.value); });
   });
-  document.querySelectorAll('.lang-select').forEach(function (sel) {
-    sel.addEventListener('change', function () {
-      lang = sel.value;
-      document.querySelectorAll('.lang-select').forEach(function (s) { s.value = lang; });
-      applyStrings();
+  $('lang-select').addEventListener('change', function (e) {
+    lang = e.target.value;
+    applyStrings();
+  });
+  $('btn-layout').addEventListener('click', function () {
+    $('options-dialog').close();
+    openLayout();
+  });
+
+  // ---------- Written-out recipe ("Read instead") ----------
+  function openRead(r) {
+    $('read-title').textContent = r.name;
+    var body = $('read-body');
+    body.innerHTML = '';
+    var text = (window.RECIPE_TEXTS || {})[r.id] || '';
+    text.split(/\n\s*\n/).forEach(function (block) {
+      var lines = block.split('\n').filter(function (l) { return l.trim(); });
+      var list = null;
+      lines.forEach(function (line, i) {
+        line = line.trim();
+        if (/^•/.test(line)) {
+          if (!list) { list = document.createElement('ul'); body.appendChild(list); }
+          var li = document.createElement('li');
+          li.textContent = line.replace(/^•\s*/, '');
+          list.appendChild(li);
+          return;
+        }
+        list = null;
+        var el = document.createElement(i === 0 && /:$/.test(line) ? 'h3' : 'p');
+        el.textContent = line;
+        body.appendChild(el);
+      });
     });
+    $('read-dialog').showModal();
+    body.scrollTop = 0;
+  }
+  $('read-close').addEventListener('click', function () { $('read-dialog').close(); });
+  document.querySelectorAll('.btn-read').forEach(function (b) {
+    b.addEventListener('click', function () { if (state.recipe) openRead(state.recipe); });
   });
 
   // ---------- Kitchen areas ----------
@@ -193,6 +290,7 @@
     board: { x: 0.52, y: 0.24, w: 0.16, h: 0.22 },
     me: { x: 0.45, y: 0.60, w: 0.10, h: 0.18 }
   };
+  state.layout = clone(DEFAULT_LAYOUT);
 
   function overlaps(a, b) {
     var e = 0.001;
@@ -297,40 +395,11 @@
     });
   }
 
-  var state = {
-    layout: clone(DEFAULT_LAYOUT),
-    recipe: null,
-    choices: null,
-    built: null,
-    mapView: false // desktop toggle
-  };
-
-  // ---------- Screens ----------
-  var SCREENS = ['setup', 'layout', 'recipes', 'details', 'ingredients', 'cook'];
-  function show(name) {
-    SCREENS.forEach(function (s) { $('screen-' + s).hidden = s !== name; });
-    window.scrollTo(0, 0);
-  }
-
-  document.addEventListener('click', function (e) {
-    var go = e.target.closest('[data-go]');
-    if (go) {
-      stopCooking();
-      show(go.getAttribute('data-go'));
-    }
-  });
-
-  // ---------- Setup ----------
-  $('btn-layout').addEventListener('click', openLayout);
-  $('btn-setup-continue').addEventListener('click', function () {
-    renderRecipes();
-    show('recipes');
-  });
-
   // ---------- Kitchen layout editor ----------
   var draft = null;
 
   function openLayout() {
+    state.returnTo = state.screen;
     draft = clone(state.layout);
     show('layout');
     var canvas = $('layout-canvas');
@@ -350,24 +419,21 @@
     });
   }
 
-  $('btn-layout-cancel').addEventListener('click', function () { show('setup'); });
+  $('btn-layout-cancel').addEventListener('click', function () { show(state.returnTo); });
   $('btn-layout-save').addEventListener('click', function () {
     state.layout = draft;
+    state.layoutSaved = true;
     var status = $('layout-status');
     status.setAttribute('data-i18n', 'layoutSaved');
     status.textContent = t('layoutSaved');
-    show('setup');
+    show(state.returnTo);
+    if (cook) {
+      $('cook-map').innerHTML = '';
+      render();
+    }
   });
 
-  // ---------- Recipes ----------
-  function defaultChoices(r) {
-    var c = { servings: r.defaultServings || 2, mode: 'detailed' };
-    r.options.forEach(function (o) {
-      c[o.id] = o.choices.filter(function (ch) { return ch.isDefault; })[0].id;
-    });
-    return c;
-  }
-
+  // ---------- Recipe facts: time, diet, allergens, nutrition, kids ----------
   function prevInThread(steps, step) {
     var prev = null;
     for (var i = 0; i < steps.length && steps[i] !== step; i++) {
@@ -383,18 +449,22 @@
 
   // Rough total: every step starts as soon as the steps it needs are done.
   // Repeats until nothing changes, so the order of the steps doesn't matter.
-  function estimateMinutes(steps) {
+  // remaining(step) gives the seconds still needed (default: its full duration).
+  function scheduleSeconds(steps, remaining) {
     var end = {}, total = 0, changed = true, rounds = 0;
     while (changed && rounds++ <= steps.length) {
       changed = false;
       steps.forEach(function (s) {
         var start = depsOf(steps, s).reduce(function (m, d) { return Math.max(m, end[d] || 0); }, 0);
-        if (end[s.id] !== start + s.duration) { end[s.id] = start + s.duration; changed = true; }
+        var e = start + (remaining ? remaining(s) : s.duration);
+        if (end[s.id] !== e) { end[s.id] = e; changed = true; }
       });
     }
     steps.forEach(function (s) { total = Math.max(total, end[s.id]); });
-    return Math.round(total / 60);
+    return total;
   }
+
+  function estimateMinutes(steps) { return Math.round(scheduleSeconds(steps) / 60); }
 
   function fmtMinutes(min) {
     return min < 60 ? min + ' ' + t('min') : t('hours', { h: Math.floor(min / 60), m: min % 60 });
@@ -402,13 +472,12 @@
 
   // Text that depends on what one serving is: a person (default), a jar or a batch.
   function unitText(r, key, vars) {
-    var k = key + (r.unit && r.unit !== 'person' ? '_' + r.unit : '');
-    return t(k, vars);
+    return t(key + (r.unit && r.unit !== 'person' ? '_' + r.unit : ''), vars);
   }
 
   function infoFor(i) { return window.INGREDIENT_INFO[i.key || i.id]; }
 
-  function dietInfo(built) {
+  function tagsOf(built) {
     var tags = {}, allergens = [];
     built.ingredients.forEach(function (i) {
       var info = infoFor(i);
@@ -416,20 +485,40 @@
       info.tags.forEach(function (tg) { tags[tg] = true; });
       info.allergens.forEach(function (a) { if (allergens.indexOf(a) < 0) allergens.push(a); });
     });
-    var meat = !!tags.meat, seafood = !!(tags.fish || tags.seafood);
-    var vegetarian = !meat && !seafood;
-    var vegan = vegetarian && !tags.egg && !tags.dairy && !tags.honey;
-    return {
-      allergens: allergens,
-      main: vegan ? [t('vegan')] : vegetarian ? [t('vegetarian')]
-        : [meat ? t('hasMeat') + (tags.pork ? ' (' + t('pork') + ')' : '') : '', seafood ? t('hasSeafood') : ''].filter(Boolean),
-      keywords: [
-        meat ? t('hasMeat') + (tags.pork ? ' (' + t('pork') + ')' : '') : t('noMeat'),
-        seafood ? t('hasSeafood') : t('noSeafood'),
-        vegetarian ? t('vegetarian') : t('notVegetarian'),
-        vegan ? t('vegan') : t('notVegan')
-      ]
-    };
+    return { tags: tags, allergens: allergens };
+  }
+
+  // Diet label (shown next to the title) and the "contains" list (meat, pork, fish, allergens).
+  function dietInfo(built) {
+    var x = tagsOf(built), tags = x.tags, label = null;
+    if (!tags.meat) {
+      if (tags.fish) label = 'pesc';
+      else if (tags.dairy && tags.egg) label = 'lactoOvo';
+      else if (tags.dairy) label = 'lacto';
+      else if (tags.egg) label = 'ovo';
+      else if (tags.honey) label = 'veg';
+      else label = 'vegan';
+    }
+    var contains = [];
+    if (tags.meat) contains.push(t('meat'));
+    if (tags.pork) contains.push(t('pork'));
+    if (tags.fish) contains.push(t('fish'));
+    x.allergens.forEach(function (a) {
+      if (!contains.some(function (c) { return c.toLowerCase() === a.toLowerCase(); })) contains.push(a);
+    });
+    return { label: label, contains: contains };
+  }
+
+  function dietBadge(info) {
+    if (!info.label) return '';
+    var cls = info.label === 'vegan' ? 'diet-vegan' : info.label === 'pesc' ? 'diet-pesc' : 'diet-veg';
+    return '<span class="diet-badge ' + cls + '">' + t('diet_' + info.label) + '</span>';
+  }
+
+  function containsRow(info) {
+    if (!info.contains.length) return '';
+    return '<span class="warn-icon" role="img" aria-label="' + t('containsLabel') + '">❗</span>' +
+      info.contains.map(function (c) { return '<span class="keyword">' + esc(c) + '</span>'; }).join('');
   }
 
   function nutritionPerPerson(built) {
@@ -443,74 +532,233 @@
     keys.forEach(function (k) { tot[k] /= built.servings; });
     return tot;
   }
+  var NUTRI_EMOJI = { kcal: '🔥', carbs: '🌾', protein: '💪', fat: '🫒', satFat: '🧈', fiber: '🥦', salt: '🧂' };
 
-  function renderRecipes() {
-    var list = $('recipe-list');
-    list.innerHTML = '';
-    window.RECIPES.forEach(function (r) {
-      var built = r.build(defaultChoices(r));
-      var info = dietInfo(built), n = nutritionPerPerson(built);
-      var chips = info.main.map(function (k) { return '<span class="keyword">' + k + '</span>'; })
-        .concat(info.allergens.map(function (a) { return '<span class="keyword keyword-allergen">' + a + '</span>'; })).join('');
-      var li = document.createElement('li');
-      li.innerHTML =
-        '<button class="recipe-card" type="button">' +
-        '<img alt="" src="' + r.image + '">' +
-        '<span class="recipe-card-body"><strong>' + r.name + '</strong>' +
-        '<span class="hint">≈ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
-        '<span class="recipe-card-nutri">' + Math.round(n.kcal) + ' kcal · ' + Math.round(n.carbs) + ' g ' + t('carbsShort') +
-        ' · ' + Math.round(n.protein) + ' g ' + t('proteinShort') + ' <span class="hint">' + unitText(r, 'perServing') + '</span></span>' +
-        '<span class="keywords">' + chips + '</span></span>' +
-        '</button>';
-      li.firstChild.addEventListener('click', function () { openDetails(r); });
-      list.appendChild(li);
-    });
+  // Things children shouldn't get: alcohol, hot spices, raw egg.
+  function hazards(r, c, built) {
+    var x = tagsOf(built).tags, out = [];
+    if (x.alcohol) out.push('alcohol');
+    if (x.spicy || (x.chili && /^(hot|spicier)$/.test(c.opt_heat || ''))) out.push('spicy');
+    if (r.rawEgg(c)) out.push('rawEgg');
+    return out;
   }
 
-  // ---------- Recipe details ----------
-  function openDetails(r) {
-    if (state.recipe !== r) {
-      state.recipe = r;
-      state.choices = defaultChoices(r);
-    }
-    $('det-img').src = r.image;
-    $('det-name').textContent = r.name;
+  function listWords(keys) {
+    var w = keys.map(function (k) { return t('hazard_' + k); });
+    return w.length > 1 ? w.slice(0, -1).join(', ') + ' ' + t('and') + ' ' + w[w.length - 1] : w[0];
+  }
 
-    var box = $('det-options');
-    box.innerHTML = '';
-    r.options.forEach(function (o) {
-      var fs = document.createElement('fieldset');
-      fs.className = 'choices';
-      fs.innerHTML = '<legend>' + o.question + '</legend>' + o.choices.map(function (ch) {
-        return '<label class="choice"><input type="radio" name="' + o.id + '" value="' + ch.id + '"' +
-          (state.choices[o.id] === ch.id ? ' checked' : '') + '> <span>' + ch.label + '</span></label>';
-      }).join('');
-      box.appendChild(fs);
+  // ---------- Photos ----------
+  function photoEl(r, size, cls) {
+    var img = document.createElement('img');
+    img.className = 'photo ' + (cls || '');
+    img.alt = '';
+    img.src = 'img/ready/webp' + size + '/' + r.id + '.webp';
+    img.addEventListener('error', function () {
+      var ph = document.createElement('div');
+      ph.className = 'photo photo-placeholder ' + (cls || '');
+      if (img.id) ph.id = img.id;
+      img.replaceWith(ph);
     });
+    return img;
+  }
+
+  // ---------- Recipe list ----------
+  var CATEGORIES = ['soup', 'main', 'dessert', 'side'];
+  var CUISINES = ['Italian', 'Asian', 'Greek', 'French', 'Mexican', 'American'];
+  var defaultBuilds = {};
+
+  function defaultChoices(r) {
+    var c = { adults: r.defaultServings || 2, kids: 0, mode: 'detailed' };
+    r.options.forEach(function (o) {
+      c[o.id] = o.choices.filter(function (ch) { return ch.isDefault; })[0].id;
+    });
+    c.servings = c.adults;
+    return c;
+  }
+
+  function renderFilters() {
+    var box = $('filters');
+    box.innerHTML = '';
+    function chip(group, value, label) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip';
+      b.textContent = label;
+      b.setAttribute('aria-pressed', String(state.filters[group].indexOf(value) >= 0));
+      b.addEventListener('click', function () {
+        var list = state.filters[group], i = list.indexOf(value);
+        if (i >= 0) list.splice(i, 1); else list.push(value);
+        b.setAttribute('aria-pressed', String(i < 0));
+        renderRecipes();
+      });
+      box.appendChild(b);
+    }
+    CATEGORIES.forEach(function (c) { chip('cat', c, t('cat_' + c)); });
+    var div = document.createElement('span');
+    div.className = 'divider';
+    box.appendChild(div);
+    CUISINES.forEach(function (c) { chip('cuisine', c, c); });
+  }
+
+  function renderRecipes() {
+    var wrap = $('recipe-sections'), f = state.filters, any = false;
+    wrap.innerHTML = '';
+    CATEGORIES.forEach(function (cat) {
+      if (f.cat.length && f.cat.indexOf(cat) < 0) return;
+      var recipes = window.RECIPES.filter(function (r) {
+        return r.category === cat && (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; }));
+      });
+      if (!recipes.length) return;
+      any = true;
+      var h = document.createElement('h2');
+      h.className = 'category-title';
+      h.textContent = t('cat_' + cat);
+      var ul = document.createElement('ul');
+      ul.className = 'recipe-list';
+      recipes.forEach(function (r) {
+        var built = defaultBuilds[r.id] || (defaultBuilds[r.id] = r.build(defaultChoices(r)));
+        var info = dietInfo(built), n = nutritionPerPerson(built);
+        var li = document.createElement('li');
+        li.className = 'recipe-item';
+        li.innerHTML =
+          '<button class="recipe-card" type="button">' +
+          '<span class="recipe-card-body">' +
+          '<span class="title-row"><span>' + esc(r.name) + '</span>' + dietBadge(info) + '</span>' +
+          '<span class="meta-line">⏱️ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
+          '<span class="meta-line">' + NUTRI_EMOJI.kcal + ' ' + Math.round(n.kcal) + ' kcal · ' +
+          NUTRI_EMOJI.carbs + ' ' + Math.round(n.carbs) + ' g ' + t('carbsShort') + ' · ' +
+          NUTRI_EMOJI.protein + ' ' + Math.round(n.protein) + ' g ' + t('proteinShort') +
+          ' <span class="hint">' + unitText(r, 'perServing') + '</span></span>' +
+          '<span class="warn-row">' + containsRow(info) + '</span>' +
+          '</span></button>' +
+          '<button class="btn btn-secondary btn-small btn-read-card" type="button">' + t('readInstead') + '</button>';
+        var card = li.querySelector('.recipe-card');
+        card.insertBefore(photoEl(r, 350), card.firstChild);
+        card.addEventListener('click', function () { openDetails(r); });
+        li.querySelector('.btn-read-card').addEventListener('click', function () { openRead(r); });
+        ul.appendChild(li);
+      });
+      wrap.appendChild(h);
+      wrap.appendChild(ul);
+    });
+    $('no-results').hidden = any;
+  }
+
+  // ---------- Recipe page: guidance, people, options, ingredients ----------
+  function openDetails(r) {
+    state.recipe = r;
+    state.choices = defaultChoices(r);
+    $('det-name').textContent = r.name;
+    var photo = $('det-photo');
+    var img = photoEl(r, 500, 'photo-hero');
+    img.id = 'det-photo';
+    photo.replaceWith(img);
+    renderOptions();
     document.querySelectorAll('input[name="mode"]').forEach(function (i) { i.checked = i.value === state.choices.mode; });
     updateDetails();
     show('details');
   }
 
+  // Option chips show a short name with the detail in small grey text under it.
+  // "Name (detail)" and "Name: detail" are split automatically; LABELS covers the rest.
+  var LABELS = {
+    'caesar_salad:opt_chicken:cutlets': ['Thin cutlets', 'thick fillets halved; faster, more even'],
+    'summer_salad:opt_dressing:honey': ['With honey', '1 tsp per 4; softer, rounder'],
+    'tomato_soup:opt_finish:cream_basil': ['Cream or basil', 'a splash of cream or a few fresh basil leaves'],
+    'overnight_oats:opt_milk:canned': ['Canned coconut milk', 'mixed 1:1 with water; richer'],
+    'semolina_pudding:opt_spice:with': ['With spices', 'cardamom and rosewater'],
+    'burger:opt_sauce_heat:with': ['Spicy sauce', 'with chili or cayenne']
+  };
+  function labelParts(r, optId, ch) {
+    var fixed = LABELS[r.id + ':' + optId + ':' + ch.id];
+    if (fixed) return fixed;
+    var m = ch.label.match(/^(.*?)\s*\((.*)\)\s*$/) || ch.label.match(/^([^:]{1,30}):\s+(.+)$/);
+    return m ? [m[1], m[2]] : [ch.label, ''];
+  }
+
+  function renderOptions() {
+    var r = state.recipe, box = $('det-options');
+    box.innerHTML = '';
+    r.options.forEach(function (o) {
+      var fs = document.createElement('fieldset');
+      fs.className = 'choices';
+      fs.innerHTML = '<legend>' + esc(o.question) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
+        var parts = labelParts(r, o.id, ch);
+        return '<label class="choice"><input type="radio" name="' + o.id + '" value="' + ch.id + '"' +
+          (state.choices[o.id] === ch.id ? ' checked' : '') + '> <span class="choice-text"><span>' + esc(parts[0]) + '</span>' +
+          (parts[1] ? '<small>' + esc(parts[1]) + '</small>' : '') + '</span></label>';
+      }).join('') + '</div>';
+      box.appendChild(fs);
+    });
+    $('det-forks').hidden = !r.options.length;
+  }
+
   function updateDetails() {
-    var c = state.choices, r = state.recipe;
-    state.built = r.build(c);
-    $('srv-value').textContent = c.servings;
-    $('srv-minus').disabled = c.servings <= 1;
-    $('srv-plus').disabled = c.servings >= (r.maxServings || 8);
-    $('det-time').textContent = '≈ ' + fmtMinutes(estimateMinutes(state.built.steps));
-    $('det-howmany').textContent = unitText(r, 'howMany');
+    var c = state.choices, r = state.recipe, person = !r.unit || r.unit === 'person';
+    c.servings = person ? c.adults + 0.5 * c.kids : c.adults;
+    var built = state.built = r.build(c);
+
+    $('det-time').textContent = '⏱️ ' + fmtMinutes(estimateMinutes(built.steps));
+    var info = dietInfo(built);
+    $('det-diet').innerHTML = dietBadge(info);
+    $('det-warnings').innerHTML = containsRow(info);
+    $('det-warnings').hidden = !info.contains.length;
+
+    var n = nutritionPerPerson(built);
     $('det-per').textContent = unitText(r, 'perPerson');
-
-    var info = dietInfo(state.built);
-    $('det-diet').innerHTML = info.keywords.map(function (k) { return '<span class="keyword">' + k + '</span>'; }).join('');
-    $('det-allergens').innerHTML = (info.allergens.length ? info.allergens : [t('none')])
-      .map(function (a) { return '<span class="keyword">' + a + '</span>'; }).join('');
-
-    var n = nutritionPerPerson(state.built);
     var rows = [['kcal', Math.round(n.kcal) + ' kcal'], ['carbs', Math.round(n.carbs) + ' g'], ['protein', Math.round(n.protein) + ' g'],
       ['fat', Math.round(n.fat) + ' g'], ['satFat', Math.round(n.satFat) + ' g'], ['fiber', n.fiber.toFixed(1) + ' g'], ['salt', n.salt.toFixed(1) + ' g']];
-    $('det-nutrition').innerHTML = rows.map(function (r) { return '<div><dt>' + t(r[0]) + '</dt><dd>' + r[1] + '</dd></div>'; }).join('');
+    $('det-nutrition').innerHTML = rows.map(function (x) {
+      return '<div><dt>' + NUTRI_EMOJI[x[0]] + ' ' + t(x[0]) + '</dt><dd>' + x[1] + '</dd></div>';
+    }).join('');
+
+    // People
+    $('det-howmany').textContent = unitText(r, 'howMany');
+    $('adults-label').textContent = unitText(r, 'adults');
+    $('adults-value').textContent = c.adults;
+    $('kids-value').textContent = c.kids;
+    $('adults-minus').disabled = c.adults <= (c.kids ? 0 : 1);
+    $('adults-plus').disabled = c.adults >= (r.maxServings || 8);
+    $('kids-minus').disabled = c.kids <= 0 || (c.kids <= 1 && c.adults === 0);
+    $('kids-plus').disabled = c.kids >= 8;
+    $('kids-counter').hidden = !person;
+    $('kids-note').hidden = !person || !c.kids;
+
+    // Kids warning
+    var warn = $('kids-warning');
+    if (person && c.kids) {
+      var base = Object.assign({}, c);
+      var defaults = defaultChoices(r);
+      Object.keys(r.kids).forEach(function (k) { base[k] = defaults[k]; });
+      var before = hazards(r, base, r.build(base)), now = hazards(r, c, built);
+      var omitted = before.filter(function (h) { return now.indexOf(h) < 0; });
+      var html = '';
+      if (omitted.length) html += '<p><strong>' + t('warning') + '</strong> ' + t('kidsOmitted', { x: listWords(omitted) }) + '</p>';
+      if (now.length) html += '<p><strong>' + t('warning') + '</strong> ' + t('kidsSure', { x: listWords(now) }) + '</p>';
+      warn.innerHTML = html;
+      warn.hidden = !html;
+    } else {
+      warn.hidden = true;
+    }
+
+    // Ingredients
+    var who = person
+      ? [c.adults ? (c.adults === 1 ? t('one_adult') : t('n_adults', { n: c.adults })) : '',
+        c.kids ? (c.kids === 1 ? t('one_child') : t('n_children', { n: c.kids })) : ''].filter(Boolean).join(' + ')
+      : (c.adults === 1 ? t('one_' + r.unit) : t('n_' + r.unit, { n: c.adults }));
+    $('ing-meta').textContent = t('ingredientsFor', { x: who });
+    var list = $('ing-list');
+    list.innerHTML = '';
+    built.ingredients.forEach(function (ing) {
+      var li = document.createElement('li');
+      li.className = 'ing-card';
+      li.innerHTML =
+        '<img alt="" src="' + imgFor(ing) + '">' +
+        '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(ing.note) + '</span>' : '') + '</span>' +
+        '<span class="amount">' + esc(ing.amount) + '</span>';
+      list.appendChild(li);
+    });
   }
 
   $('screen-details').addEventListener('change', function (e) {
@@ -518,33 +766,24 @@
     state.choices[e.target.name] = e.target.value;
     updateDetails();
   });
-  $('srv-minus').addEventListener('click', function () { state.choices.servings = Math.max(1, state.choices.servings - 1); updateDetails(); });
-  $('srv-plus').addEventListener('click', function () {
-    state.choices.servings = Math.min(state.recipe.maxServings || 8, state.choices.servings + 1);
+
+  function setPeople(adults, kids) {
+    var c = state.choices, hadKids = c.kids > 0;
+    c.adults = adults;
+    c.kids = kids;
+    // Adding children switches on the child-friendly options.
+    if (!hadKids && kids > 0) {
+      Object.keys(state.recipe.kids).forEach(function (k) { c[k] = state.recipe.kids[k]; });
+      renderOptions();
+    }
     updateDetails();
-  });
-  $('btn-show-ingredients').addEventListener('click', openIngredients);
-
-  // ---------- Ingredients ----------
-  function imgFor(i) { return 'img/350/' + (i.key || i.id) + '.webp'; }
-
-  function openIngredients() {
-    var b = state.built;
-    $('ing-title').textContent = state.recipe.name;
-    $('ing-meta').textContent = t('ingredientsFor', { x: unitText(state.recipe, b.servings === 1 ? 'count1' : 'count', { n: b.servings }) });
-    var list = $('ing-list');
-    list.innerHTML = '';
-    b.ingredients.forEach(function (ing) {
-      var li = document.createElement('li');
-      li.className = 'ing-card';
-      li.innerHTML =
-        '<img alt="" src="' + imgFor(ing) + '">' +
-        '<span class="name">' + ing.name + (ing.note ? '<span class="note">' + ing.note + '</span>' : '') + '</span>' +
-        '<span class="amount">' + ing.amount + '</span>';
-      list.appendChild(li);
-    });
-    show('ingredients');
   }
+  $('adults-minus').addEventListener('click', function () { setPeople(state.choices.adults - 1, state.choices.kids); });
+  $('adults-plus').addEventListener('click', function () { setPeople(state.choices.adults + 1, state.choices.kids); });
+  $('kids-minus').addEventListener('click', function () { setPeople(state.choices.adults, state.choices.kids - 1); });
+  $('kids-plus').addEventListener('click', function () { setPeople(state.choices.adults, state.choices.kids + 1); });
+
+  function imgFor(i) { return 'img/350/' + (i.key || i.id) + '.webp'; }
 
   $('btn-start-cooking').addEventListener('click', startCooking);
 
@@ -553,89 +792,134 @@
   var tickTimer = null;
   var coarse = window.matchMedia('(pointer: coarse)');
   var landscape = window.matchMedia('(orientation: landscape)');
+  var RING = 2 * Math.PI * 40;
 
   function isMap() {
+    if (!state.layoutSaved) return false;
     // Phones and tablets follow the orientation; desktop uses the toggle.
     return coarse.matches ? landscape.matches : state.mapView;
   }
 
   function fmt(sec) {
     sec = Math.max(0, Math.round(sec));
-    return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
+    var h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = String(sec % 60).padStart(2, '0');
+    return h ? h + ':' + String(m).padStart(2, '0') + ':' + s : m + ':' + s;
   }
 
-  function stepById(id) {
-    return cook.steps.filter(function (s) { return s.id === id; })[0];
+  function stepById(id) { return cook.byId[id]; }
+  function allDeps(step) { return depsOf(cook.steps, step); }
+  function isDone(id) { return cook.done.has(id); }
+
+  /*
+    Each step is one of:
+    hidden   not shown yet
+    waiting  shown, but still waits for a step of another thread
+    active   ready to do
+    kept     done, but a step that needs it is still open: greyed and folded
+    gone     done and no longer needed
+  */
+  function statusOf(step) {
+    if (isDone(step.id)) {
+      var needed = cook.steps.some(function (o) { return !isDone(o.id) && allDeps(o).indexOf(step.id) >= 0; });
+      return needed ? 'kept' : 'gone';
+    }
+    if (allDeps(step).every(isDone)) return 'active';
+    var prev = prevInThread(cook.steps, step);
+    var prevDone = prev && isDone(prev.id);
+    if ((!prev || prevDone) && (prevDone || step.deps.some(isDone))) return 'waiting';
+    return 'hidden';
   }
 
-  function isReady(step) {
-    if (cook.done.has(step.id) || cook.slots.indexOf(step.id) >= 0) return false;
-    return depsOf(cook.steps, step).every(function (d) { return cook.done.has(d); });
-  }
-
-  // Adds newly ready steps to the card order. A follow-up step of the same
-  // thread takes the place of the step that just finished, so cards move as
-  // little as possible; other new steps fill a free place or go to the end.
-  function activate(freeIndex, finishedThread) {
-    var fresh = cook.steps.filter(isReady);
-    var placed = [];
-    fresh.forEach(function (s) {
-      if (freeIndex >= 0 && s.thread === finishedThread) {
-        cook.slots.splice(freeIndex, 0, s.id);
-        placed.push(s);
-        freeIndex = -1;
+  // Works out which cards are shown. A new card goes right after the last card
+  // of its thread, so the order stays logical and cards move as little as possible.
+  function refresh() {
+    var fresh = [], nowActive = [];
+    cook.steps.forEach(function (s) {
+      var st = statusOf(s), old = cook.status[s.id];
+      cook.status[s.id] = st;
+      if (st === 'active' && old !== 'active') nowActive.push(s);
+      var visible = st === 'active' || st === 'waiting' || st === 'kept';
+      var at = cook.slots.indexOf(s.id);
+      if (visible && at < 0) {
+        var after = -1;
+        cook.slots.forEach(function (id, i) { if (stepById(id).thread === s.thread) after = i; });
+        if (after >= 0) cook.slots.splice(after + 1, 0, s.id); else cook.slots.push(s.id);
+        fresh.push(s);
+      } else if (!visible && at >= 0) {
+        cook.slots.splice(at, 1);
+        if (cook.els[s.id]) { cook.els[s.id].remove(); delete cook.els[s.id]; }
       }
     });
-    fresh.forEach(function (s) {
-      if (placed.indexOf(s) >= 0) return;
-      if (freeIndex >= 0) {
-        cook.slots.splice(freeIndex, 0, s.id);
-        freeIndex = -1;
-      } else {
-        cook.slots.push(s.id);
-      }
-    });
-    return fresh;
+    return { fresh: fresh, active: nowActive };
   }
 
   function startCooking() {
     var b = state.built;
-    cook = { steps: b.steps, ingredients: b.ingredients, done: new Set(), slots: [], started: {}, els: {}, t0: Date.now(), tipsShown: new Set() };
+    var byId = {};
+    b.steps.forEach(function (s) { byId[s.id] = s; });
+    cook = { steps: b.steps, byId: byId, ingredients: b.ingredients, done: new Set(), slots: [], status: {},
+      started: {}, els: {}, t0: null, tipsShown: new Set(), view: null };
     $('cook-name').textContent = state.recipe.name;
-    $('cook-total').textContent = '/ ≈ ' + fmtMinutes(estimateMinutes(b.steps));
     $('cook-list').innerHTML = '';
     $('cook-map').innerHTML = '';
     $('cook-finished').hidden = true;
+    $('start-overlay').hidden = false;
+    $('cook-clock').textContent = '0:00';
     resetStars();
     show('cook');
-    var fresh = activate(-1, null);
+    refresh();
     render();
-    showTips(fresh);
+    updateClocks();
+    $('btn-start-now').focus();
+  }
+
+  $('btn-start-now').addEventListener('click', function () {
+    cook.t0 = Date.now();
+    $('start-overlay').hidden = true;
+    showTips(cook.steps.filter(function (s) { return cook.status[s.id] === 'active'; }));
     tick();
     tickTimer = setInterval(tick, 500);
-  }
+  });
 
   function stopCooking() {
     clearInterval(tickTimer);
     tickTimer = null;
     cook = null;
-    document.body.classList.remove("overdo");
+    document.body.classList.remove('overdo');
     hideTip(true);
   }
 
   $('btn-cook-exit').addEventListener('click', function () {
     if (window.confirm(t('exitConfirm'))) {
       stopCooking();
-      show('ingredients');
+      show('details');
     }
   });
 
+  // Map view needs a saved kitchen layout; until then the button explains why.
+  var viewTipTimer = null;
+  function showViewTip() {
+    $('view-tip').hidden = false;
+    clearTimeout(viewTipTimer);
+    viewTipTimer = setTimeout(function () { $('view-tip').hidden = true; }, 3500);
+  }
   $('btn-view').addEventListener('click', function () {
+    if (!state.layoutSaved) { showViewTip(); return; }
     state.mapView = !state.mapView;
     render();
   });
+  $('btn-view').addEventListener('mouseenter', function () { if (!state.layoutSaved) showViewTip(); });
+  $('btn-view').addEventListener('focus', function () { if (!state.layoutSaved) showViewTip(); });
+  $('btn-view').addEventListener('mouseleave', function () { $('view-tip').hidden = true; });
+
   landscape.addEventListener('change', function () { if (cook) render(); });
   window.addEventListener('resize', function () { if (cook && isMap()) render(); });
+
+  function ingItem(i) {
+    var base = cook.ingredients.filter(function (x) { return x.id === i.id; })[0];
+    var name = i.label || (base ? base.name : i.id);
+    return '<li><img alt="" src="' + imgFor(i) + '"><span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(i.qty) + '</b>' : '') + '</li>';
+  }
 
   function cardFor(step) {
     if (cook.els[step.id]) return cook.els[step.id];
@@ -646,54 +930,113 @@
 
     var tools = step.tools.map(function (id) {
       var eq = window.EQUIPMENT[id];
-      return '<img class="icon" src="' + eq.icon + '" alt="' + eq.name + '" title="' + eq.name + '">';
+      return '<img class="icon" src="' + eq.icon + '" alt="' + esc(eq.name) + '" title="' + esc(eq.name) + '">';
     }).join('');
-
     var ings = step.ings.map(ingItem).join('');
+    var body = step.parts
+      ? '<ol class="step-parts">' + step.parts.map(function (p) { return '<li><b>' + esc(p.title) + ':</b> ' + esc(p.text) + '</li>'; }).join('') + '</ol>'
+      : '<p class="step-text">' + esc(step.text) + '</p>';
 
     el.innerHTML =
       '<div class="step-head">' +
         '<span class="area-badge"><span><img class="icon" alt="" src="' + AREAS[step.area].icon + '"></span>' + t(step.area) + '</span>' +
         '<span class="step-tools">' + tools + '</span>' +
       '</div>' +
-      '<h3>' + step.title + '</h3>' +
-      '<p class="step-text">' + step.text + '</p>' +
+      '<h3>' + esc(step.title) + '</h3>' +
+      '<p class="done-row"><span>' + t('doneMark') + '</span><button class="btn-reopen" type="button">' + t('reopen') + '</button></p>' +
+      body +
       (ings ? '<ul class="step-ings">' + ings + '</ul>' : '') +
-      '<p class="done-when">' + t('doneWhen') + step.doneWhen + '</p>' +
-      '<div class="timer"><span class="timer-time">' + t('about', { t: fmt(step.duration) }) + '</span><span class="timer-bar"><i></i></span></div>' +
+      '<p class="done-when">' + t('doneWhen') + esc(step.doneWhen) + '</p>' +
+      '<p class="waiting-for" hidden></p>' +
       (step.overcook ? '<p class="overdo-note" role="alert">' + t('dontOverdo') + '</p>' : '') +
-      '<div class="step-actions">' +
-        '<button class="btn btn-start" type="button">' + t('start') + '</button>' +
+      '<div class="step-foot">' +
+        '<div class="ring">' +
+          '<svg viewBox="0 0 92 92" aria-hidden="true"><circle class="ring-track" cx="46" cy="46" r="40"/>' +
+          '<circle class="ring-fill" cx="46" cy="46" r="40" stroke-dasharray="' + RING + '" stroke-dashoffset="' + RING + '"/></svg>' +
+          '<div class="ring-center">' +
+            '<button class="btn-start" type="button">' + t('start') + '<br>' + fmt(step.duration) + '</button>' +
+            '<span class="ring-time" hidden></span>' +
+          '</div>' +
+        '</div>' +
         '<button class="btn btn-primary btn-done" type="button">' + t('done') + '</button>' +
       '</div>';
 
     el.querySelector('.btn-start').addEventListener('click', function (e) {
+      if (cook.status[step.id] !== 'active') return;
       cook.started[step.id] = Date.now();
-      e.currentTarget.disabled = true;
+      e.currentTarget.hidden = true;
+      el.querySelector('.ring-time').hidden = false;
       tick();
     });
     el.querySelector('.btn-done').addEventListener('click', function () { finishStep(step); });
+    el.querySelector('.btn-reopen').addEventListener('click', function (e) {
+      var open = el.classList.toggle('expanded');
+      e.currentTarget.textContent = open ? t('fold') : t('reopen');
+    });
     cook.els[step.id] = el;
     return el;
   }
 
-  function ingItem(i) {
-    var base = cook.ingredients.filter(function (x) { return x.id === i.id; })[0];
-    var name = i.label || (base ? base.name : i.id);
-    return '<li><img alt="" src="' + imgFor(i) + '"><span>' + name + '</span>' + (i.qty ? '<b>' + i.qty + '</b>' : '') + '</li>';
+  // Classes and texts that follow the step's status.
+  function updateCard(step, el) {
+    var st = cook.status[step.id];
+    el.classList.toggle('is-waiting', st === 'waiting');
+    el.classList.toggle('is-done', st === 'kept');
+    el.querySelector('.btn-start').disabled = st !== 'active';
+    var w = el.querySelector('.waiting-for');
+    if (st === 'waiting') {
+      var open = allDeps(step).filter(function (d) { return !isDone(d); }).map(function (d) { return stepById(d).title; });
+      w.textContent = t('waitingFor', { x: open.join(', ') });
+      w.hidden = false;
+    } else {
+      w.hidden = true;
+    }
   }
 
   function finishStep(step) {
-    var idx = cook.slots.indexOf(step.id);
-    cook.slots.splice(idx, 1);
+    if (cook.status[step.id] !== 'active') { blocked(step); return; }
     cook.done.add(step.id);
     delete cook.started[step.id];
-    cook.els[step.id].remove();
-    delete cook.els[step.id];
-    var fresh = activate(idx, step.thread);
+    var el = cook.els[step.id];
+    if (el) el.classList.remove('time-up', 'expanded');
+    var r = refresh();
     render();
-    markNew(fresh);
-    showTips(fresh);
+    markNew(r.fresh);
+    showTips(r.active);
+    updateClocks();
+  }
+
+  // "I'm done" on a step that still waits: explain, and point at what to do first.
+  function blocked(step) {
+    var el = cook.els[step.id];
+    var tip = document.createElement('span');
+    tip.className = 'tooltip step-tooltip';
+    tip.setAttribute('role', 'status');
+    tip.textContent = t('firstOthers');
+    el.appendChild(tip);
+    setTimeout(function () { tip.remove(); }, 2500);
+
+    var todo = [], seen = {};
+    (function walk(s) {
+      allDeps(s).forEach(function (d) {
+        if (isDone(d) || seen[d]) return;
+        seen[d] = true;
+        if (cook.status[d] === 'active') todo.push(d); else walk(stepById(d));
+      });
+    })(step);
+    todo.forEach(function (id) {
+      var card = cook.els[id];
+      if (!card) return;
+      card.classList.remove('do-this');
+      void card.offsetWidth;
+      card.classList.add('do-this');
+      var badge = document.createElement('span');
+      badge.className = 'do-this-badge';
+      badge.textContent = t('doThis');
+      card.appendChild(badge);
+      setTimeout(function () { badge.remove(); card.classList.remove('do-this'); }, 3500);
+    });
+    if (todo[0] && cook.els[todo[0]]) cook.els[todo[0]].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   // Puts the cards into a container in the given order, only moving what changed.
@@ -709,7 +1052,10 @@
     var total = cook.steps.length;
     $('cook-count').textContent = t('stepsDone', { d: cook.done.size, n: total });
     $('cook-progress').style.width = (cook.done.size / total * 100) + '%';
-    $('btn-view').textContent = map ? t('listView') : t('mapView');
+    var vb = $('btn-view');
+    vb.textContent = map ? t('listView') : t('mapView');
+    vb.classList.toggle('is-disabled', !state.layoutSaved);
+    vb.setAttribute('aria-disabled', String(!state.layoutSaved));
 
     var finished = cook.done.size === total;
     $('cook-finished').hidden = !finished;
@@ -722,12 +1068,12 @@
       return;
     }
 
-    var els = cook.slots.map(function (id) { return cardFor(stepById(id)); });
-    if (map) {
-      renderMap(els);
-    } else {
-      syncChildren($('cook-list'), els);
-    }
+    var els = cook.slots.map(function (id) {
+      var s = stepById(id), el = cardFor(s);
+      updateCard(s, el);
+      return el;
+    });
+    if (map) renderMap(els); else syncChildren($('cook-list'), els);
   }
 
   // Only the areas this recipe uses, back to front.
@@ -823,16 +1169,18 @@
       syncChildren(a.querySelector('.map-area-cards'), mine);
       a.classList.toggle('is-empty', mine.length === 0);
 
-      // The ingredients for the cards here are shown on the area itself (display only).
+      // The ingredients for the open cards here are shown on the area itself (display only).
       var seen = {}, ings = [];
       mine.forEach(function (el) {
-        stepById(el.getAttribute('data-step')).ings.forEach(function (i) {
+        var s = stepById(el.getAttribute('data-step'));
+        if (cook.status[s.id] === 'kept') return;
+        s.ings.forEach(function (i) {
           if (!seen[i.id + i.qty]) { seen[i.id + i.qty] = true; ings.push(i); }
         });
       });
       var html = ings.map(ingItem).join('');
       var list = a.querySelector('.map-area-ings');
-      if (list.innerHTML !== html) list.innerHTML = html;
+      if (list.getAttribute('data-html') !== html) { list.innerHTML = html; list.setAttribute('data-html', html); }
       list.hidden = !ings.length;
     });
 
@@ -843,9 +1191,9 @@
       var free = freeStrip(cook.view.countertop, others, mapEl.clientWidth, mapEl.clientHeight);
       cards.classList.toggle('in-strip', !!free);
       if (free) {
-        cards.style.left = (free.x * 100) + '%';
         var ingsList = cards.previousElementSibling;
         var below = ingsList.hidden ? 40 : ingsList.offsetTop + ingsList.offsetHeight;
+        cards.style.left = (free.x * 100) + '%';
         cards.style.top = 'max(' + (free.y * 100) + '%, ' + below + 'px)';
         cards.style.width = (free.w * 100) + '%';
         cards.style.bottom = ((1 - free.y - free.h) * 100) + '%';
@@ -853,9 +1201,23 @@
     }
   }
 
+  // Time left: what is still open, scheduled from now. Steps that are running
+  // count only their remaining time; late steps count as nothing left.
+  function updateClocks() {
+    if (!cook) return;
+    var now = Date.now();
+    var left = scheduleSeconds(cook.steps, function (s) {
+      if (isDone(s.id)) return 0;
+      if (cook.started[s.id]) return Math.max(0, s.duration - (now - cook.started[s.id]) / 1000);
+      return s.duration;
+    });
+    $('cook-left').textContent = fmt(left);
+    if (cook.t0) $('cook-clock').textContent = fmt((now - cook.t0) / 1000);
+  }
+
   function tick() {
     if (!cook) return;
-    $('cook-clock').textContent = fmt((Date.now() - cook.t0) / 1000);
+    updateClocks();
     var overdo = false;
     Object.keys(cook.started).forEach(function (id) {
       var el = cook.els[id];
@@ -864,8 +1226,8 @@
       var elapsed = (Date.now() - cook.started[id]) / 1000;
       var left = step.duration - elapsed;
       var up = left <= 0;
-      el.querySelector('.timer-time').textContent = up ? t('over', { t: fmt(-left) }) : t('left', { t: fmt(left) });
-      el.querySelector('.timer-bar i').style.width = Math.min(100, elapsed / step.duration * 100) + '%';
+      el.querySelector('.ring-time').innerHTML = (up ? '+' + fmt(-left) : fmt(left)) + '<small>' + (up ? t('over') : t('left')) + '</small>';
+      el.querySelector('.ring-fill').setAttribute('stroke-dashoffset', String(RING * (1 - Math.min(1, elapsed / step.duration))));
       // Haptic feedback (navigator.vibrate) comes in a later iteration.
       el.classList.toggle('time-up', up);
       if (up && step.overcook) overdo = true;
@@ -893,8 +1255,9 @@
   var tipTimer = null;
   var tipOpen = false;
 
-  function showTips(fresh) {
-    fresh.forEach(function (s) {
+  function showTips(steps) {
+    if (!cook || !cook.t0) return;
+    steps.forEach(function (s) {
       if (s.tip && !cook.tipsShown.has(s.id)) {
         cook.tipsShown.add(s.id);
         tipQueue.push({ label: t('tip') + ' · ' + s.title, text: s.tipText || t('tipPlaceholder') });
@@ -970,35 +1333,38 @@
   })();
 
   // ---------- "How does it taste?" 1 to 5 stars ----------
-  // Hovering lights the stars up to the one under the pointer; a click sets the rating.
-  var starBox = $('taste');
+  // Hovering fills the stars up to the one under the pointer and shows its words; a click sets the rating.
+  var starRow = document.querySelector('#taste .stars-row');
   for (var n = 1; n <= 5; n++) {
     var lbl = document.createElement('label');
     lbl.className = 'star';
     lbl.innerHTML = '<input type="radio" name="taste" value="' + n + '"><span aria-hidden="true">★</span>';
-    lbl.querySelector('input').setAttribute('aria-label', t('stars', { n: n }));
-    starBox.appendChild(lbl);
+    lbl.querySelector('input').setAttribute('aria-label', t('stars', { n: n }) + ': ' + t('star' + n));
+    starRow.appendChild(lbl);
   }
-  var starLabels = starBox.querySelectorAll('.star');
+  var starLabels = starRow.querySelectorAll('.star');
 
   function paintStars(count) {
     starLabels.forEach(function (l, i) { l.classList.toggle('lit', i < count); });
+    $('star-text').textContent = count ? t('star' + count) : '';
   }
   function currentStars() {
-    var c = starBox.querySelector('input:checked');
+    var c = starRow.querySelector('input:checked');
     return c ? Number(c.value) : 0;
   }
   function resetStars() {
-    starBox.querySelectorAll('input').forEach(function (i) { i.checked = false; });
+    starRow.querySelectorAll('input').forEach(function (i) { i.checked = false; });
     paintStars(0);
   }
   starLabels.forEach(function (l, i) {
     l.addEventListener('mouseenter', function () { paintStars(i + 1); });
   });
-  starBox.addEventListener('mouseleave', function () { paintStars(currentStars()); });
-  starBox.addEventListener('change', function () { paintStars(currentStars()); });
+  starRow.addEventListener('mouseleave', function () { paintStars(currentStars()); });
+  starRow.addEventListener('change', function () { paintStars(currentStars()); });
 
   // ---------- Start ----------
   applyStrings();
-  show('setup');
+  renderFilters();
+  renderRecipes();
+  show('recipes');
 })();
