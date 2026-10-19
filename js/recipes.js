@@ -162,22 +162,51 @@ window.INGREDIENT_INFO = (function () {
     chia_seeds: '486 42 17 31 3.3 34 0.04||',
     coconut_milk: '20 2.7 0.1 0.9 0.9 0.1 0.1||'
   };
+  var CATEGORY = {
+    meat: 'guanciale bacon ham ground_pork ground_beef beef chicken_breast',
+    egg: 'egg egg_yolk',
+    dairy: 'pecorino_romano parmesan cheddar mozzarella grated_cheese cheese_slice feta_cheese sour_cream cream milk yogurt butter',
+    grain: 'spaghetti white_rice jasmine_rice rolled_oats semolina',
+    bread: 'bread hamburger_buns croutons tortilla',
+    legume: 'kidney_beans',
+    veg: 'onion red_onion white_onion garlic red_bell_pepper tomato cherry_tomato carrot cucumber bok_choy spring_onion ' +
+      'romaine_lettuce lettuce pickles corn white_mushroom',
+    fruit: 'lime blueberry',
+    nuts: 'sesame_seeds pine_nuts chia_seeds',
+    herbs: 'basil mint dill coriander_leaves rosemary parsley tarragon oregano thyme bay_leaf',
+    spices: 'black_peppercorn ground_black_pepper white_pepper salt msg paprika_powder smoked_paprika chili_powder ' +
+      'cayenne_pepper cumin cinnamon nutmeg cardamom coriander_seeds garlic_powder',
+    sauces: 'tomato_puree tomato_passata beef_stock chicken_stock vegetable_stock mayonnaise worcestershire_sauce ' +
+      'light_soy_sauce gochujang mustard ketchup pickle_juice lemon_juice apple_cider_vinegar balsamic_vinegar ' +
+      'white_vinegar rice_vinegar rosewater coconut_milk',
+    sweet: 'honey sugar brown_sugar erythritol',
+    alcohol: 'beer white_wine red_wine',
+    baking: 'flour cocoa_powder dark_chocolate',
+    oil: 'oil olive_oil extra_virgin_olive_oil toasted_sesame_oil',
+    water: 'water'
+  };
+  var catOf = {};
+  Object.keys(CATEGORY).forEach(function (c) { CATEGORY[c].split(' ').forEach(function (k) { catOf[k] = c; }); });
+
   var info = {};
   Object.keys(rows).forEach(function (k) {
     var p = rows[k].split('|'), n = p[0].split(' ').map(Number);
     info[k] = {
       kcal: n[0], carbs: n[1], protein: n[2], fat: n[3], satFat: n[4], fiber: n[5], salt: n[6],
       allergens: p[1] ? p[1].split(', ') : [],
-      tags: p[2] ? p[2].split(' ') : []
+      tags: p[2] ? p[2].split(' ') : [],
+      category: catOf[k] || 'sauces'
     };
   });
+  info.CATEGORY_ORDER = Object.keys(CATEGORY);
   return info;
 })();
 
 (function () {
   function tsp(n) {
     var q = Math.round(n * 4) / 4, whole = Math.floor(q), rest = q - whole;
-    return (whole || '') + ({ 0.25: '¼', 0.5: '½', 0.75: '¾' }[rest] || (whole ? '' : '¼')) + ' tsp';
+    if (!q) return 'a pinch';
+    return (whole || '') + ({ 0.25: '¼', 0.5: '½', 0.75: '¾' }[rest] || '') + ' tsp';
   }
 
   function g(n) { return Math.round(n) + ' g'; }
@@ -444,7 +473,7 @@ window.INGREDIENT_INFO = (function () {
   // a rule can't read falls back to the plain number at the start of the cell.
 
   var NOT_TOOLS = ['stovetop', 'oven', 'fridge'];
-  var FRACTIONS = { 0.125: '⅛', 0.25: '¼', 0.375: '⅜', 0.5: '½', 0.625: '⅝', 0.75: '¾', 0.875: '⅞' };
+  var FRACTIONS = { 0.25: '¼', 0.5: '½', 0.75: '¾' };
 
   function empty(v) { return !v || v === '—'; }
 
@@ -471,14 +500,20 @@ window.INGREDIENT_INFO = (function () {
     return (m[2].match(/[a-z_]+/gi) || []).indexOf(c[m[1]]) >= 0;
   }
 
-  function niceQty(n, unit) {
-    if (/^(tsp|tbsp|cup|pcs|head|slices|leaves)$/.test(unit)) {
-      var whole = Math.floor(n), rest = Math.round((n - whole) * 8) / 8;
-      if (rest === 1) { whole += 1; rest = 0; }
-      if (!whole && !rest) return FRACTIONS[0.125];
-      return (whole || '') + (FRACTIONS[rest] || '');
+  // Amount with its unit. Spoons, cups and pieces go to the nearest quarter;
+  // a spoon amount below a quarter becomes "a pinch".
+  function amountText(n, unit, shownUnit) {
+    var word = unit.split(' ')[0];
+    if (/^(tsp|tbsp|cup|pcs|head|slices|leaves)$/.test(word)) {
+      var q = Math.round(n * 4) / 4;
+      if (!q) {
+        if (/^(tsp|tbsp)$/.test(word)) return 'a pinch';
+        q = 0.25;
+      }
+      var whole = Math.floor(q);
+      return ((whole || '') + (FRACTIONS[q - whole] || '') + ' ' + shownUnit).trim();
     }
-    return String(n >= 10 ? Math.round(n) : Math.round(n * 10) / 10);
+    return (String(n >= 10 ? Math.round(n) : Math.round(n * 10) / 10) + ' ' + shownUnit).trim();
   }
 
   // Duration from the sheet's duration_rule, e.g. "(60 + 60 × servings) × skill_factor",
@@ -609,7 +644,7 @@ window.INGREDIENT_INFO = (function () {
         var shownUnit = unit.replace(/\s+per \w+$/, '').replace(/^pcs$/, '');
         return {
           id: r[0], name: r[1], key: r[2].replace(/^.*\//, '').replace(/\.webp$/, ''),
-          amount: (niceQty(total, unit.split(' ')[0]) + ' ' + shownUnit).trim(),
+          amount: amountText(total, unit, shownUnit),
           grams: qty ? g * total / qty : 0,
           note: empty(r[8]) ? '' : r[8]
         };
