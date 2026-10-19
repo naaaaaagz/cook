@@ -46,6 +46,7 @@ window.EQUIPMENT = {
   ingredient's image name (so "oil_marinade" uses "oil").
   ESTIMATES: generic textbook values, not from a vetted database yet.
   Columns: kcal, carbohydrate, protein, fat, saturated fat, fibre, salt | allergens | tags
+  Tags: meat, pork, fish, egg, dairy, honey (diet labels); alcohol, spicy, chili (kids warning)
 */
 window.INGREDIENT_INFO = (function () {
   var rows = {
@@ -123,8 +124,8 @@ window.INGREDIENT_INFO = (function () {
     bay_leaf: '313 75 7.6 8.4 2.3 26 0.06||',
     paprika_powder: '282 54 14 13 2 35 0.2||',
     smoked_paprika: '282 54 14 13 2 35 0.2||',
-    chili_powder: '282 50 13 14 2.5 35 2.5||',
-    cayenne_pepper: '318 57 12 17 3.3 27 0.08||',
+    chili_powder: '282 50 13 14 2.5 35 2.5||chili',
+    cayenne_pepper: '318 57 12 17 3.3 27 0.08||spicy',
     cumin: '375 44 18 22 1.5 11 0.4||',
     cinnamon: '247 81 4 1.2 0.3 53 0.03||',
     nutmeg: '525 49 6 36 26 21 0.04||',
@@ -145,15 +146,15 @@ window.INGREDIENT_INFO = (function () {
     rolled_oats: '379 68 13 6.5 1.1 10 0.01|Gluten|',
     white_rice: '360 79 6.6 0.6 0.2 1.3 0||',
     jasmine_rice: '360 79 6.6 0.6 0.2 1.3 0||',
-    beer: '43 3.6 0.5 0 0 0 0.01|Gluten|',
-    white_wine: '82 2.6 0.1 0 0 0 0.01|Sulphites|',
-    red_wine: '85 2.6 0.1 0 0 0 0.01|Sulphites|',
+    beer: '43 3.6 0.5 0 0 0 0.01|Gluten|alcohol',
+    white_wine: '82 2.6 0.1 0 0 0 0.01|Sulphites|alcohol',
+    red_wine: '85 2.6 0.1 0 0 0 0.01|Sulphites|alcohol',
     balsamic_vinegar: '88 17 0.5 0 0 0 0.06|Sulphites|',
     white_vinegar: '18 0.3 0 0 0 0 0.01|Sulphites|',
     apple_cider_vinegar: '21 0.9 0 0 0 0 0.01||',
     rice_vinegar: '18 0 0.3 0 0 0 0||',
     light_soy_sauce: '53 5 8 0.5 0.1 0.8 14.5|Soy, Gluten|',
-    gochujang: '200 40 5 2 0.3 2 6|Soy, Gluten|',
+    gochujang: '200 40 5 2 0.3 2 6|Soy, Gluten|spicy',
     mustard: '150 6 7 10 0.6 3 5.5|Mustard|',
     ketchup: '112 26 1 0.1 0 0.3 2.3||',
     sesame_seeds: '573 23 17.7 50 7 11.8 0.03|Sesame|',
@@ -175,13 +176,15 @@ window.INGREDIENT_INFO = (function () {
 
 (function () {
   function tsp(n) {
-    var whole = Math.floor(n), half = n - whole >= 0.5;
-    return (whole ? whole : '') + (half ? '½' : '') + ' tsp';
+    var q = Math.round(n * 4) / 4, whole = Math.floor(q), rest = q - whole;
+    return (whole || '') + ({ 0.25: '¼', 0.5: '½', 0.75: '¾' }[rest] || (whole ? '' : '¼')) + ' tsp';
   }
+
+  function g(n) { return Math.round(n) + ' g'; }
 
   function carbonara(c) {
     var s = c.servings;
-    var waterL = Math.max(2, s);
+    var waterL = Math.max(2, Math.ceil(s));
     var saltG = Math.round(7 * waterL);
     var rich = c.opt_eggs === 'rich';
     var garlic = c.opt_garlic === 'with';
@@ -189,19 +192,19 @@ window.INGREDIENT_INFO = (function () {
     var meatId = c.opt_meat === 'guanciale' ? 'guanciale' : 'bacon';
     var meat = meatId === 'guanciale' ? 'guanciale' : 'pancetta';
     var Meat = meat.charAt(0).toUpperCase() + meat.slice(1);
-    var eggs = rich ? Math.ceil(0.5 * s) : s;
-    var yolks = rich ? s : 0;
+    var eggs = rich ? Math.ceil(0.5 * s) : Math.ceil(s);
+    var yolks = rich ? Math.ceil(s) : 0;
     var eggText = rich ? 'the yolks and whole eggs' : 'the eggs';
     var eggIngs = [{ id: 'egg', qty: String(eggs) }].concat(rich ? [{ id: 'egg_yolk', qty: String(yolks) }] : []);
 
     // grams = the amount that ends up eaten (used for nutrition); 0 = not eaten.
     var ingredients = [
-      { id: meatId, name: meatId === 'guanciale' ? 'Guanciale' : 'Pancetta or smoked bacon', amount: 50 * s + ' g', grams: 50 * s },
-      { id: 'pecorino_romano', name: 'Pecorino Romano', amount: 30 * s + ' g', grams: 30 * s },
+      { id: meatId, name: meatId === 'guanciale' ? 'Guanciale' : 'Pancetta or smoked bacon', amount: g(50 * s), grams: 50 * s },
+      { id: 'pecorino_romano', name: 'Pecorino Romano', amount: g(30 * s), grams: 30 * s },
       { id: 'egg', name: 'Egg, large, room temperature', amount: String(eggs), grams: 55 * eggs }
     ];
     if (rich) ingredients.push({ id: 'egg_yolk', name: 'Egg yolk', amount: String(yolks), grams: 18 * yolks, note: 'whites not used' });
-    ingredients.push({ id: 'spaghetti', name: 'Spaghetti (dry)', amount: 100 * s + ' g', grams: 100 * s });
+    ingredients.push({ id: 'spaghetti', name: 'Spaghetti (dry)', amount: g(100 * s), grams: 100 * s });
     if (garlic) ingredients.push({ id: 'garlic', name: 'Garlic clove', amount: '1', grams: 0, note: 'removed before serving' });
     ingredients.push(
       { id: 'black_peppercorn', name: 'Black peppercorns, whole', amount: tsp(0.5 * s), grams: 1.25 * s },
@@ -220,7 +223,7 @@ window.INGREDIENT_INFO = (function () {
     var grindText = fine
       ? 'Grind the whole peppercorns in the mortar to a powder.'
       : 'Coarsely crack the whole peppercorns in the mortar.';
-    var g1Ings = [{ id: meatId, qty: 50 * s + ' g', label: Meat + ', diced' }, { id: 'oil', qty: '1 tsp', label: 'Oil, if lean' }]
+    var g1Ings = [{ id: meatId, qty: g(50 * s), label: Meat + ', diced' }, { id: 'oil', qty: '1 tsp', label: 'Oil, if lean' }]
       .concat(garlic ? [{ id: 'garlic', qty: '1', label: 'Garlic, crushed' }] : []);
     var g1Text = 'Put the diced ' + meat + ' into the COLD pan, then turn the burner to LOW. Lean ' + meat + '? Add 1 tsp neutral oil first.' +
       (garlic ? ' Add the lightly crushed whole garlic clove.' : '');
@@ -242,15 +245,15 @@ window.INGREDIENT_INFO = (function () {
             duration: d.B1, deps: [], tools: [], ings: eggIngs, doneWhen: 'Eggs on the counter' },
           { id: 'Q3', thread: 'B', area: 'board', title: 'Dice the ' + meat,
             text: 'Cut into 1 cm cubes.',
-            duration: d.B2, deps: [], tools: ['chef_knife'], ings: [{ id: meatId, qty: 50 * s + ' g' }], doneWhen: 'All in about 1 cm cubes' },
+            duration: d.B2, deps: [], tools: ['chef_knife'], ings: [{ id: meatId, qty: g(50 * s) }], doneWhen: 'All in about 1 cm cubes' },
           { id: 'Q4', thread: 'B', area: 'countertop', title: 'Pepper and cheese',
             text: (fine ? 'Grind the peppercorns to a powder and sieve it.' : 'Coarsely crack the peppercorns.') + ' Finely grate the pecorino.',
             duration: d.B3 + d.B4 + d.B5, deps: [], tools: ['mortar_and_pestle'].concat(fine ? ['sieve'] : []).concat(['cheese_grater']),
-            ings: [{ id: 'black_peppercorn', qty: tsp(0.5 * s) }, { id: 'pecorino_romano', qty: 30 * s + ' g' }], doneWhen: 'Pepper ground, cheese grated' },
+            ings: [{ id: 'black_peppercorn', qty: tsp(0.5 * s) }, { id: 'pecorino_romano', qty: g(30 * s) }], doneWhen: 'Pepper ground, cheese grated' },
           { id: 'Q5', thread: 'E', area: 'countertop', title: 'Mix eggs and cheese',
             text: 'Beat ' + eggText + ' with most of the pecorino until smooth. Keep the rest for serving.',
             duration: d.E1, deps: ['Q2', 'Q4'], tools: ['bowl', 'fork'],
-            ings: eggIngs.concat([{ id: 'pecorino_romano', qty: 25 * s + ' g', label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
+            ings: eggIngs.concat([{ id: 'pecorino_romano', qty: g(25 * s), label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
           { id: 'Q6', thread: 'E', area: 'countertop', title: 'Warm the plates',
             text: 'Rinse the plates with hot water and dry them.',
             duration: d.E2, deps: [], tools: [], ings: [], doneWhen: 'Plates warm to the touch' },
@@ -260,7 +263,7 @@ window.INGREDIENT_INFO = (function () {
             doneWhen: 'Cubes golden, fat melted and clear', tip: true, overcook: true },
           { id: 'Q8', thread: 'P', area: 'stove', title: 'Cook the spaghetti',
             text: "Add the spaghetti, stir once, and boil 1 minute less than the package says. Keep the water, don't drain!",
-            duration: d.P5 + d.P6, deps: [], tools: ['cooking_pot', 'tongs'], ings: [{ id: 'spaghetti', qty: 100 * s + ' g' }],
+            duration: d.P5 + d.P6, deps: [], tools: ['cooking_pot', 'tongs'], ings: [{ id: 'spaghetti', qty: g(100 * s) }],
             doneWhen: 'Bite test: slightly firm centre', tip: true, overcook: true },
           { id: 'Q9', thread: 'G', area: 'stove', title: g3Title + ', heat off',
             text: g3Text + ' Then turn off the burner and take the pan off the heat.',
@@ -269,7 +272,7 @@ window.INGREDIENT_INFO = (function () {
           { id: 'Q10', thread: 'F', area: 'stove', title: 'Pasta into the pan',
             text: 'Turn off the pasta. With tongs, move it into the pan and toss with pasta water, a ladle at a time, until creamy. Wait until the pan stops sizzling.',
             duration: d.P7 + d.F1 + d.F2, deps: ['Q8', 'Q9'], tools: ['pan', 'tongs', 'ladle'],
-            ings: [{ id: 'spaghetti', qty: 100 * s + ' g', label: 'Spaghetti, al dente' }, { id: 'water', qty: s + ' ladles', label: 'Pasta water' }],
+            ings: [{ id: 'spaghetti', qty: g(100 * s), label: 'Spaghetti, al dente' }, { id: 'water', qty: Math.ceil(s) + ' ladles', label: 'Pasta water' }],
             doneWhen: 'Creamy and no longer sizzling' },
           { id: 'Q11', thread: 'F', area: 'stove', title: 'Add the egg mix',
             text: 'Off the heat, pour in the egg mix and toss well. Too thick? Add a little pasta water.',
@@ -278,7 +281,7 @@ window.INGREDIENT_INFO = (function () {
           { id: 'Q12', thread: 'F', area: 'countertop', title: 'Plate and serve',
             text: 'Twirl onto the warm plates. Top with the remaining pecorino and pepper.',
             duration: d.F5, deps: ['Q6'], tools: ['tongs'],
-            ings: [{ id: 'pecorino_romano', qty: 5 * s + ' g', label: 'Pecorino, grated' }, { id: 'black_peppercorn', qty: 'rest', label: 'Ground pepper' }],
+            ings: [{ id: 'pecorino_romano', qty: g(5 * s), label: 'Pecorino, grated' }, { id: 'black_peppercorn', qty: 'rest', label: 'Ground pepper' }],
             doneWhen: 'Served' }
         ]
       };
@@ -300,7 +303,7 @@ window.INGREDIENT_INFO = (function () {
         duration: d.B1, deps: [], tools: [], ings: eggIngs, doneWhen: 'Eggs on the counter' },
       { id: 'B2', thread: 'B', area: 'board', title: 'Dice the ' + meat,
         text: 'Cut the ' + meat + ' into 1 cm cubes.',
-        duration: d.B2, deps: [], tools: ['chef_knife'], ings: [{ id: meatId, qty: 50 * s + ' g' }], doneWhen: 'All in about 1 cm cubes' },
+        duration: d.B2, deps: [], tools: ['chef_knife'], ings: [{ id: meatId, qty: g(50 * s) }], doneWhen: 'All in about 1 cm cubes' },
       { id: 'B3', thread: 'B', area: 'countertop', title: 'Grind the pepper',
         text: grindText,
         duration: d.B3, deps: [], tools: ['mortar_and_pestle'], ings: [{ id: 'black_peppercorn', qty: tsp(0.5 * s) }], doneWhen: 'Evenly ground' }
@@ -313,12 +316,12 @@ window.INGREDIENT_INFO = (function () {
     steps.push(
       { id: 'B5', thread: 'B', area: 'countertop', title: 'Grate the pecorino',
         text: 'Grate the Pecorino Romano on the finest side of the grater.',
-        duration: d.B5, deps: [], tools: ['cheese_grater'], ings: [{ id: 'pecorino_romano', qty: 30 * s + ' g' }], doneWhen: 'Fine, fluffy cheese' },
+        duration: d.B5, deps: [], tools: ['cheese_grater'], ings: [{ id: 'pecorino_romano', qty: g(30 * s) }], doneWhen: 'Fine, fluffy cheese' },
 
       { id: 'E1', thread: 'E', area: 'countertop', title: 'Mix eggs and cheese',
         text: 'In the bowl, beat ' + eggText + ' with most of the grated pecorino until smooth. Keep the rest for serving.',
         duration: d.E1, deps: ['B1', 'B5'], tools: ['bowl', 'fork'],
-        ings: eggIngs.concat([{ id: 'pecorino_romano', qty: 25 * s + ' g', label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
+        ings: eggIngs.concat([{ id: 'pecorino_romano', qty: g(25 * s), label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
       { id: 'E2', thread: 'E', area: 'countertop', title: 'Warm the plates',
         text: 'Make the plates slightly warm, e.g. rinse them with hot water and dry them.',
         duration: d.E2, deps: [], tools: [], ings: [], doneWhen: 'Plates warm to the touch' },
@@ -335,7 +338,7 @@ window.INGREDIENT_INFO = (function () {
         duration: d.P4, deps: [], tools: ['cooking_pot'], ings: [{ id: 'salt', qty: saltG + ' g' }], doneWhen: 'Salt dissolved' },
       { id: 'P5', thread: 'P', area: 'stove', title: 'Add the spaghetti',
         text: "Drop the spaghetti in with a twisting motion so it fans out, then stir once, slowly, so it doesn't stick.",
-        duration: d.P5, deps: [], tools: ['cooking_pot', 'tongs'], ings: [{ id: 'spaghetti', qty: 100 * s + ' g' }],
+        duration: d.P5, deps: [], tools: ['cooking_pot', 'tongs'], ings: [{ id: 'spaghetti', qty: g(100 * s) }],
         doneWhen: 'All spaghetti under water', tip: true },
       { id: 'P6', thread: 'P', area: 'stove', title: 'Cook until al dente',
         text: "Boil 1 minute less than the package says. Keep the water, don't drain!",
@@ -355,7 +358,7 @@ window.INGREDIENT_INFO = (function () {
       { id: 'F1', thread: 'F', area: 'stove', title: 'Pasta into the pan',
         text: 'With tongs, move the spaghetti straight into the pan. Add pasta water a ladle at a time while tossing, until creamy.',
         duration: d.F1, deps: ['P7', 'G4'], tools: ['pan', 'tongs', 'ladle'],
-        ings: [{ id: 'spaghetti', qty: 100 * s + ' g', label: 'Spaghetti, al dente' }, { id: 'water', qty: s + ' ladles', label: 'Pasta water' }],
+        ings: [{ id: 'spaghetti', qty: g(100 * s), label: 'Spaghetti, al dente' }, { id: 'water', qty: Math.ceil(s) + ' ladles', label: 'Pasta water' }],
         doneWhen: 'Glossy, creamy coating' },
       { id: 'F2', thread: 'F', area: 'stove', title: 'Let it calm down',
         text: 'Wait until the pan has just stopped sizzling but is still warm. Too hot = scrambled eggs.',
@@ -371,7 +374,7 @@ window.INGREDIENT_INFO = (function () {
       { id: 'F5', thread: 'F', area: 'countertop', title: 'Plate and serve',
         text: 'Twirl onto the warm plates. Top with the remaining pecorino and pepper.',
         duration: d.F5, deps: ['E2'], tools: ['tongs'],
-        ings: [{ id: 'pecorino_romano', qty: 5 * s + ' g', label: 'Pecorino, grated' }, { id: 'black_peppercorn', qty: 'rest', label: 'Ground pepper' }],
+        ings: [{ id: 'pecorino_romano', qty: g(5 * s), label: 'Pecorino, grated' }, { id: 'black_peppercorn', qty: 'rest', label: 'Ground pepper' }],
         doneWhen: 'Served' }
     );
     return { servings: s, ingredients: ingredients, steps: steps };
@@ -400,6 +403,41 @@ window.INGREDIENT_INFO = (function () {
       build: carbonara
     }
   ].concat((window.SHEET_RECIPES || []).map(fromSheet));
+
+  /*
+    category: soup, main, dessert or side (the recipe list sections)
+    cuisine:  filter tags (to be adjusted)
+    kids:     options switched on when children are added, to make it child-friendly
+    rawEgg:   true when the chosen options leave the egg raw
+  */
+  var META = {
+    spaghetti_carbonara: { category: 'main', cuisine: ['Italian'] },
+    chilli_con_carne: { category: 'main', cuisine: ['Mexican'], kids: { opt_heat: 'mild' } },
+    semolina_pudding: { category: 'dessert' },
+    bibimbap: { category: 'main', cuisine: ['Asian'] },
+    honey_tarragon_chicken: { category: 'main', kids: { opt_wine: 'alcohol_free' } },
+    caesar_salad: { category: 'main', cuisine: ['American'], kids: { opt_mayo: 'store' },
+      rawEgg: function (c) { return c.opt_mayo === 'homemade'; } },
+    breakfast_muffin: { category: 'main' },
+    summer_salad: { category: 'side' },
+    tozza: { category: 'main' },
+    tomato_soup: { category: 'soup' },
+    french_onion_soup: { category: 'soup', cuisine: ['French'] },
+    tzatziki: { category: 'side', cuisine: ['Greek'] },
+    overnight_oats: { category: 'main' },
+    slow_cooked_beef: { category: 'main', kids: { opt_heat: 'mild' } },
+    burger: { category: 'main', cuisine: ['American'], kids: { opt_sauce_heat: 'without', opt_mayo: 'store' },
+      rawEgg: function (c) { return c.opt_mayo === 'homemade'; } },
+    homemade_mayonnaise: { category: 'side', kids: { opt_egg: 'pasteurized' },
+      rawEgg: function (c) { return c.opt_egg === 'fresh'; } }
+  };
+  window.RECIPES.forEach(function (r) {
+    var m = META[r.id] || {};
+    r.category = m.category || 'main';
+    r.cuisine = m.cuisine || [];
+    r.kids = m.kids || {};
+    r.rawEgg = m.rawEgg || function () { return false; };
+  });
 
   // ---------- Recipes from the sheet (js/recipes-sheet.js) ----------
   // The sheet's free-text columns are read with a few simple rules; anything
@@ -488,24 +526,43 @@ window.INGREDIENT_INFO = (function () {
   }
 
   // "I know what I'm doing": back-to-back steps of the same thread in the same
-  // place become one card, unless a step also waits for something else.
+  // place become one card. If a step also waits for another thread (e.g. the
+  // semolina needs measuring), the whole card waits for it, unless that would
+  // make two cards wait for each other.
   function combine(steps) {
+    var byId = {};
+    steps.forEach(function (s) { byId[s.id] = s; });
+    function allDeps(s) {
+      var prev = null;
+      for (var i = 0; i < steps.length && steps[i] !== s; i++) if (steps[i].thread === s.thread) prev = steps[i];
+      return s.deps.concat(prev ? [prev.id] : []);
+    }
+    function reaches(fromId, targets, seen) {
+      if (targets.indexOf(fromId) >= 0) return true;
+      seen = seen || {};
+      if (seen[fromId]) return false;
+      seen[fromId] = true;
+      return allDeps(byId[fromId]).some(function (d) { return reaches(d, targets, seen); });
+    }
+
     var groups = [], groupOf = {}, last = {};
     steps.forEach(function (s) {
       var g = last[s.thread];
-      var own = s.deps.every(function (d) { return g && g.ids.indexOf(d) >= 0; });
-      if (g && g.area === s.area && own) {
+      var outside = g ? s.deps.filter(function (d) { return g.ids.indexOf(d) < 0; }) : [];
+      var ok = g && g.area === s.area && !outside.some(function (d) { return reaches(d, g.ids); });
+      if (ok) {
         g.ids.push(s.id);
-        g.title += ' · ' + s.title;
-        g.text += ' ' + s.text;
+        g.parts.push({ title: s.title, text: s.text });
         g.duration += s.duration;
         g.doneWhen = s.doneWhen;
         g.overcook = g.overcook || s.overcook;
+        g.deps = g.deps.concat(outside);
         s.tools.forEach(function (t) { if (g.tools.indexOf(t) < 0) g.tools.push(t); });
         s.ings.forEach(function (i) { if (!g.ings.some(function (x) { return x.id === i.id; })) g.ings.push(i); });
       } else {
-        g = { id: s.id, ids: [s.id], thread: s.thread, area: s.area, title: s.title, text: s.text, duration: s.duration,
-          deps: s.deps.slice(), tools: s.tools.slice(), ings: s.ings.slice(), doneWhen: s.doneWhen, overcook: s.overcook };
+        g = { id: s.id, ids: [s.id], thread: s.thread, area: s.area, parts: [{ title: s.title, text: s.text }],
+          duration: s.duration, deps: s.deps.slice(), tools: s.tools.slice(), ings: s.ings.slice(),
+          doneWhen: s.doneWhen, overcook: s.overcook, tip: s.tip };
         groups.push(g);
         last[s.thread] = g;
       }
@@ -515,6 +572,10 @@ window.INGREDIENT_INFO = (function () {
       var deps = [];
       g.deps.forEach(function (d) { var to = groupOf[d]; if (to && to !== g.id && deps.indexOf(to) < 0) deps.push(to); });
       g.deps = deps;
+      var n = g.parts.length;
+      g.title = n === 1 ? g.parts[0].title : n === 2 ? g.parts[0].title + ' · ' + g.parts[1].title : g.parts[0].title + ' … ' + g.parts[n - 1].title;
+      g.text = n === 1 ? g.parts[0].text : '';
+      if (n === 1) delete g.parts;
       delete g.ids;
     });
     return groups;
