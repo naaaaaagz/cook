@@ -131,9 +131,6 @@
       reopen: 'Show past steps',
       fold: 'Hide past steps',
       doneWhen: 'Done when: ',
-      waitingFor: 'Waiting for: {x}',
-      firstOthers: 'Finish other steps first!',
-      doThis: 'Do this!',
       left: 'left',
       over: 'over',
       newThing: 'New thing to do!',
@@ -913,8 +910,7 @@
 
   /*
     Each step is one of:
-    hidden   not shown yet
-    waiting  shown, but still waits for a step that is on screen and ready to do
+    hidden   not shown yet: something it needs isn't done
     active   ready to do
     kept     done, but a step that needs it is still open: greyed and folded
     gone     done and no longer needed
@@ -924,11 +920,7 @@
       var needed = cook.steps.some(function (o) { return !isDone(o.id) && allDeps(o).indexOf(step.id) >= 0; });
       return needed ? 'kept' : 'gone';
     }
-    if (allDeps(step).every(isDone)) return 'active';
-    // Shown early only when everything it still waits for is a card you can do right now.
-    var open = allDeps(step).filter(function (d) { return !isDone(d); });
-    if (open.every(function (d) { return allDeps(stepById(d)).every(isDone); })) return 'waiting';
-    return 'hidden';
+    return allDeps(step).every(isDone) ? 'active' : 'hidden';
   }
 
   // Works out which cards are shown. A new card goes right after the last card
@@ -939,7 +931,7 @@
       var st = statusOf(s), old = cook.status[s.id];
       cook.status[s.id] = st;
       if (st === 'active' && old !== 'active') nowActive.push(s);
-      var visible = st === 'active' || st === 'waiting' || (st === 'kept' && !isMap());
+      var visible = st === 'active' || (st === 'kept' && !isMap());
       var at = cook.slots.indexOf(s.id);
       if (visible && at < 0) {
         var after = -1;
@@ -1064,7 +1056,6 @@
       body +
       (ings ? '<ul class="step-ings">' + ings + '</ul>' : '') +
       '<p class="done-when">' + t('doneWhen') + esc(units(step.doneWhen)) + '</p>' +
-      '<p class="waiting-for" hidden></p>' +
       (step.overcook ? '<p class="overdo-note" role="alert">' + t('dontOverdo') + '</p>' : '') +
       '<div class="step-foot">' +
         '<div class="ring">' +
@@ -1097,21 +1088,12 @@
   // Classes and texts that follow the step's status.
   function updateCard(step, el) {
     var st = cook.status[step.id];
-    el.classList.toggle('is-waiting', st === 'waiting');
     el.classList.toggle('is-done', st === 'kept');
     el.querySelector('.btn-start').disabled = st !== 'active';
-    var w = el.querySelector('.waiting-for');
-    if (st === 'waiting') {
-      var open = allDeps(step).filter(function (d) { return !isDone(d); }).map(function (d) { return stepById(d).title; });
-      w.textContent = t('waitingFor', { x: open.join(', ') });
-      w.hidden = false;
-    } else {
-      w.hidden = true;
-    }
   }
 
   function finishStep(step) {
-    if (cook.status[step.id] !== 'active') { blocked(step); return; }
+    if (cook.status[step.id] !== 'active') return;
     cook.done.add(step.id);
     delete cook.started[step.id];
     var el = cook.els[step.id];
@@ -1121,39 +1103,6 @@
     markNew(r.fresh);
     showTips(r.active);
     updateClocks();
-  }
-
-  // "I'm done" on a step that still waits: explain, and point at what to do first.
-  function blocked(step) {
-    var el = cook.els[step.id];
-    var tip = document.createElement('span');
-    tip.className = 'tooltip step-tooltip';
-    tip.setAttribute('role', 'status');
-    tip.textContent = t('firstOthers');
-    el.appendChild(tip);
-    setTimeout(function () { tip.remove(); }, 2500);
-
-    var todo = [], seen = {};
-    (function walk(s) {
-      allDeps(s).forEach(function (d) {
-        if (isDone(d) || seen[d]) return;
-        seen[d] = true;
-        if (cook.status[d] === 'active') todo.push(d); else walk(stepById(d));
-      });
-    })(step);
-    todo.forEach(function (id) {
-      var card = cook.els[id];
-      if (!card) return;
-      card.classList.remove('do-this');
-      void card.offsetWidth;
-      card.classList.add('do-this');
-      var badge = document.createElement('span');
-      badge.className = 'do-this-badge';
-      badge.textContent = t('doThis');
-      card.appendChild(badge);
-      setTimeout(function () { badge.remove(); card.classList.remove('do-this'); }, 3500);
-    });
-    if (todo[0] && cook.els[todo[0]]) cook.els[todo[0]].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   // Puts the cards into a container in the given order, only moving what changed.

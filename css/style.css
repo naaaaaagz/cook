@@ -614,7 +614,6 @@ select {
 .step-ings img { width: 36px; height: 36px; object-fit: cover; display: block; }
 .step-ings b { white-space: nowrap; }
 .done-when { font-size: 13px; color: var(--muted); }
-.waiting-for { font-size: 13px; font-weight: 600; color: var(--muted); }
 
 /* Footer: round timer with Start in the middle, Done next to it */
 .step-foot { display: flex; align-items: center; gap: 16px; }
@@ -651,9 +650,6 @@ select {
   transition: opacity 1s ease, height 1s ease, padding 1s ease, margin 1s ease;
 }
 
-/* Waiting for other steps */
-.step.is-waiting { background: color-mix(in srgb, var(--card) 70%, var(--bg)); }
-.step.is-waiting h3, .step.is-waiting .step-text { color: var(--muted); }
 
 /* Done but still needed by a step that is open: greyed and folded, can be re-opened */
 .step.is-done { opacity: .6; padding: 8px 14px; gap: 4px; box-shadow: none; background: var(--bg); }
@@ -663,23 +659,6 @@ select {
 .done-row { display: none; }
 .step.is-done .done-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; }
 .btn-reopen { font: inherit; font-size: 13px; background: none; border: 0; color: var(--ink); text-decoration: underline; cursor: pointer; padding: 4px; }
-
-/* "Finish other steps first!" and "Do this!" */
-.step-tooltip { top: auto; bottom: 64px; right: 16px; width: auto; }
-.do-this-badge {
-  position: absolute;
-  top: -12px;
-  right: 16px;
-  z-index: 2;
-  font-size: 13px;
-  font-weight: 800;
-  color: #fff;
-  background: var(--accent);
-  border-radius: 999px;
-  padding: 3px 12px;
-}
-.step.do-this { animation: do-this .8s ease-in-out 4; }
-@keyframes do-this { 50% { box-shadow: 0 0 0 5px var(--accent); } }
 
 /* Time is up: the card shakes once every 10 seconds */
 .step.time-up { animation: nudge 10s ease-in-out infinite; }
@@ -692,7 +671,7 @@ select {
   5% { transform: translateX(-1px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .step.time-up, .step.do-this { animation: none; outline: 2px solid var(--warn); }
+  .step.time-up { animation: none; outline: 2px solid var(--warn); }
 }
 
 /* Map view (landscape) */
