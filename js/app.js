@@ -15,6 +15,32 @@
       language: 'Language',
       kitchenLayout: 'Kitchen layout',
       setupLayout: 'Set up kitchen layout',
+      setupLayoutMap: 'Set up kitchen layout for Map view',
+      editLayoutMap: 'Edit kitchen layout for Map view',
+      units: 'Units',
+      metric: 'Metric',
+      imperial: 'Imperial',
+      takes: 'Takes {x}',
+      timesUp: "⏰ Time's up: {x}",
+      perServingNote: 'per person',
+      fatSat: 'Fat / Saturated',
+      ingCat_meat: 'Meat',
+      ingCat_egg: 'Eggs',
+      ingCat_dairy: 'Dairy',
+      ingCat_grain: 'Pasta, rice & grains',
+      ingCat_bread: 'Bread',
+      ingCat_legume: 'Beans',
+      ingCat_veg: 'Vegetables',
+      ingCat_fruit: 'Fruit',
+      ingCat_nuts: 'Nuts & seeds',
+      ingCat_herbs: 'Herbs',
+      ingCat_spices: 'Spices',
+      ingCat_sauces: 'Sauces & condiments',
+      ingCat_sweet: 'Sweeteners',
+      ingCat_alcohol: 'Alcohol',
+      ingCat_baking: 'Baking',
+      ingCat_oil: 'Oil & fat',
+      ingCat_water: 'Water',
       layoutNone: 'Not set up yet.',
       layoutSaved: 'Your kitchen layout is saved.',
       landscapeNote: 'Use your device in landscape mode to set up!',
@@ -102,8 +128,8 @@
       start: 'Start',
       done: "I'm done",
       doneMark: '✓ Done',
-      reopen: 'Re-open',
-      fold: 'Fold',
+      reopen: 'Show past steps',
+      fold: 'Hide past steps',
       doneWhen: 'Done when: ',
       waitingFor: 'Waiting for: {x}',
       firstOthers: 'Finish other steps first!',
@@ -173,16 +199,34 @@
     built: null,
     mapView: false, // desktop toggle
     filters: { cat: [], cuisine: [] },
-    returnTo: 'recipes'
+    units: 'metric'
   };
 
   // ---------- Screens ----------
+  // Every screen change is a browser history entry, so Back (in the page or the
+  // browser) goes to the previous screen.
   var SCREENS = ['recipes', 'layout', 'details', 'cook'];
-  function show(name) {
+  function show(name, fromHistory) {
     state.screen = name;
     SCREENS.forEach(function (s) { $('screen-' + s).hidden = s !== name; });
+    if (!fromHistory) history.pushState({ screen: name }, '');
     window.scrollTo(0, 0);
   }
+
+  window.addEventListener('popstate', function (e) {
+    var target = (e.state && e.state.screen) || 'recipes';
+    if (cook && state.screen === 'cook' && target !== 'cook') {
+      if (!window.confirm(t('exitConfirm'))) {
+        history.pushState({ screen: 'cook' }, '');
+        return;
+      }
+      stopCooking();
+    }
+    if (target === 'cook' && !cook) target = state.recipe ? 'details' : 'recipes';
+    if (target === 'details' && !state.recipe) target = 'recipes';
+    if (target === 'layout') target = 'recipes';
+    show(target, true);
+  });
 
   document.addEventListener('click', function (e) {
     var go = e.target.closest('[data-go]');
@@ -190,17 +234,35 @@
       stopCooking();
       show(go.getAttribute('data-go'));
     }
+    if (e.target.closest('[data-back]')) history.back();
   });
 
   // Dialogs close when you click outside them.
   document.querySelectorAll('dialog').forEach(function (d) {
     d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+    d.addEventListener('close', function () { document.documentElement.classList.remove('no-scroll'); });
   });
+  function openDialog(d) {
+    document.documentElement.classList.add('no-scroll');
+    d.showModal();
+  }
 
   // ---------- Options: theme, language, kitchen layout ----------
-  $('btn-options').addEventListener('click', function () { $('options-dialog').showModal(); });
+  $('btn-options').addEventListener('click', function () { openDialog($('options-dialog')); });
   document.querySelectorAll('input[name="theme"]').forEach(function (r) {
     r.addEventListener('change', function () { document.documentElement.setAttribute('data-theme', r.value); });
+  });
+  document.querySelectorAll('input[name="units"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      state.units = r.value;
+      if (state.recipe) updateDetails();
+      if (cook) {
+        Object.keys(cook.els).forEach(function (id) { cook.els[id].remove(); });
+        cook.els = {};
+        render();
+        tick();
+      }
+    });
   });
   $('lang-select').addEventListener('change', function (e) {
     lang = e.target.value;
@@ -210,6 +272,34 @@
     $('options-dialog').close();
     openLayout();
   });
+  $('btn-layout-home').addEventListener('click', openLayout);
+
+  // ---------- Metric / imperial ----------
+  // Amounts are stored metric; with "Imperial" chosen, grams, millilitres,
+  // litres, centimetres and °C in any text are converted and rounded.
+  function quarter(x) {
+    var q = Math.max(0.25, Math.round(x * 4) / 4), whole = Math.floor(q);
+    return (whole || '') + ({ 0.25: '¼', 0.5: '½', 0.75: '¾' }[q - whole] || '');
+  }
+  function toImperial(n, unit) {
+    if (unit === '°C') return Math.round((n * 9 / 5 + 32) / 5) * 5 + ' °F';
+    if (unit === 'cm') return quarter(n / 2.54) + ' in';
+    if (unit === 'kg') n *= 1000, unit = 'g';
+    if (unit === 'L') n *= 1000, unit = 'ml';
+    if (unit === 'g') { var oz = n / 28.35; return oz >= 16 ? quarter(oz / 16) + ' lb' : quarter(oz) + ' oz'; }
+    if (n >= 950) return quarter(n / 946) + ' qt';
+    if (n >= 60) return quarter(n / 240) + ' cup';
+    return quarter(n / 15) + ' tbsp';
+  }
+  function units(text) {
+    if (state.units !== 'imperial' || !text) return text;
+    var num = '(\\d+(?:\\.\\d+)?)';
+    var re = new RegExp(num + '(?:(\\s*(?:to|-|–)\\s*)' + num + ')?\\s*(°C|kg|g|ml|L|cm)\\b', 'g');
+    return String(text).replace(re, function (m, a, sep, b, u) {
+      if (b) return toImperial(Number(a), u).replace(/\s.*$/, '') + sep + toImperial(Number(b), u);
+      return toImperial(Number(a), u);
+    });
+  }
 
   // ---------- Written-out recipe ("Read instead") ----------
   function openRead(r) {
@@ -225,17 +315,17 @@
         if (/^•/.test(line)) {
           if (!list) { list = document.createElement('ul'); body.appendChild(list); }
           var li = document.createElement('li');
-          li.textContent = line.replace(/^•\s*/, '');
+          li.textContent = units(line.replace(/^•\s*/, ''));
           list.appendChild(li);
           return;
         }
         list = null;
         var el = document.createElement(i === 0 && /:$/.test(line) ? 'h3' : 'p');
-        el.textContent = line;
+        el.textContent = units(line);
         body.appendChild(el);
       });
     });
-    $('read-dialog').showModal();
+    openDialog($('read-dialog'));
     body.scrollTop = 0;
   }
   $('read-close').addEventListener('click', function () { $('read-dialog').close(); });
@@ -399,7 +489,6 @@
   var draft = null;
 
   function openLayout() {
-    state.returnTo = state.screen;
     draft = clone(state.layout);
     show('layout');
     var canvas = $('layout-canvas');
@@ -419,14 +508,17 @@
     });
   }
 
-  $('btn-layout-cancel').addEventListener('click', function () { show(state.returnTo); });
+  $('btn-layout-cancel').addEventListener('click', function () { history.back(); });
   $('btn-layout-save').addEventListener('click', function () {
     state.layout = draft;
     state.layoutSaved = true;
     var status = $('layout-status');
     status.setAttribute('data-i18n', 'layoutSaved');
     status.textContent = t('layoutSaved');
-    show(state.returnTo);
+    var home = $('btn-layout-home');
+    home.setAttribute('data-i18n', 'editLayoutMap');
+    home.textContent = t('editLayoutMap');
+    history.back();
     if (cook) {
       $('cook-map').innerHTML = '';
       render();
@@ -517,8 +609,8 @@
 
   function containsRow(info) {
     if (!info.contains.length) return '';
-    return '<span class="warn-icon" role="img" aria-label="' + t('containsLabel') + '">❗</span>' +
-      info.contains.map(function (c) { return '<span class="keyword">' + esc(c) + '</span>'; }).join('');
+    return '<span class="warn-icon" role="img" aria-label="' + t('containsLabel') + '">❗</span> ' +
+      '<span>' + info.contains.map(esc).join(', ') + '</span>';
   }
 
   function nutritionPerPerson(built) {
@@ -532,7 +624,7 @@
     keys.forEach(function (k) { tot[k] /= built.servings; });
     return tot;
   }
-  var NUTRI_EMOJI = { kcal: '🔥', carbs: '🌾', protein: '💪', fat: '🫒', satFat: '🧈', fiber: '🥦', salt: '🧂' };
+  function kcal5(n) { return Math.round(n / 5) * 5; }
 
   // Things children shouldn't get: alcohol, hot spices, raw egg.
   function hazards(r, c, built) {
@@ -626,10 +718,9 @@
           '<span class="recipe-card-body">' +
           '<span class="title-row"><span>' + esc(r.name) + '</span>' + dietBadge(info) + '</span>' +
           '<span class="meta-line">⏱️ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
-          '<span class="meta-line">' + NUTRI_EMOJI.kcal + ' ' + Math.round(n.kcal) + ' kcal · ' +
-          NUTRI_EMOJI.carbs + ' ' + Math.round(n.carbs) + ' g ' + t('carbsShort') + ' · ' +
-          NUTRI_EMOJI.protein + ' ' + Math.round(n.protein) + ' g ' + t('proteinShort') +
-          ' <span class="hint">' + unitText(r, 'perServing') + '</span></span>' +
+          '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' kcal · ' +
+          Math.round(n.carbs) + ' g ' + t('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + t('proteinShort') +
+          '<small>' + unitText(r, 'perServing') + '</small></span>' +
           '<span class="warn-row">' + containsRow(info) + '</span>' +
           '</span></button>' +
           '<button class="btn btn-secondary btn-small btn-read-card" type="button">' + t('readInstead') + '</button>';
@@ -705,12 +796,14 @@
     $('det-warnings').innerHTML = containsRow(info);
     $('det-warnings').hidden = !info.contains.length;
 
-    var n = nutritionPerPerson(built);
+    var per = Object.assign({}, c, { adults: r.defaultServings || 2, kids: 0 });
+    per.servings = per.adults;
+    var n = nutritionPerPerson(r.build(per));
     $('det-per').textContent = unitText(r, 'perPerson');
-    var rows = [['kcal', Math.round(n.kcal) + ' kcal'], ['carbs', Math.round(n.carbs) + ' g'], ['protein', Math.round(n.protein) + ' g'],
-      ['fat', Math.round(n.fat) + ' g'], ['satFat', Math.round(n.satFat) + ' g'], ['fiber', n.fiber.toFixed(1) + ' g'], ['salt', n.salt.toFixed(1) + ' g']];
+    var rows = [['kcal', kcal5(n.kcal) + ' kcal'], ['carbs', Math.round(n.carbs) + ' g'], ['protein', Math.round(n.protein) + ' g'],
+      ['fatSat', Math.round(n.fat) + ' g / ' + Math.round(n.satFat) + ' g'], ['fiber', n.fiber.toFixed(1) + ' g'], ['salt', n.salt.toFixed(1) + ' g']];
     $('det-nutrition').innerHTML = rows.map(function (x) {
-      return '<div><dt>' + NUTRI_EMOJI[x[0]] + ' ' + t(x[0]) + '</dt><dd>' + x[1] + '</dd></div>';
+      return '<div><dt>' + t(x[0]) + '</dt><dd>' + x[1] + '</dd></div>';
     }).join('');
 
     // People
@@ -750,14 +843,22 @@
     $('ing-meta').textContent = t('ingredientsFor', { x: who });
     var list = $('ing-list');
     list.innerHTML = '';
-    built.ingredients.forEach(function (ing) {
-      var li = document.createElement('li');
-      li.className = 'ing-card';
-      li.innerHTML =
-        '<img alt="" src="' + imgFor(ing) + '">' +
-        '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(ing.note) + '</span>' : '') + '</span>' +
-        '<span class="amount">' + esc(ing.amount) + '</span>';
-      list.appendChild(li);
+    window.INGREDIENT_INFO.CATEGORY_ORDER.forEach(function (cat) {
+      var mine = built.ingredients.filter(function (i) { return (infoFor(i) || { category: 'sauces' }).category === cat; });
+      if (!mine.length) return;
+      var h = document.createElement('li');
+      h.className = 'ing-group';
+      h.textContent = t('ingCat_' + cat);
+      list.appendChild(h);
+      mine.forEach(function (ing) {
+        var li = document.createElement('li');
+        li.className = 'ing-card';
+        li.innerHTML =
+          '<img alt="" src="' + imgFor(ing) + '">' +
+          '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(units(ing.note)) + '</span>' : '') + '</span>' +
+          '<span class="amount">' + esc(units(ing.amount)) + '</span>';
+        list.appendChild(li);
+      });
     });
   }
 
@@ -813,7 +914,7 @@
   /*
     Each step is one of:
     hidden   not shown yet
-    waiting  shown, but still waits for a step of another thread
+    waiting  shown, but still waits for a step that is on screen and ready to do
     active   ready to do
     kept     done, but a step that needs it is still open: greyed and folded
     gone     done and no longer needed
@@ -824,9 +925,9 @@
       return needed ? 'kept' : 'gone';
     }
     if (allDeps(step).every(isDone)) return 'active';
-    var prev = prevInThread(cook.steps, step);
-    var prevDone = prev && isDone(prev.id);
-    if ((!prev || prevDone) && (prevDone || step.deps.some(isDone))) return 'waiting';
+    // Shown early only when everything it still waits for is a card you can do right now.
+    var open = allDeps(step).filter(function (d) { return !isDone(d); });
+    if (open.every(function (d) { return allDeps(stepById(d)).every(isDone); })) return 'waiting';
     return 'hidden';
   }
 
@@ -838,7 +939,7 @@
       var st = statusOf(s), old = cook.status[s.id];
       cook.status[s.id] = st;
       if (st === 'active' && old !== 'active') nowActive.push(s);
-      var visible = st === 'active' || st === 'waiting' || st === 'kept';
+      var visible = st === 'active' || st === 'waiting' || (st === 'kept' && !isMap());
       var at = cook.slots.indexOf(s.id);
       if (visible && at < 0) {
         var after = -1;
@@ -847,10 +948,24 @@
         fresh.push(s);
       } else if (!visible && at >= 0) {
         cook.slots.splice(at, 1);
-        if (cook.els[s.id]) { cook.els[s.id].remove(); delete cook.els[s.id]; }
+        if (cook.els[s.id]) { leave(cook.els[s.id]); delete cook.els[s.id]; }
       }
     });
     return { fresh: fresh, active: nowActive };
+  }
+
+  // A card that is no longer needed fades out over a second while the cards
+  // below slide up into its place.
+  function leave(el) {
+    var gap = parseFloat(getComputedStyle(el.parentNode || document.body).rowGap) || 0;
+    el.classList.add('leaving');
+    el.style.height = el.offsetHeight + 'px';
+    void el.offsetHeight;
+    el.style.height = '0px';
+    el.style.paddingTop = el.style.paddingBottom = '0px';
+    el.style.marginBottom = -gap + 'px';
+    el.style.opacity = '0';
+    setTimeout(function () { el.remove(); }, 1000);
   }
 
   function startCooking() {
@@ -864,6 +979,7 @@
     $('cook-map').innerHTML = '';
     $('cook-finished').hidden = true;
     $('start-overlay').hidden = false;
+    $('start-takes').textContent = t('takes', { x: fmtMinutes(estimateMinutes(b.steps)) });
     $('cook-clock').textContent = '0:00';
     resetStars();
     show('cook');
@@ -886,13 +1002,14 @@
     tickTimer = null;
     cook = null;
     document.body.classList.remove('overdo');
+    $('due-toast').hidden = true;
     hideTip(true);
   }
 
   $('btn-cook-exit').addEventListener('click', function () {
     if (window.confirm(t('exitConfirm'))) {
       stopCooking();
-      show('details');
+      history.back();
     }
   });
 
@@ -917,8 +1034,8 @@
 
   function ingItem(i) {
     var base = cook.ingredients.filter(function (x) { return x.id === i.id; })[0];
-    var name = i.label || (base ? base.name : i.id);
-    return '<li><img alt="" src="' + imgFor(i) + '"><span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(i.qty) + '</b>' : '') + '</li>';
+    var name = (i.label || (base ? base.name : i.id)).replace(/\s*\([^)]*\)/g, '');
+    return '<li><img alt="" src="' + imgFor(i) + '"><span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(units(i.qty)) + '</b>' : '') + '</li>';
   }
 
   function cardFor(step) {
@@ -934,8 +1051,8 @@
     }).join('');
     var ings = step.ings.map(ingItem).join('');
     var body = step.parts
-      ? '<ol class="step-parts">' + step.parts.map(function (p) { return '<li><b>' + esc(p.title) + ':</b> ' + esc(p.text) + '</li>'; }).join('') + '</ol>'
-      : '<p class="step-text">' + esc(step.text) + '</p>';
+      ? '<ol class="step-parts">' + step.parts.map(function (p) { return '<li><b>' + esc(p.title) + ':</b> ' + esc(units(p.text)) + '</li>'; }).join('') + '</ol>'
+      : '<p class="step-text">' + esc(units(step.text)) + '</p>';
 
     el.innerHTML =
       '<div class="step-head">' +
@@ -946,7 +1063,7 @@
       '<p class="done-row"><span>' + t('doneMark') + '</span><button class="btn-reopen" type="button">' + t('reopen') + '</button></p>' +
       body +
       (ings ? '<ul class="step-ings">' + ings + '</ul>' : '') +
-      '<p class="done-when">' + t('doneWhen') + esc(step.doneWhen) + '</p>' +
+      '<p class="done-when">' + t('doneWhen') + esc(units(step.doneWhen)) + '</p>' +
       '<p class="waiting-for" hidden></p>' +
       (step.overcook ? '<p class="overdo-note" role="alert">' + t('dontOverdo') + '</p>' : '') +
       '<div class="step-foot">' +
@@ -1042,12 +1159,14 @@
   // Puts the cards into a container in the given order, only moving what changed.
   function syncChildren(container, els) {
     els.forEach(function (el, i) {
-      if (container.children[i] !== el) container.insertBefore(el, container.children[i] || null);
+      var kids = Array.prototype.filter.call(container.children, function (c) { return !c.classList.contains('leaving'); });
+      if (kids[i] !== el) container.insertBefore(el, kids[i] || null);
     });
   }
 
   function render() {
     if (!cook) return;
+    refresh();
     var map = isMap();
     var total = cook.steps.length;
     $('cook-count').textContent = t('stepsDone', { d: cook.done.size, n: total });
@@ -1055,6 +1174,7 @@
     var vb = $('btn-view');
     vb.textContent = map ? t('listView') : t('mapView');
     vb.classList.toggle('is-disabled', !state.layoutSaved);
+    vb.classList.toggle('is-ready', state.layoutSaved);
     vb.setAttribute('aria-disabled', String(!state.layoutSaved));
 
     var finished = cook.done.size === total;
@@ -1152,7 +1272,6 @@
         a.innerHTML =
           '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + t(key) + '</span>' +
           '<button class="area-move" type="button" aria-label="' + t('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button></div>' +
-          '<ul class="map-area-ings" aria-label="' + t('ingredientsHere') + '"></ul>' +
           '<div class="map-area-cards"></div>';
         mapEl.appendChild(a);
         makeMovable(a, key, mapEl, cook.view, keys, {
@@ -1168,20 +1287,6 @@
       var mine = els.filter(function (el) { return el.getAttribute('data-area') === key; });
       syncChildren(a.querySelector('.map-area-cards'), mine);
       a.classList.toggle('is-empty', mine.length === 0);
-
-      // The ingredients for the open cards here are shown on the area itself (display only).
-      var seen = {}, ings = [];
-      mine.forEach(function (el) {
-        var s = stepById(el.getAttribute('data-step'));
-        if (cook.status[s.id] === 'kept') return;
-        s.ings.forEach(function (i) {
-          if (!seen[i.id + i.qty]) { seen[i.id + i.qty] = true; ings.push(i); }
-        });
-      });
-      var html = ings.map(ingItem).join('');
-      var list = a.querySelector('.map-area-ings');
-      if (list.getAttribute('data-html') !== html) { list.innerHTML = html; list.setAttribute('data-html', html); }
-      list.hidden = !ings.length;
     });
 
     // Countertop cards go where nothing stands on the countertop.
@@ -1191,8 +1296,7 @@
       var free = freeStrip(cook.view.countertop, others, mapEl.clientWidth, mapEl.clientHeight);
       cards.classList.toggle('in-strip', !!free);
       if (free) {
-        var ingsList = cards.previousElementSibling;
-        var below = ingsList.hidden ? 40 : ingsList.offsetTop + ingsList.offsetHeight;
+        var below = cards.previousElementSibling.offsetHeight;
         cards.style.left = (free.x * 100) + '%';
         cards.style.top = 'max(' + (free.y * 100) + '%, ' + below + 'px)';
         cards.style.width = (free.w * 100) + '%';
@@ -1234,7 +1338,43 @@
     });
     // Something on the heat is past its time: the whole screen pulses red.
     document.body.classList.toggle('overdo', overdo);
+    dueToast();
   }
+
+  // ---------- "Time's up" pop-over ----------
+  // When a card's time is up but the card is off screen, a pop-over says so; tap it to go there.
+  var dueTarget = null;
+
+  function visibleEnough(el) {
+    var r = el.getBoundingClientRect();
+    var top = Math.max(r.top, document.querySelector('.cook-head').getBoundingClientRect().bottom);
+    var bottom = Math.min(r.bottom, window.innerHeight);
+    var box = el.closest('.map-area-cards');
+    if (box) {
+      var b = box.getBoundingClientRect();
+      top = Math.max(top, b.top);
+      bottom = Math.min(bottom, b.bottom);
+    }
+    return bottom - top >= Math.min(80, r.height * 0.5);
+  }
+
+  function dueToast() {
+    var toast = $('due-toast');
+    var late = Object.keys(cook.started).map(function (id) { return cook.els[id]; }).filter(function (el) {
+      return el && el.classList.contains('time-up') && !visibleEnough(el);
+    });
+    dueTarget = late[0] || null;
+    if (!dueTarget) { toast.hidden = true; return; }
+    var step = stepById(dueTarget.getAttribute('data-step'));
+    toast.textContent = t('timesUp', { x: step.title }) + (step.overcook ? ' · ' + t('dontOverdo') : '');
+    toast.hidden = false;
+  }
+
+  $('due-toast').addEventListener('click', function () {
+    if (!dueTarget) return;
+    dueTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    $('due-toast').hidden = true;
+  });
 
   // ---------- "New thing to do!" ----------
   // A label pops up on each new card and fades out within 10 seconds.
@@ -1360,11 +1500,21 @@
     l.addEventListener('mouseenter', function () { paintStars(i + 1); });
   });
   starRow.addEventListener('mouseleave', function () { paintStars(currentStars()); });
-  starRow.addEventListener('change', function () { paintStars(currentStars()); });
+  starRow.addEventListener('change', function (e) {
+    paintStars(currentStars());
+    var star = e.target.closest('.star');
+    var pop = document.createElement('span');
+    pop.className = 'star-pop';
+    pop.setAttribute('aria-hidden', 'true');
+    pop.textContent = '★';
+    star.appendChild(pop);
+    pop.addEventListener('animationend', function () { pop.remove(); });
+  });
 
   // ---------- Start ----------
   applyStrings();
   renderFilters();
   renderRecipes();
-  show('recipes');
+  show('recipes', true);
+  history.replaceState({ screen: 'recipes' }, '');
 })();
