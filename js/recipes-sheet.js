@@ -551,7 +551,7 @@ S|F1|F|Slice and serve|Slice the meat. Serve with the side of your choice (not c
   },
   {
     id: 'burger', name: 'Burger', image: 'img/350/hamburger_buns.webp',
-    vars: function (c) { return { patties: c.servings * (c.opt_patty === 'thick' ? 1 : 2) }; },
+    vars: function (c) { return { patties: Math.ceil(c.servings) * (c.opt_patty === 'thick' ? 1 : 2) }; },
     rows: `
 O|opt_patty|thin|Thin smashed: 2 × 65 g per burger, 3 to 4 min|TRUE
 O|opt_patty|thick|Thick: 1 × 130 g with a centre divot, 5 to 6 min|FALSE
