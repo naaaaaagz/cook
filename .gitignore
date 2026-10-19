@@ -1,0 +1,30 @@
+# Only what the site needs goes to GitHub. Everything listed here stays on
+# this computer only (it is still in the folder, git just ignores it).
+
+# Full-size original photos - the site only uses the small copies in img/350/
+/img/*.jpg
+/img/*.jpeg
+/img/*.png
+
+# Mockups and reference images made while designing
+/mockup-cooking-guide.png
+/flowchart-carbonara.png
+/kitchen-icons.jpg
+
+# Working data and notes
+/*.csv
+/food stock photos.txt
+/Recipes - text - review.txt
+
+# Image conversion helper (run locally, not part of the site)
+/tools/
+/convert_images.bat
+
+# Claude, editor and temp files (incl. Claude/Codex handoff notes)
+/.handoff/
+/.claude/
+/.tmp/
+/.vscode/
+Thumbs.db
+desktop.ini
+.DS_Store
