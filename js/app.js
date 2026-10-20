@@ -130,6 +130,7 @@
       chooseFirst: 'Choose before you start',
       method: 'Method',
       cookingVersion: "This is the version you're cooking.",
+      youAreHere: 'You are here now!',
       aboutTime: 'about {t}',
       doneWhen: 'Done when: ',
       left: 'left',
@@ -324,9 +325,11 @@
   function openRead(r) {
     reading = { recipe: r, locked: !!cook && state.recipe === r };
     $('read-title').textContent = r.name;
+    $('here-badge').hidden = true;
     renderRead();
     openDialog($('read-dialog'));
     $('read-body').scrollTop = 0;
+    if (reading.locked && cook.t0) showWhereYouAre();
   }
 
   function renderRead() {
@@ -350,13 +353,36 @@
         return '<li><b>' + esc(units(i.amount)) + '</b> ' + esc(i.name) + (i.note ? ' <span class="hint">(' + esc(units(i.note)) + ')</span>' : '') + '</li>';
       }).join('') + '</ul>';
     });
-    html += '<h3>' + t('method') + '</h3><ol class="read-method">' + steps.map(function (s) {
-      return '<li><b>' + esc(s.title) + '.</b> ' + esc(units(s.text)) +
+    // While cooking: the steps already done are greyed and the first open one is "here".
+    var doneIds = {}, here = -1;
+    if (reading.locked && cook) {
+      cook.steps.forEach(function (s) {
+        if (isDone(s.id)) (s.members || [s.id]).forEach(function (id) { doneIds[id] = true; });
+      });
+      steps.some(function (s, i) { if (!doneIds[s.id]) { here = i; return true; } return false; });
+    }
+    html += '<h3>' + t('method') + '</h3><ol class="read-method">' + steps.map(function (s, i) {
+      var cls = here < 0 ? '' : i < here ? ' class="is-past"' : i === here ? ' class="is-here"' : '';
+      return '<li' + cls + '><b>' + esc(s.title) + '.</b> ' + esc(units(s.text)) +
         ' <span class="hint">(' + t('aboutTime', { t: fmtMinutes(Math.max(1, Math.round(s.duration / 60))) }) + ')</span></li>';
     }).join('') + '</ol>';
     body.innerHTML = html;
     body.scrollTop = keep;
+    return here;
   }
+
+  // Opened while cooking: scroll to where you are and say so.
+  function showWhereYouAre() {
+    var body = $('read-body'), li = body.querySelector('.is-here');
+    if (!li) return;
+    body.scrollTop = Math.max(0, li.offsetTop - body.offsetTop - 60);
+    var badge = $('here-badge');
+    badge.hidden = false;
+    badge.classList.remove('show');
+    void badge.offsetWidth;
+    badge.classList.add('show');
+  }
+  $('here-badge').addEventListener('animationend', function () { $('here-badge').hidden = true; });
 
   $('read-body').addEventListener('change', function (e) {
     if (e.target.type !== 'radio' || !reading || reading.locked) return;
@@ -397,16 +423,21 @@
   var AREA_KEYS = Object.keys(AREAS);
   var LAYOUT_KEYS = AREA_KEYS.concat(['me']);
   var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, me: 2, board: 3 };
-  // Smallest size per block; areas that hold several cards (stove, countertop) stay taller.
-  var MIN = {
-    countertop: { w: 0.20, h: 0.30 },
-    stove: { w: 0.18, h: 0.40 },
-    oven: { w: 0.14, h: 0.22 },
-    fridge: { w: 0.10, h: 0.25 },
-    freezer: { w: 0.10, h: 0.25 },
-    board: { w: 0.12, h: 0.18 },
-    me: { w: 0.06, h: 0.10 }
+  // Smallest size per block in pixels, so blocks keep their shape in landscape and portrait.
+  var MIN_PX = {
+    countertop: { w: 160, h: 110 },
+    stove: { w: 140, h: 120 },
+    oven: { w: 110, h: 80 },
+    fridge: { w: 70, h: 90 },
+    freezer: { w: 70, h: 90 },
+    board: { w: 90, h: 60 },
+    me: { w: 64, h: 64 }
   };
+  var ME_PX = 64; // "Me" is always a 64 px circle
+  function minSize(key, container) {
+    var w = container.clientWidth || 800, h = container.clientHeight || 450;
+    return { w: Math.min(0.9, MIN_PX[key].w / w), h: Math.min(0.9, MIN_PX[key].h / h) };
+  }
 
   // Positions and sizes as fractions of the canvas. No overlaps except on the countertop.
   var DEFAULT_LAYOUT = {
@@ -417,6 +448,16 @@
     freezer: { x: 0.86, y: 0.04, w: 0.11, h: 0.40 },
     board: { x: 0.52, y: 0.24, w: 0.16, h: 0.22 },
     me: { x: 0.45, y: 0.60, w: 0.10, h: 0.18 }
+  };
+  // The same kitchen for a canvas that is taller than wide.
+  var DEFAULT_LAYOUT_PORTRAIT = {
+    stove: { x: 0.05, y: 0.03, w: 0.42, h: 0.22 },
+    oven: { x: 0.05, y: 0.28, w: 0.42, h: 0.16 },
+    countertop: { x: 0.53, y: 0.03, w: 0.42, h: 0.41 },
+    board: { x: 0.60, y: 0.24, w: 0.30, h: 0.13 },
+    fridge: { x: 0.05, y: 0.50, w: 0.25, h: 0.20 },
+    freezer: { x: 0.33, y: 0.50, w: 0.25, h: 0.20 },
+    me: { x: 0.62, y: 0.55, w: 0.18, h: 0.09 }
   };
   state.layout = clone(DEFAULT_LAYOUT);
 
@@ -480,7 +521,8 @@
       if (drag.mode === 'move') {
         next = { x: clamp(r.x + dx, 0, 1 - r.w), y: clamp(r.y + dy, 0, 1 - r.h), w: r.w, h: r.h };
       } else {
-        next = { x: r.x, y: r.y, w: clamp(r.w + dx, MIN[key].w, 1 - r.x), h: clamp(r.h + dy, MIN[key].h, 1 - r.y) };
+        var m = minSize(key, container);
+        next = { x: r.x, y: r.y, w: clamp(r.w + dx, m.w, 1 - r.x), h: clamp(r.h + dy, m.h, 1 - r.y) };
       }
       tryPlace(layout, key, next, keys);
       placeEl(el, layout[key]);
@@ -508,7 +550,8 @@
       e.preventDefault();
       var r = layout[key], next;
       if (e.altKey && opts.resizer) {
-        next = { x: r.x, y: r.y, w: clamp(r.w + d[0], MIN[key].w, 1 - r.x), h: clamp(r.h + d[1], MIN[key].h, 1 - r.y) };
+        var mk = minSize(key, container);
+        next = { x: r.x, y: r.y, w: clamp(r.w + d[0], mk.w, 1 - r.x), h: clamp(r.h + d[1], mk.h, 1 - r.y) };
       } else {
         next = { x: clamp(r.x + d[0], 0, 1 - r.w), y: clamp(r.y + d[1], 0, 1 - r.h), w: r.w, h: r.h };
       }
@@ -567,7 +610,20 @@
     draft = clone(state.layout);
     fullscreenTo('landscape');
     show('layout');
+    buildCanvas();
+  }
+
+  // Until you move something, the editor shows the default arrangement for the
+  // canvas shape (landscape or portrait), also after rotating.
+  function buildCanvas() {
     var canvas = $('layout-canvas');
+    var tall = canvas.clientHeight > canvas.clientWidth;
+    if (!state.layoutTouched) draft = clone(tall ? DEFAULT_LAYOUT_PORTRAIT : DEFAULT_LAYOUT);
+    // "Me" keeps its round shape whatever the canvas proportions.
+    draft.me.w = Math.min(0.5, ME_PX / (canvas.clientWidth || 800));
+    draft.me.h = Math.min(0.5, ME_PX / (canvas.clientHeight || 450));
+    draft.me.x = clamp(draft.me.x, 0, 1 - draft.me.w);
+    draft.me.y = clamp(draft.me.y, 0, 1 - draft.me.h);
     canvas.innerHTML = '';
     LAYOUT_KEYS.forEach(function (key) {
       var el = document.createElement('div');
@@ -579,10 +635,16 @@
       el.innerHTML = '<img class="icon" alt="" src="' + (key === 'me' ? ICON.me : AREAS[key].icon) + '"><span>' + t(key) + '</span>' +
         (key === 'me' ? '' : '<span class="resize" aria-hidden="true"></span>');
       placeEl(el, draft[key]);
-      makeMovable(el, key, canvas, draft, LAYOUT_KEYS, { resizer: el.querySelector('.resize') });
+      makeMovable(el, key, canvas, draft, LAYOUT_KEYS, {
+        resizer: el.querySelector('.resize'),
+        onChange: function () { state.layoutTouched = true; }
+      });
       canvas.appendChild(el);
     });
   }
+  window.addEventListener('resize', function () {
+    if (state.screen === 'layout') buildCanvas();
+  });
 
   $('btn-layout-cancel').addEventListener('click', function () { history.back(); });
   $('btn-layout-save').addEventListener('click', function () {
@@ -1039,7 +1101,9 @@
       if (st !== 'active' && at >= 0) {
         cook.slots.splice(at, 1);
         if (!(s.thread in freed)) freed[s.thread] = at;
+        if (popStep === s.id) closePop();
         if (cook.els[s.id]) { leave(cook.els[s.id]); delete cook.els[s.id]; }
+        if (cook.notifs[s.id]) { leave(cook.notifs[s.id]); delete cook.notifs[s.id]; }
       }
     });
     cook.steps.forEach(function (s) {
@@ -1073,12 +1137,14 @@
     var byId = {};
     b.steps.forEach(function (s) { byId[s.id] = s; });
     cook = { steps: b.steps, byId: byId, ingredients: b.ingredients, done: new Set(), slots: [], status: {},
-      started: {}, els: {}, t0: null, tipsShown: new Set(), view: null };
+      started: {}, els: {}, notifs: {}, t0: null, tipsShown: new Set(), view: null };
     $('cook-name').textContent = state.recipe.name;
     $('cook-list').innerHTML = '';
     $('cook-map').innerHTML = '';
     $('cook-finished').hidden = true;
     $('start-overlay').hidden = false;
+    $('btn-start-now').hidden = false;
+    $('countdown').hidden = true;
     $('start-takes').textContent = t('takes', { x: fmtMinutes(estimateMinutes(b.steps)) });
     $('cook-clock').textContent = '0:00';
     resetStars();
@@ -1089,15 +1155,40 @@
     $('btn-start-now').focus();
   }
 
+  // "Start now" counts down 3, 2, 1 (rings close in around the number), then the clock runs.
+  var countdownTimer = null;
   $('btn-start-now').addEventListener('click', function () {
+    var n = 3, box = $('countdown'), num = $('countdown-num');
+    $('btn-start-now').hidden = true;
+    box.hidden = false;
+    function step() {
+      if (!cook) return;
+      if (n === 0) {
+        box.hidden = true;
+        beginCooking();
+        return;
+      }
+      num.textContent = n;
+      box.classList.remove('go');
+      void box.offsetWidth;
+      box.classList.add('go');
+      n -= 1;
+      countdownTimer = setTimeout(step, 1000);
+    }
+    step();
+  });
+
+  function beginCooking() {
     cook.t0 = Date.now();
     $('start-overlay').hidden = true;
     showTips(cook.steps.filter(function (s) { return cook.status[s.id] === 'active'; }));
     tick();
     tickTimer = setInterval(tick, 500);
-  });
+  }
 
   function stopCooking() {
+    clearTimeout(countdownTimer);
+    closePop();
     clearInterval(tickTimer);
     tickTimer = null;
     cook = null;
@@ -1238,11 +1329,7 @@
     var vb = $('btn-view');
     vb.setAttribute('aria-label', map ? t('listView') : t('mapView'));
     vb.setAttribute('aria-pressed', String(map));
-    // A map taller than wide is too narrow for cards: it becomes an overview on
-    // top (with a count per area) and the cards are listed below it.
-    var split = map && window.innerHeight > window.innerWidth;
     $('screen-cook').classList.toggle('is-map', map);
-    $('cook-map').classList.toggle('overview', split);
     vb.classList.toggle('is-disabled', !state.layoutSaved);
     vb.classList.toggle('is-ready', state.layoutSaved);
     vb.setAttribute('aria-disabled', String(!state.layoutSaved));
@@ -1250,7 +1337,7 @@
     var finished = cook.done.size === total;
     $('screen-cook').classList.toggle('is-finished', finished);
     $('cook-finished').hidden = !finished;
-    $('cook-list').hidden = (map && !split) || finished;
+    $('cook-list').hidden = map || finished;
     $('cook-map').hidden = !map || finished;
     if (finished) {
       clearInterval(tickTimer);
@@ -1264,9 +1351,75 @@
       updateCard(s, el);
       return el;
     });
-    if (map) renderMap(split ? [] : els, els);
-    if (!map || split) syncChildren($('cook-list'), els);
+    if (map) {
+      renderMap(cook.slots.map(function (id) { return notifFor(stepById(id)); }));
+    } else {
+      closePop();
+      syncChildren($('cook-list'), els);
+    }
   }
+
+  // ---------- Map notifications ----------
+  // On the map every open step is a small notification on its area: a moving
+  // icon, the step's title, its timer, and Start / Done. Tapping it opens the
+  // full card in a popup next to the area.
+  function notifFor(step) {
+    if (cook.notifs[step.id]) return cook.notifs[step.id];
+    var n = document.createElement('div');
+    n.className = 'notif';
+    n.setAttribute('data-step', step.id);
+    n.setAttribute('data-area', step.area);
+    var icon = step.tools.length ? window.EQUIPMENT[step.tools[0]].icon : AREAS[step.area].icon;
+    n.innerHTML =
+      '<span class="notif-icon"><img class="icon" alt="" src="' + icon + '"></span>' +
+      '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + '</span>' +
+      '<span class="notif-time">' + fmt(step.duration) + '</span></button>' +
+      '<button class="notif-btn notif-start" type="button" aria-label="' + t('start') + '">▶</button>' +
+      '<button class="notif-btn notif-done" type="button" aria-label="' + t('done') + '">✓</button>';
+    n.querySelector('.notif-open').addEventListener('click', function () { openPop(step, n); });
+    n.querySelector('.notif-start').addEventListener('click', function (e) {
+      cardFor(step).querySelector('.btn-start').click();
+      e.currentTarget.hidden = true;
+      n.classList.add('is-running');
+    });
+    n.querySelector('.notif-done').addEventListener('click', function () { finishStep(step); });
+    cook.notifs[step.id] = n;
+    return n;
+  }
+
+  var popStep = null;
+  function openPop(step, anchor) {
+    var pop = $('step-pop'), body = $('step-pop-body');
+    var card = cardFor(step);
+    updateCard(step, card);
+    body.innerHTML = '';
+    body.appendChild(card);
+    pop.hidden = false;
+    popStep = step.id;
+    // Next to the notification's area: to the right if it fits, else to the left, else centred.
+    var area = anchor.closest('.map-area') || anchor;
+    var a = area.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
+    var vw = window.innerWidth, vh = window.innerHeight, left;
+    if (a.right + 8 + w <= vw - 8) left = a.right + 8;
+    else if (a.left - 8 - w >= 8) left = a.left - 8 - w;
+    else left = (vw - w) / 2;
+    pop.style.left = Math.round(left) + 'px';
+    pop.style.top = Math.round(clamp(a.top, 8, Math.max(8, vh - h - 8))) + 'px';
+    card.querySelector('.btn-done').focus();
+  }
+  function closePop() {
+    var pop = $('step-pop');
+    if (pop.hidden) return;
+    pop.hidden = true;
+    var body = $('step-pop-body');
+    while (body.firstChild) body.removeChild(body.firstChild);
+    popStep = null;
+  }
+  $('step-pop-close').addEventListener('click', closePop);
+  document.addEventListener('pointerdown', function (e) {
+    if (!$('step-pop').hidden && !e.target.closest('#step-pop') && !e.target.closest('.notif-open')) closePop();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
 
   // Only the areas this recipe uses, back to front.
   function usedAreas() {
@@ -1303,8 +1456,8 @@
     };
   }
 
-  // els: the cards to place on the map; all: every open card (for the counts).
-  function renderMap(els, all) {
+  // els: the notifications to place on the map.
+  function renderMap(els) {
     var mapEl = $('cook-map');
     var keys = usedAreas();
     mapEl.style.setProperty('--head-h', document.querySelector('.cook-head').offsetHeight + 'px');
@@ -1323,7 +1476,6 @@
         if (!used) a.setAttribute('aria-hidden', 'true');
         a.innerHTML =
           '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + t(key) + '</span>' +
-          '<span class="area-count" hidden></span>' +
           (used ? '<button class="area-move" type="button" aria-label="' + t('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button>' : '') +
           '</div><div class="map-area-cards"></div>';
         mapEl.appendChild(a);
@@ -1342,19 +1494,16 @@
     keys.forEach(function (key) {
       var a = mapEl.querySelector('.map-area[data-area="' + key + '"]');
       var mine = els.filter(function (el) { return el.getAttribute('data-area') === key; });
-      var count = all.filter(function (el) { return el.getAttribute('data-area') === key; }).length;
-      var badge = a.querySelector('.area-count');
-      badge.textContent = count;
-      badge.hidden = !count;
+      var count = mine.length;
       syncChildren(a.querySelector('.map-area-cards'), mine);
       a.classList.toggle('is-empty', count === 0);
-      // Cards hang from the top of their area and may reach over other areas,
-      // so nothing is cut off. Areas on the right side let them hang to the left.
+      // Notifications hang from the top of their area and may reach over other
+      // areas, so nothing is cut off. Areas on the right side let them hang to the left.
       a.classList.toggle('has-cards', count > 0);
       a.classList.toggle('cards-right', cook.view[key].x + cook.view[key].w / 2 > 0.5);
     });
 
-    // Card groups may cover areas, but not each other: a group that would cover
+    // Notification groups may cover areas, but not each other: a group that would cover
     // another moves below it (or above it) when there is room, and no group runs
     // past the bottom of the map.
     var mapH = mapEl.clientHeight, gap = 8, placed = [];
@@ -1413,6 +1562,11 @@
       el.querySelector('.ring-fill').setAttribute('stroke-dashoffset', String(RING * (1 - Math.min(1, elapsed / step.duration))));
       // Haptic feedback (navigator.vibrate) comes in a later iteration.
       el.classList.toggle('time-up', up);
+      var n = cook.notifs[id];
+      if (n) {
+        n.querySelector('.notif-time').textContent = up ? '+' + fmt(-left) : fmt(left);
+        n.classList.toggle('time-up', up);
+      }
       if (up && step.overcook) overdo = true;
     });
     // Something on the heat is past its time: the whole screen pulses red.
@@ -1439,6 +1593,7 @@
 
   function dueToast() {
     var toast = $('due-toast');
+    if (isMap()) { toast.hidden = true; return; }
     var late = Object.keys(cook.started).map(function (id) { return cook.els[id]; }).filter(function (el) {
       return el && el.classList.contains('time-up') && !visibleEnough(el);
     });
@@ -1466,6 +1621,8 @@
       badge.textContent = t('newThing');
       badge.addEventListener('animationend', function () { badge.remove(); });
       el.appendChild(badge);
+      var n = cook.notifs[s.id];
+      if (n) n.classList.add('is-new');
     });
   }
 

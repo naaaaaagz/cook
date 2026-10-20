@@ -51,6 +51,7 @@
 <dialog id="read-dialog" class="dialog read-dialog" aria-labelledby="read-title">
   <h2 id="read-title"></h2>
   <div id="read-body" class="read-body"></div>
+  <p id="here-badge" class="here-badge" role="status" hidden data-i18n="youAreHere">You are here now!</p>
   <div class="dialog-actions">
     <button class="btn btn-secondary" type="button" disabled data-i18n="share">Share</button>
     <button id="read-close" class="btn btn-primary" type="button" data-i18n="close">Close</button>
@@ -181,6 +182,10 @@
           <span data-i18n="startNow">Start now</span>
           <small id="start-takes"></small>
         </button>
+        <div id="countdown" class="countdown" hidden aria-live="assertive">
+          <span class="cd-ring"></span><span class="cd-ring"></span><span class="cd-ring"></span>
+          <span id="countdown-num" class="cd-num"></span>
+        </div>
       </div>
     </div>
     <div id="cook-finished" class="wrap finished" hidden>
@@ -201,6 +206,11 @@
 </main>
 
 <button id="due-toast" class="due-toast" type="button" hidden></button>
+
+<div id="step-pop" class="step-pop" role="dialog" aria-modal="false" hidden>
+  <button id="step-pop-close" class="step-pop-close" type="button" data-i18n-label="close">&times;</button>
+  <div id="step-pop-body"></div>
+</div>
 
 <div id="tip" class="tip" role="status" hidden>
   <div class="tip-body">
