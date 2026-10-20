@@ -12,7 +12,7 @@
 <body>
 
 <button id="btn-options" class="btn-options" type="button" aria-haspopup="dialog" data-i18n-label="options">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 6h.01M8.5 6H20M4 12h.01M8.5 12H20M4 18h.01M8.5 18H20"/></svg>
 </button>
 
 <dialog id="options-dialog" class="dialog" aria-labelledby="options-title">
@@ -74,9 +74,12 @@
   <section id="screen-layout" class="screen screen-layout" hidden>
     <p class="landscape-note" role="note" data-i18n="landscapeNote">Use your device in landscape mode to set up!</p>
     <div class="layout-bar">
-      <button id="btn-layout-cancel" class="btn btn-ghost" type="button" data-i18n="cancel">Cancel</button>
+      <button id="btn-layout-cancel" class="btn btn-secondary btn-small" type="button" data-i18n="cancel">Cancel</button>
       <span class="hint" data-i18n="layoutHelp">Drag to move, drag the corner to resize. Things can only overlap the countertop.</span>
-      <button id="btn-layout-save" class="btn btn-primary" type="button" data-i18n="save">Save</button>
+      <button id="btn-layout-theme" class="btn btn-secondary btn-small btn-icon" type="button" data-i18n-label="toggleTheme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+      </button>
+      <button id="btn-layout-save" class="btn btn-primary btn-small" type="button" data-i18n="save">Save</button>
     </div>
     <div id="layout-canvas" class="canvas"></div>
     <div class="rotate-overlay" aria-hidden="true">
@@ -89,7 +92,7 @@
     <div class="wrap">
       <div class="top-row">
         <button class="btn btn-ghost btn-back" type="button" data-back data-i18n="back">Back</button>
-        <button class="btn btn-secondary btn-small btn-read" type="button" data-i18n="readInstead">Read instead</button>
+        <button class="btn btn-secondary btn-small btn-read" type="button" data-i18n-label="readInstead"><svg class="book-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13"/></svg><span class="btn-label" data-i18n="readInstead">Read instead</span></button>
       </div>
       <div class="detail-hero">
         <div id="det-photo" class="photo photo-hero"></div>
@@ -155,7 +158,7 @@
   <!-- Cooking guide -->
   <section id="screen-cook" class="screen screen-cook" hidden>
     <header class="cook-head">
-      <button id="btn-cook-exit" class="btn btn-ghost btn-small" type="button" data-i18n="exit">Exit</button>
+      <button id="btn-cook-exit" class="btn btn-secondary btn-small" type="button" data-i18n="exit">Exit</button>
       <div class="cook-title">
         <h2 id="cook-name"></h2>
         <p id="cook-count" class="hint"></p>
@@ -164,7 +167,7 @@
         <p class="cook-clock"><span class="clock-label" data-i18n="elapsed">Time</span> <span id="cook-clock">0:00</span></p>
         <p class="cook-clock"><span class="clock-label" data-i18n="timeLeft">Time left</span> <span id="cook-left">0:00</span></p>
       </div>
-      <button class="btn btn-secondary btn-small btn-read" type="button" data-i18n="readInstead">Read instead</button>
+      <button class="btn btn-secondary btn-small btn-read" type="button" data-i18n-label="readInstead"><svg class="book-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13"/></svg><span class="btn-label" data-i18n="readInstead">Read instead</span></button>
       <span class="view-toggle-wrap">
         <button id="btn-view" class="btn btn-secondary btn-small view-toggle" type="button"></button>
         <span id="view-tip" class="tooltip" role="status" hidden data-i18n="noLayout">No kitchen layout set up. Do it before your next cooking!</span>

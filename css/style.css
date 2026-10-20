@@ -181,12 +181,14 @@ img.icon { filter: var(--icon-filter); }
 .btn-wide { width: 100%; }
 .btn:disabled, .btn.is-disabled { background: var(--disabled-bg); color: var(--disabled-fg); border-color: var(--disabled-bg); cursor: not-allowed; }
 .btn-back::before { content: "\2190  "; }
+.btn-read { display: inline-flex; align-items: center; gap: 6px; }
+.btn-icon { display: inline-grid; place-items: center; width: 36px; padding: 0; }
 
-/* Options button (top right, every screen) */
+/* Menu button: top right of the page; it scrolls with the page so it never covers content */
 .btn-options {
-  position: fixed;
-  top: 8px;
-  right: 8px;
+  position: absolute;
+  top: 27px;
+  right: 16px;
   z-index: 30;
   width: 44px;
   height: 44px;
@@ -291,6 +293,7 @@ select {
   background: var(--bg);
 }
 .landscape-note {
+  display: none;
   background: var(--primary-bg);
   color: var(--primary-fg);
   text-align: center;
@@ -299,6 +302,11 @@ select {
 }
 .layout-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px; }
 .layout-bar .hint { flex: 1; text-align: center; }
+@media (max-height: 520px) {
+  .layout-bar { padding: 6px 12px; gap: 8px; }
+  .layout-bar .hint { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .canvas { margin: 0 12px 10px; }
+}
 .canvas {
   position: relative;
   flex: 1;
@@ -352,6 +360,7 @@ select {
 
 .rotate-overlay { display: none; }
 @media (pointer: coarse) and (orientation: portrait) {
+  .landscape-note { display: block; }
   .screen-layout .canvas, #btn-layout-save, .layout-bar .hint { display: none; }
   .rotate-overlay {
     display: flex;
@@ -366,7 +375,7 @@ select {
 }
 
 /* Recipe list */
-.layout-home { margin-bottom: 16px; }
+.layout-home { margin: 7px 0 16px; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; padding-right: 48px; }
 .filters .divider { width: 1px; background: var(--line); margin: 4px 4px; }
 .chip {
@@ -407,7 +416,20 @@ select {
   cursor: pointer;
 }
 .recipe-card:hover { border-color: var(--muted); }
-.recipe-card .photo { width: 120px; min-height: 120px; flex: none; }
+.photo-wrap { position: relative; display: block; width: 120px; flex: none; }
+.recipe-card .photo { width: 100%; height: 100%; min-height: 120px; }
+.photo-time {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(20, 18, 15, .7);
+  border-radius: 999px;
+  padding: 2px 7px;
+}
 .recipe-card-body { display: grid; align-content: start; gap: 5px; padding: 12px 12px 12px 0; min-width: 0; }
 .recipe-card-body .title-row { font-size: 20px; padding-right: 96px; }
 .btn-read-card { position: absolute; top: 8px; right: 8px; }
@@ -416,8 +438,14 @@ select {
 
 /* Photos and the placeholder (large pot on pale grey-blue) */
 .photo { background: var(--placeholder-bg); display: block; object-fit: cover; }
-.photo-placeholder {
-  background: var(--placeholder-bg) url("../icons/cooking-pot.svg") center / 55% no-repeat;
+.photo-placeholder { position: relative; background: var(--placeholder-bg); }
+.photo-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../icons/cooking-pot.svg") center / 50% no-repeat;
+  opacity: .16;
+  filter: var(--icon-filter);
 }
 .photo-hero { width: 120px; height: 120px; border-radius: var(--radius); flex: none; }
 
@@ -438,12 +466,12 @@ select {
 .diet-pesc { color: var(--pesc); }
 
 /* "Contains" row: meat, pork, fish and allergens */
-.warn-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-.warn-row .warn-icon { font-size: 15px; }
+.warn-row { display: block; }
+.warn-row .warn-icon { font-size: 14px; margin-right: 2px; }
 .keyword { font-size: 13px; border: 1px solid var(--line); border-radius: 4px; padding: 1px 7px; }
 
 /* Recipe page */
-.top-row { display: flex; justify-content: space-between; align-items: center; padding-right: 48px; }
+.top-row { display: flex; justify-content: space-between; align-items: center; padding-right: 60px; }
 .detail-hero { display: flex; align-items: center; gap: 16px; margin: 8px 0 16px; }
 .detail-hero .meta-line { margin-top: 6px; }
 .info {
@@ -740,6 +768,7 @@ select {
 .map-area-ings b { white-space: nowrap; }
 
 /* Finished */
+.is-finished .cook-clock + .cook-clock, .is-finished .cook-head .btn-read, .is-finished .view-toggle-wrap { display: none; }
 .finished { text-align: center; }
 .finished .stack { max-width: 360px; margin: 24px auto 0; }
 
@@ -865,3 +894,36 @@ body.overdo::before {
 .tip-body { flex: 1; }
 .tip-label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--tip-ink); }
 .tip-close { font: inherit; font-size: 22px; line-height: 1; color: var(--ink); background: none; border: 0; cursor: pointer; padding: 4px 8px; min-width: 36px; min-height: 36px; }
+
+/* ---------- Phones ---------- */
+@media (max-width: 600px) {
+  h1 { font-size: 28px; }
+  .category-title { font-size: 26px; }
+
+  /* Recipe cards: book button on the photo, time on the photo, tidy rows */
+  .recipe-card .photo-wrap { width: 108px; }
+  .photo-time { display: block; }
+  .recipe-card .time-line { display: none; }
+  .recipe-card-body { display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 10px 0; }
+  .recipe-card-body .title-row { font-size: 18px; padding-right: 0; }
+  .nutri-line { font-size: 12px; }
+  .nutri-line small { font-size: 11px; padding-left: 0; display: inline; margin-left: 4px; }
+  .recipe-card-body .warn-row { margin-top: auto; font-size: 13px; }
+  .btn-read-card { top: auto; right: auto; left: 6px; bottom: 6px; min-height: 30px; padding: 4px 7px; }
+
+  /* "Read instead" is a book icon on phones */
+  .btn-read .btn-label { display: none; }
+  .btn-read { padding-left: 9px; padding-right: 9px; }
+
+  /* Recipe page: nutrition 3 per row */
+  .nutrition { grid-template-columns: repeat(3, 1fr); gap: 8px 12px; }
+  .nutrition dt { font-size: 11px; }
+  .nutrition dd { font-size: 14px; }
+  .detail-hero h2 { font-size: 24px; }
+  .photo-hero { width: 96px; height: 96px; }
+
+  /* Cooking header */
+  .cook-head { padding-right: 64px; gap: 8px 10px; }
+  .cook-title { order: -1; flex-basis: 100%; min-height: 44px; display: flex; flex-direction: column; justify-content: center; }
+  .cook-clock { font-size: 16px; }
+}

@@ -56,6 +56,7 @@
       cat_dessert: 'Dessert',
       cat_side: 'Side dish',
       readInstead: 'Read instead',
+      toggleTheme: 'Switch light / dark',
       min: 'min',
       hours: '{h} h {m} min',
       diet_vegan: 'Vegan',
@@ -208,6 +209,8 @@
   function show(name, fromHistory) {
     state.screen = name;
     SCREENS.forEach(function (s) { $('screen-' + s).hidden = s !== name; });
+    $('btn-options').hidden = name === 'layout';
+    if (name !== 'layout') leaveFullscreen();
     if (!fromHistory) history.pushState({ screen: name }, '');
     window.scrollTo(0, 0);
   }
@@ -524,8 +527,41 @@
   // ---------- Kitchen layout editor ----------
   var draft = null;
 
+  // On phones and tablets the editor asks for full screen and landscape, so the
+  // browser bar doesn't take up room. Browsers may refuse; it still works without.
+  function enterFullscreen() {
+    if (!window.matchMedia('(pointer: coarse)').matches) return;
+    var root = document.documentElement;
+    var req = root.requestFullscreen || root.webkitRequestFullscreen;
+    if (!req) return;
+    try {
+      var done = req.call(root, { navigationUI: 'hide' });
+      if (done && done.then) {
+        done.then(function () {
+          if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(function () {});
+        }).catch(function () {});
+      }
+    } catch (e) { /* not allowed here */ }
+  }
+  function leaveFullscreen() {
+    var el = document.fullscreenElement || document.webkitFullscreenElement;
+    if (!el) return;
+    if (screen.orientation && screen.orientation.unlock) { try { screen.orientation.unlock(); } catch (e) { /* ignore */ } }
+    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+  }
+
+  function setTheme(value) {
+    document.documentElement.setAttribute('data-theme', value);
+    document.querySelectorAll('input[name="theme"]').forEach(function (r) { r.checked = r.value === value; });
+  }
+  $('btn-layout-theme').addEventListener('click', function () {
+    var dark = getComputedStyle(document.documentElement).colorScheme.indexOf('dark') >= 0;
+    setTheme(dark ? 'light' : 'dark');
+  });
+
   function openLayout() {
     draft = clone(state.layout);
+    enterFullscreen();
     show('layout');
     var canvas = $('layout-canvas');
     canvas.innerHTML = '';
@@ -753,15 +789,23 @@
           '<button class="recipe-card" type="button">' +
           '<span class="recipe-card-body">' +
           '<span class="title-row"><span>' + esc(r.name) + '</span>' + dietBadge(info) + '</span>' +
-          '<span class="meta-line">⏱️ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
+          '<span class="meta-line time-line">⏱️ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
           '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' kcal · ' +
           Math.round(n.carbs) + ' g ' + t('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + t('proteinShort') +
           '<small>' + unitText(r, 'perServing') + '</small></span>' +
           '<span class="warn-row">' + containsRow(info) + '</span>' +
           '</span></button>' +
-          '<button class="btn btn-secondary btn-small btn-read-card" type="button">' + t('readInstead') + '</button>';
+          '<button class="btn btn-secondary btn-small btn-read btn-read-card" type="button" aria-label="' + t('readInstead') + '">' +
+          document.querySelector('.book-icon').outerHTML + '<span class="btn-label">' + t('readInstead') + '</span></button>';
         var card = li.querySelector('.recipe-card');
-        card.insertBefore(photoEl(r, 350), card.firstChild);
+        var wrap = document.createElement('span');
+        wrap.className = 'photo-wrap';
+        wrap.appendChild(photoEl(r, 350));
+        var time = document.createElement('span');
+        time.className = 'photo-time';
+        time.textContent = fmtMinutes(estimateMinutes(built.steps));
+        wrap.appendChild(time);
+        card.insertBefore(wrap, card.firstChild);
         card.addEventListener('click', function () { openDetails(r); });
         li.querySelector('.btn-read-card').addEventListener('click', function () { openRead(r); });
         ul.appendChild(li);
@@ -1178,6 +1222,7 @@
     vb.setAttribute('aria-disabled', String(!state.layoutSaved));
 
     var finished = cook.done.size === total;
+    $('screen-cook').classList.toggle('is-finished', finished);
     $('cook-finished').hidden = !finished;
     $('cook-list').hidden = map || finished;
     $('cook-map').hidden = !map || finished;
