@@ -43,10 +43,9 @@
       ingCat_water: 'Water',
       layoutNone: 'Not set up yet.',
       layoutSaved: 'Your kitchen layout is saved.',
-      landscapeNote: 'Use your device in landscape mode to set up!',
       layoutHelp: 'Drag to move, drag the corner to resize. Things can only overlap the countertop.',
       cancel: 'Cancel',
-      rotate: 'Turn your device sideways to set up your kitchen.',
+      rotateScreen: 'Rotate the screen',
       back: 'Back',
       pickRecipe: 'Pick a recipe',
       filters: 'Filters',
@@ -527,22 +526,27 @@
   // ---------- Kitchen layout editor ----------
   var draft = null;
 
-  // On phones and tablets the editor asks for full screen and landscape, so the
-  // browser bar doesn't take up room. Browsers may refuse; it still works without.
-  function enterFullscreen() {
+  // On phones and tablets the layout editor and the cooking map go full screen
+  // (no browser bar) and lock the screen to landscape or portrait. The rotate
+  // button switches between the two; the phone's own turning doesn't.
+  // Browsers may refuse; everything still works without.
+  function fullscreenTo(orientation) {
     if (!window.matchMedia('(pointer: coarse)').matches) return;
     var root = document.documentElement;
     var req = root.requestFullscreen || root.webkitRequestFullscreen;
-    if (!req) return;
-    try {
-      var done = req.call(root, { navigationUI: 'hide' });
-      if (done && done.then) {
-        done.then(function () {
-          if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(function () {});
-        }).catch(function () {});
-      }
-    } catch (e) { /* not allowed here */ }
+    var inFull = document.fullscreenElement || document.webkitFullscreenElement;
+    var ready = null;
+    try { ready = inFull ? Promise.resolve() : (req ? req.call(root, { navigationUI: 'hide' }) : null); } catch (e) { ready = null; }
+    if (!ready || !ready.then) ready = Promise.resolve();
+    ready.then(function () {
+      if (orientation && screen.orientation && screen.orientation.lock) return screen.orientation.lock(orientation);
+    }).catch(function () {});
   }
+  document.querySelectorAll('.btn-rotate').forEach(function (b) {
+    b.addEventListener('click', function () {
+      fullscreenTo(window.matchMedia('(orientation: landscape)').matches ? 'portrait' : 'landscape');
+    });
+  });
   function leaveFullscreen() {
     var el = document.fullscreenElement || document.webkitFullscreenElement;
     if (!el) return;
@@ -561,7 +565,7 @@
 
   function openLayout() {
     draft = clone(state.layout);
-    enterFullscreen();
+    fullscreenTo('landscape');
     show('layout');
     var canvas = $('layout-canvas');
     canvas.innerHTML = '';
@@ -584,6 +588,9 @@
   $('btn-layout-save').addEventListener('click', function () {
     state.layout = draft;
     state.layoutSaved = true;
+    // Remember the shape of the kitchen: the map opens in landscape when it is wider than tall.
+    var canvas = $('layout-canvas');
+    state.layoutWide = canvas.clientWidth >= canvas.clientHeight;
     var status = $('layout-status');
     status.setAttribute('data-i18n', 'layoutSaved');
     status.textContent = t('layoutSaved');
@@ -1067,7 +1074,6 @@
     b.steps.forEach(function (s) { byId[s.id] = s; });
     cook = { steps: b.steps, byId: byId, ingredients: b.ingredients, done: new Set(), slots: [], status: {},
       started: {}, els: {}, t0: null, tipsShown: new Set(), view: null };
-    if (coarse.matches) state.mapView = landscape.matches;
     $('cook-name').textContent = state.recipe.name;
     $('cook-list').innerHTML = '';
     $('cook-map').innerHTML = '';
@@ -1117,16 +1123,19 @@
   $('btn-view').addEventListener('click', function () {
     if (!state.layoutSaved) { showViewTip(); return; }
     state.mapView = !state.mapView;
+    if (state.mapView) fullscreenTo(state.layoutWide === false ? 'portrait' : 'landscape');
+    else leaveFullscreen();
     render();
   });
   $('btn-view').addEventListener('mouseenter', function () { if (!state.layoutSaved) showViewTip(); });
   $('btn-view').addEventListener('focus', function () { if (!state.layoutSaved) showViewTip(); });
   $('btn-view').addEventListener('mouseleave', function () { $('view-tip').hidden = true; });
 
-  // Turning a phone or tablet sideways switches to the map, upright to the list.
+  // The rotate buttons show the shape they switch to.
+  function markOrientation() { document.documentElement.classList.toggle('is-landscape', landscape.matches); }
+  markOrientation();
   landscape.addEventListener('change', function () {
-    if (!coarse.matches) return;
-    state.mapView = landscape.matches;
+    markOrientation();
     if (cook) render();
   });
   window.addEventListener('resize', function () { if (cook && isMap()) render(); });
@@ -1227,8 +1236,13 @@
     $('cook-count').textContent = t('stepsDone', { d: cook.done.size, n: total });
     $('cook-progress').style.width = (cook.done.size / total * 100) + '%';
     var vb = $('btn-view');
-    $('view-label').textContent = map ? t('listView') : t('mapView');
     vb.setAttribute('aria-label', map ? t('listView') : t('mapView'));
+    vb.setAttribute('aria-pressed', String(map));
+    // A map taller than wide is too narrow for cards: it becomes an overview on
+    // top (with a count per area) and the cards are listed below it.
+    var split = map && window.innerHeight > window.innerWidth;
+    $('screen-cook').classList.toggle('is-map', map);
+    $('cook-map').classList.toggle('overview', split);
     vb.classList.toggle('is-disabled', !state.layoutSaved);
     vb.classList.toggle('is-ready', state.layoutSaved);
     vb.setAttribute('aria-disabled', String(!state.layoutSaved));
@@ -1236,7 +1250,7 @@
     var finished = cook.done.size === total;
     $('screen-cook').classList.toggle('is-finished', finished);
     $('cook-finished').hidden = !finished;
-    $('cook-list').hidden = map || finished;
+    $('cook-list').hidden = (map && !split) || finished;
     $('cook-map').hidden = !map || finished;
     if (finished) {
       clearInterval(tickTimer);
@@ -1250,7 +1264,8 @@
       updateCard(s, el);
       return el;
     });
-    if (map) renderMap(els); else syncChildren($('cook-list'), els);
+    if (map) renderMap(split ? [] : els, els);
+    if (!map || split) syncChildren($('cook-list'), els);
   }
 
   // Only the areas this recipe uses, back to front.
@@ -1288,41 +1303,54 @@
     };
   }
 
-  function renderMap(els) {
+  // els: the cards to place on the map; all: every open card (for the counts).
+  function renderMap(els, all) {
     var mapEl = $('cook-map');
     var keys = usedAreas();
     mapEl.style.setProperty('--head-h', document.querySelector('.cook-head').offsetHeight + 'px');
     if (!cook.view) cook.view = {};
     // Keep the view still while an area is being dragged; refit afterwards.
-    if (!mapEl.querySelector('.map-area.dragging')) fitView(keys);
+    // All areas count for the fit, so unused ones stay (faintly) in view too.
+    if (!mapEl.querySelector('.map-area.dragging')) fitView(AREA_KEYS);
     if (!mapEl.children.length) {
-      keys.forEach(function (key) {
+      AREA_KEYS.forEach(function (key) {
+        var used = keys.indexOf(key) >= 0;
         var a = document.createElement('section');
-        a.className = 'map-area area-' + key;
+        a.className = 'map-area area-' + key + (used ? '' : ' unused');
         a.style.zIndex = Z[key];
         a.setAttribute('data-area', key);
         a.setAttribute('aria-label', t(key));
+        if (!used) a.setAttribute('aria-hidden', 'true');
         a.innerHTML =
           '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + t(key) + '</span>' +
-          '<button class="area-move" type="button" aria-label="' + t('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button></div>' +
-          '<div class="map-area-cards"></div>';
+          '<span class="area-count" hidden></span>' +
+          (used ? '<button class="area-move" type="button" aria-label="' + t('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button>' : '') +
+          '</div><div class="map-area-cards"></div>';
         mapEl.appendChild(a);
-        makeMovable(a, key, mapEl, cook.view, keys, {
-          handle: a.querySelector('.area-move'),
-          onChange: function () { state.layout[key] = fromView(cook.view[key]); },
-          onEnd: render
-        });
+        if (used) {
+          makeMovable(a, key, mapEl, cook.view, AREA_KEYS, {
+            handle: a.querySelector('.area-move'),
+            onChange: function () { state.layout[key] = fromView(cook.view[key]); },
+            onEnd: render
+          });
+        }
       });
     }
+    AREA_KEYS.forEach(function (key) {
+      placeEl(mapEl.querySelector('.map-area[data-area="' + key + '"]'), cook.view[key]);
+    });
     keys.forEach(function (key) {
       var a = mapEl.querySelector('.map-area[data-area="' + key + '"]');
-      placeEl(a, cook.view[key]);
       var mine = els.filter(function (el) { return el.getAttribute('data-area') === key; });
+      var count = all.filter(function (el) { return el.getAttribute('data-area') === key; }).length;
+      var badge = a.querySelector('.area-count');
+      badge.textContent = count;
+      badge.hidden = !count;
       syncChildren(a.querySelector('.map-area-cards'), mine);
-      a.classList.toggle('is-empty', mine.length === 0);
+      a.classList.toggle('is-empty', count === 0);
       // Cards hang from the top of their area and may reach over other areas,
       // so nothing is cut off. Areas on the right side let them hang to the left.
-      a.classList.toggle('has-cards', mine.length > 0);
+      a.classList.toggle('has-cards', count > 0);
       a.classList.toggle('cards-right', cook.view[key].x + cook.view[key].w / 2 > 0.5);
     });
 
@@ -1331,7 +1359,7 @@
     // past the bottom of the map.
     var mapH = mapEl.clientHeight, gap = 8, placed = [];
     keys.map(function (key) { return mapEl.querySelector('.map-area[data-area="' + key + '"]'); })
-      .filter(function (a) { return a.classList.contains('has-cards'); })
+      .filter(function (a) { return a.querySelector('.map-area-cards').children.length; })
       .sort(function (a, b) { return a.offsetTop - b.offsetTop; })
       .forEach(function (a) {
         var cards = a.querySelector('.map-area-cards');

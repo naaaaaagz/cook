@@ -72,19 +72,16 @@
 
   <!-- Kitchen layout editor -->
   <section id="screen-layout" class="screen screen-layout" hidden>
-    <p class="landscape-note" role="note" data-i18n="landscapeNote">Use your device in landscape mode to set up!</p>
     <div class="layout-bar">
       <button id="btn-layout-cancel" class="btn btn-secondary btn-small" type="button" data-i18n="cancel">Cancel</button>
       <span class="hint" data-i18n="layoutHelp">Drag to move, drag the corner to resize. Things can only overlap the countertop.</span>
       <button id="btn-layout-theme" class="btn btn-secondary btn-small btn-icon" type="button" data-i18n-label="toggleTheme">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
       </button>
+      <button class="btn btn-secondary btn-small btn-icon btn-rotate" type="button" data-i18n-label="rotateScreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-landscape"><rect x="3" y="6.5" width="18" height="11" rx="2"/><path d="M17.5 12h.01"/></svg><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-portrait"><rect x="6.5" y="3" width="11" height="18" rx="2"/><path d="M12 17.5h.01"/></svg></button>
       <button id="btn-layout-save" class="btn btn-primary btn-small" type="button" data-i18n="save">Save</button>
     </div>
     <div id="layout-canvas" class="canvas"></div>
-    <div class="rotate-overlay" aria-hidden="true">
-      <p data-i18n="rotate">Turn your device sideways to set up your kitchen.</p>
-    </div>
   </section>
 
   <!-- Recipe: guidance, people, options, ingredients -->
@@ -171,7 +168,8 @@
       <div class="progress"><i id="cook-progress"></i></div>
     </header>
     <div class="view-fab-wrap">
-      <button id="btn-view" class="view-fab" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="view-label"></span></button>
+      <button id="btn-view" class="view-fab" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg></button>
+      <button class="btn btn-secondary btn-small btn-icon btn-rotate" type="button" data-i18n-label="rotateScreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-landscape"><rect x="3" y="6.5" width="18" height="11" rx="2"/><path d="M17.5 12h.01"/></svg><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-portrait"><rect x="6.5" y="3" width="11" height="18" rx="2"/><path d="M12 17.5h.01"/></svg></button>
       <span id="view-tip" class="tooltip" role="status" hidden data-i18n="noLayout">No kitchen layout set up. Do it before your next cooking!</span>
     </div>
     <div class="cook-body">
