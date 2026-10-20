@@ -15,6 +15,7 @@
       language: 'Language',
       kitchenLayout: 'Kitchen layout',
       setupLayout: 'Set up kitchen layout',
+      editLayout: 'Edit kitchen layout',
       setupLayoutMap: 'Set up kitchen layout for Map view',
       editLayoutMap: 'Edit kitchen layout for Map view',
       units: 'Units',
@@ -41,8 +42,6 @@
       ingCat_baking: 'Baking',
       ingCat_oil: 'Oil & fat',
       ingCat_water: 'Water',
-      layoutNone: 'Not set up yet.',
-      layoutSaved: 'Your kitchen layout is saved.',
       layoutHelp: 'Drag to move, drag the corner to resize. Things can only overlap the countertop.',
       cancel: 'Cancel',
       rotateScreen: 'Rotate the screen',
@@ -117,7 +116,10 @@
       addShopping: 'Add to shopping list',
       gotEverything: "I got everything, let's start!",
       exit: 'Exit',
-      exitConfirm: 'Stop cooking? Your progress will be lost.',
+      giveUp: 'You want to give up?',
+      no: 'No',
+      yes: 'Yes',
+      jumpBottom: 'Jump to the bottom',
       elapsed: 'Time',
       timeLeft: 'Time left',
       startNow: 'Start now',
@@ -215,16 +217,16 @@
     if (name !== 'layout') leaveFullscreen();
     if (!fromHistory) history.pushState({ screen: name }, '');
     window.scrollTo(0, 0);
+    if (typeof updateJump === 'function') setTimeout(updateJump, 0);
   }
 
   window.addEventListener('popstate', function (e) {
     var target = (e.state && e.state.screen) || 'recipes';
     if (cook && state.screen === 'cook' && target !== 'cook') {
-      if (!window.confirm(t('exitConfirm'))) {
-        history.pushState({ screen: 'cook' }, '');
-        return;
-      }
-      stopCooking();
+      // Going back while cooking: stay for now and ask first.
+      history.pushState({ screen: 'cook' }, '');
+      askGiveUp();
+      return;
     }
     if (target === 'cook' && !cook) target = state.recipe ? 'details' : 'recipes';
     if (target === 'details' && !state.recipe) target = 'recipes';
@@ -805,9 +807,9 @@
     // Remember the shape of the kitchen: the map opens in landscape when it is wider than tall.
     var canvas = $('layout-canvas');
     state.layoutWide = canvas.clientWidth >= canvas.clientHeight;
-    var status = $('layout-status');
-    status.setAttribute('data-i18n', 'layoutSaved');
-    status.textContent = t('layoutSaved');
+    var setup = $('btn-layout');
+    setup.setAttribute('data-i18n', 'editLayout');
+    setup.textContent = t('editLayout');
     var label = $('layout-home-label');
     label.setAttribute('data-i18n', 'editLayoutMap');
     label.textContent = t('editLayoutMap');
@@ -1040,6 +1042,27 @@
   }
 
   // ---------- Recipe page: guidance, people, options, ingredients ----------
+  // A chevron in the corner jumps to the bottom (the start button); it hides near the bottom.
+  function updateJump() {
+    var near = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+    $('jump-bottom').hidden = state.screen !== 'details' || near;
+  }
+  window.addEventListener('scroll', updateJump, { passive: true });
+  window.addEventListener('resize', updateJump);
+  // Animated by hand (about half a second): a smooth scrollTo started from a tap
+  // is dropped by some browsers.
+  $('jump-bottom').addEventListener('click', function () {
+    var from = window.scrollY, to = document.documentElement.scrollHeight - window.innerHeight, t0 = null;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { window.scrollTo(0, to); return; }
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / 500), ease = 1 - Math.pow(1 - p, 3);
+      window.scrollTo(0, from + (to - from) * ease);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  });
   function picksFor(r) {
     return state.picks[r.id] || (state.picks[r.id] = defaultChoices(r));
   }
@@ -1349,11 +1372,18 @@
     hideTip(true);
   }
 
-  $('btn-cook-exit').addEventListener('click', function () {
-    if (window.confirm(t('exitConfirm'))) {
-      stopCooking();
-      history.back();
-    }
+  // "You want to give up?" No keeps cooking, Yes leaves to the recipe page.
+  function askGiveUp() {
+    var d = $('exit-dialog');
+    if (!d.open) openDialog(d);
+    $('exit-no').focus();
+  }
+  $('btn-cook-exit').addEventListener('click', askGiveUp);
+  $('exit-no').addEventListener('click', function () { $('exit-dialog').close(); });
+  $('exit-yes').addEventListener('click', function () {
+    $('exit-dialog').close();
+    stopCooking();
+    history.back();
   });
 
   // Map view needs a saved kitchen layout; until then the button explains why.
@@ -1942,6 +1972,8 @@
   applyStrings();
   renderFilters();
   renderRecipes();
+  // The app sets the scroll position per screen itself; the browser shouldn't restore old ones.
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   show('recipes', true);
   history.replaceState({ screen: 'recipes' }, '');
 })();

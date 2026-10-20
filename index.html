@@ -20,10 +20,12 @@
     <h2 id="options-title" data-i18n="options">Options</h2>
     <fieldset class="choices">
       <legend data-i18n="theme">Theme</legend>
-      <div class="choices-row">
-        <label class="choice"><input type="radio" name="theme" value="light" checked> <span data-i18n="themeLight">Light</span></label>
-        <label class="choice"><input type="radio" name="theme" value="dark"> <span data-i18n="themeDark">Dark</span></label>
-        <label class="choice"><input type="radio" name="theme" value="system"> <span data-i18n="themeSystem">System</span></label>
+      <div class="segmented">
+        <label class="seg" title="Light"><input type="radio" name="theme" value="light" checked><span class="sr-only" data-i18n="themeLight">Light</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></label>
+        <label class="seg" title="Dark"><input type="radio" name="theme" value="dark"><span class="sr-only" data-i18n="themeDark">Dark</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></label>
+        <label class="seg seg-text"><input type="radio" name="theme" value="system"><span data-i18n="themeSystem">System</span></label>
       </div>
     </fieldset>
     <fieldset class="choices">
@@ -33,7 +35,7 @@
         <label class="choice"><input type="radio" name="units" value="imperial"> <span data-i18n="imperial">Imperial</span></label>
       </div>
     </fieldset>
-    <label class="field">
+    <label class="field field-inline">
       <span class="field-label" data-i18n="language">Language</span>
       <select id="lang-select">
         <option value="en">English (EN)</option>
@@ -41,11 +43,18 @@
     </label>
     <div class="field">
       <span class="field-label" data-i18n="kitchenLayout">Kitchen layout</span>
-      <button id="btn-layout" class="btn btn-secondary" type="button" data-i18n="setupLayout">Set up kitchen layout</button>
-      <p id="layout-status" class="hint" data-i18n="layoutNone">Not set up yet.</p>
+      <button id="btn-layout" class="btn btn-secondary btn-small" type="button" data-i18n="setupLayout">Set up kitchen layout</button>
     </div>
     <button class="btn btn-primary btn-wide" value="save" data-i18n="save">Save</button>
   </form>
+</dialog>
+
+<dialog id="exit-dialog" class="dialog exit-dialog" aria-labelledby="exit-title">
+  <h2 id="exit-title" data-i18n="giveUp">You want to give up?</h2>
+  <div class="dialog-actions">
+    <button id="exit-no" class="btn btn-secondary" type="button" data-i18n="no">No</button>
+    <button id="exit-yes" class="btn btn-primary" type="button" data-i18n="yes">Yes</button>
+  </div>
 </dialog>
 
 <dialog id="read-dialog" class="dialog read-dialog" aria-labelledby="read-title">
@@ -206,6 +215,10 @@
 </main>
 
 <button id="due-toast" class="due-toast" type="button" hidden></button>
+
+<button id="jump-bottom" class="jump-bottom" type="button" hidden data-i18n-label="jumpBottom">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+</button>
 
 <div id="step-pop" class="step-pop" role="dialog" aria-modal="false" hidden>
   <button id="step-pop-close" class="step-pop-close" type="button" data-i18n-label="close">&times;</button>

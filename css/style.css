@@ -3,24 +3,29 @@
   --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
   --font-sans: "DM Sans", "Segoe UI", system-ui, sans-serif;
 
-  --bg: #f7f5f1;
-  --card: #ffffff;
-  --ink: #1f1b16;
-  --text-2: #4a433b;
-  --muted: #7a7166;
-  --line: #e8e2d9;
-  --primary-bg: #1f1b16;
-  --primary-fg: #ffffff;
-  --disabled-bg: #ebe6de;
-  --disabled-fg: #a79e92;
+  /* Light: warm beige paper with cream cards */
+  --bg: #f3ebdd;
+  --card: #fbf6ec;
+  --ink: #2b231c;
+  --text-2: #54483c;
+  --muted: #85796a;
+  --line: #e2d6c3;
+  --primary-bg: #3a2e25;
+  --primary-fg: #fbf6ec;
+  --disabled-bg: #e8dfd0;
+  --disabled-fg: #a9998a;
   --icon-filter: none;
-  --shadow: rgba(31, 27, 22, .14);
+  --shadow: rgba(60, 40, 20, .14);
   --accent: #b4532a;
   --warn: #c62828;
-  --placeholder-bg: #dfe6ee;
+  --placeholder-bg: #e6dccb;
+  /* Selected and focused things */
+  --highlight: #b0552d;
+  --highlight-bg: #f6e2d3;
+  --highlight-fg: #ffffff;
 
   --veg: #2e7d32;
-  --vegan: #7cb342;
+  --vegan: #689f38;
   --pesc: #00838f;
 
   --stove: #dc2626;
@@ -31,17 +36,17 @@
   --freezer: #4f46e5;
   --me: #2563eb;
 
-  --stove-bg: #fef2f2;
-  --oven-bg: #fff7ed;
-  --countertop-bg: #fefce8;
-  --board-bg: #f0fdf4;
-  --fridge-bg: #ecfeff;
-  --freezer-bg: #eef2ff;
-  --me-bg: #eff6ff;
+  --stove-bg: #fbe9e2;
+  --oven-bg: #fbeedd;
+  --countertop-bg: #f8f0d6;
+  --board-bg: #e8f0dc;
+  --fridge-bg: #e0efee;
+  --freezer-bg: #e6e6f2;
+  --me-bg: #e3ebf4;
 
-  --tip-bg: #fffbeb;
-  --tip-line: #fcd34d;
-  --tip-ink: #92400e;
+  --tip-bg: #faf0d4;
+  --tip-line: #e8c26a;
+  --tip-ink: #8a4a12;
 
   --radius: 6px;
 }
@@ -49,80 +54,88 @@
 /* Dark theme: chosen in Options, or "System" with a dark system setting */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #1b1814;
-  --card: #26221d;
-  --ink: #f4efe8;
-  --text-2: #d8d0c5;
-  --muted: #a89e91;
-  --line: #3d372f;
-  --primary-bg: #f4efe8;
-  --primary-fg: #1b1814;
-  --disabled-bg: #34302a;
-  --disabled-fg: #7a7166;
+  /* Dark: muted grey with a faint cool tint, sage highlights */
+  --bg: #1d2024;
+  --card: #272b30;
+  --ink: #e9ebee;
+  --text-2: #c5cacf;
+  --muted: #959ba3;
+  --line: #3a3f46;
+  --primary-bg: #8fbfa8;
+  --primary-fg: #16201b;
+  --disabled-bg: #31353b;
+  --disabled-fg: #6e747c;
   --icon-filter: invert(1);
   --shadow: rgba(0, 0, 0, .5);
-  --accent: #e08a5f;
-  --warn: #ef5350;
-  --placeholder-bg: #2c3540;
-  --veg: #66bb6a;
-  --vegan: #aed581;
-  --pesc: #4dd0e1;
-  --stove: #f87171;
-  --oven: #fb923c;
-  --countertop: #facc15;
-  --board: #4ade80;
-  --fridge: #22d3ee;
-  --freezer: #818cf8;
-  --me: #60a5fa;
-  --stove-bg: #3b1d1d;
-  --oven-bg: #3b2414;
-  --countertop-bg: #3a3010;
-  --board-bg: #15301f;
-  --fridge-bg: #10303a;
-  --freezer-bg: #1e2244;
-  --me-bg: #1e2a44;
-  --tip-bg: #3a3010;
-  --tip-line: #a16207;
-  --tip-ink: #fcd34d;
+  --accent: #e3a07c;
+  --warn: #ef6b66;
+  --placeholder-bg: #2e3339;
+  --highlight: #8fbfa8;
+  --highlight-bg: #2a3a33;
+  --highlight-fg: #16201b;
+  --veg: #7cc283;
+  --vegan: #b1d48b;
+  --pesc: #6fcbd6;
+  --stove: #ec8a85;
+  --oven: #eda772;
+  --countertop: #e3c25e;
+  --board: #7cc79a;
+  --fridge: #6cc4d1;
+  --freezer: #9aa0e6;
+  --me: #7fa9e8;
+  --stove-bg: #3a2a2b;
+  --oven-bg: #3a2f26;
+  --countertop-bg: #37321f;
+  --board-bg: #24332b;
+  --fridge-bg: #213238;
+  --freezer-bg: #2a2c40;
+  --me-bg: #26303f;
+  --tip-bg: #36311f;
+  --tip-line: #9c8340;
+  --tip-ink: #e8cf86;
 }
 @media (prefers-color-scheme: dark) {
   :root[data-theme="system"] {
     color-scheme: dark;
-    --bg: #1b1814;
-    --card: #26221d;
-    --ink: #f4efe8;
-    --text-2: #d8d0c5;
-    --muted: #a89e91;
-    --line: #3d372f;
-    --primary-bg: #f4efe8;
-    --primary-fg: #1b1814;
-    --disabled-bg: #34302a;
-    --disabled-fg: #7a7166;
+    /* Dark: muted grey with a faint cool tint, sage highlights */
+    --bg: #1d2024;
+    --card: #272b30;
+    --ink: #e9ebee;
+    --text-2: #c5cacf;
+    --muted: #959ba3;
+    --line: #3a3f46;
+    --primary-bg: #8fbfa8;
+    --primary-fg: #16201b;
+    --disabled-bg: #31353b;
+    --disabled-fg: #6e747c;
     --icon-filter: invert(1);
     --shadow: rgba(0, 0, 0, .5);
-    --accent: #e08a5f;
-    --warn: #ef5350;
-    --placeholder-bg: #2c3540;
-    --veg: #66bb6a;
-    --vegan: #aed581;
-    --pesc: #4dd0e1;
-    --stove: #f87171;
-    --oven: #fb923c;
-    --countertop: #facc15;
-    --board: #4ade80;
-    --fridge: #22d3ee;
-    --freezer: #818cf8;
-    --me: #60a5fa;
-    --stove-bg: #3b1d1d;
-    --oven-bg: #3b2414;
-    --countertop-bg: #3a3010;
-    --board-bg: #15301f;
-    --fridge-bg: #10303a;
-    --freezer-bg: #1e2244;
-    --me-bg: #1e2a44;
-    --tip-bg: #3a3010;
-    --tip-line: #a16207;
-    --tip-ink: #fcd34d;
+    --accent: #e3a07c;
+    --warn: #ef6b66;
+    --placeholder-bg: #2e3339;
+    --highlight: #8fbfa8;
+    --highlight-bg: #2a3a33;
+    --highlight-fg: #16201b;
+    --veg: #7cc283;
+    --vegan: #b1d48b;
+    --pesc: #6fcbd6;
+    --stove: #ec8a85;
+    --oven: #eda772;
+    --countertop: #e3c25e;
+    --board: #7cc79a;
+    --fridge: #6cc4d1;
+    --freezer: #9aa0e6;
+    --me: #7fa9e8;
+    --stove-bg: #3a2a2b;
+    --oven-bg: #3a2f26;
+    --countertop-bg: #37321f;
+    --board-bg: #24332b;
+    --fridge-bg: #213238;
+    --freezer-bg: #2a2c40;
+    --me-bg: #26303f;
+    --tip-bg: #36311f;
+    --tip-line: #9c8340;
+    --tip-ink: #e8cf86;
   }
 }
 
@@ -170,8 +183,8 @@ img.icon { filter: var(--icon-filter); }
   min-height: 44px;
 }
 .btn:focus-visible, .block:focus-visible, .recipe-card:focus-visible, select:focus-visible,
-.btn-options:focus-visible, .area-move:focus-visible, .chip:focus-visible, .choice:has(input:focus-visible) {
-  outline: 3px solid var(--me);
+.btn-options:focus-visible, .area-move:focus-visible, .chip:focus-visible, .choice:has(input:focus-visible), .seg:has(input:focus-visible) {
+  outline: 3px solid var(--highlight);
   outline-offset: 2px;
 }
 .btn-primary { background: var(--primary-bg); color: var(--primary-fg); border-color: var(--primary-bg); }
@@ -252,6 +265,27 @@ img.icon { filter: var(--icon-filter); }
 .read-options .choice:has(input:checked:disabled) { opacity: 1; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); margin-top: 12px; }
 
+/* Options: a compact panel */
+#options-dialog { width: min(320px, calc(100% - 32px)); }
+#options-dialog form { padding: 16px; }
+#options-dialog h2 { font-size: 22px; margin-bottom: 12px; }
+#options-dialog .choices, #options-dialog .field { margin-bottom: 14px; }
+#options-dialog .choices legend { margin-bottom: 6px; }
+#options-dialog .choice { padding: 6px 10px; font-size: 14px; }
+#options-dialog select { min-height: 36px; padding: 6px 10px; font-size: 14px; }
+#options-dialog .field { gap: 6px; justify-items: start; }
+.field.field-inline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+/* Segmented buttons (theme) */
+.segmented { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); overflow: hidden; }
+.seg { position: relative; display: inline-grid; place-items: center; min-width: 44px; min-height: 36px; padding: 0 10px; color: var(--muted); cursor: pointer; font-size: 14px; font-weight: 600; }
+.seg + .seg { border-left: 1px solid var(--line); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.seg:hover { color: var(--ink); }
+.seg:has(input:focus-visible) { outline-offset: -3px; }
+.seg:has(input:checked) { background: var(--highlight); color: var(--highlight-fg); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
 /* Form bits */
 .field { display: grid; gap: 8px; margin-bottom: 20px; }
 .field-label { font-weight: 600; }
@@ -278,8 +312,8 @@ select {
   cursor: pointer;
   font-size: 15px;
 }
-.choice:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
-.choice input { width: 16px; height: 16px; margin: 0; accent-color: var(--ink); flex: none; }
+.choice:has(input:checked) { border-color: var(--highlight); background: var(--highlight-bg); box-shadow: inset 0 0 0 1px var(--highlight); }
+.choice input { width: 16px; height: 16px; margin: 0; accent-color: var(--highlight); flex: none; }
 .choices.centered { text-align: center; }
 .choices.centered legend { margin-left: auto; margin-right: auto; }
 .choices.centered .choices-row { justify-content: center; }
@@ -359,7 +393,8 @@ select {
 .block img { width: 40%; max-width: 56px; max-height: 45%; }
 .block span { color: var(--ink); font-size: 13px; line-height: 1.2; text-align: center; overflow-wrap: anywhere; }
 .block.dragging { cursor: grabbing; box-shadow: 0 8px 24px var(--shadow); }
-.block-me { border-style: dashed; border-radius: 50%; opacity: .5; }
+.block-me { border-style: dashed; border-radius: 50%; opacity: .5; padding: 0; gap: 2px; }
+.block-me img { width: 40%; max-height: 40%; }
 .block.area-board, .map-area.area-board { border-style: dashed; }
 .block.blocked { animation: blocked .3s; }
 /* Seam on the edge two areas share: drag it to resize both */
@@ -418,7 +453,7 @@ select {
   padding: 6px 14px;
   cursor: pointer;
 }
-.chip[aria-pressed="true"] { background: var(--primary-bg); color: var(--primary-fg); border-color: var(--primary-bg); }
+.chip[aria-pressed="true"] { background: var(--highlight); color: var(--highlight-fg); border-color: var(--highlight); }
 .category-title {
   font-size: 30px;
   margin: 32px 0 14px;
@@ -754,8 +789,10 @@ select {
 .cook-map {
   position: relative;
   height: calc(100vh - var(--head-h, 80px) - 72px);
+  height: calc(100dvh - var(--head-h, 80px) - 72px);
   min-height: 220px;
   margin: 0 8px 64px;
+  overflow: hidden;
 }
 .map-area {
   position: absolute;
@@ -1031,7 +1068,7 @@ body.overdo::before {
   .cook-map .ring-time { font-size: 10px; }
   .cook-map .btn-done { min-height: 32px; }
   .map-area-cards { width: max(calc(100% + 4px), 170px); padding-top: 6px; gap: 6px; }
-  .cook-map { height: calc(100vh - var(--head-h, 60px) - 56px); margin-bottom: 52px; }
+  .cook-map { height: calc(100vh - var(--head-h, 60px) - 56px); height: calc(100dvh - var(--head-h, 60px) - 56px); margin-bottom: 52px; }
 }
 
 /* ---------- Start countdown: 3, 2, 1 with rings closing in ---------- */
@@ -1164,3 +1201,31 @@ body.overdo::before {
   cursor: pointer;
 }
 .step-pop .step-head { padding-right: 40px; }
+
+/* Map view: the page itself doesn't scroll */
+html:has(.screen-cook.is-map:not([hidden])) { overflow: hidden; }
+
+/* "You want to give up?" */
+.exit-dialog { padding: 22px; width: min(360px, calc(100% - 32px)); text-align: center; }
+.exit-dialog h2 { margin-bottom: 4px; }
+.exit-dialog .dialog-actions { justify-content: center; border-top: 0; }
+.exit-dialog .btn { min-width: 110px; }
+
+/* Recipe page: jump to the bottom */
+.jump-bottom {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 12;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  box-shadow: 0 6px 18px var(--shadow);
+  cursor: pointer;
+}
+.jump-bottom:focus-visible { outline: 3px solid var(--me); outline-offset: 2px; }
