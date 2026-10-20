@@ -376,8 +376,9 @@ select {
 
 /* Recipe list */
 .layout-home { margin: 7px 0 16px; }
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; padding-right: 48px; }
-.filters .divider { width: 1px; background: var(--line); margin: 4px 4px; }
+.filters { display: grid; gap: 8px; margin: 16px 0 8px; }
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.layout-check { color: #2e7d32; font-weight: 800; }
 .chip {
   font: inherit;
   font-size: 14px;
@@ -532,10 +533,28 @@ select {
 .clock-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
 .progress { flex-basis: 100%; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin: 8px 0 10px; }
 .progress i { display: block; height: 100%; width: 0; background: var(--ink); transition: width .3s; }
-.view-toggle-wrap { position: relative; }
-.view-toggle.is-ready { background: #2e7d32; color: #fff; border-color: #2e7d32; }
-.view-toggle.is-ready:hover { background: #256b29; }
-@media (pointer: coarse) { .view-toggle-wrap { display: none; } }
+/* Map / list switch: bottom-left corner while cooking */
+.view-fab-wrap { position: fixed; left: 16px; bottom: 16px; z-index: 12; }
+.view-fab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--disabled-fg);
+  background: var(--disabled-bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 6px 18px var(--shadow);
+  cursor: pointer;
+}
+.view-fab.is-ready { color: #fff; background: #2e7d32; border-color: #2e7d32; }
+.view-fab.is-ready:hover { background: #256b29; }
+.view-fab:focus-visible { outline: 3px solid var(--me); outline-offset: 2px; }
+.view-fab-wrap .tooltip { top: auto; bottom: calc(100% + 8px); left: 0; right: auto; }
 .tooltip {
   position: absolute;
   top: calc(100% + 8px);
@@ -702,8 +721,9 @@ select {
 /* Map view (landscape) */
 .cook-map {
   position: relative;
-  height: calc(100vh - var(--head-h, 80px) - 8px);
-  margin: 0 8px 8px;
+  height: calc(100vh - var(--head-h, 80px) - 72px);
+  min-height: 220px;
+  margin: 0 8px 64px;
 }
 .map-area {
   position: absolute;
@@ -711,8 +731,10 @@ select {
   flex-direction: column;
   border: 2px solid currentColor;
   border-radius: var(--radius);
-  overflow: hidden;
 }
+/* Areas with cards sit above empty ones; the one you touch comes to the front */
+.map-area.has-cards { z-index: 5 !important; }
+.map-area:hover, .map-area:focus-within { z-index: 6 !important; }
 .map-area.dragging { box-shadow: 0 8px 24px var(--shadow); }
 .map-area-head { display: flex; align-items: center; gap: 6px; padding: 4px 4px 4px 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; }
 .map-area-head img { width: 22px; height: 22px; }
@@ -730,8 +752,18 @@ select {
   cursor: grab;
   touch-action: none;
 }
-.map-area-cards { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 12px 6px 6px; display: grid; gap: 10px; align-content: start; }
-.map-area-cards.in-strip { position: absolute; }
+.map-area-cards {
+  position: absolute;
+  top: 42px;
+  left: -2px;
+  width: max(calc(100% + 4px), 250px);
+  padding: 12px 6px 6px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.map-area.cards-right .map-area-cards { left: auto; right: -2px; }
+.map-area-cards .step { box-shadow: 0 6px 20px var(--shadow); }
 .map-area-cards > .step { min-width: 0; }
 .map-area.is-empty .map-area-head .label, .map-area.is-empty .map-area-head img { opacity: .5; }
 
@@ -768,7 +800,7 @@ select {
 .map-area-ings b { white-space: nowrap; }
 
 /* Finished */
-.is-finished .cook-clock + .cook-clock, .is-finished .cook-head .btn-read, .is-finished .view-toggle-wrap { display: none; }
+.is-finished .cook-clock + .cook-clock, .is-finished .cook-head .btn-read, .is-finished .view-fab-wrap { display: none; }
 .finished { text-align: center; }
 .finished .stack { max-width: 360px; margin: 24px auto 0; }
 
@@ -926,4 +958,33 @@ body.overdo::before {
   .cook-head { padding-right: 64px; gap: 8px 10px; }
   .cook-title { order: -1; flex-basis: 100%; min-height: 44px; display: flex; flex-direction: column; justify-content: center; }
   .cook-clock { font-size: 16px; }
+}
+
+/* ---------- Short screens (phone in landscape) ---------- */
+@media (max-height: 520px) {
+  .cook-head { padding-top: 6px; gap: 2px 10px; }
+  .cook-title h2 { font-size: 17px; }
+  .cook-title .hint { display: none; }
+  .cook-clock { font-size: 15px; }
+  .clock-label { font-size: 10px; }
+  .cook-head .btn-read .btn-label { display: none; }
+  .progress { margin: 4px 0 6px; }
+  .btn-options { top: 8px; width: 38px; height: 38px; }
+  .view-fab { min-height: 40px; width: 40px; padding: 0; justify-content: center; }
+  .view-fab #view-label { display: none; }
+  .view-fab-wrap { left: 10px; bottom: 8px; }
+  /* Map cards are compact: title, timer and "I'm done". Tap the title for the details. */
+  .cook-map .step { padding: 6px 8px; gap: 4px; }
+  .cook-map .step h3 { font-size: 14px; padding-right: 0; cursor: pointer; }
+  .cook-map .step h3::after { content: " ▾"; font-size: 11px; color: var(--muted); }
+  .cook-map .step.expanded h3::after { content: " ▴"; }
+  .cook-map .step-head { display: none; }
+  .cook-map .step:not(.expanded) :is(.step-text, .step-parts, .step-ings) { display: none; }
+  .cook-map .step-foot { flex-wrap: nowrap; }
+  .cook-map .ring { width: 44px; height: 44px; }
+  .cook-map .btn-start { width: 34px; height: 34px; font-size: 9px; }
+  .cook-map .ring-time { font-size: 10px; }
+  .cook-map .btn-done { min-height: 32px; }
+  .map-area-cards { width: max(calc(100% + 4px), 170px); padding-top: 6px; gap: 6px; }
+  .cook-map { height: calc(100vh - var(--head-h, 60px) - 56px); margin-bottom: 52px; }
 }

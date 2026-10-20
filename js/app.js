@@ -587,9 +587,10 @@
     var status = $('layout-status');
     status.setAttribute('data-i18n', 'layoutSaved');
     status.textContent = t('layoutSaved');
-    var home = $('btn-layout-home');
-    home.setAttribute('data-i18n', 'editLayoutMap');
-    home.textContent = t('editLayoutMap');
+    var label = $('layout-home-label');
+    label.setAttribute('data-i18n', 'editLayoutMap');
+    label.textContent = t('editLayoutMap');
+    document.querySelector('.layout-check').hidden = false;
     history.back();
     if (cook) {
       $('cook-map').innerHTML = '';
@@ -744,6 +745,10 @@
   function renderFilters() {
     var box = $('filters');
     box.innerHTML = '';
+    var rows = { cat: document.createElement('div'), cuisine: document.createElement('div') };
+    rows.cat.className = rows.cuisine.className = 'filter-row';
+    box.appendChild(rows.cat);
+    box.appendChild(rows.cuisine);
     function chip(group, value, label) {
       var b = document.createElement('button');
       b.type = 'button';
@@ -756,12 +761,9 @@
         b.setAttribute('aria-pressed', String(i < 0));
         renderRecipes();
       });
-      box.appendChild(b);
+      rows[group].appendChild(b);
     }
     CATEGORIES.forEach(function (c) { chip('cat', c, t('cat_' + c)); });
-    var div = document.createElement('span');
-    div.className = 'divider';
-    box.appendChild(div);
     CUISINES.forEach(function (c) { chip('cuisine', c, c); });
   }
 
@@ -993,9 +995,7 @@
   var RING = 2 * Math.PI * 40;
 
   function isMap() {
-    if (!state.layoutSaved) return false;
-    // Phones and tablets follow the orientation; desktop uses the toggle.
-    return coarse.matches ? landscape.matches : state.mapView;
+    return state.layoutSaved && state.mapView;
   }
 
   function fmt(sec) {
@@ -1067,6 +1067,7 @@
     b.steps.forEach(function (s) { byId[s.id] = s; });
     cook = { steps: b.steps, byId: byId, ingredients: b.ingredients, done: new Set(), slots: [], status: {},
       started: {}, els: {}, t0: null, tipsShown: new Set(), view: null };
+    if (coarse.matches) state.mapView = landscape.matches;
     $('cook-name').textContent = state.recipe.name;
     $('cook-list').innerHTML = '';
     $('cook-map').innerHTML = '';
@@ -1122,7 +1123,12 @@
   $('btn-view').addEventListener('focus', function () { if (!state.layoutSaved) showViewTip(); });
   $('btn-view').addEventListener('mouseleave', function () { $('view-tip').hidden = true; });
 
-  landscape.addEventListener('change', function () { if (cook) render(); });
+  // Turning a phone or tablet sideways switches to the map, upright to the list.
+  landscape.addEventListener('change', function () {
+    if (!coarse.matches) return;
+    state.mapView = landscape.matches;
+    if (cook) render();
+  });
   window.addEventListener('resize', function () { if (cook && isMap()) render(); });
 
   function ingItem(i) {
@@ -1177,6 +1183,11 @@
       tick();
     });
     el.querySelector('.btn-done').addEventListener('click', function () { finishStep(step); });
+    // Compact map cards (short screens) open and close by tapping the title.
+    el.querySelector('h3').addEventListener('click', function () {
+      el.classList.toggle('expanded');
+      if (isMap()) render();
+    });
     cook.els[step.id] = el;
     return el;
   }
@@ -1216,7 +1227,8 @@
     $('cook-count').textContent = t('stepsDone', { d: cook.done.size, n: total });
     $('cook-progress').style.width = (cook.done.size / total * 100) + '%';
     var vb = $('btn-view');
-    vb.textContent = map ? t('listView') : t('mapView');
+    $('view-label').textContent = map ? t('listView') : t('mapView');
+    vb.setAttribute('aria-label', map ? t('listView') : t('mapView'));
     vb.classList.toggle('is-disabled', !state.layoutSaved);
     vb.classList.toggle('is-ready', state.layoutSaved);
     vb.setAttribute('aria-disabled', String(!state.layoutSaved));
@@ -1276,30 +1288,6 @@
     };
   }
 
-  // Things standing on the countertop cover part of it. Returns the biggest
-  // uncovered strip (left, right, above or below them), relative to the countertop.
-  function freeStrip(ct, others, pxW, pxH) {
-    var cover = null;
-    others.forEach(function (o) {
-      var x1 = Math.max(ct.x, o.x), y1 = Math.max(ct.y, o.y);
-      var x2 = Math.min(ct.x + ct.w, o.x + o.w), y2 = Math.min(ct.y + ct.h, o.y + o.h);
-      if (x2 <= x1 || y2 <= y1) return;
-      cover = cover
-        ? { x1: Math.min(cover.x1, x1), y1: Math.min(cover.y1, y1), x2: Math.max(cover.x2, x2), y2: Math.max(cover.y2, y2) }
-        : { x1: x1, y1: y1, x2: x2, y2: y2 };
-    });
-    if (!cover) return null;
-    var right = ct.x + ct.w, bottom = ct.y + ct.h;
-    var strips = [
-      { x: ct.x, y: ct.y, w: cover.x1 - ct.x, h: ct.h },
-      { x: cover.x2, y: ct.y, w: right - cover.x2, h: ct.h },
-      { x: ct.x, y: ct.y, w: ct.w, h: cover.y1 - ct.y },
-      { x: ct.x, y: cover.y2, w: ct.w, h: bottom - cover.y2 }
-    ];
-    var best = strips.reduce(function (a, b) { return b.w * pxW * b.h * pxH > a.w * pxW * a.h * pxH ? b : a; });
-    return { x: (best.x - ct.x) / ct.w, y: (best.y - ct.y) / ct.h, w: best.w / ct.w, h: best.h / ct.h };
-  }
-
   function renderMap(els) {
     var mapEl = $('cook-map');
     var keys = usedAreas();
@@ -1332,22 +1320,40 @@
       var mine = els.filter(function (el) { return el.getAttribute('data-area') === key; });
       syncChildren(a.querySelector('.map-area-cards'), mine);
       a.classList.toggle('is-empty', mine.length === 0);
+      // Cards hang from the top of their area and may reach over other areas,
+      // so nothing is cut off. Areas on the right side let them hang to the left.
+      a.classList.toggle('has-cards', mine.length > 0);
+      a.classList.toggle('cards-right', cook.view[key].x + cook.view[key].w / 2 > 0.5);
     });
 
-    // Countertop cards go where nothing stands on the countertop.
-    if (keys.indexOf('countertop') >= 0) {
-      var cards = mapEl.querySelector('.map-area[data-area="countertop"] .map-area-cards');
-      var others = keys.filter(function (k) { return k !== 'countertop'; }).map(function (k) { return cook.view[k]; });
-      var free = freeStrip(cook.view.countertop, others, mapEl.clientWidth, mapEl.clientHeight);
-      cards.classList.toggle('in-strip', !!free);
-      if (free) {
-        var below = cards.previousElementSibling.offsetHeight;
-        cards.style.left = (free.x * 100) + '%';
-        cards.style.top = 'max(' + (free.y * 100) + '%, ' + below + 'px)';
-        cards.style.width = (free.w * 100) + '%';
-        cards.style.bottom = ((1 - free.y - free.h) * 100) + '%';
-      }
-    }
+    // Card groups may cover areas, but not each other: a group that would cover
+    // another moves below it (or above it) when there is room, and no group runs
+    // past the bottom of the map.
+    var mapH = mapEl.clientHeight, gap = 8, placed = [];
+    keys.map(function (key) { return mapEl.querySelector('.map-area[data-area="' + key + '"]'); })
+      .filter(function (a) { return a.classList.contains('has-cards'); })
+      .sort(function (a, b) { return a.offsetTop - b.offsetTop; })
+      .forEach(function (a) {
+        var cards = a.querySelector('.map-area-cards');
+        cards.style.top = '';
+        var r = { left: a.offsetLeft + cards.offsetLeft, top: a.offsetTop + cards.offsetTop, w: cards.offsetWidth, h: cards.offsetHeight };
+        function fit(top) { return Math.max(0, Math.min(top, mapH - r.h)); }
+        function hit(top) {
+          return placed.filter(function (p) {
+            return r.left < p.left + p.w && p.left < r.left + r.w && top < p.top + p.h + gap && p.top < top + r.h + gap;
+          })[0];
+        }
+        var top = fit(r.top), other = hit(top), tries = 0;
+        while (other && tries++ < placed.length) {
+          var below = other.top + other.h + gap, above = other.top - r.h - gap;
+          if (below + r.h <= mapH && !hit(below)) { top = below; other = null; }
+          else if (above >= 0 && !hit(above)) { top = above; other = null; }
+          else { top = fit(below); other = hit(top); }
+        }
+        if (other) top = fit(r.top); // no free spot: keep it at its area and let it overlap
+        cards.style.top = (top - a.offsetTop) + 'px';
+        placed.push({ left: r.left, top: top, w: r.w, h: r.h });
+      });
   }
 
   // Time left: what is still open, scheduled from now. Steps that are running
