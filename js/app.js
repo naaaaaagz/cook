@@ -131,6 +131,8 @@
       method: 'Method',
       cookingVersion: "This is the version you're cooking.",
       youAreHere: 'You are here now!',
+      tapInfo: 'Tap for info',
+      resizeSeam: 'Drag to resize both',
       aboutTime: 'about {t}',
       doneWhen: 'Done when: ',
       left: 'left',
@@ -502,6 +504,62 @@
     opts.resizer: element that starts a resize (optional; Alt + arrows resize too)
     opts.onChange: called while it moves; opts.onEnd: called when a move is finished
   */
+  // Layout editor: while dragging, an area snaps to the canvas edges and to
+  // nearby areas, and pushes an area it runs into out of the way when there is
+  // room for it. The chopping board and "Me" don't snap.
+  var SNAP_PX = 12;
+  function snappable(k) { return k !== 'board' && k !== 'me'; }
+
+  function snapRect(layout, key, r, keys, container) {
+    if (!snappable(key)) return r;
+    var tx = SNAP_PX / (container.clientWidth || 800), ty = SNAP_PX / (container.clientHeight || 450);
+    var bx = null, by = null;
+    function tryX(target, edge) { var d = target - (r.x + edge); if (Math.abs(d) <= tx && (bx === null || Math.abs(d) < Math.abs(bx))) bx = d; }
+    function tryY(target, edge) { var d = target - (r.y + edge); if (Math.abs(d) <= ty && (by === null || Math.abs(d) < Math.abs(by))) by = d; }
+    tryX(0, 0); tryX(1, r.w); tryY(0, 0); tryY(1, r.h);
+    keys.forEach(function (k) {
+      if (k === key || !snappable(k)) return;
+      var o = layout[k];
+      var sideBySide = r.y < o.y + o.h + ty && o.y < r.y + r.h + ty;
+      var stacked = r.x < o.x + o.w + tx && o.x < r.x + r.w + tx;
+      if (sideBySide) { tryX(o.x + o.w, 0); tryX(o.x, r.w); tryX(o.x, 0); tryX(o.x + o.w, r.w); }
+      if (stacked) { tryY(o.y + o.h, 0); tryY(o.y, r.h); tryY(o.y, 0); tryY(o.y + o.h, r.h); }
+    });
+    return {
+      x: clamp(r.x + (bx || 0), 0, 1 - r.w),
+      y: clamp(r.y + (by || 0), 0, 1 - r.h),
+      w: r.w,
+      h: r.h
+    };
+  }
+
+  // Moves the areas that next runs into out of its way (along the shorter overlap).
+  // Returns false when one of them has nowhere to go; then nothing is changed.
+  function pushOthers(layout, key, next, keys) {
+    if (key === 'countertop') return false;
+    var hits = keys.filter(function (k) { return k !== key && k !== 'countertop' && overlaps(next, layout[k]); });
+    if (!hits.length) return false;
+    var moved = {};
+    var ok = hits.every(function (k) {
+      var o = layout[k];
+      var ox = Math.min(next.x + next.w, o.x + o.w) - Math.max(next.x, o.x);
+      var oy = Math.min(next.y + next.h, o.y + o.h) - Math.max(next.y, o.y);
+      var c = { x: o.x, y: o.y, w: o.w, h: o.h };
+      if (ox < oy) c.x += (o.x + o.w / 2 >= next.x + next.w / 2 ? ox : -ox);
+      else c.y += (o.y + o.h / 2 >= next.y + next.h / 2 ? oy : -oy);
+      if (c.x < -1e-6 || c.y < -1e-6 || c.x + c.w > 1 + 1e-6 || c.y + c.h > 1 + 1e-6) return false;
+      var test = Object.assign({}, layout, moved);
+      test[key] = next;
+      if (collides(test, k, c, keys)) return false;
+      moved[k] = c;
+      return true;
+    });
+    if (!ok) return false;
+    Object.keys(moved).forEach(function (k) { layout[k] = moved[k]; });
+    layout[key] = next;
+    return true;
+  }
+
   function makeMovable(el, key, container, layout, keys, opts) {
     var handle = opts.handle || el;
     var drag = null;
@@ -520,11 +578,12 @@
       var dx = (e.clientX - drag.sx) / drag.cw, dy = (e.clientY - drag.sy) / drag.ch, r = drag.r, next;
       if (drag.mode === 'move') {
         next = { x: clamp(r.x + dx, 0, 1 - r.w), y: clamp(r.y + dy, 0, 1 - r.h), w: r.w, h: r.h };
+        if (opts.snap) next = snapRect(layout, key, next, keys, container);
       } else {
         var m = minSize(key, container);
         next = { x: r.x, y: r.y, w: clamp(r.w + dx, m.w, 1 - r.x), h: clamp(r.h + dy, m.h, 1 - r.y) };
       }
-      tryPlace(layout, key, next, keys);
+      if (!(opts.snap && drag.mode === 'move' && pushOthers(layout, key, next, keys))) tryPlace(layout, key, next, keys);
       placeEl(el, layout[key]);
       if (opts.onChange) opts.onChange();
     }
@@ -625,8 +684,10 @@
     draft.me.x = clamp(draft.me.x, 0, 1 - draft.me.w);
     draft.me.y = clamp(draft.me.y, 0, 1 - draft.me.h);
     canvas.innerHTML = '';
+    blockEls = {};
     LAYOUT_KEYS.forEach(function (key) {
       var el = document.createElement('div');
+      blockEls[key] = el;
       el.className = 'block area-' + key + (key === 'me' ? ' block-me' : '');
       el.style.zIndex = Z[key];
       el.tabIndex = 0;
@@ -637,10 +698,101 @@
       placeEl(el, draft[key]);
       makeMovable(el, key, canvas, draft, LAYOUT_KEYS, {
         resizer: el.querySelector('.resize'),
-        onChange: function () { state.layoutTouched = true; }
+        snap: true,
+        onChange: function () {
+          state.layoutTouched = true;
+          LAYOUT_KEYS.forEach(function (k) { placeEl(blockEls[k], draft[k]); });
+        },
+        onEnd: updateSeams
       });
       canvas.appendChild(el);
     });
+    updateSeams();
+  }
+
+  // Where two areas touch, a seam with a grip appears on the shared edge.
+  // Dragging it (or arrow keys) moves that edge: one area grows, the other shrinks.
+  var blockEls = {};
+  function updateSeams() {
+    var canvas = $('layout-canvas');
+    canvas.querySelectorAll('.seam').forEach(function (n) { n.remove(); });
+    var cw = canvas.clientWidth || 800, ch = canvas.clientHeight || 450;
+    var ex = 3 / cw, ey = 3 / ch, keys = LAYOUT_KEYS.filter(snappable);
+    keys.forEach(function (ka, i) {
+      keys.slice(i + 1).forEach(function (kb) {
+        [[ka, kb], [kb, ka]].forEach(function (pair) {
+          var a = draft[pair[0]], b = draft[pair[1]];
+          // a on the left of b, sharing a vertical edge
+          if (Math.abs(a.x + a.w - b.x) < ex) {
+            var y1 = Math.max(a.y, b.y), y2 = Math.min(a.y + a.h, b.y + b.h);
+            if ((y2 - y1) * ch > 24) addSeam('v', pair[0], pair[1], b.x, y1, y2);
+          }
+          // a above b, sharing a horizontal edge
+          if (Math.abs(a.y + a.h - b.y) < ey) {
+            var x1 = Math.max(a.x, b.x), x2 = Math.min(a.x + a.w, b.x + b.w);
+            if ((x2 - x1) * cw > 24) addSeam('h', pair[0], pair[1], b.y, x1, x2);
+          }
+        });
+      });
+    });
+  }
+
+  function addSeam(dir, ka, kb, at, from, to) {
+    var canvas = $('layout-canvas');
+    var seam = document.createElement('div');
+    seam.className = 'seam seam-' + dir;
+    seam.tabIndex = 0;
+    seam.setAttribute('role', 'separator');
+    seam.setAttribute('aria-orientation', dir === 'v' ? 'vertical' : 'horizontal');
+    seam.setAttribute('aria-label', t(ka) + ' / ' + t(kb) + ': ' + t('resizeSeam'));
+    seam.innerHTML = '<span class="seam-grip"></span>';
+    function place(pos) {
+      if (dir === 'v') { seam.style.left = (pos * 100) + '%'; seam.style.top = (from * 100) + '%'; seam.style.height = ((to - from) * 100) + '%'; }
+      else { seam.style.top = (pos * 100) + '%'; seam.style.left = (from * 100) + '%'; seam.style.width = ((to - from) * 100) + '%'; }
+    }
+    place(at);
+    function moveEdge(pos) {
+      var a = draft[ka], b = draft[kb], ma = minSize(ka, canvas), mb = minSize(kb, canvas), na, nb;
+      if (dir === 'v') {
+        pos = clamp(pos, a.x + ma.w, b.x + b.w - mb.w);
+        na = { x: a.x, y: a.y, w: pos - a.x, h: a.h };
+        nb = { x: pos, y: b.y, w: b.x + b.w - pos, h: b.h };
+      } else {
+        pos = clamp(pos, a.y + ma.h, b.y + b.h - mb.h);
+        na = { x: a.x, y: a.y, w: a.w, h: pos - a.y };
+        nb = { x: b.x, y: pos, w: b.w, h: b.y + b.h - pos };
+      }
+      var test = Object.assign({}, draft);
+      test[ka] = na; test[kb] = nb;
+      if (collides(test, ka, na, LAYOUT_KEYS) || collides(test, kb, nb, LAYOUT_KEYS)) return;
+      draft[ka] = na; draft[kb] = nb;
+      state.layoutTouched = true;
+      placeEl(blockEls[ka], na); placeEl(blockEls[kb], nb);
+      place(pos);
+    }
+    var drag = null;
+    seam.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      seam.setPointerCapture(e.pointerId);
+      var c = canvas.getBoundingClientRect();
+      drag = { s: dir === 'v' ? e.clientX : e.clientY, size: dir === 'v' ? c.width : c.height,
+        at: dir === 'v' ? draft[kb].x : draft[kb].y };
+      seam.classList.add('active');
+    });
+    seam.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      moveEdge(drag.at + ((dir === 'v' ? e.clientX : e.clientY) - drag.s) / drag.size);
+    });
+    function end() { if (!drag) return; drag = null; seam.classList.remove('active'); updateSeams(); }
+    seam.addEventListener('pointerup', end);
+    seam.addEventListener('pointercancel', end);
+    seam.addEventListener('keydown', function (e) {
+      var d = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 }[e.key];
+      if (!d) return;
+      e.preventDefault();
+      moveEdge((dir === 'v' ? draft[kb].x : draft[kb].y) + d * (e.shiftKey ? 0.05 : 0.01));
+    });
+    canvas.appendChild(seam);
   }
   window.addEventListener('resize', function () {
     if (state.screen === 'layout') buildCanvas();
@@ -1363,6 +1515,7 @@
   // On the map every open step is a small notification on its area: a moving
   // icon, the step's title, its timer, and Start / Done. Tapping it opens the
   // full card in a popup next to the area.
+  var NOTIF_RING = 2 * Math.PI * 16;
   function notifFor(step) {
     if (cook.notifs[step.id]) return cook.notifs[step.id];
     var n = document.createElement('div');
@@ -1371,9 +1524,11 @@
     n.setAttribute('data-area', step.area);
     var icon = step.tools.length ? window.EQUIPMENT[step.tools[0]].icon : AREAS[step.area].icon;
     n.innerHTML =
-      '<span class="notif-icon"><img class="icon" alt="" src="' + icon + '"></span>' +
+      '<span class="notif-icon"><svg class="notif-ring" viewBox="0 0 36 36" aria-hidden="true">' +
+      '<circle class="nr-track" cx="18" cy="18" r="16"/><circle class="nr-fill" cx="18" cy="18" r="16" ' +
+      'stroke-dasharray="' + NOTIF_RING + '" stroke-dashoffset="0"/></svg><img class="icon" alt="" src="' + icon + '"></span>' +
       '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + '</span>' +
-      '<span class="notif-time">' + fmt(step.duration) + '</span></button>' +
+      '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span> · <span class="notif-hint">' + t('tapInfo') + '</span></span></button>' +
       '<button class="notif-btn notif-start" type="button" aria-label="' + t('start') + '">▶</button>' +
       '<button class="notif-btn notif-done" type="button" aria-label="' + t('done') + '">✓</button>';
     n.querySelector('.notif-open').addEventListener('click', function () { openPop(step, n); });
@@ -1477,7 +1632,7 @@
         a.innerHTML =
           '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + t(key) + '</span>' +
           (used ? '<button class="area-move" type="button" aria-label="' + t('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button>' : '') +
-          '</div><div class="map-area-cards"></div>';
+          '</div>';
         mapEl.appendChild(a);
         if (used) {
           makeMovable(a, key, mapEl, cook.view, AREA_KEYS, {
@@ -1487,6 +1642,16 @@
           });
         }
       });
+      // Notifications sit on their own layer above every area, so no area can cover them.
+      var layer = document.createElement('div');
+      layer.className = 'map-layer';
+      keys.forEach(function (key) {
+        var g = document.createElement('div');
+        g.className = 'map-group';
+        g.setAttribute('data-area', key);
+        layer.appendChild(g);
+      });
+      mapEl.appendChild(layer);
     }
     AREA_KEYS.forEach(function (key) {
       placeEl(mapEl.querySelector('.map-area[data-area="' + key + '"]'), cook.view[key]);
@@ -1494,42 +1659,62 @@
     keys.forEach(function (key) {
       var a = mapEl.querySelector('.map-area[data-area="' + key + '"]');
       var mine = els.filter(function (el) { return el.getAttribute('data-area') === key; });
-      var count = mine.length;
-      syncChildren(a.querySelector('.map-area-cards'), mine);
-      a.classList.toggle('is-empty', count === 0);
-      // Notifications hang from the top of their area and may reach over other
-      // areas, so nothing is cut off. Areas on the right side let them hang to the left.
-      a.classList.toggle('has-cards', count > 0);
-      a.classList.toggle('cards-right', cook.view[key].x + cook.view[key].w / 2 > 0.5);
+      var g = mapEl.querySelector('.map-group[data-area="' + key + '"]');
+      syncChildren(g, mine);
+      a.classList.toggle('is-empty', mine.length === 0);
     });
 
     // Notification groups may cover areas, but not each other: a group that would cover
     // another moves below it (or above it) when there is room, and no group runs
     // past the bottom of the map.
-    var mapH = mapEl.clientHeight, gap = 8, placed = [];
-    keys.map(function (key) { return mapEl.querySelector('.map-area[data-area="' + key + '"]'); })
-      .filter(function (a) { return a.querySelector('.map-area-cards').children.length; })
-      .sort(function (a, b) { return a.offsetTop - b.offsetTop; })
-      .forEach(function (a) {
-        var cards = a.querySelector('.map-area-cards');
-        cards.style.top = '';
-        var r = { left: a.offsetLeft + cards.offsetLeft, top: a.offsetTop + cards.offsetTop, w: cards.offsetWidth, h: cards.offsetHeight };
-        function fit(top) { return Math.max(0, Math.min(top, mapH - r.h)); }
-        function hit(top) {
-          return placed.filter(function (p) {
-            return r.left < p.left + p.w && p.left < r.left + r.w && top < p.top + p.h + gap && p.top < top + r.h + gap;
-          })[0];
+    // Each group hangs below its area's name; groups on the right half hang leftwards.
+    var mapW = mapEl.clientWidth, mapH = mapEl.clientHeight, gap = 8, placed = [];
+    keys.map(function (key) { return mapEl.querySelector('.map-group[data-area="' + key + '"]'); })
+      .filter(function (g) { return g.children.length; })
+      .map(function (g) { return { g: g, a: mapEl.querySelector('.map-area[data-area="' + g.getAttribute('data-area') + '"]') }; })
+      .sort(function (p, q) { return p.a.offsetTop - q.a.offsetTop; })
+      .forEach(function (p) {
+        var a = p.a, cards = p.g, v = cook.view[a.getAttribute('data-area')];
+        var w = Math.min(mapW, Math.max(a.offsetWidth, 230));
+        var left = v.x + v.w / 2 > 0.5 ? a.offsetLeft + a.offsetWidth - w : a.offsetLeft;
+        left = clamp(left, 0, Math.max(0, mapW - w));
+        cards.style.width = w + 'px';
+        cards.style.left = left + 'px';
+        var r = { left: left, top: a.offsetTop + 40, w: w, h: cards.offsetHeight };
+        function fitTop(top) { return Math.max(0, Math.min(top, mapH - r.h)); }
+        function fitLeft(l) { return Math.max(0, Math.min(l, mapW - r.w)); }
+        function hit(top, l) {
+          return placed.some(function (p) {
+            return l < p.left + p.w + gap && p.left < l + r.w + gap && top < p.top + p.h + gap && p.top < top + r.h + gap;
+          });
         }
-        var top = fit(r.top), other = hit(top), tries = 0;
-        while (other && tries++ < placed.length) {
-          var below = other.top + other.h + gap, above = other.top - r.h - gap;
-          if (below + r.h <= mapH && !hit(below)) { top = below; other = null; }
-          else if (above >= 0 && !hit(above)) { top = above; other = null; }
-          else { top = fit(below); other = hit(top); }
+        // Try its own spot first, then below, above, right of and left of each placed group;
+        // the free spot closest to its area wins. With no free spot it stays and overlaps.
+        var spots = [{ top: fitTop(r.top), left: r.left }];
+        placed.forEach(function (p) {
+          spots.push({ top: p.top + p.h + gap, left: r.left }, { top: p.top - r.h - gap, left: r.left },
+            { top: fitTop(r.top), left: p.left + p.w + gap }, { top: fitTop(r.top), left: p.left - r.w - gap });
+        });
+        var best = null;
+        spots.forEach(function (sp) {
+          if (sp.top < 0 || sp.top + r.h > mapH || sp.left < 0 || sp.left + r.w > mapW || hit(sp.top, sp.left)) return;
+          var d = Math.abs(sp.top - r.top) + Math.abs(sp.left - r.left);
+          if (!best || d < best.d) best = { top: sp.top, left: sp.left, d: d };
+        });
+        // Still nothing: scan the whole map height (at its own, the left and the right edge).
+        if (!best) {
+          [fitLeft(r.left), 0, fitLeft(mapW - r.w)].forEach(function (l) {
+            for (var y = 0; y + r.h <= mapH; y += 8) {
+              if (hit(y, l)) continue;
+              var d = Math.abs(y - r.top) + Math.abs(l - r.left);
+              if (!best || d < best.d) best = { top: y, left: l, d: d };
+            }
+          });
         }
-        if (other) top = fit(r.top); // no free spot: keep it at its area and let it overlap
-        cards.style.top = (top - a.offsetTop) + 'px';
-        placed.push({ left: r.left, top: top, w: r.w, h: r.h });
+        var top = best ? best.top : fitTop(r.top), gl = best ? best.left : fitLeft(r.left);
+        cards.style.top = top + 'px';
+        cards.style.left = gl + 'px';
+        placed.push({ left: gl, top: top, w: r.w, h: r.h });
       });
   }
 
@@ -1564,7 +1749,13 @@
       el.classList.toggle('time-up', up);
       var n = cook.notifs[id];
       if (n) {
+        // The ring empties clockwise as time runs out: yellow in the last quarter,
+        // red (with a nudge) in the last tenth.
+        var share = Math.max(0, left) / step.duration;
         n.querySelector('.notif-time').textContent = up ? '+' + fmt(-left) : fmt(left);
+        n.querySelector('.nr-fill').setAttribute('stroke-dashoffset', String(NOTIF_RING * (1 - share)));
+        n.classList.toggle('ring-warn', share <= 0.25 && share > 0.10);
+        n.classList.toggle('ring-late', share <= 0.10);
         n.classList.toggle('time-up', up);
       }
       if (up && step.overcook) overdo = true;

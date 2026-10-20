@@ -355,20 +355,34 @@ select {
   touch-action: none;
   overflow: hidden;
 }
+.block { padding: 6px 16px 16px 6px; }
 .block img { width: 40%; max-width: 56px; max-height: 45%; }
-.block span { color: var(--ink); font-size: 14px; text-align: center; }
+.block span { color: var(--ink); font-size: 13px; line-height: 1.2; text-align: center; overflow-wrap: anywhere; }
 .block.dragging { cursor: grabbing; box-shadow: 0 8px 24px var(--shadow); }
 .block-me { border-style: dashed; border-radius: 50%; opacity: .5; }
 .block.area-board, .map-area.area-board { border-style: dashed; }
 .block.blocked { animation: blocked .3s; }
+/* Seam on the edge two areas share: drag it to resize both */
+.seam { position: absolute; z-index: 8; display: grid; place-items: center; touch-action: none; }
+.seam-v { width: 18px; transform: translateX(-50%); cursor: ew-resize; }
+.seam-h { height: 18px; transform: translateY(-50%); cursor: ns-resize; }
+.seam::before { content: ""; position: absolute; background: var(--ink); opacity: .25; transition: opacity .15s; }
+.seam-v::before { top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%); }
+.seam-h::before { left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%); }
+.seam-grip { position: relative; background: var(--ink); border-radius: 3px; opacity: .55; transition: transform .15s, opacity .15s; }
+.seam-v .seam-grip { width: 6px; height: 32px; }
+.seam-h .seam-grip { width: 32px; height: 6px; }
+.seam:hover::before, .seam.active::before, .seam:focus-visible::before { opacity: .7; }
+.seam:hover .seam-grip, .seam.active .seam-grip, .seam:focus-visible .seam-grip { opacity: 1; transform: scale(1.35); }
+.seam:focus-visible { outline: none; }
 @keyframes blocked { 50% { border-style: dotted; } }
 .block .resize {
   color: inherit;
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 22px;
-  height: 22px;
+  width: 14px;
+  height: 14px;
   cursor: nwse-resize;
   touch-action: none;
   background: linear-gradient(135deg, transparent 50%, currentColor 50%);
@@ -751,7 +765,9 @@ select {
   border-radius: var(--radius);
 }
 /* Areas with cards sit above empty ones; the one you touch comes to the front */
-.map-area.has-cards { z-index: 5 !important; }
+.map-layer { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.map-group { position: absolute; display: grid; gap: 6px; pointer-events: none; }
+.map-group .notif { pointer-events: auto; }
 .map-area.unused {
   color: var(--muted) !important;
   background: transparent !important;
@@ -763,7 +779,7 @@ select {
 
 
 
-.map-area:hover, .map-area:focus-within { z-index: 6 !important; }
+
 .map-area.dragging { box-shadow: 0 8px 24px var(--shadow); }
 .map-area-head { display: flex; align-items: center; gap: 6px; padding: 4px 4px 4px 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; }
 .map-area-head img { width: 22px; height: 22px; }
@@ -1061,19 +1077,27 @@ body.overdo::before {
   box-shadow: 0 4px 14px var(--shadow);
 }
 .notif-icon {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   flex: none;
-  border-radius: 50%;
-  background: var(--bg);
-  animation: notif-bob 1.6s ease-in-out infinite;
 }
-.notif-icon img { width: 20px; height: 20px; }
-.notif.is-running .notif-icon { animation: notif-spin 3s linear infinite; }
-@keyframes notif-bob { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-3px) rotate(-8deg); } 75% { transform: translateY(1px) rotate(8deg); } }
-@keyframes notif-spin { to { transform: rotate(360deg); } }
+.notif-icon img { width: 18px; height: 18px; }
+.notif-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg) scaleY(-1); }
+.notif-ring circle { fill: none; stroke-width: 3; }
+.nr-track { stroke: var(--line); }
+.nr-fill { stroke: #2e7d32; stroke-linecap: round; transition: stroke-dashoffset .5s linear, stroke .3s; }
+.notif.ring-warn .nr-fill { stroke: #f59e0b; }
+.notif.ring-late .nr-fill { stroke: var(--warn); }
+.notif.ring-late { animation: notif-nudge 3s ease-in-out infinite; }
+@keyframes notif-nudge {
+  0%, 12%, 100% { transform: translateX(0); }
+  3% { transform: translateX(-4px); }
+  6% { transform: translateX(4px); }
+  9% { transform: translateX(-2px); }
+}
 .notif-open {
   flex: 1;
   min-width: 0;
@@ -1087,7 +1111,9 @@ body.overdo::before {
   cursor: pointer;
 }
 .notif-title { font-family: var(--font-serif); font-weight: 600; font-size: 14px; line-height: 1.2; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-.notif-time { font-size: 12px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.notif-meta { font-size: 11px; color: var(--muted); }
+.notif-time { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.notif-hint { font-size: 10px; }
 .notif-btn {
   display: grid;
   place-items: center;
@@ -1108,7 +1134,7 @@ body.overdo::before {
 @keyframes notif-new { 0% { box-shadow: 0 0 0 0 #2563eb; } 100% { box-shadow: 0 0 0 10px transparent; } }
 .notif.leaving { overflow: hidden; pointer-events: none; transition: opacity 1s ease, height 1s ease, padding 1s ease, margin 1s ease; }
 .map-area-cards { width: max(calc(100% + 4px), 220px); gap: 6px; padding-top: 6px; }
-@media (prefers-reduced-motion: reduce) { .notif-icon, .notif.is-new { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .notif.ring-late, .notif.is-new { animation: none; } }
 
 /* The full card in a popup next to its area */
 .step-pop {
