@@ -127,9 +127,10 @@
       noLayout: 'No kitchen layout set up. Do it before your next cooking!',
       start: 'Start',
       done: "I'm done",
-      doneMark: '✓ Done',
-      reopen: 'Show past steps',
-      fold: 'Hide past steps',
+      chooseFirst: 'Choose before you start',
+      method: 'Method',
+      cookingVersion: "This is the version you're cooking.",
+      aboutTime: 'about {t}',
       doneWhen: 'Done when: ',
       left: 'left',
       over: 'over',
@@ -196,6 +197,7 @@
     built: null,
     mapView: false, // desktop toggle
     filters: { cat: [], cuisine: [] },
+    picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
     units: 'metric'
   };
 
@@ -299,32 +301,69 @@
   }
 
   // ---------- Written-out recipe ("Read instead") ----------
-  function openRead(r) {
-    $('read-title').textContent = r.name;
-    var body = $('read-body');
-    body.innerHTML = '';
-    var text = (window.RECIPE_TEXTS || {})[r.id] || '';
-    text.split(/\n\s*\n/).forEach(function (block) {
-      var lines = block.split('\n').filter(function (l) { return l.trim(); });
-      var list = null;
-      lines.forEach(function (line, i) {
-        line = line.trim();
-        if (/^•/.test(line)) {
-          if (!list) { list = document.createElement('ul'); body.appendChild(list); }
-          var li = document.createElement('li');
-          li.textContent = units(line.replace(/^•\s*/, ''));
-          list.appendChild(li);
-          return;
-        }
-        list = null;
-        var el = document.createElement(i === 0 && /:$/.test(line) ? 'h3' : 'p');
-        el.textContent = units(line);
-        body.appendChild(el);
+  // Written from the same recipe data as the cooking guide, so it follows the
+  // options picked here, on the recipe page or before cooking. While cooking it
+  // shows the version being cooked and the options can't be changed.
+  var reading = null;
+
+  // When each step can start if everything runs as soon as possible (seconds).
+  function startTimes(steps) {
+    var end = {}, start = {}, changed = true, rounds = 0;
+    while (changed && rounds++ <= steps.length) {
+      changed = false;
+      steps.forEach(function (s) {
+        var st = depsOf(steps, s).reduce(function (m, d) { return Math.max(m, end[d] || 0); }, 0);
+        if (start[s.id] !== st) { start[s.id] = st; end[s.id] = st + s.duration; changed = true; }
       });
-    });
-    openDialog($('read-dialog'));
-    body.scrollTop = 0;
+    }
+    return start;
   }
+
+  function openRead(r) {
+    reading = { recipe: r, locked: !!cook && state.recipe === r };
+    $('read-title').textContent = r.name;
+    renderRead();
+    openDialog($('read-dialog'));
+    $('read-body').scrollTop = 0;
+  }
+
+  function renderRead() {
+    var r = reading.recipe, c = picksFor(r), body = $('read-body'), keep = body.scrollTop;
+    setServings(r, c);
+    var built = r.build(Object.assign({}, c, { mode: 'detailed' }));
+    var starts = startTimes(built.steps);
+    var steps = built.steps.map(function (s, i) { return { s: s, i: i }; })
+      .sort(function (a, b) { return starts[a.s.id] - starts[b.s.id] || a.i - b.i; })
+      .map(function (x) { return x.s; });
+
+    var html = '';
+    if (r.options.length) {
+      html += '<h3>' + t('chooseFirst') + '</h3>' +
+        (reading.locked ? '<p class="hint">' + t('cookingVersion') + '</p>' : '') +
+        '<div class="read-options">' + optionsHtml(r, c, 'read_', reading.locked) + '</div>';
+    }
+    html += '<h3>' + t('ingredientsFor', { x: whoText(r, c) }) + '</h3>';
+    groupIngredients(built.ingredients).forEach(function (g) {
+      html += '<h4>' + t('ingCat_' + g.cat) + '</h4><ul>' + g.items.map(function (i) {
+        return '<li><b>' + esc(units(i.amount)) + '</b> ' + esc(i.name) + (i.note ? ' <span class="hint">(' + esc(units(i.note)) + ')</span>' : '') + '</li>';
+      }).join('') + '</ul>';
+    });
+    html += '<h3>' + t('method') + '</h3><ol class="read-method">' + steps.map(function (s) {
+      return '<li><b>' + esc(s.title) + '.</b> ' + esc(units(s.text)) +
+        ' <span class="hint">(' + t('aboutTime', { t: fmtMinutes(Math.max(1, Math.round(s.duration / 60))) }) + ')</span></li>';
+    }).join('') + '</ol>';
+    body.innerHTML = html;
+    body.scrollTop = keep;
+  }
+
+  $('read-body').addEventListener('change', function (e) {
+    if (e.target.type !== 'radio' || !reading || reading.locked) return;
+    var r = reading.recipe;
+    picksFor(r)[e.target.name.replace(/^read_/, '')] = e.target.value;
+    renderRead();
+    if (state.recipe === r && state.screen === 'details') { renderOptions(); updateDetails(); }
+  });
+
   $('read-close').addEventListener('click', function () { $('read-dialog').close(); });
   document.querySelectorAll('.btn-read').forEach(function (b) {
     b.addEventListener('click', function () { if (state.recipe) openRead(state.recipe); });
@@ -734,9 +773,13 @@
   }
 
   // ---------- Recipe page: guidance, people, options, ingredients ----------
+  function picksFor(r) {
+    return state.picks[r.id] || (state.picks[r.id] = defaultChoices(r));
+  }
+
   function openDetails(r) {
     state.recipe = r;
-    state.choices = defaultChoices(r);
+    state.choices = picksFor(r);
     $('det-name').textContent = r.name;
     var photo = $('det-photo');
     var img = photoEl(r, 500, 'photo-hero');
@@ -765,26 +808,45 @@
     return m ? [m[1], m[2]] : [ch.label, ''];
   }
 
-  function renderOptions() {
-    var r = state.recipe, box = $('det-options');
-    box.innerHTML = '';
-    r.options.forEach(function (o) {
-      var fs = document.createElement('fieldset');
-      fs.className = 'choices';
-      fs.innerHTML = '<legend>' + esc(o.question) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
+  // prefix keeps the radio groups of the reading window apart from the recipe page's.
+  function optionsHtml(r, c, prefix, disabled) {
+    return r.options.map(function (o) {
+      return '<fieldset class="choices"><legend>' + esc(o.question) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
         var parts = labelParts(r, o.id, ch);
-        return '<label class="choice"><input type="radio" name="' + o.id + '" value="' + ch.id + '"' +
-          (state.choices[o.id] === ch.id ? ' checked' : '') + '> <span class="choice-text"><span>' + esc(parts[0]) + '</span>' +
+        return '<label class="choice"><input type="radio" name="' + prefix + o.id + '" value="' + ch.id + '"' +
+          (c[o.id] === ch.id ? ' checked' : '') + (disabled ? ' disabled' : '') + '> <span class="choice-text"><span>' + esc(parts[0]) + '</span>' +
           (parts[1] ? '<small>' + esc(parts[1]) + '</small>' : '') + '</span></label>';
-      }).join('') + '</div>';
-      box.appendChild(fs);
-    });
+      }).join('') + '</div></fieldset>';
+    }).join('');
+  }
+
+  function renderOptions() {
+    var r = state.recipe;
+    $('det-options').innerHTML = optionsHtml(r, state.choices, '', false);
     $('det-forks').hidden = !r.options.length;
   }
 
+  function isPerson(r) { return !r.unit || r.unit === 'person'; }
+
+  function setServings(r, c) { c.servings = isPerson(r) ? c.adults + 0.5 * c.kids : c.adults; }
+
+  function whoText(r, c) {
+    return isPerson(r)
+      ? [c.adults ? (c.adults === 1 ? t('one_adult') : t('n_adults', { n: c.adults })) : '',
+        c.kids ? (c.kids === 1 ? t('one_child') : t('n_children', { n: c.kids })) : ''].filter(Boolean).join(' + ')
+      : (c.adults === 1 ? t('one_' + r.unit) : t('n_' + r.unit, { n: c.adults }));
+  }
+
+  // Ingredients by category: [{ cat, items }]
+  function groupIngredients(ingredients) {
+    return window.INGREDIENT_INFO.CATEGORY_ORDER.map(function (cat) {
+      return { cat: cat, items: ingredients.filter(function (i) { return (infoFor(i) || { category: 'sauces' }).category === cat; }) };
+    }).filter(function (g) { return g.items.length; });
+  }
+
   function updateDetails() {
-    var c = state.choices, r = state.recipe, person = !r.unit || r.unit === 'person';
-    c.servings = person ? c.adults + 0.5 * c.kids : c.adults;
+    var c = state.choices, r = state.recipe, person = isPerson(r);
+    setServings(r, c);
     var built = state.built = r.build(c);
 
     $('det-time').textContent = '⏱️ ' + fmtMinutes(estimateMinutes(built.steps));
@@ -833,21 +895,15 @@
     }
 
     // Ingredients
-    var who = person
-      ? [c.adults ? (c.adults === 1 ? t('one_adult') : t('n_adults', { n: c.adults })) : '',
-        c.kids ? (c.kids === 1 ? t('one_child') : t('n_children', { n: c.kids })) : ''].filter(Boolean).join(' + ')
-      : (c.adults === 1 ? t('one_' + r.unit) : t('n_' + r.unit, { n: c.adults }));
-    $('ing-meta').textContent = t('ingredientsFor', { x: who });
+    $('ing-meta').textContent = t('ingredientsFor', { x: whoText(r, c) });
     var list = $('ing-list');
     list.innerHTML = '';
-    window.INGREDIENT_INFO.CATEGORY_ORDER.forEach(function (cat) {
-      var mine = built.ingredients.filter(function (i) { return (infoFor(i) || { category: 'sauces' }).category === cat; });
-      if (!mine.length) return;
+    groupIngredients(built.ingredients).forEach(function (g) {
       var h = document.createElement('li');
       h.className = 'ing-group';
-      h.textContent = t('ingCat_' + cat);
+      h.textContent = t('ingCat_' + g.cat);
       list.appendChild(h);
-      mine.forEach(function (ing) {
+      g.items.forEach(function (ing) {
         var li = document.createElement('li');
         li.className = 'ing-card';
         li.innerHTML =
@@ -912,36 +968,37 @@
     Each step is one of:
     hidden   not shown yet: something it needs isn't done
     active   ready to do
-    kept     done, but a step that needs it is still open: greyed and folded
-    gone     done and no longer needed
+    gone     done: the card fades out and frees its space
   */
   function statusOf(step) {
-    if (isDone(step.id)) {
-      var needed = cook.steps.some(function (o) { return !isDone(o.id) && allDeps(o).indexOf(step.id) >= 0; });
-      return needed ? 'kept' : 'gone';
-    }
+    if (isDone(step.id)) return 'gone';
     return allDeps(step).every(isDone) ? 'active' : 'hidden';
   }
 
-  // Works out which cards are shown. A new card goes right after the last card
-  // of its thread, so the order stays logical and cards move as little as possible.
+  // Works out which cards are shown. A new card takes the place of the finished
+  // card of its thread (or goes after that thread's last card), so the order stays
+  // logical and cards move as little as possible.
   function refresh() {
-    var fresh = [], nowActive = [];
+    var fresh = [], nowActive = [], freed = {};
     cook.steps.forEach(function (s) {
       var st = statusOf(s), old = cook.status[s.id];
       cook.status[s.id] = st;
       if (st === 'active' && old !== 'active') nowActive.push(s);
-      var visible = st === 'active' || (st === 'kept' && !isMap());
       var at = cook.slots.indexOf(s.id);
-      if (visible && at < 0) {
-        var after = -1;
-        cook.slots.forEach(function (id, i) { if (stepById(id).thread === s.thread) after = i; });
-        if (after >= 0) cook.slots.splice(after + 1, 0, s.id); else cook.slots.push(s.id);
-        fresh.push(s);
-      } else if (!visible && at >= 0) {
+      if (st !== 'active' && at >= 0) {
         cook.slots.splice(at, 1);
+        if (!(s.thread in freed)) freed[s.thread] = at;
         if (cook.els[s.id]) { leave(cook.els[s.id]); delete cook.els[s.id]; }
       }
+    });
+    cook.steps.forEach(function (s) {
+      if (cook.status[s.id] !== 'active' || cook.slots.indexOf(s.id) >= 0) return;
+      var after = -1;
+      cook.slots.forEach(function (id, i) { if (stepById(id).thread === s.thread) after = i; });
+      if (after >= 0) cook.slots.splice(after + 1, 0, s.id);
+      else if (s.thread in freed) cook.slots.splice(Math.min(freed[s.thread], cook.slots.length), 0, s.id);
+      else cook.slots.push(s.id);
+      fresh.push(s);
     });
     return { fresh: fresh, active: nowActive };
   }
@@ -1052,7 +1109,6 @@
         '<span class="step-tools">' + tools + '</span>' +
       '</div>' +
       '<h3>' + esc(step.title) + '</h3>' +
-      '<p class="done-row"><span>' + t('doneMark') + '</span><button class="btn-reopen" type="button">' + t('reopen') + '</button></p>' +
       body +
       (ings ? '<ul class="step-ings">' + ings + '</ul>' : '') +
       '<p class="done-when">' + t('doneWhen') + esc(units(step.doneWhen)) + '</p>' +
@@ -1077,10 +1133,6 @@
       tick();
     });
     el.querySelector('.btn-done').addEventListener('click', function () { finishStep(step); });
-    el.querySelector('.btn-reopen').addEventListener('click', function (e) {
-      var open = el.classList.toggle('expanded');
-      e.currentTarget.textContent = open ? t('fold') : t('reopen');
-    });
     cook.els[step.id] = el;
     return el;
   }
@@ -1088,7 +1140,6 @@
   // Classes and texts that follow the step's status.
   function updateCard(step, el) {
     var st = cook.status[step.id];
-    el.classList.toggle('is-done', st === 'kept');
     el.querySelector('.btn-start').disabled = st !== 'active';
   }
 

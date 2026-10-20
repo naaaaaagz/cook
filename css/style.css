@@ -217,6 +217,12 @@ img.icon { filter: var(--icon-filter); }
 .read-body p { margin: 0 0 12px; }
 .read-body h3 { font-size: 17px; margin: 16px 0 8px; color: var(--ink); }
 .read-body ul { margin: 0 0 12px; padding-left: 20px; }
+.read-body h4 { font-family: var(--font-sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 10px 0 4px; }
+.read-body b { color: var(--ink); }
+.read-method { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+.read-options .choices { margin-bottom: 12px; }
+.read-options .choice:has(input:disabled) { cursor: default; opacity: .6; }
+.read-options .choice:has(input:checked:disabled) { opacity: 1; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); margin-top: 12px; }
 
 /* Form bits */
@@ -650,15 +656,6 @@ select {
   transition: opacity 1s ease, height 1s ease, padding 1s ease, margin 1s ease;
 }
 
-
-/* Done but still needed by a step that is open: greyed and folded, can be re-opened */
-.step.is-done { opacity: .6; padding: 8px 14px; gap: 4px; box-shadow: none; background: var(--bg); }
-.step.is-done:not(.expanded) > :not(.step-head):not(h3):not(.done-row) { display: none; }
-.step.is-done h3 { font-size: 16px; text-decoration: line-through; }
-.step.is-done .step-foot { display: none; }
-.done-row { display: none; }
-.step.is-done .done-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; }
-.btn-reopen { font: inherit; font-size: 13px; background: none; border: 0; color: var(--ink); text-decoration: underline; cursor: pointer; padding: 4px; }
 
 /* Time is up: the card shakes once every 10 seconds */
 .step.time-up { animation: nudge 10s ease-in-out infinite; }
