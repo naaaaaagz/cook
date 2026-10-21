@@ -417,6 +417,9 @@ select {
 }
 .block { padding: 8px; container-type: size; transition: left .2s ease, top .2s ease, width .2s ease, height .2s ease; }
 .block.dragging { transition-duration: .06s; }
+/* Icons inside areas are not images you can press: the press goes to the area */
+#layout-canvas, .cook-map { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.block img, .map-area img { pointer-events: none; -webkit-user-drag: none; }
 #layout-canvas:has(.seam.active) .block { transition: none; }
 .block img { width: 40%; max-width: 56px; max-height: 45%; }
 /* Whole words only: the label gets smaller in a narrow block instead of breaking */

@@ -571,7 +571,7 @@
   };
   var AREA_KEYS = Object.keys(AREAS);
   var LAYOUT_KEYS = AREA_KEYS.concat(['me']);
-  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, me: 2, sink: 3, board: 3 };
+  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, sink: 3, board: 3, me: 4 };
   // Smallest size per block in pixels, so blocks keep their shape in landscape and portrait.
   var MIN_PX = {
     countertop: { w: 160, h: 110 },
@@ -619,10 +619,11 @@
   }
 
   // Only the countertop may be overlapped.
+  // "Me" is just where you stand: it moves freely and never blocks or pushes anything.
   function collides(layout, key, rect, keys) {
-    if (key === 'countertop') return false;
+    if (key === 'countertop' || key === 'me') return false;
     return keys.some(function (other) {
-      return other !== key && other !== 'countertop' && overlaps(rect, layout[other]);
+      return other !== key && other !== 'countertop' && other !== 'me' && overlaps(rect, layout[other]);
     });
   }
 
@@ -683,29 +684,41 @@
     };
   }
 
-  // Moves the areas that next runs into out of its way (along the shorter overlap).
-  // Returns false when one of them has nowhere to go; then nothing is changed.
+  // Moves the areas that next runs into out of its way: each one goes to the
+  // closest free place (pushed left, right, up or down, else the nearest free
+  // spot on the canvas). Returns false when one has nowhere to go; then nothing changes.
   function pushOthers(layout, key, next, keys) {
-    if (key === 'countertop') return false;
-    var hits = keys.filter(function (k) { return k !== key && k !== 'countertop' && overlaps(next, layout[k]); });
+    if (key === 'countertop' || key === 'me') return false;
+    var hits = keys.filter(function (k) { return k !== key && k !== 'countertop' && k !== 'me' && overlaps(next, layout[k]); });
     if (!hits.length) return false;
-    var moved = {};
+    var test = Object.assign({}, layout);
+    test[key] = next;
+    function free(k, c) {
+      return c.x > -1e-6 && c.y > -1e-6 && c.x + c.w < 1 + 1e-6 && c.y + c.h < 1 + 1e-6 && !collides(test, k, c, keys);
+    }
     var ok = hits.every(function (k) {
-      var o = layout[k];
-      var ox = Math.min(next.x + next.w, o.x + o.w) - Math.max(next.x, o.x);
-      var oy = Math.min(next.y + next.h, o.y + o.h) - Math.max(next.y, o.y);
-      var c = { x: o.x, y: o.y, w: o.w, h: o.h };
-      if (ox < oy) c.x += (o.x + o.w / 2 >= next.x + next.w / 2 ? ox : -ox);
-      else c.y += (o.y + o.h / 2 >= next.y + next.h / 2 ? oy : -oy);
-      if (c.x < -1e-6 || c.y < -1e-6 || c.x + c.w > 1 + 1e-6 || c.y + c.h > 1 + 1e-6) return false;
-      var test = Object.assign({}, layout, moved);
-      test[key] = next;
-      if (collides(test, k, c, keys)) return false;
-      moved[k] = c;
+      var o = test[k], e = 0.002;
+      var cands = [
+        { x: next.x + next.w + e, y: o.y }, { x: next.x - o.w - e, y: o.y },
+        { x: o.x, y: next.y + next.h + e }, { x: o.x, y: next.y - o.h - e }
+      ];
+      for (var gy = 0; gy <= 1 - o.h + 1e-9; gy += 0.02) {
+        for (var gx = 0; gx <= 1 - o.w + 1e-9; gx += 0.02) cands.push({ x: gx, y: gy });
+      }
+      var best = null, bestD = Infinity;
+      cands.forEach(function (p, i) {
+        var c = { x: p.x, y: p.y, w: o.w, h: o.h };
+        if (!free(k, c)) return;
+        // The four pushes win over a jump across the canvas at the same distance.
+        var d = Math.hypot(c.x - o.x, c.y - o.y) + (i < 4 ? 0 : 0.05);
+        if (d < bestD) { bestD = d; best = c; }
+      });
+      if (!best) return false;
+      test[k] = best;
       return true;
     });
     if (!ok) return false;
-    Object.keys(moved).forEach(function (k) { layout[k] = moved[k]; });
+    hits.forEach(function (k) { layout[k] = test[k]; });
     layout[key] = next;
     return true;
   }
@@ -944,6 +957,10 @@
     });
     canvas.appendChild(seam);
   }
+  // Long-pressing an area on a phone moves it; no "open image / copy image" menu.
+  ['layout-canvas', 'cook-map'].forEach(function (id) {
+    $(id).addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  });
   window.addEventListener('resize', function () {
     if (state.screen === 'layout') buildCanvas();
   });
