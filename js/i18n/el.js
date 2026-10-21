@@ -179,7 +179,8 @@ window.I18N["el"] = {
   "cuisine_Greek": "Ελληνική",
   "cuisine_French": "Γαλλική",
   "cuisine_Mexican": "Μεξικάνικη",
-  "cuisine_American": "Αμερικάνικη"
+  "cuisine_American": "Αμερικάνικη",
+  "equipmentNeed": "Εξοπλισμός που χρειάζεσαι:"
  },
  "names": {
   "beer": "Μπίρα",

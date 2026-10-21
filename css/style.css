@@ -590,6 +590,11 @@ select {
 .nutrition div { display: grid; }
 .nutrition dt { font-size: 12px; color: var(--muted); }
 .nutrition dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+/* Equipment you need: icons in a row, name under each */
+.equipment-label { margin-top: 16px; }
+.equipment-list { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 10px; }
+.equipment-list li { display: grid; justify-items: center; align-content: start; gap: 4px; width: 76px; text-align: center; font-size: 12px; line-height: 1.25; color: var(--text-2); }
+.equipment-list img { width: 36px; height: 36px; }
 
 /* Ingredient cards */
 .ing-group {

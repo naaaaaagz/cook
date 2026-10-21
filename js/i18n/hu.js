@@ -179,7 +179,8 @@ window.I18N["hu"] = {
   "cuisine_Greek": "Görög",
   "cuisine_French": "Francia",
   "cuisine_Mexican": "Mexikói",
-  "cuisine_American": "Amerikai"
+  "cuisine_American": "Amerikai",
+  "equipmentNeed": "Szükséges eszközök:"
  },
  "names": {
   "beer": "Sör",

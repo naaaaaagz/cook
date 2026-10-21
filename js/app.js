@@ -17,6 +17,7 @@
       setupLayout: 'Set up kitchen layout',
       editLayout: 'Edit kitchen layout',
       seeRecipe: 'See recipe →',
+      equipmentNeed: 'Equipment you need:',
       setupLayoutMap: 'Set up kitchen layout for Map view',
       editLayoutMap: 'Edit kitchen layout for Map view',
       units: 'Units',
@@ -1346,6 +1347,17 @@
     $('det-nutrition').innerHTML = rows.map(function (x) {
       return '<div><dt>' + t(x[0]) + '</dt><dd>' + x[1] + '</dd></div>';
     }).join('');
+
+    // Equipment: every tool the steps use (with the options picked), in order of first use.
+    var tools = [];
+    built.steps.forEach(function (s) {
+      (s.tools || []).forEach(function (id) { if (window.EQUIPMENT[id] && tools.indexOf(id) < 0) tools.push(id); });
+    });
+    $('det-equipment').innerHTML = tools.map(function (id) {
+      var eq = window.EQUIPMENT[id];
+      return '<li><img class="icon" src="' + eq.icon + '" alt=""><span>' + esc(L(eq.name)) + '</span></li>';
+    }).join('');
+    $('det-equipment').previousElementSibling.hidden = $('det-equipment').hidden = !tools.length;
 
     // People
     $('det-howmany').textContent = unitText(r, 'howMany');

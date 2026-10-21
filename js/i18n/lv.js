@@ -179,7 +179,8 @@ window.I18N["lv"] = {
   "cuisine_Greek": "Grieķu",
   "cuisine_French": "Franču",
   "cuisine_Mexican": "Meksikāņu",
-  "cuisine_American": "Amerikāņu"
+  "cuisine_American": "Amerikāņu",
+  "equipmentNeed": "Nepieciešamais aprīkojums:"
  },
  "names": {
   "beer": "Alus",

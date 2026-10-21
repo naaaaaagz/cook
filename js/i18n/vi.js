@@ -179,7 +179,8 @@ window.I18N["vi"] = {
   "cuisine_Greek": "Hy Lạp",
   "cuisine_French": "Pháp",
   "cuisine_Mexican": "Mexico",
-  "cuisine_American": "Mỹ"
+  "cuisine_American": "Mỹ",
+  "equipmentNeed": "Dụng cụ cần có:"
  },
  "names": {
   "beer": "Bia",

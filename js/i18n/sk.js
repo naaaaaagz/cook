@@ -179,7 +179,8 @@ window.I18N["sk"] = {
   "cuisine_Greek": "Grécka",
   "cuisine_French": "Francúzska",
   "cuisine_Mexican": "Mexická",
-  "cuisine_American": "Americká"
+  "cuisine_American": "Americká",
+  "equipmentNeed": "Potrebné vybavenie:"
  },
  "names": {
   "beer": "Pivo",

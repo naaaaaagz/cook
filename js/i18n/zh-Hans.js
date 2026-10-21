@@ -179,7 +179,8 @@ window.I18N["zh-Hans"] = {
   "cuisine_Greek": "希腊",
   "cuisine_French": "法式",
   "cuisine_Mexican": "墨西哥",
-  "cuisine_American": "美式"
+  "cuisine_American": "美式",
+  "equipmentNeed": "所需厨具："
  },
  "names": {
   "beer": "啤酒",

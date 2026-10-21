@@ -179,7 +179,8 @@ window.I18N["fil"] = {
   "cuisine_Greek": "Griyego",
   "cuisine_French": "Pranses",
   "cuisine_Mexican": "Mehikano",
-  "cuisine_American": "Amerikano"
+  "cuisine_American": "Amerikano",
+  "equipmentNeed": "Mga gamit na kailangan:"
  },
  "names": {
   "beer": "Serbesa",

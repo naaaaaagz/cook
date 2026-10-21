@@ -179,7 +179,8 @@ window.I18N["ka"] = {
   "cuisine_Greek": "ბერძნული",
   "cuisine_French": "ფრანგული",
   "cuisine_Mexican": "მექსიკური",
-  "cuisine_American": "ამერიკული"
+  "cuisine_American": "ამერიკული",
+  "equipmentNeed": "საჭირო ინვენტარი:"
  },
  "names": {
   "beer": "Ლუდი",

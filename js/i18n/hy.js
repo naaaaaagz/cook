@@ -179,7 +179,8 @@ window.I18N["hy"] = {
   "cuisine_Greek": "Հունական",
   "cuisine_French": "Ֆրանսիական",
   "cuisine_Mexican": "Մեքսիկական",
-  "cuisine_American": "Ամերիկյան"
+  "cuisine_American": "Ամերիկյան",
+  "equipmentNeed": "Անհրաժեշտ պարագաներ՝"
  },
  "names": {
   "beer": "Գարեջուր",

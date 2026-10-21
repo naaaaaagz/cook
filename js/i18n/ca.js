@@ -179,7 +179,8 @@ window.I18N["ca"] = {
   "cuisine_Greek": "Grega",
   "cuisine_French": "Francesa",
   "cuisine_Mexican": "Mexicana",
-  "cuisine_American": "Americana"
+  "cuisine_American": "Americana",
+  "equipmentNeed": "Estris que necessites:"
  },
  "names": {
   "beer": "Cervesa",

@@ -179,7 +179,8 @@ window.I18N["ko"] = {
   "cuisine_Greek": "그리스",
   "cuisine_French": "프렌치",
   "cuisine_Mexican": "멕시칸",
-  "cuisine_American": "아메리칸"
+  "cuisine_American": "아메리칸",
+  "equipmentNeed": "필요한 도구:"
  },
  "names": {
   "beer": "맥주",

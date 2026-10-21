@@ -179,7 +179,8 @@ window.I18N["ro"] = {
   "cuisine_Greek": "Grecească",
   "cuisine_French": "Franțuzească",
   "cuisine_Mexican": "Mexicană",
-  "cuisine_American": "Americană"
+  "cuisine_American": "Americană",
+  "equipmentNeed": "Ustensile necesare:"
  },
  "names": {
   "beer": "Bere",

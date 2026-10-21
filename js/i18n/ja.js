@@ -179,7 +179,8 @@ window.I18N["ja"] = {
   "cuisine_Greek": "ギリシャ",
   "cuisine_French": "フレンチ",
   "cuisine_Mexican": "メキシカン",
-  "cuisine_American": "アメリカン"
+  "cuisine_American": "アメリカン",
+  "equipmentNeed": "必要な道具："
  },
  "names": {
   "beer": "ビール",

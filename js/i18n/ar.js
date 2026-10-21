@@ -179,7 +179,8 @@ window.I18N["ar"] = {
   "cuisine_Greek": "يوناني",
   "cuisine_French": "فرنسي",
   "cuisine_Mexican": "مكسيكي",
-  "cuisine_American": "أمريكي"
+  "cuisine_American": "أمريكي",
+  "equipmentNeed": "الأدوات التي تحتاجها:"
  },
  "names": {
   "beer": "بيرة",

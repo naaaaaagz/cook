@@ -179,7 +179,8 @@ window.I18N["bg"] = {
   "cuisine_Greek": "Гръцка",
   "cuisine_French": "Френска",
   "cuisine_Mexican": "Мексиканска",
-  "cuisine_American": "Американска"
+  "cuisine_American": "Американска",
+  "equipmentNeed": "Нужни съдове и уреди:"
  },
  "names": {
   "beer": "Бира",
