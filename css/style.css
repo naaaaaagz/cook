@@ -591,6 +591,10 @@ select {
 .top-row { display: flex; justify-content: space-between; align-items: center; padding-right: 60px; }
 .detail-hero { display: flex; align-items: center; gap: 16px; margin: 8px 0 16px; }
 .detail-hero .meta-line { margin-top: 6px; }
+/* "Read instead" on the recipe page: a small button under the cooking time */
+.btn-read-hero { margin-top: 10px; min-height: 30px; padding: 4px 10px; font-size: 13px; gap: 5px; }
+.btn-read-hero .book-icon { width: 15px; height: 15px; }
+.detail-hero .btn-read-hero .btn-label { display: inline; }
 .info {
   display: grid;
   gap: 10px;
