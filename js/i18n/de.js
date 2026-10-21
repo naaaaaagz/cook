@@ -127,7 +127,7 @@ window.I18N["de"] = {
   "listView": "Listenansicht",
   "noLayout": "Kein Küchenaufbau eingerichtet. Mach das vor dem nächsten Kochen!",
   "start": "Start",
-  "done": "Fertig",
+  "done": "Fertig!",
   "chooseFirst": "Vor dem Start auswählen",
   "method": "Zubereitung",
   "cookingVersion": "Das ist die Version, die du gerade kochst.",
@@ -180,7 +180,8 @@ window.I18N["de"] = {
   "cuisine_French": "Französisch",
   "cuisine_Mexican": "Mexikanisch",
   "cuisine_American": "Amerikanisch",
-  "equipmentNeed": "Diese Ausrüstung brauchst du:"
+  "equipmentNeed": "Diese Ausrüstung brauchst du:",
+  "doneNext": "Fertig, weiter!"
  },
  "names": {
   "beer": "Bier",

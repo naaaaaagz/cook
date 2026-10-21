@@ -127,7 +127,7 @@ window.I18N["ko"] = {
   "listView": "목록 보기",
   "noLayout": "주방 배치가 없어요. 다음 요리 전에 설정하세요!",
   "start": "시작",
-  "done": "완료",
+  "done": "완료!",
   "chooseFirst": "시작 전에 고르세요",
   "method": "만드는 법",
   "cookingVersion": "지금 요리 중인 버전이에요.",
@@ -180,7 +180,8 @@ window.I18N["ko"] = {
   "cuisine_French": "프렌치",
   "cuisine_Mexican": "멕시칸",
   "cuisine_American": "아메리칸",
-  "equipmentNeed": "필요한 도구:"
+  "equipmentNeed": "필요한 도구:",
+  "doneNext": "완료, 다음!"
  },
  "names": {
   "beer": "맥주",

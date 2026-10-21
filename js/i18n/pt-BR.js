@@ -127,7 +127,7 @@ window.I18N["pt-BR"] = {
   "listView": "Visão de lista",
   "noLayout": "Nenhuma cozinha configurada. Faça isso antes de cozinhar da próxima vez!",
   "start": "Iniciar",
-  "done": "Pronto",
+  "done": "Pronto!",
   "chooseFirst": "Escolha antes de começar",
   "method": "Modo de preparo",
   "cookingVersion": "Esta é a versão que você está cozinhando.",
@@ -180,7 +180,8 @@ window.I18N["pt-BR"] = {
   "cuisine_French": "Francesa",
   "cuisine_Mexican": "Mexicana",
   "cuisine_American": "Americana",
-  "equipmentNeed": "Utensílios de que você precisa:"
+  "equipmentNeed": "Utensílios de que você precisa:",
+  "doneNext": "Pronto, próximo!"
  },
  "names": {
   "beer": "Cerveja",

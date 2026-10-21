@@ -127,7 +127,7 @@ window.I18N["ka"] = {
   "listView": "სიის ხედი",
   "noLayout": "სამზარეულო არ არის მოწყობილი. გააკეთეთ ეს შემდეგ მომზადებამდე!",
   "start": "დაწყება",
-  "done": "მზადაა",
+  "done": "მზადაა!",
   "chooseFirst": "აირჩიეთ დაწყებამდე",
   "method": "მომზადება",
   "cookingVersion": "ეს არის ვერსია, რომელსაც ამზადებთ.",
@@ -180,7 +180,8 @@ window.I18N["ka"] = {
   "cuisine_French": "ფრანგული",
   "cuisine_Mexican": "მექსიკური",
   "cuisine_American": "ამერიკული",
-  "equipmentNeed": "საჭირო ინვენტარი:"
+  "equipmentNeed": "საჭირო ინვენტარი:",
+  "doneNext": "მზადაა, შემდეგი!"
  },
  "names": {
   "beer": "Ლუდი",

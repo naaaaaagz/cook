@@ -127,7 +127,7 @@ window.I18N["lv"] = {
   "listView": "Saraksta skats",
   "noLayout": "Virtuve nav iestatīta. Izdari to pirms nākamās gatavošanas!",
   "start": "Sākt",
-  "done": "Gatavs",
+  "done": "Gatavs!",
   "chooseFirst": "Izvēlies pirms sākšanas",
   "method": "Pagatavošana",
   "cookingVersion": "Šī ir versija, kuru tu gatavo.",
@@ -180,7 +180,8 @@ window.I18N["lv"] = {
   "cuisine_French": "Franču",
   "cuisine_Mexican": "Meksikāņu",
   "cuisine_American": "Amerikāņu",
-  "equipmentNeed": "Nepieciešamais aprīkojums:"
+  "equipmentNeed": "Nepieciešamais aprīkojums:",
+  "doneNext": "Gatavs, tālāk!"
  },
  "names": {
   "beer": "Alus",

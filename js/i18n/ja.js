@@ -127,7 +127,7 @@ window.I18N["ja"] = {
   "listView": "リスト表示",
   "noLayout": "キッチンが未設定です。次に料理する前に設定しましょう！",
   "start": "開始",
-  "done": "完了",
+  "done": "完了！",
   "chooseFirst": "始める前に選んでください",
   "method": "作り方",
   "cookingVersion": "これはいま作っているバージョンです。",
@@ -180,7 +180,8 @@ window.I18N["ja"] = {
   "cuisine_French": "フレンチ",
   "cuisine_Mexican": "メキシカン",
   "cuisine_American": "アメリカン",
-  "equipmentNeed": "必要な道具："
+  "equipmentNeed": "必要な道具：",
+  "doneNext": "完了、次へ！"
  },
  "names": {
   "beer": "ビール",

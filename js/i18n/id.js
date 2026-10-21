@@ -127,7 +127,7 @@ window.I18N["id"] = {
   "listView": "Tampilan daftar",
   "noLayout": "Dapur belum diatur. Atur dulu sebelum memasak berikutnya!",
   "start": "Mulai",
-  "done": "Selesai",
+  "done": "Selesai!",
   "chooseFirst": "Pilih sebelum mulai",
   "method": "Cara membuat",
   "cookingVersion": "Ini versi yang sedang kamu masak.",
@@ -180,7 +180,8 @@ window.I18N["id"] = {
   "cuisine_French": "Prancis",
   "cuisine_Mexican": "Meksiko",
   "cuisine_American": "Amerika",
-  "equipmentNeed": "Peralatan yang dibutuhkan:"
+  "equipmentNeed": "Peralatan yang dibutuhkan:",
+  "doneNext": "Selesai, lanjut!"
  },
  "names": {
   "beer": "Bir",

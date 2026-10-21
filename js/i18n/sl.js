@@ -127,7 +127,7 @@ window.I18N["sl"] = {
   "listView": "Pogled seznama",
   "noLayout": "Kuhinja ni nastavljena. Naredite to pred naslednjim kuhanjem!",
   "start": "Začni",
-  "done": "Končano",
+  "done": "Končano!",
   "chooseFirst": "Izberite pred začetkom",
   "method": "Priprava",
   "cookingVersion": "To je različica, ki jo kuhate.",
@@ -180,7 +180,8 @@ window.I18N["sl"] = {
   "cuisine_French": "Francoska",
   "cuisine_Mexican": "Mehiška",
   "cuisine_American": "Ameriška",
-  "equipmentNeed": "Potrebna oprema:"
+  "equipmentNeed": "Potrebna oprema:",
+  "doneNext": "Končano, naprej!"
  },
  "names": {
   "beer": "Pivo",

@@ -127,7 +127,7 @@ window.I18N["sq"] = {
   "listView": "Pamja e listës",
   "noLayout": "Kuzhina nuk është rregulluar. Bëje para gatimit të ardhshëm!",
   "start": "Nis",
-  "done": "Mbarova",
+  "done": "Gati!",
   "chooseFirst": "Zgjidh para se të fillosh",
   "method": "Përgatitja",
   "cookingVersion": "Ky është versioni që po gatuan.",
@@ -180,7 +180,8 @@ window.I18N["sq"] = {
   "cuisine_French": "Franceze",
   "cuisine_Mexican": "Meksikane",
   "cuisine_American": "Amerikane",
-  "equipmentNeed": "Pajisjet që të duhen:"
+  "equipmentNeed": "Pajisjet që të duhen:",
+  "doneNext": "Gati, tjetri!"
  },
  "names": {
   "beer": "Birrë",

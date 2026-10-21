@@ -127,7 +127,7 @@ window.I18N["lt"] = {
   "listView": "Sąrašo rodinys",
   "noLayout": "Virtuvė nenustatyta. Padarykite tai prieš kitą gaminimą!",
   "start": "Paleisti",
-  "done": "Atlikta",
+  "done": "Atlikta!",
   "chooseFirst": "Pasirinkite prieš pradėdami",
   "method": "Gaminimas",
   "cookingVersion": "Tai versija, kurią gaminate.",
@@ -180,7 +180,8 @@ window.I18N["lt"] = {
   "cuisine_French": "Prancūziška",
   "cuisine_Mexican": "Meksikietiška",
   "cuisine_American": "Amerikietiška",
-  "equipmentNeed": "Reikalingos priemonės:"
+  "equipmentNeed": "Reikalingos priemonės:",
+  "doneNext": "Atlikta, toliau!"
  },
  "names": {
   "beer": "Alus",

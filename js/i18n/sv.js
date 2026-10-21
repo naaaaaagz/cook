@@ -127,7 +127,7 @@ window.I18N["sv"] = {
   "listView": "Listvy",
   "noLayout": "Inget kök planerat. Gör det innan du lagar mat nästa gång!",
   "start": "Starta",
-  "done": "Klar",
+  "done": "Klart!",
   "chooseFirst": "Välj innan du börjar",
   "method": "Gör så här",
   "cookingVersion": "Det här är versionen du lagar nu.",
@@ -180,7 +180,8 @@ window.I18N["sv"] = {
   "cuisine_French": "Franskt",
   "cuisine_Mexican": "Mexikanskt",
   "cuisine_American": "Amerikanskt",
-  "equipmentNeed": "Utrustning du behöver:"
+  "equipmentNeed": "Utrustning du behöver:",
+  "doneNext": "Klart, nästa!"
  },
  "names": {
   "beer": "Öl",

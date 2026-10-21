@@ -130,7 +130,8 @@
       listView: 'List view',
       noLayout: 'No kitchen layout set up. Do it before your next cooking!',
       start: 'Start',
-      done: "I'm done",
+      done: 'Done!',
+      doneNext: 'Done, Next!',
       chooseFirst: 'Choose before you start',
       method: 'Method',
       cookingVersion: "This is the version you're cooking.",
@@ -1007,6 +1008,12 @@
     return step.deps.concat(prev ? [prev.id] : []);
   }
 
+  // "Done, Next!" when another step waits for this one, "Done!" at the end of its chain.
+  function doneLabel(step) {
+    var next = cook.steps.some(function (s) { return s !== step && depsOf(cook.steps, s).indexOf(step.id) >= 0; });
+    return t(next ? 'doneNext' : 'done');
+  }
+
   // Rough total: every step starts as soon as the steps it needs are done.
   // Repeats until nothing changes, so the order of the steps doesn't matter.
   // remaining(step) gives the seconds still needed (default: its full duration).
@@ -1703,7 +1710,7 @@
             '<span class="ring-time" hidden></span>' +
           '</div>' +
         '</div>' +
-        '<button class="btn btn-primary btn-done" type="button">' + t('done') + '</button>' +
+        '<button class="btn btn-primary btn-done" type="button">' + doneLabel(step) + '</button>' +
       '</div>';
 
     el.querySelector('.btn-start').addEventListener('click', function (e) {
@@ -1810,7 +1817,7 @@
       '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + '</span>' +
       '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span> · <span class="notif-hint">' + t('tapInfo') + '</span></span></button>' +
       '<button class="notif-btn notif-start" type="button" aria-label="' + t('start') + '">▶</button>' +
-      '<button class="notif-btn notif-done" type="button" aria-label="' + t('done') + '">✓</button>';
+      '<button class="notif-btn notif-done" type="button" aria-label="' + doneLabel(step) + '">✓</button>';
     n.querySelector('.notif-open').addEventListener('click', function () { openPop(step, n); });
     n.querySelector('.notif-start').addEventListener('click', function (e) {
       cardFor(step).querySelector('.btn-start').click();

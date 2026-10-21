@@ -127,7 +127,7 @@ window.I18N["tr"] = {
   "listView": "Liste görünümü",
   "noLayout": "Mutfak düzeni ayarlanmadı. Bir sonraki yemekten önce ayarla!",
   "start": "Başlat",
-  "done": "Bitti",
+  "done": "Bitti!",
   "chooseFirst": "Başlamadan önce seç",
   "method": "Hazırlanışı",
   "cookingVersion": "Şu an pişirdiğin sürüm bu.",
@@ -180,7 +180,8 @@ window.I18N["tr"] = {
   "cuisine_French": "Fransız",
   "cuisine_Mexican": "Meksika",
   "cuisine_American": "Amerikan",
-  "equipmentNeed": "Gereken ekipman:"
+  "equipmentNeed": "Gereken ekipman:",
+  "doneNext": "Bitti, sıradaki!"
  },
  "names": {
   "beer": "Bira",

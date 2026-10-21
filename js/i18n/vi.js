@@ -127,7 +127,7 @@ window.I18N["vi"] = {
   "listView": "Chế độ danh sách",
   "noLayout": "Chưa thiết lập bếp. Hãy làm trước lần nấu tới nhé!",
   "start": "Bắt đầu",
-  "done": "Xong",
+  "done": "Xong!",
   "chooseFirst": "Chọn trước khi bắt đầu",
   "method": "Cách làm",
   "cookingVersion": "Đây là phiên bản bạn đang nấu.",
@@ -180,7 +180,8 @@ window.I18N["vi"] = {
   "cuisine_French": "Pháp",
   "cuisine_Mexican": "Mexico",
   "cuisine_American": "Mỹ",
-  "equipmentNeed": "Dụng cụ cần có:"
+  "equipmentNeed": "Dụng cụ cần có:",
+  "doneNext": "Xong, tiếp!"
  },
  "names": {
   "beer": "Bia",

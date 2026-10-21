@@ -127,7 +127,7 @@ window.I18N["ar"] = {
   "listView": "عرض القائمة",
   "noLayout": "لم يتم إعداد المطبخ. افعل ذلك قبل الطبخ المرة القادمة!",
   "start": "ابدأ",
-  "done": "انتهيت",
+  "done": "تم!",
   "chooseFirst": "اختر قبل أن تبدأ",
   "method": "طريقة التحضير",
   "cookingVersion": "هذه هي النسخة التي تطبخها.",
@@ -180,7 +180,8 @@ window.I18N["ar"] = {
   "cuisine_French": "فرنسي",
   "cuisine_Mexican": "مكسيكي",
   "cuisine_American": "أمريكي",
-  "equipmentNeed": "الأدوات التي تحتاجها:"
+  "equipmentNeed": "الأدوات التي تحتاجها:",
+  "doneNext": "تم، التالي!"
  },
  "names": {
   "beer": "بيرة",

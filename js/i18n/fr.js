@@ -127,7 +127,7 @@ window.I18N["fr"] = {
   "listView": "Vue liste",
   "noLayout": "Aucun plan de cuisine configuré. Faites-le avant votre prochaine recette !",
   "start": "Démarrer",
-  "done": "C'est fait",
+  "done": "Terminé !",
   "chooseFirst": "À choisir avant de commencer",
   "method": "Préparation",
   "cookingVersion": "C'est la version que vous cuisinez.",
@@ -180,7 +180,8 @@ window.I18N["fr"] = {
   "cuisine_French": "Française",
   "cuisine_Mexican": "Mexicaine",
   "cuisine_American": "Américaine",
-  "equipmentNeed": "Matériel nécessaire :"
+  "equipmentNeed": "Matériel nécessaire :",
+  "doneNext": "Terminé, suivant !"
  },
  "names": {
   "beer": "Bière",

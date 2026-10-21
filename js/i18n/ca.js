@@ -127,7 +127,7 @@ window.I18N["ca"] = {
   "listView": "Vista de llista",
   "noLayout": "No has configurat la cuina. Fes-ho abans de tornar a cuinar!",
   "start": "Inicia",
-  "done": "Fet",
+  "done": "Fet!",
   "chooseFirst": "Tria abans de començar",
   "method": "Preparació",
   "cookingVersion": "Aquesta és la versió que estàs cuinant.",
@@ -180,7 +180,8 @@ window.I18N["ca"] = {
   "cuisine_French": "Francesa",
   "cuisine_Mexican": "Mexicana",
   "cuisine_American": "Americana",
-  "equipmentNeed": "Estris que necessites:"
+  "equipmentNeed": "Estris que necessites:",
+  "doneNext": "Fet, següent!"
  },
  "names": {
   "beer": "Cervesa",

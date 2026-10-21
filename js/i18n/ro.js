@@ -127,7 +127,7 @@ window.I18N["ro"] = {
   "listView": "Vizualizare listă",
   "noLayout": "Bucătăria nu e configurată. Fă-o înainte de următoarea gătire!",
   "start": "Pornește",
-  "done": "Gata",
+  "done": "Gata!",
   "chooseFirst": "Alege înainte să începi",
   "method": "Mod de preparare",
   "cookingVersion": "Aceasta e versiunea pe care o gătești.",
@@ -180,7 +180,8 @@ window.I18N["ro"] = {
   "cuisine_French": "Franțuzească",
   "cuisine_Mexican": "Mexicană",
   "cuisine_American": "Americană",
-  "equipmentNeed": "Ustensile necesare:"
+  "equipmentNeed": "Ustensile necesare:",
+  "doneNext": "Gata, următorul!"
  },
  "names": {
   "beer": "Bere",

@@ -127,7 +127,7 @@ window.I18N["cs"] = {
   "listView": "Zobrazení seznamu",
   "noLayout": "Kuchyně není nastavená. Udělejte to před dalším vařením!",
   "start": "Spustit",
-  "done": "Hotovo",
+  "done": "Hotovo!",
   "chooseFirst": "Vyberte před začátkem",
   "method": "Postup",
   "cookingVersion": "Tohle je verze, kterou právě vaříte.",
@@ -180,7 +180,8 @@ window.I18N["cs"] = {
   "cuisine_French": "Francouzská",
   "cuisine_Mexican": "Mexická",
   "cuisine_American": "Americká",
-  "equipmentNeed": "Potřebné vybavení:"
+  "equipmentNeed": "Potřebné vybavení:",
+  "doneNext": "Hotovo, další!"
  },
  "names": {
   "beer": "Pivo",

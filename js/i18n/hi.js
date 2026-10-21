@@ -127,7 +127,7 @@ window.I18N["hi"] = {
   "listView": "लिस्ट व्यू",
   "noLayout": "रसोई का लेआउट सेट नहीं है। अगली बार खाना बनाने से पहले कर लें!",
   "start": "शुरू",
-  "done": "हो गया",
+  "done": "हो गया!",
   "chooseFirst": "शुरू करने से पहले चुनें",
   "method": "बनाने की विधि",
   "cookingVersion": "यह वही वर्ज़न है जो आप बना रहे हैं।",
@@ -180,7 +180,8 @@ window.I18N["hi"] = {
   "cuisine_French": "फ़्रांसीसी",
   "cuisine_Mexican": "मैक्सिकन",
   "cuisine_American": "अमेरिकी",
-  "equipmentNeed": "ज़रूरी बर्तन और उपकरण:"
+  "equipmentNeed": "ज़रूरी बर्तन और उपकरण:",
+  "doneNext": "हो गया, अगला!"
  },
  "names": {
   "beer": "बीयर",

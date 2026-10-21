@@ -127,7 +127,7 @@ window.I18N["fil"] = {
   "listView": "List view",
   "noLayout": "Wala pang ayos ng kusina. Gawin ito bago ka magluto ulit!",
   "start": "Simulan",
-  "done": "Tapos na",
+  "done": "Tapos na!",
   "chooseFirst": "Pumili bago magsimula",
   "method": "Paraan ng pagluluto",
   "cookingVersion": "Ito ang bersyong niluluto mo.",
@@ -180,7 +180,8 @@ window.I18N["fil"] = {
   "cuisine_French": "Pranses",
   "cuisine_Mexican": "Mehikano",
   "cuisine_American": "Amerikano",
-  "equipmentNeed": "Mga gamit na kailangan:"
+  "equipmentNeed": "Mga gamit na kailangan:",
+  "doneNext": "Tapos na, susunod!"
  },
  "names": {
   "beer": "Serbesa",

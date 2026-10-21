@@ -127,7 +127,7 @@ window.I18N["et"] = {
   "listView": "Loendivaade",
   "noLayout": "Kööki pole seadistatud. Tee seda enne järgmist toiduvalmistamist!",
   "start": "Käivita",
-  "done": "Valmis",
+  "done": "Valmis!",
   "chooseFirst": "Vali enne alustamist",
   "method": "Valmistamine",
   "cookingVersion": "See on versioon, mida praegu valmistad.",
@@ -180,7 +180,8 @@ window.I18N["et"] = {
   "cuisine_French": "Prantsuse",
   "cuisine_Mexican": "Mehhiko",
   "cuisine_American": "Ameerika",
-  "equipmentNeed": "Vajalikud vahendid:"
+  "equipmentNeed": "Vajalikud vahendid:",
+  "doneNext": "Valmis, edasi!"
  },
  "names": {
   "beer": "Õlu",

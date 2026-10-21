@@ -283,9 +283,9 @@ window.INGREDIENT_INFO = (function () {
             text: 'Beat ' + eggText + ' with most of the pecorino until smooth. Keep the rest for serving.',
             duration: d.E1, deps: ['Q2', 'Q4'], tools: ['bowl', 'fork'],
             ings: eggIngs.concat([{ id: 'pecorino_romano', qty: g(25 * s), label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
-          { id: 'Q6', members: ['E2'], thread: 'E', area: 'countertop', title: 'Warm the plates',
+          { id: 'Q6', members: ['E2'], thread: 'E', area: 'sink', title: 'Warm the plates',
             text: 'Rinse the plates with hot water and dry them.',
-            duration: d.E2, deps: [], tools: [], ings: [], doneWhen: 'Plates warm to the touch' },
+            duration: d.E2, deps: ['Q9'], tools: [], ings: [], doneWhen: 'Plates warm to the touch' },
           { id: 'Q7', members: ['G1', 'G2'], thread: 'G', area: 'stove', title: 'Render the ' + meat,
             text: g1Text + ' Let the fat melt out slowly for about 9 minutes, stirring now and then.',
             duration: d.G1 + d.G2, deps: ['Q3', 'Q1'], tools: ['pan', 'wooden_spoon'], ings: g1Ings,
@@ -351,9 +351,10 @@ window.INGREDIENT_INFO = (function () {
         text: 'In the bowl, beat ' + eggText + ' with most of the grated pecorino until smooth. Keep the rest for serving.',
         duration: d.E1, deps: ['B1', 'B5'], tools: ['bowl', 'fork'],
         ings: eggIngs.concat([{ id: 'pecorino_romano', qty: g(25 * s), label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
-      { id: 'E2', thread: 'E', area: 'countertop', title: 'Warm the plates',
+      // Warm plates only help when the food is nearly ready: after the pan comes off the heat.
+      { id: 'E2', thread: 'E', area: 'sink', title: 'Warm the plates',
         text: 'Make the plates slightly warm, e.g. rinse them with hot water and dry them.',
-        duration: d.E2, deps: [], tools: [], ings: [], doneWhen: 'Plates warm to the touch' },
+        duration: d.E2, deps: ['G4'], tools: [], ings: [], doneWhen: 'Plates warm to the touch' },
 
       // G1 waits for the boil (P3) so the meat is ready about when the pasta is.
       { id: 'G1', thread: 'G', area: 'stove', title: Meat + ' into a cold pan',

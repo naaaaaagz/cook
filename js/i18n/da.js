@@ -127,7 +127,7 @@ window.I18N["da"] = {
   "listView": "Listevisning",
   "noLayout": "Køkkenet er ikke indrettet. Gør det, før du laver mad næste gang!",
   "start": "Start",
-  "done": "Færdig",
+  "done": "Færdig!",
   "chooseFirst": "Vælg før du starter",
   "method": "Fremgangsmåde",
   "cookingVersion": "Det er den version, du laver nu.",
@@ -180,7 +180,8 @@ window.I18N["da"] = {
   "cuisine_French": "Fransk",
   "cuisine_Mexican": "Mexicansk",
   "cuisine_American": "Amerikansk",
-  "equipmentNeed": "Udstyr, du skal bruge:"
+  "equipmentNeed": "Udstyr, du skal bruge:",
+  "doneNext": "Færdig, næste!"
  },
  "names": {
   "beer": "Øl",

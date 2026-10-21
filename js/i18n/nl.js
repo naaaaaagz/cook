@@ -127,7 +127,7 @@ window.I18N["nl"] = {
   "listView": "Lijstweergave",
   "noLayout": "Geen keukenindeling ingesteld. Doe dat voordat je weer gaat koken!",
   "start": "Start",
-  "done": "Klaar",
+  "done": "Klaar!",
   "chooseFirst": "Kies voordat je begint",
   "method": "Bereiding",
   "cookingVersion": "Dit is de versie die je nu kookt.",
@@ -180,7 +180,8 @@ window.I18N["nl"] = {
   "cuisine_French": "Frans",
   "cuisine_Mexican": "Mexicaans",
   "cuisine_American": "Amerikaans",
-  "equipmentNeed": "Benodigdheden:"
+  "equipmentNeed": "Benodigdheden:",
+  "doneNext": "Klaar, volgende!"
  },
  "names": {
   "beer": "Bier",

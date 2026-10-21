@@ -127,7 +127,7 @@ window.I18N["hu"] = {
   "listView": "Listanézet",
   "noLayout": "Nincs beállítva konyha. Tedd meg a következő főzés előtt!",
   "start": "Indítás",
-  "done": "Kész vagyok",
+  "done": "Kész!",
   "chooseFirst": "Válassz, mielőtt elkezded",
   "method": "Elkészítés",
   "cookingVersion": "Ezt a változatot főzöd most.",
@@ -180,7 +180,8 @@ window.I18N["hu"] = {
   "cuisine_French": "Francia",
   "cuisine_Mexican": "Mexikói",
   "cuisine_American": "Amerikai",
-  "equipmentNeed": "Szükséges eszközök:"
+  "equipmentNeed": "Szükséges eszközök:",
+  "doneNext": "Kész, jöhet a következő!"
  },
  "names": {
   "beer": "Sör",

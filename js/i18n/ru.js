@@ -127,7 +127,7 @@ window.I18N["ru"] = {
   "listView": "Вид списка",
   "noLayout": "Кухня не настроена. Сделайте это перед следующей готовкой!",
   "start": "Старт",
-  "done": "Готово",
+  "done": "Готово!",
   "chooseFirst": "Выберите перед началом",
   "method": "Приготовление",
   "cookingVersion": "Это версия, которую вы готовите.",
@@ -180,7 +180,8 @@ window.I18N["ru"] = {
   "cuisine_French": "Французская",
   "cuisine_Mexican": "Мексиканская",
   "cuisine_American": "Американская",
-  "equipmentNeed": "Понадобится:"
+  "equipmentNeed": "Понадобится:",
+  "doneNext": "Готово, дальше!"
  },
  "names": {
   "beer": "Пиво",

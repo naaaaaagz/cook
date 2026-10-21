@@ -127,7 +127,7 @@ window.I18N["th"] = {
   "listView": "มุมมองรายการ",
   "noLayout": "ยังไม่ได้ตั้งค่าห้องครัว ตั้งค่าก่อนทำอาหารครั้งหน้านะ!",
   "start": "เริ่ม",
-  "done": "เสร็จแล้ว",
+  "done": "เสร็จ!",
   "chooseFirst": "เลือกก่อนเริ่ม",
   "method": "วิธีทำ",
   "cookingVersion": "นี่คือเวอร์ชันที่คุณกำลังทำ",
@@ -180,7 +180,8 @@ window.I18N["th"] = {
   "cuisine_French": "ฝรั่งเศส",
   "cuisine_Mexican": "เม็กซิกัน",
   "cuisine_American": "อเมริกัน",
-  "equipmentNeed": "อุปกรณ์ที่ต้องใช้:"
+  "equipmentNeed": "อุปกรณ์ที่ต้องใช้:",
+  "doneNext": "เสร็จ ต่อไป!"
  },
  "names": {
   "beer": "เบียร์",

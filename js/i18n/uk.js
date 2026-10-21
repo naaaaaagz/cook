@@ -127,7 +127,7 @@ window.I18N["uk"] = {
   "listView": "Вигляд списку",
   "noLayout": "Кухню не налаштовано. Зробіть це перед наступним готуванням!",
   "start": "Старт",
-  "done": "Готово",
+  "done": "Готово!",
   "chooseFirst": "Оберіть перед початком",
   "method": "Приготування",
   "cookingVersion": "Це версія, яку ви готуєте.",
@@ -180,7 +180,8 @@ window.I18N["uk"] = {
   "cuisine_French": "Французька",
   "cuisine_Mexican": "Мексиканська",
   "cuisine_American": "Американська",
-  "equipmentNeed": "Потрібне приладдя:"
+  "equipmentNeed": "Потрібне приладдя:",
+  "doneNext": "Готово, далі!"
  },
  "names": {
   "beer": "Пиво",

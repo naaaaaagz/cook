@@ -127,7 +127,7 @@ window.I18N["fi"] = {
   "listView": "Luettelonäkymä",
   "noLayout": "Keittiötä ei ole määritetty. Tee se ennen kuin kokkaat seuraavan kerran!",
   "start": "Aloita",
-  "done": "Valmis",
+  "done": "Valmis!",
   "chooseFirst": "Valitse ennen aloittamista",
   "method": "Valmistus",
   "cookingVersion": "Tämä on versio, jota kokkaat nyt.",
@@ -180,7 +180,8 @@ window.I18N["fi"] = {
   "cuisine_French": "Ranskalainen",
   "cuisine_Mexican": "Meksikolainen",
   "cuisine_American": "Amerikkalainen",
-  "equipmentNeed": "Tarvittavat välineet:"
+  "equipmentNeed": "Tarvittavat välineet:",
+  "doneNext": "Valmis, seuraava!"
  },
  "names": {
   "beer": "Olut",

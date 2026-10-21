@@ -127,7 +127,7 @@ window.I18N["he"] = {
   "listView": "תצוגת רשימה",
   "noLayout": "המטבח לא הוגדר. עשו את זה לפני הבישול הבא!",
   "start": "התחלה",
-  "done": "סיימתי",
+  "done": "סיימתי!",
   "chooseFirst": "לבחור לפני שמתחילים",
   "method": "אופן ההכנה",
   "cookingVersion": "זו הגרסה שאתם מבשלים.",
@@ -180,7 +180,8 @@ window.I18N["he"] = {
   "cuisine_French": "צרפתי",
   "cuisine_Mexican": "מקסיקני",
   "cuisine_American": "אמריקאי",
-  "equipmentNeed": "הציוד שתצטרכו:"
+  "equipmentNeed": "הציוד שתצטרכו:",
+  "doneNext": "סיימתי, הבא!"
  },
  "names": {
   "beer": "בירה",

@@ -127,7 +127,7 @@ window.I18N["is"] = {
   "listView": "Listasýn",
   "noLayout": "Eldhúsið hefur ekki verið sett upp. Gerðu það áður en þú eldar næst!",
   "start": "Byrja",
-  "done": "Búið",
+  "done": "Búið!",
   "chooseFirst": "Veldu áður en þú byrjar",
   "method": "Aðferð",
   "cookingVersion": "Þetta er útgáfan sem þú ert að elda.",
@@ -180,7 +180,8 @@ window.I18N["is"] = {
   "cuisine_French": "Franskt",
   "cuisine_Mexican": "Mexíkóskt",
   "cuisine_American": "Amerískt",
-  "equipmentNeed": "Áhöld sem þú þarft:"
+  "equipmentNeed": "Áhöld sem þú þarft:",
+  "doneNext": "Búið, næst!"
  },
  "names": {
   "beer": "Bjór",

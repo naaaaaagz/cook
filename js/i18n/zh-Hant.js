@@ -127,7 +127,7 @@ window.I18N["zh-Hant"] = {
   "listView": "清單檢視",
   "noLayout": "還沒有設定廚房配置。下次下廚前設定一下吧！",
   "start": "開始",
-  "done": "完成了",
+  "done": "完成！",
   "chooseFirst": "開始前請選擇",
   "method": "做法",
   "cookingVersion": "這是你正在做的版本。",
@@ -180,7 +180,8 @@ window.I18N["zh-Hant"] = {
   "cuisine_French": "法式",
   "cuisine_Mexican": "墨西哥",
   "cuisine_American": "美式",
-  "equipmentNeed": "所需廚具："
+  "equipmentNeed": "所需廚具：",
+  "doneNext": "完成，下一步！"
  },
  "names": {
   "beer": "啤酒",
