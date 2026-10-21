@@ -523,7 +523,7 @@ select {
 .photo-time {
   display: none;
   position: absolute;
-  top: 6px;
+  bottom: 6px;
   right: 6px;
   font-size: 11px;
   font-weight: 700;
@@ -533,8 +533,23 @@ select {
   padding: 2px 7px;
 }
 .recipe-card-body { display: grid; align-content: start; gap: 5px; padding: 12px 12px 12px 0; min-width: 0; }
-.recipe-card-body .title-row { font-size: 20px; padding-right: 96px; }
-.btn-read-card { position: absolute; top: 8px; right: 8px; }
+.recipe-card-body .title-row { font-size: 20px; }
+/* "Read instead" on a recipe card: a book icon on the photo's top-left corner */
+.btn-read-card {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  box-shadow: 0 1px 4px var(--shadow);
+}
 .meta-line { font-size: 14px; color: var(--text-2); }
 .nutri-line small { display: block; font-size: 12px; color: var(--muted); padding-left: 1.6em; }
 
@@ -679,6 +694,8 @@ select {
 .view-fab.is-ready:hover { background: #256b29; }
 .view-fab:focus-visible { outline: 3px solid var(--me); outline-offset: 2px; }
 .view-fab-wrap .tooltip { top: auto; bottom: calc(100% + 8px); left: 0; right: auto; }
+/* Card view: the button sits bottom-right, so the tooltip lines up with its right edge */
+.screen-cook:not(.is-map) .view-fab-wrap .tooltip { left: auto; right: 0; }
 .tooltip {
   position: absolute;
   top: calc(100% + 8px);
@@ -1125,7 +1142,6 @@ body.overdo::before {
   .nutri-line { font-size: 12px; }
   .nutri-line small { font-size: 11px; padding-left: 0; display: inline; margin-left: 4px; }
   .recipe-card-body .warn-row { margin-top: auto; font-size: 13px; }
-  .btn-read-card { top: auto; right: auto; left: 6px; bottom: 6px; min-height: 30px; padding: 4px 7px; }
 
   /* "Read instead" is a book icon on phones */
   .btn-read .btn-label { display: none; }

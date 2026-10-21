@@ -1194,8 +1194,8 @@
           '<small>' + unitText(r, 'perServing') + '</small></span>' +
           '<span class="warn-row">' + containsRow(info) + '</span>' +
           '</span></button>' +
-          '<button class="btn btn-secondary btn-small btn-read btn-read-card" type="button" aria-label="' + t('readInstead') + '">' +
-          document.querySelector('.book-icon').outerHTML + '<span class="btn-label">' + t('readInstead') + '</span></button>';
+          '<button class="btn btn-secondary btn-read-card" type="button" aria-label="' + t('readInstead') + '" title="' + t('readInstead') + '">' +
+          document.querySelector('.book-icon').outerHTML + '</button>';
         var card = li.querySelector('.recipe-card');
         var wrap = document.createElement('span');
         wrap.className = 'photo-wrap';
