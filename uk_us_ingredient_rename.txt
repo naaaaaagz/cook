@@ -1,0 +1,103 @@
+UK / US ENGLISH INGREDIENT RENAME  (21 Oct 2026)
+================================================
+The ingredients sheet now has "name (EN-US)" (columns A-B, the default) and
+"name (EN-UK)" (columns C-D). The old "name (EN)" column became EN-US.
+Images are named after the EN-US name (spaces -> underscores).
+
+
+1) INGREDIENTS RENAMED IN EN-US  (old EN name -> new EN-US name)
+------------------------------------------------------------------
+With an image (image files renamed too):
+  beetroot                -> beet
+  coriander leaves        -> cilantro
+  french beans            -> green beans
+  kiwi fruit              -> kiwi
+  lasagna sheet           -> lasagna noodles
+  spring onion            -> green onion
+  tomato puree            -> tomato paste
+
+No image yet (sheet name only):
+  canned chopped tomatoes -> canned diced tomatoes
+  shortcrust pastry       -> pie dough
+  filo pastry             -> phyllo dough
+
+
+2) IMAGE FILES  (old -> new, in img\ and img\350\)
+---------------------------------------------------
+  img\beetroot.jpg              -> img\beet.jpg
+  img\coriander_leaves.jpg      -> img\cilantro.jpg
+  img\french_beans.jpg          -> img\green_beans.jpg
+  img\kiwi_fruit.jpg            -> img\kiwi.jpg
+  img\lasagna_sheet.jpg         -> img\lasagna_noodles.jpg
+  img\spring_onion.jpg          -> img\green_onion.jpg
+  img\tomato_puree.jpg          -> img\tomato_paste.jpg
+
+  img\350\beetroot.webp         -> img\350\beet.webp
+  img\350\coriander_leaves.webp -> img\350\cilantro.webp
+  img\350\french_beans.webp     -> img\350\green_beans.webp
+  img\350\kiwi_fruit.webp       -> img\350\kiwi.webp
+  img\350\lasagna_sheet.webp    -> img\350\lasagna_noodles.webp
+  img\350\spring_onion.webp     -> img\350\green_onion.webp
+  img\350\tomato_puree.webp     -> img\350\tomato_paste.webp
+
+  NOTE: the new files were written, but the OLD files are still there
+  (Claude can't delete files on this computer). The site no longer uses
+  them, so you can delete the 14 old files listed on the left.
+
+
+3) CODE UPDATED  (ingredient keys / image paths)
+------------------------------------------------
+  js\recipes.js        coriander_leaves -> cilantro (2x), spring_onion -> green_onion (2x),
+                       tomato_puree -> tomato_paste (2x)
+  js\recipes-sheet.js  coriander_leaves -> cilantro (3x), spring_onion -> green_onion (4x),
+                       tomato_puree -> tomato_paste (6x)
+  The other four keys (beetroot, french_beans, kiwi_fruit, lasagna_sheet) are not
+  used by any recipe yet.
+  Display text in the recipes ("Spring onion", "Tomato purée", "Cilantro leaves")
+  was NOT changed. Remember to update the ids / image paths in the "Recipes"
+  Google Sheet too, otherwise the next copy from it brings the old keys back.
+
+
+4) EN-UK COLUMN  (only where it differs from EN-US)
+---------------------------------------------------
+  arugula -> rocket                    baking soda -> bicarbonate of soda
+  bacon -> streaky bacon               beet -> beetroot
+  bell pepper -> pepper                black-eyed peas -> black-eyed beans
+  bok choy -> pak choi                 bouillon cube -> stock cube
+  canned diced tomatoes -> tinned chopped tomatoes
+  celery root -> celeriac              celery stalk -> celery stick
+  chili flakes -> chilli flakes        chili pepper -> chilli
+  chili powder -> chilli powder        cilantro -> coriander leaves
+  corn -> sweetcorn                    cornstarch -> cornflour
+  dried ancho chilies -> dried ancho chillies
+  dried red chilies -> dried red chillies
+  eggplant -> aubergine                endive -> chicory
+  fava beans -> broad beans            flour -> plain flour
+  gelatin -> gelatine                  green beans -> french beans
+  green bell pepper -> green pepper    green onion -> spring onion
+  ground beef -> beef mince            ground lamb -> lamb mince
+  ground pork -> pork mince            hamburger buns -> burger buns
+  hot sauce -> chilli sauce            kashmiri chili powder -> kashmiri chilli powder
+  kiwi -> kiwi fruit                   ladyfingers -> sponge fingers
+  lasagna noodles -> lasagne sheets    phyllo dough -> filo pastry
+  pickle juice -> gherkin brine        pickles -> gherkins
+  pie dough -> shortcrust pastry       pita -> pitta
+  powdered sugar -> icing sugar        red bell pepper -> red pepper
+  rolled oats -> porridge oats         romaine lettuce -> cos lettuce
+  shredded coconut -> desiccated coconut
+  shrimp -> prawns                     sweetened condensed milk -> condensed milk
+  tomato paste -> tomato purée         white mushroom -> button mushroom
+  whole wheat flour -> wholemeal flour yogurt -> yoghurt
+  zucchini -> courgette
+
+
+5) OTHER FIXES IN THE SAME UPDATE
+---------------------------------
+  Armenian (HY):  lovage          -> հացադեղ (լովաժ)
+                  caraway seeds   -> քեմոն (Carum carvi)
+                  cumin           -> կումին (Cuminum cyminum)
+                  fenugreek seeds -> հացհամեմի սերմեր (չաման)
+                  dried fenugreek leaves -> չորացրած հացհամեմի տերևներ (կասուրի մեթի)
+  Georgian (KA):  fenugreek seeds -> ულბოს თესლი (შამბალილა)
+                  dried fenugreek leaves -> გამხმარი ულბოს ფოთლები (კასური მეთი)
+                  thyme           -> ბეგქონდარა
