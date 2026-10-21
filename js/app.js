@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  // ---------- Text (English only for now) ----------
+  // ---------- Text: English (US) is built in, other languages are in js/i18n/ ----------
   var STRINGS = {
     en: {
       options: 'Options',
@@ -16,6 +16,7 @@
       kitchenLayout: 'Kitchen layout',
       setupLayout: 'Set up kitchen layout',
       editLayout: 'Edit kitchen layout',
+      seeRecipe: 'See recipe →',
       setupLayoutMap: 'Set up kitchen layout for Map view',
       editLayoutMap: 'Edit kitchen layout for Map view',
       units: 'Units',
@@ -62,7 +63,7 @@
       diet_lacto: 'Lacto-Vegetarian',
       diet_ovo: 'Ovo-Vegetarian',
       diet_lactoOvo: 'Lacto-Ovo Vegetarian',
-      diet_pesc: 'Pescetarian',
+      diet_pesc: 'Pescatarian',
       meat: 'Meat',
       pork: 'Pork',
       fish: 'Fish',
@@ -72,7 +73,7 @@
       protein: 'Protein',
       fat: 'Fat',
       satFat: 'of which saturated',
-      fiber: 'Fibre',
+      fiber: 'Fiber',
       salt: 'Salt',
       carbsShort: 'carbs',
       proteinShort: 'protein',
@@ -160,16 +161,54 @@
       stove: 'Stove',
       oven: 'Oven',
       countertop: 'Countertop',
-      board: 'Chopping board',
+      board: 'Cutting board',
+      sink: 'Kitchen sink',
       fridge: 'Fridge',
       freezer: 'Freezer',
-      me: 'Me'
+      me: 'Me',
+      allergen_Celery: 'Celery',
+      allergen_Egg: 'Egg',
+      allergen_Fish: 'Fish',
+      allergen_Gluten: 'Gluten',
+      allergen_Milk: 'Milk',
+      allergen_Mustard: 'Mustard',
+      allergen_Nuts: 'Nuts',
+      allergen_Sesame: 'Sesame',
+      allergen_Soy: 'Soy',
+      allergen_Sulphites: 'Sulfites',
+      cuisine_Italian: 'Italian',
+      cuisine_Asian: 'Asian',
+      cuisine_Greek: 'Greek',
+      cuisine_French: 'French',
+      cuisine_Mexican: 'Mexican',
+      cuisine_American: 'American'
     }
   };
-  var lang = 'en';
+  // Languages: English (US) first (the default), then the most used ones, then
+  // the rest by name. Each file in js/i18n/<code>.js sets window.I18N[code] =
+  // { strings: UI texts, names: ingredient names by image key (from the
+  // ingredients sheet), uk: US -> UK words (English (UK) only) }.
+  // Recipe texts (steps, notes) are English for now; English (UK) swaps words.
+  var LANGS = [
+    ['en-US', 'English (US)'], ['en-GB', 'English (UK)'], ['de', 'Deutsch'], ['es', 'Español'], ['fr', 'Français'], ['it', 'Italiano'],
+    null,
+    ['sq', 'Shqip'], ['ar', 'العربية'], ['hy', 'Հայերեն'], ['bg', 'Български'], ['ca', 'Català'], ['cs', 'Čeština'],
+    ['da', 'Dansk'], ['et', 'Eesti'], ['el', 'Ελληνικά'], ['fil', 'Filipino'], ['hr', 'Hrvatski'], ['id', 'Bahasa Indonesia'],
+    ['is', 'Íslenska'], ['ka', 'ქართული'], ['he', 'עברית'], ['hi', 'हिन्दी'], ['lv', 'Latviešu'], ['lt', 'Lietuvių'],
+    ['hu', 'Magyar'], ['ms', 'Bahasa Melayu'], ['nl', 'Nederlands'], ['no', 'Norsk'], ['pl', 'Polski'],
+    ['pt-PT', 'Português (Portugal)'], ['pt-BR', 'Português (Brasil)'], ['ro', 'Română'], ['ru', 'Русский'],
+    ['sk', 'Slovenčina'], ['sl', 'Slovenščina'], ['sr', 'Srpski'], ['fi', 'Suomi'], ['sv', 'Svenska'],
+    ['th', 'ไทย'], ['vi', 'Tiếng Việt'], ['tr', 'Türkçe'], ['uk', 'Українська'], ['ja', '日本語'],
+    ['zh-Hans', '中文（简体）'], ['zh-Hant', '中文（繁體）'], ['ko', '한국어']
+  ];
+  var RTL = ['ar', 'he'];
+  window.I18N = window.I18N || {};
+  var lang = 'en-US';
+  function pack() { return window.I18N[lang] || {}; }
 
   function t(key, vars) {
-    var s = STRINGS[lang][key];
+    var s = (pack().strings || {})[key];
+    if (s === undefined) s = STRINGS.en[key];
     if (s === undefined) s = key;
     if (vars) Object.keys(vars).forEach(function (k) { s = s.replace('{' + k + '}', vars[k]); });
     return s;
@@ -184,6 +223,54 @@
       el.setAttribute('aria-label', t(el.getAttribute('data-i18n-label')));
     });
   }
+
+  // English (UK): US words in recipe texts become UK ones, keeping capitals.
+  var ukRe = null;
+  function L(text) {
+    var uk = pack().uk;
+    if (!uk || !text) return text;
+    if (!ukRe) {
+      ukRe = new RegExp('\\b(' + Object.keys(uk).sort(function (a, b) { return b.length - a.length; })
+        .map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')\\b', 'gi');
+    }
+    return String(text).replace(ukRe, function (m) {
+      var to = uk[m.toLowerCase()];
+      return m.charAt(0) === m.charAt(0).toUpperCase() ? to.charAt(0).toUpperCase() + to.slice(1) : to;
+    });
+  }
+  // An ingredient's name in the chosen language (from the ingredients sheet), else the recipe's own.
+  function ingName(key, fallback) {
+    var n = (pack().names || {})[key];
+    return n || L(fallback);
+  }
+  // Recipe data keeps its English text in "_field"; this (re)writes the shown text.
+  function localizeObj(o, fields) {
+    fields.forEach(function (f) {
+      if (!(('_' + f) in o)) { if (o[f] === undefined) return; o['_' + f] = o[f]; }
+      o[f] = L(o['_' + f]);
+    });
+  }
+  function localizeBuilt(b) {
+    b.ingredients.forEach(function (i) {
+      localizeObj(i, ['note']);
+      if (!('_name' in i)) i._name = i.name;
+      i.name = ingName(i.key || i.id, i._name);
+    });
+    b.steps.forEach(function (s) {
+      localizeObj(s, ['title', 'text', 'doneWhen']);
+      (s.parts || []).forEach(function (p) { localizeObj(p, ['title', 'text']); });
+      (s.ings || []).forEach(function (i) {
+        if (!('_label' in i)) i._label = i.label;
+        var n = (pack().names || {})[i.key || i.id];
+        i.label = n || (i._label ? L(i._label) : i._label);
+      });
+    });
+    return b;
+  }
+  window.RECIPES.forEach(function (r) {
+    var build = r.build;
+    r.build = function (c) { return localizeBuilt(build(c)); };
+  });
 
   var $ = function (id) { return document.getElementById(id); };
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
@@ -222,6 +309,12 @@
 
   window.addEventListener('popstate', function (e) {
     var target = (e.state && e.state.screen) || 'recipes';
+    if (cook && state.screen === 'cook' && target !== 'cook' && cookFinished()) {
+      // All done: Back simply goes home.
+      stopCooking();
+      show('recipes');
+      return;
+    }
     if (cook && state.screen === 'cook' && target !== 'cook') {
       // Going back while cooking: stay for now and ask first.
       history.pushState({ screen: 'cook' }, '');
@@ -250,7 +343,7 @@
   });
   function openDialog(d) {
     document.documentElement.classList.add('no-scroll');
-    d.showModal();
+    if (!d.open) d.showModal();
   }
 
   // ---------- Options: theme, language, kitchen layout ----------
@@ -270,10 +363,51 @@
       }
     });
   });
-  $('lang-select').addEventListener('change', function (e) {
-    lang = e.target.value;
+  (function () {
+    var sel = $('lang-select');
+    sel.innerHTML = LANGS.map(function (l) {
+      return l ? '<option value="' + l[0] + '">' + l[1] + '</option>' : '<option disabled>──────────</option>';
+    }).join('');
+    sel.value = lang;
+  })();
+  function setLang(code) {
+    if (code === 'en-US' || window.I18N[code]) { applyLang(code); return; }
+    var sc = document.createElement('script');
+    sc.src = 'js/i18n/' + code + '.js';
+    sc.onload = function () { applyLang(code); };
+    sc.onerror = function () { $('lang-select').value = lang; };
+    document.head.appendChild(sc);
+  }
+  function applyLang(code) {
+    lang = code;
+    ukRe = null;
+    document.documentElement.dir = RTL.indexOf(code) >= 0 ? 'rtl' : 'ltr';
     applyStrings();
-  });
+    refreshTexts();
+  }
+  // Redraws everything that shows text in the new language.
+  function refreshTexts() {
+    renderFilters();
+    renderRecipes();
+    starLabels.forEach(function (l, i) { l.querySelector('input').setAttribute('aria-label', t('stars', { n: i + 1 }) + ': ' + t('star' + (i + 1))); });
+    if (state.built) localizeBuilt(state.built);
+    if (state.recipe) {
+      $('det-name').textContent = L(state.recipe.name);
+      if (state.screen === 'details') { renderOptions(); updateDetails(); }
+    }
+    if (state.screen === 'layout') buildCanvas();
+    if (cook) {
+      localizeBuilt({ ingredients: cook.ingredients, steps: cook.steps });
+      $('cook-name').textContent = L(state.recipe.name);
+      Object.keys(cook.els).forEach(function (id) { cook.els[id].remove(); });
+      cook.els = {};
+      $('cook-map').innerHTML = '';
+      render();
+      tick();
+    }
+    if (reading && $('read-dialog').open) { $('read-title').textContent = L(reading.recipe.name); renderRead(); }
+  }
+  $('lang-select').addEventListener('change', function (e) { setLang(e.target.value); });
   $('btn-layout').addEventListener('click', function () {
     $('options-dialog').close();
     openLayout();
@@ -328,7 +462,7 @@
 
   function openRead(r) {
     reading = { recipe: r, locked: !!cook && state.recipe === r };
-    $('read-title').textContent = r.name;
+    $('read-title').textContent = L(r.name);
     $('here-badge').hidden = true;
     renderRead();
     openDialog($('read-dialog'));
@@ -338,6 +472,9 @@
 
   function renderRead() {
     var r = reading.recipe, c = picksFor(r), body = $('read-body'), keep = body.scrollTop;
+    // The marker sits inside the step it points at; keep it out of the rebuild.
+    var badge = $('here-badge');
+    if (body.contains(badge)) { badge.hidden = true; $('read-dialog').appendChild(badge); }
     setServings(r, c);
     var built = r.build(Object.assign({}, c, { mode: 'detailed' }));
     var starts = startTimes(built.steps);
@@ -364,10 +501,12 @@
         if (isDone(s.id)) (s.members || [s.id]).forEach(function (id) { doneIds[id] = true; });
       });
       steps.some(function (s, i) { if (!doneIds[s.id]) { here = i; return true; } return false; });
+      // Nothing done yet (or not started): no marker, nothing greyed.
+      if (here <= 0 || !cook.t0) here = -1;
     }
     html += '<h3>' + t('method') + '</h3><ol class="read-method">' + steps.map(function (s, i) {
       var cls = here < 0 ? '' : i < here ? ' class="is-past"' : i === here ? ' class="is-here"' : '';
-      return '<li' + cls + '><b>' + esc(s.title) + '.</b> ' + esc(units(s.text)) +
+      return '<li' + cls + '><b>' + esc(s.title) + '.</b> ' + linkRecipes(esc(units(s.text)), r) +
         ' <span class="hint">(' + t('aboutTime', { t: fmtMinutes(Math.max(1, Math.round(s.duration / 60))) }) + ')</span></li>';
     }).join('') + '</ol>';
     body.innerHTML = html;
@@ -379,8 +518,11 @@
   function showWhereYouAre() {
     var body = $('read-body'), li = body.querySelector('.is-here');
     if (!li) return;
-    body.scrollTop = Math.max(0, li.offsetTop - body.offsetTop - 60);
+    // The current step lands a little below the middle, with the marker right above it.
+    var top = li.getBoundingClientRect().top - body.getBoundingClientRect().top + body.scrollTop;
+    body.scrollTop = Math.max(0, top - body.clientHeight * 0.55);
     var badge = $('here-badge');
+    li.appendChild(badge);
     badge.hidden = false;
     badge.classList.remove('show');
     void badge.offsetWidth;
@@ -406,27 +548,30 @@
     return 'data:image/svg+xml,' + encodeURIComponent(
       '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1c1917" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">' + body + '</svg>');
   }
-  // Stand-ins until these get icon files: countertop, fridge, freezer and the "Me" figure.
+  // Stand-ins until these get icon files: countertop, sink, fridge, freezer and the "Me" figure.
   var ICON = {
     countertop: svgUri('<rect x="2.5" y="6" width="19" height="3" rx="1"/><rect x="4" y="9" width="16" height="10.5" rx="1"/><path d="M12 9v10.5M10 14h.01M14 14h.01"/>'),
+    sink: svgUri('<path d="M3 13.5h18v1a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M9 13.5V6.5a3 3 0 0 1 6 0v1.5"/><path d="M7 10.5h4"/>'),
     fridge: svgUri('<rect x="5.5" y="2.5" width="13" height="19" rx="2"/><path d="M5.5 9.5h13M8.5 5.5v2M8.5 12.5v3"/>'),
     freezer: svgUri('<rect x="5.5" y="2.5" width="13" height="19" rx="2"/><path d="M8.5 5.5v2M12 10.5v7M9 12.25l6 3.5M9 15.75l6-3.5"/>'),
     me: svgUri('<circle cx="12" cy="6.5" r="3"/><path d="M6.5 20.5v-4.5a5.5 5.5 0 0 1 11 0v4.5z"/>')
   };
   var MOVE_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg>';
 
-  // Listed back to front: the countertop is always behind, the chopping board always on top.
+  // Listed back to front: the countertop is always behind; the sink and the
+  // chopping board can sit on it (or stand on their own).
   var AREAS = {
     countertop: { icon: ICON.countertop },
     stove: { icon: 'icons/stovetop.svg' },
     oven: { icon: 'icons/oven.svg' },
     fridge: { icon: ICON.fridge },
     freezer: { icon: ICON.freezer },
+    sink: { icon: ICON.sink },
     board: { icon: 'icons/chopping-board.svg' }
   };
   var AREA_KEYS = Object.keys(AREAS);
   var LAYOUT_KEYS = AREA_KEYS.concat(['me']);
-  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, me: 2, board: 3 };
+  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, me: 2, sink: 3, board: 3 };
   // Smallest size per block in pixels, so blocks keep their shape in landscape and portrait.
   var MIN_PX = {
     countertop: { w: 160, h: 110 },
@@ -435,6 +580,7 @@
     fridge: { w: 70, h: 90 },
     freezer: { w: 70, h: 90 },
     board: { w: 90, h: 60 },
+    sink: { w: 80, h: 60 },
     me: { w: 64, h: 64 }
   };
   var ME_PX = 64; // "Me" is always a 64 px circle
@@ -445,12 +591,13 @@
 
   // Positions and sizes as fractions of the canvas. No overlaps except on the countertop.
   var DEFAULT_LAYOUT = {
-    countertop: { x: 0.30, y: 0.04, w: 0.40, h: 0.44 },
+    countertop: { x: 0.30, y: 0.04, w: 0.40, h: 0.54 },
     stove: { x: 0.03, y: 0.04, w: 0.24, h: 0.40 },
     oven: { x: 0.03, y: 0.50, w: 0.24, h: 0.30 },
     fridge: { x: 0.73, y: 0.04, w: 0.12, h: 0.40 },
     freezer: { x: 0.86, y: 0.04, w: 0.11, h: 0.40 },
-    board: { x: 0.52, y: 0.24, w: 0.16, h: 0.22 },
+    board: { x: 0.51, y: 0.24, w: 0.17, h: 0.30 },
+    sink: { x: 0.32, y: 0.24, w: 0.17, h: 0.30 },
     me: { x: 0.45, y: 0.60, w: 0.10, h: 0.18 }
   };
   // The same kitchen for a canvas that is taller than wide.
@@ -458,7 +605,8 @@
     stove: { x: 0.05, y: 0.03, w: 0.42, h: 0.22 },
     oven: { x: 0.05, y: 0.28, w: 0.42, h: 0.16 },
     countertop: { x: 0.53, y: 0.03, w: 0.42, h: 0.41 },
-    board: { x: 0.60, y: 0.24, w: 0.30, h: 0.13 },
+    board: { x: 0.58, y: 0.25, w: 0.32, h: 0.11 },
+    sink: { x: 0.58, y: 0.10, w: 0.32, h: 0.11 },
     fridge: { x: 0.05, y: 0.50, w: 0.25, h: 0.20 },
     freezer: { x: 0.33, y: 0.50, w: 0.25, h: 0.20 },
     me: { x: 0.62, y: 0.55, w: 0.18, h: 0.09 }
@@ -892,7 +1040,9 @@
     if (tags.pork) contains.push(t('pork'));
     if (tags.fish) contains.push(t('fish'));
     x.allergens.forEach(function (a) {
-      if (!contains.some(function (c) { return c.toLowerCase() === a.toLowerCase(); })) contains.push(a);
+      if (a === 'Fish' && tags.fish) return;
+      var name = t('allergen_' + a);
+      if (contains.indexOf(name) < 0) contains.push(name);
     });
     return { label: label, contains: contains };
   }
@@ -987,7 +1137,7 @@
       rows[group].appendChild(b);
     }
     CATEGORIES.forEach(function (c) { chip('cat', c, t('cat_' + c)); });
-    CUISINES.forEach(function (c) { chip('cuisine', c, c); });
+    CUISINES.forEach(function (c) { chip('cuisine', c, t('cuisine_' + c)); });
   }
 
   function renderRecipes() {
@@ -1013,7 +1163,7 @@
         li.innerHTML =
           '<button class="recipe-card" type="button">' +
           '<span class="recipe-card-body">' +
-          '<span class="title-row"><span>' + esc(r.name) + '</span>' + dietBadge(info) + '</span>' +
+          '<span class="title-row"><span>' + esc(L(r.name)) + '</span>' + dietBadge(info) + '</span>' +
           '<span class="meta-line time-line">⏱️ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
           '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' kcal · ' +
           Math.round(n.carbs) + ' g ' + t('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + t('proteinShort') +
@@ -1070,7 +1220,7 @@
   function openDetails(r) {
     state.recipe = r;
     state.choices = picksFor(r);
-    $('det-name').textContent = r.name;
+    $('det-name').textContent = L(r.name);
     var photo = $('det-photo');
     var img = photoEl(r, 500, 'photo-hero');
     img.id = 'det-photo';
@@ -1098,14 +1248,39 @@
     return m ? [m[1], m[2]] : [ch.label, ''];
   }
 
+  // Another recipe used in this one ("see Homemade Mayonnaise", "from the
+  // Homemade Mayonnaise recipe") becomes a link that opens it in the reading window.
+  function recipeNamed(name) {
+    return window.RECIPES.filter(function (x) { return x.name.toLowerCase() === name.trim().toLowerCase(); })[0] || null;
+  }
+  function linkRecipes(html, self) {
+    window.RECIPES.forEach(function (x) {
+      var name = L(x.name);
+      if (x === self || html.indexOf(name) < 0) return;
+      html = html.split(name).join('<button type="button" class="recipe-link" data-recipe="' + x.id + '">' + esc(name) + '</button>');
+    });
+    return html;
+  }
+  // Capture phase, so the click doesn't also pick the option or tap the card.
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('.see-recipe, .recipe-link');
+    if (!link) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var r = window.RECIPES.filter(function (x) { return x.id === link.getAttribute('data-recipe'); })[0];
+    if (r) openRead(r);
+  }, true);
+
   // prefix keeps the radio groups of the reading window apart from the recipe page's.
   function optionsHtml(r, c, prefix, disabled) {
     return r.options.map(function (o) {
-      return '<fieldset class="choices"><legend>' + esc(o.question) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
+      return '<fieldset class="choices"><legend>' + esc(L(o.question)) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
         var parts = labelParts(r, o.id, ch);
+        var see = parts[1].match(/^see (.+)$/i), sub = see && recipeNamed(see[1]);
         return '<label class="choice"><input type="radio" name="' + prefix + o.id + '" value="' + ch.id + '"' +
-          (c[o.id] === ch.id ? ' checked' : '') + (disabled ? ' disabled' : '') + '> <span class="choice-text"><span>' + esc(parts[0]) + '</span>' +
-          (parts[1] ? '<small>' + esc(parts[1]) + '</small>' : '') + '</span></label>';
+          (c[o.id] === ch.id ? ' checked' : '') + (disabled ? ' disabled' : '') + '> <span class="choice-text"><span>' + esc(L(parts[0])) + '</span>' +
+          (sub ? '<button type="button" class="see-recipe" data-recipe="' + sub.id + '">' + t('seeRecipe') + '</button>'
+            : parts[1] ? '<small>' + esc(L(parts[1])) + '</small>' : '') + '</span></label>';
       }).join('') + '</div></fieldset>';
     }).join('');
   }
@@ -1313,7 +1488,7 @@
     b.steps.forEach(function (s) { byId[s.id] = s; });
     cook = { steps: b.steps, byId: byId, ingredients: b.ingredients, done: new Set(), slots: [], status: {},
       started: {}, els: {}, notifs: {}, t0: null, tipsShown: new Set(), view: null };
-    $('cook-name').textContent = state.recipe.name;
+    $('cook-name').textContent = L(state.recipe.name);
     $('cook-list').innerHTML = '';
     $('cook-map').innerHTML = '';
     $('cook-finished').hidden = true;
@@ -1361,6 +1536,28 @@
     tickTimer = setInterval(tick, 500);
   }
 
+  // The finish: a warm flash, a big star that pops and shoots up, little
+  // stars bursting out, then the rating screen rises in.
+  function celebrate() {
+    var fin = $('cook-finished');
+    fin.classList.remove('enter');
+    void fin.offsetWidth;
+    fin.classList.add('enter');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var box = document.createElement('div');
+    box.className = 'celebrate';
+    box.setAttribute('aria-hidden', 'true');
+    var html = '<div class="celebrate-flash"></div><span class="celebrate-star">★</span>';
+    for (var i = 0; i < 16; i++) {
+      var a = i / 16 * Math.PI * 2 + Math.random() * 0.3, d = 110 + Math.random() * 130;
+      html += '<span class="celebrate-spark" style="--dx:' + Math.round(Math.cos(a) * d) + 'px;--dy:' + Math.round(Math.sin(a) * d - 30) +
+        'px;--d:' + (0.15 + Math.random() * 0.25).toFixed(2) + 's;font-size:' + Math.round(14 + Math.random() * 18) + 'px">★</span>';
+    }
+    box.innerHTML = html;
+    document.body.appendChild(box);
+    setTimeout(function () { box.remove(); }, 2000);
+  }
+
   function stopCooking() {
     clearTimeout(countdownTimer);
     closePop();
@@ -1372,8 +1569,12 @@
     hideTip(true);
   }
 
+  function cookFinished() { return !!cook && cook.done.size === cook.steps.length; }
+
   // "You want to give up?" No keeps cooking, Yes leaves to the recipe page.
+  // Once everything is done there is nothing to give up: Exit goes home.
   function askGiveUp() {
+    if (cookFinished()) { stopCooking(); show('recipes'); return; }
     var d = $('exit-dialog');
     if (!d.open) openDialog(d);
     $('exit-no').focus();
@@ -1428,12 +1629,12 @@
 
     var tools = step.tools.map(function (id) {
       var eq = window.EQUIPMENT[id];
-      return '<img class="icon" src="' + eq.icon + '" alt="' + esc(eq.name) + '" title="' + esc(eq.name) + '">';
+      return '<img class="icon" src="' + eq.icon + '" alt="' + esc(L(eq.name)) + '" title="' + esc(L(eq.name)) + '">';
     }).join('');
     var ings = step.ings.map(ingItem).join('');
     var body = step.parts
-      ? '<ol class="step-parts">' + step.parts.map(function (p) { return '<li><b>' + esc(p.title) + ':</b> ' + esc(units(p.text)) + '</li>'; }).join('') + '</ol>'
-      : '<p class="step-text">' + esc(units(step.text)) + '</p>';
+      ? '<ol class="step-parts">' + step.parts.map(function (p) { return '<li><b>' + esc(p.title) + ':</b> ' + linkRecipes(esc(units(p.text))) + '</li>'; }).join('') + '</ol>'
+      : '<p class="step-text">' + linkRecipes(esc(units(step.text))) + '</p>';
 
     el.innerHTML =
       '<div class="step-head">' +
@@ -1522,6 +1723,7 @@
     $('cook-list').hidden = map || finished;
     $('cook-map').hidden = !map || finished;
     if (finished) {
+      if (!cook.celebrated) { cook.celebrated = true; celebrate(); }
       clearInterval(tickTimer);
       document.body.classList.remove('overdo');
       hideTip(true);
@@ -1579,6 +1781,8 @@
     updateCard(step, card);
     body.innerHTML = '';
     body.appendChild(card);
+    // The card is open now: no need for its "New thing to do!" label.
+    card.querySelectorAll('.new-badge').forEach(function (b) { b.remove(); });
     pop.hidden = false;
     popStep = step.id;
     // Next to the notification's area: to the right if it fits, else to the left, else centred.

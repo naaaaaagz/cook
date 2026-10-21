@@ -5,13 +5,13 @@
   One block per recipe, one row per line, fields split by "|". "—" means empty.
   O|option_id|choice_id|label|TRUE when it is the default
   I|ing_id|name|image|qty_per_person|unit|approx_g_per_person|scaling|condition|prep
-  S|step_id|thread|title|instruction|kind|heat|duration_rule|depends_on|done_when|ingredients_in|equipment|condition
+  S|step_id|thread|title|instruction|kind|heat|duration_rule|depends_on|done_when|ingredients_in|equipment|condition|area (optional: stove, oven, countertop, board, sink, fridge, freezer)
 
   Only the columns the app uses are kept. Read by the converter in recipes.js.
 */
 window.SHEET_RECIPES = [
   {
-    id: 'chilli_con_carne', name: 'Chilli Con Carne', image: 'img/350/chili_pepper.webp',
+    id: 'chilli_con_carne', name: 'Chili con Carne', image: 'img/350/chili_pepper.webp',
     rows: `
 O|opt_meat|pork|Ground pork|TRUE
 O|opt_meat|beef|Ground beef|FALSE
@@ -28,9 +28,9 @@ I|onion|Onion, large|img/350/onion.webp|0.25|pcs|37|linear|—|diced
 I|garlic|Garlic clove|img/350/garlic.webp|0.75|pcs|4|linear, rounded up|—|finely chopped
 I|red_bell_pepper|Red bell pepper|img/350/red_bell_pepper.webp|0.5|pcs|75|linear|—|diced
 I|tomato|Tomato, medium|img/350/tomato.webp|1|pcs|125|linear|—|chopped
-I|tomato_puree|Tomato purée|img/350/tomato_puree.webp|7.5|g|7.5|linear|—|—
+I|tomato_paste|Tomato paste|img/350/tomato_paste.webp|7.5|g|7.5|linear|—|—
 I|kidney_beans|Red kidney beans (canned)|img/350/kidney_beans.webp|60|g drained|60|linear|—|drained and rinsed
-I|corn|Sweetcorn (canned)|img/350/corn.webp|71|g|71|linear|—|drained
+I|corn|Corn (canned)|img/350/corn.webp|71|g|71|linear|—|drained
 I|beer|Beer (lager or dark ale)|img/350/beer.webp|37.5|ml|38|linear|—|—
 I|beef_stock|Beef or chicken stock|img/350/beef_stock.webp|75|ml|75|linear|opt_liquid = stock|—
 I|water|Water|img/350/water.webp|75|ml|75|linear|opt_liquid = water|—
@@ -47,7 +47,7 @@ I|cheddar|Cheddar|img/350/cheddar.webp|25|g|25|linear|—|grated
 I|sour_cream|Sour cream|img/350/sour_cream.webp|1|tbsp|20|linear|—|—
 I|tortilla|Small tortilla|img/350/tortilla.webp|1|pcs|30|linear|opt_serve = tortillas|toasted
 I|white_rice|Long-grain rice|img/350/white_rice.webp|70|g|70|linear|opt_serve = rice|—
-I|coriander_leaves|Cilantro leaves|img/350/coriander_leaves.webp|3|leaves|1|linear|—|—
+I|cilantro|Cilantro leaves|img/350/cilantro.webp|3|leaves|1|linear|—|—
 I|lime|Lime wedge|img/350/lime.webp|1|pcs|10|linear|—|wedge
 S|K1|K|Dice the onion|Peel the onion and dice it.|action|—|(60 + 60 × servings) × skill_factor|—|Small even dice|onion|chef_knife, chopping_board|—
 S|K2|K|Dice the peppers|Remove the seeds and dice the red bell peppers.|action|—|(60 + 60 × servings) × skill_factor|—|Small even dice|red_bell_pepper|chef_knife, chopping_board|—
@@ -61,7 +61,7 @@ S|P5|P|Meat in|Add the ground meat and break it up with the spatula.|action|medi
 S|P6|P|Brown the meat|Leave it undisturbed for 2 to 3 min between stirs so it browns, breaking it up each time.|wait|medium|420 (doc: 6 to 8 min)|P5|No pink left, browned bits|—|cooking_pot, spatula|—
 S|P7|P|Deglaze|Pour in the beer and scrape the bottom of the pot.|action|medium|30|P6|Bottom scraped clean|beer|cooking_pot, spatula|—
 S|P8|P|Let it cook|Let it bubble for a couple of minutes.|wait|medium|120|P7|Beer mostly evaporated|—|cooking_pot|—
-S|P9|P|Tomato purée|Add the tomato purée and fry it for 1 minute, stirring.|action|medium|60|P8|Darker, fragrant|tomato_puree|cooking_pot, spatula|—
+S|P9|P|Tomato paste|Add the tomato paste and fry it for 1 minute, stirring.|action|medium|60|P8|Darker, fragrant|tomato_paste|cooking_pot, spatula|—
 S|P10|P|Tomatoes in|Add the chopped tomatoes and keep stirring.|action|medium|30|P9, K4|Mixed in|tomato_chopped|cooking_pot, spatula|—
 S|P11|P|Chocolate, oregano, liquid|Add the dark chocolate chunks, the oregano and the stock (or water). Stir.|action|medium|45|P10|Chocolate melted in|dark_chocolate; oregano; beef_stock / water|cooking_pot, spatula|—
 S|P12|P|Bring to a boil|Let it come to a boil.|wait|medium|300|P11|Bubbling all over|—|cooking_pot|—
@@ -73,7 +73,7 @@ S|P15|P|Finish simmering|Simmer for the last stretch. Take the lid off if it nee
 S|R1|R|Cook the rice|Wash the rice until the water runs clear. Cook it in 1.5× its volume of lightly salted water; when the water level meets the rice, cover on the lowest heat for 10 to 12 min, then rest covered 10 to 15 min.|wait|low|1500|—|Fluffy, water absorbed|white_rice|cooking_pot, stovetop|opt_serve = rice
 S|P16|P|Taste and adjust|Taste. Adjust salt and chili. Still missing something? A squeeze of lime juice.|check|low|60|P15|Tastes right|salt; chili_powder; lime|cooking_pot, spoon|—
 S|S2|S|Toast the tortillas|Toast each tortilla in a dry hot pan, 15 to 25 s per side.|action|high|40 × servings|P15|Lightly charred spots|tortilla|pan, stovetop|opt_serve = tortillas
-S|S3|S|Serve|Ladle into bowls. Top with grated cheddar, a spoon of sour cream and a few cilantro leaves. Tortillas (or rice) on the side, lime wedge optional.|action|—|30 + 20 × servings|P16, S1, S2|Served|cheddar_grated; sour_cream; coriander_leaves; lime; tortillas_toasted|ladle, bowl|—
+S|S3|S|Serve|Ladle into bowls. Top with grated cheddar, a spoon of sour cream and a few cilantro leaves. Tortillas (or rice) on the side, lime wedge optional.|action|—|30 + 20 × servings|P16, S1, S2|Served|cheddar_grated; sour_cream; cilantro; lime; tortillas_toasted|ladle, bowl|—
 `
   },
   {
@@ -109,7 +109,7 @@ S|F2|F|Dust and serve|Just before serving, sprinkle cocoa powder (and cinnamon) 
   {
     id: 'bibimbap', name: 'Bibimbap', image: 'img/350/gochujang.webp',
     rows: `
-O|opt_veg|easy|Easy: carrot, cucumber and spring onion all julienned raw|TRUE
+O|opt_veg|easy|Easy: carrot, cucumber and green onion all julienned raw|TRUE
 O|opt_veg|traditional|Traditional: salted, squeezed shredded cucumber; carrot sautéed 1 min|FALSE
 O|opt_rice|jasmine|Jasmine rice|TRUE
 O|opt_rice|sushi|Short-grain sushi rice (traditional, stickier)|FALSE
@@ -135,7 +135,7 @@ I|bok_choy|Bok choy|img/350/bok_choy.webp|100|g|100|linear|—|leaves torn apart
 I|egg|Egg|img/350/egg.webp|1|pcs|55|linear|—|—
 I|carrot|Carrot|img/350/carrot.webp|30|g|30|linear|—|julienned
 I|cucumber|Cucumber|img/350/cucumber.webp|37.5|g|37.5|linear|—|julienned (or shredded, traditional)
-I|spring_onion|Spring onion|img/350/spring_onion.webp|1|pcs|15|linear|—|white: julienned; green: chopped
+I|green_onion|Green onion|img/350/green_onion.webp|1|pcs|15|linear|—|white: julienned; green: chopped
 I|sesame_seeds|Toasted sesame seeds|img/350/sesame_seeds.webp|1|tsp|3|linear|—|—
 I|gochujang_sauce|Gochujang (sauce)|img/350/gochujang.webp|0.75|tbsp|13|linear|opt_sauce = bibimbap|—
 I|sesame_oil_sauce|Toasted sesame oil (sauce)|img/350/toasted_sesame_oil.webp|0.25|tbsp|3.4|linear|opt_sauce = bibimbap|—
@@ -155,11 +155,11 @@ S|R4|R|Water in|Add the salted water and stir once, very slowly.|action|medium|1
 S|R5|R|Boil down|Let it boil until the water level roughly matches the rice level.|wait|medium|300|R4|Water level at the rice|—|pan|—
 S|R6|R|Cover, lowest heat|Set the lowest heat and cover. Don't stir or lift the lid.|wait|low|660 (doc: 10 to 12 min)|R5|Time is up|—|pan|—
 S|R7|R|Rest, covered|Take it off the heat, keep the lid on.|wait|off|720 (doc: at least 10 to 15 min)|R6|Rested|—|pan|—
-S|K3|K|Julienne the vegetables|Cut the carrot, the cucumber (easy option) and the white part of the spring onions into matchsticks. Chop the green parts for topping.|action|—|(120 + 90 × servings) × skill_factor|—|Matchstick-sized|carrot; cucumber; spring_onion|chef_knife, chopping_board|—
+S|K3|K|Julienne the vegetables|Cut the carrot, the cucumber (easy option) and the white part of the green onions into matchsticks. Chop the green parts for topping.|action|—|(120 + 90 × servings) × skill_factor|—|Matchstick-sized|carrot; cucumber; green_onion|chef_knife, chopping_board|—
 S|K4|K|Shred and salt the cucumber|Shred the cucumber, add a pinch of salt.|action|—|(30 + 30 × servings) × skill_factor|—|Shredded, salted|cucumber; salt|cheese_grater, bowl|opt_veg = traditional
 S|K5|K|Let the cucumber rest|Let it rest.|wait|—|600 (doc: 10 min)|K4|10 min passed|—|bowl|opt_veg = traditional
-S|K6|K|Squeeze the cucumber|Squeeze the water out.|action|—|30|K5|Dry-ish|—|—|opt_veg = traditional
-S|K7|K|Prepare the bok choy|Tear the bok choy apart by leaves and wash it thoroughly.|action|—|(60 + 30 × servings) × skill_factor|—|Clean leaves|bok_choy|—|—
+S|K6|K|Squeeze the cucumber|Squeeze the water out.|action|—|30|K5|Dry-ish|—|—|opt_veg = traditional|sink
+S|K7|K|Prepare the bok choy|Tear the bok choy apart by leaves and wash it thoroughly.|action|—|(60 + 30 × servings) × skill_factor|—|Clean leaves|bok_choy|—|—|sink
 S|S1|F|Mix the sauce|Mix the gochujang, sesame oil, sugar or honey, rice vinegar, water, sesame seeds and grated garlic.|action|—|60|K2|Smooth sauce|gochujang_sauce; sesame_oil_sauce; honey_sauce; rice_vinegar; water_sauce; sesame_seeds_sauce; garlic_grated|bowl, spoon|opt_sauce = bibimbap
 S|W1|W|Chicken into the pan|Heat a large pan on medium-high with a little oil. Add the marinated chicken.|action|medium-high|30|M2|Chicken spread out|chicken_marinated; oil_frying|pan, stovetop, spatula|—
 S|W2|W|Stir-fry the chicken|Stir-fry until done.|wait|medium-high|510 (doc: 7 to 10 min)|W1|No pink inside|—|pan, spatula|—
@@ -168,7 +168,7 @@ S|W4|W|Water and oil in the pan|Clean the pan (or use another). While cold, add 
 S|W5|W|Steam-fry the bok choy|Add the bok choy with a little salt, stirring. Don't overcook it.|action|medium|180|W4, K7|Just wilted, still green|bok_choy_ready; salt|pan, spatula|—
 S|W6|W|Sauté the carrot|Sauté the julienned carrot for about 1 minute.|action|medium|60|W5, K3|Slightly soft|veg_julienned|pan, spatula|opt_veg = traditional
 S|E1|E|Fry the eggs|Fry the eggs sunny side up in a small pan with a little oil, one at a time. Keep the yolk a little runny, salt a tiny bit, add a splash of sesame oil near the end.|wait|medium|180 × servings|W3|White set, yolk runny|egg; oil_frying; salt; toasted_sesame_oil|pan, stovetop, spatula|—
-S|F1|F|Plate it|Rice first, the chicken next to it, the bok choy next to it, then the vegetables and the egg on top. Drizzle light soy sauce, add the spring onion greens, 1 tsp of sauce and the sesame seeds.|action|—|60 + 45 × servings|R7, W5, E1, K3, S1|Served|rice_ready; chicken_ready; bok_choy_cooked; veg_julienned; eggs_fried; light_soy_sauce; spring_onion; sauce; sesame_seeds|bowl, spoon|—
+S|F1|F|Plate it|Rice first, the chicken next to it, the bok choy next to it, then the vegetables and the egg on top. Drizzle light soy sauce, add the green onion greens, 1 tsp of sauce and the sesame seeds.|action|—|60 + 45 × servings|R7, W5, E1, K3, S1|Served|rice_ready; chicken_ready; bok_choy_cooked; veg_julienned; eggs_fried; light_soy_sauce; green_onion; sauce; sesame_seeds|bowl, spoon|—
 `
   },
   {
@@ -246,7 +246,7 @@ S|C4|C|Chicken into the pan|Heat a little oil in the pan on medium-high and add 
 S|C5|C|Fry side 1|Fry the first side.|wait|medium-high|210 cutlets (doc: 3 to 4 min) / 300 whole (doc: about 5 min)|C4|Golden underneath|—|pan|—
 S|C6|C|Flip|Turn the chicken over.|action|medium-high|15|C5|Flipped|—|tongs|—
 S|C7|C|Fry side 2|Fry the second side.|wait|medium-high|210 cutlets (doc: 3 to 4 min) / 300 whole (doc: about 5 min)|C6|Golden underneath|—|pan|—
-S|C8|C|Check doneness|Cut the thickest piece in half: it must be white all the way through.|check|off|20|C7|White throughout|—|chef_knife|—
+S|C8|C|Check doneness|Cut the thickest piece in half: it must be white all the way through.|check|off|20|C7|White throughout|—|chef_knife|—|stove
 S|C9|C|Let it rest|Take it out and let it rest.|wait|—|270 (doc: 4 to 5 min)|C8|Rested|—|chopping_board|—
 S|C10|C|Dice the chicken|Dice it into 1 to 2 cm cubes.|action|—|(30 + 30 × servings) × skill_factor|C9|Cubes|—|chef_knife, chopping_board|—
 S|K1|K|Grate the parmesan|Grate the parmesan (skip if already grated).|action|—|(30 + 30 × servings) × skill_factor|—|Grated|parmesan|cheese_grater|—
@@ -260,27 +260,27 @@ S|F1|F|Plate it|Add the lettuce. Scatter the chicken cubes, the parmesan and the
 O|opt_eggs|whole|Whole, unbroken (runny yolk possible, check at 12 to 14 min)|TRUE
 O|opt_eggs|whisked|Whisked (puffier, 15 to 20 min, fill cups max ¾)|FALSE
 O|opt_cheese|cheddar|Cheddar|TRUE
-O|opt_cheese|mozzarella|Mozzarella or Trappista (milder)|FALSE
+O|opt_cheese|mozzarella|Mozzarella or Trappist (milder)|FALSE
 I|egg|Egg|img/350/egg.webp|1|pcs per muffin|55|per muffin|—|—
-I|bacon|Thin streaky bacon rasher|img/350/bacon.webp|1|pcs per muffin|15|per muffin|—|—
+I|bacon|Bacon strips|img/350/bacon.webp|1|pcs per muffin|15|per muffin|—|—
 I|cherry_tomato|Cherry tomato|img/350/cherry_tomato.webp|1|pcs per muffin|15|per muffin|—|halved
 I|cheddar|Cheddar, grated|img/350/cheddar.webp|10|g per muffin|10|per muffin|opt_cheese = cheddar|grated
-I|mozzarella|Mozzarella or Trappista, grated|img/350/mozzarella.webp|10|g per muffin|10|per muffin|opt_cheese = mozzarella|grated
+I|mozzarella|Mozzarella or Trappist|img/350/mozzarella.webp|10|g per muffin|10|per muffin|opt_cheese = mozzarella|grated
 I|butter|Soft butter|img/350/butter.webp|1.25|g per muffin|1.25|per muffin|—|for greasing the cups
 I|salt|Salt|img/350/salt.webp|0.02|tsp per muffin|0.12|per muffin|—|—
 I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.02|tsp per muffin|0.05|per muffin|—|—
 S|O1|O|Preheat the oven|Turn the oven on to 190 °C conventional (170 °C fan), middle rack.|action|190 °C (170 °C fan)|15|—|Oven on|—|oven|—
 S|O2|O|Wait for the oven|Let the oven heat up.|wait|190 °C (170 °C fan)|600|O1|Temperature reached|—|oven|—
-S|T1|T|Butter the cups|Butter the cups of the muffin tin, sides and bottom.|action|—|30 + 15 × muffins|—|All cups greased|butter|muffin_tin|—
+S|T1|T|Butter the cups|Butter the cups of the muffin pan, sides and bottom.|action|—|30 + 15 × muffins|—|All cups greased|butter|muffin_tin|—
 S|P1|P|Par-fry the bacon|Fry the bacon slices briefly, not until they are firm.|wait|medium|120|—|Lightly cooked, still bendy|bacon|pan, stovetop|—
 S|K1|K|Halve the tomatoes|Cut the cherry tomatoes in half.|action|—|(10 + 10 × muffins) × skill_factor|—|Halved|cherry_tomato|chef_knife, chopping_board|—
 S|K2|K|Grate the cheese|Grate the cheese if it is not already grated.|action|—|(20 + 5 × muffins) × skill_factor|—|Grated|cheddar / mozzarella|cheese_grater|—
 S|T2|T|Line the cups with bacon|Place a bacon slice around the wall of each cup.|action|—|10 + 15 × muffins|T1, P1|Every cup lined|bacon_parfried|muffin_tin|—
 S|T3|T|Eggs in|Crack one egg into each cup (whisked option: break it up with a fork). Add salt and pepper. Cups should be about half full: it puffs up while baking.|action|—|15 + 15 × muffins|T2|One egg per cup|egg; salt; ground_black_pepper|muffin_tin, fork|—
 S|T4|T|Tomatoes and cheese|Add a couple of tomato halves and some grated cheese to each cup. Whisked eggs: fill each cup no more than ¾ including fillings.|action|—|10 + 10 × muffins|T3, K1, K2|All cups filled|tomatoes_halved; cheese_grated|muffin_tin|—
-S|O3|O|Bake|Bake until the top is slightly browned and the centre is set and doesn't wobble. Whole egg with runny yolk: start checking at 12 to 14 min.|wait|190 °C (170 °C fan)|900 whole / 1050 whisked (doc: 15 to 20 min; check whole eggs at 12 to 14 min)|O2, T4|Centre set, no wobble|—|oven, muffin_tin|—
-S|O4|O|Rest in the tin|Take the tin out and let them rest.|wait|off|150 (doc: 2 to 3 min)|O3|Rested|—|muffin_tin|—
-S|F1|F|Release and serve|Run a thin knife around each muffin, then lift them out with a fork.|action|—|20 + 10 × muffins|O4|Out of the tin|muffins_rested|knife, fork, plates|—
+S|O3|O|Bake|Bake until the top is slightly browned and the center is set and doesn't wobble. Whole egg with runny yolk: start checking at 12 to 14 min.|wait|190 °C (170 °C fan)|900 whole / 1050 whisked (doc: 15 to 20 min; check whole eggs at 12 to 14 min)|O2, T4|Center set, no wobble|—|oven, muffin_tin|—
+S|O4|O|Rest in the pan|Take the pan out and let them rest.|wait|off|150 (doc: 2 to 3 min)|O3|Rested|—|muffin_tin|—
+S|F1|F|Release and serve|Run a thin knife around each muffin, then lift them out with a fork.|action|—|20 + 10 × muffins|O4|Out of the pan|muffins_rested|knife, fork, plates|—
 `
   },
   {
@@ -299,7 +299,7 @@ I|cucumber|Cucumber|img/350/cucumber.webp|0.25|pcs|75|linear|—|ribbons with sk
 I|basil|Fresh basil leaves|img/350/basil.webp|5|leaves|2|linear|—|torn by hand
 I|mint|Fresh mint leaves|img/350/mint.webp|5|leaves|1|linear|—|torn by hand
 I|pine_nuts|Nuts or seeds|img/350/pine_nuts.webp|15|g|15|linear|—|raw or toasted
-I|croutons|Unflavoured croutons|img/350/croutons.webp|15|g|15|linear|—|—
+I|croutons|Unflavored croutons|img/350/croutons.webp|15|g|15|linear|—|—
 I|feta_cheese|Feta|img/350/feta_cheese.webp|30|g|30|linear|opt_cheese = feta or both|crumbled
 I|parmesan|Parmesan|img/350/parmesan.webp|10|g|10|linear|opt_cheese = parmesan or both|—
 I|apple_cider_vinegar|Apple cider vinegar|img/350/apple_cider_vinegar.webp|0.5|tbsp|7.5|linear|—|—
@@ -337,7 +337,7 @@ I|thyme|Dried thyme|img/350/thyme.webp|0.125|tsp|0.1|linear|opt_version = tomato
 I|extra_virgin_olive_oil|Extra virgin olive oil|img/350/extra_virgin_olive_oil.webp|0.25|tbsp|3.4|linear|opt_version = tomato|—
 I|balsamic_vinegar|Balsamic vinegar|img/350/balsamic_vinegar.webp|0.25|tsp|1.3|linear|opt_version = tomato|—
 I|ham|Ham|img/350/ham.webp|40|g|40|linear|opt_version = tomato|—
-I|grated_cheese|Grated cheese (mozzarella or Trappista)|img/350/grated_cheese.webp|50|g|50|linear; 40 g in the sour cream version|—|grated
+I|grated_cheese|Grated cheese (mozzarella or Trappist)|img/350/grated_cheese.webp|50|g|50|linear; 40 g in the sour cream version|—|grated
 I|sour_cream|Sour cream|img/350/sour_cream.webp|2|tbsp|40|linear|opt_version = sour_cream|—
 I|bacon|Bacon|img/350/bacon.webp|40|g|40|linear|opt_version = sour_cream|diced, lightly stir-fried
 I|garlic|Garlic clove, small|img/350/garlic.webp|1|pcs|4|linear|opt_version = sour_cream|diced
@@ -365,11 +365,11 @@ O|opt_finish|cream_basil|With a splash of cream or a few fresh basil leaves|FALS
 I|olive_oil|Olive oil (regular, not extra virgin)|img/350/olive_oil.webp|0.5|tbsp|7|linear|—|—
 I|onion|Onion, medium|img/350/onion.webp|37.5|g|37.5|linear|—|diced
 I|garlic|Garlic clove|img/350/garlic.webp|0.75|pcs|4|linear, rounded up|—|diced
-I|flour|Plain flour|img/350/flour.webp|0.5|tbsp|5|linear|—|—
+I|flour|Flour|img/350/flour.webp|0.5|tbsp|5|linear|—|—
 I|water|Water|img/350/water.webp|125|ml|125|linear|opt_liquid = water|—
 I|vegetable_stock|Vegetable stock|img/350/vegetable_stock.webp|125|ml|125|linear|opt_liquid = stock|—
 I|tomato_passata|Tomato passata|img/350/tomato_passata.webp|125|g|125|linear|—|—
-I|tomato_puree|Tomato purée|img/350/tomato_puree.webp|7.5|g|7.5|linear|—|—
+I|tomato_paste|Tomato paste|img/350/tomato_paste.webp|7.5|g|7.5|linear|—|—
 I|diced_tomatoes|Diced tomatoes (canned)|img/350/tomato.webp|100|g|100|linear|—|—
 I|cherry_tomato|Cherry tomatoes|img/350/cherry_tomato.webp|50|g|50|linear|—|halved
 I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
@@ -386,7 +386,7 @@ S|P1|P|Onion into the pot|Heat a little olive oil in the large pot and add the o
 S|P2|P|Soften the onion|Fry for a couple of minutes.|wait|medium|120|P1|Softening|—|cooking_pot, wooden_spoon|—
 S|P3|P|Garlic, salt, pepper|Add the garlic, salt and pepper. Stir well.|action|medium|60|P2, K2|Fragrant|garlic_diced; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
 S|K3|K|Halve the cherry tomatoes|Cut the cherry tomatoes in half.|action|—|(20 + 30 × servings) × skill_factor|—|Halved|cherry_tomato|chef_knife, chopping_board|—
-S|P4|P|Flour and purée|Add a little flour and the tomato purée, keep stirring until the flour starts to brown a little.|action|medium|120|P3|Flour lightly browned|flour; tomato_puree|cooking_pot, wooden_spoon|—
+S|P4|P|Flour and tomato paste|Add a little flour and the tomato paste, keep stirring until the flour starts to brown a little.|action|medium|120|P3|Flour lightly browned|flour; tomato_paste|cooking_pot, wooden_spoon|—
 S|P5|P|Liquid in, slowly|Pour in the water (or stock) gradually while stirring so the flour doesn't form lumps.|action|medium|60|P4|No lumps|water / vegetable_stock|cooking_pot, wooden_spoon|—
 S|P6|P|Tomatoes and seasoning|Add the passata, diced tomatoes and cherry tomatoes. Season with salt, oregano, thyme and 1 to 2 tsp sugar per 4. It should be fairly thick.|action|medium|60|P5, K3|All in|tomato_passata; diced_tomatoes; cherry_halved; salt; oregano; thyme; sugar|cooking_pot, wooden_spoon|—
 S|P7|P|Bring to a boil|Let it come to a boil.|wait|medium|300|P6|Bubbling|—|cooking_pot|—
@@ -407,7 +407,7 @@ I|oil|Neutral oil|img/350/oil.webp|0.25|tbsp|3.5|linear|—|—
 I|butter|Butter|img/350/butter.webp|10|g|10|linear|—|—
 I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
 I|white_pepper|White pepper|img/350/white_pepper.webp|0.0625|tsp|0.15|linear|—|—
-I|flour|Plain flour|img/350/flour.webp|0.5|tbsp|5|linear|—|—
+I|flour|Flour|img/350/flour.webp|0.5|tbsp|5|linear|—|—
 I|white_wine|Dry white wine|img/350/white_wine.webp|50|ml|50|linear|—|—
 I|beef_stock|Beef stock|img/350/beef_stock.webp|375|ml|375|linear|opt_stock = beef|—
 I|chicken_stock|Chicken or vegetable stock|img/350/chicken_stock.webp|375|ml|375|linear|opt_stock = chicken_veg|—
@@ -420,15 +420,15 @@ I|extra_virgin_olive_oil|Extra virgin olive oil|img/350/extra_virgin_olive_oil.w
 I|grated_cheese|Gruyère, Comté or Emmental, grated|img/350/grated_cheese.webp|40|g|40|linear|—|grated
 S|K1|K|Slice the onions|Halve the onions and slice them thinly into half-moons.|action|—|(60 + 180 × servings) × skill_factor|—|Thin half-moons|onion|chef_knife, chopping_board|—
 S|P1|P|Onions into the pot|Heat the oil and butter in the large pot on medium-low. Add the onions with a little salt and white pepper.|action|medium-low|60|K1|All in, coated|oil; butter; onions_sliced; salt; white_pepper|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Caramelise|Keep stirring and frying. If it sticks to the bottom, add a splash of water and continue.|wait|medium-low|2700 (doc: at least 45 min)|P1|Sticky and golden-brown|—|cooking_pot, wooden_spoon|—
+S|P2|P|Caramelize|Keep stirring and frying. If it sticks to the bottom, add a splash of water and continue.|wait|medium-low|2700 (doc: at least 45 min)|P1|Sticky and golden-brown|—|cooking_pot, wooden_spoon|—
 S|P3|P|Flour in|Add the flour for the last couple of minutes, stirring.|action|medium-low|150|P2|Flour browning|flour|cooking_pot, wooden_spoon|—
 S|P4|P|Wine in, reduce|Add the white wine and let it reduce by half, scraping the bottom of the pot.|action|medium|210 (doc: 3 to 4 min)|P3|Reduced by half|white_wine|cooking_pot, wooden_spoon|—
 S|P5|P|Stock and herbs|Add the stock (or water) and salt to taste. Add a pinch of nutmeg, the bay leaf and the thyme.|action|medium|60|P4|All in|beef_stock / chicken_stock / water; salt; nutmeg; bay_leaf; thyme|cooking_pot, microplane|—
 S|P6|P|Simmer|Simmer, stirring now and then.|wait|low|1650 (doc: 25 to 30 min)|P5|Time is up|—|cooking_pot, wooden_spoon|—
-S|O1|O|Turn on the grill|Switch the oven grill (broil) on.|action|grill|15|—|Grill on|—|oven|—
-S|O2|O|Let the grill heat|Let it heat up.|wait|grill|300|O1|Hot|—|oven|—
+S|O1|O|Turn on the broiler|Switch the oven broiler on.|action|grill|15|—|Broiler on|—|oven|—
+S|O2|O|Let the broiler heat|Let it heat up.|wait|grill|300|O1|Hot|—|oven|—
 S|B1|O|Bread on the tray|Lay the bread slices on the tray, drizzle with olive oil and top with grated cheese.|action|—|30 + 30 × servings|—|All slices topped|bread; extra_virgin_olive_oil; grated_cheese|tray|—
-S|B2|O|Grill the toasts|Grill until the cheese is melted and a little browned.|wait|grill|270 (doc: 4 to 5 min)|B1, O2|Cheese melted, lightly browned|—|oven, tray|—
+S|B2|O|Broil the toasts|Broil until the cheese is melted and a little browned.|wait|grill|270 (doc: 4 to 5 min)|B1, O2|Cheese melted, lightly browned|—|oven, tray|—
 S|P7|P|Season, bay leaf out|Take out the bay leaf and season to taste.|check|off|60|P6|Tastes right|salt|cooking_pot|—
 S|F1|F|Serve|Ladle the soup into bowls and serve the cheese toasts next to it.|action|—|30 + 20 × servings|P7, B2|Served|soup_ready; toasts_ready|ladle, bowl|—
 `
@@ -454,7 +454,7 @@ S|C1|C|Grate the cucumber|Grate the cucumber with a cheese grater into a bowl, a
 S|C2|C|Let it drain|Put it into a colander and let it sit.|wait|—|750 (doc: 10 to 15 min)|C1|Time is up|—|colander|—
 S|G1|G|Grate the garlic|Grate the garlic finely.|action|—|(20 + 10 × servings) × skill_factor|—|Finely grated|garlic|microplane|—
 S|G2|G|Chop the dill|Chop the fresh dill.|action|—|(30 + 10 × servings) × skill_factor|—|Chopped|dill|chef_knife, chopping_board|opt_dill = fresh
-S|C3|C|Squeeze the cucumber|Squeeze out all the liquid.|action|—|30 + 15 × servings|C2|No more liquid|—|colander|—
+S|C3|C|Squeeze the cucumber|Squeeze out all the liquid.|action|—|30 + 15 × servings|C2|No more liquid|—|colander|—|sink
 S|M1|M|Mix it|In a bowl: the cucumber, the Greek yogurt, the garlic, the dill, some lemon juice (or vinegar), a pinch of salt if needed, the olive oil and black pepper. Stir well.|action|—|60|C3, G1, G2|Evenly mixed|cucumber_ready; yogurt; garlic_grated; dill_chopped / dill_dried; lemon_juice / white_vinegar; salt; extra_virgin_olive_oil; ground_black_pepper|bowl, spoon|—
 S|M2|M|Chill|Cover it and put it in the fridge.|wait|—|3600 (doc: ready in 1 hour)|M1|1 hour passed|—|bowl|—
 `
@@ -531,7 +531,7 @@ I|red_wine_gravy|Red wine (gravy)|img/350/red_wine.webp|17|ml|17|linear|—|—
 I|cumin_gravy|Ground cumin (gravy)|img/350/cumin.webp|0.08|tsp|0.2|linear|—|—
 I|coriander_seeds|Coriander seeds, crushed|img/350/coriander_seeds.webp|0.17|tsp|0.3|linear|—|—
 I|cream|Cooking cream|img/350/cream.webp|25|ml|25|linear|—|—
-I|flour|Plain flour|img/350/flour.webp|0.17|tbsp|1.7|linear|—|—
+I|flour|Flour|img/350/flour.webp|0.17|tbsp|1.7|linear|—|—
 I|cherry_tomato|Cherry tomatoes|img/350/cherry_tomato.webp|35|g|35|linear|opt_tomatoes = with|—
 S|M1|M|Mix the marinade|In the slow cooker pot mix the oil, salt, pepper, brown sugar, MSG, crushed cardamom seeds, cumin, cinnamon, smoked paprika, garlic powder, mustard, Worcestershire sauce, chili powder, thyme and red wine. Taste until satisfied.|action|—|180|—|Tastes balanced|oil; salt; ground_black_pepper; brown_sugar; msg; cardamom; cumin; cinnamon; smoked_paprika; garlic_powder; mustard; worcestershire_sauce; chili_powder; thyme; red_wine|slow_cooker, spoon|—
 S|M2|M|Beef in, coat it|Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.|action|—|60|M1|Coated all over|beef|slow_cooker|—
@@ -554,7 +554,7 @@ S|F1|F|Slice and serve|Slice the meat. Serve with the side of your choice (not c
     vars: function (c) { return { patties: Math.ceil(c.servings) * (c.opt_patty === 'thick' ? 1 : 2) }; },
     rows: `
 O|opt_patty|thin|Thin smashed: 2 × 65 g per burger, 3 to 4 min|TRUE
-O|opt_patty|thick|Thick: 1 × 130 g with a centre divot, 5 to 6 min|FALSE
+O|opt_patty|thick|Thick: 1 × 130 g with a center divot, 5 to 6 min|FALSE
 O|opt_sauce_heat|with|Sauce with chili or cayenne|TRUE
 O|opt_sauce_heat|without|Without|FALSE
 O|opt_mayo|homemade|Homemade mayonnaise (see Homemade Mayonnaise)|TRUE
@@ -582,11 +582,11 @@ I|pickle_juice|Pickle juice (sauce)|img/350/pickle_juice.webp|0.25|tsp|1.3|linea
 I|cayenne_pepper|Cayenne pepper or chili powder (sauce)|img/350/cayenne_pepper.webp|0.02|tsp|0.05|linear|opt_sauce_heat = with|—
 S|Y1|S|Make the mayonnaise|Make the mayonnaise from the Homemade Mayonnaise recipe (1 tbsp per person is needed for the sauce).|action|—|300 (see Homemade Mayonnaise)|—|Thick mayonnaise|mayonnaise|—|opt_mayo = homemade
 S|P1|P|Season the beef|In a bowl, mix the ground beef with black pepper and a little Worcestershire sauce.|action|—|60|—|Evenly mixed|ground_beef; ground_black_pepper; worcestershire_sauce|bowl|—
-S|P2|P|Shape the patties|Roll balls slightly larger than a golf ball and squeeze them into disks. Thicker than a finger? Leave a small divot in the centre.|action|—|(30 + 30 × patties) × skill_factor|P1|Even disks|beef_mixed|—|—
+S|P2|P|Shape the patties|Roll balls slightly larger than a golf ball and squeeze them into disks. Thicker than a finger? Leave a small divot in the center.|action|—|(30 + 30 × patties) × skill_factor|P1|Even disks|beef_mixed|—|—
 S|P3|P|Chill the patties|Cover them well and put them in the fridge.|wait|—|600 (the doc gives no time; minimum is an assumption)|P2|Chilled|—|fridge|—
 S|S1|S|Chop the pickles|Shred or finely chop the pickles for the sauce.|action|—|(30 + 15 × servings) × skill_factor|—|Finely chopped|pickles_chopped|chef_knife, chopping_board|—
 S|S2|S|Mix the sauce|Mix 4 parts mayonnaise, 2 parts ketchup, 1 part yellow mustard, a little salt, pepper and sugar, the chopped pickles and pickle juice (and a pinch of cayenne or chili). Stir well.|action|—|60|S1, Y1|Smooth sauce|mayonnaise; ketchup; mustard; salt_sauce; pepper_sauce; sugar; pickles_chopped_ready; pickle_juice; cayenne_pepper|bowl, spoon|—
-S|S3|S|Rest the sauce|Let the sauce rest in the fridge so the flavours blend.|wait|—|1800|S2|30 min passed|—|fridge|—
+S|S3|S|Rest the sauce|Let the sauce rest in the fridge so the flavors blend.|wait|—|1800|S2|30 min passed|—|fridge|—
 S|O1|O|Cut the onion|Cut the white onion into rings.|action|—|(30 + 30 × servings) × skill_factor|—|Rings|white_onion|chef_knife, chopping_board|—
 S|O2|O|Sauté the onion|Stir-fry the rings in a pan on medium heat with a little oil and a pinch of salt.|wait|medium|540 (doc: 8 to 10 min)|O1|Soft and glassy|onion_rings; oil; salt|pan, stovetop, spatula|—
 S|K1|K|Tomato and lettuce|Slice the tomato (2 slices per burger) and wash the lettuce leaves.|action|—|(30 + 30 × servings) × skill_factor|—|Ready|tomato; lettuce|chef_knife, chopping_board|—

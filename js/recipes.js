@@ -8,7 +8,7 @@
   at "home cook" (factor 1). Durations are in seconds.
 
   Step fields:
-  area:  where in the kitchen it happens (stove, oven, countertop, board, fridge, freezer)
+  area:  where in the kitchen it happens (stove, oven, countertop, board, sink, fridge, freezer)
   deps:  steps that must be done first (the previous step of the same thread is added automatically)
   tools: equipment ids (see EQUIPMENT)
   ings:  ingredient ids with the amount used in this step; "label" overrides the ingredient name
@@ -35,7 +35,7 @@ window.EQUIPMENT = {
   microplane: { name: 'Fine grater', icon: 'icons/microplane.svg' },
   immersion_blender: { name: 'Immersion blender', icon: 'icons/immersion-blender.svg' },
   vegetable_peeler: { name: 'Vegetable peeler', icon: 'icons/vegetable-peeler.svg' },
-  muffin_tin: { name: 'Muffin tin', icon: 'icons/muffin-tin.svg' },
+  muffin_tin: { name: 'Muffin pan', icon: 'icons/muffin-tin.svg' },
   whisk: { name: 'Whisk', icon: 'icons/whisk.svg' },
   slow_cooker: { name: 'Slow cooker', icon: 'icons/slow-cooker.svg' },
   skewers: { name: 'Skewers', icon: 'icons/skewers.svg' }
@@ -96,14 +96,14 @@ window.INGREDIENT_INFO = (function () {
     red_bell_pepper: '31 6 1 0.3 0 2.1 0.01||',
     tomato: '18 3.9 0.9 0.2 0 1.2 0.01||',
     cherry_tomato: '18 3.9 0.9 0.2 0 1.2 0.01||',
-    tomato_puree: '82 19 4.3 0.5 0.1 4.1 0.15||',
+    tomato_paste: '82 19 4.3 0.5 0.1 4.1 0.15||',
     tomato_passata: '30 5.5 1.4 0.2 0 1.5 0.1||',
     kidney_beans: '110 15 7 0.6 0.1 6 0.5||',
     corn: '80 15 2.5 1 0.2 2.5 0.5||',
     carrot: '41 9.6 0.9 0.2 0 2.8 0.17||',
     cucumber: '15 3.6 0.7 0.1 0 0.5 0.01||',
     bok_choy: '13 2.2 1.5 0.2 0 1 0.16||',
-    spring_onion: '32 7.3 1.8 0.2 0 2.6 0.04||',
+    green_onion: '32 7.3 1.8 0.2 0 2.6 0.04||',
     white_mushroom: '22 3.3 3.1 0.3 0 1 0.01||',
     romaine_lettuce: '17 3.3 1.2 0.3 0 2.1 0.02||',
     lettuce: '15 2.9 1.4 0.2 0 1.3 0.07||',
@@ -115,7 +115,7 @@ window.INGREDIENT_INFO = (function () {
     basil: '23 2.7 3.2 0.6 0 1.6 0.01||',
     mint: '70 15 3.8 0.9 0.2 8 0.08||',
     dill: '43 7 3.5 1.1 0.1 2.1 0.15||',
-    coriander_leaves: '23 3.7 2.1 0.5 0 2.8 0.12||',
+    cilantro: '23 3.7 2.1 0.5 0 2.8 0.12||',
     rosemary: '131 21 3.3 5.9 2.8 14 0.07||',
     parsley: '292 51 27 5.5 1.4 27 1.1||',
     tarragon: '295 50 23 7.2 1.9 7.4 0.16||',
@@ -169,14 +169,14 @@ window.INGREDIENT_INFO = (function () {
     grain: 'spaghetti white_rice jasmine_rice rolled_oats semolina',
     bread: 'bread hamburger_buns croutons tortilla',
     legume: 'kidney_beans',
-    veg: 'onion red_onion white_onion garlic red_bell_pepper tomato cherry_tomato carrot cucumber bok_choy spring_onion ' +
+    veg: 'onion red_onion white_onion garlic red_bell_pepper tomato cherry_tomato carrot cucumber bok_choy green_onion ' +
       'romaine_lettuce lettuce pickles corn white_mushroom',
     fruit: 'lime blueberry',
     nuts: 'sesame_seeds pine_nuts chia_seeds',
-    herbs: 'basil mint dill coriander_leaves rosemary parsley tarragon oregano thyme bay_leaf',
+    herbs: 'basil mint dill cilantro rosemary parsley tarragon oregano thyme bay_leaf',
     spices: 'black_peppercorn ground_black_pepper white_pepper salt msg paprika_powder smoked_paprika chili_powder ' +
       'cayenne_pepper cumin cinnamon nutmeg cardamom coriander_seeds garlic_powder',
-    sauces: 'tomato_puree tomato_passata beef_stock chicken_stock vegetable_stock mayonnaise worcestershire_sauce ' +
+    sauces: 'tomato_paste tomato_passata beef_stock chicken_stock vegetable_stock mayonnaise worcestershire_sauce ' +
       'light_soy_sauce gochujang mustard ketchup pickle_juice lemon_juice apple_cider_vinegar balsamic_vinegar ' +
       'white_vinegar rice_vinegar rosewater coconut_milk',
     sweet: 'honey sugar brown_sugar erythritol',
@@ -293,7 +293,7 @@ window.INGREDIENT_INFO = (function () {
           { id: 'Q8', members: ['P5', 'P6'], thread: 'P', area: 'stove', title: 'Cook the spaghetti',
             text: "Add the spaghetti, stir once, and boil 1 minute less than the package says. Keep the water, don't drain!",
             duration: d.P5 + d.P6, deps: [], tools: ['cooking_pot', 'tongs'], ings: [{ id: 'spaghetti', qty: g(100 * s) }],
-            doneWhen: 'Bite test: slightly firm centre', tip: true, overcook: true },
+            doneWhen: 'Bite test: slightly firm center', tip: true, overcook: true },
           { id: 'Q9', members: ['G3', 'G4'], thread: 'G', area: 'stove', title: g3Title + ', heat off',
             text: g3Text + ' Then turn off the burner and take the pan off the heat.',
             duration: d.G3 + d.G4, deps: ['Q4'], tools: ['pan'],
@@ -317,7 +317,7 @@ window.INGREDIENT_INFO = (function () {
     }
 
     var steps = [
-      { id: 'P1', thread: 'P', area: 'countertop', title: 'Fill the pot',
+      { id: 'P1', thread: 'P', area: 'sink', title: 'Fill the pot',
         text: 'Fill the large pot with ' + waterL + " L cold water. Don't add oil.",
         duration: d.P1, deps: [], tools: ['cooking_pot'], ings: [{ id: 'water', qty: waterL + ' L' }], doneWhen: 'Pot filled' },
       { id: 'P2', thread: 'P', area: 'stove', title: 'Put it on the stove',
@@ -371,7 +371,7 @@ window.INGREDIENT_INFO = (function () {
         doneWhen: 'All spaghetti under water', tip: true },
       { id: 'P6', thread: 'P', area: 'stove', title: 'Cook until al dente',
         text: "Boil 1 minute less than the package says. Keep the water, don't drain!",
-        duration: d.P6, deps: [], tools: ['cooking_pot'], ings: [], doneWhen: 'Bite test: slightly firm centre', overcook: true },
+        duration: d.P6, deps: [], tools: ['cooking_pot'], ings: [], doneWhen: 'Bite test: slightly firm center', overcook: true },
 
       { id: 'G3', thread: 'G', area: 'stove', title: g3Title,
         text: g3Text, duration: d.G3, deps: [pepperStep], tools: ['pan'],
@@ -548,14 +548,19 @@ window.INGREDIENT_INFO = (function () {
   }
 
   // Where in the kitchen a step happens, guessed from its equipment, heat and text.
+  // A step whose heat is a hob setting stays at the stove (flipping, stirring,
+  // tasting happen right there). The sheet's optional last column overrides it.
+  var STOVE_HEAT = /^(low|medium|high)(-(low|high))?\b/i;
   function areaOf(st) {
     var eq = st.equipment, text = (st.title + ' ' + st.text).toLowerCase();
+    if (st.area) return st.area;
     if (eq.indexOf('fridge') >= 0 || /\bfridge\b/.test(text)) return 'fridge';
     if (/\bfreezer\b/.test(text)) return 'freezer';
     if (eq.indexOf('oven') >= 0 || /°C|grill/.test(st.heat)) return 'oven';
     if (eq.indexOf('slow_cooker') >= 0 || eq.indexOf('panini_press') >= 0) return 'countertop';
-    if (eq.indexOf('stovetop') >= 0) return 'stove';
+    if (eq.indexOf('stovetop') >= 0 || STOVE_HEAT.test(st.heat)) return 'stove';
     if ((eq.indexOf('pan') >= 0 || eq.indexOf('cooking_pot') >= 0) && !empty(st.heat)) return 'stove';
+    if (/\b(wash|rinse|drain)/i.test(st.title)) return 'sink';
     if (eq.indexOf('chopping_board') >= 0) return 'board';
     return 'countertop';
   }
@@ -658,7 +663,7 @@ window.INGREDIENT_INFO = (function () {
       var mentions = {};
       var steps = raw.map(function (r) {
         var st = { id: r[0], thread: r[1], title: r[2], text: r[3], kind: r[4], heat: r[5], doneWhen: r[8],
-          equipment: empty(r[10]) ? [] : r[10].split(/,\s*/) };
+          equipment: empty(r[10]) ? [] : r[10].split(/,\s*/), area: empty(r[12]) ? '' : r[12] };
         st.area = areaOf(st);
         st.duration = duration(r[6], vars, chosen);
         st.deps = empty(r[7]) ? [] : r[7].split(/,\s*/).filter(function (d) { return ids.indexOf(d) >= 0; });
