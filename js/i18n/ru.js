@@ -295,5 +295,17 @@ window.I18N["ru"] = {
   "green_onion": "Зелёный лук",
   "tomato": "Помидор",
   "white_onion": "Белый лук"
+ },
+ "recipes": {
+  "semolina_pudding": "Манная каша",
+  "honey_tarragon_chicken": "Курица с мёдом и эстрагоном",
+  "caesar_salad": "Салат «Цезарь»",
+  "breakfast_muffin": "Маффины на завтрак",
+  "summer_salad": "Летний салат",
+  "tomato_soup": "Томатный суп",
+  "french_onion_soup": "Французский луковый суп",
+  "overnight_oats": "Ленивая овсянка",
+  "slow_cooked_beef": "Говядина томлёная",
+  "homemade_mayonnaise": "Домашний майонез"
  }
 };

@@ -295,5 +295,17 @@ window.I18N["pl"] = {
   "green_onion": "Dymka",
   "tomato": "Pomidor",
   "white_onion": "Biała cebula"
+ },
+ "recipes": {
+  "semolina_pudding": "Kaszka manna",
+  "honey_tarragon_chicken": "Kurczak z miodem i estragonem",
+  "caesar_salad": "Sałatka Cezar",
+  "breakfast_muffin": "Śniadaniowe muffinki",
+  "summer_salad": "Letnia sałatka",
+  "tomato_soup": "Zupa pomidorowa",
+  "french_onion_soup": "Francuska zupa cebulowa",
+  "overnight_oats": "Owsianka na noc",
+  "slow_cooked_beef": "Wołowina duszona",
+  "homemade_mayonnaise": "Domowy majonez"
  }
 };

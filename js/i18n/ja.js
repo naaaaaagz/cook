@@ -295,5 +295,17 @@ window.I18N["ja"] = {
   "green_onion": "青ねぎ",
   "tomato": "トマト",
   "white_onion": "白玉ねぎ"
+ },
+ "recipes": {
+  "semolina_pudding": "セモリナプディング",
+  "honey_tarragon_chicken": "はちみつとタラゴンのチキン",
+  "caesar_salad": "シーザーサラダ",
+  "breakfast_muffin": "朝食マフィン",
+  "summer_salad": "サマーサラダ",
+  "tomato_soup": "トマトスープ",
+  "french_onion_soup": "オニオングラタンスープ",
+  "overnight_oats": "オーバーナイトオーツ",
+  "slow_cooked_beef": "牛肉の煮込み",
+  "homemade_mayonnaise": "自家製マヨネーズ"
  }
 };

@@ -295,5 +295,17 @@ window.I18N["fr"] = {
   "green_onion": "Oignon nouveau",
   "tomato": "Tomate",
   "white_onion": "Oignon blanc"
+ },
+ "recipes": {
+  "semolina_pudding": "Semoule au lait",
+  "honey_tarragon_chicken": "Poulet au miel et à l’estragon",
+  "caesar_salad": "Salade César",
+  "breakfast_muffin": "Muffins du petit-déjeuner",
+  "summer_salad": "Salade d’été",
+  "tomato_soup": "Soupe à la tomate",
+  "french_onion_soup": "Soupe à l’oignon",
+  "overnight_oats": "Overnight oats",
+  "slow_cooked_beef": "Bœuf mijoté",
+  "homemade_mayonnaise": "Mayonnaise maison"
  }
 };

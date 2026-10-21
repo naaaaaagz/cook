@@ -295,5 +295,17 @@ window.I18N["sl"] = {
   "green_onion": "Mlada čebula",
   "tomato": "Paradižnik",
   "white_onion": "Bela čebula"
+ },
+ "recipes": {
+  "semolina_pudding": "Zdrobova kaša",
+  "honey_tarragon_chicken": "Piščanec z medom in pehtranom",
+  "caesar_salad": "Solata Cezar",
+  "breakfast_muffin": "Zajtrkovalni mafini",
+  "summer_salad": "Poletna solata",
+  "tomato_soup": "Paradižnikova juha",
+  "french_onion_soup": "Francoska čebulna juha",
+  "overnight_oats": "Ovseni kosmiči čez noč",
+  "slow_cooked_beef": "Počasi kuhana govedina",
+  "homemade_mayonnaise": "Domača majoneza"
  }
 };

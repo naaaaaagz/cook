@@ -295,5 +295,17 @@ window.I18N["he"] = {
   "green_onion": "בצל ירוק",
   "tomato": "עגבנייה",
   "white_onion": "בצל לבן"
+ },
+ "recipes": {
+  "semolina_pudding": "דייסת סולת",
+  "honey_tarragon_chicken": "עוף בדבש וטרגון",
+  "caesar_salad": "סלט קיסר",
+  "breakfast_muffin": "מאפינס לארוחת בוקר",
+  "summer_salad": "סלט קיץ",
+  "tomato_soup": "מרק עגבניות",
+  "french_onion_soup": "מרק בצל צרפתי",
+  "overnight_oats": "שיבולת שועל של לילה",
+  "slow_cooked_beef": "בקר בבישול איטי",
+  "homemade_mayonnaise": "מיונז ביתי"
  }
 };

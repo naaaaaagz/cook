@@ -295,5 +295,17 @@ window.I18N["nl"] = {
   "green_onion": "Lente-ui",
   "tomato": "Tomaat",
   "white_onion": "Witte ui"
+ },
+ "recipes": {
+  "semolina_pudding": "Griesmeelpap",
+  "honey_tarragon_chicken": "Kip met honing en dragon",
+  "caesar_salad": "Caesarsalade",
+  "breakfast_muffin": "Ontbijtmuffins",
+  "summer_salad": "Zomersalade",
+  "tomato_soup": "Tomatensoep",
+  "french_onion_soup": "Franse uiensoep",
+  "overnight_oats": "Overnight oats",
+  "slow_cooked_beef": "Langzaam gegaard rundvlees",
+  "homemade_mayonnaise": "Zelfgemaakte mayonaise"
  }
 };

@@ -295,5 +295,17 @@ window.I18N["bg"] = {
   "green_onion": "Пресен лук",
   "tomato": "Домат",
   "white_onion": "Бял лук"
+ },
+ "recipes": {
+  "semolina_pudding": "Грис на мляко",
+  "honey_tarragon_chicken": "Пиле с мед и естрагон",
+  "caesar_salad": "Салата Цезар",
+  "breakfast_muffin": "Мъфини за закуска",
+  "summer_salad": "Лятна салата",
+  "tomato_soup": "Доматена супа",
+  "french_onion_soup": "Френска лучена супа",
+  "overnight_oats": "Овесени ядки за през нощта",
+  "slow_cooked_beef": "Бавно готвено телешко",
+  "homemade_mayonnaise": "Домашна майонеза"
  }
 };

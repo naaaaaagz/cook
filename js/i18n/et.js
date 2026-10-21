@@ -295,5 +295,17 @@ window.I18N["et"] = {
   "green_onion": "Roheline sibul",
   "tomato": "Tomat",
   "white_onion": "Valge sibul"
+ },
+ "recipes": {
+  "semolina_pudding": "Mannapuder",
+  "honey_tarragon_chicken": "Mee-estragoni kana",
+  "caesar_salad": "Caesari salat",
+  "breakfast_muffin": "Hommikusöögi muffinid",
+  "summer_salad": "Suvesalat",
+  "tomato_soup": "Tomatisupp",
+  "french_onion_soup": "Prantsuse sibulasupp",
+  "overnight_oats": "Üleöö kaerahelbed",
+  "slow_cooked_beef": "Aeglaselt küpsetatud veiseliha",
+  "homemade_mayonnaise": "Kodune majonees"
  }
 };

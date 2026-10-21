@@ -295,5 +295,17 @@ window.I18N["uk"] = {
   "green_onion": "Зелена цибуля",
   "tomato": "Помідор",
   "white_onion": "Біла цибуля"
+ },
+ "recipes": {
+  "semolina_pudding": "Манна каша",
+  "honey_tarragon_chicken": "Курка з медом і естрагоном",
+  "caesar_salad": "Салат «Цезар»",
+  "breakfast_muffin": "Мафіни на сніданок",
+  "summer_salad": "Літній салат",
+  "tomato_soup": "Томатний суп",
+  "french_onion_soup": "Французький цибулевий суп",
+  "overnight_oats": "Лінива вівсянка",
+  "slow_cooked_beef": "Яловичина повільного приготування",
+  "homemade_mayonnaise": "Домашній майонез"
  }
 };

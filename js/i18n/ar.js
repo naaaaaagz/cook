@@ -295,5 +295,17 @@ window.I18N["ar"] = {
   "green_onion": "بصل أخضر",
   "tomato": "طماطم",
   "white_onion": "بصل أبيض"
+ },
+ "recipes": {
+  "semolina_pudding": "مهلبية السميد",
+  "honey_tarragon_chicken": "دجاج بالعسل والطرخون",
+  "caesar_salad": "سلطة سيزر",
+  "breakfast_muffin": "مافن الفطور",
+  "summer_salad": "سلطة صيفية",
+  "tomato_soup": "شوربة الطماطم",
+  "french_onion_soup": "شوربة البصل الفرنسية",
+  "overnight_oats": "شوفان منقوع ليلًا",
+  "slow_cooked_beef": "لحم بقري مطهو ببطء",
+  "homemade_mayonnaise": "مايونيز منزلي"
  }
 };

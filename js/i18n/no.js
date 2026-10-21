@@ -295,5 +295,17 @@ window.I18N["no"] = {
   "green_onion": "Vårløk",
   "tomato": "Tomat",
   "white_onion": "Hvit løk"
+ },
+ "recipes": {
+  "semolina_pudding": "Semulegrøt",
+  "honey_tarragon_chicken": "Kylling med honning og estragon",
+  "caesar_salad": "Cæsarsalat",
+  "breakfast_muffin": "Frokostmuffins",
+  "summer_salad": "Sommersalat",
+  "tomato_soup": "Tomatsuppe",
+  "french_onion_soup": "Fransk løksuppe",
+  "overnight_oats": "Overnight oats",
+  "slow_cooked_beef": "Langtidskokt storfekjøtt",
+  "homemade_mayonnaise": "Hjemmelaget majones"
  }
 };

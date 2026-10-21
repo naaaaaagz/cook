@@ -295,5 +295,17 @@ window.I18N["lv"] = {
   "green_onion": "Zaļie sīpoli",
   "tomato": "Tomāts",
   "white_onion": "Baltais sīpols"
+ },
+ "recipes": {
+  "semolina_pudding": "Mannas putra",
+  "honey_tarragon_chicken": "Vista ar medu un estragonu",
+  "caesar_salad": "Cēzara salāti",
+  "breakfast_muffin": "Brokastu mafini",
+  "summer_salad": "Vasaras salāti",
+  "tomato_soup": "Tomātu zupa",
+  "french_onion_soup": "Franču sīpolu zupa",
+  "overnight_oats": "Pa nakti mērcētas auzas",
+  "slow_cooked_beef": "Lēni gatavota liellopu gaļa",
+  "homemade_mayonnaise": "Mājas majonēze"
  }
 };

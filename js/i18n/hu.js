@@ -295,5 +295,17 @@ window.I18N["hu"] = {
   "green_onion": "Újhagyma",
   "tomato": "Paradicsom",
   "white_onion": "Fehér hagyma"
+ },
+ "recipes": {
+  "semolina_pudding": "Tejbegríz",
+  "honey_tarragon_chicken": "Mézes-tárkonyos csirke",
+  "caesar_salad": "Cézár saláta",
+  "breakfast_muffin": "Reggeli muffin",
+  "summer_salad": "Nyári saláta",
+  "tomato_soup": "Paradicsomleves",
+  "french_onion_soup": "Francia hagymaleves",
+  "overnight_oats": "Éjszakai zabkása",
+  "slow_cooked_beef": "Lassan főtt marhahús",
+  "homemade_mayonnaise": "Házi majonéz"
  }
 };

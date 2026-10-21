@@ -239,6 +239,11 @@
       return m.charAt(0) === m.charAt(0).toUpperCase() ? to.charAt(0).toUpperCase() + to.slice(1) : to;
     });
   }
+  // A recipe's name in the chosen language. Well-known names (Spaghetti
+  // Carbonara, Bibimbap, …) have no translation and stay as they are.
+  function recipeName(r) {
+    return (pack().recipes || {})[r.id] || L(r.name);
+  }
   // An ingredient's name in the chosen language (from the ingredients sheet), else the recipe's own.
   function ingName(key, fallback) {
     var n = (pack().names || {})[key];
@@ -306,6 +311,7 @@
     if (!fromHistory) history.pushState({ screen: name }, '');
     window.scrollTo(0, 0);
     if (typeof updateJump === 'function') setTimeout(updateJump, 0);
+    if (name === 'details') layoutEquipment();
   }
 
   window.addEventListener('popstate', function (e) {
@@ -393,20 +399,20 @@
     starLabels.forEach(function (l, i) { l.querySelector('input').setAttribute('aria-label', t('stars', { n: i + 1 }) + ': ' + t('star' + (i + 1))); });
     if (state.built) localizeBuilt(state.built);
     if (state.recipe) {
-      $('det-name').textContent = L(state.recipe.name);
+      $('det-name').textContent = recipeName(state.recipe);
       if (state.screen === 'details') { renderOptions(); updateDetails(); }
     }
     if (state.screen === 'layout') buildCanvas();
     if (cook) {
       localizeBuilt({ ingredients: cook.ingredients, steps: cook.steps });
-      $('cook-name').textContent = L(state.recipe.name);
+      $('cook-name').textContent = recipeName(state.recipe);
       Object.keys(cook.els).forEach(function (id) { cook.els[id].remove(); });
       cook.els = {};
       $('cook-map').innerHTML = '';
       render();
       tick();
     }
-    if (reading && $('read-dialog').open) { $('read-title').textContent = L(reading.recipe.name); renderRead(); }
+    if (reading && $('read-dialog').open) { $('read-title').textContent = recipeName(reading.recipe); renderRead(); }
   }
   $('lang-select').addEventListener('change', function (e) { setLang(e.target.value); });
   $('btn-layout').addEventListener('click', function () {
@@ -463,7 +469,7 @@
 
   function openRead(r) {
     reading = { recipe: r, locked: !!cook && state.recipe === r };
-    $('read-title').textContent = L(r.name);
+    $('read-title').textContent = recipeName(r);
     $('here-badge').hidden = true;
     renderRead();
     openDialog($('read-dialog'));
@@ -1181,7 +1187,7 @@
         li.innerHTML =
           '<button class="recipe-card" type="button">' +
           '<span class="recipe-card-body">' +
-          '<span class="title-row"><span>' + esc(L(r.name)) + '</span>' + dietBadge(info) + '</span>' +
+          '<span class="title-row"><span>' + esc(recipeName(r)) + '</span>' + dietBadge(info) + '</span>' +
           '<span class="meta-line time-line">⏱️ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
           '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' kcal · ' +
           Math.round(n.carbs) + ' g ' + t('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + t('proteinShort') +
@@ -1238,7 +1244,7 @@
   function openDetails(r) {
     state.recipe = r;
     state.choices = picksFor(r);
-    $('det-name').textContent = L(r.name);
+    $('det-name').textContent = recipeName(r);
     var photo = $('det-photo');
     var img = photoEl(r, 500, 'photo-hero');
     img.id = 'det-photo';
@@ -1327,6 +1333,18 @@
     }).filter(function (g) { return g.items.length; });
   }
 
+  // Equipment cards: one row if they fit, else the fewest rows with the same
+  // number of cards in each (the last row may have one fewer).
+  var EQ_MIN = 48, EQ_MAX = 96, EQ_GAP = 6;
+  function layoutEquipment() {
+    var ul = $('det-equipment'), n = ul.children.length, wAll = ul.clientWidth;
+    if (!n || !wAll) return;
+    var fit = Math.max(1, Math.floor((wAll + EQ_GAP) / (EQ_MIN + EQ_GAP)));
+    var perRow = Math.ceil(n / Math.ceil(n / fit));
+    ul.style.setProperty('--eq-w', Math.min(EQ_MAX, (wAll - EQ_GAP * (perRow - 1)) / perRow) + 'px');
+  }
+  window.addEventListener('resize', function () { if (state.screen === 'details') layoutEquipment(); });
+
   function updateDetails() {
     var c = state.choices, r = state.recipe, person = isPerson(r);
     setServings(r, c);
@@ -1357,7 +1375,8 @@
       var eq = window.EQUIPMENT[id];
       return '<li><img class="icon" src="' + eq.icon + '" alt=""><span>' + esc(L(eq.name)) + '</span></li>';
     }).join('');
-    $('det-equipment').previousElementSibling.hidden = $('det-equipment').hidden = !tools.length;
+    document.querySelector('.equipment').hidden = !tools.length;
+    layoutEquipment();
 
     // People
     $('det-howmany').textContent = unitText(r, 'howMany');
@@ -1517,7 +1536,7 @@
     b.steps.forEach(function (s) { byId[s.id] = s; });
     cook = { steps: b.steps, byId: byId, ingredients: b.ingredients, done: new Set(), slots: [], status: {},
       started: {}, els: {}, notifs: {}, t0: null, tipsShown: new Set(), view: null };
-    $('cook-name').textContent = L(state.recipe.name);
+    $('cook-name').textContent = recipeName(state.recipe);
     $('cook-list').innerHTML = '';
     $('cook-map').innerHTML = '';
     $('cook-finished').hidden = true;

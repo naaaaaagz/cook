@@ -295,5 +295,17 @@ window.I18N["ka"] = {
   "green_onion": "Მწვანე ხახვი",
   "tomato": "Პომიდორი",
   "white_onion": "Თეთრი ხახვი"
+ },
+ "recipes": {
+  "semolina_pudding": "მანის ფაფა",
+  "honey_tarragon_chicken": "ქათამი თაფლითა და ტარხუნით",
+  "caesar_salad": "სალათი „ცეზარი“",
+  "breakfast_muffin": "საუზმის მაფინები",
+  "summer_salad": "ზაფხულის სალათი",
+  "tomato_soup": "პომიდვრის სუპი",
+  "french_onion_soup": "ფრანგული ხახვის სუპი",
+  "overnight_oats": "ღამით დალბობილი შვრია",
+  "slow_cooked_beef": "ნელა მოხარშული საქონლის ხორცი",
+  "homemade_mayonnaise": "შინ მომზადებული მაიონეზი"
  }
 };

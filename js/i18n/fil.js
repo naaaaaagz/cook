@@ -295,5 +295,17 @@ window.I18N["fil"] = {
   "green_onion": "Dahon ng sibuyas",
   "tomato": "Kamatis",
   "white_onion": "Puting sibuyas"
+ },
+ "recipes": {
+  "semolina_pudding": "Semolina pudding",
+  "honey_tarragon_chicken": "Manok na may pulot at tarragon",
+  "caesar_salad": "Caesar salad",
+  "breakfast_muffin": "Muffin pang-almusal",
+  "summer_salad": "Salad pantag-init",
+  "tomato_soup": "Sopas na kamatis",
+  "french_onion_soup": "French onion soup",
+  "overnight_oats": "Overnight oats",
+  "slow_cooked_beef": "Mabagal na lutong baka",
+  "homemade_mayonnaise": "Gawang-bahay na mayonesa"
  }
 };

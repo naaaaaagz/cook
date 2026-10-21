@@ -295,5 +295,17 @@ window.I18N["fi"] = {
   "green_onion": "Kevätsipuli",
   "tomato": "Tomaatti",
   "white_onion": "Valkoinen sipuli"
+ },
+ "recipes": {
+  "semolina_pudding": "Mannapuuro",
+  "honey_tarragon_chicken": "Hunaja-rakuunakana",
+  "caesar_salad": "Caesar-salaatti",
+  "breakfast_muffin": "Aamiaismuffinssit",
+  "summer_salad": "Kesäsalaatti",
+  "tomato_soup": "Tomaattikeitto",
+  "french_onion_soup": "Ranskalainen sipulikeitto",
+  "overnight_oats": "Yökaura",
+  "slow_cooked_beef": "Haudutettu naudanliha",
+  "homemade_mayonnaise": "Kotitekoinen majoneesi"
  }
 };

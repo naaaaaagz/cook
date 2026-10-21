@@ -295,5 +295,17 @@ window.I18N["el"] = {
   "green_onion": "Φρέσκο κρεμμυδάκι",
   "tomato": "Ντομάτα",
   "white_onion": "Λευκό κρεμμύδι"
+ },
+ "recipes": {
+  "semolina_pudding": "Χυλός σιμιγδαλιού",
+  "honey_tarragon_chicken": "Κοτόπουλο με μέλι και εστραγκόν",
+  "caesar_salad": "Σαλάτα του Καίσαρα",
+  "breakfast_muffin": "Μάφινς πρωινού",
+  "summer_salad": "Καλοκαιρινή σαλάτα",
+  "tomato_soup": "Ντοματόσουπα",
+  "french_onion_soup": "Γαλλική κρεμμυδόσουπα",
+  "overnight_oats": "Βρώμη μιας νύχτας",
+  "slow_cooked_beef": "Μοσχάρι σιγοψημένο",
+  "homemade_mayonnaise": "Σπιτική μαγιονέζα"
  }
 };

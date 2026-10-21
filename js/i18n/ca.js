@@ -295,5 +295,17 @@ window.I18N["ca"] = {
   "green_onion": "Ceba tendra",
   "tomato": "Tomàquet",
   "white_onion": "Ceba blanca"
+ },
+ "recipes": {
+  "semolina_pudding": "Farinetes de sèmola",
+  "honey_tarragon_chicken": "Pollastre amb mel i estragó",
+  "caesar_salad": "Amanida César",
+  "breakfast_muffin": "Magdalenes d’esmorzar",
+  "summer_salad": "Amanida d’estiu",
+  "tomato_soup": "Sopa de tomàquet",
+  "french_onion_soup": "Sopa de ceba francesa",
+  "overnight_oats": "Civada en remull",
+  "slow_cooked_beef": "Vedella cuita a foc lent",
+  "homemade_mayonnaise": "Maionesa casolana"
  }
 };

@@ -295,5 +295,17 @@ window.I18N["th"] = {
   "green_onion": "ต้นหอม",
   "tomato": "มะเขือเทศ",
   "white_onion": "หอมหัวใหญ่สีขาว"
+ },
+ "recipes": {
+  "semolina_pudding": "พุดดิ้งเซโมลินา",
+  "honey_tarragon_chicken": "ไก่น้ำผึ้งทาร์รากอน",
+  "caesar_salad": "สลัดซีซาร์",
+  "breakfast_muffin": "มัฟฟินอาหารเช้า",
+  "summer_salad": "สลัดฤดูร้อน",
+  "tomato_soup": "ซุปมะเขือเทศ",
+  "french_onion_soup": "ซุปหัวหอมฝรั่งเศส",
+  "overnight_oats": "โอ๊ตแช่ข้ามคืน",
+  "slow_cooked_beef": "เนื้อตุ๋นช้า",
+  "homemade_mayonnaise": "มายองเนสโฮมเมด"
  }
 };

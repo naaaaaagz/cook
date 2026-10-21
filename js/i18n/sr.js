@@ -295,5 +295,17 @@ window.I18N["sr"] = {
   "green_onion": "Mladi luk",
   "tomato": "Paradajz",
   "white_onion": "Crni luk (beli)"
+ },
+ "recipes": {
+  "semolina_pudding": "Griz na mleku",
+  "honey_tarragon_chicken": "Piletina sa medom i estragonom",
+  "caesar_salad": "Cezar salata",
+  "breakfast_muffin": "Mafini za doručak",
+  "summer_salad": "Letnja salata",
+  "tomato_soup": "Čorba od paradajza",
+  "french_onion_soup": "Francuska čorba od luka",
+  "overnight_oats": "Ovsene pahuljice preko noći",
+  "slow_cooked_beef": "Sporo kuvana govedina",
+  "homemade_mayonnaise": "Domaći majonez"
  }
 };

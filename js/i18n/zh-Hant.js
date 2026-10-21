@@ -295,5 +295,17 @@ window.I18N["zh-Hant"] = {
   "green_onion": "青蔥",
   "tomato": "番茄",
   "white_onion": "白洋蔥"
+ },
+ "recipes": {
+  "semolina_pudding": "粗粒小麥粉布丁",
+  "honey_tarragon_chicken": "蜂蜜龍蒿雞",
+  "caesar_salad": "凱撒沙拉",
+  "breakfast_muffin": "早餐瑪芬",
+  "summer_salad": "夏日沙拉",
+  "tomato_soup": "番茄湯",
+  "french_onion_soup": "法式洋蔥湯",
+  "overnight_oats": "隔夜燕麥",
+  "slow_cooked_beef": "慢燉牛肉",
+  "homemade_mayonnaise": "自製美乃滋"
  }
 };

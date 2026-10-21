@@ -295,5 +295,17 @@ window.I18N["cs"] = {
   "green_onion": "Jarní cibulka",
   "tomato": "Rajče",
   "white_onion": "Bílá cibule"
+ },
+ "recipes": {
+  "semolina_pudding": "Krupicová kaše",
+  "honey_tarragon_chicken": "Kuře s medem a estragonem",
+  "caesar_salad": "Caesar salát",
+  "breakfast_muffin": "Snídaňové muffiny",
+  "summer_salad": "Letní salát",
+  "tomato_soup": "Rajská polévka",
+  "french_onion_soup": "Francouzská cibulačka",
+  "overnight_oats": "Ovesná kaše přes noc",
+  "slow_cooked_beef": "Pomalu dušené hovězí",
+  "homemade_mayonnaise": "Domácí majonéza"
  }
 };

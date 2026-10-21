@@ -295,5 +295,17 @@ window.I18N["de"] = {
   "green_onion": "Frühlingszwiebel",
   "tomato": "Tomate",
   "white_onion": "Weiße Zwiebel"
+ },
+ "recipes": {
+  "semolina_pudding": "Grießbrei",
+  "honey_tarragon_chicken": "Honig-Estragon-Hähnchen",
+  "caesar_salad": "Caesar Salad",
+  "breakfast_muffin": "Frühstücksmuffins",
+  "summer_salad": "Sommersalat",
+  "tomato_soup": "Tomatensuppe",
+  "french_onion_soup": "Französische Zwiebelsuppe",
+  "overnight_oats": "Overnight Oats",
+  "slow_cooked_beef": "Langsam geschmortes Rindfleisch",
+  "homemade_mayonnaise": "Hausgemachte Mayonnaise"
  }
 };

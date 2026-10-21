@@ -295,5 +295,17 @@ window.I18N["lt"] = {
   "green_onion": "Svogūnų laiškai",
   "tomato": "Pomidoras",
   "white_onion": "Baltasis svogūnas"
+ },
+ "recipes": {
+  "semolina_pudding": "Manų košė",
+  "honey_tarragon_chicken": "Vištiena su medumi ir peletrūnu",
+  "caesar_salad": "Cezario salotos",
+  "breakfast_muffin": "Pusryčių keksiukai",
+  "summer_salad": "Vasaros salotos",
+  "tomato_soup": "Pomidorų sriuba",
+  "french_onion_soup": "Prancūziška svogūnų sriuba",
+  "overnight_oats": "Per naktį mirkytos avižos",
+  "slow_cooked_beef": "Lėtai troškinta jautiena",
+  "homemade_mayonnaise": "Naminis majonezas"
  }
 };

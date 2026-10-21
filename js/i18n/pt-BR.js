@@ -295,5 +295,17 @@ window.I18N["pt-BR"] = {
   "green_onion": "Cebolinha",
   "tomato": "Tomate",
   "white_onion": "Cebola branca"
+ },
+ "recipes": {
+  "semolina_pudding": "Mingau de semolina",
+  "honey_tarragon_chicken": "Frango com mel e estragão",
+  "caesar_salad": "Salada Caesar",
+  "breakfast_muffin": "Muffins de café da manhã",
+  "summer_salad": "Salada de verão",
+  "tomato_soup": "Sopa de tomate",
+  "french_onion_soup": "Sopa de cebola francesa",
+  "overnight_oats": "Aveia dormida",
+  "slow_cooked_beef": "Carne cozida lentamente",
+  "homemade_mayonnaise": "Maionese caseira"
  }
 };

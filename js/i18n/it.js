@@ -295,5 +295,17 @@ window.I18N["it"] = {
   "green_onion": "Cipollotto",
   "tomato": "Pomodoro",
   "white_onion": "Cipolla bianca"
+ },
+ "recipes": {
+  "semolina_pudding": "Budino di semolino",
+  "honey_tarragon_chicken": "Pollo al miele e dragoncello",
+  "caesar_salad": "Insalata Caesar",
+  "breakfast_muffin": "Muffin per colazione",
+  "summer_salad": "Insalata estiva",
+  "tomato_soup": "Zuppa di pomodoro",
+  "french_onion_soup": "Zuppa di cipolle alla francese",
+  "overnight_oats": "Overnight oats",
+  "slow_cooked_beef": "Manzo cotto a fuoco lento",
+  "homemade_mayonnaise": "Maionese fatta in casa"
  }
 };

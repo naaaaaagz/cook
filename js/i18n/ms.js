@@ -295,5 +295,17 @@ window.I18N["ms"] = {
   "green_onion": "Daun bawang",
   "tomato": "Tomato",
   "white_onion": "Bawang besar putih"
+ },
+ "recipes": {
+  "semolina_pudding": "Puding semolina",
+  "honey_tarragon_chicken": "Ayam madu tarragon",
+  "caesar_salad": "Salad Caesar",
+  "breakfast_muffin": "Muffin sarapan",
+  "summer_salad": "Salad musim panas",
+  "tomato_soup": "Sup tomato",
+  "french_onion_soup": "Sup bawang Perancis",
+  "overnight_oats": "Oat semalaman",
+  "slow_cooked_beef": "Daging lembu masak perlahan",
+  "homemade_mayonnaise": "Mayonis buatan sendiri"
  }
 };

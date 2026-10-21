@@ -295,5 +295,17 @@ window.I18N["ro"] = {
   "green_onion": "Ceapă verde",
   "tomato": "Roșie",
   "white_onion": "Ceapă albă"
+ },
+ "recipes": {
+  "semolina_pudding": "Griș cu lapte",
+  "honey_tarragon_chicken": "Pui cu miere și tarhon",
+  "caesar_salad": "Salată Caesar",
+  "breakfast_muffin": "Brioșe pentru micul dejun",
+  "summer_salad": "Salată de vară",
+  "tomato_soup": "Supă de roșii",
+  "french_onion_soup": "Supă franțuzească de ceapă",
+  "overnight_oats": "Ovăz peste noapte",
+  "slow_cooked_beef": "Vită gătită lent",
+  "homemade_mayonnaise": "Maioneză de casă"
  }
 };

@@ -295,5 +295,17 @@ window.I18N["is"] = {
   "green_onion": "Vorlaukur",
   "tomato": "Tómatur",
   "white_onion": "Hvítur laukur"
+ },
+ "recipes": {
+  "semolina_pudding": "Semolíugrautur",
+  "honey_tarragon_chicken": "Kjúklingur með hunangi og estragon",
+  "caesar_salad": "Sesarsalat",
+  "breakfast_muffin": "Morgunverðarmúffur",
+  "summer_salad": "Sumarsalat",
+  "tomato_soup": "Tómatsúpa",
+  "french_onion_soup": "Frönsk lauksúpa",
+  "overnight_oats": "Hafrar yfir nótt",
+  "slow_cooked_beef": "Hægeldað nautakjöt",
+  "homemade_mayonnaise": "Heimagert majónes"
  }
 };

@@ -295,5 +295,17 @@ window.I18N["tr"] = {
   "green_onion": "Taze soğan",
   "tomato": "Domates",
   "white_onion": "Beyaz soğan"
+ },
+ "recipes": {
+  "semolina_pudding": "İrmik muhallebisi",
+  "honey_tarragon_chicken": "Ballı tarhunlu tavuk",
+  "caesar_salad": "Sezar salata",
+  "breakfast_muffin": "Kahvaltılık muffin",
+  "summer_salad": "Yaz salatası",
+  "tomato_soup": "Domates çorbası",
+  "french_onion_soup": "Fransız soğan çorbası",
+  "overnight_oats": "Gece yulafı",
+  "slow_cooked_beef": "Ağır ateşte pişmiş dana eti",
+  "homemade_mayonnaise": "Ev yapımı mayonez"
  }
 };

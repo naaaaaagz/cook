@@ -295,5 +295,17 @@ window.I18N["ko"] = {
   "green_onion": "쪽파",
   "tomato": "토마토",
   "white_onion": "흰 양파"
+ },
+ "recipes": {
+  "semolina_pudding": "세몰리나 푸딩",
+  "honey_tarragon_chicken": "꿀 타라곤 치킨",
+  "caesar_salad": "시저 샐러드",
+  "breakfast_muffin": "아침 머핀",
+  "summer_salad": "여름 샐러드",
+  "tomato_soup": "토마토 수프",
+  "french_onion_soup": "프렌치 어니언 수프",
+  "overnight_oats": "오버나이트 오트",
+  "slow_cooked_beef": "저온 조리 소고기",
+  "homemade_mayonnaise": "수제 마요네즈"
  }
 };

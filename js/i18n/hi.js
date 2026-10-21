@@ -295,5 +295,17 @@ window.I18N["hi"] = {
   "green_onion": "हरा प्याज़",
   "tomato": "टमाटर",
   "white_onion": "सफ़ेद प्याज़"
+ },
+ "recipes": {
+  "semolina_pudding": "सूजी का हलवा",
+  "honey_tarragon_chicken": "शहद और टैरागन वाला चिकन",
+  "caesar_salad": "सीज़र सलाद",
+  "breakfast_muffin": "नाश्ते के मफ़िन",
+  "summer_salad": "गर्मियों का सलाद",
+  "tomato_soup": "टमाटर का सूप",
+  "french_onion_soup": "फ़्रेंच प्याज़ का सूप",
+  "overnight_oats": "रात भर भीगे ओट्स",
+  "slow_cooked_beef": "धीमी आँच पर पका बीफ़",
+  "homemade_mayonnaise": "घर का बना मेयोनीज़"
  }
 };

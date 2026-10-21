@@ -295,5 +295,17 @@ window.I18N["sv"] = {
   "green_onion": "Salladslök",
   "tomato": "Tomat",
   "white_onion": "Vit lök"
+ },
+ "recipes": {
+  "semolina_pudding": "Mannagrynsgröt",
+  "honey_tarragon_chicken": "Kyckling med honung och dragon",
+  "caesar_salad": "Caesarsallad",
+  "breakfast_muffin": "Frukostmuffins",
+  "summer_salad": "Sommarsallad",
+  "tomato_soup": "Tomatsoppa",
+  "french_onion_soup": "Fransk löksoppa",
+  "overnight_oats": "Overnight oats",
+  "slow_cooked_beef": "Långkokt nötkött",
+  "homemade_mayonnaise": "Hemgjord majonnäs"
  }
 };

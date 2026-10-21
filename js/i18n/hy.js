@@ -295,5 +295,17 @@ window.I18N["hy"] = {
   "green_onion": "Կանաչ սոխ",
   "tomato": "Լոլիկ",
   "white_onion": "Սպիտակ սոխ"
+ },
+ "recipes": {
+  "semolina_pudding": "Սպիտակաձավարով շիլա",
+  "honey_tarragon_chicken": "Հավ մեղրով և թարխունով",
+  "caesar_salad": "«Կեսար» աղցան",
+  "breakfast_muffin": "Նախաճաշի մաֆիններ",
+  "summer_salad": "Ամառային աղցան",
+  "tomato_soup": "Լոլիկով ապուր",
+  "french_onion_soup": "Ֆրանսիական սոխով ապուր",
+  "overnight_oats": "Գիշերային վարսակ",
+  "slow_cooked_beef": "Դանդաղ եփած տավարի միս",
+  "homemade_mayonnaise": "Տնական մայոնեզ"
  }
 };

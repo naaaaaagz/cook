@@ -295,5 +295,17 @@ window.I18N["sq"] = {
   "green_onion": "Qepë e njomë",
   "tomato": "Domate",
   "white_onion": "Qepë e bardhë"
+ },
+ "recipes": {
+  "semolina_pudding": "Pudingë me griz",
+  "honey_tarragon_chicken": "Pulë me mjaltë dhe tarragon",
+  "caesar_salad": "Sallatë Cezar",
+  "breakfast_muffin": "Mafina për mëngjes",
+  "summer_salad": "Sallatë vere",
+  "tomato_soup": "Supë me domate",
+  "french_onion_soup": "Supë franceze me qepë",
+  "overnight_oats": "Tërshërë e njomur gjatë natës",
+  "slow_cooked_beef": "Mish viçi i gatuar ngadalë",
+  "homemade_mayonnaise": "Majonezë shtëpie"
  }
 };

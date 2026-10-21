@@ -295,5 +295,17 @@ window.I18N["vi"] = {
   "green_onion": "Hành lá",
   "tomato": "Cà chua",
   "white_onion": "Hành tây trắng"
+ },
+ "recipes": {
+  "semolina_pudding": "Pudding bột semolina",
+  "honey_tarragon_chicken": "Gà mật ong ngải giấm",
+  "caesar_salad": "Salad Caesar",
+  "breakfast_muffin": "Bánh muffin ăn sáng",
+  "summer_salad": "Salad mùa hè",
+  "tomato_soup": "Súp cà chua",
+  "french_onion_soup": "Súp hành kiểu Pháp",
+  "overnight_oats": "Yến mạch ngâm qua đêm",
+  "slow_cooked_beef": "Bò hầm chậm",
+  "homemade_mayonnaise": "Sốt mayonnaise tự làm"
  }
 };
