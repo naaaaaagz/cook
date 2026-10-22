@@ -8,6 +8,8 @@
   S|step_id|thread|title|instruction|kind|heat|duration_rule|depends_on|done_when|ingredients_in|equipment|condition|area (optional: stove, oven, countertop, board, sink, fridge, freezer)
 
   Only the columns the app uses are kept. Read by the converter in recipes.js.
+  Optional per recipe: vars(choices) adds numbers for duration rules; heat(choices)
+  returns { stepId: heat } for heat cells that are formulas in the sheet.
 */
 window.SHEET_RECIPES = [
   {
@@ -495,6 +497,8 @@ S|M1|M|Serve|Open and eat from the jar.|action|—|10|J7, J8|Served|oats_ready|j
   },
   {
     id: 'slow_cooked_beef', name: 'Slow-Cooked Beef', image: 'img/350/beef.webp',
+    // The sheet's M3 heat cell is a formula: Low or High, following the setting option.
+    heat: function (c) { return { M3: c.opt_setting === 'low' ? 'Low' : 'High' }; },
     rows: `
 O|opt_setting|high|High (5 to 6 hours)|TRUE
 O|opt_setting|low|Low (8 to 10 hours)|FALSE
@@ -535,7 +539,7 @@ I|flour|Flour|img/350/flour.webp|0.17|tbsp|1.7|linear|—|—
 I|cherry_tomato|Cherry tomatoes|img/350/cherry_tomato.webp|35|g|35|linear|opt_tomatoes = with|—
 S|M1|M|Mix the marinade|In the slow cooker pot mix the oil, salt, pepper, brown sugar, MSG, crushed cardamom seeds, cumin, cinnamon, smoked paprika, garlic powder, mustard, Worcestershire sauce, chili powder, thyme and red wine. Taste until satisfied.|action|—|180|—|Tastes balanced|oil; salt; ground_black_pepper; brown_sugar; msg; cardamom; cumin; cinnamon; smoked_paprika; garlic_powder; mustard; worcestershire_sauce; chili_powder; thyme; red_wine|slow_cooker, spoon|—
 S|M2|M|Beef in, coat it|Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.|action|—|60|M1|Coated all over|beef|slow_cooker|—
-S|M3|M|Slow cook|Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.|wait|slow cooker|19800 High (doc: 5 to 6 h) / 32400 Low (doc: 8 to 10 h)|M2|Fork twists in easily (≈90 to 95 °C inside)|—|slow_cooker|—
+S|M3|M|Slow cook|Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.|wait|High|19800 High (doc: 5 to 6 h) / 32400 Low (doc: 8 to 10 h)|M2|Fork twists in easily (≈90 to 95 °C inside)|—|slow_cooker|—
 S|G1|G|Cream and flour|Whisk the cream with the flour in a separate bowl.|action|—|60|—|Smooth, no lumps|cream; flour|bowl, whisk|—
 S|M4|M|Check doneness|Twist a fork into the meat: it should go in easily. Don't overcook it, it dries into strings.|check|—|60|M3|Fork twists in easily|—|fork|—
 S|S1|S|Into the hot pan|Turn off the slow cooker. Move the meat carefully into a pan with a little oil, the butter and the herbs (and garlic). Leave the marinade in the pot!|action|high|60|M4|Meat in the pan|beef_done; oil_sear; butter; rosemary; thyme_fresh; garlic|pan, stovetop|—

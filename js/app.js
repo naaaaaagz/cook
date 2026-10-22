@@ -212,7 +212,7 @@
     var s = (pack().strings || {})[key];
     if (s === undefined) s = STRINGS.en[key];
     if (s === undefined) s = key;
-    if (vars) Object.keys(vars).forEach(function (k) { s = s.replace('{' + k + '}', vars[k]); });
+    if (vars) Object.keys(vars).forEach(function (k) { s = s.replace('{' + k + '}', function () { return vars[k]; }); });
     return s;
   }
 
@@ -283,8 +283,11 @@
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
   function esc(s) {
-    return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+    return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   }
+
+  // Translations are plain text, including when used inside generated HTML.
+  function ht(key, vars) { return esc(t(key, vars)); }
 
   // In memory only: this is a one-shot test, nothing is stored on the device.
   var state = {
@@ -364,10 +367,7 @@
       state.units = r.value;
       if (state.recipe) updateDetails();
       if (cook) {
-        Object.keys(cook.els).forEach(function (id) { cook.els[id].remove(); });
-        cook.els = {};
-        render();
-        tick();
+        redrawCooking();
       }
     });
   });
@@ -378,20 +378,45 @@
     }).join('');
     sel.value = lang;
   })();
+  var requestedLang = lang;
+  var languageLoads = Object.create(null);
   function setLang(code) {
+    if (!LANGS.some(function (entry) { return entry && entry[0] === code; })) return;
+    requestedLang = code;
     if (code === 'en-US' || window.I18N[code]) { applyLang(code); return; }
+    if (languageLoads[code]) return;
     var sc = document.createElement('script');
+    languageLoads[code] = sc;
     sc.src = 'js/i18n/' + code + '.js';
-    sc.onload = function () { applyLang(code); };
-    sc.onerror = function () { $('lang-select').value = lang; };
+    sc.onload = function () {
+      delete languageLoads[code];
+      sc.remove();
+      if (requestedLang === code && window.I18N[code]) applyLang(code);
+    };
+    sc.onerror = function () {
+      delete languageLoads[code];
+      sc.remove();
+      if (requestedLang === code) { requestedLang = lang; $('lang-select').value = lang; }
+    };
     document.head.appendChild(sc);
   }
   function applyLang(code) {
     lang = code;
+    $('lang-select').value = code;
     ukRe = null;
     document.documentElement.dir = RTL.indexOf(code) >= 0 ? 'rtl' : 'ltr';
     applyStrings();
     refreshTexts();
+  }
+  function redrawCooking() {
+    closePop();
+    Object.keys(cook.els).forEach(function (id) { cook.els[id].remove(); });
+    Object.keys(cook.notifs).forEach(function (id) { cook.notifs[id].remove(); });
+    cook.els = {};
+    cook.notifs = {};
+    $('cook-map').innerHTML = '';
+    render();
+    tick();
   }
   // Redraws everything that shows text in the new language.
   function refreshTexts() {
@@ -407,11 +432,7 @@
     if (cook) {
       localizeBuilt({ ingredients: cook.ingredients, steps: cook.steps });
       $('cook-name').textContent = recipeName(state.recipe);
-      Object.keys(cook.els).forEach(function (id) { cook.els[id].remove(); });
-      cook.els = {};
-      $('cook-map').innerHTML = '';
-      render();
-      tick();
+      redrawCooking();
     }
     if (reading && $('read-dialog').open) { $('read-title').textContent = recipeName(reading.recipe); renderRead(); }
   }
@@ -456,17 +477,7 @@
   var reading = null;
 
   // When each step can start if everything runs as soon as possible (seconds).
-  function startTimes(steps) {
-    var end = {}, start = {}, changed = true, rounds = 0;
-    while (changed && rounds++ <= steps.length) {
-      changed = false;
-      steps.forEach(function (s) {
-        var st = depsOf(steps, s).reduce(function (m, d) { return Math.max(m, end[d] || 0); }, 0);
-        if (start[s.id] !== st) { start[s.id] = st; end[s.id] = st + s.duration; changed = true; }
-      });
-    }
-    return start;
-  }
+  function startTimes(steps) { return window.CookCore.schedule(steps).start; }
 
   function openRead(r) {
     reading = { recipe: r, locked: !!cook && state.recipe === r };
@@ -492,13 +503,13 @@
 
     var html = '';
     if (r.options.length) {
-      html += '<h3>' + t('chooseFirst') + '</h3>' +
-        (reading.locked ? '<p class="hint">' + t('cookingVersion') + '</p>' : '') +
+      html += '<h3>' + ht('chooseFirst') + '</h3>' +
+        (reading.locked ? '<p class="hint">' + ht('cookingVersion') + '</p>' : '') +
         '<div class="read-options">' + optionsHtml(r, c, 'read_', reading.locked) + '</div>';
     }
-    html += '<h3>' + t('ingredientsFor', { x: whoText(r, c) }) + '</h3>';
+    html += '<h3>' + ht('ingredientsFor', { x: whoText(r, c) }) + '</h3>';
     groupIngredients(built.ingredients).forEach(function (g) {
-      html += '<h4>' + t('ingCat_' + g.cat) + '</h4><ul>' + g.items.map(function (i) {
+      html += '<h4>' + ht('ingCat_' + g.cat) + '</h4><ul>' + g.items.map(function (i) {
         return '<li><b>' + esc(units(i.amount)) + '</b> ' + esc(i.name) + (i.note ? ' <span class="hint">(' + esc(units(i.note)) + ')</span>' : '') + '</li>';
       }).join('') + '</ul>';
     });
@@ -512,10 +523,10 @@
       // Nothing done yet (or not started): no marker, nothing greyed.
       if (here <= 0 || !cook.t0) here = -1;
     }
-    html += '<h3>' + t('method') + '</h3><ol class="read-method">' + steps.map(function (s, i) {
+    html += '<h3>' + ht('method') + '</h3><ol class="read-method">' + steps.map(function (s, i) {
       var cls = here < 0 ? '' : i < here ? ' class="is-past"' : i === here ? ' class="is-here"' : '';
-      return '<li' + cls + '><b>' + esc(s.title) + '.</b> ' + linkRecipes(esc(units(s.text)), r) +
-        ' <span class="hint">(' + t('aboutTime', { t: fmtMinutes(Math.max(1, Math.round(s.duration / 60))) }) + ')</span></li>';
+      return '<li' + cls + '><b>' + esc(s.title) + '.</b> ' + linkRecipes(units(s.text), r) +
+        ' <span class="hint">(' + ht('aboutTime', { t: fmtMinutes(Math.max(1, Math.round(s.duration / 60))) }) + ')</span></li>';
     }).join('') + '</ol>';
     body.innerHTML = html;
     body.scrollTop = keep;
@@ -864,7 +875,7 @@
       el.tabIndex = 0;
       el.setAttribute('role', 'button');
       el.setAttribute('aria-label', t(key) + ', ' + t('moveHint'));
-      el.innerHTML = '<img class="icon" alt="" src="' + (key === 'me' ? ICON.me : AREAS[key].icon) + '"><span>' + t(key) + '</span>' +
+      el.innerHTML = '<img class="icon" alt="" src="' + (key === 'me' ? ICON.me : AREAS[key].icon) + '"><span>' + ht(key) + '</span>' +
         (key === 'me' ? '' : '<span class="resize" aria-hidden="true"></span>');
       placeEl(el, draft[key]);
       makeMovable(el, key, canvas, draft, LAYOUT_KEYS, {
@@ -995,41 +1006,16 @@
   });
 
   // ---------- Recipe facts: time, diet, allergens, nutrition, kids ----------
-  function prevInThread(steps, step) {
-    var prev = null;
-    for (var i = 0; i < steps.length && steps[i] !== step; i++) {
-      if (steps[i].thread === step.thread) prev = steps[i];
-    }
-    return prev;
-  }
-
-  function depsOf(steps, step) {
-    var prev = prevInThread(steps, step);
-    return step.deps.concat(prev ? [prev.id] : []);
-  }
+  function depsOf(steps, step) { return window.CookCore.graph(steps).deps[step.id]; }
 
   // "Done, Next!" when another step waits for this one, "Done!" at the end of its chain.
   function doneLabel(step) {
-    var next = cook.steps.some(function (s) { return s !== step && depsOf(cook.steps, s).indexOf(step.id) >= 0; });
+    var next = window.CookCore.graph(cook.steps).next[step.id].length > 0;
     return t(next ? 'doneNext' : 'done');
   }
 
-  // Rough total: every step starts as soon as the steps it needs are done.
-  // Repeats until nothing changes, so the order of the steps doesn't matter.
-  // remaining(step) gives the seconds still needed (default: its full duration).
-  function scheduleSeconds(steps, remaining) {
-    var end = {}, total = 0, changed = true, rounds = 0;
-    while (changed && rounds++ <= steps.length) {
-      changed = false;
-      steps.forEach(function (s) {
-        var start = depsOf(steps, s).reduce(function (m, d) { return Math.max(m, end[d] || 0); }, 0);
-        var e = start + (remaining ? remaining(s) : s.duration);
-        if (end[s.id] !== e) { end[s.id] = e; changed = true; }
-      });
-    }
-    steps.forEach(function (s) { total = Math.max(total, end[s.id]); });
-    return total;
-  }
+  // Earliest possible finish, respecting explicit dependencies and thread order.
+  function scheduleSeconds(steps, remaining) { return window.CookCore.schedule(steps, remaining).total; }
 
   function estimateMinutes(steps) { return Math.round(scheduleSeconds(steps) / 60); }
 
@@ -1081,12 +1067,12 @@
   function dietBadge(info) {
     if (!info.label) return '';
     var cls = info.label === 'vegan' ? 'diet-vegan' : info.label === 'pesc' ? 'diet-pesc' : 'diet-veg';
-    return '<span class="diet-badge ' + cls + '">' + t('diet_' + info.label) + '</span>';
+    return '<span class="diet-badge ' + cls + '">' + ht('diet_' + info.label) + '</span>';
   }
 
   function containsRow(info) {
     if (!info.contains.length) return '';
-    return '<span class="warn-icon" role="img" aria-label="' + t('containsLabel') + '">❗</span> ' +
+    return '<span class="warn-icon" role="img" aria-label="' + ht('containsLabel') + '">❗</span> ' +
       '<span>' + info.contains.map(esc).join(', ') + '</span>';
   }
 
@@ -1122,6 +1108,8 @@
     var img = document.createElement('img');
     img.className = 'photo ' + (cls || '');
     img.alt = '';
+    img.decoding = 'async';
+    if (size === 350) img.loading = 'lazy';
     img.src = 'img/ready/webp' + size + '/' + r.id + '.webp';
     img.addEventListener('error', function () {
       var ph = document.createElement('div');
@@ -1195,13 +1183,13 @@
           '<button class="recipe-card" type="button">' +
           '<span class="recipe-card-body">' +
           '<span class="title-row"><span>' + esc(recipeName(r)) + '</span>' + dietBadge(info) + '</span>' +
-          '<span class="meta-line time-line">⏱️ ' + fmtMinutes(estimateMinutes(built.steps)) + '</span>' +
+          '<span class="meta-line time-line">⏱️ ' + esc(fmtMinutes(estimateMinutes(built.steps))) + '</span>' +
           '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' kcal · ' +
-          Math.round(n.carbs) + ' g ' + t('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + t('proteinShort') +
-          '<small>' + unitText(r, 'perServing') + '</small></span>' +
+          Math.round(n.carbs) + ' g ' + ht('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + ht('proteinShort') +
+          '<small>' + esc(unitText(r, 'perServing')) + '</small></span>' +
           '<span class="warn-row">' + containsRow(info) + '</span>' +
           '</span></button>' +
-          '<button class="btn btn-secondary btn-read-card" type="button" aria-label="' + t('readInstead') + '" title="' + t('readInstead') + '">' +
+          '<button class="btn btn-secondary btn-read-card" type="button" aria-label="' + ht('readInstead') + '" title="' + ht('readInstead') + '">' +
           document.querySelector('.book-icon').outerHTML + '</button>';
         var card = li.querySelector('.recipe-card');
         var wrap = document.createElement('span');
@@ -1284,13 +1272,24 @@
   function recipeNamed(name) {
     return window.RECIPES.filter(function (x) { return x.name.toLowerCase() === name.trim().toLowerCase(); })[0] || null;
   }
-  function linkRecipes(html, self) {
-    window.RECIPES.forEach(function (x) {
-      var name = L(x.name);
-      if (x === self || html.indexOf(name) < 0) return;
-      html = html.split(name).join('<button type="button" class="recipe-link" data-recipe="' + x.id + '">' + esc(name) + '</button>');
-    });
-    return html;
+  // Match plain text once; escape both unmatched text and link attributes.
+  function linkRecipes(text, self) {
+    var recipes = window.RECIPES.filter(function (r) { return r !== self; })
+      .map(function (r) { return { name: L(r.name), id: r.id }; })
+      .sort(function (a, b) { return b.name.length - a.name.length; });
+    if (!recipes.length) return esc(text);
+    var byName = Object.create(null);
+    recipes.forEach(function (r) { byName[r.name] = r; });
+    var pattern = recipes.map(function (r) {
+      return r.name.replace(/[^a-zA-Z0-9_ ]/g, function (c) { return '\\' + c; });
+    }).join('|');
+    var re = new RegExp(pattern, 'g'), result = '', end = 0, match;
+    while ((match = re.exec(String(text)))) {
+      result += esc(String(text).slice(end, match.index)) + '<button type="button" class="recipe-link" data-recipe="' +
+        esc(byName[match[0]].id) + '">' + esc(match[0]) + '</button>';
+      end = re.lastIndex;
+    }
+    return result + esc(String(text).slice(end));
   }
   // Capture phase, so the click doesn't also pick the option or tap the card.
   document.addEventListener('click', function (e) {
@@ -1308,9 +1307,9 @@
       return '<fieldset class="choices"><legend>' + esc(L(o.question)) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
         var parts = labelParts(r, o.id, ch);
         var see = parts[1].match(/^see (.+)$/i), sub = see && recipeNamed(see[1]);
-        return '<label class="choice"><input type="radio" name="' + prefix + o.id + '" value="' + ch.id + '"' +
+        return '<label class="choice"><input type="radio" name="' + esc(prefix + o.id) + '" value="' + esc(ch.id) + '"' +
           (c[o.id] === ch.id ? ' checked' : '') + (disabled ? ' disabled' : '') + '> <span class="choice-text"><span>' + esc(L(parts[0])) + '</span>' +
-          (sub ? '<button type="button" class="see-recipe" data-recipe="' + sub.id + '">' + t('seeRecipe') + '</button>'
+          (sub ? '<button type="button" class="see-recipe" data-recipe="' + esc(sub.id) + '">' + ht('seeRecipe') + '</button>'
             : parts[1] ? '<small>' + esc(L(parts[1])) + '</small>' : '') + '</span></label>';
       }).join('') + '</div></fieldset>';
     }).join('');
@@ -1363,14 +1362,12 @@
     $('det-warnings').innerHTML = containsRow(info);
     $('det-warnings').hidden = !info.contains.length;
 
-    var per = Object.assign({}, c, { adults: r.defaultServings || 2, kids: 0 });
-    per.servings = per.adults;
-    var n = nutritionPerPerson(r.build(per));
+    var n = nutritionPerPerson(built);
     $('det-per').textContent = unitText(r, 'perPerson');
     var rows = [['kcal', kcal5(n.kcal) + ' kcal'], ['carbs', Math.round(n.carbs) + ' g'], ['protein', Math.round(n.protein) + ' g'],
       ['fatSat', Math.round(n.fat) + ' g / ' + Math.round(n.satFat) + ' g'], ['fiber', n.fiber.toFixed(1) + ' g'], ['salt', n.salt.toFixed(1) + ' g']];
     $('det-nutrition').innerHTML = rows.map(function (x) {
-      return '<div><dt>' + t(x[0]) + '</dt><dd>' + x[1] + '</dd></div>';
+      return '<div><dt>' + ht(x[0]) + '</dt><dd>' + x[1] + '</dd></div>';
     }).join('');
 
     // Equipment: every tool the steps use (with the options picked), in order of first use.
@@ -1380,7 +1377,7 @@
     });
     $('det-equipment').innerHTML = tools.map(function (id) {
       var eq = window.EQUIPMENT[id];
-      return '<li><img class="icon" src="' + eq.icon + '" alt=""><span>' + esc(L(eq.name)) + '</span></li>';
+      return '<li>' + (eq.icon ? '<img class="icon" src="' + esc(eq.icon) + '" alt="">' : '') + '<span>' + esc(L(eq.name)) + '</span></li>';
     }).join('');
     document.querySelector('.equipment').hidden = !tools.length;
     layoutEquipment();
@@ -1406,8 +1403,8 @@
       var before = hazards(r, base, r.build(base)), now = hazards(r, c, built);
       var omitted = before.filter(function (h) { return now.indexOf(h) < 0; });
       var html = '';
-      if (omitted.length) html += '<p><strong>' + t('warning') + '</strong> ' + t('kidsOmitted', { x: listWords(omitted) }) + '</p>';
-      if (now.length) html += '<p><strong>' + t('warning') + '</strong> ' + t('kidsSure', { x: listWords(now) }) + '</p>';
+      if (omitted.length) html += '<p><strong>' + ht('warning') + '</strong> ' + ht('kidsOmitted', { x: listWords(omitted) }) + '</p>';
+      if (now.length) html += '<p><strong>' + ht('warning') + '</strong> ' + ht('kidsSure', { x: listWords(now) }) + '</p>';
       warn.innerHTML = html;
       warn.hidden = !html;
     } else {
@@ -1427,7 +1424,7 @@
         var li = document.createElement('li');
         li.className = 'ing-card';
         li.innerHTML =
-          '<img alt="" src="' + imgFor(ing) + '">' +
+          '<img alt="" src="' + esc(imgFor(ing)) + '">' +
           '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(units(ing.note)) + '</span>' : '') + '</span>' +
           '<span class="amount">' + esc(units(ing.amount)) + '</span>';
         list.appendChild(li);
@@ -1672,7 +1669,7 @@
   function ingItem(i) {
     var base = cook.ingredients.filter(function (x) { return x.id === i.id; })[0];
     var name = (i.label || (base ? base.name : i.id)).replace(/\s*\([^)]*\)/g, '');
-    return '<li><img alt="" src="' + imgFor(i) + '"><span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(units(i.qty)) + '</b>' : '') + '</li>';
+    return '<li><img alt="" src="' + esc(imgFor(i)) + '"><span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(units(i.qty)) + '</b>' : '') + '</li>';
   }
 
   function cardFor(step) {
@@ -1684,33 +1681,34 @@
 
     var tools = step.tools.map(function (id) {
       var eq = window.EQUIPMENT[id];
-      return '<img class="icon" src="' + eq.icon + '" alt="' + esc(L(eq.name)) + '" title="' + esc(L(eq.name)) + '">';
+      return eq.icon ? '<img class="icon" src="' + esc(eq.icon) + '" alt="' + esc(L(eq.name)) + '" title="' + esc(L(eq.name)) + '">' :
+        '<span class="tool-label">' + esc(L(eq.name)) + '</span>';
     }).join('');
     var ings = step.ings.map(ingItem).join('');
     var body = step.parts
-      ? '<ol class="step-parts">' + step.parts.map(function (p) { return '<li><b>' + esc(p.title) + ':</b> ' + linkRecipes(esc(units(p.text))) + '</li>'; }).join('') + '</ol>'
-      : '<p class="step-text">' + linkRecipes(esc(units(step.text))) + '</p>';
+      ? '<ol class="step-parts">' + step.parts.map(function (p) { return '<li><b>' + esc(p.title) + ':</b> ' + linkRecipes(units(p.text)) + '</li>'; }).join('') + '</ol>'
+      : '<p class="step-text">' + linkRecipes(units(step.text)) + '</p>';
 
     el.innerHTML =
       '<div class="step-head">' +
-        '<span class="area-badge"><span><img class="icon" alt="" src="' + AREAS[step.area].icon + '"></span>' + t(step.area) + '</span>' +
+        '<span class="area-badge"><span><img class="icon" alt="" src="' + AREAS[step.area].icon + '"></span>' + ht(step.area) + '</span>' +
         '<span class="step-tools">' + tools + '</span>' +
       '</div>' +
       '<h3>' + esc(step.title) + '</h3>' +
       body +
       (ings ? '<ul class="step-ings">' + ings + '</ul>' : '') +
-      '<p class="done-when">' + t('doneWhen') + esc(units(step.doneWhen)) + '</p>' +
-      (step.overcook ? '<p class="overdo-note" role="alert">' + t('dontOverdo') + '</p>' : '') +
+      '<p class="done-when">' + ht('doneWhen') + esc(units(step.doneWhen)) + '</p>' +
+      (step.overcook ? '<p class="overdo-note" role="alert">' + ht('dontOverdo') + '</p>' : '') +
       '<div class="step-foot">' +
         '<div class="ring">' +
           '<svg viewBox="0 0 92 92" aria-hidden="true"><circle class="ring-track" cx="46" cy="46" r="40"/>' +
           '<circle class="ring-fill" cx="46" cy="46" r="40" stroke-dasharray="' + RING + '" stroke-dashoffset="' + RING + '"/></svg>' +
           '<div class="ring-center">' +
-            '<button class="btn-start" type="button">' + t('start') + '<br>' + fmt(step.duration) + '</button>' +
+            '<button class="btn-start" type="button">' + ht('start') + '<br>' + fmt(step.duration) + '</button>' +
             '<span class="ring-time" hidden></span>' +
           '</div>' +
         '</div>' +
-        '<button class="btn btn-primary btn-done" type="button">' + doneLabel(step) + '</button>' +
+        '<button class="btn btn-primary btn-done" type="button">' + esc(doneLabel(step)) + '</button>' +
       '</div>';
 
     el.querySelector('.btn-start').addEventListener('click', function (e) {
@@ -1733,7 +1731,10 @@
   // Classes and texts that follow the step's status.
   function updateCard(step, el) {
     var st = cook.status[step.id];
+    var running = !!cook.started[step.id];
     el.querySelector('.btn-start').disabled = st !== 'active';
+    el.querySelector('.btn-start').hidden = running;
+    el.querySelector('.ring-time').hidden = !running;
   }
 
   function finishStep(step) {
@@ -1809,15 +1810,16 @@
     n.className = 'notif';
     n.setAttribute('data-step', step.id);
     n.setAttribute('data-area', step.area);
-    var icon = step.tools.length ? window.EQUIPMENT[step.tools[0]].icon : AREAS[step.area].icon;
+    var toolWithIcon = step.tools.map(function (id) { return window.EQUIPMENT[id]; }).filter(function (eq) { return eq.icon; })[0];
+    var icon = toolWithIcon ? toolWithIcon.icon : AREAS[step.area].icon;
     n.innerHTML =
       '<span class="notif-icon"><svg class="notif-ring" viewBox="0 0 36 36" aria-hidden="true">' +
       '<circle class="nr-track" cx="18" cy="18" r="16"/><circle class="nr-fill" cx="18" cy="18" r="16" ' +
       'stroke-dasharray="' + NOTIF_RING + '" stroke-dashoffset="0"/></svg><img class="icon" alt="" src="' + icon + '"></span>' +
       '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + '</span>' +
-      '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span> · <span class="notif-hint">' + t('tapInfo') + '</span></span></button>' +
-      '<button class="notif-btn notif-start" type="button" aria-label="' + t('start') + '">▶</button>' +
-      '<button class="notif-btn notif-done" type="button" aria-label="' + doneLabel(step) + '">✓</button>';
+      '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span> · <span class="notif-hint">' + ht('tapInfo') + '</span></span></button>' +
+      '<button class="notif-btn notif-start" type="button" aria-label="' + ht('start') + '">▶</button>' +
+      '<button class="notif-btn notif-done" type="button" aria-label="' + esc(doneLabel(step)) + '">✓</button>';
     n.querySelector('.notif-open').addEventListener('click', function () { openPop(step, n); });
     n.querySelector('.notif-start').addEventListener('click', function (e) {
       cardFor(step).querySelector('.btn-start').click();
@@ -1825,6 +1827,8 @@
       n.classList.add('is-running');
     });
     n.querySelector('.notif-done').addEventListener('click', function () { finishStep(step); });
+    n.querySelector('.notif-start').hidden = !!cook.started[step.id];
+    n.classList.toggle('is-running', !!cook.started[step.id]);
     cook.notifs[step.id] = n;
     return n;
   }
@@ -1919,8 +1923,8 @@
         a.setAttribute('aria-label', t(key));
         if (!used) a.setAttribute('aria-hidden', 'true');
         a.innerHTML =
-          '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + t(key) + '</span>' +
-          (used ? '<button class="area-move" type="button" aria-label="' + t('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button>' : '') +
+          '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + ht(key) + '</span>' +
+          (used ? '<button class="area-move" type="button" aria-label="' + ht('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button>' : '') +
           '</div>';
         mapEl.appendChild(a);
         if (used) {
@@ -2032,7 +2036,7 @@
       var elapsed = (Date.now() - cook.started[id]) / 1000;
       var left = step.duration - elapsed;
       var up = left <= 0;
-      el.querySelector('.ring-time').innerHTML = (up ? '+' + fmt(-left) : fmt(left)) + '<small>' + (up ? t('over') : t('left')) + '</small>';
+      el.querySelector('.ring-time').innerHTML = (up ? '+' + fmt(-left) : fmt(left)) + '<small>' + (up ? ht('over') : ht('left')) + '</small>';
       el.querySelector('.ring-fill').setAttribute('stroke-dashoffset', String(RING * (1 - Math.min(1, elapsed / step.duration))));
       // Haptic feedback (navigator.vibrate) comes in a later iteration.
       el.classList.toggle('time-up', up);

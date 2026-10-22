@@ -29,8 +29,16 @@
 # Claude, editor and temp files (incl. Claude/Codex handoff notes)
 /.handoff/
 /.claude/
+/.codex/
 /.tmp/
 /.vscode/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Credentials must never become website assets or enter version control.
+.env
+.env.*
+!.env.example
+*.pem
+*.key

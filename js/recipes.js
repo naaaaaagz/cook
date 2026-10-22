@@ -38,7 +38,15 @@ window.EQUIPMENT = {
   muffin_tin: { name: 'Muffin pan', icon: 'icons/muffin-tin.svg' },
   whisk: { name: 'Whisk', icon: 'icons/whisk.svg' },
   slow_cooker: { name: 'Slow cooker', icon: 'icons/slow-cooker.svg' },
-  skewers: { name: 'Skewers', icon: 'icons/skewers.svg' }
+  skewers: { name: 'Skewers', icon: 'icons/skewers.svg' },
+  // Sheet equipment without a dedicated first-party icon remains visible as text.
+  plates: { name: 'Plates', icon: null },
+  salad_spinner: { name: 'Salad spinner or kitchen towel', icon: null },
+  jar: { name: 'Jar with lid', icon: null },
+  panini_press: { name: 'Panini press (adjustable gap)', icon: null },
+  tray: { name: 'Baking tray', icon: 'icons/baking-tray.svg' },
+  tall_container: { name: 'Tall, narrow container', icon: null },
+  lidded_container: { name: 'Lidded container', icon: null }
 };
 
 /*
@@ -541,8 +549,8 @@ window.INGREDIENT_INFO = (function () {
     var ok = (expr.match(/[a-z_]+/gi) || []).every(function (w) { return names.indexOf(w) >= 0; });
     if (ok && expr) {
       try {
-        var v = Function.apply(null, names.concat('return (' + expr + ');')).apply(null, names.map(function (k) { return vars[k]; }));
-        if (isFinite(v)) return Math.round(v);
+        var v = window.CookCore.arithmetic(expr, vars);
+        if (v >= 0) return Math.round(v);
       } catch (e) { /* fall through */ }
     }
     return Number((rule.match(/\d+/) || [60])[0]);
@@ -665,6 +673,7 @@ window.INGREDIENT_INFO = (function () {
       var steps = raw.map(function (r) {
         var st = { id: r[0], thread: r[1], title: r[2], text: r[3], kind: r[4], heat: r[5], doneWhen: r[8],
           equipment: empty(r[10]) ? [] : r[10].split(/,\s*/), area: empty(r[12]) ? '' : r[12] };
+        if (def.heat && def.heat(c)[st.id]) st.heat = def.heat(c)[st.id];
         st.area = areaOf(st);
         st.duration = duration(r[6], vars, chosen);
         st.deps = empty(r[7]) ? [] : r[7].split(/,\s*/).filter(function (d) { return ids.indexOf(d) >= 0; });

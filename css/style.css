@@ -795,7 +795,8 @@ select {
   border-radius: 50%;
 }
 .area-badge img { width: 20px; height: 20px; }
-.step-tools { display: flex; gap: 4px; }
+.step-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
+.step-tools .tool-label { font-size: 12px; color: var(--text-2); border: 1px solid var(--line); border-radius: 4px; padding: 4px 6px; }
 .step-tools img { width: 30px; height: 30px; padding: 3px; border: 1px solid var(--line); border-radius: 4px; }
 .step h3 { font-size: 21px; }
 .step-text { color: var(--text-2); }
