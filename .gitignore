@@ -11,6 +11,8 @@
 /img/ready/*.jpeg
 /img/ready/*.png
 /img/ready/webp1000/
+# Photos of recipes taken off the list (kept locally, not published)
+/img/ready/nope/
 
 # Mockups and reference images made while designing
 /mockup-cooking-guide.png
@@ -25,6 +27,7 @@
 # Image conversion helper (run locally, not part of the site)
 /tools/
 /convert_images.bat
+/convert_ready_images.bat
 
 # Claude, editor and temp files (incl. Claude/Codex handoff notes)
 /.handoff/
@@ -42,3 +45,6 @@ desktop.ini
 !.env.example
 *.pem
 *.key
+
+# Ads folder: local only, everything in it now and later
+/ads/

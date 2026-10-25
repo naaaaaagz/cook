@@ -1,0 +1,502 @@
+/* "Tell me what's in the fridge": voice (or typed) ingredients turn into chips.
+   Moved here from voicetest.html. Element ids start with "fv-". It starts when
+   the screen first opens (window.Fridge.open) and stops listening when the
+   screen is left (window.Fridge.stop). Nothing is stored on the device. */
+(function () {
+"use strict";
+
+/* ---------- Ingredient catalog: id, display names, spoken aliases per language ---------- */
+const CATALOG = [
+  ["egg",       {en:"Eggs", hu:"Tojás", de:"Eier"},                {en:["egg","eggs"], hu:["tojás"], de:["ei","eier"]}],
+  ["milk",      {en:"Milk", hu:"Tej", de:"Milch"},                 {en:["milk"], hu:["tej"], de:["milch"]}],
+  ["butter",    {en:"Butter", hu:"Vaj", de:"Butter"},              {en:["butter"], hu:["vaj"], de:["butter"]}],
+  ["sourcream", {en:"Sour cream", hu:"Tejföl", de:"Saure Sahne"},  {en:["sour cream"], hu:["tejföl"], de:["saure sahne","schmand"]}],
+  ["cream",     {en:"Cream", hu:"Tejszín", de:"Sahne"},            {en:["cream","heavy cream"], hu:["tejszín","főzőtejszín"], de:["sahne"]}],
+  ["cheese",    {en:"Cheese", hu:"Sajt", de:"Käse"},               {en:["cheese","cheddar","mozzarella","parmesan"], hu:["sajt","mozzarella","parmezán","trappista"], de:["käse","parmesan","mozzarella"]}],
+  ["cottage",   {en:"Cottage cheese", hu:"Túró", de:"Quark"},      {en:["cottage cheese","quark"], hu:["túró"], de:["quark","hüttenkäse"]}],
+  ["yogurt",    {en:"Yogurt", hu:"Joghurt", de:"Joghurt"},         {en:["yogurt","yoghurt"], hu:["joghurt"], de:["joghurt"]}],
+  ["flour",     {en:"Flour", hu:"Liszt", de:"Mehl"},               {en:["flour"], hu:["liszt"], de:["mehl"]}],
+  ["sugar",     {en:"Sugar", hu:"Cukor", de:"Zucker"},             {en:["sugar"], hu:["cukor","cukr"], de:["zucker"]}],
+  ["rice",      {en:"Rice", hu:"Rizs", de:"Reis"},                 {en:["rice"], hu:["rizs"], de:["reis"]}],
+  ["pasta",     {en:"Pasta", hu:"Tészta", de:"Nudeln"},            {en:["pasta","spaghetti","noodles","penne"], hu:["tészta","spagetti","makaróni","penne"], de:["nudeln","pasta","spaghetti"]}],
+  ["bread",     {en:"Bread", hu:"Kenyér", de:"Brot"},              {en:["bread","toast"], hu:["kenyér","kenyer","toast","kifli","zsemle"], de:["brot","toast","brötchen"]}],
+  ["oats",      {en:"Oats", hu:"Zabpehely", de:"Haferflocken"},    {en:["oats","oatmeal"], hu:["zabpehely","zabpelyh","zab"], de:["haferflocken","hafer"]}],
+  ["potato",    {en:"Potatoes", hu:"Krumpli", de:"Kartoffeln"},    {en:["potato","potatoes"], hu:["krumpli","burgonya"], de:["kartoffel"]}],
+  ["onion",     {en:"Onion", hu:"Hagyma", de:"Zwiebel"},           {en:["onion","red onion","spring onion","shallot"], hu:["hagyma","vöröshagyma","lilahagyma","újhagyma"], de:["zwiebel","frühlingszwiebel"]}],
+  ["garlic",    {en:"Garlic", hu:"Fokhagyma", de:"Knoblauch"},     {en:["garlic"], hu:["fokhagyma"], de:["knoblauch"]}],
+  ["tomato",    {en:"Tomatoes", hu:"Paradicsom", de:"Tomaten"},    {en:["tomato","tomatoes","passata"], hu:["paradicsom","passata"], de:["tomate","tomaten"]}],
+  ["pepper",    {en:"Bell pepper", hu:"Paprika", de:"Paprika"},    {en:["bell pepper","peppers","red pepper","green pepper","capsicum"], hu:["paprika","kaliforniai paprika"], de:["paprika"]}],
+  ["carrot",    {en:"Carrots", hu:"Répa", de:"Karotten"},          {en:["carrot","carrots"], hu:["répa","sárgarépa"], de:["karotte","möhre"]}],
+  ["cucumber",  {en:"Cucumber", hu:"Uborka", de:"Gurke"},          {en:["cucumber"], hu:["uborka"], de:["gurke"]}],
+  ["zucchini",  {en:"Zucchini", hu:"Cukkini", de:"Zucchini"},      {en:["zucchini","courgette"], hu:["cukkini"], de:["zucchini"]}],
+  ["mushroom",  {en:"Mushrooms", hu:"Gomba", de:"Pilze"},          {en:["mushroom","mushrooms"], hu:["gomba","csiperke"], de:["pilz","pilze","champignon"]}],
+  ["spinach",   {en:"Spinach", hu:"Spenót", de:"Spinat"},          {en:["spinach"], hu:["spenót"], de:["spinat"]}],
+  ["lettuce",   {en:"Lettuce", hu:"Saláta", de:"Salat"},           {en:["lettuce","salad"], hu:["saláta","jégsaláta"], de:["salat"]}],
+  ["cabbage",   {en:"Cabbage", hu:"Káposzta", de:"Kohl"},          {en:["cabbage"], hu:["káposzta"], de:["kohl","weißkohl"]}],
+  ["peas",      {en:"Peas", hu:"Borsó", de:"Erbsen"},              {en:["peas"], hu:["borsó","zöldborsó"], de:["erbsen"]}],
+  ["corn",      {en:"Sweetcorn", hu:"Kukorica", de:"Mais"},        {en:["corn","sweetcorn"], hu:["kukorica"], de:["mais"]}],
+  ["beans",     {en:"Beans", hu:"Bab", de:"Bohnen"},               {en:["beans"], hu:["bab"], de:["bohnen"]}],
+  ["lentils",   {en:"Lentils", hu:"Lencse", de:"Linsen"},          {en:["lentils"], hu:["lencse"], de:["linsen"]}],
+  ["apple",     {en:"Apples", hu:"Alma", de:"Äpfel"},              {en:["apple","apples"], hu:["alma"], de:["apfel","äpfel"]}],
+  ["banana",    {en:"Bananas", hu:"Banán", de:"Bananen"},          {en:["banana","bananas"], hu:["banán"], de:["banane"]}],
+  ["lemon",     {en:"Lemon", hu:"Citrom", de:"Zitrone"},           {en:["lemon","lemons"], hu:["citrom"], de:["zitrone"]}],
+  ["chicken",   {en:"Chicken", hu:"Csirke", de:"Hähnchen"},        {en:["chicken","chicken breast"], hu:["csirke","csirkemell","csirkecomb"], de:["hähnchen","huhn","hühnchen"]}],
+  ["pork",      {en:"Pork", hu:"Sertéshús", de:"Schweinefleisch"}, {en:["pork"], hu:["sertés","disznó","karaj"], de:["schwein","schweinefleisch"]}],
+  ["beef",      {en:"Beef", hu:"Marhahús", de:"Rindfleisch"},      {en:["beef"], hu:["marha"], de:["rind","rindfleisch"]}],
+  ["mince",     {en:"Minced meat", hu:"Darált hús", de:"Hackfleisch"}, {en:["minced meat","ground beef","mince"], hu:["darált hús","darálthús","darált"], de:["hackfleisch","hack"]}],
+  ["ham",       {en:"Ham", hu:"Sonka", de:"Schinken"},             {en:["ham"], hu:["sonka"], de:["schinken"]}],
+  ["bacon",     {en:"Bacon", hu:"Szalonna", de:"Speck"},           {en:["bacon"], hu:["szalonna","bacon"], de:["speck","bacon"]}],
+  ["sausage",   {en:"Sausage", hu:"Kolbász", de:"Wurst"},          {en:["sausage","sausages","chorizo"], hu:["kolbász","virsli"], de:["wurst","würstchen"]}],
+  ["fish",      {en:"Fish", hu:"Hal", de:"Fisch"},                 {en:["fish","salmon","tuna"], hu:["hal","lazac","tonhal"], de:["fisch","lachs","thunfisch"]}],
+  ["honey",     {en:"Honey", hu:"Méz", de:"Honig"},                {en:["honey"], hu:["méz"], de:["honig"]}],
+  ["oil",       {en:"Oil", hu:"Olaj", de:"Öl"},                    {en:["oil","olive oil"], hu:["olaj","olívaolaj"], de:["öl","olivenöl"]}, true],
+  ["salt",      {en:"Salt", hu:"Só", de:"Salz"},                   {en:["salt"], hu:["só"], de:["salz"]}, true],
+  ["blackpepper",{en:"Black pepper", hu:"Bors", de:"Pfeffer"},     {en:["black pepper","pepper"], hu:["bors"], de:["pfeffer"]}, true],
+];
+const BY_ID = Object.fromEntries(CATALOG.map(([id, names, , staple]) => [id, {names, staple: !!staple}]));
+
+/* ---------- Sample recipes: need = must have, nice = optional extras ---------- */
+const RECIPES = [
+  {name:{en:"Scrambled eggs", hu:"Rántotta", de:"Rührei"}, min:10, need:["egg"], nice:["butter","onion","cheese"]},
+  {name:{en:"Pancakes", hu:"Palacsinta", de:"Pfannkuchen"}, min:30, need:["egg","milk","flour"], nice:["sugar","cottage"]},
+  {name:{en:"Lecsó", hu:"Lecsó", de:"Letscho"}, min:35, need:["pepper","tomato","onion"], nice:["sausage","egg"]},
+  {name:{en:"Tomato & garlic pasta", hu:"Fokhagymás paradicsomos tészta", de:"Tomaten-Knoblauch-Nudeln"}, min:20, need:["pasta","tomato","garlic"], nice:["cheese"]},
+  {name:{en:"Carbonara-style pasta", hu:"Carbonara", de:"Nudeln Carbonara"}, min:25, need:["pasta","egg","bacon","cheese"], nice:["garlic"]},
+  {name:{en:"Chicken paprikash", hu:"Paprikás csirke", de:"Paprikahuhn"}, min:50, need:["chicken","onion","sourcream"], nice:["pepper","tomato"]},
+  {name:{en:"Potato soup", hu:"Krumplileves", de:"Kartoffelsuppe"}, min:40, need:["potato","onion","carrot"], nice:["sourcream","sausage"]},
+  {name:{en:"Cucumber salad", hu:"Uborkasaláta", de:"Gurkensalat"}, min:10, need:["cucumber"], nice:["sourcream","garlic","onion"]},
+  {name:{en:"Mushroom risotto", hu:"Gombás rizottó", de:"Pilzrisotto"}, min:40, need:["rice","mushroom","onion"], nice:["cheese","butter"]},
+  {name:{en:"Bolognese", hu:"Bolognai spagetti", de:"Spaghetti Bolognese"}, min:45, need:["pasta","mince","tomato","onion"], nice:["carrot","garlic","cheese"]},
+  {name:{en:"Pasta with cottage cheese", hu:"Túrós csusza", de:"Nudeln mit Quark"}, min:25, need:["pasta","cottage","sourcream"], nice:["bacon"]},
+  {name:{en:"Layered potato bake", hu:"Rakott krumpli", de:"Kartoffelauflauf"}, min:70, need:["potato","egg","sausage","sourcream"], nice:["butter"]},
+  {name:{en:"Spinach omelette", hu:"Spenótos omlett", de:"Spinat-Omelett"}, min:15, need:["egg","spinach"], nice:["cheese","onion"]},
+  {name:{en:"Lentil stew", hu:"Lencsefőzelék", de:"Linseneintopf"}, min:45, need:["lentils","onion"], nice:["sourcream","sausage","carrot"]},
+  {name:{en:"Cabbage noodles", hu:"Káposztás tészta", de:"Krautfleckerl"}, min:35, need:["pasta","cabbage"], nice:["onion","sugar"]},
+  {name:{en:"Porridge", hu:"Zabkása", de:"Haferbrei"}, min:10, need:["oats","milk"], nice:["honey","banana","apple"]},
+  {name:{en:"Ham & cheese toast", hu:"Sonkás-sajtos melegszendvics", de:"Schinken-Käse-Toast"}, min:10, need:["bread","ham","cheese"], nice:["butter","tomato"]},
+  {name:{en:"Egg fried rice", hu:"Tojásos sült rizs", de:"Gebratener Eierreis"}, min:20, need:["rice","egg"], nice:["peas","carrot","onion","corn"]},
+];
+
+const SAMPLES = {
+  hu: "Van itthon tojás, egy kis tejföl, két paradicsom, vöröshagyma, kolbász és egy fél csomag tészta",
+  en: "I've got eggs, some sour cream, two tomatoes, an onion, a sausage and half a pack of pasta",
+  de: "Ich habe Eier, saure Sahne, zwei Tomaten, eine Zwiebel, eine Wurst und eine halbe Packung Nudeln",
+};
+
+/* ---------- Matching (pure functions) ---------- */
+const SUFFIX = {
+  hu: ["","t","at","et","ot","öt","m","am","em","om","unk","ból","ből","ban","ben","val","vel","ja","je","k"],
+  en: ["","s","es"],
+  de: ["","e","n","en","er","s"],
+};
+function tokenize(s) {
+  return s.toLowerCase().normalize("NFC").replace(/[^\p{L}\p{N}]+/gu, " ").trim().split(/\s+/).filter(Boolean);
+}
+function buildIndex(lang2) {
+  const langs = lang2 === "en" ? ["en"] : [lang2, "en"];
+  const entries = [];
+  for (const [id, , aliases] of CATALOG) {
+    for (const lg of langs) {
+      for (const a of (aliases[lg] || [])) {
+        const variants = new Set([a]);
+        // Hungarian: final a/e lengthens before suffixes (tészta -> tésztát)
+        if (lg === "hu" && /[ae]$/.test(a)) variants.add(a.slice(0, -1) + (a.endsWith("a") ? "á" : "é"));
+        for (const v of variants) entries.push({ id, lang: lg, tokens: tokenize(v) });
+      }
+    }
+  }
+  entries.sort((x, y) => (y.tokens.length - x.tokens.length) || (y.tokens.join(" ").length - x.tokens.join(" ").length));
+  return entries;
+}
+function tokMatch(tok, alias, lang, isLast) {
+  if (!isLast) return tok === alias;
+  if (alias.length <= 3) return SUFFIX[lang].some(s => tok === alias + s);
+  return tok.startsWith(alias);
+}
+function matchText(text, index) {
+  const toks = tokenize(text);
+  const used = new Array(toks.length).fill(false);
+  const found = [];
+  for (const e of index) {
+    const n = e.tokens.length;
+    for (let i = 0; i + n <= toks.length; i++) {
+      let ok = true;
+      for (let k = 0; k < n; k++) {
+        if (used[i + k] || !tokMatch(toks[i + k], e.tokens[k], e.lang, k === n - 1)) { ok = false; break; }
+      }
+      if (ok) {
+        for (let k = 0; k < n; k++) used[i + k] = true;
+        if (!found.includes(e.id)) found.push(e.id);
+      }
+    }
+  }
+  return found;
+}
+function rankRecipes(have) {
+  const staples = new Set(["oil","salt","blackpepper"]);
+  return RECIPES.map(r => {
+    const missing = r.need.filter(id => !have.has(id) && !staples.has(id));
+    const extras = r.nice.filter(id => have.has(id));
+    const haveNeed = r.need.length - missing.length;
+    return { r, missing, extras, haveNeed };
+  }).filter(x => x.haveNeed > 0)
+    .sort((a, b) => (a.missing.length - b.missing.length) || (b.extras.length - a.extras.length) || (a.r.min - b.r.min));
+}
+
+/* ---------- Screen ---------- */
+// The voice language follows the site language the first time the screen opens.
+const SITE_TO_VOICE = { hu: "hu-HU", de: "de-DE", "en-GB": "en-GB", "en-US": "en-US" };
+let api = null;
+
+function init(siteLang) {
+  const $ = id => document.getElementById("fv-" + id);
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const t0 = performance.now();
+
+  let lang = SITE_TO_VOICE[siteLang] || "en-US";
+  $("lang").value = lang;
+  let lang2 = lang.slice(0, 2);
+  let INDEX = buildIndex(lang2);
+
+  const pantry = new Map();      // id -> source
+  const noMatch = [];
+  let transcriptFinal = [];
+  let interimText = "";
+
+  let rec = null, want = false, fatal = false, restarts = 0, finals = 0, startedAt = 0, prevFinal = "", tick = null, wakeLock = null;
+
+  /* ----- log ----- */
+  const logLines = [];
+  function log(kind, msg) {
+    const ms = ((performance.now() - t0) / 1000).toFixed(2).padStart(7, " ");
+    logLines.push({ ms, kind, msg });
+    if (logLines.length > 400) logLines.shift();
+    const el = $("log");
+    const line = document.createElement("div");
+    const ts = document.createElement("span"); ts.className = "t"; ts.textContent = ms + "s ";
+    const body = document.createElement("span");
+    if (kind === "err") body.className = "err";
+    if (kind === "final") body.className = "fin";
+    body.textContent = "[" + kind + "] " + msg;
+    line.append(ts, body);
+    el.append(line);
+    while (el.childNodes.length > 400) el.removeChild(el.firstChild);
+    el.scrollTop = el.scrollHeight;
+  }
+
+  /* ----- status ----- */
+  const statusItems = {};
+  function setStatus(key, label, value, state) {
+    statusItems[key] = { label, value, state };
+    const el = $("status"); el.textContent = "";
+    for (const k of Object.keys(statusItems)) {
+      const s = statusItems[k];
+      const p = document.createElement("span"); p.className = "pill";
+      const d = document.createElement("span"); d.className = "dot" + (s.state ? " " + s.state : "");
+      const l = document.createElement("span"); l.textContent = s.label + ": ";
+      const b = document.createElement("b"); b.textContent = s.value; l.append(b);
+      p.append(d, l); el.append(p);
+    }
+  }
+  function banner(msg) { const b = $("banner"); b.textContent = msg || ""; b.hidden = !msg; }
+
+  setStatus("sr", "Speech recognition", SR ? "supported" : "not supported", SR ? "ok" : "bad");
+  const proto = location.protocol.replace(":", "");
+  const secure = window.isSecureContext;
+  setStatus("origin", "Page", proto === "file" ? "local file" : (secure ? proto + " (secure)" : proto + " (not secure)"), secure && proto !== "file" ? "ok" : (secure ? "" : "bad"));
+  log("info", "UA: " + navigator.userAgent);
+  log("info", "SpeechRecognition: " + (window.SpeechRecognition ? "SpeechRecognition" : window.webkitSpeechRecognition ? "webkitSpeechRecognition" : "missing") + " · secureContext=" + secure + " · protocol=" + proto);
+  if (!SR) {
+    banner("This browser has no built-in speech recognition (Firefox and some in-app browsers lack it). You can still type ingredients below to test the matching and recipes.");
+    $("mic").disabled = true;
+  } else if (!secure) {
+    banner("The microphone only works on https:// or localhost. Open this page from a secure address.");
+  }
+
+  /* ----- on-device mode ----- */
+  async function checkLocal() {
+    const box = $("ondevice"), btn = $("installBtn");
+    btn.hidden = true;
+    if (!SR || typeof SR.available !== "function") {
+      box.disabled = true; box.checked = false;
+      setStatus("local", "On-device", "not in this browser", "");
+      return;
+    }
+    box.disabled = false;
+    try {
+      const s = await SR.available({ langs: [lang], processLocally: true });
+      setStatus("local", "On-device " + lang, s, s === "available" ? "ok" : "");
+      log("info", "on-device availability for " + lang + ": " + s);
+      if (s === "downloadable" || s === "downloading") btn.hidden = false;
+      if (s === "unavailable" && box.checked) { box.checked = false; log("info", "on-device unchecked: unavailable for " + lang); }
+    } catch (e) {
+      setStatus("local", "On-device", "check failed", "bad");
+      log("err", "available() failed: " + e);
+    }
+  }
+  $("installBtn").addEventListener("click", async () => {
+    log("info", "install() requested for " + lang);
+    try {
+      const ok = await SR.install({ langs: [lang], processLocally: true });
+      log(ok ? "info" : "err", "install() result: " + ok);
+    } catch (e) { log("err", "install() failed: " + e); }
+    checkLocal();
+  });
+  $("ondevice").addEventListener("change", () => {
+    log("info", "on-device mode " + ($("ondevice").checked ? "on" : "off") + " (applies on next start)");
+    if (want) { restartNow(); }
+  });
+  checkLocal();
+
+  /* ----- UI state ----- */
+  function fmt(sec) { const m = Math.floor(sec / 60), s = Math.floor(sec % 60); return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0"); }
+  function updateMeta() {
+    const el = startedAt ? (performance.now() - startedAt) / 1000 : 0;
+    $("meta").textContent = fmt(el) + " · restarts " + restarts + " · finals " + finals;
+  }
+  function setState(text, live) {
+    $("state").textContent = text;
+    const mic = $("mic");
+    mic.classList.toggle("live", !!live);
+    mic.setAttribute("aria-label", live ? "Stop listening" : "Start listening");
+  }
+  function setSpeech(on, text) {
+    $("speechDot").classList.toggle("on", on);
+    $("speechText").textContent = text;
+  }
+
+  function renderTranscript() {
+    const el = $("transcript"); el.textContent = "";
+    if (!transcriptFinal.length && !interimText) {
+      const s = document.createElement("span"); s.className = "empty"; s.textContent = "Your words will appear here."; el.append(s); return;
+    }
+    el.append(document.createTextNode(transcriptFinal.join(" ") + " "));
+    if (interimText) { const s = document.createElement("span"); s.className = "interim"; s.textContent = interimText; el.append(s); }
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function renderChips() {
+    const el = $("chips"); el.textContent = "";
+    for (const [id] of pantry) {
+      const c = document.createElement("span"); c.className = "chip";
+      const info = BY_ID[id];
+      const name = document.createElement("span"); name.textContent = info.names[lang2] || info.names.en;
+      c.append(name);
+      if (info.staple) { const sm = document.createElement("small"); sm.textContent = "staple"; c.append(sm); }
+      const x = document.createElement("button"); x.type = "button"; x.textContent = "×";
+      x.setAttribute("aria-label", "Remove " + name.textContent);
+      x.addEventListener("click", () => { pantry.delete(id); log("info", "removed " + id); renderChips(); if (!$("recipesPanel").hidden) renderRecipes(); });
+      c.append(x); el.append(c);
+    }
+    const ghosts = interimText ? matchText(interimText, INDEX).filter(id => !pantry.has(id)) : [];
+    for (const id of ghosts) {
+      const g = document.createElement("span"); g.className = "chip ghost";
+      g.textContent = (BY_ID[id].names[lang2] || BY_ID[id].names.en) + "…";
+      el.append(g);
+    }
+    if (!pantry.size && !ghosts.length) {
+      const e = document.createElement("span"); e.className = "note"; e.textContent = "Nothing yet. Say “tojás, tej, paradicsom” or try the sample sentence.";
+      el.append(e);
+    }
+    $("count").textContent = "(" + pantry.size + ")";
+    $("doneBtn").disabled = pantry.size === 0;
+  }
+
+  function renderNoMatch() {
+    $("nomatchWrap").hidden = noMatch.length === 0;
+    const ul = $("nomatch"); ul.textContent = "";
+    for (const t of noMatch.slice(-8).reverse()) { const li = document.createElement("li"); li.textContent = t; ul.append(li); }
+  }
+
+  function processText(text, source) {
+    const ids = matchText(text, INDEX);
+    const added = ids.filter(id => !pantry.has(id));
+    for (const id of added) pantry.set(id, source);
+    log("match", "“" + text + "” → " + (ids.length ? ids.join(", ") : "no match") + (added.length && added.length !== ids.length ? " (new: " + added.join(", ") + ")" : ""));
+    if (!ids.length) { noMatch.push(text); renderNoMatch(); }
+    renderChips();
+    if (!$("recipesPanel").hidden) renderRecipes();
+  }
+
+  function renderRecipes() {
+    const el = $("recipes"); el.textContent = "";
+    const ranked = rankRecipes(new Set(pantry.keys()));
+    const groups = [
+      ["Ready to cook", ranked.filter(x => x.missing.length === 0)],
+      ["Missing one ingredient", ranked.filter(x => x.missing.length === 1)],
+      ["Missing two ingredients", ranked.filter(x => x.missing.length === 2)],
+    ];
+    let shown = 0;
+    for (const [title, list] of groups) {
+      if (!list.length) continue;
+      const g = document.createElement("div"); g.className = "group";
+      const h = document.createElement("h3"); h.textContent = title + " · " + list.length; g.append(h);
+      for (const x of list) {
+        shown++;
+        const card = document.createElement("div"); card.className = "recipe";
+        const head = document.createElement("div"); head.className = "recipe-head";
+        const n = document.createElement("span"); n.className = "recipe-name"; n.textContent = x.r.name[lang2] || x.r.name.en;
+        const tm = document.createElement("span"); tm.className = "recipe-time"; tm.textContent = x.r.min + " min";
+        head.append(n, tm);
+        const ings = document.createElement("div"); ings.className = "ings";
+        const nm = id => BY_ID[id].names[lang2] || BY_ID[id].names.en;
+        for (const id of x.r.need) { const s = document.createElement("span"); const miss = x.missing.includes(id); s.className = "ing " + (miss ? "miss" : "have"); s.textContent = (miss ? "need: " : "✓ ") + nm(id); ings.append(s); }
+        for (const id of x.r.nice) { const s = document.createElement("span"); const has = pantry.has(id); s.className = "ing " + (has ? "have" : "extra"); s.textContent = (has ? "✓ " : "+ ") + nm(id); ings.append(s); }
+        card.append(head, ings); g.append(card);
+      }
+      el.append(g);
+    }
+    const rest = ranked.length - shown;
+    const p = document.createElement("p"); p.className = "note";
+    p.textContent = shown ? (rest > 0 ? rest + " more recipes need three or more extra ingredients." : "") : "None of the sample recipes fit yet. Add a few more ingredients.";
+    if (p.textContent) el.append(p);
+  }
+
+  /* ----- recognition ----- */
+  function makeRec() {
+    const r = new SR();
+    r.lang = lang; r.continuous = true; r.interimResults = true; r.maxAlternatives = 1;
+    if ($("ondevice").checked && "processLocally" in r) r.processLocally = true;
+    r.onstart = () => { log("event", "start (lang=" + r.lang + (r.processLocally ? ", on-device" : "") + ")"); setState("Listening… tap to stop", true); };
+    r.onaudiostart = () => log("event", "audiostart");
+    r.onsoundstart = () => setSpeech(false, "Sound detected");
+    r.onspeechstart = () => { log("event", "speechstart"); setSpeech(true, "Hearing speech"); };
+    r.onspeechend = () => { log("event", "speechend"); setSpeech(false, "Speech paused"); };
+    r.onnomatch = () => log("event", "nomatch");
+    r.onresult = e => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const res = e.results[i]; const t = res[0].transcript.trim();
+        if (res.isFinal) {
+          finals++;
+          const conf = res[0].confidence;
+          log("final", "#" + i + " “" + t + "”" + (conf ? " conf=" + conf.toFixed(2) : ""));
+          handleFinal(t);
+        } else { interim += " " + t; }
+      }
+      interimText = interim.trim();
+      renderTranscript(); renderChips(); updateMeta();
+    };
+    r.onerror = e => {
+      log("err", "error: " + e.error + (e.message ? " – " + e.message : ""));
+      const msgs = {
+        "not-allowed": proto === "file"
+          ? "Microphone blocked. Chrome may refuse the mic for local files: serve the page from localhost or https."
+          : "Microphone blocked. Allow microphone access for this site in Chrome's address bar, then tap the mic again.",
+        "service-not-allowed": "Speech service not allowed in this browser or context.",
+        "audio-capture": "No microphone found, or another app is using it.",
+        "network": "Chrome couldn't reach its speech servers. Check the connection, or try on-device mode.",
+        "language-not-supported": "This language isn't available" + ($("ondevice").checked ? " on-device yet. Download the language pack or switch on-device mode off." : "."),
+      };
+      if (msgs[e.error]) { banner(msgs[e.error]); fatal = true; }
+      if (e.error === "no-speech") setSpeech(false, "No speech in the last few seconds");
+    };
+    r.onend = () => {
+      log("event", "end");
+      setSpeech(false, "Not listening");
+      interimText = ""; renderTranscript(); renderChips();
+      if (want && !fatal && $("autorestart").checked) {
+        restarts++; updateMeta();
+        setState("Pause detected, restarting…", true);
+        setTimeout(() => { if (want) startRec(); }, 250);
+      } else {
+        stopUI();
+      }
+    };
+    return r;
+  }
+
+  function handleFinal(t) {
+    // Android Chrome sometimes repeats earlier text in later final results: keep only the new part.
+    const lt = t.toLowerCase(), lp = prevFinal.toLowerCase();
+    let delta = t;
+    if (lp && lt.startsWith(lp)) delta = t.slice(prevFinal.length).trim();
+    else if (lp && lp.startsWith(lt)) delta = "";
+    prevFinal = t;
+    if (!delta) { log("info", "duplicate final skipped"); return; }
+    if (delta !== t) log("info", "trimmed repeat → “" + delta + "”");
+    transcriptFinal.push(delta);
+    processText(delta, "voice");
+  }
+
+  function startRec() {
+    prevFinal = ""; fatal = false;
+    try { rec = makeRec(); rec.start(); }
+    catch (e) { log("err", "start() threw: " + e); }
+  }
+  function restartNow() { if (rec) { try { rec.abort(); } catch (e) {} } }
+
+  async function startListening() {
+    if (!SR) return;
+    banner(""); want = true; restarts = 0; finals = 0; startedAt = performance.now();
+    setState("Starting…", true);
+    log("info", "user pressed start");
+    try { if ("wakeLock" in navigator) { wakeLock = await navigator.wakeLock.request("screen"); log("info", "screen wake lock on"); } } catch (e) { log("info", "wake lock not available: " + e.name); }
+    clearInterval(tick); tick = setInterval(updateMeta, 500);
+    startRec();
+  }
+  function stopListening() {
+    want = false; log("info", "user pressed stop");
+    if (rec) { try { rec.stop(); } catch (e) {} }
+    stopUI();
+  }
+  function stopUI() {
+    want = false; clearInterval(tick); updateMeta();
+    setState(pantry.size ? "Stopped. Tap to continue" : "Tap to start listening", false);
+    if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
+  }
+
+  $("mic").addEventListener("click", () => { want ? stopListening() : startListening(); });
+
+  /* ----- controls ----- */
+  const PLACEHOLDER = { hu: "Or type ingredients, e.g. tojás, tej, paradicsom", en: "Or type ingredients, e.g. eggs, milk, tomatoes", de: "Or type ingredients, e.g. Eier, Milch, Tomaten" };
+  $("typed").placeholder = PLACEHOLDER[lang2];
+  $("lang").addEventListener("change", () => {
+    lang = $("lang").value; lang2 = lang.slice(0, 2); INDEX = buildIndex(lang2);
+    $("typed").placeholder = PLACEHOLDER[lang2];
+    log("info", "language → " + lang);
+    renderChips(); if (!$("recipesPanel").hidden) renderRecipes();
+    checkLocal();
+    if (want) restartNow();
+  });
+  $("autorestart").addEventListener("change", () => log("info", "keep listening through pauses: " + $("autorestart").checked));
+  function addTyped() {
+    const v = $("typed").value.trim(); if (!v) return;
+    transcriptFinal.push("[typed] " + v); renderTranscript();
+    processText(v, "typed"); $("typed").value = "";
+  }
+  $("addBtn").addEventListener("click", addTyped);
+  $("typed").addEventListener("keydown", e => { if (e.key === "Enter") addTyped(); });
+  $("sampleBtn").addEventListener("click", () => {
+    const s = SAMPLES[lang2]; transcriptFinal.push("[sample] " + s); renderTranscript(); processText(s, "sample");
+  });
+  $("clearBtn").addEventListener("click", () => {
+    pantry.clear(); noMatch.length = 0; transcriptFinal = []; interimText = "";
+    renderChips(); renderNoMatch(); renderTranscript(); $("recipesPanel").hidden = true;
+    log("info", "cleared");
+  });
+  $("doneBtn").addEventListener("click", () => {
+    if (want) stopListening();
+    $("recipesPanel").hidden = false; renderRecipes();
+    log("info", "recipes shown for: " + [...pantry.keys()].join(", "));
+    $("recipesPanel").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  });
+  $("copyLog").addEventListener("click", async () => {
+    const text = logLines.map(l => l.ms + "s [" + l.kind + "] " + l.msg).join("\n");
+    try { await navigator.clipboard.writeText(text); $("copyLog").textContent = "Copied"; setTimeout(() => $("copyLog").textContent = "Copy log", 1500); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents($("log")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); $("copyLog").textContent = "Selected, press Ctrl+C"; }
+  });
+  $("clearLog").addEventListener("click", () => { logLines.length = 0; $("log").textContent = ""; });
+
+  renderChips(); renderTranscript(); updateMeta();
+
+  return { stop() { if (want) stopListening(); } };
+}
+
+window.Fridge = {
+  // Called each time the screen opens; sets everything up the first time.
+  open(siteLang) { if (!api) api = init(siteLang); },
+  // Called when leaving the screen: the microphone must not keep listening.
+  stop() { if (api) api.stop(); }
+};
+})();

@@ -51,6 +51,7 @@
       pickRecipe: 'Pick a recipe',
       filters: 'Filters',
       noResults: 'No recipes match these filters.',
+      mostPopular: 'Most popular',
       cat_soup: 'Soup',
       cat_main: 'Main',
       cat_dessert: 'Dessert',
@@ -158,6 +159,10 @@
       star5: 'am I chef now?',
       uploadPhoto: 'Upload photo',
       backHome: 'Back to home',
+      skipStep: 'Skip this step',
+      tellFridge: "Tell me what's in the fridge (voice recognition)",
+      justRecipes: 'Just take me to the recipes',
+      backToRecipes: 'Back to recipes',
       moveHint: 'arrow keys move, Alt + arrow keys resize',
       moveArea: 'Move {a} (drag, or use arrow keys)',
       stove: 'Stove',
@@ -169,6 +174,9 @@
       freezer: 'Freezer',
       me: 'Me',
       allergen_Celery: 'Celery',
+      allergen_Crustaceans: 'Crustaceans',
+      allergen_Molluscs: 'Molluscs',
+      allergen_Peanuts: 'Peanuts',
       allergen_Egg: 'Egg',
       allergen_Fish: 'Fish',
       allergen_Gluten: 'Gluten',
@@ -183,7 +191,11 @@
       cuisine_Greek: 'Greek',
       cuisine_French: 'French',
       cuisine_Mexican: 'Mexican',
-      cuisine_American: 'American'
+      cuisine_American: 'American',
+      cuisine_Indian: 'Indian',
+      'cuisine_Middle Eastern': 'Middle Eastern',
+      'cuisine_Latin American': 'Latin American',
+      cuisine_African: 'African'
     }
   };
   // Languages: English (US) first (the default), then the most used ones, then
@@ -298,28 +310,60 @@
     choices: null,
     built: null,
     mapView: false, // desktop toggle
-    filters: { cat: [], cuisine: [] },
+    filters: { starred: true, cat: [], cuisine: [] }, // starred: "Most popular" filter, on by default for now
     picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
     units: 'metric'
   };
 
   // ---------- Screens ----------
   // Every screen change is a browser history entry, so Back (in the page or the
-  // browser) goes to the previous screen.
-  var SCREENS = ['recipes', 'layout', 'details', 'cook'];
+  // browser) goes to the previous screen. Each screen has its own address in the
+  // same page: index.html (welcome, step 1), #start (step 2), #fridge, #recipes
+  // (recipe list), #recipe/<id>, #cook/<id> and #kitchen.
+  var SCREENS = ['welcome', 'start', 'fridge', 'recipes', 'layout', 'details', 'cook'];
+  function screenUrl(name) {
+    var base = location.pathname + location.search;
+    if (name === 'details' && state.recipe) return base + '#recipe/' + encodeURIComponent(state.recipe.id);
+    if (name === 'cook' && state.recipe) return base + '#cook/' + encodeURIComponent(state.recipe.id);
+    if (name === 'layout') return base + '#kitchen';
+    if (name === 'start' || name === 'fridge' || name === 'recipes') return base + '#' + name;
+    return base;
+  }
+  // The address tells which screen (and recipe) to show.
+  function route() {
+    var h = location.hash.slice(1);
+    try { h = decodeURIComponent(h); } catch (e) { h = ''; }
+    var m = h.match(/^(recipe|cook)\/(.+)$/);
+    if (h === '') return { screen: 'welcome' };
+    if (h === 'kitchen') return { screen: 'layout' };
+    if (h === 'start' || h === 'fridge') return { screen: h };
+    var r = m && window.RECIPES.filter(function (x) { return x.id === m[2]; })[0];
+    if (r) return { screen: m[1] === 'cook' ? 'cook' : 'details', recipe: r };
+    return { screen: 'recipes' };
+  }
+  // The browser tab names the screen too.
+  function updateTitle() {
+    var name = state.screen;
+    document.title = (name === 'details' || name === 'cook') && state.recipe ? recipeName(state.recipe) + ' \u2013 Cook'
+      : name === 'layout' ? t('kitchenLayout') + ' \u2013 Cook' : 'Cook';
+  }
   function show(name, fromHistory) {
+    // The microphone must not keep listening after the fridge screen is left.
+    if (state.screen === 'fridge' && name !== 'fridge') window.Fridge.stop();
     state.screen = name;
     SCREENS.forEach(function (s) { $('screen-' + s).hidden = s !== name; });
     $('btn-options').hidden = name === 'layout';
     if (name !== 'layout') leaveFullscreen();
-    if (!fromHistory) history.pushState({ screen: name }, '');
+    if (!fromHistory) history.pushState({ screen: name }, '', screenUrl(name));
+    updateTitle();
     window.scrollTo(0, 0);
     if (typeof updateJump === 'function') setTimeout(updateJump, 0);
     if (name === 'details') layoutEquipment();
+    if (name === 'fridge') window.Fridge.open(lang);
   }
 
-  window.addEventListener('popstate', function (e) {
-    var target = (e.state && e.state.screen) || 'recipes';
+  window.addEventListener('popstate', function () {
+    var where = route(), target = where.screen;
     if (cook && state.screen === 'cook' && target !== 'cook' && cookFinished()) {
       // All done: Back simply goes home.
       stopCooking();
@@ -328,13 +372,18 @@
     }
     if (cook && state.screen === 'cook' && target !== 'cook') {
       // Going back while cooking: stay for now and ask first.
-      history.pushState({ screen: 'cook' }, '');
+      history.pushState({ screen: 'cook' }, '', screenUrl('cook'));
       askGiveUp();
       return;
     }
-    if (target === 'cook' && !cook) target = state.recipe ? 'details' : 'recipes';
-    if (target === 'details' && !state.recipe) target = 'recipes';
-    if (target === 'layout') target = 'recipes';
+    // A cook can't be picked up again from history: show its recipe page instead.
+    if (target === 'cook' && !cook) {
+      if (where.recipe) { openDetails(where.recipe, true); history.replaceState({ screen: 'details' }, '', screenUrl('details')); }
+      else show('recipes', true);
+      return;
+    }
+    if (target === 'details' && where.recipe !== state.recipe) { openDetails(where.recipe, true); return; }
+    if (target === 'layout') { openLayout(true); return; }
     show(target, true);
   });
 
@@ -420,6 +469,7 @@
   }
   // Redraws everything that shows text in the new language.
   function refreshTexts() {
+    updateTitle();
     renderFilters();
     renderRecipes();
     starLabels.forEach(function (l, i) { l.querySelector('input').setAttribute('aria-label', t('stars', { n: i + 1 }) + ': ' + t('star' + (i + 1))); });
@@ -847,10 +897,14 @@
     setTheme(dark ? 'light' : 'dark');
   });
 
-  function openLayout() {
+  // Where the kitchen layout editor was opened from: from the welcome step, Save
+  // and Cancel continue to step 2 instead of going back.
+  var layoutFrom = null;
+  function openLayout(fromHistory) {
+    layoutFrom = state.screen;
     draft = clone(state.layout);
     fullscreenTo('landscape');
-    show('layout');
+    show('layout', fromHistory === true);
     buildCanvas();
   }
 
@@ -984,7 +1038,12 @@
     if (state.screen === 'layout') buildCanvas();
   });
 
-  $('btn-layout-cancel').addEventListener('click', function () { history.back(); });
+  function leaveLayout() {
+    if (layoutFrom !== 'welcome') { history.back(); return; }
+    show('start', true);
+    history.replaceState({ screen: 'start' }, '', screenUrl('start'));
+  }
+  $('btn-layout-cancel').addEventListener('click', leaveLayout);
   $('btn-layout-save').addEventListener('click', function () {
     state.layout = draft;
     state.layoutSaved = true;
@@ -998,7 +1057,7 @@
     label.setAttribute('data-i18n', 'editLayoutMap');
     label.textContent = t('editLayoutMap');
     document.querySelector('.layout-check').hidden = false;
-    history.back();
+    leaveLayout();
     if (cook) {
       $('cook-map').innerHTML = '';
       render();
@@ -1064,6 +1123,12 @@
     return { label: label, contains: contains };
   }
 
+  // A five-pointed star (filled with currentColor) for "Most popular" recipes.
+  function starSvg(cls) {
+    return '<svg class="' + cls + '" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">' +
+      '<path fill="currentColor" d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z"/></svg>';
+  }
+
   function dietBadge(info) {
     if (!info.label) return '';
     var cls = info.label === 'vegan' ? 'diet-vegan' : info.label === 'pesc' ? 'diet-pesc' : 'diet-veg';
@@ -1122,7 +1187,7 @@
 
   // ---------- Recipe list ----------
   var CATEGORIES = ['soup', 'main', 'dessert', 'side'];
-  var CUISINES = ['Italian', 'Asian', 'Greek', 'French', 'Mexican', 'American'];
+  var CUISINES = ['Italian', 'Asian', 'Indian', 'Middle Eastern', 'Greek', 'French', 'Mexican', 'Latin American', 'American', 'African'];
   var defaultBuilds = {};
 
   function defaultChoices(r) {
@@ -1139,6 +1204,21 @@
     box.innerHTML = '';
     var rows = { cat: document.createElement('div'), cuisine: document.createElement('div') };
     rows.cat.className = rows.cuisine.className = 'filter-row';
+    // "Most popular": only starred recipes while pressed (on by default)
+    var top = document.createElement('div');
+    top.className = 'filter-row';
+    var star = document.createElement('button');
+    star.type = 'button';
+    star.className = 'chip chip-star';
+    star.innerHTML = starSvg('star-icon') + '<span>' + ht('mostPopular') + '</span>';
+    star.setAttribute('aria-pressed', String(state.filters.starred));
+    star.addEventListener('click', function () {
+      state.filters.starred = !state.filters.starred;
+      star.setAttribute('aria-pressed', String(state.filters.starred));
+      renderRecipes();
+    });
+    top.appendChild(star);
+    box.appendChild(top);
     box.appendChild(rows.cat);
     box.appendChild(rows.cuisine);
     function chip(group, value, label) {
@@ -1165,7 +1245,7 @@
     CATEGORIES.forEach(function (cat) {
       if (f.cat.length && f.cat.indexOf(cat) < 0) return;
       var recipes = window.RECIPES.filter(function (r) {
-        return r.category === cat && (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; }));
+        return r.category === cat && (!f.starred || r.starred === 1) && (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; }));
       });
       if (!recipes.length) return;
       any = true;
@@ -1199,6 +1279,13 @@
         time.className = 'photo-time';
         time.textContent = fmtMinutes(estimateMinutes(built.steps));
         wrap.appendChild(time);
+        if (r.starred === 1) {
+          var badge = document.createElement('span');
+          badge.className = 'photo-star';
+          badge.title = t('mostPopular');
+          badge.innerHTML = starSvg('star-icon');
+          wrap.appendChild(badge);
+        }
         card.insertBefore(wrap, card.firstChild);
         card.addEventListener('click', function () { openDetails(r); });
         li.querySelector('.btn-read-card').addEventListener('click', function () { openRead(r); });
@@ -1236,10 +1323,14 @@
     return state.picks[r.id] || (state.picks[r.id] = defaultChoices(r));
   }
 
-  function openDetails(r) {
+  function openDetails(r, fromHistory) {
     state.recipe = r;
     state.choices = picksFor(r);
     $('det-name').textContent = recipeName(r);
+    var detStar = $('det-star');
+    detStar.hidden = r.starred !== 1;
+    detStar.innerHTML = r.starred === 1 ? starSvg('star-icon') : '';
+    detStar.title = t('mostPopular');
     var photo = $('det-photo');
     var img = photoEl(r, 500, 'photo-hero');
     img.id = 'det-photo';
@@ -1247,7 +1338,7 @@
     renderOptions();
     document.querySelectorAll('input[name="mode"]').forEach(function (i) { i.checked = i.value === state.choices.mode; });
     updateDetails();
-    show('details');
+    show('details', fromHistory === true);
   }
 
   // Option chips show a short name with the detail in small grey text under it.
@@ -1424,7 +1515,7 @@
         var li = document.createElement('li');
         li.className = 'ing-card';
         li.innerHTML =
-          '<img alt="" src="' + esc(imgFor(ing)) + '">' +
+          ingImg(ing) +
           '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(units(ing.note)) + '</span>' : '') + '</span>' +
           '<span class="amount">' + esc(units(ing.amount)) + '</span>';
         list.appendChild(li);
@@ -1455,6 +1546,10 @@
   $('kids-plus').addEventListener('click', function () { setPeople(state.choices.adults, state.choices.kids + 1); });
 
   function imgFor(i) { return 'img/350/' + (i.key || i.id) + '.webp'; }
+  // Ingredients without a photo yet get the same pot placeholder as the meals.
+  function ingImg(i) {
+    return i.noImage ? '<span class="ing-ph" aria-hidden="true"></span>' : '<img alt="" src="' + esc(imgFor(i)) + '">';
+  }
 
   $('btn-start-cooking').addEventListener('click', startCooking);
 
@@ -1669,7 +1764,7 @@
   function ingItem(i) {
     var base = cook.ingredients.filter(function (x) { return x.id === i.id; })[0];
     var name = (i.label || (base ? base.name : i.id)).replace(/\s*\([^)]*\)/g, '');
-    return '<li><img alt="" src="' + esc(imgFor(i)) + '"><span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(units(i.qty)) + '</b>' : '') + '</li>';
+    return '<li>' + ingImg(i) + '<span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(units(i.qty)) + '</b>' : '') + '</li>';
   }
 
   function cardFor(step) {
@@ -2237,6 +2332,25 @@
   renderRecipes();
   // The app sets the scroll position per screen itself; the browser shouldn't restore old ones.
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  show('recipes', true);
-  history.replaceState({ screen: 'recipes' }, '');
+  // Welcome steps: 1) kitchen layout or skip, 2) fridge or straight to the recipes.
+  $('btn-welcome-layout').addEventListener('click', function () { openLayout(); });
+  $('btn-welcome-skip').addEventListener('click', function () { show('start'); });
+  $('btn-start-fridge').addEventListener('click', function () { show('fridge'); });
+  $('btn-start-recipes').addEventListener('click', function () { show('recipes'); });
+  $('btn-fridge-back').addEventListener('click', function () { show('recipes'); });
+
+  // The plain address opens the welcome step. A link to another screen opens it
+  // on top of the recipe list, so Back still leads to the list. A running cook
+  // can't be restored after a reload.
+  var start = route();
+  if (start.screen === 'welcome') {
+    show('welcome', true);
+    history.replaceState({ screen: 'welcome' }, '', screenUrl('welcome'));
+  } else {
+    show('recipes', true);
+    history.replaceState({ screen: 'recipes' }, '', screenUrl('recipes'));
+    if (start.recipe) openDetails(start.recipe);
+    else if (start.screen === 'layout') openLayout();
+    else if (start.screen === 'start' || start.screen === 'fridge') show(start.screen);
+  }
 })();
