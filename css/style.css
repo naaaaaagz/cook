@@ -32,7 +32,8 @@
   --stove: #dc2626;
   --oven: #ea580c;
   --countertop: #ca8a04;
-  --board: #16a34a;
+  --board: #9a6a3a;
+  --appliance: #4b5563;
   --fridge: #0891b2;
   --freezer: #4f46e5;
   --me: #2563eb;
@@ -41,7 +42,8 @@
   --stove-bg: #fbe9e2;
   --oven-bg: #fbeedd;
   --countertop-bg: #f8f0d6;
-  --board-bg: #e8f0dc;
+  --board-bg: #f3e9dc;
+  --appliance-bg: #eceef1;
   --fridge-bg: #e0efee;
   --freezer-bg: #e6e6f2;
   --me-bg: #e3ebf4;
@@ -83,7 +85,8 @@
   --stove: #ec8a85;
   --oven: #eda772;
   --countertop: #e3c25e;
-  --board: #7cc79a;
+  --board: #c9a27a;
+  --appliance: #9aa1ab;
   --fridge: #6cc4d1;
   --freezer: #9aa0e6;
   --me: #7fa9e8;
@@ -91,7 +94,8 @@
   --stove-bg: #3a2a2b;
   --oven-bg: #3a2f26;
   --countertop-bg: #37321f;
-  --board-bg: #24332b;
+  --board-bg: #33291f;
+  --appliance-bg: #2b2e33;
   --fridge-bg: #213238;
   --freezer-bg: #2a2c40;
   --me-bg: #26303f;
@@ -129,7 +133,8 @@
     --stove: #ec8a85;
     --oven: #eda772;
     --countertop: #e3c25e;
-    --board: #7cc79a;
+    --board: #c9a27a;
+  --appliance: #9aa1ab;
     --fridge: #6cc4d1;
     --freezer: #9aa0e6;
     --me: #7fa9e8;
@@ -137,7 +142,8 @@
     --stove-bg: #3a2a2b;
     --oven-bg: #3a2f26;
     --countertop-bg: #37321f;
-    --board-bg: #24332b;
+    --board-bg: #33291f;
+  --appliance-bg: #2b2e33;
     --fridge-bg: #213238;
     --freezer-bg: #2a2c40;
     --me-bg: #26303f;
@@ -172,7 +178,7 @@ h2 { font-size: 26px; }
 h3 { font-size: 19px; }
 
 /* Black line icons (utensils, areas) turn white in dark mode */
-img.icon { filter: var(--icon-filter); }
+img.icon, .anim img, img.notif-tool { filter: var(--icon-filter); }
 
 .wrap { max-width: 680px; margin: 0 auto; padding: 24px 16px 48px; }
 .wrap-wide { max-width: 960px; }
@@ -198,7 +204,7 @@ img.icon { filter: var(--icon-filter); }
   min-height: 44px;
 }
 .btn:focus-visible, .block:focus-visible, .recipe-card:focus-visible, select:focus-visible,
-.btn-options:focus-visible, .area-move:focus-visible, .chip:focus-visible, .choice:has(input:focus-visible), .seg:has(input:focus-visible) {
+.btn-options:focus-visible, .area-move:focus-visible, .filter-word:focus-visible, .choice:has(input:focus-visible), .seg:has(input:focus-visible) {
   outline: 3px solid var(--highlight);
   outline-offset: 2px;
 }
@@ -409,6 +415,14 @@ select {
   touch-action: none;
   overflow: hidden;
 }
+.layout-add { position: absolute; right: 28px; bottom: 28px; z-index: 30; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.btn-layout-add { width: 48px; height: 48px; border-radius: 50%; padding: 0; display: grid; place-items: center; box-shadow: 0 4px 14px var(--shadow); }
+.layout-add-menu { display: grid; gap: 2px; padding: 6px; min-width: 190px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 8px 24px var(--shadow); }
+.layout-add-menu[hidden] { display: none; }
+.add-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; font: inherit; font-weight: 600; color: var(--ink); background: transparent; border: none; border-radius: 6px; cursor: pointer; text-align: left; }
+.add-item:hover, .add-item:focus-visible { background: var(--highlight-bg); }
+.add-item:disabled { opacity: .4; cursor: default; background: transparent; }
+.add-item img { width: 24px; height: 24px; }
 .block {
   position: absolute;
   display: flex;
@@ -437,7 +451,13 @@ select {
 .block-me { border-style: dashed; border-radius: 50%; opacity: .5; padding: 0; gap: 2px; }
 .block-me img { width: 40%; max-height: 40%; }
 .block-me span { font-size: 13px; }
-.block.area-board, .map-area.area-board { border-style: dashed; }
+.block.area-board, .map-area.area-board,
+.block.area-microwave, .map-area.area-microwave,
+.block.area-airfryer, .map-area.area-airfryer,
+.block.area-mixer, .map-area.area-mixer,
+.block.area-blender, .map-area.area-blender,
+.block.area-kettle, .block.area-toaster, .block.area-ricecooker,
+.block.area-slowcooker, .block.area-pressurecooker, .block.area-foodprocessor { border-style: dashed; }
 /* The countertop's name stays at the top, clear of the sink and board on it */
 .block.area-countertop { flex-direction: row; align-items: flex-start; justify-content: center; padding-top: 10px; }
 .block.area-countertop img { width: 26px; height: 26px; max-height: none; }
@@ -477,6 +497,8 @@ select {
 .area-freezer { color: var(--freezer); background: var(--freezer-bg); }
 .area-sink { color: var(--sink); background: var(--sink-bg); }
 .area-me { color: var(--me); background: var(--me-bg); }
+.area-microwave, .area-airfryer, .area-mixer, .area-blender,
+.area-kettle, .area-toaster, .area-ricecooker, .area-slowcooker, .area-pressurecooker, .area-foodprocessor { color: var(--appliance); background: var(--appliance-bg); }
 
 /* Rotate buttons: phones and tablets only; they show the shape they switch to */
 .btn-rotate { display: none; }
@@ -486,26 +508,31 @@ select {
 
 /* Recipe list */
 .layout-home { margin: 7px 0 16px; }
-.filters { display: grid; gap: 8px; margin: 16px 0 8px; }
-.filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.layout-check { color: #2e7d32; font-weight: 800; }
-.chip {
+.filters { display: grid; gap: 10px; margin: 16px 0 8px; }
+/* Filters are words separated by interpuncts; a faint line between dish types and cuisines */
+.filter-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.filter-row-cuisine { border-top: 1px solid var(--line); padding-top: 10px; }
+.filter-sep { color: var(--muted); }
+.filter-open { margin-right: -7px; }
+.filter-close { margin-left: -7px; }
+.filter-word {
   font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  padding: 4px 2px;
   cursor: pointer;
+  text-underline-offset: 4px;
 }
-.chip[aria-pressed="true"] { background: var(--highlight); color: var(--highlight-fg); border-color: var(--highlight); }
+.filter-word:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); }
+.filter-word[aria-pressed="true"] { color: var(--highlight); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: currentColor; }
 /* "Most popular" (starred recipes) */
 .star-icon { display: block; flex: none; }
-.chip-star { display: inline-flex; align-items: center; gap: 6px; }
-.chip-star .star-icon { color: var(--star); }
-.chip-star[aria-pressed="true"] .star-icon { color: currentColor; }
+.filter-star { display: inline-flex; align-items: center; gap: 6px; }
+.filter-star .star-icon { color: var(--star); }
 .photo-star {
   position: absolute;
   top: 6px;
@@ -808,6 +835,8 @@ select {
 .step[data-area="sink"] { --area-color: var(--sink); --area-bg: var(--sink-bg); }
 .step[data-area="fridge"] { --area-color: var(--fridge); --area-bg: var(--fridge-bg); }
 .step[data-area="freezer"] { --area-color: var(--freezer); --area-bg: var(--freezer-bg); }
+.step[data-area^="countertop"] { --area-color: var(--countertop); --area-bg: var(--countertop-bg); }
+.step[data-area="microwave"], .step[data-area="airfryer"], .step[data-area="mixer"], .step[data-area="blender"] { --area-color: var(--appliance); --area-bg: var(--appliance-bg); }
 
 .step-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 .area-badge {
@@ -1265,7 +1294,7 @@ body.overdo::before {
   padding: 5px 6px;
   color: var(--ink);
   background: var(--card);
-  border: 1px solid var(--line);
+  border: 2px solid color-mix(in srgb, var(--ink) 45%, transparent);
   border-radius: 10px;
   box-shadow: 0 4px 14px var(--shadow);
 }
@@ -1278,6 +1307,19 @@ body.overdo::before {
   flex: none;
 }
 .notif-icon img { width: 18px; height: 18px; }
+/* Two-frame action picture: shown in the ring while the step runs, 0.4 s per frame */
+.anim { display: none; position: relative; }
+.anim img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.anim img + img { animation: anim-frame .8s steps(1, end) infinite; }
+.anim img:first-child { animation: anim-frame .8s steps(1, end) infinite reverse; }
+@keyframes anim-frame { 0% { opacity: 0; } 50% { opacity: 1; } }
+.notif.is-running .notif-anim { display: block; width: 22px; height: 22px; }
+.notif.is-running .notif-anim ~ .icon, .notif.is-running .icon:has(+ .notif-anim) { display: none; }
+.step.is-running .ring-anim { display: block; width: 26px; height: 26px; margin: 0 auto 2px; color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .anim img { animation: none !important; }
+  .anim img + img { opacity: 0; }
+}
 .notif-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg) scaleY(-1); }
 .notif-ring circle { fill: none; stroke-width: 3; }
 .nr-track { stroke: var(--line); }
@@ -1305,6 +1347,9 @@ body.overdo::before {
 }
 .notif-title { font-family: var(--font-serif); font-weight: 600; font-size: 14px; line-height: 1.2; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .notif-meta { font-size: 11px; color: var(--muted); }
+/* The step's tools after its name: plain icons, no frames */
+.notif-tools { display: inline-flex; gap: 3px; vertical-align: -3px; }
+.notif-tool { width: 16px; height: 16px; border: 0; padding: 0; background: none; }
 .notif-time { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .notif-hint { font-size: 10px; }
 .notif-btn {
@@ -1363,12 +1408,49 @@ body.overdo::before {
 .step-pop-close:hover { color: var(--ink); }
 .step-pop-close:focus-visible { outline: 3px solid var(--highlight); outline-offset: -3px; }
 .step-pop .step-head { padding-right: 40px; }
+/* Pointer from the popup to its notification: a square turned 45°, half of it showing */
+.step-pop-arrow {
+  position: fixed;
+  z-index: 21;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+.step-pop-arrow[hidden] { display: none; }
+.step-pop-arrow.is-up { transform: translateY(1px) rotate(45deg); border-right: 0; border-bottom: 0; margin-top: -8px; }
+.step-pop-arrow:not(.is-up) { transform: translateY(-1px) rotate(45deg); border-left: 0; border-top: 0; margin-top: -8px; }
+
+/* "Do this first!" on the step to start with */
+.first-badge {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-fg);
+  background: var(--primary-bg);
+  border-radius: 999px;
+  padding: 1px 9px;
+}
+.step.is-first { border-color: var(--primary-bg); box-shadow: 0 0 0 1px var(--primary-bg), 0 1px 3px var(--shadow); }
+.notif { position: relative; }
+.notif.is-first { border-color: var(--primary-bg); }
+.notif .first-badge { top: 0; left: 44px; font-size: 10px; padding: 0 7px; }
+.step-pop .first-badge { display: none; }
 
 /* Map view: the page itself doesn't scroll */
 html:has(.screen-cook.is-map:not([hidden])) { overflow: hidden; }
 
 /* "You want to give up?" */
 .exit-dialog { padding: 22px; width: min(360px, calc(100% - 32px)); text-align: center; }
+.nolayout-dialog { width: min(560px, calc(100% - 32px)); }
 .exit-dialog h2 { margin-bottom: 4px; }
 .exit-dialog .dialog-actions { justify-content: center; border-top: 0; }
 .exit-dialog .btn { min-width: 110px; }
@@ -1391,3 +1473,120 @@ html:has(.screen-cook.is-map:not([hidden])) { overflow: hidden; }
   cursor: pointer;
 }
 .jump-bottom:focus-visible { outline: 3px solid var(--me); outline-offset: 2px; }
+
+/* ---------- Kitchen layout textures (editor only; toggled with the paintbrush button) ----------
+   Each area gets a semi-transparent texture over its own color tint, just hinting
+   at the real thing. The labels get a soft backing so they stay readable. */
+#layout-canvas.textured {
+  background-image: conic-gradient(from 45deg,
+    color-mix(in srgb, var(--ink) 6%, transparent) 0 90deg, transparent 0 180deg,
+    color-mix(in srgb, var(--ink) 6%, transparent) 0 270deg, transparent 0);
+  background-size: 52px 52px;
+}
+#layout-canvas.textured .block:not(.block-me)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: .55;
+  pointer-events: none;
+}
+#layout-canvas.textured .block > img,
+#layout-canvas.textured .block > span:not(.resize) { position: relative; z-index: 1; }
+#layout-canvas.textured .block:not(.block-me) > span:not(.resize) {
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+#layout-canvas.textured .block:not(.block-me) > img { display: none; }
+/* Small appliances have no texture: they keep their icon */
+#layout-canvas.textured .block.small-appliance > img { display: block; }
+#layout-canvas.textured .block.small-appliance::before { content: none; }
+#layout-canvas.textured .block .resize { z-index: 2; }
+
+/* Stove: black ceramic glass with four cooking zones */
+#layout-canvas.textured .area-stove::before {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .16), transparent 45%),
+    radial-gradient(circle 30px at 30% 32%, transparent 23px, rgba(255, 110, 70, .75) 24px 26px, transparent 27px),
+    radial-gradient(circle 30px at 30% 32%, transparent 13px, rgba(255, 110, 70, .45) 14px 15px, transparent 16px),
+    radial-gradient(circle 22px at 72% 30%, transparent 16px, rgba(255, 110, 70, .75) 17px 19px, transparent 20px),
+    radial-gradient(circle 22px at 30% 74%, transparent 16px, rgba(255, 110, 70, .75) 17px 19px, transparent 20px),
+    radial-gradient(circle 30px at 72% 72%, transparent 23px, rgba(255, 110, 70, .75) 24px 26px, transparent 27px),
+    linear-gradient(#18181b, #0e0e10);
+}
+/* Oven: front view with control strip, knobs, handle and glass window */
+#layout-canvas.textured .area-oven::before {
+  background:
+    radial-gradient(circle, #c9cdd2 0 3px, transparent 3.5px) 14% 6% / 12px 12px no-repeat,
+    radial-gradient(circle, #c9cdd2 0 3px, transparent 3.5px) 28% 6% / 12px 12px no-repeat,
+    radial-gradient(circle, #c9cdd2 0 3px, transparent 3.5px) 72% 6% / 12px 12px no-repeat,
+    radial-gradient(circle, #c9cdd2 0 3px, transparent 3.5px) 86% 6% / 12px 12px no-repeat,
+    linear-gradient(#1c1d20, #1c1d20) top / 100% 15% no-repeat,
+    linear-gradient(#d4d8dd, #d4d8dd) 50% 24% / 70% 4px no-repeat,
+    linear-gradient(160deg, rgba(255, 255, 255, .14), rgba(0, 0, 0, .7) 40%) 50% 70% / 74% 48% no-repeat,
+    linear-gradient(#4a4d52, #34363a);
+}
+/* Countertop: dark mahogany wood */
+#layout-canvas.textured .area-countertop::before {
+  background:
+    repeating-linear-gradient(93deg, rgba(0, 0, 0, .22) 0 1px, transparent 1px 7px, rgba(255, 255, 255, .05) 7px 9px, transparent 9px 17px),
+    repeating-linear-gradient(88deg, rgba(0, 0, 0, .14) 0 2px, transparent 2px 43px),
+    linear-gradient(180deg, #5e2317, #3c120b);
+}
+/* Cutting board: light wood */
+#layout-canvas.textured .area-board::before {
+  background:
+    repeating-linear-gradient(2deg, rgba(120, 70, 20, .25) 0 1px, transparent 1px 6px, rgba(255, 255, 255, .12) 6px 7px, transparent 7px 13px),
+    linear-gradient(180deg, #d9ab70, #b9853f);
+}
+/* Sink: brushed steel with a basin; the tap is drawn by ::after */
+#layout-canvas.textured .area-sink::before {
+  background:
+    linear-gradient(rgba(40, 46, 54, .32), rgba(40, 46, 54, .12)) center / 70% 58% no-repeat,
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .22) 0 1px, transparent 1px 3px),
+    linear-gradient(135deg, #e6e9ed, #9aa3ad 55%, #d6dbe0);
+}
+#layout-canvas.textured .area-sink::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 28px;
+  height: 24px;
+  pointer-events: none;
+  opacity: .85;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25));
+  background:
+    radial-gradient(circle, #f2f4f6 0 3px, transparent 3.5px) center 1px / 10px 10px no-repeat,
+    linear-gradient(90deg, #aeb6bf, #e3e7eb 50%, #aeb6bf) center top / 28px 9px no-repeat,
+    linear-gradient(90deg, #aeb6bf, #e3e7eb 50%, #aeb6bf) center 8px / 6px 16px no-repeat;
+}
+#layout-canvas.textured .area-sink[data-tap="top"]::after { top: 4px; left: 50%; transform: translateX(-50%); }
+#layout-canvas.textured .area-sink[data-tap="bottom"]::after { bottom: 4px; left: 50%; transform: translateX(-50%) rotate(180deg); }
+#layout-canvas.textured .area-sink[data-tap="left"]::after { left: 3px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+#layout-canvas.textured .area-sink[data-tap="right"]::after { right: 3px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+/* Fridge: front view, one door (the freezer is separate), handle on the left */
+#layout-canvas.textured .area-fridge::before {
+  background:
+    linear-gradient(#8a929b, #8a929b) 12% 42% / 3px 36% no-repeat,
+    linear-gradient(270deg, #f4f6f8, #d5dae0);
+}
+/* Freezer: darker front with a snowflake, handle on the left */
+#layout-canvas.textured .area-freezer::before {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7M9 3.8l3 2 3-2M9 20.2l3-2 3 2M3.6 10.4l2.9-.4-1.4-2.7M20.4 13.6l-2.9.4 1.4 2.7M3.6 13.6l2.9.4-1.4 2.7M20.4 10.4l-2.9-.4 1.4-2.7'/%3E%3C/svg%3E") 50% 14% / 20px 20px no-repeat,
+    linear-gradient(#5d656e, #5d656e) 12% 55% / 3px 34% no-repeat,
+    linear-gradient(270deg, #aab3bd, #808a95);
+}
+/* Microwave: dark glass door with a keypad strip on the right */
+#layout-canvas.textured .area-microwave::before {
+  background:
+    radial-gradient(circle, #c9cdd2 0 2px, transparent 2.5px) 90% 60% / 8px 8px no-repeat,
+    radial-gradient(circle, #c9cdd2 0 2px, transparent 2.5px) 90% 75% / 8px 8px no-repeat,
+    linear-gradient(#9fd3a8, #9fd3a8) 90% 25% / 12% 10% no-repeat,
+    linear-gradient(160deg, rgba(255, 255, 255, .16), rgba(0, 0, 0, .7) 45%) 8% 50% / 68% 72% no-repeat,
+    linear-gradient(#4a4d52, #34363a);
+}
+/* Textures button: crossed out while textures are off */
+.btn-textures { position: relative; }
+.btn-textures[aria-pressed="false"]::after { content: ""; position: absolute; left: 22%; right: 22%; top: 50%; height: 2px; background: currentColor; transform: rotate(-45deg); }

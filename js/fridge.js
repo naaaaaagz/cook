@@ -169,7 +169,7 @@ function init(siteLang) {
   const logLines = [];
   function log(kind, msg) {
     const ms = ((performance.now() - t0) / 1000).toFixed(2).padStart(7, " ");
-    logLines.push({ ms, kind, msg });
+    logLines.push({ ms, kind, msg, at: new Date() });
     if (logLines.length > 400) logLines.shift();
     const el = $("log");
     const line = document.createElement("div");
@@ -487,6 +487,20 @@ function init(siteLang) {
     catch (e) { const r = document.createRange(); r.selectNodeContents($("log")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); $("copyLog").textContent = "Selected, press Ctrl+C"; }
   });
   $("clearLog").addEventListener("click", () => { logLines.length = 0; $("log").textContent = ""; });
+  // Saves the log as voicedebug.txt on this device: one entry per block, with the real date and time.
+  function stamp(d) {
+    const p = (n, w) => String(n).padStart(w || 2, "0");
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " +
+      p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds()) + "." + p(d.getMilliseconds(), 3);
+  }
+  $("saveLog").addEventListener("click", () => {
+    const text = logLines.map(l => stamp(l.at) + " [" + l.kind + "] " + l.msg).join("\n\n") + "\n";
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" }));
+    a.download = "voicedebug.txt";
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
 
   renderChips(); renderTranscript(); updateMeta();
 

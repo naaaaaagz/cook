@@ -56,6 +56,9 @@
       cat_main: 'Main',
       cat_dessert: 'Dessert',
       cat_side: 'Side dish',
+      cat_breakfast: 'Breakfast',
+      cat_salad: 'Salad',
+      cat_dip: 'Dips & sauces',
       readInstead: 'Read instead',
       toggleTheme: 'Switch light / dark',
       min: 'min',
@@ -163,12 +166,27 @@
       tellFridge: "Tell me what's in the fridge (voice recognition)",
       justRecipes: 'Just take me to the recipes',
       backToRecipes: 'Back to recipes',
+      toggleTextures: 'Textures on / off',
+      noLayoutAsk: "You don't have the kitchen layout set up. Continue in list view only?",
+      noSetUp: "No, let's set it up",
       moveHint: 'arrow keys move, Alt + arrow keys resize',
       moveArea: 'Move {a} (drag, or use arrow keys)',
       stove: 'Stove',
       oven: 'Oven',
       countertop: 'Countertop',
       board: 'Cutting board',
+      microwave: 'Microwave',
+      airfryer: 'Air fryer',
+      mixer: 'Stand mixer',
+      blender: 'Blender',
+      kettle: 'Kettle',
+      toaster: 'Toaster',
+      ricecooker: 'Rice cooker',
+      slowcooker: 'Slow cooker',
+      pressurecooker: 'Pressure cooker',
+      foodprocessor: 'Food processor',
+      addToKitchen: 'Add to the kitchen',
+      doFirst: 'Do this first!',
       sink: 'Kitchen sink',
       fridge: 'Fridge',
       freezer: 'Freezer',
@@ -192,6 +210,15 @@
       cuisine_French: 'French',
       cuisine_Mexican: 'Mexican',
       cuisine_American: 'American',
+      cuisine_Chinese: 'Chinese',
+      cuisine_Japanese: 'Japanese',
+      cuisine_Korean: 'Korean',
+      cuisine_Thai: 'Thai',
+      cuisine_Vietnamese: 'Vietnamese',
+      cuisine_Indonesian: 'Indonesian',
+      cuisine_Filipino: 'Filipino',
+      cuisine_Nigerian: 'Nigerian',
+      cuisine_Moroccan: 'Moroccan',
       cuisine_Indian: 'Indian',
       'cuisine_Middle Eastern': 'Middle Eastern',
       'cuisine_Latin American': 'Latin American',
@@ -309,8 +336,8 @@
     recipe: null,
     choices: null,
     built: null,
-    mapView: false, // desktop toggle
-    filters: { starred: true, cat: [], cuisine: [] }, // starred: "Most popular" filter, on by default for now
+    mapView: true, // map or list; map needs a saved layout
+    filters: { starred: true, diet: [], cat: [], cuisine: [] }, // starred: "Most popular" filter, on by default for now
     picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
     units: 'metric'
   };
@@ -629,18 +656,49 @@
 
   // Listed back to front: the countertop is always behind; the sink and the
   // chopping board can sit on it (or stand on their own).
+  // Every possible area, back to front. A kitchen has the base set; the plus
+  // button adds up to two more countertops (countertop2, countertop3, shown as
+  // "Countertop") and small appliances.
   var AREAS = {
     countertop: { icon: ICON.countertop },
+    countertop2: { icon: ICON.countertop },
+    countertop3: { icon: ICON.countertop },
     stove: { icon: 'icons/stovetop.svg' },
     oven: { icon: 'icons/oven.svg' },
     fridge: { icon: ICON.fridge },
     freezer: { icon: ICON.freezer },
+    microwave: { icon: 'icons/microwave-oven.svg' },
     sink: { icon: ICON.sink },
-    board: { icon: 'icons/chopping-board.svg' }
+    board: { icon: 'icons/chopping-board.svg' },
+    airfryer: { icon: 'icons/air-fryer.svg' },
+    mixer: { icon: 'icons/stand-mixer.svg' },
+    blender: { icon: 'icons/blender.svg' },
+    kettle: { icon: 'icons/kettle.svg' },
+    toaster: { icon: 'icons/toaster.svg' },
+    ricecooker: { icon: 'icons/rice-cooker.svg' },
+    slowcooker: { icon: 'icons/slow-cooker.svg' },
+    pressurecooker: { icon: 'icons/pressure-cooker.svg' },
+    foodprocessor: { icon: 'icons/food-processor.svg' }
   };
   var AREA_KEYS = Object.keys(AREAS);
-  var LAYOUT_KEYS = AREA_KEYS.concat(['me']);
-  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, sink: 3, board: 3, me: 4 };
+  var ALL_KEYS = AREA_KEYS.concat(['me']);
+  // The areas (and "Me") a layout has, back to front.
+  function keysOf(layout) { return ALL_KEYS.filter(function (k) { return layout[k]; }); }
+  function areaKeysOf(layout) { return AREA_KEYS.filter(function (k) { return layout[k]; }); }
+  // countertop2 and countertop3 are countertops too (same look, name and rules).
+  function baseKey(k) { return k.replace(/\d+$/, ''); }
+  function isCounter(k) { return baseKey(k) === 'countertop'; }
+  // These may stand on a countertop; the fridge, freezer and oven may not.
+  var APPLIANCES = ['microwave', 'airfryer', 'mixer', 'blender', 'kettle', 'toaster', 'ricecooker', 'slowcooker', 'pressurecooker', 'foodprocessor'];
+  var ON_COUNTER = ['stove', 'sink', 'board'].concat(APPLIANCES);
+  function canOverlap(a, b) {
+    if (a === 'me' || b === 'me') return true;
+    if (isCounter(a) && isCounter(b)) return false;
+    if (isCounter(a)) return ON_COUNTER.indexOf(baseKey(b)) >= 0;
+    if (isCounter(b)) return ON_COUNTER.indexOf(baseKey(a)) >= 0;
+    return false;
+  }
+  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, microwave: 3, sink: 3, board: 3, airfryer: 3, mixer: 3, blender: 3, kettle: 3, toaster: 3, ricecooker: 3, slowcooker: 3, pressurecooker: 3, foodprocessor: 3, me: 4 };
   // Smallest size per block in pixels, so blocks keep their shape in landscape and portrait.
   var MIN_PX = {
     countertop: { w: 160, h: 110 },
@@ -650,12 +708,23 @@
     freezer: { w: 70, h: 90 },
     board: { w: 90, h: 60 },
     sink: { w: 80, h: 60 },
+    microwave: { w: 90, h: 60 },
+    airfryer: { w: 64, h: 64 },
+    mixer: { w: 64, h: 64 },
+    blender: { w: 56, h: 56 },
+    kettle: { w: 56, h: 56 },
+    toaster: { w: 64, h: 56 },
+    ricecooker: { w: 64, h: 64 },
+    slowcooker: { w: 70, h: 64 },
+    pressurecooker: { w: 70, h: 64 },
+    foodprocessor: { w: 64, h: 64 },
     me: { w: 64, h: 64 }
   };
   var ME_PX = 64; // "Me" is always a 64 px circle
   function minSize(key, container) {
     var w = container.clientWidth || 800, h = container.clientHeight || 450;
-    return { w: Math.min(0.9, MIN_PX[key].w / w), h: Math.min(0.9, MIN_PX[key].h / h) };
+    var m = MIN_PX[baseKey(key)];
+    return { w: Math.min(0.9, m.w / w), h: Math.min(0.9, m.h / h) };
   }
 
   // Positions and sizes as fractions of the canvas. No overlaps except on the countertop.
@@ -667,6 +736,7 @@
     freezer: { x: 0.86, y: 0.04, w: 0.11, h: 0.40 },
     board: { x: 0.51, y: 0.24, w: 0.17, h: 0.30 },
     sink: { x: 0.32, y: 0.24, w: 0.17, h: 0.30 },
+    microwave: { x: 0.73, y: 0.50, w: 0.13, h: 0.17 },
     me: { x: 0.45, y: 0.60, w: 0.10, h: 0.18 }
   };
   // The same kitchen for a canvas that is taller than wide.
@@ -678,6 +748,7 @@
     sink: { x: 0.58, y: 0.10, w: 0.32, h: 0.11 },
     fridge: { x: 0.05, y: 0.50, w: 0.25, h: 0.20 },
     freezer: { x: 0.33, y: 0.50, w: 0.25, h: 0.20 },
+    microwave: { x: 0.62, y: 0.70, w: 0.30, h: 0.10 },
     me: { x: 0.62, y: 0.55, w: 0.18, h: 0.09 }
   };
   state.layout = clone(DEFAULT_LAYOUT);
@@ -687,12 +758,12 @@
     return a.x < b.x + b.w - e && b.x < a.x + a.w - e && a.y < b.y + b.h - e && b.y < a.y + a.h - e;
   }
 
-  // Only the countertop may be overlapped.
+  // Only countertops may be overlapped, and only by what can stand on them.
   // "Me" is just where you stand: it moves freely and never blocks or pushes anything.
   function collides(layout, key, rect, keys) {
-    if (key === 'countertop' || key === 'me') return false;
+    if (key === 'me') return false;
     return keys.some(function (other) {
-      return other !== key && other !== 'countertop' && other !== 'me' && overlaps(rect, layout[other]);
+      return other !== key && layout[other] && !canOverlap(key, other) && overlaps(rect, layout[other]);
     });
   }
 
@@ -728,7 +799,7 @@
   // nearby areas, and pushes an area it runs into out of the way when there is
   // room for it. The chopping board and "Me" don't snap.
   var SNAP_PX = 12;
-  function snappable(k) { return k !== 'board' && k !== 'me'; }
+  function snappable(k) { return k !== 'board' && k !== 'me' && APPLIANCES.indexOf(k) < 0; }
 
   function snapRect(layout, key, r, keys, container) {
     if (!snappable(key)) return r;
@@ -757,9 +828,10 @@
   // closest free place (pushed left, right, up or down, else the nearest free
   // spot on the canvas). Returns false when one has nowhere to go; then nothing changes.
   function pushOthers(layout, key, next, keys) {
-    if (key === 'countertop' || key === 'me') return false;
-    var hits = keys.filter(function (k) { return k !== key && k !== 'countertop' && k !== 'me' && overlaps(next, layout[k]); });
-    if (!hits.length) return false;
+    if (key === 'me') return false;
+    var hits = keys.filter(function (k) { return k !== key && !canOverlap(key, k) && overlaps(next, layout[k]); });
+    // A countertop is never pushed: what stands on it would be left behind.
+    if (!hits.length || hits.some(isCounter)) return false;
     var test = Object.assign({}, layout);
     test[key] = next;
     function free(k, c) {
@@ -908,6 +980,80 @@
     buildCanvas();
   }
 
+  // Textures hint at the real kitchen (floor tiles, ceramic stove, wood, steel...).
+  // On by default; the paintbrush button in the editor turns them off and on.
+  var textures = true;
+  function applyTextures() {
+    $('layout-canvas').classList.toggle('textured', textures);
+    $('btn-layout-textures').setAttribute('aria-pressed', String(textures));
+  }
+  $('btn-layout-textures').addEventListener('click', function () { textures = !textures; applyTextures(); });
+
+  // Plus button: adds another countertop (up to 3 in all) or a small appliance.
+  // A new item goes to the free spot nearest the middle of a
+  // countertop (appliances) or of the kitchen (countertops).
+  var ADDABLE = ['countertop', 'airfryer', 'mixer', 'blender', 'kettle', 'toaster', 'ricecooker', 'slowcooker', 'pressurecooker', 'foodprocessor'];
+  function addKey(kind) {
+    if (kind !== 'countertop') return draft[kind] ? null : kind;
+    return ['countertop2', 'countertop3'].filter(function (k) { return !draft[k]; })[0] || null;
+  }
+  function addItem(kind) {
+    var key = addKey(kind), canvas = $('layout-canvas');
+    if (!key) return;
+    state.layoutTouched = true;
+    var cw = canvas.clientWidth || 800, ch = canvas.clientHeight || 450, m = MIN_PX[kind];
+    var w = Math.min(0.9, m.w * 1.25 / cw), h = Math.min(0.9, m.h * 1.25 / ch);
+    var keys = keysOf(draft).concat([key]);
+    var targets = kind === 'countertop' ? [{ x: 0, y: 0, w: 1, h: 1 }]
+      : keysOf(draft).filter(isCounter).map(function (k) { return draft[k]; }).concat([{ x: 0, y: 0, w: 1, h: 1 }]);
+    var best = null;
+    targets.some(function (t) {
+      var cx = t.x + t.w / 2, cy = t.y + t.h / 2;
+      for (var y = t.y; y + h <= t.y + t.h + 1e-9; y += 0.02) {
+        for (var x = t.x; x + w <= t.x + t.w + 1e-9; x += 0.02) {
+          var r = { x: x, y: y, w: w, h: h };
+          if (x + w > 1 || y + h > 1 || collides(draft, key, r, keys)) continue;
+          var d = Math.hypot(x + w / 2 - cx, y + h / 2 - cy);
+          if (!best || d < best.d) best = { r: r, d: d };
+        }
+      }
+      return !!best;
+    });
+    draft[key] = best ? best.r : { x: (1 - w) / 2, y: (1 - h) / 2, w: w, h: h };
+    buildCanvas();
+  }
+  function renderAddMenu() {
+    var menu = $('layout-add-menu');
+    menu.innerHTML = '';
+    ADDABLE.forEach(function (kind) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'add-item';
+      b.innerHTML = '<img class="icon" alt="" src="' + AREAS[kind].icon + '"><span>' + ht(kind) + '</span>';
+      b.disabled = !addKey(kind);
+      b.addEventListener('click', function () { menu.hidden = true; addItem(kind); });
+      menu.appendChild(b);
+    });
+  }
+  $('btn-layout-add').addEventListener('click', function () {
+    var menu = $('layout-add-menu');
+    if (menu.hidden) renderAddMenu();
+    menu.hidden = !menu.hidden;
+  });
+  document.addEventListener('pointerdown', function (e) {
+    if (!e.target.closest('#layout-add-menu') && !e.target.closest('#btn-layout-add')) $('layout-add-menu').hidden = true;
+  });
+
+  // The sink's tap sits in the middle of a long side: the one facing away from "Me".
+  function updateSinkTap() {
+    var el = blockEls.sink, canvas = $('layout-canvas');
+    if (!el || !draft) return;
+    var s = draft.sink, me = draft.me, cw = canvas.clientWidth || 800, ch = canvas.clientHeight || 450;
+    var sx = s.x + s.w / 2, sy = s.y + s.h / 2, mx = me.x + me.w / 2, my = me.y + me.h / 2;
+    var wide = s.w * cw >= s.h * ch;
+    el.setAttribute('data-tap', wide ? (my > sy ? 'top' : 'bottom') : (mx > sx ? 'left' : 'right'));
+  }
+
   // Until you move something, the editor shows the default arrangement for the
   // canvas shape (landscape or portrait), also after rotating.
   function buildCanvas() {
@@ -921,29 +1067,34 @@
     draft.me.y = clamp(draft.me.y, 0, 1 - draft.me.h);
     canvas.innerHTML = '';
     blockEls = {};
-    LAYOUT_KEYS.forEach(function (key) {
+    var keys = keysOf(draft);
+    keys.forEach(function (key) {
       var el = document.createElement('div');
       blockEls[key] = el;
-      el.className = 'block area-' + key + (key === 'me' ? ' block-me' : '');
-      el.style.zIndex = Z[key];
+      el.className = 'block area-' + baseKey(key) + (key === 'me' ? ' block-me' : '') + (APPLIANCES.indexOf(key) > 0 ? ' small-appliance' : '');
+      el.setAttribute('data-key', key);
+      el.style.zIndex = Z[baseKey(key)];
       el.tabIndex = 0;
       el.setAttribute('role', 'button');
-      el.setAttribute('aria-label', t(key) + ', ' + t('moveHint'));
-      el.innerHTML = '<img class="icon" alt="" src="' + (key === 'me' ? ICON.me : AREAS[key].icon) + '"><span>' + ht(key) + '</span>' +
+      el.setAttribute('aria-label', t(baseKey(key)) + ', ' + t('moveHint'));
+      el.innerHTML = '<img class="icon" alt="" src="' + (key === 'me' ? ICON.me : AREAS[key].icon) + '"><span>' + ht(baseKey(key)) + '</span>' +
         (key === 'me' ? '' : '<span class="resize" aria-hidden="true"></span>');
       placeEl(el, draft[key]);
-      makeMovable(el, key, canvas, draft, LAYOUT_KEYS, {
+      makeMovable(el, key, canvas, draft, keys, {
         resizer: el.querySelector('.resize'),
         snap: true,
         onChange: function () {
           state.layoutTouched = true;
-          LAYOUT_KEYS.forEach(function (k) { placeEl(blockEls[k], draft[k]); });
+          keys.forEach(function (k) { placeEl(blockEls[k], draft[k]); });
+          updateSinkTap();
         },
         onEnd: updateSeams
       });
       canvas.appendChild(el);
     });
     updateSeams();
+    updateSinkTap();
+    applyTextures();
   }
 
   // Where two areas touch, a seam with a grip appears on the shared edge.
@@ -953,7 +1104,7 @@
     var canvas = $('layout-canvas');
     canvas.querySelectorAll('.seam').forEach(function (n) { n.remove(); });
     var cw = canvas.clientWidth || 800, ch = canvas.clientHeight || 450;
-    var ex = 3 / cw, ey = 3 / ch, keys = LAYOUT_KEYS.filter(snappable);
+    var ex = 3 / cw, ey = 3 / ch, keys = keysOf(draft).filter(snappable);
     keys.forEach(function (ka, i) {
       keys.slice(i + 1).forEach(function (kb) {
         [[ka, kb], [kb, ka]].forEach(function (pair) {
@@ -980,7 +1131,7 @@
     seam.tabIndex = 0;
     seam.setAttribute('role', 'separator');
     seam.setAttribute('aria-orientation', dir === 'v' ? 'vertical' : 'horizontal');
-    seam.setAttribute('aria-label', t(ka) + ' / ' + t(kb) + ': ' + t('resizeSeam'));
+    seam.setAttribute('aria-label', t(baseKey(ka)) + ' / ' + t(baseKey(kb)) + ': ' + t('resizeSeam'));
     seam.innerHTML = '<span class="seam-grip"></span>';
     function place(pos) {
       if (dir === 'v') { seam.style.left = (pos * 100) + '%'; seam.style.top = (from * 100) + '%'; seam.style.height = ((to - from) * 100) + '%'; }
@@ -1000,10 +1151,11 @@
       }
       var test = Object.assign({}, draft);
       test[ka] = na; test[kb] = nb;
-      if (collides(test, ka, na, LAYOUT_KEYS) || collides(test, kb, nb, LAYOUT_KEYS)) return;
+      if (collides(test, ka, na, keysOf(draft)) || collides(test, kb, nb, keysOf(draft))) return;
       draft[ka] = na; draft[kb] = nb;
       state.layoutTouched = true;
       placeEl(blockEls[ka], na); placeEl(blockEls[kb], nb);
+      updateSinkTap();
       place(pos);
     }
     var drag = null;
@@ -1169,13 +1321,15 @@
   }
 
   // ---------- Photos ----------
+  // Dish photos are named after the recipe id, except where one photo serves under another name.
+  var PHOTO_FILE = { homemade_mayonnaise: 'mayonnaise' };
   function photoEl(r, size, cls) {
     var img = document.createElement('img');
     img.className = 'photo ' + (cls || '');
     img.alt = '';
     img.decoding = 'async';
     if (size === 350) img.loading = 'lazy';
-    img.src = 'img/ready/webp' + size + '/' + r.id + '.webp';
+    img.src = 'img/ready/webp' + size + '/' + (PHOTO_FILE[r.id] || r.id) + '.webp';
     img.addEventListener('error', function () {
       var ph = document.createElement('div');
       ph.className = 'photo photo-placeholder ' + (cls || '');
@@ -1186,8 +1340,23 @@
   }
 
   // ---------- Recipe list ----------
-  var CATEGORIES = ['soup', 'main', 'dessert', 'side'];
-  var CUISINES = ['Italian', 'Asian', 'Indian', 'Middle Eastern', 'Greek', 'French', 'Mexican', 'Latin American', 'American', 'African'];
+  var CATEGORIES = ['breakfast', 'soup', 'salad', 'main', 'side', 'dip', 'dessert'];
+  // Cuisine filters: regions, each with its countries that have 2 or more recipes,
+  // shown as "Asian (Chinese · Japanese · …)".
+  var CUISINE_GROUPS = [
+    ['Italian'], ['Asian', ['Chinese', 'Japanese', 'Korean', 'Thai', 'Vietnamese', 'Indonesian', 'Filipino']],
+    ['Indian'], ['Middle Eastern'], ['Greek'], ['French'], ['Mexican'], ['Latin American'], ['American'],
+    ['African', ['Nigerian', 'Moroccan']]
+  ];
+  // Diet filters: Vegetarian also lists the vegan recipes (judged with the default options).
+  var DIETS = ['veg', 'vegan'];
+  var VEGETARIAN = ['vegan', 'veg', 'lacto', 'ovo', 'lactoOvo'];
+  function defaultBuild(r) { return defaultBuilds[r.id] || (defaultBuilds[r.id] = r.build(defaultChoices(r))); }
+  function dietOk(r, diets) {
+    if (!diets.length) return true;
+    var label = dietInfo(defaultBuild(r)).label;
+    return diets.some(function (d) { return d === 'vegan' ? label === 'vegan' : VEGETARIAN.indexOf(label) >= 0; });
+  }
   var defaultBuilds = {};
 
   function defaultChoices(r) {
@@ -1199,32 +1368,28 @@
     return c;
   }
 
+  // Filters are words separated by interpuncts (·); a picked word is highlighted.
+  // Rows: Most popular · diets, then dish types, then cuisines.
   function renderFilters() {
     var box = $('filters');
     box.innerHTML = '';
-    var rows = { cat: document.createElement('div'), cuisine: document.createElement('div') };
-    rows.cat.className = rows.cuisine.className = 'filter-row';
-    // "Most popular": only starred recipes while pressed (on by default)
-    var top = document.createElement('div');
-    top.className = 'filter-row';
-    var star = document.createElement('button');
-    star.type = 'button';
-    star.className = 'chip chip-star';
-    star.innerHTML = starSvg('star-icon') + '<span>' + ht('mostPopular') + '</span>';
-    star.setAttribute('aria-pressed', String(state.filters.starred));
-    star.addEventListener('click', function () {
-      state.filters.starred = !state.filters.starred;
-      star.setAttribute('aria-pressed', String(state.filters.starred));
-      renderRecipes();
+    var rows = {};
+    ['diet', 'cat', 'cuisine'].forEach(function (g) {
+      rows[g] = document.createElement('div');
+      rows[g].className = 'filter-row filter-row-' + g;
+      box.appendChild(rows[g]);
     });
-    top.appendChild(star);
-    box.appendChild(top);
-    box.appendChild(rows.cat);
-    box.appendChild(rows.cuisine);
-    function chip(group, value, label) {
+    function text(group, str, cls) {
+      var span = document.createElement('span');
+      span.className = 'filter-sep' + (cls ? ' ' + cls : '');
+      span.setAttribute('aria-hidden', 'true');
+      span.textContent = str;
+      rows[group].appendChild(span);
+    }
+    function word(group, value, label) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.className = 'chip';
+      b.className = 'filter-word';
       b.textContent = label;
       b.setAttribute('aria-pressed', String(state.filters[group].indexOf(value) >= 0));
       b.addEventListener('click', function () {
@@ -1235,8 +1400,28 @@
       });
       rows[group].appendChild(b);
     }
-    CATEGORIES.forEach(function (c) { chip('cat', c, t('cat_' + c)); });
-    CUISINES.forEach(function (c) { chip('cuisine', c, t('cuisine_' + c)); });
+    // "Most popular": only starred recipes while picked (on by default)
+    var star = document.createElement('button');
+    star.type = 'button';
+    star.className = 'filter-word filter-star';
+    star.innerHTML = starSvg('star-icon') + '<span>' + ht('mostPopular') + '</span>';
+    star.setAttribute('aria-pressed', String(state.filters.starred));
+    star.addEventListener('click', function () {
+      state.filters.starred = !state.filters.starred;
+      star.setAttribute('aria-pressed', String(state.filters.starred));
+      renderRecipes();
+    });
+    rows.diet.appendChild(star);
+    DIETS.forEach(function (d) { text('diet', '\u00b7'); word('diet', d, t('diet_' + d)); });
+    CATEGORIES.forEach(function (c, i) { if (i) text('cat', '\u00b7'); word('cat', c, t('cat_' + c)); });
+    CUISINE_GROUPS.forEach(function (g, i) {
+      if (i) text('cuisine', '\u00b7');
+      word('cuisine', g[0], t('cuisine_' + g[0]));
+      if (!g[1]) return;
+      text('cuisine', '(', 'filter-open');
+      g[1].forEach(function (c, j) { if (j) text('cuisine', '\u00b7'); word('cuisine', c, t('cuisine_' + c)); });
+      text('cuisine', ')', 'filter-close');
+    });
   }
 
   function renderRecipes() {
@@ -1245,7 +1430,8 @@
     CATEGORIES.forEach(function (cat) {
       if (f.cat.length && f.cat.indexOf(cat) < 0) return;
       var recipes = window.RECIPES.filter(function (r) {
-        return r.category === cat && (!f.starred || r.starred === 1) && (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; }));
+        return r.category === cat && (!f.starred || r.starred === 1) && dietOk(r, f.diet) &&
+          (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; }));
       });
       if (!recipes.length) return;
       any = true;
@@ -1255,7 +1441,7 @@
       var ul = document.createElement('ul');
       ul.className = 'recipe-list';
       recipes.forEach(function (r) {
-        var built = defaultBuilds[r.id] || (defaultBuilds[r.id] = r.build(defaultChoices(r)));
+        var built = defaultBuild(r);
         var info = dietInfo(built), n = nutritionPerPerson(built);
         var li = document.createElement('li');
         li.className = 'recipe-item';
@@ -1551,7 +1737,15 @@
     return i.noImage ? '<span class="ing-ph" aria-hidden="true"></span>' : '<img alt="" src="' + esc(imgFor(i)) + '">';
   }
 
-  $('btn-start-cooking').addEventListener('click', startCooking);
+  // No kitchen layout yet: ask first. Yes cooks in list view; No opens the layout
+  // editor, which returns to this recipe page (saved or cancelled).
+  $('btn-start-cooking').addEventListener('click', function () {
+    if (state.layoutSaved) { startCooking(); return; }
+    openDialog($('nolayout-dialog'));
+    $('nolayout-setup').focus();
+  });
+  $('nolayout-yes').addEventListener('click', function () { $('nolayout-dialog').close(); startCooking(); });
+  $('nolayout-setup').addEventListener('click', function () { $('nolayout-dialog').close(); openLayout(); });
 
   // ---------- Cooking ----------
   var cook = null;
@@ -1615,6 +1809,28 @@
     return { fresh: fresh, active: nowActive };
   }
 
+  // "Do this first!": when two or more open steps have not been started yet, the
+  // one with the most work left after it (its own time plus the longest chain of
+  // steps that wait for it) goes first, so the slow parts start early.
+  function workLeft(id, memo) {
+    if (id in memo) return memo[id];
+    var next = CookCore.graph(cook.steps).next[id];
+    var most = 0;
+    next.forEach(function (n) { most = Math.max(most, workLeft(n, memo)); });
+    return (memo[id] = (stepById(id).duration || 0) + most);
+  }
+  function doFirstId() {
+    var open = cook.slots.filter(function (id) { return !cook.started[id]; });
+    if (open.length < 2) return null;
+    var memo = {}, best = null;
+    open.forEach(function (id) { if (best === null || workLeft(id, memo) > workLeft(best, memo)) best = id; });
+    return best;
+  }
+  function firstFirst(ids, first) {
+    var at = ids.indexOf(first);
+    return at > 0 ? [first].concat(ids.slice(0, at), ids.slice(at + 1)) : ids;
+  }
+
   // A card that is no longer needed fades out over a second while the cards
   // below slide up into its place.
   function leave(el) {
@@ -1646,6 +1862,7 @@
     $('cook-clock').textContent = '0:00';
     resetStars();
     show('cook');
+    if (isMap()) fullscreenTo(state.layoutWide === false ? 'portrait' : 'landscape');
     refresh();
     render();
     updateClocks();
@@ -1800,6 +2017,7 @@
           '<circle class="ring-fill" cx="46" cy="46" r="40" stroke-dasharray="' + RING + '" stroke-dashoffset="' + RING + '"/></svg>' +
           '<div class="ring-center">' +
             '<button class="btn-start" type="button">' + ht('start') + '<br>' + fmt(step.duration) + '</button>' +
+            animHtml(step, 'ring-anim') +
             '<span class="ring-time" hidden></span>' +
           '</div>' +
         '</div>' +
@@ -1811,6 +2029,7 @@
       cook.started[step.id] = Date.now();
       e.currentTarget.hidden = true;
       el.querySelector('.ring-time').hidden = false;
+      el.classList.add('is-running');
       tick();
     });
     el.querySelector('.btn-done').addEventListener('click', function () { finishStep(step); });
@@ -1830,6 +2049,7 @@
     el.querySelector('.btn-start').disabled = st !== 'active';
     el.querySelector('.btn-start').hidden = running;
     el.querySelector('.ring-time').hidden = !running;
+    el.classList.toggle('is-running', running);
   }
 
   function finishStep(step) {
@@ -1881,17 +2101,35 @@
       return;
     }
 
-    var els = cook.slots.map(function (id) {
+    var first = doFirstId(), ids = firstFirst(cook.slots, first);
+    var els = ids.map(function (id) {
       var s = stepById(id), el = cardFor(s);
       updateCard(s, el);
+      markFirst(el, id === first);
       return el;
     });
     if (map) {
-      renderMap(cook.slots.map(function (id) { return notifFor(stepById(id)); }));
+      renderMap(ids.map(function (id) {
+        var n = notifFor(stepById(id));
+        markFirst(n, id === first);
+        return n;
+      }));
     } else {
       closePop();
       syncChildren($('cook-list'), els);
     }
+  }
+
+  function markFirst(el, on) {
+    var b = el.querySelector(':scope > .first-badge');
+    el.classList.toggle('is-first', on);
+    if (on && !b) {
+      b = document.createElement('span');
+      b.className = 'first-badge';
+      b.textContent = t('doFirst');
+      el.appendChild(b);
+    } else if (!on && b) b.remove();
+    else if (b) b.textContent = t('doFirst');
   }
 
   // ---------- Map notifications ----------
@@ -1899,19 +2137,58 @@
   // icon, the step's title, its timer, and Start / Done. Tapping it opens the
   // full card in a popup next to the area.
   var NOTIF_RING = 2 * Math.PI * 16;
+
+  // While a step runs, its ring shows a two-frame picture of the work
+  // (icons/anim/NAME-1.svg and -2.svg, 0.4 s each). The picture is picked from
+  // the step's area, tools and (English) title; steps that match nothing keep
+  // the still area icon.
+  function animOf(step) {
+    var title = (step._title || step.title || '').toLowerCase();
+    var tools = step.tools || [];
+    function has() { return Array.prototype.some.call(arguments, function (t) { return tools.indexOf(t) >= 0; }); }
+    function says(re) { return re.test(title); }
+    if (step.area === 'fridge') return 'fridge';
+    if (step.area === 'sink') {
+      if (says(/drain|strain/) || has('colander', 'sieve')) return 'drain';
+      if (says(/fill|water/)) return 'pour-water';
+      return 'wash';
+    }
+    if (has('mortar_and_pestle')) return 'grind-in-mortar';
+    if (says(/drain|strain/) || has('colander')) return 'drain';
+    if (has('cheese_grater', 'microplane') || says(/grate|zest/)) return 'grate';
+    if (has('vegetable_peeler') || says(/\bpeel/)) return 'peel';
+    if (has('blender', 'immersion_blender') || says(/blend|pur[eé]e/)) return 'blend';
+    if (has('whisk') || says(/whisk|\bbeat/)) return 'whisk';
+    if (has('rolling_pin') || says(/knead|roll out/)) return 'knead';
+    if (says(/serve|plate/)) return 'plate';
+    if (step.area === 'board' || has('chef_knife', 'knife')) return 'chop';
+    if (step.area === 'oven') return 'bake';
+    if (says(/\bfill|pour/)) return 'pour-water';
+    if (step.area === 'stove' && says(/flip|turn/)) return 'flip-in-pan';
+    if (has('pan', 'wok')) return 'stir-pan';
+    if (has('cooking_pot', 'saucepan')) return says(/boil|simmer|bring|cook the (pasta|noodles|rice)/) ? 'boil' : 'add-to-pot';
+    if (has('bowl') || says(/\bstir|\bmix|combine|toss/)) return 'mix-in-bowl';
+    return null;
+  }
+  function animHtml(step, cls) {
+    var a = animOf(step);
+    if (!a) return '';
+    return '<span class="anim ' + cls + '" aria-hidden="true"><img alt="" src="icons/anim/' + a + '-1.svg"><img alt="" src="icons/anim/' + a + '-2.svg"></span>';
+  }
   function notifFor(step) {
     if (cook.notifs[step.id]) return cook.notifs[step.id];
     var n = document.createElement('div');
     n.className = 'notif';
     n.setAttribute('data-step', step.id);
     n.setAttribute('data-area', step.area);
-    var toolWithIcon = step.tools.map(function (id) { return window.EQUIPMENT[id]; }).filter(function (eq) { return eq.icon; })[0];
-    var icon = toolWithIcon ? toolWithIcon.icon : AREAS[step.area].icon;
+    var tools = step.tools.map(function (id) { return window.EQUIPMENT[id]; }).filter(function (eq) { return eq && eq.icon; });
+    var icon = (AREAS[step.area] || AREAS.countertop).icon;
+    var toolIcons = tools.map(function (eq) { return '<img class="notif-tool" alt="" src="' + eq.icon + '">'; }).join('');
     n.innerHTML =
       '<span class="notif-icon"><svg class="notif-ring" viewBox="0 0 36 36" aria-hidden="true">' +
       '<circle class="nr-track" cx="18" cy="18" r="16"/><circle class="nr-fill" cx="18" cy="18" r="16" ' +
-      'stroke-dasharray="' + NOTIF_RING + '" stroke-dashoffset="0"/></svg><img class="icon" alt="" src="' + icon + '"></span>' +
-      '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + '</span>' +
+      'stroke-dasharray="' + NOTIF_RING + '" stroke-dashoffset="0"/></svg><img class="icon" alt="" src="' + icon + '">' + animHtml(step, 'notif-anim') + '</span>' +
+      '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + (toolIcons ? ' <span class="notif-tools">' + toolIcons + '</span>' : '') + '</span>' +
       '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span> · <span class="notif-hint">' + ht('tapInfo') + '</span></span></button>' +
       '<button class="notif-btn notif-start" type="button" aria-label="' + ht('start') + '">▶</button>' +
       '<button class="notif-btn notif-done" type="button" aria-label="' + esc(doneLabel(step)) + '">✓</button>';
@@ -1939,21 +2216,33 @@
     card.querySelectorAll('.new-badge').forEach(function (b) { b.remove(); });
     pop.hidden = false;
     popStep = step.id;
-    // Next to the notification's area: to the right if it fits, else to the left, else centred.
-    var area = anchor.closest('.map-area') || anchor;
-    var a = area.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
-    var vw = window.innerWidth, vh = window.innerHeight, left;
-    if (a.right + 8 + w <= vw - 8) left = a.right + 8;
-    else if (a.left - 8 - w >= 8) left = a.left - 8 - w;
-    else left = (vw - w) / 2;
-    pop.style.left = Math.round(left) + 'px';
-    pop.style.top = Math.round(clamp(a.top, 8, Math.max(8, vh - h - 8))) + 'px';
+    placePop(anchor);
     card.querySelector('.btn-done').focus();
+  }
+  // Under the notification if the card fits there, else above it, else on the
+  // roomier side with a scrollbar. The pointer (arrow) joins it to the notification.
+  function placePop(anchor) {
+    var pop = $('step-pop'), arrow = $('step-pop-arrow'), gap = 12, edge = 8;
+    pop.style.maxHeight = '';
+    var a = anchor.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var below = vh - edge - (a.bottom + gap), above = a.top - gap - edge;
+    var under = h <= below || (h > above && below >= above);
+    if (h > (under ? below : above)) { pop.style.maxHeight = Math.max(120, under ? below : above) + 'px'; h = pop.offsetHeight; }
+    var left = clamp(a.left + a.width / 2 - w / 2, edge, Math.max(edge, vw - w - edge));
+    var top = under ? a.bottom + gap : a.top - gap - h;
+    pop.style.left = Math.round(left) + 'px';
+    pop.style.top = Math.round(top) + 'px';
+    arrow.hidden = false;
+    arrow.classList.toggle('is-up', under);
+    arrow.style.left = Math.round(clamp(a.left + a.width / 2, left + 20, left + w - 20)) + 'px';
+    arrow.style.top = Math.round(under ? a.bottom + gap : a.top - gap) + 'px';
   }
   function closePop() {
     var pop = $('step-pop');
     if (pop.hidden) return;
     pop.hidden = true;
+    $('step-pop-arrow').hidden = true;
     var body = $('step-pop-body');
     while (body.firstChild) body.removeChild(body.firstChild);
     popStep = null;
@@ -1966,16 +2255,17 @@
 
   // Only the areas this recipe uses, back to front.
   function usedAreas() {
-    return AREA_KEYS.filter(function (key) {
+    return areaKeysOf(state.layout).filter(function (key) {
       return cook.steps.some(function (s) { return s.area === key; });
     });
   }
 
-  // Stretches and centres the used areas so they fill the map, with empty
-  // space around the arrangement cut away. Writes into cook.view.
-  function fitView(keys) {
-    var minX = 1, minY = 1, maxX = 0, maxY = 0, pad = 0.01;
-    keys.forEach(function (k) {
+  // Zooms in on the areas the recipe uses (fitKeys), centred with a small gap
+  // around them, so unused areas may show at the edges or fall outside.
+  // Writes every area's map position into cook.view.
+  function fitView(fitKeys, keys) {
+    var minX = 1, minY = 1, maxX = 0, maxY = 0, pad = 0.05;
+    fitKeys.forEach(function (k) {
       var r = state.layout[k];
       minX = Math.min(minX, r.x); minY = Math.min(minY, r.y);
       maxX = Math.max(maxX, r.x + r.w); maxY = Math.max(maxY, r.y + r.h);
@@ -2006,24 +2296,25 @@
     mapEl.style.setProperty('--head-h', document.querySelector('.cook-head').offsetHeight + 'px');
     if (!cook.view) cook.view = {};
     // Keep the view still while an area is being dragged; refit afterwards.
-    // All areas count for the fit, so unused ones stay (faintly) in view too.
-    if (!mapEl.querySelector('.map-area.dragging')) fitView(AREA_KEYS);
+    // The fit zooms in on the used areas; unused ones show faintly where they fall.
+    var all = areaKeysOf(state.layout);
+    if (!mapEl.querySelector('.map-area.dragging')) fitView(keys.length ? keys : all, all);
     if (!mapEl.children.length) {
-      AREA_KEYS.forEach(function (key) {
+      all.forEach(function (key) {
         var used = keys.indexOf(key) >= 0;
         var a = document.createElement('section');
-        a.className = 'map-area area-' + key + (used ? '' : ' unused');
-        a.style.zIndex = Z[key];
+        a.className = 'map-area area-' + baseKey(key) + (used ? '' : ' unused');
+        a.style.zIndex = Z[baseKey(key)];
         a.setAttribute('data-area', key);
-        a.setAttribute('aria-label', t(key));
+        a.setAttribute('aria-label', t(baseKey(key)));
         if (!used) a.setAttribute('aria-hidden', 'true');
         a.innerHTML =
-          '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + ht(key) + '</span>' +
-          (used ? '<button class="area-move" type="button" aria-label="' + ht('moveArea', { a: t(key) }) + '">' + MOVE_ICON + '</button>' : '') +
+          '<div class="map-area-head"><img class="icon" alt="" src="' + AREAS[key].icon + '"><span class="label">' + ht(baseKey(key)) + '</span>' +
+          (used ? '<button class="area-move" type="button" aria-label="' + ht('moveArea', { a: t(baseKey(key)) }) + '">' + MOVE_ICON + '</button>' : '') +
           '</div>';
         mapEl.appendChild(a);
         if (used) {
-          makeMovable(a, key, mapEl, cook.view, AREA_KEYS, {
+          makeMovable(a, key, mapEl, cook.view, all, {
             handle: a.querySelector('.area-move'),
             onChange: function () { state.layout[key] = fromView(cook.view[key]); },
             onEnd: render
@@ -2041,7 +2332,7 @@
       });
       mapEl.appendChild(layer);
     }
-    AREA_KEYS.forEach(function (key) {
+    all.forEach(function (key) {
       placeEl(mapEl.querySelector('.map-area[data-area="' + key + '"]'), cook.view[key]);
     });
     keys.forEach(function (key) {
@@ -2063,8 +2354,8 @@
       .sort(function (p, q) { return p.a.offsetTop - q.a.offsetTop; })
       .forEach(function (p) {
         var a = p.a, cards = p.g, v = cook.view[a.getAttribute('data-area')];
-        var w = Math.min(mapW, Math.max(a.offsetWidth, 230));
-        var left = v.x + v.w / 2 > 0.5 ? a.offsetLeft + a.offsetWidth - w : a.offsetLeft;
+        var inset = 10, w = Math.min(mapW, 280, Math.max(a.offsetWidth - 2 * inset, 200));
+        var left = v.x + v.w / 2 > 0.5 ? a.offsetLeft + a.offsetWidth - inset - w : a.offsetLeft + inset;
         left = clamp(left, 0, Math.max(0, mapW - w));
         cards.style.width = w + 'px';
         cards.style.left = left + 'px';
@@ -2137,6 +2428,7 @@
       el.classList.toggle('time-up', up);
       var n = cook.notifs[id];
       if (n) {
+        n.classList.add('is-running');
         // The ring empties clockwise as time runs out: yellow in the last quarter,
         // red (with a nudge) in the last tenth.
         var share = Math.max(0, left) / step.duration;

@@ -52,6 +52,14 @@
   </form>
 </dialog>
 
+<dialog id="nolayout-dialog" class="dialog exit-dialog nolayout-dialog" aria-labelledby="nolayout-title">
+  <h2 id="nolayout-title" data-i18n="noLayoutAsk">You don't have the kitchen layout set up. Continue in list view only?</h2>
+  <div class="dialog-actions">
+    <button id="nolayout-setup" class="btn btn-primary" type="button" data-i18n="noSetUp">No, let's set it up</button>
+    <button id="nolayout-yes" class="btn btn-secondary" type="button" data-i18n="yes">Yes</button>
+  </div>
+</dialog>
+
 <dialog id="exit-dialog" class="dialog exit-dialog" aria-labelledby="exit-title">
   <h2 id="exit-title" data-i18n="giveUp">You want to give up?</h2>
   <div class="dialog-actions">
@@ -164,6 +172,7 @@
           <summary>Debug log</summary>
           <div class="row log-tools">
             <button class="fv-btn small" id="fv-copyLog" type="button">Copy log</button>
+            <button class="fv-btn small" id="fv-saveLog" type="button">Save log</button>
             <button class="fv-btn small" id="fv-clearLog" type="button">Clear log</button>
           </div>
           <div class="log" id="fv-log" role="log"></div>
@@ -193,10 +202,19 @@
       <button id="btn-layout-theme" class="btn btn-secondary btn-small btn-icon" type="button" data-i18n-label="toggleTheme">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
       </button>
+      <button id="btn-layout-textures" class="btn btn-secondary btn-small btn-icon btn-textures" type="button" aria-pressed="true" data-i18n-label="toggleTextures">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 3.5 10 13"/><path d="M14.5 4.5 18 3l2 2-1.5 3.5L12 15l-3-3z"/><path d="M8.5 13.5c-2.5 0-4 1.6-4 4 0 1.4-.6 2.3-1.5 3 3.5.6 7.5-.4 7.5-4.5z"/></svg>
+      </button>
       <button class="btn btn-secondary btn-small btn-icon btn-rotate" type="button" data-i18n-label="rotateScreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-landscape"><rect x="3" y="6.5" width="18" height="11" rx="2"/><path d="M17.5 12h.01"/></svg><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-portrait"><rect x="6.5" y="3" width="11" height="18" rx="2"/><path d="M12 17.5h.01"/></svg></button>
       <button id="btn-layout-save" class="btn btn-primary btn-small" type="button" data-i18n="save">Save</button>
     </div>
     <div id="layout-canvas" class="canvas"></div>
+    <div class="layout-add">
+      <div id="layout-add-menu" class="layout-add-menu" hidden></div>
+      <button id="btn-layout-add" class="btn btn-primary btn-layout-add" type="button" data-i18n-label="addToKitchen">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
   </section>
 
   <!-- Recipe: guidance, people, options, ingredients -->
@@ -334,6 +352,7 @@
   <button id="step-pop-close" class="step-pop-close" type="button" data-i18n-label="close">&times;</button>
   <div id="step-pop-body"></div>
 </div>
+<div id="step-pop-arrow" class="step-pop-arrow" aria-hidden="true" hidden></div>
 
 <div id="tip" class="tip" role="status" hidden>
   <div class="tip-body">

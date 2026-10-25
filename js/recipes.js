@@ -642,7 +642,7 @@ window.INGREDIENT_INFO = (function () {
   ].concat((window.SHEET_RECIPES || []).map(fromSheet));
 
   /*
-    category: soup, main, dessert or side (the recipe list sections)
+    category: soup, main, dessert or side (the recipe list sections; see SECTION below for more)
     cuisine:  filter tags (to be adjusted)
     kids:     options switched on when children are added, to make it child-friendly
     rawEgg:   true when the chosen options leave the egg raw
@@ -804,6 +804,33 @@ window.INGREDIENT_INFO = (function () {
     r.kids = m.kids || {};
     r.rawEgg = m.rawEgg || function () { return false; };
     r.starred = m.starred ? 1 : 0;
+  });
+
+  // Country filters on top of the region tags: a country gets its own filter
+  // once it has 2 or more recipes. The region tag (e.g. Asian) stays as well.
+  var COUNTRY = {
+    egg_fried_rice: 'Chinese', chow_mein: 'Chinese', mapo_tofu: 'Chinese', kung_pao_chicken: 'Chinese',
+    beef_and_broccoli: 'Chinese', sweet_and_sour_pork: 'Chinese', tomato_and_egg_stir_fry: 'Chinese', congee: 'Chinese',
+    japanese_curry_rice: 'Japanese', teriyaki_chicken: 'Japanese', miso_soup: 'Japanese', yakisoba: 'Japanese', onigiri: 'Japanese',
+    bibimbap: 'Korean', bulgogi: 'Korean', kimchi_fried_rice: 'Korean',
+    pad_thai: 'Thai', thai_green_curry: 'Thai', tom_yum_soup: 'Thai',
+    pho: 'Vietnamese', fresh_spring_rolls: 'Vietnamese',
+    nasi_goreng: 'Indonesian', mie_goreng: 'Indonesian', gado_gado: 'Indonesian', chicken_satay: 'Indonesian',
+    chicken_adobo: 'Filipino', sinigang: 'Filipino', pancit_bihon: 'Filipino',
+    jollof_rice: 'Nigerian', egusi_soup: 'Nigerian',
+    chicken_tagine: 'Moroccan', vegetable_couscous: 'Moroccan'
+  };
+  // Extra recipe-list sections, so Main isn't one long list.
+  var SECTION = {
+    scrambled_eggs: 'breakfast', omelette: 'breakfast', french_toast: 'breakfast', oatmeal_porridge: 'breakfast',
+    overnight_oats: 'breakfast', breakfast_muffin: 'breakfast', pancakes: 'breakfast', waffles: 'breakfast',
+    huevos_rancheros: 'breakfast', menemen: 'breakfast', shakshuka: 'breakfast',
+    caesar_salad: 'salad', summer_salad: 'salad', greek_salad: 'salad', potato_salad: 'salad', tabbouleh: 'salad', gado_gado: 'salad',
+    tzatziki: 'dip', homemade_mayonnaise: 'dip', hummus: 'dip', guacamole: 'dip', baba_ganoush: 'dip'
+  };
+  window.RECIPES.forEach(function (r) {
+    if (COUNTRY[r.id]) r.cuisine = r.cuisine.concat(COUNTRY[r.id]);
+    if (SECTION[r.id]) r.category = SECTION[r.id];
   });
 
   // ---------- Recipes from the sheet (js/recipes-sheet.js) ----------
