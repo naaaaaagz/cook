@@ -52,6 +52,32 @@
       filters: 'Filters',
       noResults: 'No recipes match these filters.',
       mostPopular: 'Most popular',
+      fridgeBtn: 'Tell us what you got in the fridge',
+      fridgeBtnSub: '(voice recognition)',
+      basedOnSaid: 'Based on what you said',
+      alsoNeed: 'You also need:',
+      fvListening: 'Listening… say what you have',
+      fvStarting: 'Starting…',
+      fvTapToStart: 'Tap the microphone to start',
+      fvTapToAdd: 'Tap the microphone to add more',
+      fvStart: 'Start listening',
+      fvStop: 'Stop listening',
+      fvHeard: 'What we heard',
+      fvYourIngredients: 'Your ingredients',
+      fvNothingYet: 'Nothing recognized yet.',
+      fvTypePh: 'Or type ingredients, e.g. eggs, milk, tomatoes',
+      fvAdd: 'Add',
+      fvClear: 'Clear all',
+      fvEdit: 'Edit',
+      fvRemove: 'Remove {x}',
+      fvAssumed: 'We assume you have salt, pepper, sugar, flour, oil and water.',
+      fvNoSR: "This browser can't recognize speech. Type what you have instead.",
+      fvNoSRShort: 'No speech recognition',
+      fvLangUnavailable: "Speech recognition isn't available for {x}. Pick a language:",
+      fvLanguage: 'Speech language',
+      fvMicBlocked: "The microphone is blocked. Allow it in the browser's address bar, then tap the microphone again.",
+      fvMicError: "The microphone or the speech service isn't working right now. You can type instead.",
+      fvNoRecipes: 'No recipe fits yet. Add a few more ingredients.',
       cat_soup: 'Soup',
       cat_main: 'Main',
       cat_dessert: 'Dessert',
@@ -260,6 +286,9 @@
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       el.textContent = t(el.getAttribute('data-i18n'));
     });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+    });
     document.querySelectorAll('[data-i18n-label]').forEach(function (el) {
       el.setAttribute('aria-label', t(el.getAttribute('data-i18n-label')));
     });
@@ -337,7 +366,8 @@
     choices: null,
     built: null,
     mapView: true, // map or list; map needs a saved layout
-    filters: { starred: true, diet: [], cat: [], cuisine: [] }, // starred: "Most popular" filter, on by default for now
+    filters: { starred: true, diet: [], cat: [], cuisine: [], voice: false }, // starred: "Most popular" filter, on by default for now
+    voice: [], // ingredient keys said (or typed) in the fridge panel
     picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
     units: 'metric'
   };
@@ -345,15 +375,15 @@
   // ---------- Screens ----------
   // Every screen change is a browser history entry, so Back (in the page or the
   // browser) goes to the previous screen. Each screen has its own address in the
-  // same page: index.html (welcome, step 1), #start (step 2), #fridge, #recipes
+  // same page: index.html (welcome), #recipes
   // (recipe list), #recipe/<id>, #cook/<id> and #kitchen.
-  var SCREENS = ['welcome', 'start', 'fridge', 'recipes', 'layout', 'details', 'cook'];
+  var SCREENS = ['welcome', 'recipes', 'layout', 'details', 'cook'];
   function screenUrl(name) {
     var base = location.pathname + location.search;
     if (name === 'details' && state.recipe) return base + '#recipe/' + encodeURIComponent(state.recipe.id);
     if (name === 'cook' && state.recipe) return base + '#cook/' + encodeURIComponent(state.recipe.id);
     if (name === 'layout') return base + '#kitchen';
-    if (name === 'start' || name === 'fridge' || name === 'recipes') return base + '#' + name;
+    if (name === 'recipes') return base + '#' + name;
     return base;
   }
   // The address tells which screen (and recipe) to show.
@@ -363,7 +393,6 @@
     var m = h.match(/^(recipe|cook)\/(.+)$/);
     if (h === '') return { screen: 'welcome' };
     if (h === 'kitchen') return { screen: 'layout' };
-    if (h === 'start' || h === 'fridge') return { screen: h };
     var r = m && window.RECIPES.filter(function (x) { return x.id === m[2]; })[0];
     if (r) return { screen: m[1] === 'cook' ? 'cook' : 'details', recipe: r };
     return { screen: 'recipes' };
@@ -375,8 +404,8 @@
       : name === 'layout' ? t('kitchenLayout') + ' \u2013 Cook' : 'Cook';
   }
   function show(name, fromHistory) {
-    // The microphone must not keep listening after the fridge screen is left.
-    if (state.screen === 'fridge' && name !== 'fridge') window.Fridge.stop();
+    // The microphone must not keep listening after the recipe list is left.
+    if (name !== 'recipes') window.Fridge.stop();
     state.screen = name;
     SCREENS.forEach(function (s) { $('screen-' + s).hidden = s !== name; });
     $('btn-options').hidden = name === 'layout';
@@ -386,7 +415,6 @@
     window.scrollTo(0, 0);
     if (typeof updateJump === 'function') setTimeout(updateJump, 0);
     if (name === 'details') layoutEquipment();
-    if (name === 'fridge') window.Fridge.open(lang);
   }
 
   window.addEventListener('popstate', function () {
@@ -497,6 +525,7 @@
   // Redraws everything that shows text in the new language.
   function refreshTexts() {
     updateTitle();
+    if (window.Fridge) window.Fridge.redraw();
     renderFilters();
     renderRecipes();
     starLabels.forEach(function (l, i) { l.querySelector('input').setAttribute('aria-label', t('stars', { n: i + 1 }) + ': ' + t('star' + (i + 1))); });
@@ -1192,8 +1221,8 @@
 
   function leaveLayout() {
     if (layoutFrom !== 'welcome') { history.back(); return; }
-    show('start', true);
-    history.replaceState({ screen: 'start' }, '', screenUrl('start'));
+    show('recipes', true);
+    history.replaceState({ screen: 'recipes' }, '', screenUrl('recipes'));
   }
   $('btn-layout-cancel').addEventListener('click', leaveLayout);
   $('btn-layout-save').addEventListener('click', function () {
@@ -1422,16 +1451,138 @@
       g[1].forEach(function (c, j) { if (j) text('cuisine', '\u00b7'); word('cuisine', c, t('cuisine_' + c)); });
       text('cuisine', ')', 'filter-close');
     });
+    // "Based on what you said": appears once something was said in the fridge panel.
+    if (state.voice.length) {
+      var row = document.createElement('div');
+      row.className = 'filter-row filter-row-voice';
+      var vb = document.createElement('button');
+      vb.type = 'button';
+      vb.className = 'filter-word filter-voice';
+      vb.innerHTML = '<svg class="mic-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg><span>' + ht('basedOnSaid') + '</span>';
+      vb.setAttribute('aria-pressed', String(state.filters.voice));
+      vb.addEventListener('click', function () {
+        state.filters.voice = !state.filters.voice;
+        vb.setAttribute('aria-pressed', String(state.filters.voice));
+        renderRecipes();
+      });
+      row.appendChild(vb);
+      box.appendChild(row);
+    }
   }
+
+  // ---------- What's in the fridge: which recipes fit ----------
+  // Assumed to be in every kitchen; never listed as missing.
+  var ESSENTIALS = ['salt', 'ground_black_pepper', 'black_peppercorn', 'white_pepper', 'sugar', 'brown_sugar', 'flour',
+    'oil', 'olive_oil', 'extra_virgin_olive_oil', 'water', 'ice', 'baking_powder', 'baking_soda'];
+  // Saying one of these counts for all of them ("chicken" fits chicken thighs too).
+  var KINDS = [
+    ['chicken_breast', 'chicken_legs', 'chicken_wings', 'whole_chicken'],
+    ['white_rice', 'jasmine_rice', 'basmati_rice', 'short_grain_rice', 'arborio_rice', 'brown_rice'],
+    ['spaghetti', 'penne', 'macaroni', 'fettuccine'], ['onion', 'white_onion', 'red_onion'], ['tomato', 'cherry_tomato'],
+    ['bell_pepper', 'red_bell_pepper', 'green_bell_pepper'], ['grated_cheese', 'cheddar', 'cheese_slice'],
+    ['lettuce', 'romaine_lettuce'], ['green_onion', 'spring_onion'], ['kidney_beans', 'black_beans', 'white_beans'],
+    ['light_soy_sauce', 'dark_soy_sauce'], ['white_mushroom', 'oyster_mushroom', 'shiitake_mushroom', 'portobello_mushroom']
+  ];
+  var MAX_MISSING = 4;
+  var fitCache = { sig: '', fits: {} };
+  function voiceHave() {
+    var have = {};
+    state.voice.forEach(function (k) {
+      have[k] = true;
+      KINDS.forEach(function (kind) { if (kind.indexOf(k) >= 0) kind.forEach(function (m) { have[m] = true; }); });
+    });
+    return have;
+  }
+  // Every combination of the recipe's options (24 at most here).
+  function optionCombos(r) {
+    var list = [{}];
+    r.options.forEach(function (o) {
+      var next = [];
+      list.forEach(function (c) { o.choices.forEach(function (ch) { var x = Object.assign({}, c); x[o.id] = ch.id; next.push(x); }); });
+      list = next.length > 64 ? list : next;
+    });
+    return list;
+  }
+  // The options that need the fewest extra ingredients: { missing: [{ key, name }], hits, choices }.
+  function voiceFit(r) {
+    var sig = state.voice.slice().sort().join(',') + '|' + lang;
+    if (fitCache.sig !== sig) fitCache = { sig: sig, fits: {} };
+    if (fitCache.fits[r.id]) return fitCache.fits[r.id];
+    var have = voiceHave(), best = null;
+    optionCombos(r).forEach(function (combo) {
+      var c = Object.assign(defaultChoices(r), combo);
+      var built = r.build(c), seen = {}, missing = [], hits = 0;
+      built.ingredients.forEach(function (i) {
+        var k = i.key || i.id;
+        if (seen[k] || ESSENTIALS.indexOf(k) >= 0) return;
+        seen[k] = true;
+        if (have[k]) hits++;
+        else if (!/optional/i.test(i._name || '')) missing.push({ key: k, name: shortName(i.name) });
+      });
+      if (!best || missing.length < best.missing.length || (missing.length === best.missing.length && hits > best.hits)) {
+        best = { missing: missing, hits: hits, choices: c };
+      }
+    });
+    return (fitCache.fits[r.id] = best);
+  }
+  function voiceOk(r) { var f = voiceFit(r); return f.hits > 0 && f.missing.length <= MAX_MISSING; }
+  // "Egg, large, room temperature" -> "Egg"; "Milk (or cream)" -> "Milk".
+  function shortName(n) { var x = String(n).split(/,|\(/)[0].trim(); return x || String(n); }
+  // A chip's name: the ingredient name in the site language.
+  var englishNames = null;
+  function ingredientName(key) {
+    if (!englishNames) {
+      englishNames = {};
+      window.RECIPES.forEach(function (r) {
+        defaultBuild(r).ingredients.forEach(function (i) {
+          var k = i.key || i.id, n = shortName(i._name || i.name);
+          if (!englishNames[k] || n.length < englishNames[k].length) englishNames[k] = n;
+        });
+      });
+    }
+    var en = englishNames[key] || key.replace(/_/g, ' ');
+    return ingName(key, en.charAt(0).toUpperCase() + en.slice(1));
+  }
+  window.Fridge.init({
+    t: t,
+    nameOf: ingredientName,
+    langs: LANGS,
+    onChange: function (keys, why) {
+      state.voice = keys;
+      if (why === 'finish' && keys.length) {
+        state.filters.voice = true;
+        state.filters.starred = false; // the answer should not be limited to the most popular recipes
+      }
+      if (!keys.length) state.filters.voice = false;
+      renderFilters();
+      renderRecipes();
+      if (why === 'finish') {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        $('filters').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      }
+    },
+    onClose: function () { $('btn-fridge').hidden = false; }
+  });
+  $('btn-fridge').addEventListener('click', function () {
+    $('btn-fridge').hidden = true;
+    window.Fridge.open();
+  });
 
   function renderRecipes() {
     var wrap = $('recipe-sections'), f = state.filters, any = false;
     wrap.innerHTML = '';
     CATEGORIES.forEach(function (cat) {
       if (f.cat.length && f.cat.indexOf(cat) < 0) return;
+      var voice = f.voice && state.voice.length;
       var recipes = window.RECIPES.filter(function (r) {
         return r.category === cat && (!f.starred || r.starred === 1) && dietOk(r, f.diet) &&
-          (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; }));
+          (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; })) &&
+          (!voice || voiceOk(r));
+      });
+      // Based on what you said: the fewest extra ingredients first.
+      if (voice) recipes.sort(function (a, b) {
+        var x = voiceFit(a), y = voiceFit(b);
+        return (x.missing.length - y.missing.length) || (y.hits - x.hits);
       });
       if (!recipes.length) return;
       any = true;
@@ -1454,6 +1605,8 @@
           Math.round(n.carbs) + ' g ' + ht('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + ht('proteinShort') +
           '<small>' + esc(unitText(r, 'perServing')) + '</small></span>' +
           '<span class="warn-row">' + containsRow(info) + '</span>' +
+          (voice && voiceFit(r).missing.length ? '<span class="need-line"><b>' + ht('alsoNeed') + '</b> ' +
+            voiceFit(r).missing.map(function (m) { return esc(m.name); }).join(', ') + '</span>' : '') +
           '</span></button>' +
           '<button class="btn btn-secondary btn-read-card" type="button" aria-label="' + ht('readInstead') + '" title="' + ht('readInstead') + '">' +
           document.querySelector('.book-icon').outerHTML + '</button>';
@@ -1473,7 +1626,11 @@
           wrap.appendChild(badge);
         }
         card.insertBefore(wrap, card.firstChild);
-        card.addEventListener('click', function () { openDetails(r); });
+        card.addEventListener('click', function () {
+          // From "Based on what you said": open it with the options that fit.
+          if (voice) state.picks[r.id] = Object.assign({}, voiceFit(r).choices, { mode: picksFor(r).mode || 'detailed' });
+          openDetails(r);
+        });
         li.querySelector('.btn-read-card').addEventListener('click', function () { openRead(r); });
         ul.appendChild(li);
       });
@@ -1481,6 +1638,7 @@
       wrap.appendChild(ul);
     });
     $('no-results').hidden = any;
+    $('no-results').textContent = t(f.voice && state.voice.length ? 'fvNoRecipes' : 'noResults');
   }
 
   // ---------- Recipe page: guidance, people, options, ingredients ----------
@@ -2624,12 +2782,9 @@
   renderRecipes();
   // The app sets the scroll position per screen itself; the browser shouldn't restore old ones.
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  // Welcome steps: 1) kitchen layout or skip, 2) fridge or straight to the recipes.
+  // Welcome: kitchen layout or skip, then the recipe list.
   $('btn-welcome-layout').addEventListener('click', function () { openLayout(); });
-  $('btn-welcome-skip').addEventListener('click', function () { show('start'); });
-  $('btn-start-fridge').addEventListener('click', function () { show('fridge'); });
-  $('btn-start-recipes').addEventListener('click', function () { show('recipes'); });
-  $('btn-fridge-back').addEventListener('click', function () { show('recipes'); });
+  $('btn-welcome-skip').addEventListener('click', function () { show('recipes'); });
 
   // The plain address opens the welcome step. A link to another screen opens it
   // on top of the recipe list, so Back still leads to the list. A running cook
@@ -2643,6 +2798,5 @@
     history.replaceState({ screen: 'recipes' }, '', screenUrl('recipes'));
     if (start.recipe) openDetails(start.recipe);
     else if (start.screen === 'layout') openLayout();
-    else if (start.screen === 'start' || start.screen === 'fridge') show(start.screen);
   }
 })();

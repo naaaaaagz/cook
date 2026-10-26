@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://api.country.is; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cook</title>
@@ -89,104 +89,64 @@
     </div>
   </section>
 
-  <!-- Welcome, step 2: fridge or recipes -->
-  <section id="screen-start" class="screen" hidden>
-    <div class="wrap welcome">
-      <h1>Cook</h1>
-      <button id="btn-start-fridge" class="btn btn-primary welcome-main" type="button" data-i18n="tellFridge">Tell me what's in the fridge (voice recognition)</button>
-      <button id="btn-start-recipes" class="btn btn-secondary welcome-main" type="button" data-i18n="justRecipes">Just take me to the recipes</button>
-    </div>
-  </section>
-
-  <!-- What's in the fridge: voice or typed ingredients (from voicetest.html) -->
-  <section id="screen-fridge" class="screen" hidden>
-    <div class="fv-main">
-      <header>
-        <h1>Fridge voice test</h1>
-        <p class="lede">Tap the mic, open the fridge and say what you see. Ingredients turn into chips as you talk. Tap “Show recipes” when you are done.</p>
-      </header>
-
-      <section class="panel" aria-label="Browser check">
-        <div class="status" id="fv-status"></div>
-        <div class="banner" id="fv-banner" hidden></div>
-        <div class="settings">
-          <label class="check" for="fv-lang"><span class="label">Language</span>
-            <select id="fv-lang">
-              <option value="hu-HU">Magyar (hu-HU)</option>
-              <option value="en-US">English (en-US)</option>
-              <option value="en-GB">English (en-GB)</option>
-              <option value="de-DE">Deutsch (de-DE)</option>
-            </select>
-          </label>
-          <label class="check" for="fv-autorestart"><input type="checkbox" id="fv-autorestart" checked> Keep listening through pauses</label>
-          <label class="check" for="fv-ondevice"><input type="checkbox" id="fv-ondevice"> On-device mode</label>
-          <button class="fv-btn small" id="fv-installBtn" type="button" hidden>Download language pack</button>
-        </div>
-      </section>
-
-      <section class="panel" aria-label="Listening">
-        <div class="deck">
-          <button class="mic" id="fv-mic" type="button" aria-label="Start listening">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
-          </button>
-          <div class="deck-info">
-            <div class="state" id="fv-state">Tap to start listening</div>
-            <div class="meta" id="fv-meta">00:00 · restarts 0 · finals 0</div>
-            <div class="hearing"><span class="dot" id="fv-speechDot"></span><span id="fv-speechText">No speech detected yet</span></div>
-          </div>
-        </div>
-        <div>
-          <div class="label">What it heard</div>
-          <div class="transcript" id="fv-transcript" aria-live="polite"><span class="empty">Your words will appear here.</span></div>
-        </div>
-      </section>
-
-      <section class="panel" aria-label="Ingredients">
-        <div class="head-row">
-          <h2>In your fridge <span class="meta" id="fv-count">(0)</span></h2>
-          <div class="row">
-            <button class="fv-btn small" id="fv-sampleBtn" type="button">Try a sample sentence</button>
-            <button class="fv-btn small" id="fv-clearBtn" type="button">Clear all</button>
-          </div>
-        </div>
-        <div class="chips" id="fv-chips"></div>
-        <div class="row">
-          <input type="text" id="fv-typed" placeholder="Or type ingredients, e.g. tojás, tej, paradicsom" aria-label="Type ingredients">
-          <button class="fv-btn" id="fv-addBtn" type="button">Add</button>
-        </div>
-        <div id="fv-nomatchWrap" hidden>
-          <div class="label">Heard, but nothing matched</div>
-          <ul class="nomatch" id="fv-nomatch"></ul>
-        </div>
-        <div class="row"><button class="fv-btn primary" id="fv-doneBtn" type="button" disabled>Show recipes</button></div>
-      </section>
-
-      <section class="panel" id="fv-recipesPanel" aria-label="Recipes" hidden>
-        <h2>What you can cook</h2>
-        <p class="note">Salt, pepper, oil and water are assumed to be in the kitchen. This is a sample recipe set for testing.</p>
-        <div id="fv-recipes"></div>
-      </section>
-
-      <section class="panel">
-        <details id="fv-logDetails" open>
-          <summary>Debug log</summary>
-          <div class="row log-tools">
-            <button class="fv-btn small" id="fv-copyLog" type="button">Copy log</button>
-            <button class="fv-btn small" id="fv-saveLog" type="button">Save log</button>
-            <button class="fv-btn small" id="fv-clearLog" type="button">Clear log</button>
-          </div>
-          <div class="log" id="fv-log" role="log"></div>
-        </details>
-      </section>
-
-      <button id="btn-fridge-back" class="btn btn-primary fv-back" type="button" data-i18n="backToRecipes">Back to recipes</button>
-    </div>
-  </section>
-
   <!-- Recipes (home) -->
   <section id="screen-recipes" class="screen">
     <div class="wrap wrap-wide">
       <button id="btn-layout-home" class="btn btn-secondary btn-small layout-home" type="button"><span class="layout-check" hidden>✓</span> <span id="layout-home-label" data-i18n="setupLayoutMap">Set up kitchen layout for Map view</span></button>
+      <!-- "Tell us what you got in the fridge": voice (or typed) ingredients, see js/fridge.js -->
+      <button id="btn-fridge" class="fridge-cta" type="button">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>
+        <span class="fridge-cta-text"><span class="fridge-cta-main" data-i18n="fridgeBtn">Tell us what you got in the fridge</span>
+        <span class="fridge-cta-sub" data-i18n="fridgeBtnSub">(voice recognition)</span></span>
+      </button>
+      <section id="fridge-panel" class="fridge-panel" hidden data-i18n-label="fridgeBtn">
+        <button id="fv-close" class="fv-close" type="button" data-i18n-label="close">&times;</button>
+        <div id="fv-full" class="fv-full">
+          <div class="banner" id="fv-banner" hidden></div>
+          <div class="settings" id="fv-settings" hidden>
+            <div class="status" id="fv-status"></div>
+            <label class="check" id="fv-langWrap" for="fv-lang" hidden><span class="label" data-i18n="fvLanguage">Speech language</span>
+              <select id="fv-lang"></select>
+            </label>
+          </div>
+          <div class="deck">
+            <button class="mic" id="fv-mic" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
+            </button>
+            <div class="deck-info">
+              <div class="state" id="fv-state"></div>
+              <div class="hearing"><span class="dot" id="fv-speechDot"></span></div>
+            </div>
+          </div>
+          <div class="label" data-i18n="fvHeard">What we heard</div>
+          <div class="transcript" id="fv-transcript" aria-live="polite"></div>
+          <div class="head-row">
+            <div class="label" data-i18n="fvYourIngredients">Your ingredients</div>
+            <button class="fv-btn small" id="fv-clearBtn" type="button" data-i18n="fvClear" hidden>Clear all</button>
+          </div>
+          <div class="chips" id="fv-chips"></div>
+          <div class="row">
+            <input type="text" id="fv-typed" data-i18n-placeholder="fvTypePh" data-i18n-label="fvTypePh">
+            <button class="fv-btn" id="fv-addBtn" type="button" data-i18n="fvAdd">Add</button>
+          </div>
+          <p class="note" data-i18n="fvAssumed">We assume you have salt, pepper, sugar, flour, oil and water.</p>
+          <details id="fv-logDetails" class="fv-log">
+            <summary>Debug log</summary>
+            <div class="row log-tools">
+              <button class="fv-btn small" id="fv-copyLog" type="button">Copy log</button>
+              <button class="fv-btn small" id="fv-clearLog" type="button">Clear log</button>
+            </div>
+            <div class="log" id="fv-log" role="log"></div>
+          </details>
+        </div>
+        <div id="fv-mini" class="fv-mini" hidden>
+          <button class="mic mic-small" id="fv-micMini" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
+          </button>
+          <div class="chips" id="fv-chipsMini"></div>
+          <button class="fv-btn small" id="fv-expand" type="button" data-i18n="fvEdit">Edit</button>
+        </div>
+      </section>
       <h1 data-i18n="pickRecipe">Pick a recipe</h1>
       <div id="filters" class="filters" role="group" data-i18n-label="filters"></div>
       <div id="recipe-sections"></div>

@@ -6,7 +6,9 @@ window.I18N["en-GB"] = {
   "board": "Chopping board",
   "countertop": "Worktop",
   "layoutHelp": "Drag to move, drag the corner to resize. Things can only overlap the worktop.",
-  "allergen_Sulphites": "Sulphites"
+  "allergen_Sulphites": "Sulphites",
+  "fvNothingYet": "Nothing recognised yet.",
+  "fvNoSR": "This browser can't recognise speech. Type what you have instead."
  },
  "uk": {
   "baking soda": "bicarbonate of soda",

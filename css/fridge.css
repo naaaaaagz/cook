@@ -1,7 +1,7 @@
 /* "Tell me what's in the fridge" screen (moved from voicetest.html).
-   Every rule is scoped to #screen-fridge and uses the site's colors and fonts,
+   Every rule is scoped to #fridge-panel and uses the site's colors and fonts,
    so it follows the light/dark theme and doesn't touch other screens. */
-#screen-fridge {
+#fridge-panel {
   --fv-bg: var(--bg);
   --fv-surface: var(--card);
   --fv-ink: var(--ink);
@@ -17,88 +17,107 @@
   --fv-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
   line-height: 1.55;
 }
-#screen-fridge .fv-main { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; display: flex; flex-direction: column; gap: 20px; }
-#screen-fridge h1 { font-size: 1.9rem; line-height: 1.1; margin: 0; text-wrap: balance; }
-#screen-fridge h2 { font-size: 1.15rem; margin: 0; }
-#screen-fridge .lede { color: var(--fv-muted); margin: 6px 0 0; max-width: 60ch; }
-#screen-fridge .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fv-muted); font-weight: 600; }
-#screen-fridge .panel { background: var(--fv-surface); border: 1px solid var(--fv-line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+#fridge-panel .fv-main { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; display: flex; flex-direction: column; gap: 20px; }
+#fridge-panel h1 { font-size: 1.9rem; line-height: 1.1; margin: 0; text-wrap: balance; }
+#fridge-panel h2 { font-size: 1.15rem; margin: 0; }
+#fridge-panel .lede { color: var(--fv-muted); margin: 6px 0 0; max-width: 60ch; }
+#fridge-panel .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fv-muted); font-weight: 600; }
+#fridge-panel .panel { background: var(--fv-surface); border: 1px solid var(--fv-line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 
-#screen-fridge .status { display: flex; flex-wrap: wrap; gap: 8px; }
-#screen-fridge .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--fv-line); color: var(--fv-muted); }
-#screen-fridge .pill b { color: var(--fv-ink); font-weight: 600; }
-#screen-fridge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--fv-ghost); flex: none; }
-#screen-fridge .dot.ok { background: var(--fv-accent); }
-#screen-fridge .dot.bad { background: var(--fv-rec); }
-#screen-fridge .banner { background: var(--fv-warn-bg); color: var(--fv-warn-ink); border-radius: 10px; padding: 10px 12px; font-size: 0.92rem; }
+#fridge-panel .status { display: flex; flex-wrap: wrap; gap: 8px; }
+#fridge-panel .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--fv-line); color: var(--fv-muted); }
+#fridge-panel .pill b { color: var(--fv-ink); font-weight: 600; }
+#fridge-panel .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--fv-ghost); flex: none; }
+#fridge-panel .dot.ok { background: var(--fv-accent); }
+#fridge-panel .dot.bad { background: var(--fv-rec); }
+#fridge-panel .banner { background: var(--fv-warn-bg); color: var(--fv-warn-ink); border-radius: 10px; padding: 10px 12px; font-size: 0.92rem; }
 
-#screen-fridge .settings { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
-#screen-fridge select, #screen-fridge input[type="text"] { font: inherit; color: var(--fv-ink); background: var(--fv-bg); border: 1px solid var(--fv-line); border-radius: 8px; padding: 8px 10px; min-width: 0; min-height: 0; }
-#screen-fridge label.check { display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; cursor: pointer; }
-#screen-fridge input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--fv-accent); }
+#fridge-panel .settings { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+#fridge-panel select, #fridge-panel input[type="text"] { font: inherit; color: var(--fv-ink); background: var(--fv-bg); border: 1px solid var(--fv-line); border-radius: 8px; padding: 8px 10px; min-width: 0; min-height: 0; }
+#fridge-panel label.check { display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; cursor: pointer; }
+#fridge-panel input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--fv-accent); }
 
-#screen-fridge .deck { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
-#screen-fridge .mic {
+#fridge-panel .deck { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+#fridge-panel .mic {
   width: 104px; height: 104px; border-radius: 50%; border: none; cursor: pointer; flex: none;
   background: var(--fv-accent); color: var(--fv-accent-ink); display: grid; place-items: center;
   transition: background .2s, transform .1s;
 }
-#screen-fridge .mic:active { transform: scale(0.97); }
-#screen-fridge .mic svg { width: 40px; height: 40px; }
-#screen-fridge .mic.live { background: var(--fv-rec); color: #fff; }
-#screen-fridge .mic:disabled { background: var(--fv-line); color: var(--fv-muted); cursor: not-allowed; }
+#fridge-panel .mic:active { transform: scale(0.97); }
+#fridge-panel .mic svg { width: 40px; height: 40px; }
+#fridge-panel .mic.live { background: var(--fv-rec); color: #fff; }
+#fridge-panel .mic:disabled { background: var(--fv-line); color: var(--fv-muted); cursor: not-allowed; }
 @media (prefers-reduced-motion: no-preference) {
-  #screen-fridge .mic.live { animation: fv-pulse 1.6s ease-out infinite; }
+  #fridge-panel .mic.live { animation: fv-pulse 1.6s ease-out infinite; }
   @keyframes fv-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--fv-rec) 45%, transparent); } 100% { box-shadow: 0 0 0 22px transparent; } }
 }
-#screen-fridge .deck-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1 1 200px; }
-#screen-fridge .state { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; }
-#screen-fridge .meta { font-family: var(--fv-mono); font-size: 0.82rem; color: var(--fv-muted); font-variant-numeric: tabular-nums; }
-#screen-fridge .hearing { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--fv-muted); }
-#screen-fridge .hearing .dot.on { background: var(--fv-rec); }
+#fridge-panel .deck-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1 1 200px; }
+#fridge-panel .state { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; }
+#fridge-panel .meta { font-family: var(--fv-mono); font-size: 0.82rem; color: var(--fv-muted); font-variant-numeric: tabular-nums; }
+#fridge-panel .hearing { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--fv-muted); }
+#fridge-panel .hearing .dot.on { background: var(--fv-rec); }
 
-#screen-fridge .transcript { min-height: 64px; max-height: 180px; overflow-y: auto; font-size: 1.02rem; line-height: 1.6; padding: 10px 12px; border-radius: 10px; background: var(--fv-bg); border: 1px solid var(--fv-line); }
-#screen-fridge .transcript .interim { color: var(--fv-ghost); font-style: italic; }
-#screen-fridge .transcript .empty { color: var(--fv-ghost); }
+#fridge-panel .transcript { min-height: 64px; max-height: 180px; overflow-y: auto; font-size: 1.02rem; line-height: 1.6; padding: 10px 12px; border-radius: 10px; background: var(--fv-bg); border: 1px solid var(--fv-line); }
+#fridge-panel .transcript .interim { color: var(--fv-ghost); font-style: italic; }
+#fridge-panel .transcript .empty { color: var(--fv-ghost); }
 
-#screen-fridge .chips { display: flex; flex-wrap: wrap; gap: 8px; min-height: 36px; align-items: flex-start; }
-#screen-fridge .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 6px 6px 12px; border-radius: 999px; background: var(--fv-accent-soft); color: var(--fv-ink); font-size: 0.95rem; font-weight: 400; cursor: default; border: 1px solid transparent; min-height: 0; }
-#screen-fridge .chip button { border: none; background: transparent; color: var(--fv-muted); font-size: 1rem; line-height: 1; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; }
-#screen-fridge .chip button:hover { background: var(--fv-line); color: var(--fv-ink); }
-#screen-fridge .chip.ghost { background: transparent; border: 1px dashed var(--fv-ghost); color: var(--fv-muted); padding-right: 12px; }
-#screen-fridge .chip small { color: var(--fv-muted); font-size: 0.75rem; }
-#screen-fridge .nomatch { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: var(--fv-muted); }
-#screen-fridge .nomatch li::before { content: "\201C"; }
-#screen-fridge .nomatch li::after { content: "\201D"; }
+#fridge-panel .chips { display: flex; flex-wrap: wrap; gap: 8px; min-height: 36px; align-items: flex-start; }
+#fridge-panel .chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 6px 6px 12px; border-radius: 999px; background: var(--fv-accent-soft); color: var(--fv-ink); font-size: 0.95rem; font-weight: 400; cursor: default; border: 1px solid transparent; min-height: 0; }
+#fridge-panel .chip button { border: none; background: transparent; color: var(--fv-muted); font-size: 1rem; line-height: 1; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; }
+#fridge-panel .chip button:hover { background: var(--fv-line); color: var(--fv-ink); }
+#fridge-panel .chip.ghost { background: transparent; border: 1px dashed var(--fv-ghost); color: var(--fv-muted); padding-right: 12px; }
+#fridge-panel .chip small { color: var(--fv-muted); font-size: 0.75rem; }
+#fridge-panel .nomatch { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: var(--fv-muted); }
+#fridge-panel .nomatch li::before { content: "\201C"; }
+#fridge-panel .nomatch li::after { content: "\201D"; }
 
-#screen-fridge .row { display: flex; gap: 8px; flex-wrap: wrap; }
-#screen-fridge .row input[type="text"] { flex: 1 1 220px; }
-#screen-fridge .fv-btn { font: inherit; font-weight: 600; font-size: 0.95rem; padding: 9px 14px; border-radius: 9px; border: 1px solid var(--fv-line); background: var(--fv-surface); color: var(--fv-ink); cursor: pointer; }
-#screen-fridge .fv-btn:hover { border-color: var(--fv-muted); }
-#screen-fridge .fv-btn.primary { background: var(--fv-accent); color: var(--fv-accent-ink); border-color: var(--fv-accent); }
-#screen-fridge .fv-btn.primary:disabled { opacity: .45; cursor: not-allowed; }
-#screen-fridge .fv-btn.small { font-size: 0.82rem; padding: 5px 10px; }
-#screen-fridge :focus-visible { outline: 2px solid var(--fv-accent); outline-offset: 2px; }
+#fridge-panel .row { display: flex; gap: 8px; flex-wrap: wrap; }
+#fridge-panel .row input[type="text"] { flex: 1 1 220px; }
+#fridge-panel .fv-btn { font: inherit; font-weight: 600; font-size: 0.95rem; padding: 9px 14px; border-radius: 9px; border: 1px solid var(--fv-line); background: var(--fv-surface); color: var(--fv-ink); cursor: pointer; }
+#fridge-panel .fv-btn:hover { border-color: var(--fv-muted); }
+#fridge-panel .fv-btn.primary { background: var(--fv-accent); color: var(--fv-accent-ink); border-color: var(--fv-accent); }
+#fridge-panel .fv-btn.primary:disabled { opacity: .45; cursor: not-allowed; }
+#fridge-panel .fv-btn.small { font-size: 0.82rem; padding: 5px 10px; }
+#fridge-panel :focus-visible { outline: 2px solid var(--fv-accent); outline-offset: 2px; }
 
-#screen-fridge .group { display: flex; flex-direction: column; gap: 8px; }
-#screen-fridge .group h3 { margin: 6px 0 0; font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fv-muted); }
-#screen-fridge .recipe { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; border-top: 1px solid var(--fv-line); }
-#screen-fridge .recipe:first-of-type { border-top: none; }
-#screen-fridge .recipe-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
-#screen-fridge .recipe-name { font-weight: 600; font-size: 1.05rem; }
-#screen-fridge .recipe-time { font-family: var(--fv-mono); font-size: 0.8rem; color: var(--fv-muted); }
-#screen-fridge .ings { display: flex; flex-wrap: wrap; gap: 6px; }
-#screen-fridge .ing { font-size: 0.82rem; padding: 2px 9px; border-radius: 999px; }
-#screen-fridge .ing.have { background: var(--fv-accent-soft); }
-#screen-fridge .ing.miss { border: 1px solid var(--fv-rec); color: var(--fv-rec); }
-#screen-fridge .ing.extra { border: 1px dashed var(--fv-line); color: var(--fv-muted); }
-#screen-fridge .note { font-size: 0.85rem; color: var(--fv-muted); margin: 0; }
+#fridge-panel .group { display: flex; flex-direction: column; gap: 8px; }
+#fridge-panel .group h3 { margin: 6px 0 0; font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fv-muted); }
+#fridge-panel .recipe { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; border-top: 1px solid var(--fv-line); }
+#fridge-panel .recipe:first-of-type { border-top: none; }
+#fridge-panel .recipe-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+#fridge-panel .recipe-name { font-weight: 600; font-size: 1.05rem; }
+#fridge-panel .recipe-time { font-family: var(--fv-mono); font-size: 0.8rem; color: var(--fv-muted); }
+#fridge-panel .ings { display: flex; flex-wrap: wrap; gap: 6px; }
+#fridge-panel .ing { font-size: 0.82rem; padding: 2px 9px; border-radius: 999px; }
+#fridge-panel .ing.have { background: var(--fv-accent-soft); }
+#fridge-panel .ing.miss { border: 1px solid var(--fv-rec); color: var(--fv-rec); }
+#fridge-panel .ing.extra { border: 1px dashed var(--fv-line); color: var(--fv-muted); }
+#fridge-panel .note { font-size: 0.85rem; color: var(--fv-muted); margin: 0; }
 
-#screen-fridge details summary { cursor: pointer; font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; }
-#screen-fridge .log-tools { margin: 10px 0; }
-#screen-fridge .log { font-family: var(--fv-mono); font-size: 0.76rem; line-height: 1.5; max-height: 280px; overflow: auto; background: var(--fv-bg); border: 1px solid var(--fv-line); border-radius: 10px; padding: 8px 10px; white-space: pre-wrap; word-break: break-word; }
-#screen-fridge .log .t { color: var(--fv-ghost); }
-#screen-fridge .log .err { color: var(--fv-rec); }
-#screen-fridge .log .fin { color: var(--fv-accent); }
-#screen-fridge .head-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-#screen-fridge .fv-back { align-self: center; }
+#fridge-panel details summary { cursor: pointer; font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; }
+#fridge-panel .log-tools { margin: 10px 0; }
+#fridge-panel .log { font-family: var(--fv-mono); font-size: 0.76rem; line-height: 1.5; max-height: 280px; overflow: auto; background: var(--fv-bg); border: 1px solid var(--fv-line); border-radius: 10px; padding: 8px 10px; white-space: pre-wrap; word-break: break-word; }
+#fridge-panel .log .t { color: var(--fv-ghost); }
+#fridge-panel .log .err { color: var(--fv-rec); }
+#fridge-panel .log .fin { color: var(--fv-accent); }
+#fridge-panel .head-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+#fridge-panel .fv-back { align-self: center; }
+
+/* The panel itself, its close button and the small (minimized) form */
+#fridge-panel { position: relative; background: var(--fv-surface); border: 1px solid var(--fv-line); border-radius: 14px; padding: 16px; margin: 0 0 20px; }
+#fridge-panel .fv-full { display: flex; flex-direction: column; gap: 12px; }
+#fridge-panel .fv-close { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; min-height: 0; padding: 0; border: none; border-radius: 50%; background: transparent; color: var(--fv-muted); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+[dir="rtl"] #fridge-panel .fv-close { right: auto; left: 8px; }
+#fridge-panel .fv-close:hover { background: var(--fv-line); color: var(--fv-ink); }
+#fridge-panel .settings { flex-direction: column; align-items: flex-start; }
+#fridge-panel .deck { padding-right: 36px; }
+#fridge-panel .fv-mini { display: flex; align-items: center; gap: 12px; padding-right: 36px; }
+#fridge-panel .fv-mini[hidden], #fridge-panel .fv-full[hidden] { display: none; }
+#fridge-panel .fv-mini .chips { flex: 1 1 auto; min-height: 0; }
+#fridge-panel .mic-small { width: 48px; height: 48px; }
+#fridge-panel .mic-small svg { width: 22px; height: 22px; }
+#fridge-panel.is-mini { padding: 10px 12px; }
+#fridge-panel .fv-log summary { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; color: var(--fv-muted); }
+#fridge-panel .banner { margin-right: 36px; }
+[dir="rtl"] #fridge-panel .banner { margin-right: 0; margin-left: 36px; }
+#fridge-panel .mic:not(.live) + .deck-info .hearing { visibility: hidden; }
