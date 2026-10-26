@@ -144,7 +144,7 @@ function matchText(text, index, code) {
 }
 
 /* ---------- Panel ---------- */
-var SILENCE_MS = 2500; // this long without new speech after a hit = "done talking"
+var SILENCE_MS = 7000; // this long with no words at all = "done talking"
 var opts = null, ui = null;
 
 function setup() {
@@ -158,7 +158,7 @@ function setup() {
   var pantry = [];                       // ingredient keys, in the order they were said
   var transcript = [], interim = '';
   var rec = null, want = false, fatal = false, silence = null, wakeLock = null, prevFinal = '';
-  var sessionHit = false;
+  var sessionHit = false, quickEnds = 0, lastStart = 0;
 
   /* ----- debug log (closed by default) ----- */
   var logLines = [];
@@ -308,9 +308,10 @@ function setup() {
   }
 
   /* ----- recognition ----- */
+  // Restarted on every sign of speech; fires only after SILENCE_MS of no words.
   function armSilence() {
     clearTimeout(silence);
-    if (pantry.length && sessionHit) silence = setTimeout(function () { log('info', 'silence → done talking'); finish(); }, SILENCE_MS);
+    if (want) silence = setTimeout(function () { log('info', 'no words for ' + SILENCE_MS / 1000 + ' s → done'); finish(); }, SILENCE_MS);
   }
   function makeRec() {
     var r = new SR();
@@ -327,6 +328,7 @@ function setup() {
       }
       interim = live.trim();
       renderTranscript(); renderChips();
+      quickEnds = 0;
       armSilence();
     };
     r.onerror = function (e) {
@@ -335,13 +337,22 @@ function setup() {
       else if (e.error === 'audio-capture' || e.error === 'network') { fatal = true; problem(t('fvMicError')); }
       else if (e.error === 'language-not-supported') { fatal = true; problem(t('fvLangUnavailable', { x: langName(code) }), true); }
     };
-    // No automatic restart (each restart beeps on phones): a stop with something
-    // said means "done"; otherwise the mic waits for a tap.
+    // Browsers end a session on their own after a pause (or mid-sentence on
+    // phones). Keep listening until the Stop tap or the silence timer says done.
     r.onend = function () {
       log('event', 'end');
       setHearing(false); interim = ''; renderTranscript(); renderChips();
       rec = null;
-      if (want && !fatal && pantry.length && sessionHit) { finish(); return; }
+      if (want && !fatal) {
+        var now = performance.now();
+        quickEnds = (now - lastStart < 1500) ? quickEnds + 1 : 0;
+        if (quickEnds < 5) {
+          prevFinal = '';
+          try { rec = makeRec(); lastStart = now; rec.start(); log('info', 'resumed listening'); return; }
+          catch (e) { log('err', 'restart threw: ' + e); }
+        } else log('err', 'recognition keeps ending → stopped');
+        finish(); return;
+      }
       stopUI();
     };
     return r;
@@ -354,20 +365,21 @@ function setup() {
     prevFinal = txt;
     if (!delta) return;
     transcript.push(delta);
-    addFrom(delta, 'voice');
+    // A last result can arrive just after Stop: still apply it to the recipes.
+    if (addFrom(delta, 'voice') && !want && pantry.length) { minimize(true); changed('finish'); }
   }
   function startListening() {
     if (!SR || want) return;
-    want = true; fatal = false; prevFinal = ''; sessionHit = false;
+    want = true; fatal = false; prevFinal = ''; sessionHit = false; quickEnds = 0; lastStart = performance.now();
     minimize(false);
     setState(t('fvStarting'), true);
     try { if ('wakeLock' in navigator) navigator.wakeLock.request('screen').then(function (w) { wakeLock = w; }).catch(function () {}); } catch (e) {}
-    try { rec = makeRec(); rec.start(); }
+    try { rec = makeRec(); rec.start(); armSilence(); }
     catch (e) { log('err', 'start() threw: ' + e); stopUI(); }
   }
   function stopListening() {
     want = false; clearTimeout(silence);
-    if (rec) { try { rec.stop(); } catch (e) {} }
+    if (rec) { var r = rec; rec = null; r.onend = function () { log('event', 'end'); }; try { r.stop(); } catch (e) {} }
     stopUI();
   }
   function stopUI() {
