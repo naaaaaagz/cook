@@ -246,7 +246,17 @@ window.I18N["fr"] = {
   "fvLanguage": "Langue de la reconnaissance",
   "fvMicBlocked": "Le micro est bloqué. Autorisez-le dans la barre d'adresse du navigateur, puis touchez à nouveau le micro.",
   "fvMicError": "Le micro ou le service de reconnaissance ne fonctionne pas pour le moment. Vous pouvez taper à la place.",
-  "fvNoRecipes": "Aucune recette ne convient encore. Ajoutez quelques ingrédients."
+  "fvNoRecipes": "Aucune recette ne convient encore. Ajoutez quelques ingrédients.",
+  "searchLabel": "Rechercher des recettes",
+  "searchPlaceholder": "Recherchez recettes, ingrédients, ustensiles…",
+  "searchSuggestions": "Suggestions",
+  "kindRecipe": "Recette",
+  "kindIngredient": "Ingrédient",
+  "kindUtensil": "Ustensile",
+  "kindMethod": "Étape",
+  "kindLabel": "Étiquette",
+  "oneRecipe": "1 recette",
+  "nRecipes": "{n} recettes"
  },
  "names": {
   "beer": "Bière",

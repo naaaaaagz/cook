@@ -246,7 +246,17 @@ window.I18N["sq"] = {
   "fvLanguage": "Gjuha e të folurit",
   "fvMicBlocked": "Mikrofoni është i bllokuar. Lejoje te shiriti i adresës së shfletuesit dhe prek sërish mikrofonin.",
   "fvMicError": "Mikrofoni ose shërbimi i zërit nuk punon tani. Mund të shkruash.",
-  "fvNoRecipes": "Ende asnjë recetë nuk përshtatet. Shto disa përbërës të tjerë."
+  "fvNoRecipes": "Ende asnjë recetë nuk përshtatet. Shto disa përbërës të tjerë.",
+  "searchLabel": "Kërko receta",
+  "searchPlaceholder": "Kërko receta, përbërës, vegla…",
+  "searchSuggestions": "Sugjerime",
+  "kindRecipe": "Recetë",
+  "kindIngredient": "Përbërës",
+  "kindUtensil": "Vegël",
+  "kindMethod": "Hap",
+  "kindLabel": "Etiketë",
+  "oneRecipe": "1 recetë",
+  "nRecipes": "{n} receta"
  },
  "names": {
   "beer": "Birrë",

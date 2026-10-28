@@ -246,7 +246,17 @@ window.I18N["sk"] = {
   "fvLanguage": "Jazyk reči",
   "fvMicBlocked": "Mikrofón je zablokovaný. Povoľte ho v paneli s adresou prehliadača a znova ťuknite na mikrofón.",
   "fvMicError": "Mikrofón alebo služba rozpoznávania reči teraz nefunguje. Môžete písať.",
-  "fvNoRecipes": "Zatiaľ nesedí žiadny recept. Pridajte ešte pár surovín."
+  "fvNoRecipes": "Zatiaľ nesedí žiadny recept. Pridajte ešte pár surovín.",
+  "searchLabel": "Hľadať recepty",
+  "searchPlaceholder": "Hľadajte recepty, suroviny, náradie…",
+  "searchSuggestions": "Návrhy",
+  "kindRecipe": "Recept",
+  "kindIngredient": "Surovina",
+  "kindUtensil": "Náradie",
+  "kindMethod": "Krok",
+  "kindLabel": "Štítok",
+  "oneRecipe": "1 recept",
+  "nRecipes": "Receptov: {n}"
  },
  "names": {
   "beer": "Pivo",

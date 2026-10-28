@@ -246,7 +246,17 @@ window.I18N["he"] = {
   "fvLanguage": "שפת הדיבור",
   "fvMicBlocked": "המיקרופון חסום. אפשרו אותו בשורת הכתובת של הדפדפן והקישו שוב על המיקרופון.",
   "fvMicError": "המיקרופון או שירות הדיבור לא עובדים כרגע. אפשר להקליד.",
-  "fvNoRecipes": "עדיין אין מתכון מתאים. הוסיפו עוד כמה מצרכים."
+  "fvNoRecipes": "עדיין אין מתכון מתאים. הוסיפו עוד כמה מצרכים.",
+  "searchLabel": "חיפוש מתכונים",
+  "searchPlaceholder": "חפשו מתכונים, מרכיבים, כלים…",
+  "searchSuggestions": "הצעות",
+  "kindRecipe": "מתכון",
+  "kindIngredient": "מרכיב",
+  "kindUtensil": "כלי",
+  "kindMethod": "שלב",
+  "kindLabel": "תווית",
+  "oneRecipe": "מתכון אחד",
+  "nRecipes": "{n} מתכונים"
  },
  "names": {
   "beer": "בירה",

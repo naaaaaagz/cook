@@ -246,7 +246,17 @@ window.I18N["sv"] = {
   "fvLanguage": "Talspråk",
   "fvMicBlocked": "Mikrofonen är blockerad. Tillåt den i webbläsarens adressfält och tryck sedan på mikrofonen igen.",
   "fvMicError": "Mikrofonen eller taltjänsten fungerar inte just nu. Du kan skriva i stället.",
-  "fvNoRecipes": "Inget recept passar än. Lägg till några fler ingredienser."
+  "fvNoRecipes": "Inget recept passar än. Lägg till några fler ingredienser.",
+  "searchLabel": "Sök recept",
+  "searchPlaceholder": "Sök recept, ingredienser, redskap…",
+  "searchSuggestions": "Förslag",
+  "kindRecipe": "Recept",
+  "kindIngredient": "Ingrediens",
+  "kindUtensil": "Redskap",
+  "kindMethod": "Steg",
+  "kindLabel": "Etikett",
+  "oneRecipe": "1 recept",
+  "nRecipes": "{n} recept"
  },
  "names": {
   "beer": "Öl",

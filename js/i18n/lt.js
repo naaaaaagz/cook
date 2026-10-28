@@ -246,7 +246,17 @@ window.I18N["lt"] = {
   "fvLanguage": "Kalbėjimo kalba",
   "fvMicBlocked": "Mikrofonas užblokuotas. Leisk jį naršyklės adreso juostoje ir vėl paliesk mikrofoną.",
   "fvMicError": "Mikrofonas arba kalbos paslauga dabar neveikia. Gali rašyti.",
-  "fvNoRecipes": "Kol kas netinka joks receptas. Pridėk dar kelis produktus."
+  "fvNoRecipes": "Kol kas netinka joks receptas. Pridėk dar kelis produktus.",
+  "searchLabel": "Ieškoti receptų",
+  "searchPlaceholder": "Ieškokite receptų, ingredientų, įrankių…",
+  "searchSuggestions": "Pasiūlymai",
+  "kindRecipe": "Receptas",
+  "kindIngredient": "Ingredientas",
+  "kindUtensil": "Įrankis",
+  "kindMethod": "Žingsnis",
+  "kindLabel": "Žyma",
+  "oneRecipe": "1 receptas",
+  "nRecipes": "Receptų: {n}"
  },
  "names": {
   "beer": "Alus",

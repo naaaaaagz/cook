@@ -246,7 +246,17 @@ window.I18N["tr"] = {
   "fvLanguage": "Konuşma dili",
   "fvMicBlocked": "Mikrofon engellendi. Tarayıcının adres çubuğundan izin ver, sonra mikrofona tekrar dokun.",
   "fvMicError": "Mikrofon ya da ses hizmeti şu anda çalışmıyor. Yazarak da ekleyebilirsin.",
-  "fvNoRecipes": "Henüz uyan bir tarif yok. Birkaç malzeme daha ekle."
+  "fvNoRecipes": "Henüz uyan bir tarif yok. Birkaç malzeme daha ekle.",
+  "searchLabel": "Tarif ara",
+  "searchPlaceholder": "Tarif, malzeme, mutfak aleti ara…",
+  "searchSuggestions": "Öneriler",
+  "kindRecipe": "Tarif",
+  "kindIngredient": "Malzeme",
+  "kindUtensil": "Mutfak aleti",
+  "kindMethod": "Adım",
+  "kindLabel": "Etiket",
+  "oneRecipe": "1 tarif",
+  "nRecipes": "{n} tarif"
  },
  "names": {
   "beer": "Bira",

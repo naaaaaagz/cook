@@ -246,7 +246,17 @@ window.I18N["de"] = {
   "fvLanguage": "Sprache der Spracherkennung",
   "fvMicBlocked": "Das Mikrofon ist blockiert. Erlaube es in der Adressleiste des Browsers und tippe dann erneut auf das Mikrofon.",
   "fvMicError": "Mikrofon oder Spracherkennung funktionieren gerade nicht. Du kannst stattdessen tippen.",
-  "fvNoRecipes": "Noch passt kein Rezept. Nenne noch ein paar Zutaten."
+  "fvNoRecipes": "Noch passt kein Rezept. Nenne noch ein paar Zutaten.",
+  "searchLabel": "Rezepte suchen",
+  "searchPlaceholder": "Rezepte, Zutaten, Küchenhelfer suchen…",
+  "searchSuggestions": "Vorschläge",
+  "kindRecipe": "Rezept",
+  "kindIngredient": "Zutat",
+  "kindUtensil": "Küchenhelfer",
+  "kindMethod": "Schritt",
+  "kindLabel": "Kategorie",
+  "oneRecipe": "1 Rezept",
+  "nRecipes": "{n} Rezepte"
  },
  "names": {
   "beer": "Bier",

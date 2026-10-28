@@ -149,6 +149,12 @@
       </section>
       <h1 data-i18n="pickRecipe">Pick a recipe</h1>
       <div id="filters" class="filters" role="group" data-i18n-label="filters"></div>
+      <div class="search" role="search">
+        <label class="sr-only" for="recipe-search" data-i18n="searchLabel">Search recipes</label>
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+        <input id="recipe-search" class="search-input" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-list" autocomplete="off" spellcheck="false" data-i18n-placeholder="searchPlaceholder" placeholder="Search recipes, ingredients, utensils…">
+        <ul id="search-list" class="search-list" role="listbox" data-i18n-label="searchSuggestions" hidden></ul>
+      </div>
       <div id="recipe-sections"></div>
       <p id="no-results" class="hint" hidden data-i18n="noResults">No recipes match these filters.</p>
     </div>

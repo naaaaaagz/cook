@@ -246,7 +246,17 @@ window.I18N["zh-Hans"] = {
   "fvLanguage": "语音语言",
   "fvMicBlocked": "麦克风已被阻止。请在浏览器地址栏中允许，然后再次点按麦克风。",
   "fvMicError": "麦克风或语音服务暂时无法使用。你可以改为输入。",
-  "fvNoRecipes": "还没有合适的食谱。再添加几样食材吧。"
+  "fvNoRecipes": "还没有合适的食谱。再添加几样食材吧。",
+  "searchLabel": "搜索食谱",
+  "searchPlaceholder": "搜索食谱、食材、厨具…",
+  "searchSuggestions": "建议",
+  "kindRecipe": "食谱",
+  "kindIngredient": "食材",
+  "kindUtensil": "厨具",
+  "kindMethod": "步骤",
+  "kindLabel": "标签",
+  "oneRecipe": "1 个食谱",
+  "nRecipes": "{n} 个食谱"
  },
  "names": {
   "beer": "啤酒",

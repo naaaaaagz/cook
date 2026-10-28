@@ -246,7 +246,17 @@ window.I18N["hu"] = {
   "fvLanguage": "Beszéd nyelve",
   "fvMicBlocked": "A mikrofon le van tiltva. Engedélyezd a böngésző címsorában, majd koppints újra a mikrofonra.",
   "fvMicError": "A mikrofon vagy a hangfelismerő szolgáltatás most nem működik. Beírhatod helyette.",
-  "fvNoRecipes": "Még nincs illő recept. Mondj még néhány hozzávalót."
+  "fvNoRecipes": "Még nincs illő recept. Mondj még néhány hozzávalót.",
+  "searchLabel": "Receptek keresése",
+  "searchPlaceholder": "Keress receptet, hozzávalót, eszközt…",
+  "searchSuggestions": "Javaslatok",
+  "kindRecipe": "Recept",
+  "kindIngredient": "Hozzávaló",
+  "kindUtensil": "Eszköz",
+  "kindMethod": "Lépés",
+  "kindLabel": "Címke",
+  "oneRecipe": "1 recept",
+  "nRecipes": "{n} recept"
  },
  "names": {
   "beer": "Sör",

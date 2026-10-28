@@ -246,7 +246,17 @@ window.I18N["ca"] = {
   "fvLanguage": "Idioma de la veu",
   "fvMicBlocked": "El micròfon està bloquejat. Permet-lo a la barra d'adreces del navegador i torna a tocar el micròfon.",
   "fvMicError": "El micròfon o el servei de veu no funcionen ara mateix. Pots escriure-ho.",
-  "fvNoRecipes": "Encara no hi encaixa cap recepta. Afegeix-hi uns quants ingredients més."
+  "fvNoRecipes": "Encara no hi encaixa cap recepta. Afegeix-hi uns quants ingredients més.",
+  "searchLabel": "Cerca receptes",
+  "searchPlaceholder": "Cerca receptes, ingredients, estris…",
+  "searchSuggestions": "Suggeriments",
+  "kindRecipe": "Recepta",
+  "kindIngredient": "Ingredient",
+  "kindUtensil": "Estri",
+  "kindMethod": "Pas",
+  "kindLabel": "Etiqueta",
+  "oneRecipe": "1 recepta",
+  "nRecipes": "{n} receptes"
  },
  "names": {
   "beer": "Cervesa",

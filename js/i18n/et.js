@@ -246,7 +246,17 @@ window.I18N["et"] = {
   "fvLanguage": "Kõne keel",
   "fvMicBlocked": "Mikrofon on blokeeritud. Luba see brauseri aadressiribal ja puuduta siis uuesti mikrofoni.",
   "fvMicError": "Mikrofon või kõneteenus ei tööta praegu. Võid hoopis kirjutada.",
-  "fvNoRecipes": "Ükski retsept ei sobi veel. Lisa veel mõni koostisosa."
+  "fvNoRecipes": "Ükski retsept ei sobi veel. Lisa veel mõni koostisosa.",
+  "searchLabel": "Otsi retsepte",
+  "searchPlaceholder": "Otsi retsepte, koostisosi, köögitarbeid…",
+  "searchSuggestions": "Soovitused",
+  "kindRecipe": "Retsept",
+  "kindIngredient": "Koostisosa",
+  "kindUtensil": "Köögitarve",
+  "kindMethod": "Samm",
+  "kindLabel": "Silt",
+  "oneRecipe": "1 retsept",
+  "nRecipes": "{n} retsepti"
  },
  "names": {
   "beer": "Õlu",

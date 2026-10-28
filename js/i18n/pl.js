@@ -246,7 +246,17 @@ window.I18N["pl"] = {
   "fvLanguage": "Język mowy",
   "fvMicBlocked": "Mikrofon jest zablokowany. Zezwól na niego na pasku adresu przeglądarki, a potem znów dotknij mikrofonu.",
   "fvMicError": "Mikrofon lub usługa rozpoznawania mowy teraz nie działa. Możesz wpisać składniki.",
-  "fvNoRecipes": "Żaden przepis jeszcze nie pasuje. Dodaj kilka składników."
+  "fvNoRecipes": "Żaden przepis jeszcze nie pasuje. Dodaj kilka składników.",
+  "searchLabel": "Szukaj przepisów",
+  "searchPlaceholder": "Szukaj przepisów, składników, przyborów…",
+  "searchSuggestions": "Podpowiedzi",
+  "kindRecipe": "Przepis",
+  "kindIngredient": "Składnik",
+  "kindUtensil": "Przybór",
+  "kindMethod": "Krok",
+  "kindLabel": "Etykieta",
+  "oneRecipe": "1 przepis",
+  "nRecipes": "Przepisy: {n}"
  },
  "names": {
   "beer": "Piwo",

@@ -246,7 +246,17 @@ window.I18N["da"] = {
   "fvLanguage": "Talesprog",
   "fvMicBlocked": "Mikrofonen er blokeret. Tillad den i browserens adresselinje, og tryk så på mikrofonen igen.",
   "fvMicError": "Mikrofonen eller taletjenesten virker ikke lige nu. Du kan skrive i stedet.",
-  "fvNoRecipes": "Ingen opskrift passer endnu. Tilføj et par ingredienser mere."
+  "fvNoRecipes": "Ingen opskrift passer endnu. Tilføj et par ingredienser mere.",
+  "searchLabel": "Søg i opskrifter",
+  "searchPlaceholder": "Søg efter opskrifter, ingredienser, redskaber…",
+  "searchSuggestions": "Forslag",
+  "kindRecipe": "Opskrift",
+  "kindIngredient": "Ingrediens",
+  "kindUtensil": "Redskab",
+  "kindMethod": "Trin",
+  "kindLabel": "Mærkat",
+  "oneRecipe": "1 opskrift",
+  "nRecipes": "{n} opskrifter"
  },
  "names": {
   "beer": "Øl",

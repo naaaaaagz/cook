@@ -246,7 +246,17 @@ window.I18N["ro"] = {
   "fvLanguage": "Limba vorbirii",
   "fvMicBlocked": "Microfonul este blocat. Permite-l din bara de adrese a browserului, apoi atinge din nou microfonul.",
   "fvMicError": "Microfonul sau serviciul vocal nu funcționează acum. Poți scrie în schimb.",
-  "fvNoRecipes": "Încă nu se potrivește nicio rețetă. Adaugă câteva ingrediente."
+  "fvNoRecipes": "Încă nu se potrivește nicio rețetă. Adaugă câteva ingrediente.",
+  "searchLabel": "Caută rețete",
+  "searchPlaceholder": "Caută rețete, ingrediente, ustensile…",
+  "searchSuggestions": "Sugestii",
+  "kindRecipe": "Rețetă",
+  "kindIngredient": "Ingredient",
+  "kindUtensil": "Ustensilă",
+  "kindMethod": "Pas",
+  "kindLabel": "Etichetă",
+  "oneRecipe": "1 rețetă",
+  "nRecipes": "{n} rețete"
  },
  "names": {
   "beer": "Bere",

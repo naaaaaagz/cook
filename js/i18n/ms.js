@@ -246,7 +246,17 @@ window.I18N["ms"] = {
   "fvLanguage": "Bahasa pertuturan",
   "fvMicBlocked": "Mikrofon disekat. Benarkan dalam bar alamat pelayar, kemudian ketik mikrofon sekali lagi.",
   "fvMicError": "Mikrofon atau perkhidmatan suara tidak berfungsi sekarang. Anda boleh menaip.",
-  "fvNoRecipes": "Belum ada resipi yang sesuai. Tambah beberapa bahan lagi."
+  "fvNoRecipes": "Belum ada resipi yang sesuai. Tambah beberapa bahan lagi.",
+  "searchLabel": "Cari resipi",
+  "searchPlaceholder": "Cari resipi, bahan, peralatan…",
+  "searchSuggestions": "Cadangan",
+  "kindRecipe": "Resipi",
+  "kindIngredient": "Bahan",
+  "kindUtensil": "Peralatan",
+  "kindMethod": "Langkah",
+  "kindLabel": "Label",
+  "oneRecipe": "1 resipi",
+  "nRecipes": "{n} resipi"
  },
  "names": {
   "beer": "Bir",

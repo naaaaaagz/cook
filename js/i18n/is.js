@@ -246,7 +246,17 @@ window.I18N["is"] = {
   "fvLanguage": "Tungumál tals",
   "fvMicBlocked": "Hljóðneminn er lokaður. Leyfðu hann í veffangastiku vafrans og ýttu svo aftur á hljóðnemann.",
   "fvMicError": "Hljóðneminn eða talþjónustan virkar ekki núna. Þú getur skrifað í staðinn.",
-  "fvNoRecipes": "Engin uppskrift passar enn. Bættu við nokkrum hráefnum."
+  "fvNoRecipes": "Engin uppskrift passar enn. Bættu við nokkrum hráefnum.",
+  "searchLabel": "Leita að uppskriftum",
+  "searchPlaceholder": "Leitaðu að uppskriftum, hráefnum, áhöldum…",
+  "searchSuggestions": "Tillögur",
+  "kindRecipe": "Uppskrift",
+  "kindIngredient": "Hráefni",
+  "kindUtensil": "Áhald",
+  "kindMethod": "Skref",
+  "kindLabel": "Merki",
+  "oneRecipe": "1 uppskrift",
+  "nRecipes": "{n} uppskriftir"
  },
  "names": {
   "beer": "Bjór",

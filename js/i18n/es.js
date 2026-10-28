@@ -246,7 +246,17 @@ window.I18N["es"] = {
   "fvLanguage": "Idioma de la voz",
   "fvMicBlocked": "El micrófono está bloqueado. Permítelo en la barra de direcciones del navegador y vuelve a tocar el micrófono.",
   "fvMicError": "El micrófono o el servicio de voz no funcionan ahora. Puedes escribir en su lugar.",
-  "fvNoRecipes": "Todavía no encaja ninguna receta. Añade algunos ingredientes más."
+  "fvNoRecipes": "Todavía no encaja ninguna receta. Añade algunos ingredientes más.",
+  "searchLabel": "Buscar recetas",
+  "searchPlaceholder": "Busca recetas, ingredientes, utensilios…",
+  "searchSuggestions": "Sugerencias",
+  "kindRecipe": "Receta",
+  "kindIngredient": "Ingrediente",
+  "kindUtensil": "Utensilio",
+  "kindMethod": "Paso",
+  "kindLabel": "Etiqueta",
+  "oneRecipe": "1 receta",
+  "nRecipes": "{n} recetas"
  },
  "names": {
   "beer": "Cerveza",

@@ -246,7 +246,17 @@ window.I18N["nl"] = {
   "fvLanguage": "Spraaktaal",
   "fvMicBlocked": "De microfoon is geblokkeerd. Sta hem toe in de adresbalk van de browser en tik dan opnieuw op de microfoon.",
   "fvMicError": "De microfoon of de spraakdienst werkt nu niet. Je kunt ook typen.",
-  "fvNoRecipes": "Er past nog geen recept. Noem nog een paar ingrediënten."
+  "fvNoRecipes": "Er past nog geen recept. Noem nog een paar ingrediënten.",
+  "searchLabel": "Recepten zoeken",
+  "searchPlaceholder": "Zoek recepten, ingrediënten, keukengerei…",
+  "searchSuggestions": "Suggesties",
+  "kindRecipe": "Recept",
+  "kindIngredient": "Ingrediënt",
+  "kindUtensil": "Keukengerei",
+  "kindMethod": "Stap",
+  "kindLabel": "Label",
+  "oneRecipe": "1 recept",
+  "nRecipes": "{n} recepten"
  },
  "names": {
   "beer": "Bier",

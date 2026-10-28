@@ -246,7 +246,17 @@ window.I18N["cs"] = {
   "fvLanguage": "Jazyk řeči",
   "fvMicBlocked": "Mikrofon je zablokovaný. Povolte ho v adresním řádku prohlížeče a znovu klepněte na mikrofon.",
   "fvMicError": "Mikrofon nebo služba rozpoznávání řeči teď nefunguje. Můžete psát.",
-  "fvNoRecipes": "Zatím nesedí žádný recept. Přidejte ještě pár surovin."
+  "fvNoRecipes": "Zatím nesedí žádný recept. Přidejte ještě pár surovin.",
+  "searchLabel": "Hledat recepty",
+  "searchPlaceholder": "Hledejte recepty, suroviny, náčiní…",
+  "searchSuggestions": "Návrhy",
+  "kindRecipe": "Recept",
+  "kindIngredient": "Surovina",
+  "kindUtensil": "Náčiní",
+  "kindMethod": "Krok",
+  "kindLabel": "Štítek",
+  "oneRecipe": "1 recept",
+  "nRecipes": "Receptů: {n}"
  },
  "names": {
   "beer": "Pivo",

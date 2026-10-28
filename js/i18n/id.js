@@ -246,7 +246,17 @@ window.I18N["id"] = {
   "fvLanguage": "Bahasa ucapan",
   "fvMicBlocked": "Mikrofon diblokir. Izinkan di bilah alamat browser, lalu ketuk mikrofon lagi.",
   "fvMicError": "Mikrofon atau layanan suara sedang tidak berfungsi. Kamu bisa mengetik.",
-  "fvNoRecipes": "Belum ada resep yang cocok. Tambahkan beberapa bahan lagi."
+  "fvNoRecipes": "Belum ada resep yang cocok. Tambahkan beberapa bahan lagi.",
+  "searchLabel": "Cari resep",
+  "searchPlaceholder": "Cari resep, bahan, peralatan…",
+  "searchSuggestions": "Saran",
+  "kindRecipe": "Resep",
+  "kindIngredient": "Bahan",
+  "kindUtensil": "Peralatan",
+  "kindMethod": "Langkah",
+  "kindLabel": "Label",
+  "oneRecipe": "1 resep",
+  "nRecipes": "{n} resep"
  },
  "names": {
   "beer": "Bir",

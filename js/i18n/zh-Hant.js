@@ -246,7 +246,17 @@ window.I18N["zh-Hant"] = {
   "fvLanguage": "語音語言",
   "fvMicBlocked": "麥克風已被封鎖。請在瀏覽器網址列中允許，然後再輕觸麥克風。",
   "fvMicError": "麥克風或語音服務目前無法使用。你可以改為輸入。",
-  "fvNoRecipes": "還沒有合適的食譜。再新增幾樣食材吧。"
+  "fvNoRecipes": "還沒有合適的食譜。再新增幾樣食材吧。",
+  "searchLabel": "搜尋食譜",
+  "searchPlaceholder": "搜尋食譜、食材、廚具…",
+  "searchSuggestions": "建議",
+  "kindRecipe": "食譜",
+  "kindIngredient": "食材",
+  "kindUtensil": "廚具",
+  "kindMethod": "步驟",
+  "kindLabel": "標籤",
+  "oneRecipe": "1 個食譜",
+  "nRecipes": "{n} 個食譜"
  },
  "names": {
   "beer": "啤酒",

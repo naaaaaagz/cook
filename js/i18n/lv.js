@@ -246,7 +246,17 @@ window.I18N["lv"] = {
   "fvLanguage": "Runas valoda",
   "fvMicBlocked": "Mikrofons ir bloķēts. Atļauj to pārlūka adreses joslā un vēlreiz pieskaries mikrofonam.",
   "fvMicError": "Mikrofons vai runas pakalpojums pašlaik nedarbojas. Vari rakstīt.",
-  "fvNoRecipes": "Vēl neder neviena recepte. Pievieno vēl dažas sastāvdaļas."
+  "fvNoRecipes": "Vēl neder neviena recepte. Pievieno vēl dažas sastāvdaļas.",
+  "searchLabel": "Meklēt receptes",
+  "searchPlaceholder": "Meklējiet receptes, sastāvdaļas, piederumus…",
+  "searchSuggestions": "Ieteikumi",
+  "kindRecipe": "Recepte",
+  "kindIngredient": "Sastāvdaļa",
+  "kindUtensil": "Piederums",
+  "kindMethod": "Solis",
+  "kindLabel": "Birka",
+  "oneRecipe": "1 recepte",
+  "nRecipes": "Receptes: {n}"
  },
  "names": {
   "beer": "Alus",

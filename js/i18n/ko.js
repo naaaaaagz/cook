@@ -246,7 +246,17 @@ window.I18N["ko"] = {
   "fvLanguage": "말하는 언어",
   "fvMicBlocked": "마이크가 차단되었습니다. 브라우저 주소 표시줄에서 허용한 뒤 마이크를 다시 누르세요.",
   "fvMicError": "지금은 마이크나 음성 서비스가 작동하지 않습니다. 대신 입력할 수 있어요.",
-  "fvNoRecipes": "아직 맞는 레시피가 없습니다. 재료를 몇 가지 더 추가하세요."
+  "fvNoRecipes": "아직 맞는 레시피가 없습니다. 재료를 몇 가지 더 추가하세요.",
+  "searchLabel": "레시피 검색",
+  "searchPlaceholder": "레시피, 재료, 조리 도구 검색…",
+  "searchSuggestions": "추천",
+  "kindRecipe": "레시피",
+  "kindIngredient": "재료",
+  "kindUtensil": "조리 도구",
+  "kindMethod": "단계",
+  "kindLabel": "라벨",
+  "oneRecipe": "레시피 1개",
+  "nRecipes": "레시피 {n}개"
  },
  "names": {
   "beer": "맥주",

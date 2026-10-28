@@ -246,7 +246,17 @@ window.I18N["sl"] = {
   "fvLanguage": "Jezik govora",
   "fvMicBlocked": "Mikrofon je blokiran. Dovolite ga v naslovni vrstici brskalnika in znova tapnite mikrofon.",
   "fvMicError": "Mikrofon ali storitev za govor trenutno ne deluje. Lahko vpišete.",
-  "fvNoRecipes": "Noben recept še ne ustreza. Dodajte še nekaj sestavin."
+  "fvNoRecipes": "Noben recept še ne ustreza. Dodajte še nekaj sestavin.",
+  "searchLabel": "Iskanje receptov",
+  "searchPlaceholder": "Iščite recepte, sestavine, pripomočke…",
+  "searchSuggestions": "Predlogi",
+  "kindRecipe": "Recept",
+  "kindIngredient": "Sestavina",
+  "kindUtensil": "Pripomoček",
+  "kindMethod": "Korak",
+  "kindLabel": "Oznaka",
+  "oneRecipe": "1 recept",
+  "nRecipes": "Receptov: {n}"
  },
  "names": {
   "beer": "Pivo",

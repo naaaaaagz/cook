@@ -51,6 +51,16 @@
       pickRecipe: 'Pick a recipe',
       filters: 'Filters',
       noResults: 'No recipes match these filters.',
+      searchLabel: 'Search recipes',
+      searchPlaceholder: 'Search recipes, ingredients, utensils…',
+      searchSuggestions: 'Suggestions',
+      kindRecipe: 'Recipe',
+      kindIngredient: 'Ingredient',
+      kindUtensil: 'Utensil',
+      kindMethod: 'Step',
+      kindLabel: 'Label',
+      oneRecipe: '1 recipe',
+      nRecipes: '{n} recipes',
       mostPopular: 'Most popular',
       fridgeBtn: 'Tell us what you got in the fridge',
       fridgeBtnSub: '(voice recognition)',
@@ -367,6 +377,7 @@
     built: null,
     mapView: true, // map or list; map needs a saved layout
     filters: { starred: true, diet: [], cat: [], cuisine: [], voice: false }, // starred: "Most popular" filter, on by default for now
+    search: '', // text in the recipe search box
     voice: [], // ingredient keys said (or typed) in the fridge panel
     picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
     units: 'metric'
@@ -1568,6 +1579,242 @@
     window.Fridge.open();
   });
 
+  // The filters (not the search text): Most popular, diet, dish type, cuisine, "what you said".
+  function filtersOk(r) {
+    var f = state.filters;
+    return (!f.cat.length || f.cat.indexOf(r.category) >= 0) && (!f.starred || r.starred === 1) && dietOk(r, f.diet) &&
+      (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; })) &&
+      (!(f.voice && state.voice.length) || voiceOk(r));
+  }
+
+  // ---------- Recipe search ----------
+  // Finds recipes by name, ingredient, utensil, step (method) or label (dish type,
+  // cuisine, diet), in every language: the first search loads all language packs.
+  // Equipment names and step texts exist in English only (US and UK).
+  // From 3 characters on, a list of suggestions opens under the box and the
+  // recipe list narrows down as you type.
+  var SEARCH_MIN = 3;
+  var KIND_ORDER = ['recipe', 'ingredient', 'label', 'utensil', 'method'];
+  var KIND_LABEL = { recipe: 'kindRecipe', ingredient: 'kindIngredient', utensil: 'kindUtensil', method: 'kindMethod', label: 'kindLabel' };
+  var searchIndex = null; // { entries: [...], hay: { recipeId: 'all terms' } }
+  var packsLoading = false;
+  function norm(text) {
+    return String(text || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  }
+  // [code, pack] for every loaded language pack.
+  function allPacks() {
+    return LANGS.filter(function (e) { return e && e[0] !== 'en-US' && window.I18N[e[0]]; })
+      .map(function (e) { return [e[0], window.I18N[e[0]]]; });
+  }
+  // English (UK) words for an English text, as L() does for the UK pack.
+  var toUKRe = null;
+  function toUK(text) {
+    var uk = (window.I18N['en-GB'] || {}).uk;
+    if (!uk || !text) return text;
+    if (!toUKRe) {
+      toUKRe = new RegExp('\\b(' + Object.keys(uk).sort(function (a, b) { return b.length - a.length; })
+        .map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')\\b', 'gi');
+    }
+    return String(text).replace(toUKRe, function (m) {
+      var to = uk[m.toLowerCase()];
+      return m.charAt(0) === m.charAt(0).toUpperCase() ? to.charAt(0).toUpperCase() + to.slice(1) : to;
+    });
+  }
+  // Loads every language pack once (they're small), then rebuilds the index.
+  function loadAllPacks() {
+    if (packsLoading) return;
+    packsLoading = true;
+    var codes = LANGS.filter(function (e) { return e && e[0] !== 'en-US' && !window.I18N[e[0]]; }).map(function (e) { return e[0]; });
+    var left = codes.length;
+    if (!left) return;
+    codes.forEach(function (code) {
+      var sc = document.createElement('script');
+      sc.src = 'js/i18n/' + code + '.js';
+      sc.onload = sc.onerror = function () {
+        sc.remove();
+        left -= 1;
+        if (!left) { searchIndex = null; runSearch(); }
+      };
+      document.head.appendChild(sc);
+    });
+  }
+  // The builds a recipe can have: the default choices, and each other choice of each option.
+  function searchBuilds(r) {
+    var base = defaultChoices(r), out = [defaultBuild(r)];
+    r.options.forEach(function (o) {
+      o.choices.forEach(function (ch) {
+        if (ch.id === base[o.id]) return;
+        var c = Object.assign({}, base);
+        c[o.id] = ch.id;
+        try { out.push(r.build(c)); } catch (e) { /* skip a choice that can't be built */ }
+      });
+    });
+    return out;
+  }
+  function buildSearchIndex() {
+    var packs = allPacks(), byKey = {}, entries = [], hay = {};
+    // code: the language the text is in ('en' for English, US or UK).
+    function add(kind, text, r, code) {
+      var n = norm(text);
+      if (!n) return;
+      var key = kind + '|' + n + (kind === 'recipe' ? '|' + r.id : '');
+      var e = byKey[key];
+      if (!e) { e = byKey[key] = { kind: kind, text: String(text).trim(), norm: n, ids: {}, langs: {} }; entries.push(e); }
+      e.ids[r.id] = true;
+      e.langs[code] = true;
+      hay[r.id] = (hay[r.id] || '') + '\u0001' + n;
+    }
+    function addEnglish(kind, text, r) { add(kind, text, r, 'en'); add(kind, toUK(text), r, 'en'); }
+    function addKey(kind, key, english, r) {
+      add(kind, english, r, 'en');
+      packs.forEach(function (p) { if (p[1].strings && p[1].strings[key]) add(kind, p[1].strings[key], r, p[0]); });
+    }
+    window.RECIPES.forEach(function (r) {
+      addEnglish('recipe', r.name, r);
+      packs.forEach(function (p) { if (p[1].recipes && p[1].recipes[r.id]) add('recipe', p[1].recipes[r.id], r, p[0]); });
+      searchBuilds(r).forEach(function (b) {
+        b.ingredients.forEach(function (i) {
+          var key = i.key || i.id;
+          addEnglish('ingredient', i._name || i.name, r);
+          packs.forEach(function (p) { if (p[1].names && p[1].names[key]) add('ingredient', p[1].names[key], r, p[0]); });
+        });
+        b.steps.forEach(function (st) {
+          addEnglish('method', st._title || st.title, r);
+          (st.tools || []).forEach(function (id) { if (window.EQUIPMENT[id]) addEnglish('utensil', window.EQUIPMENT[id].name, r); });
+        });
+      });
+      addKey('label', 'cat_' + r.category, STRINGS.en['cat_' + r.category], r);
+      r.cuisine.forEach(function (c) { addKey('label', 'cuisine_' + c, STRINGS.en['cuisine_' + c] || c, r); });
+      var diet = dietInfo(defaultBuild(r)).label;
+      if (diet && STRINGS.en['diet_' + diet]) addKey('label', 'diet_' + diet, STRINGS.en['diet_' + diet], r);
+      if (r.starred === 1) addKey('label', 'mostPopular', STRINGS.en.mostPopular, r);
+    });
+    return { entries: entries, hay: hay };
+  }
+  function searchOk(r) {
+    var q = norm(state.search);
+    if (q.length < SEARCH_MIN) return true;
+    if (!searchIndex) searchIndex = buildSearchIndex();
+    return (searchIndex.hay[r.id] || '').indexOf(q) >= 0;
+  }
+  // Suggestions for the text: best matches first (start of the text, then start of a
+  // word, then anywhere), words in the chosen language (or English) before other
+  // languages, recipes before ingredients, labels, utensils and steps.
+  function suggestions(text) {
+    var q = norm(text);
+    if (q.length < SEARCH_MIN) return [];
+    if (!searchIndex) searchIndex = buildSearchIndex();
+    var allowed = {};
+    window.RECIPES.forEach(function (r) { if (filtersOk(r)) allowed[r.id] = true; });
+    var word = new RegExp('(^|[\\s\\-(,/])' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    var seenRecipe = {}, hits = [];
+    searchIndex.entries.forEach(function (e) {
+      var at = e.norm.indexOf(q);
+      if (at < 0) return;
+      var ids = Object.keys(e.ids).filter(function (id) { return allowed[id]; });
+      if (!ids.length) return;
+      hits.push({ e: e, ids: ids, score: at === 0 ? 0 : word.test(e.norm) ? 1 : 2, own: e.langs[lang] || (/^en/.test(lang) && e.langs.en) ? 0 : e.langs.en ? 1 : 2 });
+    });
+    hits.sort(function (a, b) {
+      return (a.score - b.score) || (a.own - b.own) || (KIND_ORDER.indexOf(a.e.kind) - KIND_ORDER.indexOf(b.e.kind)) ||
+        (a.e.text.length - b.e.text.length) || a.e.text.localeCompare(b.e.text);
+    });
+    // One line per recipe, however many of its names match.
+    return hits.filter(function (h) {
+      if (h.e.kind !== 'recipe') return true;
+      if (seenRecipe[h.ids[0]]) return false;
+      seenRecipe[h.ids[0]] = true;
+      return true;
+    }).slice(0, 8);
+  }
+  // The text with the matching part in <mark>; accents and case don't matter.
+  function markMatch(text, q) {
+    var map = [], flat = '';
+    Array.from(text).forEach(function (ch, i, chars) {
+      var n = norm(ch) || '';
+      for (var k = 0; k < n.length; k++) map.push(i);
+      flat += n;
+    });
+    var chars = Array.from(text), at = flat.indexOf(q);
+    if (at < 0 || !q) return esc(text);
+    var from = map[at], to = map[at + q.length - 1] + 1;
+    return esc(chars.slice(0, from).join('')) + '<mark>' + esc(chars.slice(from, to).join('')) + '</mark>' + esc(chars.slice(to).join(''));
+  }
+  var searchHits = [], searchActive = -1;
+  function closeSuggestions() {
+    $('search-list').hidden = true;
+    $('recipe-search').setAttribute('aria-expanded', 'false');
+    $('recipe-search').removeAttribute('aria-activedescendant');
+    searchActive = -1;
+  }
+  function showSuggestions() {
+    var input = $('recipe-search'), list = $('search-list'), q = norm(input.value);
+    searchHits = suggestions(input.value);
+    searchActive = -1;
+    input.removeAttribute('aria-activedescendant');
+    list.innerHTML = '';
+    if (!searchHits.length) { closeSuggestions(); return; }
+    searchHits.forEach(function (h, i) {
+      var li = document.createElement('li');
+      li.id = 'search-opt-' + i;
+      li.className = 'search-opt';
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-selected', 'false');
+      var r = h.e.kind === 'recipe' ? window.RECIPES.filter(function (x) { return x.id === h.ids[0]; })[0] : null;
+      var shown = r && norm(recipeName(r)) !== h.e.norm ? recipeName(r) + ' · ' : '';
+      var more = r ? '' : ' · ' + (h.ids.length === 1 ? t('oneRecipe') : t('nRecipes', { n: h.ids.length }));
+      li.innerHTML = '<span class="search-opt-text">' + markMatch(h.e.text, q) + '</span>' +
+        '<span class="search-opt-kind">' + esc(shown) + ht(KIND_LABEL[h.e.kind]) + esc(more) + '</span>';
+      // pointerdown keeps the focus in the box; the pick happens on click.
+      li.addEventListener('pointerdown', function (e) { e.preventDefault(); });
+      li.addEventListener('click', function () { pickSuggestion(i); });
+      list.appendChild(li);
+    });
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function setActive(i) {
+    var opts = $('search-list').querySelectorAll('.search-opt');
+    if (!opts.length) return;
+    searchActive = (i + opts.length) % opts.length;
+    opts.forEach(function (o, k) { o.setAttribute('aria-selected', String(k === searchActive)); });
+    opts[searchActive].scrollIntoView({ block: 'nearest' });
+    $('recipe-search').setAttribute('aria-activedescendant', opts[searchActive].id);
+  }
+  // A recipe opens; anything else becomes the search text and narrows the list.
+  function pickSuggestion(i) {
+    var h = searchHits[i];
+    if (!h) return;
+    closeSuggestions();
+    if (h.e.kind === 'recipe') {
+      var r = window.RECIPES.filter(function (x) { return x.id === h.ids[0]; })[0];
+      if (r) openDetails(r);
+      return;
+    }
+    $('recipe-search').value = h.e.text;
+    state.search = h.e.text;
+    renderRecipes();
+  }
+  function runSearch() {
+    var input = $('recipe-search');
+    if (!input) return;
+    state.search = input.value;
+    renderRecipes();
+    if (document.activeElement === input) showSuggestions();
+  }
+  $('recipe-search').addEventListener('focus', loadAllPacks);
+  $('recipe-search').addEventListener('input', function () { loadAllPacks(); runSearch(); });
+  $('recipe-search').addEventListener('keydown', function (e) {
+    var open = !$('search-list').hidden;
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (!open) showSuggestions(); else setActive(searchActive + 1); }
+    else if (e.key === 'ArrowUp') { if (open) { e.preventDefault(); setActive(searchActive - 1); } }
+    else if (e.key === 'Enter') { if (open && searchActive >= 0) { e.preventDefault(); pickSuggestion(searchActive); } else closeSuggestions(); }
+    else if (e.key === 'Escape') { if (open) { e.preventDefault(); closeSuggestions(); } }
+  });
+  // The box's own clear (×) button and Escape on an empty list empty the search.
+  $('recipe-search').addEventListener('search', runSearch);
+  $('recipe-search').addEventListener('blur', closeSuggestions);
+
   function renderRecipes() {
     var wrap = $('recipe-sections'), f = state.filters, any = false;
     wrap.innerHTML = '';
@@ -1575,9 +1822,7 @@
       if (f.cat.length && f.cat.indexOf(cat) < 0) return;
       var voice = f.voice && state.voice.length;
       var recipes = window.RECIPES.filter(function (r) {
-        return r.category === cat && (!f.starred || r.starred === 1) && dietOk(r, f.diet) &&
-          (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; })) &&
-          (!voice || voiceOk(r));
+        return r.category === cat && filtersOk(r) && searchOk(r);
       });
       // Based on what you said: the fewest extra ingredients first.
       if (voice) recipes.sort(function (a, b) {

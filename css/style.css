@@ -509,6 +509,49 @@ select {
 /* Recipe list */
 .layout-home { margin: 7px 0 16px; }
 .filters { display: grid; gap: 10px; margin: 16px 0 8px; }
+/* Recipe search: a box with a list of suggestions that opens under it */
+.search { position: relative; margin: 12px 0 4px; }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.search-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px 8px 38px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.search-input::placeholder { color: var(--muted); }
+.search-input:focus { outline: 2px solid var(--highlight); outline-offset: 1px; }
+.search-list {
+  position: absolute;
+  z-index: 15;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: min(360px, 60vh);
+  overflow-y: auto;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+.search-list[hidden] { display: none; }
+.search-opt { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 8px 10px; border-radius: 4px; cursor: pointer; }
+.search-opt:hover, .search-opt[aria-selected="true"] { background: var(--highlight-bg); }
+.search-opt-text { min-width: 0; color: var(--ink); overflow-wrap: anywhere; }
+.search-opt-text mark { background: none; color: inherit; font-weight: 700; }
+.search-opt-kind { flex: none; max-width: 50%; font-size: 13px; color: var(--muted); text-align: right; }
+@media (max-width: 480px) {
+  .search-opt { flex-direction: column; gap: 2px; }
+  .search-opt-kind { max-width: none; text-align: left; }
+}
+
 /* Filters are words separated by interpuncts; a faint line between dish types and cuisines */
 .filter-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
 .filter-row-cuisine { border-top: 1px solid var(--line); padding-top: 10px; }

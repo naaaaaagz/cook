@@ -246,7 +246,17 @@ window.I18N["ja"] = {
   "fvLanguage": "話す言語",
   "fvMicBlocked": "マイクがブロックされています。ブラウザーのアドレスバーで許可してから、もう一度マイクをタップしてください。",
   "fvMicError": "マイクまたは音声サービスが現在使えません。入力もできます。",
-  "fvNoRecipes": "まだ合うレシピがありません。食材をもう少し追加してください。"
+  "fvNoRecipes": "まだ合うレシピがありません。食材をもう少し追加してください。",
+  "searchLabel": "レシピを検索",
+  "searchPlaceholder": "レシピ、材料、調理器具を検索…",
+  "searchSuggestions": "候補",
+  "kindRecipe": "レシピ",
+  "kindIngredient": "材料",
+  "kindUtensil": "調理器具",
+  "kindMethod": "手順",
+  "kindLabel": "ラベル",
+  "oneRecipe": "1件のレシピ",
+  "nRecipes": "{n}件のレシピ"
  },
  "names": {
   "beer": "ビール",

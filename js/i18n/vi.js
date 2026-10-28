@@ -246,7 +246,17 @@ window.I18N["vi"] = {
   "fvLanguage": "Ngôn ngữ nói",
   "fvMicBlocked": "Micrô đang bị chặn. Hãy cho phép trên thanh địa chỉ của trình duyệt rồi chạm lại vào micrô.",
   "fvMicError": "Micrô hoặc dịch vụ giọng nói hiện không hoạt động. Bạn có thể nhập thay thế.",
-  "fvNoRecipes": "Chưa có công thức phù hợp. Hãy thêm vài nguyên liệu nữa."
+  "fvNoRecipes": "Chưa có công thức phù hợp. Hãy thêm vài nguyên liệu nữa.",
+  "searchLabel": "Tìm công thức",
+  "searchPlaceholder": "Tìm công thức, nguyên liệu, dụng cụ…",
+  "searchSuggestions": "Gợi ý",
+  "kindRecipe": "Công thức",
+  "kindIngredient": "Nguyên liệu",
+  "kindUtensil": "Dụng cụ",
+  "kindMethod": "Bước",
+  "kindLabel": "Nhãn",
+  "oneRecipe": "1 công thức",
+  "nRecipes": "{n} công thức"
  },
  "names": {
   "beer": "Bia",

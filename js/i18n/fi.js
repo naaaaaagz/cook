@@ -246,7 +246,17 @@ window.I18N["fi"] = {
   "fvLanguage": "Puheen kieli",
   "fvMicBlocked": "Mikrofoni on estetty. Salli se selaimen osoiterivillä ja napauta sitten mikrofonia uudelleen.",
   "fvMicError": "Mikrofoni tai puhepalvelu ei nyt toimi. Voit kirjoittaa sen sijaan.",
-  "fvNoRecipes": "Mikään resepti ei vielä sovi. Lisää muutama ainesosa."
+  "fvNoRecipes": "Mikään resepti ei vielä sovi. Lisää muutama ainesosa.",
+  "searchLabel": "Hae reseptejä",
+  "searchPlaceholder": "Hae reseptejä, aineksia, välineitä…",
+  "searchSuggestions": "Ehdotukset",
+  "kindRecipe": "Resepti",
+  "kindIngredient": "Ainesosa",
+  "kindUtensil": "Väline",
+  "kindMethod": "Vaihe",
+  "kindLabel": "Tunniste",
+  "oneRecipe": "1 resepti",
+  "nRecipes": "{n} reseptiä"
  },
  "names": {
   "beer": "Olut",

@@ -246,7 +246,17 @@ window.I18N["no"] = {
   "fvLanguage": "Talespråk",
   "fvMicBlocked": "Mikrofonen er blokkert. Tillat den i nettleserens adressefelt, og trykk på mikrofonen igjen.",
   "fvMicError": "Mikrofonen eller taletjenesten virker ikke akkurat nå. Du kan skrive i stedet.",
-  "fvNoRecipes": "Ingen oppskrift passer ennå. Legg til noen flere ingredienser."
+  "fvNoRecipes": "Ingen oppskrift passer ennå. Legg til noen flere ingredienser.",
+  "searchLabel": "Søk i oppskrifter",
+  "searchPlaceholder": "Søk etter oppskrifter, ingredienser, redskaper…",
+  "searchSuggestions": "Forslag",
+  "kindRecipe": "Oppskrift",
+  "kindIngredient": "Ingrediens",
+  "kindUtensil": "Redskap",
+  "kindMethod": "Trinn",
+  "kindLabel": "Merkelapp",
+  "oneRecipe": "1 oppskrift",
+  "nRecipes": "{n} oppskrifter"
  },
  "names": {
   "beer": "Øl",

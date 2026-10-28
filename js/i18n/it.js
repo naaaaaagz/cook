@@ -246,7 +246,17 @@ window.I18N["it"] = {
   "fvLanguage": "Lingua della voce",
   "fvMicBlocked": "Il microfono è bloccato. Consentilo nella barra degli indirizzi del browser, poi tocca di nuovo il microfono.",
   "fvMicError": "Il microfono o il servizio vocale non funzionano al momento. Puoi scrivere invece.",
-  "fvNoRecipes": "Ancora nessuna ricetta adatta. Aggiungi qualche ingrediente."
+  "fvNoRecipes": "Ancora nessuna ricetta adatta. Aggiungi qualche ingrediente.",
+  "searchLabel": "Cerca ricette",
+  "searchPlaceholder": "Cerca ricette, ingredienti, utensili…",
+  "searchSuggestions": "Suggerimenti",
+  "kindRecipe": "Ricetta",
+  "kindIngredient": "Ingrediente",
+  "kindUtensil": "Utensile",
+  "kindMethod": "Passaggio",
+  "kindLabel": "Etichetta",
+  "oneRecipe": "1 ricetta",
+  "nRecipes": "{n} ricette"
  },
  "names": {
   "beer": "Birra",

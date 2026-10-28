@@ -246,7 +246,17 @@ window.I18N["fil"] = {
   "fvLanguage": "Wika ng pagsasalita",
   "fvMicBlocked": "Naka-block ang mikropono. Payagan ito sa address bar ng browser, saka i-tap ulit ang mikropono.",
   "fvMicError": "Hindi gumagana ngayon ang mikropono o ang serbisyo ng boses. Puwede kang mag-type.",
-  "fvNoRecipes": "Wala pang tugmang recipe. Magdagdag pa ng ilang sangkap."
+  "fvNoRecipes": "Wala pang tugmang recipe. Magdagdag pa ng ilang sangkap.",
+  "searchLabel": "Maghanap ng recipe",
+  "searchPlaceholder": "Maghanap ng recipe, sangkap, kagamitan…",
+  "searchSuggestions": "Mga mungkahi",
+  "kindRecipe": "Recipe",
+  "kindIngredient": "Sangkap",
+  "kindUtensil": "Kagamitan",
+  "kindMethod": "Hakbang",
+  "kindLabel": "Label",
+  "oneRecipe": "1 recipe",
+  "nRecipes": "{n} recipe"
  },
  "names": {
   "beer": "Serbesa",
