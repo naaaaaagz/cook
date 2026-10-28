@@ -90,12 +90,15 @@ async function main() {
     writeDelay=0;assert.equal(rows.get(a.id).preferences.units,'imperial');assert.equal(rows.get(a.id).preferences.lang,'hu');
     await page.locator('#btn-layout-save').click();await page.waitForURL('**/recipes.html');
     assert(rows.get(a.id).preferences.layoutSaved);assert(rows.get(a.id).preferences.layout.countertop);
-    await page.locator('#btn-account').click();await page.locator('#account-status').filter({hasText:'are loaded'}).waitFor();
+    // The page is in Hungarian now, so account texts must be translated.
+    const tx=key=>page.evaluate(k=>window.CookI18n.t(k),key);assert.equal(await tx('accLoaded'),'A mentett konyhád és beállításaid betöltődtek.');
+    await page.locator('#btn-account').click();await page.locator('#account-status').filter({hasText:await tx('accLoaded')}).waitFor();
+    assert.equal(await page.locator('#account-save').textContent(),await tx('accSave'));
     failWrites=true;await page.locator('#account-save').click();await page.locator('#account-message[open]').waitFor();
-    assert.match(await page.locator('#account-message-title').textContent(),/not saved/);
+    assert.equal(await page.locator('#account-message-title').textContent(),await tx('accNotSavedTitle'));
     assert(await page.evaluate(()=>window.CookPreferences.read().layoutSaved));
     await page.locator('[data-close="account-message"]').click();failWrites=false;
-    await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:'settings saved'}).waitFor();
+    await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:await tx('accSaved')}).waitFor();
     await page.locator('#account-logout').click();await page.waitForURL('**/index.html');
     assert.equal(await page.evaluate(()=>window.CookPreferences.read().layoutSaved),false);
     assert.equal(await page.evaluate(()=>document.documentElement.getAttribute('data-theme')),'light');
@@ -107,15 +110,15 @@ async function main() {
     assert(rows.has(a.id)&&rows.has(b.id));assert.equal(rows.get(b.id).preferences.layoutSaved,false);
     // Cross-browser confirmation, with an actual verification response required.
     const verify=await context.newPage();await verify.goto(base+'/index.html#token_hash=good-link&type=email');
-    await verify.locator('#account-message[open]').waitFor();assert.equal(await verify.locator('#account-message-text').textContent(),'Your account has been verified!');
+    await verify.locator('#account-message[open]').waitFor();assert.equal(await verify.locator('#account-message-text').textContent(),await verify.evaluate(()=>window.CookI18n.t('accConfirmed')));
     assert.equal(new URL(verify.url()).hash,'');
     assert.equal(await verify.evaluate(()=>window.CookPreferences.read().units),'imperial');
     const invalid=await context.newPage();await invalid.goto(base+'/index.html#token_hash=expired&type=email');
-    await invalid.locator('#account-message[open]').waitFor();assert.match(await invalid.locator('#account-message-title').textContent(),/could not be verified/);
+    await invalid.locator('#account-message[open]').waitFor();assert.equal(await invalid.locator('#account-message-title').textContent(),await invalid.evaluate(()=>window.CookI18n.t('accLinkFailedTitle')));
     assert.equal(new URL(invalid.url()).hash,'');
     const recovery=await context.newPage();await recovery.goto(base+'/index.html#token_hash=good-link&type=recovery');
     await recovery.locator('#account-recovery:not([hidden])').waitFor();await recovery.locator('#account-new-password').fill('new-test-password-123');
-    await recovery.locator('#account-recovery button').click();await recovery.locator('#account-status').filter({hasText:'password has been updated'}).waitFor();
+    await recovery.locator('#account-recovery button').click();await recovery.waitForFunction(()=>document.getElementById('account-status').textContent===window.CookI18n.t('accPasswordUpdated'));
     // Browser storage snapshots/exports cannot accidentally contain auth credentials.
     const snapshot=await verify.evaluate(()=>window.CookSession.read());
     assert(!/access_token|refresh_token|password/.test(JSON.stringify(snapshot)));

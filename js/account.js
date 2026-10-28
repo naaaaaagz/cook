@@ -13,11 +13,15 @@
   var tokenHash = parameters.get('token_hash'), tokenType = parameters.get('type');
   // Strip credentials before any account network request. Never trust a success flag.
   if (tokenHash || parameters.has('access_token') || parameters.has('error')) history.replaceState(null, '', location.pathname + location.search);
-  function status(message) { $('account-status').textContent = message; }
+  // Texts are translation keys; tr() looks them up in the current language.
+  function tr(key) { return window.CookI18n ? window.CookI18n.t(key) : key; }
+  var lastStatus = null, lastMessage = null;
+  function status(key) { lastStatus = key; $('account-status').textContent = tr(key); }
   function open(id) { if (!$(id).open) $(id).showModal(); }
   function message(title, text) {
-    $('account-message-title').textContent = title;
-    $('account-message-text').textContent = text;
+    lastMessage = [title, text];
+    $('account-message-title').textContent = tr(title);
+    $('account-message-text').textContent = tr(text);
     open('account-message');
   }
   function dismissNotice() {
@@ -35,6 +39,7 @@
     $(id).addEventListener('click', function (event) { if (event.target === $(id)) $(id).close(); });
   });
   $('btn-account').addEventListener('click', function () { open('account-dialog'); });
+  var SUBMIT = { login: 'accSignIn', signup: 'accCreate', reset: 'accSendReset', resend: 'accResend' };
   function setMode(value) {
     mode = value;
     $('account-password-field').hidden = value === 'reset' || value === 'resend';
@@ -42,7 +47,7 @@
     $('account-password').minLength = value === 'signup' ? 12 : 1;
     $('account-password').autocomplete = value === 'signup' ? 'new-password' : 'current-password';
     $('account-signup-note').hidden = value !== 'signup';
-    $('account-submit').textContent = { login: 'Sign in', signup: 'Create account', reset: 'Send reset link', resend: 'Resend confirmation' }[value];
+    $('account-submit').textContent = tr(SUBMIT[value]);
     $('account-password').value = '';
   }
   document.querySelectorAll('[data-account-mode]').forEach(function (el) { el.addEventListener('click', function () { setMode(el.dataset.accountMode); }); });
@@ -50,7 +55,7 @@
     $('account-guest').hidden = !!user || recovery;
     $('account-member').hidden = !user || recovery;
     $('account-recovery').hidden = !recovery;
-    $('btn-account').textContent = user ? 'My account' : 'Account';
+    $('btn-account').textContent = tr(user ? 'accMyAccount' : 'accAccount');
     $('account-email-display').textContent = user ? user.email : '';
   }
   function validConfig() {
@@ -78,24 +83,24 @@
     sessionStorage.setItem(ownerKey, user.id);
     savedFingerprint = JSON.stringify(preferences());
     ready = true;
-    status(data ? 'Your saved kitchen and settings are loaded.' : 'Signed in. Save your kitchen and settings to back them up.');
+    status(data ? 'accLoaded' : 'accSignedInEmpty');
   }
   function savePreferences() {
     if (!user) return Promise.resolve(true);
-    if (!ready) { message('Settings not saved', 'Your account settings have not loaded yet. Open Account and sign in again before saving.'); return Promise.resolve(false); }
+    if (!ready) { message('accNotSavedTitle', 'accNotLoadedYet'); return Promise.resolve(false); }
     var snapshot = preferences(), accountId = user.id;
     // Serialise writes so a slow old request cannot overwrite a later snapshot.
     saving = saving.then(async function () {
       if (!user || user.id !== accountId) return false;
-      status('Saving settings…');
+      status('accSaving');
       try {
         check(await client.from('user_settings').upsert({ user_id: accountId, preferences: snapshot }, { onConflict: 'user_id' }));
         savedFingerprint = JSON.stringify(snapshot);
-        status('Kitchen and settings saved.');
+        status('accSaved');
         return true;
       } catch (e) {
-        status('Settings could not be saved. Your changes are still in this tab.');
-        message('Settings not saved', 'Please check your connection and try “Save kitchen and settings” in Account again.');
+        status('accSaveFailed');
+        message('accNotSavedTitle', 'accRetrySave');
         return false;
       }
     });
@@ -117,13 +122,13 @@
     var password = $('account-password').value;
     $('account-password').value = '';
     var action = mode;
-    if (action === 'signup' && !passwordOK(password)) { status('Use at least 12 characters. If your password is very long, shorten it.'); return; }
+    if (action === 'signup' && !passwordOK(password)) { status('accPasswordRule'); return; }
     busy = true; $('account-submit').disabled = true;
-    status('Please wait…');
+    status('accWait');
     try {
       if (action === 'signup') {
         check(await client.auth.signUp({ email: email, password: password, options: { emailRedirectTo: config.siteUrl } }));
-        status('If registration is available for this address, a confirmation email is on its way. Check your inbox and spam folder.');
+        status('accSignupSent');
       } else if (action === 'login') {
         var signedIn = check(await client.auth.signInWithPassword({ email: email, password: password }));
         var verified = check(await client.auth.getUser()).user;
@@ -134,27 +139,27 @@
         user = verified; draw(); await loadSettings();
       } else if (action === 'reset') {
         check(await client.auth.resetPasswordForEmail(email, { redirectTo: config.siteUrl }));
-        status('If this address has an account, a password-reset email is on its way.');
+        status('accResetSent');
       } else {
         check(await client.auth.resend({ type: 'signup', email: email, options: { emailRedirectTo: config.siteUrl } }));
-        status('If confirmation is needed for this address, an email is on its way.');
+        status('accResendSent');
       }
     } catch (e) {
-      status(action === 'login' ? 'Sign-in or loading settings failed. Check your email/password and confirm your email, then try again.' : 'The request could not be completed. Please try again later.');
-      if (user && !ready) status('Signed in, but settings could not be loaded. Sign out and try again. Nothing has been overwritten.');
+      status(action === 'login' ? 'accLoginFailed' : 'accRequestFailed');
+      if (user && !ready) status('accLoadFailed');
     } finally { password = ''; busy = false; $('account-submit').disabled = false; }
   });
   $('account-recovery').addEventListener('submit', async function (event) {
     event.preventDefault();
     var password = $('account-new-password').value;
     $('account-new-password').value = '';
-    if (!passwordOK(password)) { status('Use at least 12 characters. If your password is very long, shorten it.'); return; }
+    if (!passwordOK(password)) { status('accPasswordRule'); return; }
     if (busy) return;
     busy = true;
     try {
       check(await client.auth.updateUser({ password: password }));
-      recovery = false; draw(); await loadSettings(); status('Your password has been updated.');
-    } catch (e) { status('The password could not be updated. Request a new reset link and try again.'); }
+      recovery = false; draw(); await loadSettings(); status('accPasswordUpdated');
+    } catch (e) { status('accPasswordFailed'); }
     finally { password = ''; busy = false; }
   });
   $('account-logout').addEventListener('click', async function () {
@@ -177,9 +182,9 @@
   });
   async function start() {
     if (!validConfig()) {
-      status('Accounts are not available yet. You can keep using Cook without an account.');
+      status('accUnavailable');
       $('account-form').querySelectorAll('input,button[type="submit"]').forEach(function (el) { el.disabled = true; });
-      if (tokenHash) message('Verification unavailable', 'Account setup is not complete. Please try the email link again once registration is available.');
+      if (tokenHash) message('accVerifyUnavailableTitle', 'accVerifyUnavailable');
       return;
     }
     try {
@@ -198,10 +203,10 @@
         var oldOwner = sessionStorage.getItem(ownerKey);
         if (oldOwner && oldOwner !== confirmed.id) window.CookPreferences.reset();
         user = confirmed; recovery = tokenType === 'recovery'; draw();
-        if (recovery) { status('Choose a new password.'); open('account-dialog'); }
+        if (recovery) { status('accChooseNew'); open('account-dialog'); }
         else {
-          try { await loadSettings(); } catch (e) { status('Your email is confirmed, but settings could not be loaded. Sign out and try again.'); }
-          message('Registration confirmed', 'Your account has been verified!');
+          try { await loadSettings(); } catch (e) { status('accConfirmedLoadFailed'); }
+          message('accConfirmedTitle', 'accConfirmed');
         }
       } else {
         var session = check(await client.auth.getSession()).session;
@@ -211,21 +216,29 @@
           draw(); await loadSettings();
         } else {
           if (sessionStorage.getItem(ownerKey)) { window.CookPreferences.reset(); sessionStorage.removeItem(ownerKey); }
-          status('Sign in or create an account to save your kitchen across devices.');
+          status('accPrompt');
         }
       }
       client.auth.onAuthStateChange(function (event) {
         // Avoid SDK calls in this callback (the SDK holds its session lock).
         if (event === 'SIGNED_OUT' && user && !busy) {
           user = null; ready = false; draw(); window.CookPreferences.reset();
-          sessionStorage.removeItem(ownerKey); status('Your session ended. Please sign in again.');
+          sessionStorage.removeItem(ownerKey); status('accSessionEnded');
         }
       });
     } catch (e) {
       ready = false;
-      status('Accounts could not be loaded. Check your connection and allow tab storage, then reload.');
-      if (tokenHash) message('Link could not be verified', 'This link may have expired or already been used. Open Account to sign in or request a new email.');
+      status('accLoadError');
+      if (tokenHash) message('accLinkFailedTitle', 'accLinkFailed');
     }
   }
+  // Redraw this file's texts after a language change in app.js.
+  document.addEventListener('cook:lang', function () {
+    draw();
+    $('account-submit').textContent = tr(SUBMIT[mode]);
+    if (lastStatus) $('account-status').textContent = tr(lastStatus);
+    if (lastMessage) { $('account-message-title').textContent = tr(lastMessage[0]); $('account-message-text').textContent = tr(lastMessage[1]); }
+  });
+  draw();
   start();
 })();
