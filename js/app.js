@@ -2201,7 +2201,12 @@
   }
 
   function startCooking() {
-    if (pageScreen !== 'cook') { activeCookRecord = null; navigate('cook'); return; }
+    if (pageScreen !== 'cook') {
+      activeCookRecord = { recipe: state.recipe.id, choices: clone(state.choices),
+        steps: state.built.steps.map(function (step) { return step.id; }), done: [], started: {}, t0: null, tipsShown: [] };
+      navigate('cook');
+      return;
+    }
     var b = state.built;
     var byId = {};
     b.steps.forEach(function (s) { byId[s.id] = s; });
@@ -3123,7 +3128,7 @@
     else if (pageScreen === 'layout') openLayout(true);
     else if (pageScreen === 'cook') {
       state.built = state.recipe.build(state.choices);
-      if (!restoreCooking(activeCookRecord)) startCooking();
+      if (!restoreCooking(activeCookRecord)) navigate('details', true);
     } else show(pageScreen);
   }
   if (typeof savedSession.lang === 'string') setLang(savedSession.lang);

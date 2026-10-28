@@ -155,7 +155,7 @@ function setup() {
   var panel = document.getElementById('fridge-panel');
   var t0 = performance.now();
 
-  var code = 'en-US', speech = 'en-US', index = [], ready = null;
+  var code = 'en-US', speech = 'en-US', index = [], ready = null, opening = 0;
   var pantry = opts.keys ? opts.keys() : []; // keys carried from the recipe-list session; no audio/transcript storage
   var transcript = [], interim = '';
   var rec = null, want = false, fatal = false, silence = null, wakeLock = null, prevFinal = '';
@@ -398,7 +398,10 @@ function setup() {
 
   /* ----- controls ----- */
   $('mic').addEventListener('click', function () { if (want) { if (pantry.length) finish(); else stopListening(); } else startListening(); });
-  $('micMini').addEventListener('click', function () { ready.then(startListening); });
+  $('micMini').addEventListener('click', function () {
+    var ticket = opening;
+    ready.then(function () { if (ticket === opening && !panel.hidden) startListening(); });
+  });
   $('expand').addEventListener('click', function () { minimize(false); });
   $('close').addEventListener('click', function () { api.close(); });
   function addTyped() {
@@ -426,15 +429,19 @@ function setup() {
   ready = resolveLang();
   var api = {
     open: function () {
+      var ticket = ++opening;
       panel.hidden = false; minimize(false);
       renderChips(); renderTranscript();
       if (!SR) { problem(t('fvNoSR')); $('mic').disabled = true; $('micMini').disabled = true; setState(t('fvNoSRShort'), false); return; }
       if (!window.isSecureContext) { problem(t('fvMicBlocked')); }
       setState(t('fvStarting'), true);
-      ready.then(function (ok) { if (ok !== false) startListening(); else stopUI(); });
+      ready.then(function (ok) {
+        if (ticket !== opening || panel.hidden) return;
+        if (ok !== false) startListening(); else stopUI();
+      });
     },
-    stop: function () { if (want) stopListening(); },
-    close: function () { stopListening(); panel.hidden = true; opts.onClose(); },
+    stop: function () { opening++; if (want) stopListening(); },
+    close: function () { opening++; stopListening(); panel.hidden = true; opts.onClose(); },
     redraw: function () { renderChips(); renderTranscript(); if (!want) stopUI(); else setState(t('fvListening'), true); }
   };
   return api;

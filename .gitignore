@@ -24,8 +24,12 @@
 /food stock photos.txt
 /Recipes - text - review.txt
 
-# Image conversion helper (run locally, not part of the site)
-/tools/
+# Local tools stay private, except the source needed to maintain the shipped pages.
+/tools/*
+!/tools/build-pages.cjs
+!/tools/page-template.html
+!/tools/pages-tests.cjs
+!/tools/PAGES.md
 /convert_images.bat
 /convert_ready_images.bat
 
