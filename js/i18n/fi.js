@@ -256,7 +256,10 @@ window.I18N["fi"] = {
   "kindMethod": "Vaihe",
   "kindLabel": "Tunniste",
   "oneRecipe": "1 resepti",
-  "nRecipes": "{n} reseptiä"
+  "nRecipes": "{n} reseptiä",
+  "method_airfryer": "Airfryer",
+  "method_slowcooker": "Haudutuspata",
+  "method_nocook": "Ei kypsennystä"
  },
  "names": {
   "beer": "Olut",

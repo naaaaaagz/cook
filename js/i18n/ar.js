@@ -256,7 +256,10 @@ window.I18N["ar"] = {
   "kindMethod": "خطوة",
   "kindLabel": "تصنيف",
   "oneRecipe": "وصفة واحدة",
-  "nRecipes": "{n} وصفات"
+  "nRecipes": "{n} وصفات",
+  "method_airfryer": "مقلاة هوائية",
+  "method_slowcooker": "قدر طهي بطيء",
+  "method_nocook": "بدون طهي"
  },
  "names": {
   "beer": "بيرة",

@@ -256,7 +256,10 @@ window.I18N["de"] = {
   "kindMethod": "Schritt",
   "kindLabel": "Kategorie",
   "oneRecipe": "1 Rezept",
-  "nRecipes": "{n} Rezepte"
+  "nRecipes": "{n} Rezepte",
+  "method_airfryer": "Heißluftfritteuse",
+  "method_slowcooker": "Schongarer",
+  "method_nocook": "Ohne Kochen"
  },
  "names": {
   "beer": "Bier",

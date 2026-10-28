@@ -256,7 +256,10 @@ window.I18N["sr"] = {
   "kindMethod": "Korak",
   "kindLabel": "Oznaka",
   "oneRecipe": "1 recept",
-  "nRecipes": "Recepata: {n}"
+  "nRecipes": "Recepata: {n}",
+  "method_airfryer": "Friteza na vrući vazduh",
+  "method_slowcooker": "Lonac za sporo kuvanje",
+  "method_nocook": "Bez kuvanja"
  },
  "names": {
   "beer": "Pivo",

@@ -256,7 +256,10 @@ window.I18N["he"] = {
   "kindMethod": "שלב",
   "kindLabel": "תווית",
   "oneRecipe": "מתכון אחד",
-  "nRecipes": "{n} מתכונים"
+  "nRecipes": "{n} מתכונים",
+  "method_airfryer": "סיר טיגון באוויר",
+  "method_slowcooker": "סיר בישול איטי",
+  "method_nocook": "ללא בישול"
  },
  "names": {
   "beer": "בירה",

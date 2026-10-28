@@ -256,7 +256,10 @@ window.I18N["ja"] = {
   "kindMethod": "手順",
   "kindLabel": "ラベル",
   "oneRecipe": "1件のレシピ",
-  "nRecipes": "{n}件のレシピ"
+  "nRecipes": "{n}件のレシピ",
+  "method_airfryer": "エアフライヤー",
+  "method_slowcooker": "スロークッカー",
+  "method_nocook": "加熱なし"
  },
  "names": {
   "beer": "ビール",

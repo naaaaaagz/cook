@@ -256,7 +256,10 @@ window.I18N["vi"] = {
   "kindMethod": "Bước",
   "kindLabel": "Nhãn",
   "oneRecipe": "1 công thức",
-  "nRecipes": "{n} công thức"
+  "nRecipes": "{n} công thức",
+  "method_airfryer": "Nồi chiên không dầu",
+  "method_slowcooker": "Nồi nấu chậm",
+  "method_nocook": "Không cần nấu"
  },
  "names": {
   "beer": "Bia",

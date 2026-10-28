@@ -256,7 +256,10 @@ window.I18N["da"] = {
   "kindMethod": "Trin",
   "kindLabel": "Mærkat",
   "oneRecipe": "1 opskrift",
-  "nRecipes": "{n} opskrifter"
+  "nRecipes": "{n} opskrifter",
+  "method_airfryer": "Airfryer",
+  "method_slowcooker": "Slow cooker",
+  "method_nocook": "Uden tilberedning"
  },
  "names": {
   "beer": "Øl",

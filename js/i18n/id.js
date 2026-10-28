@@ -256,7 +256,10 @@ window.I18N["id"] = {
   "kindMethod": "Langkah",
   "kindLabel": "Label",
   "oneRecipe": "1 resep",
-  "nRecipes": "{n} resep"
+  "nRecipes": "{n} resep",
+  "method_airfryer": "Air fryer",
+  "method_slowcooker": "Slow cooker",
+  "method_nocook": "Tanpa masak"
  },
  "names": {
   "beer": "Bir",

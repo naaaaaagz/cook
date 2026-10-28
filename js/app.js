@@ -95,6 +95,9 @@
       cat_breakfast: 'Breakfast',
       cat_salad: 'Salad',
       cat_dip: 'Dips & sauces',
+      method_airfryer: 'Air fryer',
+      method_slowcooker: 'Slow cooker',
+      method_nocook: 'No-cook',
       readInstead: 'Read instead',
       toggleTheme: 'Switch light / dark',
       min: 'min',
@@ -376,7 +379,7 @@
     choices: null,
     built: null,
     mapView: true, // map or list; map needs a saved layout
-    filters: { starred: true, diet: [], cat: [], cuisine: [], voice: false }, // starred: "Most popular" filter, on by default for now
+    filters: { starred: true, diet: [], cat: [], cuisine: [], method: [], voice: false }, // starred: "Most popular" filter, on by default for now
     search: '', // text in the recipe search box
     voice: [], // ingredient keys said (or typed) in the fridge panel
     picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
@@ -1390,6 +1393,21 @@
   ];
   // Diet filters: Vegetarian also lists the vegan recipes (judged with the default options).
   var DIETS = ['veg', 'vegan'];
+  // Cooking-method filters (judged with the default options):
+  // Air fryer / Slow cooker: that appliance is the only heat (no stovetop, no oven).
+  // No-cook: no stovetop, oven or heating appliance at all.
+  var METHODS = ['airfryer', 'slowcooker', 'nocook'];
+  var HEAT_TOOLS = ['slow_cooker', 'air_fryer', 'waffle_iron', 'panini_press', 'microwave'];
+  function methodOf(r, m) {
+    var steps = defaultBuild(r).steps;
+    var areas = steps.map(function (s) { return s.area; });
+    var tools = [].concat.apply([], steps.map(function (s) { return s.tools || []; }));
+    var stoveOrOven = areas.indexOf('stove') >= 0 || areas.indexOf('oven') >= 0;
+    if (m === 'airfryer') return tools.indexOf('air_fryer') >= 0 && !stoveOrOven;
+    if (m === 'slowcooker') return tools.indexOf('slow_cooker') >= 0 && !stoveOrOven;
+    return !stoveOrOven && !tools.some(function (t) { return HEAT_TOOLS.indexOf(t) >= 0; });
+  }
+  function methodOk(r, list) { return !list.length || list.some(function (m) { return methodOf(r, m); }); }
   var VEGETARIAN = ['vegan', 'veg', 'lacto', 'ovo', 'lactoOvo'];
   function defaultBuild(r) { return defaultBuilds[r.id] || (defaultBuilds[r.id] = r.build(defaultChoices(r))); }
   function dietOk(r, diets) {
@@ -1414,7 +1432,7 @@
     var box = $('filters');
     box.innerHTML = '';
     var rows = {};
-    ['diet', 'cat', 'cuisine'].forEach(function (g) {
+    ['diet', 'cat', 'cuisine', 'method'].forEach(function (g) {
       rows[g] = document.createElement('div');
       rows[g].className = 'filter-row filter-row-' + g;
       box.appendChild(rows[g]);
@@ -1462,6 +1480,7 @@
       g[1].forEach(function (c, j) { if (j) text('cuisine', '\u00b7'); word('cuisine', c, t('cuisine_' + c)); });
       text('cuisine', ')', 'filter-close');
     });
+    METHODS.forEach(function (m, i) { if (i) text('method', '·'); word('method', m, t('method_' + m)); });
     // "Based on what you said": appears once something was said in the fridge panel.
     if (state.voice.length) {
       var row = document.createElement('div');
@@ -1583,7 +1602,7 @@
   function filtersOk(r) {
     var f = state.filters;
     return (!f.cat.length || f.cat.indexOf(r.category) >= 0) && (!f.starred || r.starred === 1) && dietOk(r, f.diet) &&
-      (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; })) &&
+      (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; })) && methodOk(r, f.method) &&
       (!(f.voice && state.voice.length) || voiceOk(r));
   }
 
@@ -1591,7 +1610,7 @@
   // Finds recipes by name, ingredient, utensil, step (method) or label (dish type,
   // cuisine, diet), in every language: the first search loads all language packs.
   // Equipment names and step texts exist in English only (US and UK).
-  // From 3 characters on, a list of suggestions opens under the box and the
+  // From 3 characters on, a list of matching recipes opens under the box and the
   // recipe list narrows down as you type.
   var SEARCH_MIN = 3;
   var KIND_ORDER = ['recipe', 'ingredient', 'label', 'utensil', 'method'];
@@ -1688,6 +1707,7 @@
       var diet = dietInfo(defaultBuild(r)).label;
       if (diet && STRINGS.en['diet_' + diet]) addKey('label', 'diet_' + diet, STRINGS.en['diet_' + diet], r);
       if (r.starred === 1) addKey('label', 'mostPopular', STRINGS.en.mostPopular, r);
+      METHODS.forEach(function (m) { if (methodOf(r, m)) addKey('label', 'method_' + m, STRINGS.en['method_' + m], r); });
     });
     return { entries: entries, hay: hay };
   }
@@ -1719,13 +1739,16 @@
       return (a.score - b.score) || (a.own - b.own) || (KIND_ORDER.indexOf(a.e.kind) - KIND_ORDER.indexOf(b.e.kind)) ||
         (a.e.text.length - b.e.text.length) || a.e.text.localeCompare(b.e.text);
     });
-    // One line per recipe, however many of its names match.
-    return hits.filter(function (h) {
-      if (h.e.kind !== 'recipe') return true;
-      if (seenRecipe[h.ids[0]]) return false;
-      seenRecipe[h.ids[0]] = true;
-      return true;
-    }).slice(0, 8);
+    // Only recipes are listed: each one once, with its best matching word.
+    var out = [];
+    hits.forEach(function (h) {
+      h.ids.forEach(function (id) {
+        if (seenRecipe[id]) return;
+        seenRecipe[id] = true;
+        out.push({ r: window.RECIPES.filter(function (x) { return x.id === id; })[0], e: h.e });
+      });
+    });
+    return out.slice(0, 8);
   }
   // The text with the matching part in <mark>; accents and case don't matter.
   function markMatch(text, q) {
@@ -1760,11 +1783,14 @@
       li.className = 'search-opt';
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', 'false');
-      var r = h.e.kind === 'recipe' ? window.RECIPES.filter(function (x) { return x.id === h.ids[0]; })[0] : null;
-      var shown = r && norm(recipeName(r)) !== h.e.norm ? recipeName(r) + ' · ' : '';
-      var more = r ? '' : ' · ' + (h.ids.length === 1 ? t('oneRecipe') : t('nRecipes', { n: h.ids.length }));
-      li.innerHTML = '<span class="search-opt-text">' + markMatch(h.e.text, q) + '</span>' +
-        '<span class="search-opt-kind">' + esc(shown) + ht(KIND_LABEL[h.e.kind]) + esc(more) + '</span>';
+      // The recipe's name; beside it, what matched when it isn't the name itself
+      // (its name in another language, an ingredient, a utensil, a step or a label).
+      var name = recipeName(h.r), why = '';
+      if (norm(name).indexOf(q) < 0) {
+        why = h.e.kind === 'recipe' ? markMatch(h.e.text, q) : ht(KIND_LABEL[h.e.kind]) + ': ' + markMatch(h.e.text, q);
+      }
+      li.innerHTML = '<span class="search-opt-text">' + markMatch(name, q) + '</span>' +
+        (why ? '<span class="search-opt-kind">' + why + '</span>' : '');
       // pointerdown keeps the focus in the box; the pick happens on click.
       li.addEventListener('pointerdown', function (e) { e.preventDefault(); });
       li.addEventListener('click', function () { pickSuggestion(i); });
@@ -1781,19 +1807,12 @@
     opts[searchActive].scrollIntoView({ block: 'nearest' });
     $('recipe-search').setAttribute('aria-activedescendant', opts[searchActive].id);
   }
-  // A recipe opens; anything else becomes the search text and narrows the list.
+  // Picking a suggestion opens that recipe.
   function pickSuggestion(i) {
     var h = searchHits[i];
     if (!h) return;
     closeSuggestions();
-    if (h.e.kind === 'recipe') {
-      var r = window.RECIPES.filter(function (x) { return x.id === h.ids[0]; })[0];
-      if (r) openDetails(r);
-      return;
-    }
-    $('recipe-search').value = h.e.text;
-    state.search = h.e.text;
-    renderRecipes();
+    if (h.r) openDetails(h.r);
   }
   function runSearch() {
     var input = $('recipe-search');

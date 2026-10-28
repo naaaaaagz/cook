@@ -256,7 +256,10 @@ window.I18N["sq"] = {
   "kindMethod": "Hap",
   "kindLabel": "Etiketë",
   "oneRecipe": "1 recetë",
-  "nRecipes": "{n} receta"
+  "nRecipes": "{n} receta",
+  "method_airfryer": "Fritezë me ajër",
+  "method_slowcooker": "Tenxhere me gatim të ngadaltë",
+  "method_nocook": "Pa gatim"
  },
  "names": {
   "beer": "Birrë",

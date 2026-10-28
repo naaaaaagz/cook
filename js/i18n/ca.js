@@ -256,7 +256,10 @@ window.I18N["ca"] = {
   "kindMethod": "Pas",
   "kindLabel": "Etiqueta",
   "oneRecipe": "1 recepta",
-  "nRecipes": "{n} receptes"
+  "nRecipes": "{n} receptes",
+  "method_airfryer": "Fregidora d’aire",
+  "method_slowcooker": "Olla de cocció lenta",
+  "method_nocook": "Sense cocció"
  },
  "names": {
   "beer": "Cervesa",

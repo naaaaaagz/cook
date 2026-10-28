@@ -256,7 +256,10 @@ window.I18N["ru"] = {
   "kindMethod": "Шаг",
   "kindLabel": "Метка",
   "oneRecipe": "1 рецепт",
-  "nRecipes": "Рецептов: {n}"
+  "nRecipes": "Рецептов: {n}",
+  "method_airfryer": "Аэрогриль",
+  "method_slowcooker": "Медленноварка",
+  "method_nocook": "Без готовки"
  },
  "names": {
   "beer": "Пиво",

@@ -256,7 +256,10 @@ window.I18N["ko"] = {
   "kindMethod": "단계",
   "kindLabel": "라벨",
   "oneRecipe": "레시피 1개",
-  "nRecipes": "레시피 {n}개"
+  "nRecipes": "레시피 {n}개",
+  "method_airfryer": "에어프라이어",
+  "method_slowcooker": "슬로쿠커",
+  "method_nocook": "불 없이"
  },
  "names": {
   "beer": "맥주",

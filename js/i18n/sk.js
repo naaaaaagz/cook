@@ -256,7 +256,10 @@ window.I18N["sk"] = {
   "kindMethod": "Krok",
   "kindLabel": "Štítok",
   "oneRecipe": "1 recept",
-  "nRecipes": "Receptov: {n}"
+  "nRecipes": "Receptov: {n}",
+  "method_airfryer": "Teplovzdušná fritéza",
+  "method_slowcooker": "Pomalý hrniec",
+  "method_nocook": "Bez varenia"
  },
  "names": {
   "beer": "Pivo",

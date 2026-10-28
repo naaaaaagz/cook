@@ -256,7 +256,10 @@ window.I18N["is"] = {
   "kindMethod": "Skref",
   "kindLabel": "Merki",
   "oneRecipe": "1 uppskrift",
-  "nRecipes": "{n} uppskriftir"
+  "nRecipes": "{n} uppskriftir",
+  "method_airfryer": "Loftsteikingarpottur",
+  "method_slowcooker": "Hægeldunarpottur",
+  "method_nocook": "Án eldunar"
  },
  "names": {
   "beer": "Bjór",

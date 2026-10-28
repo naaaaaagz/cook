@@ -256,7 +256,10 @@ window.I18N["no"] = {
   "kindMethod": "Trinn",
   "kindLabel": "Merkelapp",
   "oneRecipe": "1 oppskrift",
-  "nRecipes": "{n} oppskrifter"
+  "nRecipes": "{n} oppskrifter",
+  "method_airfryer": "Airfryer",
+  "method_slowcooker": "Slow cooker",
+  "method_nocook": "Uten varmebehandling"
  },
  "names": {
   "beer": "Øl",

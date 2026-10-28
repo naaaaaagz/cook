@@ -256,7 +256,10 @@ window.I18N["lv"] = {
   "kindMethod": "Solis",
   "kindLabel": "Birka",
   "oneRecipe": "1 recepte",
-  "nRecipes": "Receptes: {n}"
+  "nRecipes": "Receptes: {n}",
+  "method_airfryer": "Karstā gaisa friteris",
+  "method_slowcooker": "Lēnās gatavošanas katls",
+  "method_nocook": "Bez gatavošanas"
  },
  "names": {
   "beer": "Alus",

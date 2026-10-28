@@ -256,7 +256,10 @@ window.I18N["sv"] = {
   "kindMethod": "Steg",
   "kindLabel": "Etikett",
   "oneRecipe": "1 recept",
-  "nRecipes": "{n} recept"
+  "nRecipes": "{n} recept",
+  "method_airfryer": "Airfryer",
+  "method_slowcooker": "Slow cooker",
+  "method_nocook": "Ingen tillagning"
  },
  "names": {
   "beer": "Öl",

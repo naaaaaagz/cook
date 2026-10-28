@@ -256,7 +256,10 @@ window.I18N["zh-Hans"] = {
   "kindMethod": "步骤",
   "kindLabel": "标签",
   "oneRecipe": "1 个食谱",
-  "nRecipes": "{n} 个食谱"
+  "nRecipes": "{n} 个食谱",
+  "method_airfryer": "空气炸锅",
+  "method_slowcooker": "慢炖锅",
+  "method_nocook": "免烹饪"
  },
  "names": {
   "beer": "啤酒",

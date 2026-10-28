@@ -256,7 +256,10 @@ window.I18N["tr"] = {
   "kindMethod": "Adım",
   "kindLabel": "Etiket",
   "oneRecipe": "1 tarif",
-  "nRecipes": "{n} tarif"
+  "nRecipes": "{n} tarif",
+  "method_airfryer": "Hava fritözü",
+  "method_slowcooker": "Yavaş pişirici",
+  "method_nocook": "Pişirmesiz"
  },
  "names": {
   "beer": "Bira",

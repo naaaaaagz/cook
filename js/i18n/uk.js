@@ -256,7 +256,10 @@ window.I18N["uk"] = {
   "kindMethod": "Крок",
   "kindLabel": "Мітка",
   "oneRecipe": "1 рецепт",
-  "nRecipes": "Рецептів: {n}"
+  "nRecipes": "Рецептів: {n}",
+  "method_airfryer": "Аерофритюрниця",
+  "method_slowcooker": "Повільноварка",
+  "method_nocook": "Без приготування"
  },
  "names": {
   "beer": "Пиво",

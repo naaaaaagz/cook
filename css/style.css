@@ -545,7 +545,7 @@ select {
 .search-opt { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 8px 10px; border-radius: 4px; cursor: pointer; }
 .search-opt:hover, .search-opt[aria-selected="true"] { background: var(--highlight-bg); }
 .search-opt-text { min-width: 0; color: var(--ink); overflow-wrap: anywhere; }
-.search-opt-text mark { background: none; color: inherit; font-weight: 700; }
+.search-opt mark { background: none; color: inherit; font-weight: 700; }
 .search-opt-kind { flex: none; max-width: 50%; font-size: 13px; color: var(--muted); text-align: right; }
 @media (max-width: 480px) {
   .search-opt { flex-direction: column; gap: 2px; }
@@ -554,7 +554,7 @@ select {
 
 /* Filters are words separated by interpuncts; a faint line between dish types and cuisines */
 .filter-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
-.filter-row-cuisine { border-top: 1px solid var(--line); padding-top: 10px; }
+.filter-row-cuisine, .filter-row-method { border-top: 1px solid var(--line); padding-top: 10px; }
 .filter-sep { color: var(--muted); }
 .filter-open { margin-right: -7px; }
 .filter-close { margin-left: -7px; }

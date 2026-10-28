@@ -256,7 +256,10 @@ window.I18N["et"] = {
   "kindMethod": "Samm",
   "kindLabel": "Silt",
   "oneRecipe": "1 retsept",
-  "nRecipes": "{n} retsepti"
+  "nRecipes": "{n} retsepti",
+  "method_airfryer": "Kuumaõhufritüür",
+  "method_slowcooker": "Aeglane pott",
+  "method_nocook": "Ilma kuumutamiseta"
  },
  "names": {
   "beer": "Õlu",

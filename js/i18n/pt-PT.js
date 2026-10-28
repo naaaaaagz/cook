@@ -256,7 +256,10 @@ window.I18N["pt-PT"] = {
   "kindMethod": "Passo",
   "kindLabel": "Etiqueta",
   "oneRecipe": "1 receita",
-  "nRecipes": "{n} receitas"
+  "nRecipes": "{n} receitas",
+  "method_airfryer": "Fritadeira de ar",
+  "method_slowcooker": "Panela de cozedura lenta",
+  "method_nocook": "Sem cozedura"
  },
  "names": {
   "beer": "Cerveja",

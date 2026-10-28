@@ -256,7 +256,10 @@ window.I18N["pl"] = {
   "kindMethod": "Krok",
   "kindLabel": "Etykieta",
   "oneRecipe": "1 przepis",
-  "nRecipes": "Przepisy: {n}"
+  "nRecipes": "Przepisy: {n}",
+  "method_airfryer": "Frytkownica beztłuszczowa",
+  "method_slowcooker": "Wolnowar",
+  "method_nocook": "Bez gotowania"
  },
  "names": {
   "beer": "Piwo",

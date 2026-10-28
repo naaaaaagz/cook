@@ -256,7 +256,10 @@ window.I18N["zh-Hant"] = {
   "kindMethod": "步驟",
   "kindLabel": "標籤",
   "oneRecipe": "1 個食譜",
-  "nRecipes": "{n} 個食譜"
+  "nRecipes": "{n} 個食譜",
+  "method_airfryer": "氣炸鍋",
+  "method_slowcooker": "慢燉鍋",
+  "method_nocook": "免烹調"
  },
  "names": {
   "beer": "啤酒",

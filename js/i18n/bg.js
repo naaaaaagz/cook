@@ -256,7 +256,10 @@ window.I18N["bg"] = {
   "kindMethod": "Стъпка",
   "kindLabel": "Етикет",
   "oneRecipe": "1 рецепта",
-  "nRecipes": "{n} рецепти"
+  "nRecipes": "{n} рецепти",
+  "method_airfryer": "Еърфрайър",
+  "method_slowcooker": "Бавноготвещ уред",
+  "method_nocook": "Без готвене"
  },
  "names": {
   "beer": "Бира",

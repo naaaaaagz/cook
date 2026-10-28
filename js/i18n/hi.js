@@ -256,7 +256,10 @@ window.I18N["hi"] = {
   "kindMethod": "चरण",
   "kindLabel": "लेबल",
   "oneRecipe": "1 रेसिपी",
-  "nRecipes": "{n} रेसिपी"
+  "nRecipes": "{n} रेसिपी",
+  "method_airfryer": "एयर फ्रायर",
+  "method_slowcooker": "स्लो कुकर",
+  "method_nocook": "बिना पकाए"
  },
  "names": {
   "beer": "बीयर",

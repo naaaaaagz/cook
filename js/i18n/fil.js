@@ -256,7 +256,10 @@ window.I18N["fil"] = {
   "kindMethod": "Hakbang",
   "kindLabel": "Label",
   "oneRecipe": "1 recipe",
-  "nRecipes": "{n} recipe"
+  "nRecipes": "{n} recipe",
+  "method_airfryer": "Air fryer",
+  "method_slowcooker": "Slow cooker",
+  "method_nocook": "Walang lutuan"
  },
  "names": {
   "beer": "Serbesa",

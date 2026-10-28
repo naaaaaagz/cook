@@ -256,7 +256,10 @@ window.I18N["ro"] = {
   "kindMethod": "Pas",
   "kindLabel": "Etichetă",
   "oneRecipe": "1 rețetă",
-  "nRecipes": "{n} rețete"
+  "nRecipes": "{n} rețete",
+  "method_airfryer": "Friteuză cu aer",
+  "method_slowcooker": "Slow cooker",
+  "method_nocook": "Fără gătit"
  },
  "names": {
   "beer": "Bere",

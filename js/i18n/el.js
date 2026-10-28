@@ -256,7 +256,10 @@ window.I18N["el"] = {
   "kindMethod": "Βήμα",
   "kindLabel": "Ετικέτα",
   "oneRecipe": "1 συνταγή",
-  "nRecipes": "{n} συνταγές"
+  "nRecipes": "{n} συνταγές",
+  "method_airfryer": "Φριτέζα αέρος",
+  "method_slowcooker": "Γάστρα αργού μαγειρέματος",
+  "method_nocook": "Χωρίς μαγείρεμα"
  },
  "names": {
   "beer": "Μπίρα",

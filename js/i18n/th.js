@@ -256,7 +256,10 @@ window.I18N["th"] = {
   "kindMethod": "ขั้นตอน",
   "kindLabel": "ป้ายกำกับ",
   "oneRecipe": "1 สูตร",
-  "nRecipes": "{n} สูตร"
+  "nRecipes": "{n} สูตร",
+  "method_airfryer": "หม้อทอดไร้น้ำมัน",
+  "method_slowcooker": "หม้อตุ๋นไฟฟ้า",
+  "method_nocook": "ไม่ต้องปรุงด้วยความร้อน"
  },
  "names": {
   "beer": "เบียร์",

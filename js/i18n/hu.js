@@ -256,7 +256,10 @@ window.I18N["hu"] = {
   "kindMethod": "Lépés",
   "kindLabel": "Címke",
   "oneRecipe": "1 recept",
-  "nRecipes": "{n} recept"
+  "nRecipes": "{n} recept",
+  "method_airfryer": "Légsütő",
+  "method_slowcooker": "Lassúfőző",
+  "method_nocook": "Főzés nélkül"
  },
  "names": {
   "beer": "Sör",

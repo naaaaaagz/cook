@@ -256,7 +256,10 @@ window.I18N["hy"] = {
   "kindMethod": "Քայլ",
   "kindLabel": "Պիտակ",
   "oneRecipe": "1 բաղադրատոմս",
-  "nRecipes": "{n} բաղադրատոմս"
+  "nRecipes": "{n} բաղադրատոմս",
+  "method_airfryer": "Օդային տապակիչ",
+  "method_slowcooker": "Դանդաղ եփող",
+  "method_nocook": "Առանց եփելու"
  },
  "names": {
   "beer": "Գարեջուր",

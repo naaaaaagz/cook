@@ -256,7 +256,10 @@ window.I18N["nl"] = {
   "kindMethod": "Stap",
   "kindLabel": "Label",
   "oneRecipe": "1 recept",
-  "nRecipes": "{n} recepten"
+  "nRecipes": "{n} recepten",
+  "method_airfryer": "Airfryer",
+  "method_slowcooker": "Slowcooker",
+  "method_nocook": "Zonder koken"
  },
  "names": {
   "beer": "Bier",

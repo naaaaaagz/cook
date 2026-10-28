@@ -256,7 +256,10 @@ window.I18N["ka"] = {
   "kindMethod": "ნაბიჯი",
   "kindLabel": "იარლიყი",
   "oneRecipe": "1 რეცეპტი",
-  "nRecipes": "{n} რეცეპტი"
+  "nRecipes": "{n} რეცეპტი",
+  "method_airfryer": "აეროგრილი",
+  "method_slowcooker": "ნელი მოსახარში",
+  "method_nocook": "მოხარშვის გარეშე"
  },
  "names": {
   "beer": "ლუდი",

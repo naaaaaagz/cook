@@ -256,7 +256,10 @@ window.I18N["lt"] = {
   "kindMethod": "Žingsnis",
   "kindLabel": "Žyma",
   "oneRecipe": "1 receptas",
-  "nRecipes": "Receptų: {n}"
+  "nRecipes": "Receptų: {n}",
+  "method_airfryer": "Karšto oro gruzdintuvė",
+  "method_slowcooker": "Lėtpuodis",
+  "method_nocook": "Be gaminimo"
  },
  "names": {
   "beer": "Alus",
