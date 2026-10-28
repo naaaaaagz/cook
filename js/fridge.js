@@ -7,7 +7,8 @@
    1.5 s at most), else the browser's language, else English (US). The
    language picker and the browser checks only show up when something is wrong.
    Spoken words per language come from js/voice/<lang>.js, loaded on demand.
-   Nothing is stored on the device. */
+   The app carries ingredient keys between pages in tab session storage;
+   this panel does not store audio or speech transcripts. */
 (function () {
 'use strict';
 
@@ -155,7 +156,7 @@ function setup() {
   var t0 = performance.now();
 
   var code = 'en-US', speech = 'en-US', index = [], ready = null;
-  var pantry = [];                       // ingredient keys, in the order they were said
+  var pantry = opts.keys ? opts.keys() : []; // keys carried from the recipe-list session; no audio/transcript storage
   var transcript = [], interim = '';
   var rec = null, want = false, fatal = false, silence = null, wakeLock = null, prevFinal = '';
   var sessionHit = false, quickEnds = 0, lastStart = 0;

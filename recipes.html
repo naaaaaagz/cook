@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://api.country.is; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cook</title>
+<link rel="preload" href="fonts/Fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/DMSans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/fridge.css">
+</head>
+<body data-page="recipes">
+
+<button id="btn-options" class="btn-options" type="button" aria-haspopup="dialog" data-i18n-label="options">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 6h.01M8.5 6H20M4 12h.01M8.5 12H20M4 18h.01M8.5 18H20"/></svg>
+</button>
+
+<dialog id="options-dialog" class="dialog" aria-labelledby="options-title">
+  <form method="dialog">
+    <h2 id="options-title" data-i18n="options">Options</h2>
+    <fieldset class="choices">
+      <legend data-i18n="theme">Theme</legend>
+      <div class="segmented">
+        <label class="seg" title="Light"><input type="radio" name="theme" value="light" checked><span class="sr-only" data-i18n="themeLight">Light</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></label>
+        <label class="seg" title="Dark"><input type="radio" name="theme" value="dark"><span class="sr-only" data-i18n="themeDark">Dark</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></label>
+        <label class="seg seg-text"><input type="radio" name="theme" value="system"><span data-i18n="themeSystem">System</span></label>
+      </div>
+    </fieldset>
+    <fieldset class="choices">
+      <legend data-i18n="units">Units</legend>
+      <div class="choices-row">
+        <label class="choice"><input type="radio" name="units" value="metric" checked> <span data-i18n="metric">Metric</span></label>
+        <label class="choice"><input type="radio" name="units" value="imperial"> <span data-i18n="imperial">Imperial</span></label>
+      </div>
+    </fieldset>
+    <label class="field field-inline">
+      <span class="field-label" data-i18n="language">Language</span>
+      <select id="lang-select">
+        <option value="en">English (EN)</option>
+      </select>
+    </label>
+    <div class="field">
+      <span class="field-label" data-i18n="kitchenLayout">Kitchen layout</span>
+      <button id="btn-layout" class="btn btn-secondary btn-small" type="button" data-i18n="setupLayout">Set up kitchen layout</button>
+    </div>
+    <button class="btn btn-primary btn-wide" value="save" data-i18n="save">Save</button>
+  </form>
+</dialog>
+
+<dialog id="nolayout-dialog" class="dialog exit-dialog nolayout-dialog" aria-labelledby="nolayout-title">
+  <h2 id="nolayout-title" data-i18n="noLayoutAsk">You don't have the kitchen layout set up. Continue in list view only?</h2>
+  <div class="dialog-actions">
+    <button id="nolayout-setup" class="btn btn-primary" type="button" data-i18n="noSetUp">No, let's set it up</button>
+    <button id="nolayout-yes" class="btn btn-secondary" type="button" data-i18n="yes">Yes</button>
+  </div>
+</dialog>
+
+<dialog id="exit-dialog" class="dialog exit-dialog" aria-labelledby="exit-title">
+  <h2 id="exit-title" data-i18n="giveUp">You want to give up?</h2>
+  <div class="dialog-actions">
+    <button id="exit-no" class="btn btn-secondary" type="button" data-i18n="no">No</button>
+    <button id="exit-yes" class="btn btn-primary" type="button" data-i18n="yes">Yes</button>
+  </div>
+</dialog>
+
+<dialog id="read-dialog" class="dialog read-dialog" aria-labelledby="read-title">
+  <h2 id="read-title"></h2>
+  <div id="read-body" class="read-body"></div>
+  <p id="here-badge" class="here-badge" role="status" hidden data-i18n="youAreHere">You are here now!</p>
+  <div class="dialog-actions">
+    <button class="btn btn-secondary" type="button" disabled data-i18n="share">Share</button>
+    <button id="read-close" class="btn btn-primary" type="button" data-i18n="close">Close</button>
+  </div>
+</dialog>
+
+<main id="app">
+  <section id="screen-recipes" class="screen">
+    <div class="wrap wrap-wide">
+      <button id="btn-layout-home" class="btn btn-secondary btn-small layout-home" type="button"><span class="layout-check" hidden>✓</span> <span id="layout-home-label" data-i18n="setupLayoutMap">Set up kitchen layout for Map view</span></button>
+      <!-- "Tell us what you got in the fridge": voice (or typed) ingredients, see js/fridge.js -->
+      <button id="btn-fridge" class="fridge-cta" type="button">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>
+        <span class="fridge-cta-text"><span class="fridge-cta-main" data-i18n="fridgeBtn">Tell us what you got in the fridge</span>
+        <span class="fridge-cta-sub" data-i18n="fridgeBtnSub">(voice recognition)</span></span>
+      </button>
+      <section id="fridge-panel" class="fridge-panel" hidden data-i18n-label="fridgeBtn">
+        <button id="fv-close" class="fv-close" type="button" data-i18n-label="close">&times;</button>
+        <div id="fv-full" class="fv-full">
+          <div class="banner" id="fv-banner" hidden></div>
+          <div class="settings" id="fv-settings" hidden>
+            <div class="status" id="fv-status"></div>
+            <label class="check" id="fv-langWrap" for="fv-lang" hidden><span class="label" data-i18n="fvLanguage">Speech language</span>
+              <select id="fv-lang"></select>
+            </label>
+          </div>
+          <div class="deck">
+            <button class="mic" id="fv-mic" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
+            </button>
+            <div class="deck-info">
+              <div class="state" id="fv-state"></div>
+              <div class="hearing"><span class="dot" id="fv-speechDot"></span></div>
+            </div>
+          </div>
+          <div class="label" data-i18n="fvHeard">What we heard</div>
+          <div class="transcript" id="fv-transcript" aria-live="polite"></div>
+          <div class="head-row">
+            <div class="label" data-i18n="fvYourIngredients">Your ingredients</div>
+            <button class="fv-btn small" id="fv-clearBtn" type="button" data-i18n="fvClear" hidden>Clear all</button>
+          </div>
+          <div class="chips" id="fv-chips"></div>
+          <div class="row">
+            <input type="text" id="fv-typed" data-i18n-placeholder="fvTypePh" data-i18n-label="fvTypePh">
+            <button class="fv-btn" id="fv-addBtn" type="button" data-i18n="fvAdd">Add</button>
+          </div>
+          <p class="note" data-i18n="fvAssumed">We assume you have salt, pepper, sugar, flour, oil and water.</p>
+          <details id="fv-logDetails" class="fv-log">
+            <summary>Debug log</summary>
+            <div class="row log-tools">
+              <button class="fv-btn small" id="fv-copyLog" type="button">Copy log</button>
+              <button class="fv-btn small" id="fv-clearLog" type="button">Clear log</button>
+            </div>
+            <div class="log" id="fv-log" role="log"></div>
+          </details>
+        </div>
+        <div id="fv-mini" class="fv-mini" hidden>
+          <button class="mic mic-small" id="fv-micMini" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
+          </button>
+          <div class="chips" id="fv-chipsMini"></div>
+          <button class="fv-btn small" id="fv-expand" type="button" data-i18n="fvEdit">Edit</button>
+        </div>
+      </section>
+      <h1 data-i18n="pickRecipe">Pick a recipe</h1>
+      <div id="filters" class="filters" role="group" data-i18n-label="filters"></div>
+      <div class="search" role="search">
+        <label class="sr-only" for="recipe-search" data-i18n="searchLabel">Search recipes</label>
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+        <input id="recipe-search" class="search-input" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-list" autocomplete="off" spellcheck="false" data-i18n-placeholder="searchPlaceholder" placeholder="Search recipes, ingredients, utensils…">
+        <ul id="search-list" class="search-list" role="listbox" data-i18n-label="searchSuggestions" hidden></ul>
+      </div>
+      <div id="recipe-sections"></div>
+      <p id="no-results" class="hint" hidden data-i18n="noResults">No recipes match these filters.</p>
+    </div>
+  </section>
+</main>
+
+<button id="due-toast" class="due-toast" type="button" hidden></button>
+
+<button id="jump-bottom" class="jump-bottom" type="button" hidden data-i18n-label="jumpBottom">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+
+<div id="step-pop" class="step-pop" role="dialog" aria-modal="false" hidden>
+  <button id="step-pop-close" class="step-pop-close" type="button" data-i18n-label="close">&times;</button>
+  <div id="step-pop-body"></div>
+</div>
+<div id="step-pop-arrow" class="step-pop-arrow" aria-hidden="true" hidden></div>
+
+<div id="tip" class="tip" role="status" hidden>
+  <div class="tip-body">
+    <p class="tip-label" id="tip-label"></p>
+    <p class="tip-text" id="tip-text"></p>
+  </div>
+  <button id="tip-close" class="tip-close" type="button" data-i18n-label="dismissTip">&times;</button>
+</div>
+
+<script src="js/page-session.js"></script>
+<script src="js/cook-core.js"></script>
+<script src="js/recipes-sheet.js"></script>
+<script src="js/recipes.js"></script>
+<script src="js/fridge.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

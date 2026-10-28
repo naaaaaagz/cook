@@ -574,7 +574,9 @@ select {
 .filter-word[aria-pressed="true"] { color: var(--highlight); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: currentColor; }
 /* "Most popular" (starred recipes) */
 .star-icon { display: block; flex: none; }
-.filter-star { display: inline-flex; align-items: center; gap: 6px; }
+/* Inline (not flex) so the words sit on the same baseline as the other filters */
+.filter-star { display: inline; }
+.filter-star .star-icon { display: inline-block; vertical-align: -0.12em; margin-right: 6px; }
 .filter-star .star-icon { color: var(--star); }
 .photo-star {
   position: absolute;
@@ -603,6 +605,7 @@ select {
 .recipe-item { position: relative; }
 .recipe-card {
   display: flex;
+  text-decoration: none;
   align-items: stretch;
   gap: 14px;
   width: 100%;
@@ -1650,7 +1653,7 @@ html:has(.screen-cook.is-map:not([hidden])) { overflow: hidden; }
 .fridge-cta-sub { font-size: .9rem; opacity: .9; }
 /* "Based on what you said" filter and the missing ingredients on the cards */
 .filter-row-voice { border-top: 1px solid var(--line); padding-top: 10px; }
-.filter-voice { display: inline-flex; align-items: center; gap: 6px; }
-.filter-voice .mic-icon { flex: none; }
+.filter-voice { display: inline; }
+.filter-voice .mic-icon { display: inline-block; vertical-align: -0.12em; margin-right: 6px; }
 .need-line { display: block; margin-top: 6px; padding: 4px 8px; border-radius: 8px; font-size: .9rem; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .need-line b { font-weight: 700; }

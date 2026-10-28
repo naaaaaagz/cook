@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/fridge.css">
 </head>
-<body>
+<body data-page="welcome">
 
 <button id="btn-options" class="btn-options" type="button" aria-haspopup="dialog" data-i18n-label="options">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 6h.01M8.5 6H20M4 12h.01M8.5 12H20M4 18h.01M8.5 18H20"/></svg>
@@ -79,233 +79,13 @@
 </dialog>
 
 <main id="app">
-
-  <!-- Welcome, step 1: kitchen layout (shown when the site opens) -->
-  <section id="screen-welcome" class="screen" hidden>
+  <section id="screen-welcome" class="screen">
     <div class="wrap welcome">
       <h1>Cook</h1>
       <button id="btn-welcome-layout" class="btn btn-primary welcome-main" type="button" data-i18n="setupLayout">Set up kitchen layout</button>
       <button id="btn-welcome-skip" class="btn btn-secondary btn-small welcome-skip" type="button" data-i18n="skipStep">Skip this step</button>
     </div>
   </section>
-
-  <!-- Recipes (home) -->
-  <section id="screen-recipes" class="screen">
-    <div class="wrap wrap-wide">
-      <button id="btn-layout-home" class="btn btn-secondary btn-small layout-home" type="button"><span class="layout-check" hidden>✓</span> <span id="layout-home-label" data-i18n="setupLayoutMap">Set up kitchen layout for Map view</span></button>
-      <!-- "Tell us what you got in the fridge": voice (or typed) ingredients, see js/fridge.js -->
-      <button id="btn-fridge" class="fridge-cta" type="button">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>
-        <span class="fridge-cta-text"><span class="fridge-cta-main" data-i18n="fridgeBtn">Tell us what you got in the fridge</span>
-        <span class="fridge-cta-sub" data-i18n="fridgeBtnSub">(voice recognition)</span></span>
-      </button>
-      <section id="fridge-panel" class="fridge-panel" hidden data-i18n-label="fridgeBtn">
-        <button id="fv-close" class="fv-close" type="button" data-i18n-label="close">&times;</button>
-        <div id="fv-full" class="fv-full">
-          <div class="banner" id="fv-banner" hidden></div>
-          <div class="settings" id="fv-settings" hidden>
-            <div class="status" id="fv-status"></div>
-            <label class="check" id="fv-langWrap" for="fv-lang" hidden><span class="label" data-i18n="fvLanguage">Speech language</span>
-              <select id="fv-lang"></select>
-            </label>
-          </div>
-          <div class="deck">
-            <button class="mic" id="fv-mic" type="button">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
-            </button>
-            <div class="deck-info">
-              <div class="state" id="fv-state"></div>
-              <div class="hearing"><span class="dot" id="fv-speechDot"></span></div>
-            </div>
-          </div>
-          <div class="label" data-i18n="fvHeard">What we heard</div>
-          <div class="transcript" id="fv-transcript" aria-live="polite"></div>
-          <div class="head-row">
-            <div class="label" data-i18n="fvYourIngredients">Your ingredients</div>
-            <button class="fv-btn small" id="fv-clearBtn" type="button" data-i18n="fvClear" hidden>Clear all</button>
-          </div>
-          <div class="chips" id="fv-chips"></div>
-          <div class="row">
-            <input type="text" id="fv-typed" data-i18n-placeholder="fvTypePh" data-i18n-label="fvTypePh">
-            <button class="fv-btn" id="fv-addBtn" type="button" data-i18n="fvAdd">Add</button>
-          </div>
-          <p class="note" data-i18n="fvAssumed">We assume you have salt, pepper, sugar, flour, oil and water.</p>
-          <details id="fv-logDetails" class="fv-log">
-            <summary>Debug log</summary>
-            <div class="row log-tools">
-              <button class="fv-btn small" id="fv-copyLog" type="button">Copy log</button>
-              <button class="fv-btn small" id="fv-clearLog" type="button">Clear log</button>
-            </div>
-            <div class="log" id="fv-log" role="log"></div>
-          </details>
-        </div>
-        <div id="fv-mini" class="fv-mini" hidden>
-          <button class="mic mic-small" id="fv-micMini" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
-          </button>
-          <div class="chips" id="fv-chipsMini"></div>
-          <button class="fv-btn small" id="fv-expand" type="button" data-i18n="fvEdit">Edit</button>
-        </div>
-      </section>
-      <h1 data-i18n="pickRecipe">Pick a recipe</h1>
-      <div id="filters" class="filters" role="group" data-i18n-label="filters"></div>
-      <div class="search" role="search">
-        <label class="sr-only" for="recipe-search" data-i18n="searchLabel">Search recipes</label>
-        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
-        <input id="recipe-search" class="search-input" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-list" autocomplete="off" spellcheck="false" data-i18n-placeholder="searchPlaceholder" placeholder="Search recipes, ingredients, utensils…">
-        <ul id="search-list" class="search-list" role="listbox" data-i18n-label="searchSuggestions" hidden></ul>
-      </div>
-      <div id="recipe-sections"></div>
-      <p id="no-results" class="hint" hidden data-i18n="noResults">No recipes match these filters.</p>
-    </div>
-  </section>
-
-  <!-- Kitchen layout editor -->
-  <section id="screen-layout" class="screen screen-layout" hidden>
-    <div class="layout-bar">
-      <button id="btn-layout-cancel" class="btn btn-secondary btn-small" type="button" data-i18n="cancel">Cancel</button>
-      <span class="hint" data-i18n="layoutHelp">Drag to move, drag the corner to resize. Things can only overlap the countertop.</span>
-      <button id="btn-layout-theme" class="btn btn-secondary btn-small btn-icon" type="button" data-i18n-label="toggleTheme">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
-      </button>
-      <button id="btn-layout-textures" class="btn btn-secondary btn-small btn-icon btn-textures" type="button" aria-pressed="true" data-i18n-label="toggleTextures">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 3.5 10 13"/><path d="M14.5 4.5 18 3l2 2-1.5 3.5L12 15l-3-3z"/><path d="M8.5 13.5c-2.5 0-4 1.6-4 4 0 1.4-.6 2.3-1.5 3 3.5.6 7.5-.4 7.5-4.5z"/></svg>
-      </button>
-      <button class="btn btn-secondary btn-small btn-icon btn-rotate" type="button" data-i18n-label="rotateScreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-landscape"><rect x="3" y="6.5" width="18" height="11" rx="2"/><path d="M17.5 12h.01"/></svg><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-portrait"><rect x="6.5" y="3" width="11" height="18" rx="2"/><path d="M12 17.5h.01"/></svg></button>
-      <button id="btn-layout-save" class="btn btn-primary btn-small" type="button" data-i18n="save">Save</button>
-    </div>
-    <div id="layout-canvas" class="canvas"></div>
-    <div class="layout-add">
-      <div id="layout-add-menu" class="layout-add-menu" hidden></div>
-      <button id="btn-layout-add" class="btn btn-primary btn-layout-add" type="button" data-i18n-label="addToKitchen">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
-    </div>
-  </section>
-
-  <!-- Recipe: guidance, people, options, ingredients -->
-  <section id="screen-details" class="screen" hidden>
-    <div class="wrap">
-      <div class="top-row">
-        <button class="btn btn-ghost btn-back" type="button" data-back data-i18n="back">Back</button>
-      </div>
-      <div class="detail-hero">
-        <div id="det-photo" class="photo photo-hero"></div>
-        <div>
-          <h2 class="title-row"><span id="det-name"></span><span id="det-star" class="det-star" hidden></span> <span id="det-diet"></span></h2>
-          <p id="det-time" class="meta-line"></p>
-          <button class="btn btn-secondary btn-read btn-read-hero" type="button" data-i18n-label="readInstead"><svg class="book-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13"/></svg><span class="btn-label" data-i18n="readInstead">Read instead</span></button>
-        </div>
-      </div>
-
-      <div class="info">
-        <p id="det-warnings" class="warn-row"></p>
-        <h3 id="det-per" class="info-label"></h3>
-        <dl id="det-nutrition" class="nutrition"></dl>
-      </div>
-
-      <section class="equipment">
-        <h3 class="info-label equipment-label" data-i18n="equipmentNeed">Equipment you need:</h3>
-        <ul id="det-equipment" class="equipment-list"></ul>
-      </section>
-
-      <fieldset class="choices centered">
-        <legend data-i18n="guideMode">Do you need guidance for every single step?</legend>
-        <div class="choices-row">
-          <label class="choice"><input type="radio" name="mode" value="detailed" checked> <span data-i18n="modeDetailed">Yes, guide me through every step</span></label>
-          <label class="choice"><input type="radio" name="mode" value="quick"> <span data-i18n="modeQuick">No, I know what I'm doing</span></label>
-        </div>
-      </fieldset>
-
-      <fieldset class="people">
-        <legend id="det-howmany"></legend>
-        <div class="counters">
-          <div class="counter">
-            <span id="adults-label" class="counter-label"></span>
-            <div class="stepper">
-              <button id="adults-minus" class="btn btn-secondary" type="button" data-i18n-label="fewer">&minus;</button>
-              <output id="adults-value" aria-live="polite">2</output>
-              <button id="adults-plus" class="btn btn-secondary" type="button" data-i18n-label="more">+</button>
-            </div>
-          </div>
-          <div id="kids-counter" class="counter">
-            <span class="counter-label" data-i18n="children">Children</span>
-            <div class="stepper">
-              <button id="kids-minus" class="btn btn-secondary" type="button" data-i18n-label="fewer">&minus;</button>
-              <output id="kids-value" aria-live="polite">0</output>
-              <button id="kids-plus" class="btn btn-secondary" type="button" data-i18n-label="more">+</button>
-            </div>
-          </div>
-        </div>
-        <p id="kids-note" class="hint" hidden data-i18n="kidsNote">Children get half a portion.</p>
-        <div id="kids-warning" class="kids-warning" role="status" hidden></div>
-      </fieldset>
-
-      <div id="det-forks">
-        <h3 class="section-title" data-i18n="yourWay">Do it your way!</h3>
-        <div id="det-options"></div>
-      </div>
-
-      <h3 class="section-title" data-i18n="ingredients">Ingredients</h3>
-      <p id="ing-meta" class="hint"></p>
-      <ul id="ing-list" class="ing-list"></ul>
-      <div class="stack">
-        <button class="btn btn-secondary" type="button" disabled data-i18n="addShopping">Add to shopping list</button>
-        <button id="btn-start-cooking" class="btn btn-primary" type="button" data-i18n="gotEverything">I got everything, let's start!</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cooking guide -->
-  <section id="screen-cook" class="screen screen-cook" hidden>
-    <header class="cook-head">
-      <button id="btn-cook-exit" class="btn btn-secondary btn-small" type="button" data-i18n="exit">Exit</button>
-      <div class="cook-title">
-        <h2 id="cook-name"></h2>
-        <p id="cook-count" class="hint"></p>
-      </div>
-      <div class="cook-clocks">
-        <p class="cook-clock"><span class="clock-label" data-i18n="elapsed">Time</span> <span id="cook-clock">0:00</span></p>
-        <p class="cook-clock"><span class="clock-label" data-i18n="timeLeft">Time left</span> <span id="cook-left">0:00</span></p>
-      </div>
-      <button class="btn btn-secondary btn-small btn-read" type="button" data-i18n-label="readInstead"><svg class="book-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13"/></svg><span class="btn-label" data-i18n="readInstead">Read instead</span></button>
-      <div class="progress"><i id="cook-progress"></i></div>
-    </header>
-    <div class="view-fab-wrap">
-      <button id="btn-view" class="view-fab" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="10" rx="1.5"/><rect x="13" y="3" width="8" height="6" rx="1.5"/><rect x="13" y="11" width="8" height="10" rx="1.5"/><rect x="3" y="15" width="8" height="6" rx="1.5"/></svg></button>
-      <button class="btn btn-secondary btn-small btn-icon btn-rotate" type="button" data-i18n-label="rotateScreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-landscape"><rect x="3" y="6.5" width="18" height="11" rx="2"/><path d="M17.5 12h.01"/></svg><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-portrait"><rect x="6.5" y="3" width="11" height="18" rx="2"/><path d="M12 17.5h.01"/></svg></button>
-      <span id="view-tip" class="tooltip" role="status" hidden data-i18n="noLayout">No kitchen layout set up. Do it before your next cooking!</span>
-    </div>
-    <div class="cook-body">
-      <div id="cook-list" class="cook-list"></div>
-      <div id="cook-map" class="cook-map" hidden></div>
-      <div id="start-overlay" class="start-overlay">
-        <button id="btn-start-now" class="btn-start-now" type="button">
-          <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
-          <span data-i18n="startNow">Start now</span>
-          <small id="start-takes"></small>
-        </button>
-        <div id="countdown" class="countdown" hidden aria-live="assertive">
-          <span class="cd-ring"></span><span class="cd-ring"></span><span class="cd-ring"></span>
-          <span id="countdown-num" class="cd-num"></span>
-        </div>
-      </div>
-    </div>
-    <div id="cook-finished" class="wrap finished" hidden>
-      <h2 data-i18n="finishedTitle">You did it! Bon appétit!</h2>
-      <fieldset class="stars" id="taste">
-        <legend data-i18n="howTaste">How does it taste?</legend>
-        <div class="stars-row"></div>
-        <p id="star-text" class="star-text" aria-live="polite"></p>
-      </fieldset>
-      <div class="stack">
-        <button class="btn btn-secondary" type="button" disabled data-i18n="uploadPhoto">Upload photo</button>
-        <button class="btn btn-secondary" type="button" disabled data-i18n="share">Share</button>
-        <button class="btn btn-primary" type="button" data-go="recipes" data-i18n="backHome">Back to home</button>
-      </div>
-    </div>
-  </section>
-
 </main>
 
 <button id="due-toast" class="due-toast" type="button" hidden></button>
@@ -328,6 +108,7 @@
   <button id="tip-close" class="tip-close" type="button" data-i18n-label="dismissTip">&times;</button>
 </div>
 
+<script src="js/page-session.js"></script>
 <script src="js/cook-core.js"></script>
 <script src="js/recipes-sheet.js"></script>
 <script src="js/recipes.js"></script>
