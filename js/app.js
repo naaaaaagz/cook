@@ -411,9 +411,10 @@
     document.title = (name === 'details' || name === 'cook') && state.recipe ? recipeName(state.recipe) + ' – Cook'
       : name === 'layout' ? t('kitchenLayout') + ' – Cook' : 'Cook';
   }
-  function navigate(name, replace) {
+  async function navigate(name, replace) {
     if (window.Fridge) window.Fridge.stop();
     if (!saveSession()) { window.alert(t('sessionUnavailable')); return; }
+    if (window.CookAccount && !await window.CookAccount.flushPending()) return;
     internalNavigation = true;
     location[replace ? 'replace' : 'assign'](screenUrl(name));
   }
@@ -990,9 +991,10 @@
   // Where the kitchen layout editor was opened from: from the welcome step, Save
   // and Cancel continue to step 2 instead of going back.
   var layoutFrom = null;
-  function openLayout(fromHistory) {
+  async function openLayout(fromHistory) {
     if (pageScreen !== 'layout') {
       if (!saveSession()) { window.alert(t('sessionUnavailable')); return; }
+      if (window.CookAccount && !await window.CookAccount.flushPending()) return;
       internalNavigation = true;
       location.assign('kitchen.html?from=' + encodeURIComponent(state.screen) +
         (state.recipe ? '&id=' + encodeURIComponent(state.recipe.id) : ''));
@@ -1219,11 +1221,14 @@
     navigate(['details', 'cook'].indexOf(layoutFrom) >= 0 && state.recipe ? layoutFrom : 'recipes');
   }
   on('btn-layout-cancel', 'click', leaveLayout);
-  on('btn-layout-save', 'click', function () {
+  on('btn-layout-save', 'click', async function () {
     state.layout = draft;
     state.layoutSaved = true;
     var canvas = $('layout-canvas');
     state.layoutWide = canvas.clientWidth >= canvas.clientHeight;
+    preferencesRevision++;
+    saveSession();
+    if (window.CookAccount && !await window.CookAccount.savePreferences()) return;
     leaveLayout();
   });
 
@@ -3097,6 +3102,54 @@
       event.returnValue = '';
     }
   });
+
+  // Account snapshots contain only settings, never cooking history or credentials.
+  var preferencesRevision = 0;
+  var preferenceFields = ['layout', 'layoutSaved', 'layoutTouched', 'layoutWide', 'textures', 'lang', 'theme', 'units'];
+  function accountPreferences() {
+    return { layout: state.layoutSaved ? clone(state.layout) : null, layoutSaved: state.layoutSaved,
+      layoutTouched: !!state.layoutTouched, layoutWide: state.layoutWide !== false, textures: textures,
+      lang: requestedLang || lang, theme: document.documentElement.getAttribute('data-theme'), units: state.units };
+  }
+  window.CookPreferences = {
+    read: accountPreferences,
+    revision: function () { return preferencesRevision; },
+    apply: function (preferences) {
+      if (!preferences || typeof preferences !== 'object') return;
+      // Keep unrelated tab choices/timers, then use the existing layout validation.
+      saveSession();
+      savedSession = window.CookSession.read();
+      preferenceFields.forEach(function (key) { if (Object.prototype.hasOwnProperty.call(preferences, key)) savedSession[key] = preferences[key]; });
+      state.layout = clone(DEFAULT_LAYOUT); state.layoutSaved = false; state.layoutTouched = false; state.layoutWide = true;
+      restoreSession();
+      setLang(typeof savedSession.lang === 'string' ? savedSession.lang : 'en-US');
+      if (pageScreen === 'layout') { draft = clone(state.layout); buildCanvas(); }
+      $('btn-layout').setAttribute('data-i18n', state.layoutSaved ? 'editLayout' : 'setupLayout');
+      $('btn-layout').textContent = t(state.layoutSaved ? 'editLayout' : 'setupLayout');
+      if ($('layout-home-label')) {
+        $('layout-home-label').setAttribute('data-i18n', state.layoutSaved ? 'editLayoutMap' : 'setupLayoutMap');
+        $('layout-home-label').textContent = t(state.layoutSaved ? 'editLayoutMap' : 'setupLayoutMap');
+        document.querySelector('.layout-check').hidden = !state.layoutSaved;
+      }
+      saveSession();
+    },
+    reset: function () {
+      // Clear only this Cook tab's snapshot, preserving other sites and notice state.
+      stopCooking();
+      window.CookSession.save({}); savedSession = {};
+      state.layout = clone(DEFAULT_LAYOUT); state.layoutSaved = false; state.layoutTouched = false;
+      state.layoutWide = true; state.picks = {}; state.voice = []; state.search = '';
+      state.filters = { starred: true, diet: [], cat: [], cuisine: [], method: [], voice: false };
+      activeCookRecord = null;
+      restoreSession(); setLang('en-US');
+      if (pageScreen === 'layout') { draft = clone(state.layout); buildCanvas(); }
+      saveSession();
+    }
+  };
+  $('options-dialog').addEventListener('close', function () { preferencesRevision++; saveSession(); });
+  $('options-dialog').addEventListener('change', function () { preferencesRevision++; });
+  on('layout-canvas', 'pointerdown', function () { preferencesRevision++; });
+  on('layout-canvas', 'keydown', function () { preferencesRevision++; });
 
   // ---------- Start ----------
   restoreSession();

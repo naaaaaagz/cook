@@ -3,7 +3,9 @@
 The runtime pages are index.html (welcome), recipes.html (searchable list),
 recipe.html?id=RECIPE_ID, kitchen.html and cook.html?id=RECIPE_ID.
 Keep all links relative so the same files work under a project path such as /cook/.
-There is no hash router, numbered list pagination, backend or framework.
+There is no hash router, numbered list pagination or framework. Optional email
+accounts use managed Supabase Auth/PostgreSQL; see account-setup/README.md. Account
+activation and real email delivery are separate from the local static-page checks.
 
 Adding or changing recipes does not require generating recipe HTML files.
 The existing Sheets-derived JavaScript remains the recipe source used at runtime.
@@ -30,10 +32,12 @@ to serve the committed pages.
 js/page-session.js carries a versioned JSON snapshot in sessionStorage, scoped by
 the site's path. This deliberately replaces the old nothing-stored rule for the
 owner's request to carry choices between pages. No localStorage, cookies, audio,
-speech transcripts or server-side storage are added. Ingredient keys, filters,
+speech transcripts are stored by the tab snapshot. Ingredient keys, filters,
 search, options, layout, language, theme and units are kept for the browser tab's
 page session. Session restoration is controlled by the browser; this is not an
-account backup or cross-device sync.
+account backup or cross-device sync on its own. Optional accounts separately save
+only kitchen/layout, language, theme, textures and units to the account database;
+account auth uses a separate tab-storage key. See account-setup/README.md.
 
 Saved choices and layout coordinates are validated before use. Blocked/quota-full
 storage prevents internal navigation and explains why, rather than silently

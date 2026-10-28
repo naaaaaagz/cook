@@ -30,6 +30,7 @@
 !/tools/page-template.html
 !/tools/pages-tests.cjs
 !/tools/PAGES.md
+!/tools/account-tests.cjs
 /convert_images.bat
 /convert_ready_images.bat
 
