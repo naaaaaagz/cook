@@ -355,7 +355,9 @@ window.I18N["cs"] = {
   "accTooMany": "Bylo odesláno příliš mnoho e-mailů. Chvíli počkejte a zkuste to znovu.",
   "accEmailInvalid": "Tato e-mailová adresa není přijata.",
   "favNone": "Zatím nemáte uložené žádné oblíbené.",
-  "favShowAll": "Zobrazit všechny recepty"
+  "favShowAll": "Zobrazit všechny recepty",
+  "accStay": "Zůstat přihlášen na tomto zařízení",
+  "privStorage3": "Pokud zaškrtnete „Zůstat přihlášen na tomto zařízení“, vaše přihlašovací relace a motiv se uchovají v localStorage tohoto prohlížeče až do odhlášení, takže zůstanete přihlášeni i po zavření karty. Bez zaškrtnutí se uchovají jen v této kartě."
  },
  "names": {
   "beer": "Pivo",

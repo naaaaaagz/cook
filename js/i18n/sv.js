@@ -355,7 +355,9 @@ window.I18N["sv"] = {
   "accTooMany": "För många mejl har skickats. Vänta en stund och försök igen.",
   "accEmailInvalid": "Den här e-postadressen godkänns inte.",
   "favNone": "Du har inte sparat några favoriter än.",
-  "favShowAll": "Visa alla recept"
+  "favShowAll": "Visa alla recept",
+  "accStay": "Förbli inloggad på den här enheten",
+  "privStorage3": "Om du kryssar i ”Förbli inloggad på den här enheten” sparas din inloggningssession och ditt tema i den här webbläsarens localStorage tills du loggar ut, så att du förblir inloggad efter att fliken stängts. Utan kryss sparas de bara i den här fliken."
  },
  "names": {
   "beer": "Öl",

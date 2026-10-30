@@ -355,7 +355,9 @@ window.I18N["nl"] = {
   "accTooMany": "Er zijn te veel e-mails verzonden. Wacht even en probeer het opnieuw.",
   "accEmailInvalid": "Dit e-mailadres wordt niet geaccepteerd.",
   "favNone": "Je hebt nog geen favorieten opgeslagen.",
-  "favShowAll": "Alle recepten bekijken"
+  "favShowAll": "Alle recepten bekijken",
+  "accStay": "Ingelogd blijven op dit apparaat",
+  "privStorage3": "Als je ‘Ingelogd blijven op dit apparaat’ aanvinkt, worden je inlogsessie en je thema in de localStorage van deze browser bewaard tot je uitlogt, zodat je ingelogd blijft na het sluiten van het tabblad. Zonder vinkje worden ze alleen in dit tabblad bewaard."
  },
  "names": {
   "beer": "Bier",

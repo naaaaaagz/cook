@@ -106,6 +106,10 @@ async function main() {
     writeDelay=0;assert.equal(rows.get(a.id).preferences.units,'imperial');assert.equal(rows.get(a.id).preferences.lang,'hu');
     await page.locator('#btn-layout-save').click();await page.waitForURL('**/recipes.html');
     assert(rows.get(a.id).preferences.layoutSaved);assert(rows.get(a.id).preferences.layout.countertop);
+    // "Stay signed in" (ticked by default): a new tab is still signed in and starts in the account's theme.
+    const reopened=await context.newPage();await reopened.goto(base+'/recipes.html');
+    assert.equal(await reopened.evaluate(()=>document.documentElement.getAttribute('data-theme')),'dark');
+    await reopened.waitForFunction(()=>window.CookAccount.signedIn());await reopened.close();
     // Favorites: the star on a photo saves to the account; "Favorites only" lists just those.
     await page.locator('.filter-star').waitFor();
     // No favorites yet: a large note and "Check all recipes", which clears the filters.
@@ -132,10 +136,14 @@ async function main() {
     await page.locator('#account-logout').click();await page.waitForURL('**/index.html');
     assert.equal(await page.evaluate(()=>window.CookPreferences.read().layoutSaved),false);
     assert.equal(await page.evaluate(()=>document.documentElement.getAttribute('data-theme')),'light');
+    const kept=()=>page.evaluate(()=>Object.keys(localStorage).filter(k=>/^cook:(auth|theme)/.test(k)));
+    assert.deepEqual(await kept(),[]); // signing out removes the kept sign-in and theme
     await page.locator('#btn-account').click();await page.locator('#account-email').fill(b.email);
+    await page.locator('#account-stay').uncheck(); // this tab only
     await page.locator('#account-password').fill('other-test-password-123');await page.locator('#account-submit').click();
     await page.waitForURL('**/recipes.html');await page.locator('#btn-account').click();
     await page.locator('#account-status').filter({hasText:'Signed in.'}).waitFor();
+    assert.deepEqual(await kept(),[]);assert(await page.evaluate(()=>!!sessionStorage.getItem(Object.keys(sessionStorage).find(k=>/^cook:auth:v1:/.test(k)))));
     assert.equal(await page.evaluate(()=>window.CookPreferences.read().layoutSaved),false);
     await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:'settings saved'}).waitFor();
     assert(rows.has(a.id)&&rows.has(b.id));assert.equal(rows.get(b.id).preferences.layoutSaved,false);
@@ -187,7 +195,7 @@ async function main() {
     await mobile.screenshot({path:path.join(root,'.tmp/account-storage.png')});
     assert.deepEqual(errors,[]);
     await context.close();
-    console.log('PASS: disabled setup, OK/X storage notice, privacy, +aliases, sign-in, isolated accounts, kitchen/preferences save/reload, failure/retry, verification/expired links, recovery with repeat, sign-out, favorites, delete account, email-error reasons, mobile layout. Auth/database are mocked; live RLS/delivery not tested.');
+    console.log('PASS: disabled setup, OK/X storage notice, privacy, +aliases, sign-in, isolated accounts, kitchen/preferences save/reload, failure/retry, verification/expired links, recovery with repeat, stay signed in / tab only, sign-out, favorites, delete account, email-error reasons, mobile layout. Auth/database are mocked; live RLS/delivery not tested.');
   } finally { await browser.close(); }
 }
 main().catch(error=>{console.error(error);process.exitCode=1;}).finally(()=>server.close());

@@ -355,7 +355,9 @@ window.I18N["et"] = {
   "accTooMany": "Saadetud on liiga palju e-kirju. Oota veidi ja proovi uuesti.",
   "accEmailInvalid": "Seda e-posti aadressi ei aktsepteerita.",
   "favNone": "Sul pole veel ühtegi lemmikut salvestatud.",
-  "favShowAll": "Vaata kõiki retsepte"
+  "favShowAll": "Vaata kõiki retsepte",
+  "accStay": "Jää selles seadmes sisselogituks",
+  "privStorage3": "Kui märgid „Jää selles seadmes sisselogituks“, hoitakse sinu sisselogimisseanssi ja teemat selle brauseri localStorage’is, kuni logid välja, nii et jääd sisselogituks ka pärast vahekaardi sulgemist. Ilma märketa hoitakse neid ainult selles vahekaardis."
  },
  "names": {
   "beer": "Õlu",

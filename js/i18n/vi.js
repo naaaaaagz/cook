@@ -355,7 +355,9 @@ window.I18N["vi"] = {
   "accTooMany": "Đã gửi quá nhiều email. Vui lòng chờ một lúc rồi thử lại.",
   "accEmailInvalid": "Địa chỉ email này không được chấp nhận.",
   "favNone": "Bạn chưa lưu món yêu thích nào.",
-  "favShowAll": "Xem tất cả công thức"
+  "favShowAll": "Xem tất cả công thức",
+  "accStay": "Duy trì đăng nhập trên thiết bị này",
+  "privStorage3": "Nếu bạn chọn “Duy trì đăng nhập trên thiết bị này”, phiên đăng nhập và giao diện của bạn được lưu trong localStorage của trình duyệt này cho đến khi bạn đăng xuất, nên bạn vẫn đăng nhập sau khi đóng thẻ. Nếu không chọn, chúng chỉ được lưu trong thẻ này."
  },
  "names": {
   "beer": "Bia",

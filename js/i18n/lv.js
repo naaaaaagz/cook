@@ -355,7 +355,9 @@ window.I18N["lv"] = {
   "accTooMany": "Nosūtīts pārāk daudz e-pastu. Nedaudz uzgaidiet un mēģiniet vēlreiz.",
   "accEmailInvalid": "Šī e-pasta adrese netiek pieņemta.",
   "favNone": "Jums vēl nav saglabātas izlases.",
-  "favShowAll": "Skatīt visas receptes"
+  "favShowAll": "Skatīt visas receptes",
+  "accStay": "Palikt pierakstītam šajā ierīcē",
+  "privStorage3": "Ja atzīmējat “Palikt pierakstītam šajā ierīcē”, jūsu pierakstīšanās sesija un motīvs tiek glabāti šī pārlūka localStorage, līdz izrakstāties, lai jūs paliktu pierakstīts arī pēc cilnes aizvēršanas. Bez atzīmes tie tiek glabāti tikai šajā cilnē."
  },
  "names": {
   "beer": "Alus",

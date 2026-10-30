@@ -355,7 +355,9 @@ window.I18N["it"] = {
   "accTooMany": "Sono state inviate troppe email. Attendi un po’ e riprova.",
   "accEmailInvalid": "Questo indirizzo email non è accettato.",
   "favNone": "Non hai ancora salvato preferiti.",
-  "favShowAll": "Vedi tutte le ricette"
+  "favShowAll": "Vedi tutte le ricette",
+  "accStay": "Resta connesso su questo dispositivo",
+  "privStorage3": "Se selezioni «Resta connesso su questo dispositivo», la sessione di accesso e il tema vengono conservati nel localStorage di questo browser finché non esci, così resti connesso anche dopo aver chiuso la scheda. Altrimenti vengono conservati solo in questa scheda."
  },
  "names": {
   "beer": "Birra",

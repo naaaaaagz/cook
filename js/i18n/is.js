@@ -355,7 +355,9 @@ window.I18N["is"] = {
   "accTooMany": "Of margir póstar hafa verið sendir. Bíddu aðeins og reyndu aftur.",
   "accEmailInvalid": "Þetta netfang er ekki samþykkt.",
   "favNone": "Þú hefur ekki vistað nein eftirlæti enn.",
-  "favShowAll": "Skoða allar uppskriftir"
+  "favShowAll": "Skoða allar uppskriftir",
+  "accStay": "Vera áfram innskráð(ur) í þessu tæki",
+  "privStorage3": "Ef þú hakar við „Vera áfram innskráð(ur) í þessu tæki“ eru innskráningarlotan og þemað geymd í localStorage þessa vafra þar til þú skráir þig út, svo þú verður áfram innskráð(ur) eftir að flipanum er lokað. Annars eru þau aðeins geymd í þessum flipa."
  },
  "names": {
   "beer": "Bjór",

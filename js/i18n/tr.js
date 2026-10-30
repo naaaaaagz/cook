@@ -355,7 +355,9 @@ window.I18N["tr"] = {
   "accTooMany": "Çok fazla e-posta gönderildi. Biraz bekleyip tekrar deneyin.",
   "accEmailInvalid": "Bu e-posta adresi kabul edilmiyor.",
   "favNone": "Henüz kaydedilmiş favoriniz yok.",
-  "favShowAll": "Tüm tarifleri gör"
+  "favShowAll": "Tüm tarifleri gör",
+  "accStay": "Bu cihazda oturumum açık kalsın",
+  "privStorage3": "“Bu cihazda oturumum açık kalsın” seçeneğini işaretlerseniz oturumunuz ve temanız, çıkış yapana kadar bu tarayıcının localStorage alanında tutulur; böylece sekmeyi kapattıktan sonra da oturumunuz açık kalır. İşaretlemezseniz yalnızca bu sekmede tutulur."
  },
  "names": {
   "beer": "Bira",

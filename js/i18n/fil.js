@@ -355,7 +355,9 @@ window.I18N["fil"] = {
   "accTooMany": "Masyadong maraming email ang naipadala. Maghintay sandali at subukang muli.",
   "accEmailInvalid": "Hindi tinatanggap ang email address na ito.",
   "favNone": "Wala ka pang naka-save na paborito.",
-  "favShowAll": "Tingnan ang lahat ng recipe"
+  "favShowAll": "Tingnan ang lahat ng recipe",
+  "accStay": "Manatiling naka-sign in sa device na ito",
+  "privStorage3": "Kung lalagyan mo ng tsek ang “Manatiling naka-sign in sa device na ito”, itatago ang iyong sign-in session at tema sa localStorage ng browser na ito hanggang mag-sign out ka, kaya mananatili kang naka-sign in kahit isara ang tab. Kung walang tsek, sa tab na ito lang sila itatago."
  },
  "names": {
   "beer": "Serbesa",

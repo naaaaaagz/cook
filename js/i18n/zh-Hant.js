@@ -355,7 +355,9 @@ window.I18N["zh-Hant"] = {
   "accTooMany": "寄出的郵件過多。請稍候再試。",
   "accEmailInvalid": "不接受此電子郵件地址。",
   "favNone": "你還沒有收藏任何食譜。",
-  "favShowAll": "查看全部食譜"
+  "favShowAll": "查看全部食譜",
+  "accStay": "在此裝置上保持登入",
+  "privStorage3": "如果你勾選「在此裝置上保持登入」，你的登入工作階段和主題會儲存在此瀏覽器的 localStorage 中，直到你登出，因此關閉分頁後仍保持登入。不勾選時，它們只會儲存在目前分頁中。"
  },
  "names": {
   "beer": "啤酒",

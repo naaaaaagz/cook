@@ -355,7 +355,9 @@ window.I18N["id"] = {
   "accTooMany": "Terlalu banyak email terkirim. Tunggu sebentar lalu coba lagi.",
   "accEmailInvalid": "Alamat email ini tidak diterima.",
   "favNone": "Anda belum menyimpan favorit.",
-  "favShowAll": "Lihat semua resep"
+  "favShowAll": "Lihat semua resep",
+  "accStay": "Tetap masuk di perangkat ini",
+  "privStorage3": "Jika Anda mencentang “Tetap masuk di perangkat ini”, sesi masuk dan tema Anda disimpan di localStorage browser ini sampai Anda keluar, sehingga Anda tetap masuk setelah menutup tab. Tanpa centang, keduanya hanya disimpan di tab ini."
  },
  "names": {
   "beer": "Bir",

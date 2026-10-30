@@ -355,7 +355,9 @@ window.I18N["ro"] = {
   "accTooMany": "Au fost trimise prea multe e-mailuri. Așteaptă puțin și încearcă din nou.",
   "accEmailInvalid": "Această adresă de e-mail nu este acceptată.",
   "favNone": "Încă nu ai salvat favorite.",
-  "favShowAll": "Vezi toate rețetele"
+  "favShowAll": "Vezi toate rețetele",
+  "accStay": "Rămâi conectat pe acest dispozitiv",
+  "privStorage3": "Dacă bifezi „Rămâi conectat pe acest dispozitiv”, sesiunea de conectare și tema sunt păstrate în localStorage-ul acestui browser până te deconectezi, astfel încât rămâi conectat și după închiderea filei. Fără bifă, sunt păstrate doar în această filă."
  },
  "names": {
   "beer": "Bere",

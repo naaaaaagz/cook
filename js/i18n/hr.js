@@ -355,7 +355,9 @@ window.I18N["hr"] = {
   "accTooMany": "Poslano je previše e-poruka. Pričekajte malo i pokušajte ponovno.",
   "accEmailInvalid": "Ova adresa e-pošte nije prihvaćena.",
   "favNone": "Još nemate spremljenih favorita.",
-  "favShowAll": "Pogledaj sve recepte"
+  "favShowAll": "Pogledaj sve recepte",
+  "accStay": "Ostani prijavljen na ovom uređaju",
+  "privStorage3": "Ako označite „Ostani prijavljen na ovom uređaju”, vaša sesija prijave i tema čuvaju se u localStorageu ovog preglednika dok se ne odjavite, pa ostajete prijavljeni i nakon zatvaranja kartice. Bez oznake čuvaju se samo u ovoj kartici."
  },
  "names": {
   "beer": "Pivo",

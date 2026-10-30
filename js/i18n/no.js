@@ -355,7 +355,9 @@ window.I18N["no"] = {
   "accTooMany": "For mange e-poster er sendt. Vent en stund og prøv igjen.",
   "accEmailInvalid": "Denne e-postadressen godtas ikke.",
   "favNone": "Du har ikke lagret noen favoritter ennå.",
-  "favShowAll": "Se alle oppskrifter"
+  "favShowAll": "Se alle oppskrifter",
+  "accStay": "Forbli innlogget på denne enheten",
+  "privStorage3": "Hvis du krysser av for «Forbli innlogget på denne enheten», lagres innloggingsøkten og temaet ditt i denne nettleserens localStorage til du logger ut, slik at du forblir innlogget etter at fanen lukkes. Uten avkrysning lagres de bare i denne fanen."
  },
  "names": {
   "beer": "Øl",

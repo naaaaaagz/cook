@@ -355,7 +355,9 @@ window.I18N["pt-BR"] = {
   "accTooMany": "Foram enviados e-mails demais. Aguarde um pouco e tente novamente.",
   "accEmailInvalid": "Este endereço de e-mail não é aceito.",
   "favNone": "Você ainda não salvou favoritos.",
-  "favShowAll": "Ver todas as receitas"
+  "favShowAll": "Ver todas as receitas",
+  "accStay": "Manter conectado neste dispositivo",
+  "privStorage3": "Se você marcar “Manter conectado neste dispositivo”, sua sessão de login e seu tema ficam guardados no localStorage deste navegador até você sair, para que continue conectado depois de fechar a aba. Sem a marcação, ficam guardados só nesta aba."
  },
  "names": {
   "beer": "Cerveja",

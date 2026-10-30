@@ -355,7 +355,9 @@ window.I18N["de"] = {
   "accTooMany": "Es wurden zu viele E-Mails gesendet. Bitte warte eine Weile und versuche es erneut.",
   "accEmailInvalid": "Diese E-Mail-Adresse wird nicht akzeptiert.",
   "favNone": "Du hast noch keine Favoriten gespeichert.",
-  "favShowAll": "Alle Rezepte ansehen"
+  "favShowAll": "Alle Rezepte ansehen",
+  "accStay": "Auf diesem Gerät angemeldet bleiben",
+  "privStorage3": "Wenn du „Auf diesem Gerät angemeldet bleiben“ ankreuzt, werden deine Anmeldesitzung und dein Design im localStorage dieses Browsers gespeichert, bis du dich abmeldest. So bleibst du auch nach dem Schließen des Tabs angemeldet. Ohne Häkchen werden sie nur in diesem Tab gespeichert."
  },
  "names": {
   "beer": "Bier",

@@ -355,7 +355,9 @@ window.I18N["sl"] = {
   "accTooMany": "Poslanih je bilo preveč sporočil. Počakajte nekaj časa in poskusite znova.",
   "accEmailInvalid": "Ta e-poštni naslov ni sprejet.",
   "favNone": "Še nimate shranjenih priljubljenih.",
-  "favShowAll": "Prikaži vse recepte"
+  "favShowAll": "Prikaži vse recepte",
+  "accStay": "Ostani prijavljen v tej napravi",
+  "privStorage3": "Če označite »Ostani prijavljen v tej napravi«, se vaša seja prijave in tema hranita v localStorage tega brskalnika, dokler se ne odjavite, zato ostanete prijavljeni tudi po zaprtju zavihka. Brez oznake se hranita samo v tem zavihku."
  },
  "names": {
   "beer": "Pivo",

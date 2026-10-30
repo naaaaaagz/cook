@@ -8,6 +8,30 @@
   var noticeKey = 'cook:storage-notice:v1:' + scope;
   var ownerKey = 'cook:account-owner:v1:' + scope;
   var pendingKey = 'cook:account-message:v1:' + scope; // a message to show after moving to another page
+  // Where the sign-in session is kept: this tab only, or (with "Stay signed in") this browser
+  // until signing out. The account's theme is kept with it, so a reopened tab starts in that theme.
+  var authKey = 'cook:auth:v1:' + scope, persistKey = 'cook:auth-persist:v1:' + scope, themeKey = 'cook:theme:v1:' + scope;
+  function persistent() { try { return localStorage.getItem(persistKey) === '1'; } catch (e) { return false; } }
+  function setPersistent(on) {
+    try { if (on) localStorage.setItem(persistKey, '1'); else { localStorage.removeItem(persistKey); localStorage.removeItem(themeKey); } }
+    catch (e) { /* browser storage blocked: the session stays in this tab */ }
+  }
+  var authStorage = {
+    getItem: function (key) { try { return (persistent() ? localStorage : sessionStorage).getItem(key); } catch (e) { return null; } },
+    setItem: function (key, value) { (persistent() ? localStorage : sessionStorage).setItem(key, value); },
+    removeItem: function (key) {
+      try { localStorage.removeItem(key); } catch (e) { /* nothing stored there */ }
+      try { sessionStorage.removeItem(key); } catch (e) { /* nothing stored there */ }
+    }
+  };
+  // Removes every stored sign-in item (both places) and the kept theme.
+  function clearAuth() {
+    [authKey, authKey + '-code-verifier', authKey + '-user'].forEach(authStorage.removeItem);
+    setPersistent(false);
+  }
+  function rememberTheme() {
+    try { if (persistent()) localStorage.setItem(themeKey, preferences().theme); } catch (e) { /* optional */ }
+  }
   var mode = 'login', client = null, user = null, ready = false, recovery = false;
   var saving = Promise.resolve(), busy = false, savedFingerprint = null;
   var parameters = new URLSearchParams(location.hash.slice(1));
@@ -90,6 +114,7 @@
     $('account-password').minLength = value === 'signup' ? 12 : 1;
     $('account-password').autocomplete = value === 'signup' ? 'new-password' : 'current-password';
     $('account-password').value = '';
+    $('account-stay-field').hidden = value !== 'login';
     drawMode();
     status(null);
   }
@@ -145,6 +170,7 @@
     sessionStorage.setItem(ownerKey, user.id);
     savedFingerprint = JSON.stringify(preferences());
     ready = true;
+    rememberTheme();
     status(data ? 'accLoaded' : 'accSignedInEmpty');
     document.dispatchEvent(new Event('cook:account'));
   }
@@ -159,6 +185,7 @@
       try {
         check(await client.from('user_settings').upsert({ user_id: accountId, preferences: snapshot }, { onConflict: 'user_id' }));
         savedFingerprint = JSON.stringify(snapshot);
+        rememberTheme();
         status('accSaved');
         return true;
       } catch (e) {
@@ -204,6 +231,8 @@
         check(await client.auth.signUp({ email: email, password: password, options: { emailRedirectTo: config.siteUrl } }));
         status('accSignupSent');
       } else if (action === 'login') {
+        clearAuth();
+        setPersistent($('account-stay').checked);
         var signedIn = check(await client.auth.signInWithPassword({ email: email, password: password }));
         var verified = check(await client.auth.getUser()).user;
         if (!verified || !verified.email_confirmed_at || !signedIn.session) throw new Error('unconfirmed');
@@ -246,7 +275,7 @@
   // Removes this tab's authentication data and Cook choices.
   async function signOutLocally() {
     await client.auth.signOut({ scope: 'local' }).catch(function () {});
-    sessionStorage.removeItem('cook:auth:v1:' + scope);
+    clearAuth();
     sessionStorage.removeItem(ownerKey);
     window.CookPreferences.reset();
     user = null; ready = false;
@@ -258,7 +287,7 @@
     var result = await client.auth.signOut({ scope: 'local' });
     // Even if the network is unavailable, remove this tab's authentication data.
     if (result.error) await client.auth.signOut({ scope: 'local' }).catch(function () {});
-    sessionStorage.removeItem('cook:auth:v1:' + scope);
+    clearAuth();
     sessionStorage.removeItem(ownerKey);
     window.CookPreferences.reset();
     user = null; ready = false;
@@ -307,7 +336,7 @@
       var probe = 'cook:storage-probe:' + scope;
       sessionStorage.setItem(probe, '1'); sessionStorage.removeItem(probe);
       client = window.supabase.createClient(config.supabaseUrl, config.publishableKey, { auth: {
-        storage: sessionStorage, storageKey: 'cook:auth:v1:' + scope, persistSession: true,
+        storage: authStorage, storageKey: authKey, persistSession: true,
         autoRefreshToken: true, detectSessionInUrl: false, flowType: 'pkce'
       } });
       if (tokenHash && tokenType !== 'email' && tokenType !== 'recovery') throw new Error('invalid_link_type');
@@ -338,7 +367,7 @@
       client.auth.onAuthStateChange(function (event) {
         // Avoid SDK calls in this callback (the SDK holds its session lock).
         if (event === 'SIGNED_OUT' && user && !busy) {
-          user = null; ready = false; draw(); window.CookPreferences.reset();
+          user = null; ready = false; clearAuth(); draw(); window.CookPreferences.reset();
           sessionStorage.removeItem(ownerKey); status('accSessionEnded');
         }
       });

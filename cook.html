@@ -25,6 +25,7 @@
       <form id="account-form">
         <label class="field"><span data-i18n="accEmail">Email address</span><input id="account-email" name="email" type="email" autocomplete="email" maxlength="254" required></label>
         <label class="field" id="account-password-field"><span data-i18n="accPassword">Password</span><input id="account-password" name="password" type="password" autocomplete="current-password" maxlength="72" required></label>
+        <label class="account-check" id="account-stay-field"><input id="account-stay" type="checkbox" checked> <span data-i18n="accStay">Stay signed in on this device</span></label>
         <button class="btn btn-primary btn-wide" id="account-submit" type="submit">Sign in</button>
       </form>
       <button id="account-switch" class="btn btn-secondary btn-wide account-switch" type="button">Create account</button>
@@ -67,6 +68,7 @@
     <p data-i18n="privWhat2">Account and settings processing is necessary to provide the account service you request (GDPR Article 6(1)(b)). Limited security and abuse-prevention records may be processed under legitimate interests (Article 6(1)(f)), subject to necessity and balancing. Verification and password-reset emails are service messages, not marketing. No advertising or analytics is added by the account feature.</p>
     <h3 data-i18n="privStorage">Browser storage</h3>
     <p data-i18n="privStorage1">Cook uses sessionStorage to carry your kitchen, cooking progress and choices between pages in the same tab. When signed in, it also holds your authentication session. The browser normally clears this when the tab session ends, but browser session restoration can retain it. Signing out clears Cook's tab data. The storage-notice dismissal is kept in that tab only. Cook's own scripts do not set cookies. Your hosting or service providers may have separate security processing that must be documented before launch.</p>
+    <p data-i18n="privStorage3">If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.</p>
     <p data-i18n="privStorage2">OK and the close button on the storage notice only dismiss the notice. They do not authorise analytics, advertising or other optional tracking. Any future non-essential storage requires a separate choice before it starts, with an equally easy refusal and withdrawal.</p>
     <h3 data-i18n="privOther">Other existing features</h3>
     <p data-i18n="privOther1">The current recipe-list speech feature requests an approximate country from country.is using your IP address to choose a speech language. If you use microphone recognition, your browser may send audio to its speech-service provider. Typed ingredient entry is available instead. These providers, their policies and the legal basis for these features must be reviewed before public launch.</p>

@@ -355,7 +355,9 @@ window.I18N["pl"] = {
   "accTooMany": "Wysłano zbyt wiele e-maili. Odczekaj chwilę i spróbuj ponownie.",
   "accEmailInvalid": "Ten adres e-mail nie jest akceptowany.",
   "favNone": "Nie masz jeszcze zapisanych ulubionych.",
-  "favShowAll": "Zobacz wszystkie przepisy"
+  "favShowAll": "Zobacz wszystkie przepisy",
+  "accStay": "Nie wylogowuj mnie na tym urządzeniu",
+  "privStorage3": "Jeśli zaznaczysz „Nie wylogowuj mnie na tym urządzeniu”, Twoja sesja logowania i motyw będą przechowywane w localStorage tej przeglądarki do czasu wylogowania, dzięki czemu pozostaniesz zalogowany po zamknięciu karty. Bez zaznaczenia są przechowywane tylko w tej karcie."
  },
  "names": {
   "beer": "Piwo",

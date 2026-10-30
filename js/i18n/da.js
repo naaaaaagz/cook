@@ -355,7 +355,9 @@ window.I18N["da"] = {
   "accTooMany": "Der er sendt for mange mails. Vent lidt, og prøv igen.",
   "accEmailInvalid": "Denne e-mailadresse accepteres ikke.",
   "favNone": "Du har ikke gemt nogen favoritter endnu.",
-  "favShowAll": "Se alle opskrifter"
+  "favShowAll": "Se alle opskrifter",
+  "accStay": "Forbliv logget ind på denne enhed",
+  "privStorage3": "Hvis du sætter flueben ved »Forbliv logget ind på denne enhed«, gemmes din login-session og dit tema i denne browsers localStorage, indtil du logger ud, så du forbliver logget ind efter at have lukket fanen. Uden flueben gemmes de kun i denne fane."
  },
  "names": {
   "beer": "Øl",

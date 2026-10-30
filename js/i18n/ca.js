@@ -355,7 +355,9 @@ window.I18N["ca"] = {
   "accTooMany": "S’han enviat massa correus. Espera una estona i torna-ho a provar.",
   "accEmailInvalid": "Aquesta adreça de correu no s’accepta.",
   "favNone": "Encara no has desat cap preferit.",
-  "favShowAll": "Mira totes les receptes"
+  "favShowAll": "Mira totes les receptes",
+  "accStay": "Mantén la sessió iniciada en aquest dispositiu",
+  "privStorage3": "Si marques «Mantén la sessió iniciada en aquest dispositiu», la teva sessió i el teu tema es desen al localStorage d’aquest navegador fins que tanquis la sessió, perquè continuïs connectat després de tancar la pestanya. Si no ho marques, només es desen en aquesta pestanya."
  },
  "names": {
   "beer": "Cervesa",

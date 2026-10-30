@@ -355,7 +355,9 @@ window.I18N["hu"] = {
   "accTooMany": "Túl sok e-mail ment ki. Várj egy kicsit, és próbáld újra.",
   "accEmailInvalid": "Ezt az e-mail-címet nem fogadjuk el.",
   "favNone": "Még nincs mentett kedvenced.",
-  "favShowAll": "Összes recept megtekintése"
+  "favShowAll": "Összes recept megtekintése",
+  "accStay": "Maradjak bejelentkezve ezen az eszközön",
+  "privStorage3": "Ha bejelölöd a „Maradjak bejelentkezve ezen az eszközön” lehetőséget, a bejelentkezési munkameneted és a témád a böngésző localStorage-ében marad, amíg ki nem jelentkezel, így a lap bezárása után is bejelentkezve maradsz. Bejelölés nélkül csak ezen a lapon tároljuk őket."
  },
  "names": {
   "beer": "Sör",

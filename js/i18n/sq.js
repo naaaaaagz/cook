@@ -355,7 +355,9 @@ window.I18N["sq"] = {
   "accTooMany": "Janë dërguar shumë email-e. Prit pak dhe provo përsëri.",
   "accEmailInvalid": "Kjo adresë email-i nuk pranohet.",
   "favNone": "Nuk ke ende të preferuara të ruajtura.",
-  "favShowAll": "Shiko të gjitha recetat"
+  "favShowAll": "Shiko të gjitha recetat",
+  "accStay": "Më mbaj të identifikuar në këtë pajisje",
+  "privStorage3": "Nëse shënon “Më mbaj të identifikuar në këtë pajisje”, sesioni yt i hyrjes dhe tema ruhen në localStorage të këtij shfletuesi derisa të dalësh, kështu që mbetesh i identifikuar edhe pasi mbyll skedën. Pa këtë shenjë, ruhen vetëm në këtë skedë."
  },
  "names": {
   "beer": "Birrë",

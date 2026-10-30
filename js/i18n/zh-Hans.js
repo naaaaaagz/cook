@@ -355,7 +355,9 @@ window.I18N["zh-Hans"] = {
   "accTooMany": "发送的邮件过多。请稍等片刻再试。",
   "accEmailInvalid": "不接受此电子邮件地址。",
   "favNone": "你还没有收藏任何食谱。",
-  "favShowAll": "查看全部食谱"
+  "favShowAll": "查看全部食谱",
+  "accStay": "在此设备上保持登录",
+  "privStorage3": "如果你勾选“在此设备上保持登录”，你的登录会话和主题会保存在此浏览器的 localStorage 中，直到你退出登录，因此关闭标签页后仍保持登录。不勾选时，它们只保存在当前标签页中。"
  },
  "names": {
   "beer": "啤酒",

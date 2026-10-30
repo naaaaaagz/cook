@@ -17,7 +17,9 @@
   window.CookSession = { read: read, save: save };
   // This file loads in <head>: apply the saved theme before the page is drawn, so a dark
   // theme does not flash light first. app.js applies the same value again later.
+  // A new tab has no saved choices yet: use the theme kept for "Stay signed in", if any.
   var theme = read().theme;
+  if (!theme) { try { theme = localStorage.getItem('cook:theme:v1:' + location.pathname.replace(/[^/]*$/, '')); } catch (e) { theme = null; } }
   if (typeof document !== 'undefined' && ['light', 'dark', 'system'].indexOf(theme) >= 0) {
     document.documentElement.setAttribute('data-theme', theme);
   }

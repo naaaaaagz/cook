@@ -355,7 +355,9 @@ window.I18N["ms"] = {
   "accTooMany": "Terlalu banyak e-mel dihantar. Tunggu sebentar dan cuba lagi.",
   "accEmailInvalid": "Alamat e-mel ini tidak diterima.",
   "favNone": "Anda belum menyimpan sebarang kegemaran.",
-  "favShowAll": "Lihat semua resipi"
+  "favShowAll": "Lihat semua resipi",
+  "accStay": "Kekal log masuk pada peranti ini",
+  "privStorage3": "Jika anda menanda “Kekal log masuk pada peranti ini”, sesi log masuk dan tema anda disimpan dalam localStorage pelayar ini sehingga anda log keluar, jadi anda kekal log masuk selepas menutup tab. Tanpa tanda, ia hanya disimpan dalam tab ini."
  },
  "names": {
   "beer": "Bir",

@@ -105,6 +105,8 @@
       favSignIn: 'Sign in to save favorites.',
       favNone: 'You have no favorites saved yet.',
       favShowAll: 'Check all recipes',
+      accStay: 'Stay signed in on this device',
+      privStorage3: 'If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.',
       accLogOut: 'Log out',
       accDelete: 'Delete account',
       accDeleteConfirm: 'Are you sure? Your account will be permanently removed! Please enter your password to confirm:',
@@ -3206,7 +3208,8 @@
       }
     }
     textures = value.textures !== false;
-    setTheme(['light', 'dark', 'system'].indexOf(value.theme) >= 0 ? value.theme : 'light');
+    // Without a saved tab theme keep the one set early in <head> (e.g. a signed-in account's theme).
+    setTheme(['light', 'dark', 'system'].indexOf(value.theme) >= 0 ? value.theme : document.documentElement.getAttribute('data-theme') || 'light');
     document.querySelectorAll('input[name="units"]').forEach(function (radio) { radio.checked = radio.value === state.units; });
     if ($('recipe-search')) $('recipe-search').value = state.search;
   }
@@ -3312,7 +3315,7 @@
       state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false };
       state.favorites = [];
       activeCookRecord = null;
-      restoreSession(); setLang('en-US');
+      restoreSession(); setTheme('light'); setLang('en-US');
       if (pageScreen === 'layout') { draft = clone(state.layout); buildCanvas(); }
       saveSession();
     }

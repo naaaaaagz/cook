@@ -355,7 +355,9 @@ window.I18N["lt"] = {
   "accTooMany": "Išsiųsta per daug laiškų. Šiek tiek palaukite ir bandykite dar kartą.",
   "accEmailInvalid": "Šis el. pašto adresas nepriimamas.",
   "favNone": "Dar neturite išsaugotų mėgstamų.",
-  "favShowAll": "Peržiūrėti visus receptus"
+  "favShowAll": "Peržiūrėti visus receptus",
+  "accStay": "Likti prisijungus šiame įrenginyje",
+  "privStorage3": "Jei pažymėsite „Likti prisijungus šiame įrenginyje“, jūsų prisijungimo seansas ir tema bus saugomi šios naršyklės localStorage, kol atsijungsite, todėl liksite prisijungę ir uždarę skirtuką. Nepažymėjus jie saugomi tik šiame skirtuke."
  },
  "names": {
   "beer": "Alus",

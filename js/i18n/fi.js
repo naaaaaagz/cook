@@ -355,7 +355,9 @@ window.I18N["fi"] = {
   "accTooMany": "Sähköposteja on lähetetty liikaa. Odota hetki ja yritä uudelleen.",
   "accEmailInvalid": "Tätä sähköpostiosoitetta ei hyväksytä.",
   "favNone": "Et ole vielä tallentanut suosikkeja.",
-  "favShowAll": "Näytä kaikki reseptit"
+  "favShowAll": "Näytä kaikki reseptit",
+  "accStay": "Pysy kirjautuneena tällä laitteella",
+  "privStorage3": "Jos valitset ”Pysy kirjautuneena tällä laitteella”, kirjautumisistuntosi ja teemasi säilytetään tämän selaimen localStoragessa, kunnes kirjaudut ulos, joten pysyt kirjautuneena välilehden sulkemisen jälkeen. Muuten ne säilytetään vain tässä välilehdessä."
  },
  "names": {
   "beer": "Olut",
