@@ -15,24 +15,19 @@
 </head>
 <body data-page="layout">
 
-<button id="btn-account" class="btn btn-secondary account-launch" type="button" aria-haspopup="dialog" data-i18n="accAccount">Account</button>
 <dialog id="account-dialog" class="dialog account-dialog" aria-labelledby="account-title">
   <div class="account-content">
     <button class="account-close" type="button" data-close="account-dialog" aria-label="Close account" data-i18n-label="accClose">&times;</button>
     <h2 id="account-title" data-i18n="accTitle">Your Cook account</h2>
     <p id="account-status" role="status" aria-live="polite"></p>
     <div id="account-guest">
-      <div class="account-tabs" role="group" aria-label="Account action" data-i18n-label="accActionGroup">
-        <button class="btn btn-secondary" type="button" data-account-mode="login" data-i18n="accSignIn">Sign in</button>
-        <button class="btn btn-secondary" type="button" data-account-mode="signup" data-i18n="accCreate">Create account</button>
-      </div>
       <form id="account-form">
         <label class="field"><span data-i18n="accEmail">Email address</span><input id="account-email" name="email" type="email" autocomplete="email" maxlength="254" required></label>
         <label class="field" id="account-password-field"><span data-i18n="accPassword">Password</span><input id="account-password" name="password" type="password" autocomplete="current-password" maxlength="72" required></label>
-        <p id="account-signup-note" hidden><span data-i18n="accSignupNote">Use 12 or more characters. We will send a confirmation link. Sign in to save your kitchen and preferences.</span> <button type="button" class="text-button" data-open-privacy data-i18n="accPrivacyLink">Privacy notice</button></p>
         <button class="btn btn-primary btn-wide" id="account-submit" type="submit">Sign in</button>
       </form>
-      <div class="account-tabs">
+      <button id="account-switch" class="btn btn-secondary btn-wide account-switch" type="button">Create account</button>
+      <div class="account-links">
         <button class="text-button" type="button" data-account-mode="reset" data-i18n="accForgot">Forgot password?</button>
         <button class="text-button" type="button" data-account-mode="resend" data-i18n="accResend">Resend confirmation</button>
       </div>
@@ -42,17 +37,22 @@
       <p data-i18n="accMemberNote">Your kitchen layout, language, theme and units are saved when you save your kitchen or close Options. You can also save them here.</p>
       <button id="account-save" class="btn btn-primary" type="button" data-i18n="accSave">Save kitchen and settings</button>
       <button id="account-export" class="btn btn-secondary" type="button" data-i18n="accExport">Download my settings</button>
-      <button id="account-logout" class="btn btn-secondary" type="button" data-i18n="accSignOut">Sign out</button>
+      <button id="account-logout" class="btn btn-secondary" type="button" data-i18n="accLogOut">Log out</button>
+      <button id="account-delete-open" class="text-button account-danger" type="button" data-i18n="accDelete">Delete account</button>
+      <form id="account-delete" class="account-delete" hidden>
+        <p data-i18n="accDeleteConfirm">Are you sure? Your account will be permanently removed! Please enter your password to confirm:</p>
+        <label class="field"><span data-i18n="accPassword">Password</span><input id="account-delete-password" type="password" autocomplete="current-password" maxlength="72" required></label>
+        <button class="btn btn-danger" type="submit" data-i18n="accDeleteNow">Delete my account</button>
+        <button id="account-delete-cancel" class="btn btn-secondary" type="button" data-i18n="cancel">Cancel</button>
+      </form>
     </div>
     <form id="account-recovery" hidden>
-      <label class="field"><span data-i18n="accNewPassword">New password</span><input id="account-new-password" type="password" autocomplete="new-password" minlength="12" maxlength="72" required></label>
-      <button class="btn btn-primary" type="submit" data-i18n="accSaveNewPassword">Save new password</button>
+      <p id="account-recovery-email" class="account-recovery-email"></p>
+      <label class="field"><span data-i18n="accEnterNew">Enter your new password</span><input id="account-new-password" type="password" autocomplete="new-password" minlength="12" maxlength="72" required></label>
+      <label class="field"><span data-i18n="accRepeat">Repeat password</span><input id="account-new-password2" type="password" autocomplete="new-password" minlength="12" maxlength="72" required></label>
+      <button class="btn btn-primary btn-wide" type="submit" data-i18n="accSaveNewPassword">Save new password</button>
     </form>
   </div>
-</dialog>
-<dialog id="account-message" class="dialog account-dialog" aria-labelledby="account-message-title">
-  <div class="account-content"><h2 id="account-message-title" data-i18n="accAccount">Account</h2><p id="account-message-text"></p>
-    <button class="btn btn-primary" type="button" data-close="account-message" data-i18n="accOk">OK</button></div>
 </dialog>
 <dialog id="privacy-dialog" class="dialog privacy-dialog" aria-labelledby="privacy-title">
   <div class="account-content">
@@ -78,9 +78,14 @@
   </div>
 </dialog>
 
-<button id="btn-options" class="btn-options" type="button" aria-haspopup="dialog" data-i18n-label="options">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 6h.01M8.5 6H20M4 12h.01M8.5 12H20M4 18h.01M8.5 18H20"/></svg>
-</button>
+<div class="top-icons">
+  <button id="btn-account" class="btn-icon-top btn-account" type="button" aria-haspopup="dialog" data-i18n-label="accAccount" aria-label="Account">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.8 3.4-6 7-6s6.4 2.2 7 6"/></svg>
+  </button>
+  <button id="btn-options" class="btn-icon-top btn-options" type="button" aria-haspopup="dialog" data-i18n-label="options">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M8.5 6H20M8.5 12H20M8.5 18H20"/><circle cx="4" cy="6" r="1.1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.1" fill="currentColor" stroke="none"/></svg>
+  </button>
+</div>
 
 <dialog id="options-dialog" class="dialog" aria-labelledby="options-title">
   <form method="dialog">
@@ -167,11 +172,17 @@
 </main>
 
 <footer class="account-footer"><button class="text-button" type="button" data-open-privacy data-i18n="privFooter">Privacy &amp; storage</button><button id="storage-reopen" class="text-button" type="button" data-i18n="noticeReopen">Storage notice</button></footer>
-<aside id="storage-notice" class="storage-notice" aria-label="Browser storage notice" data-i18n-label="noticeLabel" hidden>
+<div class="slide-stack">
+<aside id="account-message" class="slide-note" role="status" aria-live="polite" hidden>
+  <p id="account-message-text"></p>
+  <button id="account-message-ok" class="btn btn-primary" type="button" data-i18n="accOk">OK</button>
+</aside>
+<aside id="storage-notice" class="slide-note storage-notice" aria-label="Browser storage notice" data-i18n-label="noticeLabel" hidden>
   <p><span data-i18n="noticeText">Cook uses browser storage for your requested cooking and sign-in features. No advertising or analytics storage is added.</span> <button class="text-button" type="button" data-open-privacy data-i18n="privFooter">Privacy &amp; storage</button></p>
   <button id="storage-ok" class="btn btn-primary" type="button" data-i18n="accOk">OK</button>
   <button id="storage-close" class="account-close" type="button" aria-label="Close storage notice" data-i18n-label="noticeClose">&times;</button>
 </aside>
+</div>
 
 <button id="due-toast" class="due-toast" type="button" hidden></button>
 

@@ -15,15 +15,22 @@
   if (tokenHash || parameters.has('access_token') || parameters.has('error')) history.replaceState(null, '', location.pathname + location.search);
   // Texts are translation keys; tr() looks them up in the current language.
   function tr(key) { return window.CookI18n ? window.CookI18n.t(key) : key; }
-  var lastStatus = null, lastMessage = null;
-  function status(key) { lastStatus = key; $('account-status').textContent = tr(key); }
-  function open(id) { if (!$(id).open) $(id).showModal(); }
-  function message(title, text) {
-    lastMessage = [title, text];
-    $('account-message-title').textContent = tr(title);
-    $('account-message-text').textContent = tr(text);
-    open('account-message');
+  var lastStatus = null, lastDetail = '', lastMessage = null;
+  // detail: a short technical error code shown after the text, so problems can be diagnosed.
+  function status(key, detail) {
+    lastStatus = key; lastDetail = detail || '';
+    $('account-status').textContent = key ? tr(key) + (lastDetail ? ' (' + lastDetail + ')' : '') : '';
   }
+  function open(id) { if (!$(id).open) $(id).showModal(); }
+  // Messages slide up at the bottom of the page, like the storage notice.
+  // While the account window is open the page behind it can't be clicked, so the message shows there.
+  function message(key) {
+    if ($('account-dialog').open) { status(key); return; }
+    lastMessage = key;
+    $('account-message-text').textContent = tr(key);
+    $('account-message').hidden = false;
+  }
+  $('account-message-ok').addEventListener('click', function () { $('account-message').hidden = true; lastMessage = null; });
   function dismissNotice() {
     $('storage-notice').hidden = true;
     try { sessionStorage.setItem(noticeKey, 'dismissed'); } catch (e) { /* Tab-only dismissal still works. */ }
@@ -35,28 +42,52 @@
   catch (e) { $('storage-notice').hidden = false; }
   document.querySelectorAll('[data-open-privacy]').forEach(function (el) { el.addEventListener('click', function () { open('privacy-dialog'); }); });
   document.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', function () { $(el.dataset.close).close(); }); });
-  ['account-dialog', 'account-message', 'privacy-dialog'].forEach(function (id) {
+  ['account-dialog', 'privacy-dialog'].forEach(function (id) {
     $(id).addEventListener('click', function (event) { if (event.target === $(id)) $(id).close(); });
   });
   $('btn-account').addEventListener('click', function () { open('account-dialog'); });
   var SUBMIT = { login: 'accSignIn', signup: 'accCreate', reset: 'accSendReset', resend: 'accResend' };
+  // The less prominent button under the main one switches between signing in and creating an account.
+  function drawMode() {
+    $('account-submit').textContent = tr(SUBMIT[mode]);
+    $('account-switch').textContent = tr(mode === 'login' ? 'accCreate' : 'accSignIn');
+  }
   function setMode(value) {
     mode = value;
     $('account-password-field').hidden = value === 'reset' || value === 'resend';
     $('account-password').required = !$('account-password-field').hidden;
     $('account-password').minLength = value === 'signup' ? 12 : 1;
     $('account-password').autocomplete = value === 'signup' ? 'new-password' : 'current-password';
-    $('account-signup-note').hidden = value !== 'signup';
-    $('account-submit').textContent = tr(SUBMIT[value]);
     $('account-password').value = '';
+    drawMode();
+    status(null);
   }
   document.querySelectorAll('[data-account-mode]').forEach(function (el) { el.addEventListener('click', function () { setMode(el.dataset.accountMode); }); });
+  $('account-switch').addEventListener('click', function () { setMode(mode === 'login' ? 'signup' : 'login'); });
+  function hideDelete() { $('account-delete').hidden = true; $('account-delete-open').hidden = false; $('account-delete-password').value = ''; }
   function draw() {
     $('account-guest').hidden = !!user || recovery;
     $('account-member').hidden = !user || recovery;
     $('account-recovery').hidden = !recovery;
-    $('btn-account').textContent = tr(user ? 'accMyAccount' : 'accAccount');
+    var label = tr(user ? 'accMyAccount' : 'accAccount');
+    $('btn-account').setAttribute('aria-label', label);
+    $('btn-account').title = label;
     $('account-email-display').textContent = user ? user.email : '';
+    $('account-recovery-email').textContent = user ? user.email : '';
+    if (!user) hideDelete();
+    // app.js shows favorites only for a signed-in, loaded account.
+    document.dispatchEvent(new Event('cook:account'));
+  }
+  // Supabase error codes → a reason the visitor can act on. Unknown errors keep their code visible.
+  function failure(e, action) {
+    var code = (e && e.code) || '', st = (e && e.status) || 0, text = (e && e.message) || '';
+    // Server errors (5xx) arrive without a code; their short message is the useful detail.
+    var detail = code || String(text).slice(0, 80) || String(st || '');
+    if (code === 'over_email_send_rate_limit' || code === 'over_request_rate_limit' || st === 429) return ['accTooMany', detail];
+    if (code === 'weak_password') return ['accPasswordRule', detail];
+    if (code === 'email_address_invalid' || code === 'validation_failed') return ['accEmailInvalid', detail];
+    if (action !== 'login' && (code === 'email_address_not_authorized' || st >= 500 || /sending|smtp/i.test(text))) return ['accEmailFailed', detail];
+    return [action === 'login' ? 'accLoginFailed' : 'accRequestFailed', detail];
   }
   function validConfig() {
     try {
@@ -84,10 +115,11 @@
     savedFingerprint = JSON.stringify(preferences());
     ready = true;
     status(data ? 'accLoaded' : 'accSignedInEmpty');
+    document.dispatchEvent(new Event('cook:account'));
   }
   function savePreferences() {
     if (!user) return Promise.resolve(true);
-    if (!ready) { message('accNotSavedTitle', 'accNotLoadedYet'); return Promise.resolve(false); }
+    if (!ready) { message('accNotLoadedYet'); return Promise.resolve(false); }
     var snapshot = preferences(), accountId = user.id;
     // Serialise writes so a slow old request cannot overwrite a later snapshot.
     saving = saving.then(async function () {
@@ -99,20 +131,31 @@
         status('accSaved');
         return true;
       } catch (e) {
-        status('accSaveFailed');
-        message('accNotSavedTitle', 'accRetrySave');
+        status('accRetrySave');
+        message('accSaveFailed');
         return false;
       }
     });
     return saving;
   }
-  window.CookAccount = { savePreferences: savePreferences, flushPending: function () {
-    return saving.then(function (ok) {
-      if (ok === false) return false;
-      // A dialog's close event can arrive after a navigation click. Capture changes now.
-      return user && JSON.stringify(preferences()) !== savedFingerprint ? savePreferences() : true;
-    });
-  } };
+  window.CookAccount = {
+    savePreferences: savePreferences,
+    flushPending: function () {
+      return saving.then(function (ok) {
+        if (ok === false) return false;
+        // A dialog's close event can arrive after a navigation click. Capture changes now.
+        return user && JSON.stringify(preferences()) !== savedFingerprint ? savePreferences() : true;
+      });
+    },
+    // Signed in with settings loaded: favorites can be shown and saved.
+    signedIn: function () { return !!user && ready; },
+    // Opens the account window with a reason, e.g. "Sign in to save favorites."
+    prompt: function (key) {
+      if (!user) setMode('login');
+      status(key);
+      open('account-dialog');
+    }
+  };
   $('account-save').addEventListener('click', savePreferences);
   $('options-dialog').addEventListener('close', function () { if (user) savePreferences(); });
   $('account-form').addEventListener('submit', async function (event) {
@@ -145,23 +188,37 @@
         status('accResendSent');
       }
     } catch (e) {
-      status(action === 'login' ? 'accLoginFailed' : 'accRequestFailed');
+      var why = failure(e, action);
+      status(why[0], why[1]);
       if (user && !ready) status('accLoadFailed');
     } finally { password = ''; busy = false; $('account-submit').disabled = false; }
   });
+  // Password reset link: show the address, ask for the new password twice.
   $('account-recovery').addEventListener('submit', async function (event) {
     event.preventDefault();
-    var password = $('account-new-password').value;
-    $('account-new-password').value = '';
+    var password = $('account-new-password').value, again = $('account-new-password2').value;
+    if (password !== again) { status('accMismatch'); return; }
     if (!passwordOK(password)) { status('accPasswordRule'); return; }
     if (busy) return;
     busy = true;
     try {
+      // Managed Auth stores only a secure hash of the new password.
       check(await client.auth.updateUser({ password: password }));
+      $('account-new-password').value = ''; $('account-new-password2').value = '';
       recovery = false; draw(); await loadSettings(); status('accPasswordUpdated');
-    } catch (e) { status('accPasswordFailed'); }
-    finally { password = ''; busy = false; }
+    } catch (e) {
+      var why = failure(e, 'recovery');
+      status(why[0] === 'accPasswordRule' ? 'accPasswordRule' : 'accPasswordFailed', why[1]);
+    } finally { password = ''; again = ''; busy = false; }
   });
+  // Removes this tab's authentication data and Cook choices.
+  async function signOutLocally() {
+    await client.auth.signOut({ scope: 'local' }).catch(function () {});
+    sessionStorage.removeItem('cook:auth:v1:' + scope);
+    sessionStorage.removeItem(ownerKey);
+    window.CookPreferences.reset();
+    user = null; ready = false;
+  }
   $('account-logout').addEventListener('click', async function () {
     if (busy) return;
     busy = true;
@@ -175,6 +232,32 @@
     user = null; ready = false;
     location.assign('index.html');
   });
+  // Delete account: confirm with the password. The database checks it against the stored hash.
+  $('account-delete-open').addEventListener('click', function () {
+    $('account-delete').hidden = false; $('account-delete-open').hidden = true;
+    $('account-delete-password').focus();
+  });
+  $('account-delete-cancel').addEventListener('click', function () { hideDelete(); status(null); });
+  $('account-delete').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    if (!client || !user || busy) return;
+    var password = $('account-delete-password').value;
+    $('account-delete-password').value = '';
+    busy = true;
+    status('accWait');
+    try {
+      await saving;
+      var removed = check(await client.rpc('cook_delete_account', { p_password: password }));
+      if (removed !== true) { status('accDeleteWrong'); return; }
+      await signOutLocally();
+      draw();
+      $('account-dialog').close();
+      status(null);
+      message('accDeleted');
+    } catch (e) {
+      status('accDeleteFailed', (e && e.code) || '');
+    } finally { password = ''; busy = false; }
+  });
   $('account-export').addEventListener('click', function () {
     var blob = new Blob([JSON.stringify({ email: user.email, settings: preferences() }, null, 2)], { type: 'application/json' });
     var url = URL.createObjectURL(blob), link = document.createElement('a');
@@ -184,7 +267,8 @@
     if (!validConfig()) {
       status('accUnavailable');
       $('account-form').querySelectorAll('input,button[type="submit"]').forEach(function (el) { el.disabled = true; });
-      if (tokenHash) message('accVerifyUnavailableTitle', 'accVerifyUnavailable');
+      $('account-switch').disabled = true;
+      if (tokenHash) message('accVerifyUnavailable');
       return;
     }
     try {
@@ -203,10 +287,10 @@
         var oldOwner = sessionStorage.getItem(ownerKey);
         if (oldOwner && oldOwner !== confirmed.id) window.CookPreferences.reset();
         user = confirmed; recovery = tokenType === 'recovery'; draw();
-        if (recovery) { status('accChooseNew'); open('account-dialog'); }
+        if (recovery) { status(null); open('account-dialog'); $('account-new-password').focus(); }
         else {
           try { await loadSettings(); } catch (e) { status('accConfirmedLoadFailed'); }
-          message('accConfirmedTitle', 'accConfirmed');
+          message('accConfirmed');
         }
       } else {
         var session = check(await client.auth.getSession()).session;
@@ -216,7 +300,7 @@
           draw(); await loadSettings();
         } else {
           if (sessionStorage.getItem(ownerKey)) { window.CookPreferences.reset(); sessionStorage.removeItem(ownerKey); }
-          status('accPrompt');
+          status(null);
         }
       }
       client.auth.onAuthStateChange(function (event) {
@@ -229,16 +313,17 @@
     } catch (e) {
       ready = false;
       status('accLoadError');
-      if (tokenHash) message('accLinkFailedTitle', 'accLinkFailed');
+      if (tokenHash) message('accLinkFailed');
     }
   }
   // Redraw this file's texts after a language change in app.js.
   document.addEventListener('cook:lang', function () {
     draw();
-    $('account-submit').textContent = tr(SUBMIT[mode]);
-    if (lastStatus) $('account-status').textContent = tr(lastStatus);
-    if (lastMessage) { $('account-message-title').textContent = tr(lastMessage[0]); $('account-message-text').textContent = tr(lastMessage[1]); }
+    drawMode();
+    if (lastStatus) status(lastStatus, lastDetail);
+    if (lastMessage) $('account-message-text').textContent = tr(lastMessage);
   });
+  drawMode();
   draw();
   start();
 })();

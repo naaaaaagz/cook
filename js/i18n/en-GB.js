@@ -8,7 +8,11 @@ window.I18N["en-GB"] = {
   "layoutHelp": "Drag to move, drag the corner to resize. Things can only overlap the worktop.",
   "allergen_Sulphites": "Sulphites",
   "fvNothingYet": "Nothing recognised yet.",
-  "fvNoSR": "This browser can't recognise speech. Type what you have instead."
+  "fvNoSR": "This browser can't recognise speech. Type what you have instead.",
+  "favOnly": "Favourites only",
+  "favAdd": "Add to favourites",
+  "favAdded": "Added to favourites",
+  "favSignIn": "Sign in to save favourites."
  },
  "uk": {
   "baking soda": "bicarbonate of soda",

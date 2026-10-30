@@ -28,7 +28,13 @@ async function backend(route) {
   let user;
   try {const token=request.headers().authorization?.split(' ')[1];const id=JSON.parse(Buffer.from(token.split('.')[1],'base64url')).sub;user=[...accounts.values()].find(x=>x.id===id);}catch{}
   function reply(value,status=200) { return route.fulfill({status,contentType:'application/json',body:JSON.stringify(value)}); }
-  if(url.pathname==='/auth/v1/signup')return reply({user:{id:'unconfirmed',email:body.email,identities:[]},session:null});
+  if(url.pathname==='/auth/v1/signup')return body.email==='smtp-fails@example.com'?route.fulfill({status:500,contentType:'application/json',headers:{'x-supabase-api-version':'2024-01-01'},body:JSON.stringify({code:'unexpected_failure',message:'Error sending confirmation email'})}):reply({user:{id:'unconfirmed',email:body.email,identities:[]},session:null});
+  if(url.pathname==='/auth/v1/user'&&method==='PUT')return user?reply(user):reply({msg:'Not authenticated'},401);
+  if(url.pathname==='/rest/v1/rpc/cook_delete_account') {
+    if(!user)return reply({message:'Not authenticated'},401);
+    if(body.p_password!=='other-test-password-123')return reply(false);
+    accounts.delete(user.email);rows.delete(user.id);return reply(true);
+  }
   if(url.pathname==='/auth/v1/token')return accounts.has(body.email)?reply(session(accounts.get(body.email))):reply({msg:'Invalid login credentials'},400);
   if(url.pathname==='/auth/v1/verify')return body.token_hash==='good-link'?reply(session(a)):reply({msg:'Expired link'},403);
   if(url.pathname==='/auth/v1/user')return user?reply(user):reply({msg:'Not authenticated'},401);
@@ -66,12 +72,19 @@ async function main() {
     await context.route('https://api.country.is/**',route=>route.fulfill({contentType:'application/json',body:'{"country":"HU"}'}));
     const page=await context.newPage();await page.goto(base+'/index.html');await page.locator('#storage-ok').click();
     await page.locator('#btn-account').click();
-    await page.locator('#account-status').filter({hasText:'Sign in or create'}).waitFor();
-    await page.locator('[data-account-mode="signup"]').click();
+    assert.equal(await page.locator('#account-status').textContent(),'');
+    assert.equal(await page.locator('#account-switch').textContent(),'Create account');
+    await page.locator('#account-switch').click();
+    assert.equal(await page.locator('#account-submit').textContent(),'Create account');
+    assert.equal(await page.locator('#account-switch').textContent(),'Sign in');
+    // A failed confirmation email names the reason and keeps the technical code visible.
+    await page.locator('#account-email').fill('smtp-fails@example.com');await page.locator('#account-password').fill('a-test-password-123');await page.locator('#account-submit').click();
+    await page.locator('#account-status').filter({hasText:'email could not be sent'}).waitFor();
+    assert.match(await page.locator('#account-status').textContent(),/Error sending confirmation email/);
     await page.locator('#account-email').fill(b.email);await page.locator('#account-password').fill('a-test-password-123');await page.locator('#account-submit').click();
     await page.locator('#account-status').filter({hasText:'confirmation email'}).waitFor();
-    assert.equal(calls.find(x=>x.path==='/auth/v1/signup').email,b.email);
-    await page.locator('[data-account-mode="login"]').click();
+    assert(calls.some(x=>x.path==='/auth/v1/signup'&&x.email===b.email));
+    await page.locator('#account-switch').click();
     await page.locator('#account-email').fill(a.email);await page.locator('#account-password').fill('a-test-password-123');await page.locator('#account-submit').click();
     await page.locator('#account-member:not([hidden])').waitFor();
     await page.locator('#account-status').filter({hasText:'Signed in.'}).waitFor();
@@ -90,14 +103,23 @@ async function main() {
     writeDelay=0;assert.equal(rows.get(a.id).preferences.units,'imperial');assert.equal(rows.get(a.id).preferences.lang,'hu');
     await page.locator('#btn-layout-save').click();await page.waitForURL('**/recipes.html');
     assert(rows.get(a.id).preferences.layoutSaved);assert(rows.get(a.id).preferences.layout.countertop);
+    // Favorites: the star on a photo saves to the account; "Favorites only" lists just those.
+    await page.locator('.filter-star').waitFor();
+    const firstFav=page.locator('.fav-card').first();const favId=await firstFav.getAttribute('data-fav');
+    await firstFav.click();await page.waitForFunction(()=>document.querySelector('.fav-card').getAttribute('aria-pressed')==='true');
+    await page.waitForFunction(()=>window.CookAccount.flushPending());
+    assert.deepEqual(rows.get(a.id).preferences.favorites,[favId]);
+    await page.locator('.filter-star').click();assert.equal(await page.locator('.fav-card').count(),1);
+    await page.locator('.filter-star').click();
     // The page is in Hungarian now, so account texts must be translated.
     const tx=key=>page.evaluate(k=>window.CookI18n.t(k),key);assert.equal(await tx('accLoaded'),'A mentett konyhád és beállításaid betöltődtek.');
-    await page.locator('#btn-account').click();await page.locator('#account-status').filter({hasText:await tx('accLoaded')}).waitFor();
+    await page.locator('#btn-account').click();await page.locator('#account-status').filter({hasText:await tx('accSaved')}).waitFor();
     assert.equal(await page.locator('#account-save').textContent(),await tx('accSave'));
-    failWrites=true;await page.locator('#account-save').click();await page.locator('#account-message[open]').waitFor();
-    assert.equal(await page.locator('#account-message-title').textContent(),await tx('accNotSavedTitle'));
+    // With the account window open, a failed save is reported inside it (the page behind can't be clicked).
+    failWrites=true;await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:await tx('accSaveFailed')}).waitFor();
+    assert(await page.locator('#account-message').isHidden());
     assert(await page.evaluate(()=>window.CookPreferences.read().layoutSaved));
-    await page.locator('[data-close="account-message"]').click();failWrites=false;
+    failWrites=false;
     await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:await tx('accSaved')}).waitFor();
     await page.locator('#account-logout').click();await page.waitForURL('**/index.html');
     assert.equal(await page.evaluate(()=>window.CookPreferences.read().layoutSaved),false);
@@ -108,22 +130,34 @@ async function main() {
     assert.equal(await page.evaluate(()=>window.CookPreferences.read().layoutSaved),false);
     await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:'settings saved'}).waitFor();
     assert(rows.has(a.id)&&rows.has(b.id));assert.equal(rows.get(b.id).preferences.layoutSaved,false);
+    // Delete account: a wrong password keeps it; the right one removes the account and its settings.
+    await page.locator('#account-delete-open').click();assert(await page.locator('#account-delete').isVisible());
+    await page.locator('#account-delete-password').fill('wrong-password-123');await page.locator('#account-delete button[type="submit"]').click();
+    await page.locator('#account-status').filter({hasText:'Wrong password'}).waitFor();assert(accounts.has(b.email));
+    await page.locator('#account-delete-password').fill('other-test-password-123');await page.locator('#account-delete button[type="submit"]').click();
+    await page.locator('#account-message:not([hidden])').waitFor();assert.equal(await page.locator('#account-message-text').textContent(),'Your account has been deleted.');
+    assert(!accounts.has(b.email));assert(!rows.has(b.id));assert(await page.locator('#account-guest').isVisible()===false);
+    await page.locator('#account-message-ok').click();
     // Cross-browser confirmation, with an actual verification response required.
     const verify=await context.newPage();await verify.goto(base+'/index.html#token_hash=good-link&type=email');
-    await verify.locator('#account-message[open]').waitFor();assert.equal(await verify.locator('#account-message-text').textContent(),await verify.evaluate(()=>window.CookI18n.t('accConfirmed')));
+    await verify.locator('#account-message:not([hidden])').waitFor();assert.equal(await verify.locator('#account-message-text').textContent(),await verify.evaluate(()=>window.CookI18n.t('accConfirmed')));
     assert.equal(new URL(verify.url()).hash,'');
     assert.equal(await verify.evaluate(()=>window.CookPreferences.read().units),'imperial');
     const invalid=await context.newPage();await invalid.goto(base+'/index.html#token_hash=expired&type=email');
-    await invalid.locator('#account-message[open]').waitFor();assert.equal(await invalid.locator('#account-message-title').textContent(),await invalid.evaluate(()=>window.CookI18n.t('accLinkFailedTitle')));
+    await invalid.locator('#account-message:not([hidden])').waitFor();assert.equal(await invalid.locator('#account-message-text').textContent(),await invalid.evaluate(()=>window.CookI18n.t('accLinkFailed')));
     assert.equal(new URL(invalid.url()).hash,'');
     const recovery=await context.newPage();await recovery.goto(base+'/index.html#token_hash=good-link&type=recovery');
-    await recovery.locator('#account-recovery:not([hidden])').waitFor();await recovery.locator('#account-new-password').fill('new-test-password-123');
+    await recovery.locator('#account-recovery:not([hidden])').waitFor();
+    assert.equal(await recovery.locator('#account-recovery-email').textContent(),a.email);
+    await recovery.locator('#account-new-password').fill('new-test-password-123');await recovery.locator('#account-new-password2').fill('new-test-password-124');
+    await recovery.locator('#account-recovery button').click();await recovery.waitForFunction(()=>document.getElementById('account-status').textContent===window.CookI18n.t('accMismatch'));
+    await recovery.locator('#account-new-password2').fill('new-test-password-123');
     await recovery.locator('#account-recovery button').click();await recovery.waitForFunction(()=>document.getElementById('account-status').textContent===window.CookI18n.t('accPasswordUpdated'));
     // Browser storage snapshots/exports cannot accidentally contain auth credentials.
     const snapshot=await verify.evaluate(()=>window.CookSession.read());
     assert(!/access_token|refresh_token|password/.test(JSON.stringify(snapshot)));
     const mobile=await context.newPage();await mobile.setViewportSize({width:390,height:844});await mobile.goto(base+'/index.html');
-    await mobile.locator('#btn-account').click();await mobile.locator('[data-account-mode="signup"]').click();
+    await mobile.locator('#btn-account').click();await mobile.locator('#account-switch').click();
     assert(await mobile.locator('#account-email').isVisible());
     assert(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     fs.mkdirSync(path.join(root,'.tmp'),{recursive:true});
@@ -141,7 +175,7 @@ async function main() {
     await mobile.screenshot({path:path.join(root,'.tmp/account-storage.png')});
     assert.deepEqual(errors,[]);
     await context.close();
-    console.log('PASS: disabled setup, OK/X storage notice, privacy, +aliases, sign-in, isolated accounts, kitchen/preferences save/reload, failure/retry, verification/expired links, recovery, sign-out, mobile layout. Auth/database are mocked; live RLS/delivery not tested.');
+    console.log('PASS: disabled setup, OK/X storage notice, privacy, +aliases, sign-in, isolated accounts, kitchen/preferences save/reload, failure/retry, verification/expired links, recovery with repeat, sign-out, favorites, delete account, email-error reasons, mobile layout. Auth/database are mocked; live RLS/delivery not tested.');
   } finally { await browser.close(); }
 }
 main().catch(error=>{console.error(error);process.exitCode=1;}).finally(()=>server.close());

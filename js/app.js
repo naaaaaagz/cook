@@ -99,6 +99,23 @@
       method_airfryer: 'Air fryer',
       method_slowcooker: 'Slow cooker',
       method_nocook: 'No-cook',
+      favOnly: 'Favorites only',
+      favAdd: 'Add to favorites',
+      favAdded: 'Added to favorites',
+      favSignIn: 'Sign in to save favorites.',
+      accLogOut: 'Log out',
+      accDelete: 'Delete account',
+      accDeleteConfirm: 'Are you sure? Your account will be permanently removed! Please enter your password to confirm:',
+      accDeleteNow: 'Delete my account',
+      accDeleteWrong: 'Wrong password. Your account was not deleted.',
+      accDeleteFailed: 'Your account could not be deleted. Please try again later.',
+      accDeleted: 'Your account has been deleted.',
+      accEnterNew: 'Enter your new password',
+      accRepeat: 'Repeat password',
+      accMismatch: 'The passwords do not match.',
+      accEmailFailed: 'The email could not be sent. Please try again later.',
+      accTooMany: 'Too many emails were sent. Please wait a while and try again.',
+      accEmailInvalid: 'This email address is not accepted.',
       accOk: 'OK',
       accAccount: 'Account',
       accMyAccount: 'My account',
@@ -460,7 +477,8 @@
     choices: null,
     built: null,
     mapView: true, // map or list; map needs a saved layout
-    filters: { starred: true, diet: [], cat: [], cuisine: [], method: [], voice: false }, // starred: "Most popular" filter, on by default for now
+    favorites: [], // recipe ids; saved with the account
+    filters: { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false }, // fav: "Favorites only" (signed in)
     search: '', // text in the recipe search box
     voice: [], // ingredient keys said (or typed) in the fridge panel
     picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
@@ -499,7 +517,7 @@
     state.screen = name;
     var section = $('screen-' + name);
     if (section) section.hidden = false;
-    $('btn-options').hidden = name === 'layout';
+    document.querySelector('.top-icons').hidden = name === 'layout';
     updateTitle();
     window.scrollTo(0, 0);
     if (typeof updateJump === 'function') setTimeout(updateJump, 0);
@@ -609,6 +627,7 @@
       redrawCooking();
     }
     if (reading && $('read-dialog').open) { $('read-title').textContent = recipeName(reading.recipe); renderRead(); }
+    paintFavs();
   }
   on('lang-select', 'change', function (e) { setLang(e.target.value); });
   on('btn-layout', 'click', function () {
@@ -1369,11 +1388,66 @@
     return { label: label, contains: contains };
   }
 
-  // A five-pointed star (filled with currentColor) for "Most popular" recipes.
-  function starSvg(cls) {
+  // A five-pointed star for favorites: filled with currentColor, or an outline when not a favorite.
+  function starSvg(cls, outline) {
     return '<svg class="' + cls + '" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">' +
-      '<path fill="currentColor" d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z"/></svg>';
+      '<path ' + (outline ? 'fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"' : 'fill="currentColor"') + ' d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9z"/></svg>';
   }
+
+  // ---------- Favorites (saved with the account; only while signed in) ----------
+  function signedIn() { return !!(window.CookAccount && window.CookAccount.signedIn()); }
+  function isFav(r) { return state.favorites.indexOf(r.id) >= 0; }
+  function cleanFavorites(list) {
+    var known = window.RECIPES.map(function (r) { return r.id; });
+    return list.filter(function (id, i) { return known.indexOf(id) >= 0 && list.indexOf(id) === i; }).slice(0, 500);
+  }
+  function toggleFav(r) {
+    if (!signedIn()) { window.CookAccount && window.CookAccount.prompt('favSignIn'); return; }
+    if (isFav(r)) state.favorites = state.favorites.filter(function (id) { return id !== r.id; });
+    else state.favorites = state.favorites.concat(r.id);
+    preferencesRevision++;
+    saveSession();
+    paintFavs();
+    if (state.filters.fav && state.screen === 'recipes') renderRecipes();
+    window.CookAccount.savePreferences();
+  }
+  // The small star on a recipe card's photo: filled when a favorite.
+  function paintFavButton(button, r) {
+    var fav = signedIn() && isFav(r);
+    button.innerHTML = starSvg('star-icon', !fav);
+    button.setAttribute('aria-pressed', String(fav));
+    button.setAttribute('aria-label', t(fav ? 'favAdded' : 'favAdd'));
+    button.title = t(fav ? 'favAdded' : 'favAdd');
+  }
+  // "Add to favorites" / "Added to favorites" buttons and the star after the recipe name.
+  function paintFavs() {
+    document.querySelectorAll('[data-fav]').forEach(function (button) {
+      var r = window.RECIPES.filter(function (x) { return x.id === button.getAttribute('data-fav'); })[0];
+      if (r) paintFavButton(button, r);
+    });
+    var r = state.recipe, fav = !!r && signedIn() && isFav(r);
+    ['btn-fav', 'btn-fav-done'].forEach(function (id) {
+      var button = $(id);
+      if (!button) return;
+      button.setAttribute('aria-pressed', String(fav));
+      button.querySelector('.fav-icon').innerHTML = starSvg('star-icon', !fav);
+      button.querySelector('.btn-label').textContent = t(fav ? 'favAdded' : 'favAdd');
+    });
+    var star = $('det-star');
+    if (star) {
+      star.hidden = !fav;
+      star.innerHTML = fav ? starSvg('star-icon') : '';
+      star.title = t('favAdded');
+    }
+  }
+  on('btn-fav', 'click', function () { if (state.recipe) toggleFav(state.recipe); });
+  on('btn-fav-done', 'click', function () { if (state.recipe) toggleFav(state.recipe); });
+  // Signing in or out changes which favorites (and the "Favorites only" filter) show.
+  document.addEventListener('cook:account', function () {
+    if ($('filters')) renderFilters();
+    if (state.filters.fav && $('screen-recipes')) renderRecipes();
+    paintFavs();
+  });
 
   function dietBadge(info) {
     if (!info.label) return '';
@@ -1514,18 +1588,20 @@
       });
       rows[group].appendChild(b);
     }
-    // "Most popular": only starred recipes while picked (on by default)
-    var star = document.createElement('button');
-    star.type = 'button';
-    star.className = 'filter-word filter-star';
-    star.innerHTML = starSvg('star-icon') + '<span>' + ht('mostPopular') + '</span>';
-    star.setAttribute('aria-pressed', String(state.filters.starred));
-    star.addEventListener('click', function () {
-      state.filters.starred = !state.filters.starred;
-      star.setAttribute('aria-pressed', String(state.filters.starred));
-      renderRecipes();
-    });
-    rows.diet.appendChild(star);
+    // "Favorites only": shown while signed in
+    if (signedIn()) {
+      var star = document.createElement('button');
+      star.type = 'button';
+      star.className = 'filter-word filter-star';
+      star.innerHTML = starSvg('star-icon') + '<span>' + ht('favOnly') + '</span>';
+      star.setAttribute('aria-pressed', String(state.filters.fav));
+      star.addEventListener('click', function () {
+        state.filters.fav = !state.filters.fav;
+        star.setAttribute('aria-pressed', String(state.filters.fav));
+        renderRecipes();
+      });
+      rows.diet.appendChild(star);
+    }
     DIETS.forEach(function (d) { text('diet', '\u00b7'); word('diet', d, t('diet_' + d)); });
     CATEGORIES.forEach(function (c, i) { if (i) text('cat', '\u00b7'); word('cat', c, t('cat_' + c)); });
     CUISINE_GROUPS.forEach(function (g, i) {
@@ -1638,7 +1714,7 @@
       state.voice = keys;
       if (why === 'finish' && keys.length) {
         state.filters.voice = true;
-        state.filters.starred = false; // the answer should not be limited to the most popular recipes
+        state.filters.fav = false; // the answer should not be limited to favorites
       }
       if (!keys.length) state.filters.voice = false;
       renderFilters();
@@ -1655,10 +1731,10 @@
     window.Fridge.open();
   });
 
-  // The filters (not the search text): Most popular, diet, dish type, cuisine, "what you said".
+  // The filters (not the search text): favorites, diet, dish type, cuisine, "what you said".
   function filtersOk(r) {
     var f = state.filters;
-    return (!f.cat.length || f.cat.indexOf(r.category) >= 0) && (!f.starred || r.starred === 1) && dietOk(r, f.diet) &&
+    return (!f.cat.length || f.cat.indexOf(r.category) >= 0) && (!f.fav || !signedIn() || isFav(r)) && dietOk(r, f.diet) &&
       (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; })) && methodOk(r, f.method) &&
       (!(f.voice && state.voice.length) || voiceOk(r));
   }
@@ -1718,7 +1794,6 @@
       r.cuisine.forEach(function (c) { add('label', t('cuisine_' + c), r); });
       var diet = dietInfo(defaultBuild(r)).label;
       if (diet) add('label', t('diet_' + diet), r);
-      if (r.starred === 1) add('label', t('mostPopular'), r);
       METHODS.forEach(function (m) { if (methodOf(r, m)) add('label', t('method_' + m), r); });
     });
     return { lang: lang, entries: entries, hay: hay };
@@ -1892,13 +1967,6 @@
         time.className = 'photo-time';
         time.textContent = fmtMinutes(estimateMinutes(built.steps));
         wrap.appendChild(time);
-        if (r.starred === 1) {
-          var badge = document.createElement('span');
-          badge.className = 'photo-star';
-          badge.title = t('mostPopular');
-          badge.innerHTML = starSvg('star-icon');
-          wrap.appendChild(badge);
-        }
         card.insertBefore(wrap, card.firstChild);
         card.addEventListener('click', function (e) {
           if (e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
@@ -1908,6 +1976,14 @@
           openDetails(r);
         });
         li.querySelector('.btn-read-card').addEventListener('click', function () { openRead(r); });
+        // Favorite toggle on the photo (outside the link, so it is its own button)
+        var fav = document.createElement('button');
+        fav.type = 'button';
+        fav.className = 'fav-card';
+        fav.setAttribute('data-fav', r.id);
+        fav.addEventListener('click', function () { toggleFav(r); });
+        li.appendChild(fav);
+        paintFavButton(fav, r);
         ul.appendChild(li);
       });
       wrap.appendChild(h);
@@ -1948,10 +2024,7 @@
     state.choices = picksFor(r);
     if (pageScreen !== 'details') { navigate('details'); return; }
     $('det-name').textContent = recipeName(r);
-    var detStar = $('det-star');
-    detStar.hidden = r.starred !== 1;
-    detStar.innerHTML = r.starred === 1 ? starSvg('star-icon') : '';
-    detStar.title = t('mostPopular');
+    paintFavs();
     var photo = $('det-photo');
     var img = photoEl(r, 500, 'photo-hero');
     img.id = 'det-photo';
@@ -3091,6 +3164,7 @@
     state.units = value.units === 'imperial' ? 'imperial' : 'metric';
     state.mapView = value.mapView !== false;
     if (typeof value.search === 'string') state.search = value.search.slice(0, 200);
+    if (Array.isArray(value.favorites)) state.favorites = cleanFavorites(value.favorites);
     if (Array.isArray(value.voice)) state.voice = value.voice.filter(function (key) { return typeof key === 'string' && /^[a-z0-9_]+$/.test(key); }).slice(0, 500);
     if (value.filters && typeof value.filters === 'object') {
       ['diet', 'cat', 'cuisine', 'method'].forEach(function (key) {
@@ -3098,7 +3172,7 @@
         if (key === 'cuisine') window.RECIPES.forEach(function (r) { allowed = allowed.concat(r.cuisine); });
         if (Array.isArray(value.filters[key])) state.filters[key] = value.filters[key].filter(function (x) { return allowed.indexOf(x) >= 0; }).slice(0, 1);
       });
-      state.filters.starred = value.filters.starred !== false;
+      state.filters.fav = value.filters.fav === true;
       state.filters.voice = value.filters.voice === true && !!state.voice.length;
     }
     if (value.layout && typeof value.layout === 'object') {
@@ -3131,7 +3205,7 @@
   function saveSession() {
     return window.CookSession.save({
       picks: state.picks, units: state.units, mapView: state.mapView, filters: state.filters, search: state.search,
-      voice: state.voice, layout: state.layout, layoutSaved: state.layoutSaved, layoutTouched: !!state.layoutTouched,
+      voice: state.voice, favorites: state.favorites, layout: state.layout, layoutSaved: state.layoutSaved, layoutTouched: !!state.layoutTouched,
       layoutWide: state.layoutWide, textures: textures, lang: requestedLang || lang,
       theme: document.documentElement.getAttribute('data-theme'), cooking: cookingRecord()
     });
@@ -3183,11 +3257,14 @@
 
   // Account snapshots contain only settings, never cooking history or credentials.
   var preferencesRevision = 0;
-  var preferenceFields = ['layout', 'layoutSaved', 'layoutTouched', 'layoutWide', 'textures', 'lang', 'theme', 'units'];
+  var preferenceFields = ['layout', 'layoutSaved', 'layoutTouched', 'layoutWide', 'textures', 'lang', 'theme', 'units', 'favorites'];
   function accountPreferences() {
-    return { layout: state.layoutSaved ? clone(state.layout) : null, layoutSaved: state.layoutSaved,
+    var prefs = { layout: state.layoutSaved ? clone(state.layout) : null, layoutSaved: state.layoutSaved,
       layoutTouched: !!state.layoutTouched, layoutWide: state.layoutWide !== false, textures: textures,
       lang: requestedLang || lang, theme: document.documentElement.getAttribute('data-theme'), units: state.units };
+    // Favorites are sent only when there are some, so saves keep working with the older database check.
+    if (state.favorites.length) prefs.favorites = state.favorites.slice();
+    return prefs;
   }
   window.CookI18n = { t: t };
   window.CookPreferences = {
@@ -3218,7 +3295,8 @@
       window.CookSession.save({}); savedSession = {};
       state.layout = clone(DEFAULT_LAYOUT); state.layoutSaved = false; state.layoutTouched = false;
       state.layoutWide = true; state.picks = {}; state.voice = []; state.search = '';
-      state.filters = { starred: true, diet: [], cat: [], cuisine: [], method: [], voice: false };
+      state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false };
+      state.favorites = [];
       activeCookRecord = null;
       restoreSession(); setLang('en-US');
       if (pageScreen === 'layout') { draft = clone(state.layout); buildCanvas(); }

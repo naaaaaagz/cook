@@ -204,7 +204,7 @@ img.icon, .anim img, img.notif-tool { filter: var(--icon-filter); }
   min-height: 44px;
 }
 .btn:focus-visible, .block:focus-visible, .recipe-card:focus-visible, select:focus-visible,
-.btn-options:focus-visible, .area-move:focus-visible, .filter-word:focus-visible, .choice:has(input:focus-visible), .seg:has(input:focus-visible) {
+.btn-icon-top:focus-visible, .area-move:focus-visible, .filter-word:focus-visible, .choice:has(input:focus-visible), .seg:has(input:focus-visible) {
   outline: 3px solid var(--highlight);
   outline-offset: 2px;
 }
@@ -219,22 +219,28 @@ img.icon, .anim img, img.notif-tool { filter: var(--icon-filter); }
 .btn-read { display: inline-flex; align-items: center; gap: 6px; }
 .btn-icon { display: inline-grid; place-items: center; width: 36px; padding: 0; }
 
-/* Menu button: top right of the page; it scrolls with the page so it never covers content */
-.btn-options {
+/* Account and menu icons: top right of the page, no outline circle; they scroll with the page */
+.top-icons {
   position: absolute;
   top: 27px;
   right: 16px;
   z-index: 30;
+  display: flex;
+  gap: 2px;
+}
+.btn-icon-top {
   width: 44px;
   height: 44px;
   display: grid;
   place-items: center;
+  padding: 0;
   color: var(--ink);
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 50%;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
   cursor: pointer;
 }
+.btn-icon-top:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
 
 /* Dialogs (options, written recipe) */
 .dialog {
@@ -578,19 +584,31 @@ select {
 .filter-star { display: inline; }
 .filter-star .star-icon { display: inline-block; vertical-align: -0.12em; margin-right: 6px; }
 .filter-star .star-icon { color: var(--star); }
-.photo-star {
+/* Favorite toggle on a recipe card: a small white circle on the photo's top-right corner */
+.fav-card {
   position: absolute;
   top: 6px;
-  right: 6px;
+  inset-inline-start: calc(120px - 30px);
+  z-index: 1;
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
   border-radius: 999px;
   color: var(--star);
   background: rgba(255, 255, 255, .92);
   box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+  cursor: pointer;
 }
+.fav-card .star-icon { width: 14px; height: 14px; }
+.fav-card:focus-visible { outline: 3px solid var(--highlight); outline-offset: 2px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.hero-actions .btn-read-hero { margin-top: 0; }
+.btn-fav { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.btn-fav .fav-icon { display: inline-flex; color: var(--star); }
+.btn-read-hero .fav-icon .star-icon { width: 15px; height: 15px; }
 .det-star { display: inline-flex; align-items: center; color: var(--star); vertical-align: middle; }
 .det-star[hidden] { display: none; }
 .det-star .star-icon { width: .8em; height: .8em; }
@@ -1249,6 +1267,7 @@ body.overdo::before {
 
   /* Recipe cards: book button on the photo, time on the photo, tidy rows */
   .recipe-card .photo-wrap { width: 108px; }
+  .fav-card { inset-inline-start: calc(108px - 30px); }
   .photo-time { display: block; }
   .recipe-card .time-line { display: none; }
   .recipe-card-body { display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 10px 0; }
@@ -1283,7 +1302,8 @@ body.overdo::before {
   .clock-label { font-size: 10px; }
   .cook-head .btn-read .btn-label { display: none; }
   .progress { margin: 4px 0 6px; }
-  .btn-options { top: 8px; width: 38px; height: 38px; }
+  .top-icons { top: 8px; }
+  .btn-icon-top { width: 38px; height: 38px; }
   .view-fab { min-height: 40px; width: 40px; padding: 0; justify-content: center; }
   .view-fab-wrap { left: 10px; bottom: 8px; }
   /* Map cards are compact: title, timer and "I'm done". Tap the title for the details. */
