@@ -23,7 +23,8 @@ let failed=false;
 for (const [file,name] of Object.entries(pages)) {
   const html=(head+'<main id="app">\n  '+screen(name)+'\n</main>'+tail)
     .replace('<body>','<body data-page="'+name+'">')
-    .replace('<script src="js/cook-core.js">','<script src="js/page-session.js"></script>\n<script src="js/cook-core.js">');
+    // In <head>, so the saved theme is set before the page is drawn (no light flash).
+    .replace('</head>','<script src="js/page-session.js"></script>\n</head>');
   const target=path.join(root,file);
   if(process.argv.includes('--check')) {
     if(!fs.existsSync(target)||fs.readFileSync(target,'utf8').replace(/\r\n/g,'\n')!==html) { console.error('Outdated page: '+file); failed=true; }

@@ -15,4 +15,10 @@
     catch (e) { return false; }
   }
   window.CookSession = { read: read, save: save };
+  // This file loads in <head>: apply the saved theme before the page is drawn, so a dark
+  // theme does not flash light first. app.js applies the same value again later.
+  var theme = read().theme;
+  if (typeof document !== 'undefined' && ['light', 'dark', 'system'].indexOf(theme) >= 0) {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
 })();
