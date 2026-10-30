@@ -353,7 +353,9 @@ window.I18N["ja"] = {
   "accMismatch": "パスワードが一致しません。",
   "accEmailFailed": "メールを送信できませんでした。しばらくしてから再度お試しください。",
   "accTooMany": "送信されたメールが多すぎます。しばらく待ってから再度お試しください。",
-  "accEmailInvalid": "このメールアドレスは使用できません。"
+  "accEmailInvalid": "このメールアドレスは使用できません。",
+  "favNone": "お気に入りはまだありません。",
+  "favShowAll": "すべてのレシピを見る"
  },
  "names": {
   "beer": "ビール",

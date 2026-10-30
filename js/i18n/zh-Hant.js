@@ -353,7 +353,9 @@ window.I18N["zh-Hant"] = {
   "accMismatch": "兩次輸入的密碼不一致。",
   "accEmailFailed": "無法寄送電子郵件。請稍後再試。",
   "accTooMany": "寄出的郵件過多。請稍候再試。",
-  "accEmailInvalid": "不接受此電子郵件地址。"
+  "accEmailInvalid": "不接受此電子郵件地址。",
+  "favNone": "你還沒有收藏任何食譜。",
+  "favShowAll": "查看全部食譜"
  },
  "names": {
   "beer": "啤酒",

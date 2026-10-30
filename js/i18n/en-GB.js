@@ -12,7 +12,9 @@ window.I18N["en-GB"] = {
   "favOnly": "Favourites only",
   "favAdd": "Add to favourites",
   "favAdded": "Added to favourites",
-  "favSignIn": "Sign in to save favourites."
+  "favSignIn": "Sign in to save favourites.",
+  "favNone": "You have no favourites saved yet.",
+  "favShowAll": "Check all recipes"
  },
  "uk": {
   "baking soda": "bicarbonate of soda",

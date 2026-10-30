@@ -353,7 +353,9 @@ window.I18N["ro"] = {
   "accMismatch": "Parolele nu se potrivesc.",
   "accEmailFailed": "E-mailul nu a putut fi trimis. Încearcă din nou mai târziu.",
   "accTooMany": "Au fost trimise prea multe e-mailuri. Așteaptă puțin și încearcă din nou.",
-  "accEmailInvalid": "Această adresă de e-mail nu este acceptată."
+  "accEmailInvalid": "Această adresă de e-mail nu este acceptată.",
+  "favNone": "Încă nu ai salvat favorite.",
+  "favShowAll": "Vezi toate rețetele"
  },
  "names": {
   "beer": "Bere",

@@ -353,7 +353,9 @@ window.I18N["sq"] = {
   "accMismatch": "Fjalëkalimet nuk përputhen.",
   "accEmailFailed": "Email-i nuk mund të dërgohej. Provo përsëri më vonë.",
   "accTooMany": "Janë dërguar shumë email-e. Prit pak dhe provo përsëri.",
-  "accEmailInvalid": "Kjo adresë email-i nuk pranohet."
+  "accEmailInvalid": "Kjo adresë email-i nuk pranohet.",
+  "favNone": "Nuk ke ende të preferuara të ruajtura.",
+  "favShowAll": "Shiko të gjitha recetat"
  },
  "names": {
   "beer": "Birrë",

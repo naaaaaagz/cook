@@ -353,7 +353,9 @@ window.I18N["tr"] = {
   "accMismatch": "Şifreler eşleşmiyor.",
   "accEmailFailed": "E-posta gönderilemedi. Lütfen daha sonra tekrar deneyin.",
   "accTooMany": "Çok fazla e-posta gönderildi. Biraz bekleyip tekrar deneyin.",
-  "accEmailInvalid": "Bu e-posta adresi kabul edilmiyor."
+  "accEmailInvalid": "Bu e-posta adresi kabul edilmiyor.",
+  "favNone": "Henüz kaydedilmiş favoriniz yok.",
+  "favShowAll": "Tüm tarifleri gör"
  },
  "names": {
   "beer": "Bira",

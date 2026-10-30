@@ -353,7 +353,9 @@ window.I18N["pt-BR"] = {
   "accMismatch": "As senhas não coincidem.",
   "accEmailFailed": "Não foi possível enviar o e-mail. Tente novamente mais tarde.",
   "accTooMany": "Foram enviados e-mails demais. Aguarde um pouco e tente novamente.",
-  "accEmailInvalid": "Este endereço de e-mail não é aceito."
+  "accEmailInvalid": "Este endereço de e-mail não é aceito.",
+  "favNone": "Você ainda não salvou favoritos.",
+  "favShowAll": "Ver todas as receitas"
  },
  "names": {
   "beer": "Cerveja",

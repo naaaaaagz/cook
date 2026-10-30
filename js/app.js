@@ -103,6 +103,8 @@
       favAdd: 'Add to favorites',
       favAdded: 'Added to favorites',
       favSignIn: 'Sign in to save favorites.',
+      favNone: 'You have no favorites saved yet.',
+      favShowAll: 'Check all recipes',
       accLogOut: 'Log out',
       accDelete: 'Delete account',
       accDeleteConfirm: 'Are you sure? Your account will be permanently removed! Please enter your password to confirm:',
@@ -1441,6 +1443,15 @@
     }
   }
   on('btn-fav', 'click', function () { if (state.recipe) toggleFav(state.recipe); });
+  // "Check all recipes": clears every filter and the search text.
+  on('btn-fav-all', 'click', function () {
+    state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false };
+    state.search = '';
+    if ($('recipe-search')) $('recipe-search').value = '';
+    saveSession();
+    renderFilters();
+    renderRecipes();
+  });
   on('btn-fav-done', 'click', function () { if (state.recipe) toggleFav(state.recipe); });
   // Signing in or out changes which favorites (and the "Favorites only" filter) show.
   document.addEventListener('cook:account', function () {
@@ -1989,7 +2000,10 @@
       wrap.appendChild(h);
       wrap.appendChild(ul);
     });
-    $('no-results').hidden = any;
+    // "Favorites only" with no favorites yet: a large, dimmed note and a way back to all recipes.
+    var favEmpty = f.fav && signedIn() && !state.favorites.length;
+    $('fav-empty').hidden = !favEmpty;
+    $('no-results').hidden = any || favEmpty;
     $('no-results').textContent = t(f.voice && state.voice.length ? 'fvNoRecipes' : 'noResults');
   }
 

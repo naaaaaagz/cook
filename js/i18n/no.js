@@ -353,7 +353,9 @@ window.I18N["no"] = {
   "accMismatch": "Passordene er ikke like.",
   "accEmailFailed": "E-posten kunne ikke sendes. Prøv igjen senere.",
   "accTooMany": "For mange e-poster er sendt. Vent en stund og prøv igjen.",
-  "accEmailInvalid": "Denne e-postadressen godtas ikke."
+  "accEmailInvalid": "Denne e-postadressen godtas ikke.",
+  "favNone": "Du har ikke lagret noen favoritter ennå.",
+  "favShowAll": "Se alle oppskrifter"
  },
  "names": {
   "beer": "Øl",

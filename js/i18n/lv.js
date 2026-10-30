@@ -353,7 +353,9 @@ window.I18N["lv"] = {
   "accMismatch": "Paroles nesakrīt.",
   "accEmailFailed": "E-pastu neizdevās nosūtīt. Lūdzu, mēģiniet vēlāk.",
   "accTooMany": "Nosūtīts pārāk daudz e-pastu. Nedaudz uzgaidiet un mēģiniet vēlreiz.",
-  "accEmailInvalid": "Šī e-pasta adrese netiek pieņemta."
+  "accEmailInvalid": "Šī e-pasta adrese netiek pieņemta.",
+  "favNone": "Jums vēl nav saglabātas izlases.",
+  "favShowAll": "Skatīt visas receptes"
  },
  "names": {
   "beer": "Alus",

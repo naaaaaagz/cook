@@ -353,7 +353,9 @@ window.I18N["cs"] = {
   "accMismatch": "Hesla se neshodují.",
   "accEmailFailed": "E-mail se nepodařilo odeslat. Zkuste to prosím později.",
   "accTooMany": "Bylo odesláno příliš mnoho e-mailů. Chvíli počkejte a zkuste to znovu.",
-  "accEmailInvalid": "Tato e-mailová adresa není přijata."
+  "accEmailInvalid": "Tato e-mailová adresa není přijata.",
+  "favNone": "Zatím nemáte uložené žádné oblíbené.",
+  "favShowAll": "Zobrazit všechny recepty"
  },
  "names": {
   "beer": "Pivo",

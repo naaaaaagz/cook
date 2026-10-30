@@ -353,7 +353,9 @@ window.I18N["sv"] = {
   "accMismatch": "Lösenorden stämmer inte överens.",
   "accEmailFailed": "Mejlet kunde inte skickas. Försök igen senare.",
   "accTooMany": "För många mejl har skickats. Vänta en stund och försök igen.",
-  "accEmailInvalid": "Den här e-postadressen godkänns inte."
+  "accEmailInvalid": "Den här e-postadressen godkänns inte.",
+  "favNone": "Du har inte sparat några favoriter än.",
+  "favShowAll": "Visa alla recept"
  },
  "names": {
   "beer": "Öl",

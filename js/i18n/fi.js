@@ -353,7 +353,9 @@ window.I18N["fi"] = {
   "accMismatch": "Salasanat eivät täsmää.",
   "accEmailFailed": "Sähköpostia ei voitu lähettää. Yritä myöhemmin uudelleen.",
   "accTooMany": "Sähköposteja on lähetetty liikaa. Odota hetki ja yritä uudelleen.",
-  "accEmailInvalid": "Tätä sähköpostiosoitetta ei hyväksytä."
+  "accEmailInvalid": "Tätä sähköpostiosoitetta ei hyväksytä.",
+  "favNone": "Et ole vielä tallentanut suosikkeja.",
+  "favShowAll": "Näytä kaikki reseptit"
  },
  "names": {
   "beer": "Olut",

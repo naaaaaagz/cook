@@ -353,7 +353,9 @@ window.I18N["et"] = {
   "accMismatch": "Paroolid ei kattu.",
   "accEmailFailed": "E-kirja ei saanud saata. Proovi hiljem uuesti.",
   "accTooMany": "Saadetud on liiga palju e-kirju. Oota veidi ja proovi uuesti.",
-  "accEmailInvalid": "Seda e-posti aadressi ei aktsepteerita."
+  "accEmailInvalid": "Seda e-posti aadressi ei aktsepteerita.",
+  "favNone": "Sul pole veel ühtegi lemmikut salvestatud.",
+  "favShowAll": "Vaata kõiki retsepte"
  },
  "names": {
   "beer": "Õlu",

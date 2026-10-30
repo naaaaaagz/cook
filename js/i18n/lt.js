@@ -353,7 +353,9 @@ window.I18N["lt"] = {
   "accMismatch": "Slaptažodžiai nesutampa.",
   "accEmailFailed": "Laiško išsiųsti nepavyko. Bandykite vėliau.",
   "accTooMany": "Išsiųsta per daug laiškų. Šiek tiek palaukite ir bandykite dar kartą.",
-  "accEmailInvalid": "Šis el. pašto adresas nepriimamas."
+  "accEmailInvalid": "Šis el. pašto adresas nepriimamas.",
+  "favNone": "Dar neturite išsaugotų mėgstamų.",
+  "favShowAll": "Peržiūrėti visus receptus"
  },
  "names": {
   "beer": "Alus",

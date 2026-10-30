@@ -19,14 +19,15 @@
 .privacy-dialog { width: min(94vw, 760px); max-height: 88dvh; overflow: auto; }
 .account-footer { display: flex; justify-content: center; gap: 20px; padding: 24px 16px; font-size: .85rem; color: var(--muted); }
 
-/* Slide-ups at the bottom: account messages above the storage notice. Thin bars, text next to OK. */
-.slide-stack { position: fixed; inset-inline: 12px; bottom: 12px; z-index: 80; display: grid; gap: 8px; pointer-events: none; }
-.slide-note { pointer-events: auto; position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; padding: 8px 16px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 4px 24px var(--shadow); animation: storage-up .25s ease-out; }
+/* Slide-ups at the bottom left: account messages above the storage notice. Thin bars, small text next to OK. */
+.slide-stack { position: fixed; inset-inline-start: 12px; bottom: 12px; z-index: 80; width: min(400px, calc(100% - 24px)); display: grid; gap: 8px; pointer-events: none; }
+.slide-note { pointer-events: auto; position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 12px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 4px 24px var(--shadow); animation: storage-up .25s ease-out; transition: opacity .6s ease; }
 .slide-note[hidden] { display: none; }
-.slide-note p { margin: 0; line-height: 1.35; font-size: .9rem; flex: 0 1 auto; }
-.slide-note .btn { flex: none; min-height: 34px; padding: 5px 16px; }
-.storage-notice { padding-inline-end: 48px; }
-.storage-notice .account-close { top: 50%; transform: translateY(-50%); inset-inline-end: 6px; }
+.slide-note.is-fading { opacity: 0; }
+.slide-note p { margin: 0; line-height: 1.35; font-size: .78rem; flex: 0 1 auto; }
+.slide-note .btn { flex: none; min-height: 30px; padding: 4px 14px; font-size: .8rem; }
+.storage-notice { padding-inline-end: 42px; }
+.storage-notice .account-close { top: 50%; transform: translateY(-50%); inset-inline-end: 4px; font-size: 1.4rem; width: 34px; height: 34px; }
 @keyframes storage-up { from { transform: translateY(110%); } to { transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) { .slide-note { animation: none; } }
-@media (max-width: 520px) { .slide-note { justify-content: space-between; gap: 10px; padding: 8px 12px; } .storage-notice { padding-inline-end: 42px; } .slide-note .btn { padding: 5px 12px; } .account-content { padding: 22px; } }
+@media (prefers-reduced-motion: reduce) { .slide-note { animation: none; transition: none; } }
+@media (max-width: 520px) { .account-content { padding: 22px; } }

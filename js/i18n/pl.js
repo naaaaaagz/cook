@@ -353,7 +353,9 @@ window.I18N["pl"] = {
   "accMismatch": "Hasła nie są takie same.",
   "accEmailFailed": "Nie udało się wysłać e-maila. Spróbuj ponownie później.",
   "accTooMany": "Wysłano zbyt wiele e-maili. Odczekaj chwilę i spróbuj ponownie.",
-  "accEmailInvalid": "Ten adres e-mail nie jest akceptowany."
+  "accEmailInvalid": "Ten adres e-mail nie jest akceptowany.",
+  "favNone": "Nie masz jeszcze zapisanych ulubionych.",
+  "favShowAll": "Zobacz wszystkie przepisy"
  },
  "names": {
   "beer": "Piwo",

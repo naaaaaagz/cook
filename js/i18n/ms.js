@@ -353,7 +353,9 @@ window.I18N["ms"] = {
   "accMismatch": "Kata laluan tidak sepadan.",
   "accEmailFailed": "E-mel tidak dapat dihantar. Sila cuba lagi kemudian.",
   "accTooMany": "Terlalu banyak e-mel dihantar. Tunggu sebentar dan cuba lagi.",
-  "accEmailInvalid": "Alamat e-mel ini tidak diterima."
+  "accEmailInvalid": "Alamat e-mel ini tidak diterima.",
+  "favNone": "Anda belum menyimpan sebarang kegemaran.",
+  "favShowAll": "Lihat semua resipi"
  },
  "names": {
   "beer": "Bir",

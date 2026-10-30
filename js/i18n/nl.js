@@ -353,7 +353,9 @@ window.I18N["nl"] = {
   "accMismatch": "De wachtwoorden komen niet overeen.",
   "accEmailFailed": "De e-mail kon niet worden verzonden. Probeer het later opnieuw.",
   "accTooMany": "Er zijn te veel e-mails verzonden. Wacht even en probeer het opnieuw.",
-  "accEmailInvalid": "Dit e-mailadres wordt niet geaccepteerd."
+  "accEmailInvalid": "Dit e-mailadres wordt niet geaccepteerd.",
+  "favNone": "Je hebt nog geen favorieten opgeslagen.",
+  "favShowAll": "Alle recepten bekijken"
  },
  "names": {
   "beer": "Bier",

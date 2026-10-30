@@ -86,6 +86,8 @@ async function main() {
     assert(calls.some(x=>x.path==='/auth/v1/signup'&&x.email===b.email));
     await page.locator('#account-switch').click();
     await page.locator('#account-email').fill(a.email);await page.locator('#account-password').fill('a-test-password-123');await page.locator('#account-submit').click();
+    // Signing in from the start page opens the recipe list.
+    await page.waitForURL('**/recipes.html');await page.locator('#btn-account').click();
     await page.locator('#account-member:not([hidden])').waitFor();
     await page.locator('#account-status').filter({hasText:'Signed in.'}).waitFor();
     await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:'settings saved'}).waitFor();
@@ -94,6 +96,7 @@ async function main() {
     assert.deepEqual(Object.keys(prefs).sort(),['layout','layoutSaved','layoutTouched','layoutWide','textures','lang','theme','units'].sort());
     assert(!JSON.stringify(prefs).includes('password'));
     await page.locator('[data-close="account-dialog"]').click();
+    await page.goto(base+'/index.html');
     await page.locator('#btn-options').click();await page.locator('input[name="theme"][value="dark"]').check();
     await page.locator('input[name="units"][value="imperial"]').check();await page.locator('#lang-select').selectOption('hu');
     writeDelay=200;
@@ -105,6 +108,11 @@ async function main() {
     assert(rows.get(a.id).preferences.layoutSaved);assert(rows.get(a.id).preferences.layout.countertop);
     // Favorites: the star on a photo saves to the account; "Favorites only" lists just those.
     await page.locator('.filter-star').waitFor();
+    // No favorites yet: a large note and "Check all recipes", which clears the filters.
+    await page.locator('.filter-star').click();await page.locator('#fav-empty:not([hidden])').waitFor();
+    assert.equal(await page.locator('.fav-card').count(),0);assert(await page.locator('#no-results').isHidden());
+    await page.locator('#btn-fav-all').click();assert(await page.locator('#fav-empty').isHidden());
+    assert.equal(await page.locator('.filter-star').getAttribute('aria-pressed'),'false');assert(await page.locator('.fav-card').count()>100);
     const firstFav=page.locator('.fav-card').first();const favId=await firstFav.getAttribute('data-fav');
     await firstFav.click();await page.waitForFunction(()=>document.querySelector('.fav-card').getAttribute('aria-pressed')==='true');
     await page.waitForFunction(()=>window.CookAccount.flushPending());
@@ -126,6 +134,7 @@ async function main() {
     assert.equal(await page.evaluate(()=>document.documentElement.getAttribute('data-theme')),'light');
     await page.locator('#btn-account').click();await page.locator('#account-email').fill(b.email);
     await page.locator('#account-password').fill('other-test-password-123');await page.locator('#account-submit').click();
+    await page.waitForURL('**/recipes.html');await page.locator('#btn-account').click();
     await page.locator('#account-status').filter({hasText:'Signed in.'}).waitFor();
     assert.equal(await page.evaluate(()=>window.CookPreferences.read().layoutSaved),false);
     await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:'settings saved'}).waitFor();
@@ -139,8 +148,11 @@ async function main() {
     assert(!accounts.has(b.email));assert(!rows.has(b.id));assert(await page.locator('#account-guest').isVisible()===false);
     await page.locator('#account-message-ok').click();
     // Cross-browser confirmation, with an actual verification response required.
+    // The confirmed new account lands on the recipe list; "verified" slides up and fades after 5 seconds.
     const verify=await context.newPage();await verify.goto(base+'/index.html#token_hash=good-link&type=email');
+    await verify.waitForURL('**/recipes.html');
     await verify.locator('#account-message:not([hidden])').waitFor();assert.equal(await verify.locator('#account-message-text').textContent(),await verify.evaluate(()=>window.CookI18n.t('accConfirmed')));
+    await verify.locator('#account-message').waitFor({state:'hidden',timeout:9000});
     assert.equal(new URL(verify.url()).hash,'');
     assert.equal(await verify.evaluate(()=>window.CookPreferences.read().units),'imperial');
     const invalid=await context.newPage();await invalid.goto(base+'/index.html#token_hash=expired&type=email');

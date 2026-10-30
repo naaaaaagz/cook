@@ -353,7 +353,9 @@ window.I18N["sr"] = {
   "accMismatch": "Lozinke se ne podudaraju.",
   "accEmailFailed": "Imejl nije bilo moguće poslati. Pokušajte ponovo kasnije.",
   "accTooMany": "Poslato je previše imejlova. Sačekajte malo i pokušajte ponovo.",
-  "accEmailInvalid": "Ova imejl adresa nije prihvaćena."
+  "accEmailInvalid": "Ova imejl adresa nije prihvaćena.",
+  "favNone": "Još nemate sačuvanih omiljenih.",
+  "favShowAll": "Pogledaj sve recepte"
  },
  "names": {
   "beer": "Pivo",

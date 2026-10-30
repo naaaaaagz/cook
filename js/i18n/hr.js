@@ -353,7 +353,9 @@ window.I18N["hr"] = {
   "accMismatch": "Lozinke se ne podudaraju.",
   "accEmailFailed": "E-poruku nije bilo moguće poslati. Pokušajte ponovno kasnije.",
   "accTooMany": "Poslano je previše e-poruka. Pričekajte malo i pokušajte ponovno.",
-  "accEmailInvalid": "Ova adresa e-pošte nije prihvaćena."
+  "accEmailInvalid": "Ova adresa e-pošte nije prihvaćena.",
+  "favNone": "Još nemate spremljenih favorita.",
+  "favShowAll": "Pogledaj sve recepte"
  },
  "names": {
   "beer": "Pivo",

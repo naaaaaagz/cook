@@ -353,7 +353,9 @@ window.I18N["da"] = {
   "accMismatch": "Adgangskoderne er ikke ens.",
   "accEmailFailed": "Mailen kunne ikke sendes. Prøv igen senere.",
   "accTooMany": "Der er sendt for mange mails. Vent lidt, og prøv igen.",
-  "accEmailInvalid": "Denne e-mailadresse accepteres ikke."
+  "accEmailInvalid": "Denne e-mailadresse accepteres ikke.",
+  "favNone": "Du har ikke gemt nogen favoritter endnu.",
+  "favShowAll": "Se alle opskrifter"
  },
  "names": {
   "beer": "Øl",

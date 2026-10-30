@@ -353,7 +353,9 @@ window.I18N["fil"] = {
   "accMismatch": "Hindi magkatugma ang mga password.",
   "accEmailFailed": "Hindi maipadala ang email. Subukang muli mamaya.",
   "accTooMany": "Masyadong maraming email ang naipadala. Maghintay sandali at subukang muli.",
-  "accEmailInvalid": "Hindi tinatanggap ang email address na ito."
+  "accEmailInvalid": "Hindi tinatanggap ang email address na ito.",
+  "favNone": "Wala ka pang naka-save na paborito.",
+  "favShowAll": "Tingnan ang lahat ng recipe"
  },
  "names": {
   "beer": "Serbesa",

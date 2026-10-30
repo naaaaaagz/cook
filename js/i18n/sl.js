@@ -353,7 +353,9 @@ window.I18N["sl"] = {
   "accMismatch": "Gesli se ne ujemata.",
   "accEmailFailed": "Sporočila ni bilo mogoče poslati. Poskusite znova pozneje.",
   "accTooMany": "Poslanih je bilo preveč sporočil. Počakajte nekaj časa in poskusite znova.",
-  "accEmailInvalid": "Ta e-poštni naslov ni sprejet."
+  "accEmailInvalid": "Ta e-poštni naslov ni sprejet.",
+  "favNone": "Še nimate shranjenih priljubljenih.",
+  "favShowAll": "Prikaži vse recepte"
  },
  "names": {
   "beer": "Pivo",

@@ -353,7 +353,9 @@ window.I18N["zh-Hans"] = {
   "accMismatch": "两次输入的密码不一致。",
   "accEmailFailed": "无法发送邮件。请稍后重试。",
   "accTooMany": "发送的邮件过多。请稍等片刻再试。",
-  "accEmailInvalid": "不接受此电子邮件地址。"
+  "accEmailInvalid": "不接受此电子邮件地址。",
+  "favNone": "你还没有收藏任何食谱。",
+  "favShowAll": "查看全部食谱"
  },
  "names": {
   "beer": "啤酒",

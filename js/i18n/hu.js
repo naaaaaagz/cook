@@ -353,7 +353,9 @@ window.I18N["hu"] = {
   "accMismatch": "A jelszavak nem egyeznek.",
   "accEmailFailed": "Az e-mailt nem sikerült elküldeni. Próbáld újra később.",
   "accTooMany": "Túl sok e-mail ment ki. Várj egy kicsit, és próbáld újra.",
-  "accEmailInvalid": "Ezt az e-mail-címet nem fogadjuk el."
+  "accEmailInvalid": "Ezt az e-mail-címet nem fogadjuk el.",
+  "favNone": "Még nincs mentett kedvenced.",
+  "favShowAll": "Összes recept megtekintése"
  },
  "names": {
   "beer": "Sör",

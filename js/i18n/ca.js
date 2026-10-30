@@ -353,7 +353,9 @@ window.I18N["ca"] = {
   "accMismatch": "Les contrasenyes no coincideixen.",
   "accEmailFailed": "No s’ha pogut enviar el correu. Torna-ho a provar més tard.",
   "accTooMany": "S’han enviat massa correus. Espera una estona i torna-ho a provar.",
-  "accEmailInvalid": "Aquesta adreça de correu no s’accepta."
+  "accEmailInvalid": "Aquesta adreça de correu no s’accepta.",
+  "favNone": "Encara no has desat cap preferit.",
+  "favShowAll": "Mira totes les receptes"
  },
  "names": {
   "beer": "Cervesa",

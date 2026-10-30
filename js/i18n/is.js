@@ -353,7 +353,9 @@ window.I18N["is"] = {
   "accMismatch": "Lykilorðin stemma ekki.",
   "accEmailFailed": "Ekki tókst að senda póstinn. Reyndu aftur síðar.",
   "accTooMany": "Of margir póstar hafa verið sendir. Bíddu aðeins og reyndu aftur.",
-  "accEmailInvalid": "Þetta netfang er ekki samþykkt."
+  "accEmailInvalid": "Þetta netfang er ekki samþykkt.",
+  "favNone": "Þú hefur ekki vistað nein eftirlæti enn.",
+  "favShowAll": "Skoða allar uppskriftir"
  },
  "names": {
   "beer": "Bjór",

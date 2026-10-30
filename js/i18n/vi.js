@@ -353,7 +353,9 @@ window.I18N["vi"] = {
   "accMismatch": "Mật khẩu không khớp.",
   "accEmailFailed": "Không thể gửi email. Vui lòng thử lại sau.",
   "accTooMany": "Đã gửi quá nhiều email. Vui lòng chờ một lúc rồi thử lại.",
-  "accEmailInvalid": "Địa chỉ email này không được chấp nhận."
+  "accEmailInvalid": "Địa chỉ email này không được chấp nhận.",
+  "favNone": "Bạn chưa lưu món yêu thích nào.",
+  "favShowAll": "Xem tất cả công thức"
  },
  "names": {
   "beer": "Bia",

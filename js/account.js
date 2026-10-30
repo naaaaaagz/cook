@@ -7,6 +7,7 @@
   var scope = location.pathname.replace(/[^/]*$/, '');
   var noticeKey = 'cook:storage-notice:v1:' + scope;
   var ownerKey = 'cook:account-owner:v1:' + scope;
+  var pendingKey = 'cook:account-message:v1:' + scope; // a message to show after moving to another page
   var mode = 'login', client = null, user = null, ready = false, recovery = false;
   var saving = Promise.resolve(), busy = false, savedFingerprint = null;
   var parameters = new URLSearchParams(location.hash.slice(1));
@@ -24,13 +25,43 @@
   function open(id) { if (!$(id).open) $(id).showModal(); }
   // Messages slide up at the bottom of the page, like the storage notice.
   // While the account window is open the page behind it can't be clicked, so the message shows there.
-  function message(key) {
+  // fade: good news (verified, deleted) fades out by itself after 5 seconds.
+  var fadeTimer = null;
+  function hideMessage() {
+    clearTimeout(fadeTimer);
+    $('account-message').hidden = true;
+    $('account-message').classList.remove('is-fading');
+    lastMessage = null;
+  }
+  function message(key, fade) {
     if ($('account-dialog').open) { status(key); return; }
+    hideMessage();
     lastMessage = key;
     $('account-message-text').textContent = tr(key);
     $('account-message').hidden = false;
+    if (fade) fadeTimer = setTimeout(function () {
+      $('account-message').classList.add('is-fading');
+      fadeTimer = setTimeout(hideMessage, 600);
+    }, 5000);
   }
-  $('account-message-ok').addEventListener('click', function () { $('account-message').hidden = true; lastMessage = null; });
+  $('account-message-ok').addEventListener('click', hideMessage);
+  // After signing in (or confirming a new account) show the recipe list.
+  // On a recipe or cooking page the visitor stays where they were.
+  function showRecipes(key) {
+    var page = document.body.getAttribute('data-page');
+    if (page === 'recipes' || page === 'details' || page === 'cook') {
+      if ($('account-dialog').open) $('account-dialog').close();
+      if (key) message(key, true);
+      return;
+    }
+    try { if (key) sessionStorage.setItem(pendingKey, key); } catch (e) { /* the message is optional */ }
+    location.assign('recipes.html');
+  }
+  try {
+    var pending = sessionStorage.getItem(pendingKey);
+    sessionStorage.removeItem(pendingKey);
+    if (pending === 'accConfirmed' || pending === 'accDeleted') message(pending, true);
+  } catch (e) { /* storage blocked: no message to carry */ }
   function dismissNotice() {
     $('storage-notice').hidden = true;
     try { sessionStorage.setItem(noticeKey, 'dismissed'); } catch (e) { /* Tab-only dismissal still works. */ }
@@ -180,6 +211,7 @@
         var previousOwner = sessionStorage.getItem(ownerKey);
         if (previousOwner && previousOwner !== verified.id) window.CookPreferences.reset();
         user = verified; draw(); await loadSettings();
+        showRecipes();
       } else if (action === 'reset') {
         check(await client.auth.resetPasswordForEmail(email, { redirectTo: config.siteUrl }));
         status('accResetSent');
@@ -253,7 +285,7 @@
       draw();
       $('account-dialog').close();
       status(null);
-      message('accDeleted');
+      message('accDeleted', true);
     } catch (e) {
       status('accDeleteFailed', (e && e.code) || '');
     } finally { password = ''; busy = false; }
@@ -289,8 +321,8 @@
         user = confirmed; recovery = tokenType === 'recovery'; draw();
         if (recovery) { status(null); open('account-dialog'); $('account-new-password').focus(); }
         else {
-          try { await loadSettings(); } catch (e) { status('accConfirmedLoadFailed'); }
-          message('accConfirmed');
+          try { await loadSettings(); showRecipes('accConfirmed'); }
+          catch (e) { status('accConfirmedLoadFailed'); message('accConfirmed', true); }
         }
       } else {
         var session = check(await client.auth.getSession()).session;

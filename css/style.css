@@ -603,6 +603,9 @@ select {
   cursor: pointer;
 }
 .fav-card .star-icon { width: 14px; height: 14px; }
+/* "Favorites only" with no favorites yet */
+.fav-empty { text-align: center; padding: 48px 16px 24px; }
+.fav-empty p { margin: 0 0 20px; font-family: var(--font-serif); font-size: clamp(24px, 4vw, 34px); line-height: 1.2; color: var(--muted); }
 .fav-card:focus-visible { outline: 3px solid var(--highlight); outline-offset: 2px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .hero-actions .btn-read-hero { margin-top: 0; }

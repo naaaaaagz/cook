@@ -353,7 +353,9 @@ window.I18N["ko"] = {
   "accMismatch": "비밀번호가 일치하지 않습니다.",
   "accEmailFailed": "이메일을 보내지 못했습니다. 나중에 다시 시도하세요.",
   "accTooMany": "이메일을 너무 많이 보냈습니다. 잠시 후 다시 시도하세요.",
-  "accEmailInvalid": "이 이메일 주소는 사용할 수 없습니다."
+  "accEmailInvalid": "이 이메일 주소는 사용할 수 없습니다.",
+  "favNone": "아직 저장한 즐겨찾기가 없습니다.",
+  "favShowAll": "모든 레시피 보기"
  },
  "names": {
   "beer": "맥주",

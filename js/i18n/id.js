@@ -353,7 +353,9 @@ window.I18N["id"] = {
   "accMismatch": "Kata sandi tidak cocok.",
   "accEmailFailed": "Email tidak dapat dikirim. Silakan coba lagi nanti.",
   "accTooMany": "Terlalu banyak email terkirim. Tunggu sebentar lalu coba lagi.",
-  "accEmailInvalid": "Alamat email ini tidak diterima."
+  "accEmailInvalid": "Alamat email ini tidak diterima.",
+  "favNone": "Anda belum menyimpan favorit.",
+  "favShowAll": "Lihat semua resep"
  },
  "names": {
   "beer": "Bir",

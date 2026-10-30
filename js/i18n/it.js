@@ -353,7 +353,9 @@ window.I18N["it"] = {
   "accMismatch": "Le password non coincidono.",
   "accEmailFailed": "Impossibile inviare l’email. Riprova più tardi.",
   "accTooMany": "Sono state inviate troppe email. Attendi un po’ e riprova.",
-  "accEmailInvalid": "Questo indirizzo email non è accettato."
+  "accEmailInvalid": "Questo indirizzo email non è accettato.",
+  "favNone": "Non hai ancora salvato preferiti.",
+  "favShowAll": "Vedi tutte le ricette"
  },
  "names": {
   "beer": "Birra",
