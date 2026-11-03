@@ -196,8 +196,36 @@
     });
     return saving;
   }
+  function validRecipe(id) {
+    return typeof id === 'string' && window.RECIPES.some(function (recipe) { return recipe.id === id; });
+  }
+  async function loadRating(recipeId) {
+    if (!user || !ready || !validRecipe(recipeId)) return null;
+    var accountId = user.id;
+    var data = check(await client.from('recipe_ratings').select('stars')
+      .eq('user_id', accountId).eq('recipe_id', recipeId).maybeSingle());
+    if (!user || !ready || user.id !== accountId) return null;
+    return data && Number.isInteger(data.stars) && data.stars >= 1 && data.stars <= 5 ? data.stars : null;
+  }
+  function saveRating(recipeId, stars) {
+    // Never queue a guest selection for upload after a later sign-in.
+    if (!user || !ready || !validRecipe(recipeId) || !Number.isInteger(stars) || stars < 1 || stars > 5) return Promise.resolve(false);
+    var accountId = user.id;
+    saving = saving.then(async function () {
+      if (!user || !ready || user.id !== accountId) return false;
+      try {
+        check(await client.from('recipe_ratings').upsert({ user_id: accountId, recipe_id: recipeId, stars: stars },
+          { onConflict: 'user_id,recipe_id' }));
+        return true;
+      } catch (e) { return false; }
+    });
+    return saving;
+  }
   window.CookAccount = {
     savePreferences: savePreferences,
+    loadRating: loadRating,
+    saveRating: saveRating,
+    userId: function () { return user && ready ? user.id : null; },
     flushPending: function () {
       return saving.then(function (ok) {
         if (ok === false) return false;

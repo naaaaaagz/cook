@@ -6,7 +6,27 @@ delivery have not yet been independently tested. Registration is now enabled loc
 for owner-authorised testing; the owner will commit/push/sync the files themselves.
 The configured shared Resend sender only delivers to the Resend account's exact email
 address. Complete the privacy details and live checks below before public launch.
-Google/Facebook/favourites are out of scope.
+Google/Facebook remain deferred. See the current code and update-2026-10-30.sql for
+the subsequently added favourites/account-deletion features.
+
+## Recipe ratings (2026-11-03)
+
+Run update-2026-11-03-ratings.sql ONCE in the existing Supabase project's SQL editor
+after schema.sql. Do not rerun the original schema or replace user_settings.
+The new recipe_ratings table stores user_id, recipe_id, stars (integer 1–5), and
+updated_at, with one row per user/recipe. RLS permits only confirmed users to read
+and insert/update their own ratings. Anonymous access is denied. Account deletion
+cascades to ratings. No aggregate/public rating is introduced.
+
+Selecting stars while signed in saves immediately. Selecting again updates the same
+row; existing own ratings load from the database on the cooking page. Save failures
+are shown beside the stars; selecting stars again retries. Navigation waits for the
+save. Guests may interact with the existing stars temporarily, but their ratings are
+never sent to the database, saved in browser storage, or copied into a later login.
+The old stars field in tab cooking records is removed; database ratings are separate
+from the kitchen/settings JSON. Local tests use simulated Auth/HTTP and PostgreSQL
+fixtures. Applying this migration and testing the actual hosted service remain
+separate from local verification.
 
 ## 1. Managed database and authentication
 
@@ -86,8 +106,9 @@ the kitchen waits for the cloud write before navigating; Options saves when clos
 Writes are serialised. On failed cloud saves, changes remain in the tab and can be
 retried through Account. Saves replace the settings snapshot; latest successful save
 wins across devices. There is no realtime merge. Unsaved layout-editor changes are
-not uploaded. No recipe history, ratings, favourites or microphone data is uploaded
-to the account database.
+not uploaded. Ratings use the separate recipe_ratings table described above;
+favourites now live in account preferences. No cooking history or microphone data
+is uploaded to the account database.
 
 Sessions use sessionStorage, not persistent localStorage. A tab usually signs out
 when its session ends, but browser restoration may retain it. Separate tabs can use

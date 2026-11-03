@@ -186,6 +186,7 @@
       privWho1: "Cook is operated by [operator's legal name and postal address]. Contact [privacy email address] for privacy questions and requests. These details must be completed before registration opens.",
       privWhat1: "When you create an account, we use your email, an account identifier, password authentication records and verification status to provide and secure your account. Passwords are handled by the authentication provider as secure hashes; Cook does not store readable passwords. We store your kitchen layout, selected language, theme and measurement units to restore your settings across devices. Providing an account email and password is necessary for an account; you can browse recipes without one.",
       privWhat2: "Account and settings processing is necessary to provide the account service you request (GDPR Article 6(1)(b)). Limited security and abuse-prevention records may be processed under legitimate interests (Article 6(1)(f)), subject to necessity and balancing. Verification and password-reset emails are service messages, not marketing. No advertising or analytics is added by the account feature.",
+      privRatings: 'When signed in, your 1–5 star recipe ratings are stored with your account identifier and recipe identifier. Rating a recipe again updates your rating. Ratings given while signed out are not stored or uploaded later.',
       privStorage1: "Cook uses sessionStorage to carry your kitchen, cooking progress and choices between pages in the same tab. When signed in, it also holds your authentication session. The browser normally clears this when the tab session ends, but browser session restoration can retain it. Signing out clears Cook's tab data. The storage-notice dismissal is kept in that tab only. Cook's own scripts do not set cookies. Your hosting or service providers may have separate security processing that must be documented before launch.",
       privStorage2: "OK and the close button on the storage notice only dismiss the notice. They do not authorise analytics, advertising or other optional tracking. Any future non-essential storage requires a separate choice before it starts, with an equally easy refusal and withdrawal.",
       privOther1: "The current recipe-list speech feature requests an approximate country from country.is using your IP address to choose a speech language. If you use microphone recognition, your browser may send audio to its speech-service provider. Typed ingredient entry is available instead. These providers, their policies and the legal basis for these features must be reviewed before public launch.",
@@ -291,6 +292,9 @@
       dismissTip: 'Dismiss tip',
       finishedTitle: 'You did it! Bon appétit!',
       howTaste: 'How does it taste?',
+      ratingSaved: 'Your rating has been saved.',
+      ratingSaveFailed: 'Your rating could not be saved. Select the stars again to retry.',
+      ratingLoadFailed: 'Your saved rating could not be loaded.',
       stars: '{n} of 5 stars',
       star1: 'total fail',
       star2: 'had worse',
@@ -493,6 +497,11 @@
   var PAGES = { welcome: 'index.html', recipes: 'recipes.html', details: 'recipe.html', layout: 'kitchen.html', cook: 'cook.html' };
   var pageScreen = document.body.getAttribute('data-page') || 'welcome';
   var savedSession = window.CookSession.read(), activeCookRecord = savedSession.cooking || null;
+  // Ratings now belong only in the authenticated database, never in tab snapshots.
+  if (activeCookRecord && Object.prototype.hasOwnProperty.call(activeCookRecord, 'stars')) {
+    delete activeCookRecord.stars;
+    window.CookSession.save(savedSession);
+  }
   var internalNavigation = false;
   var pageParams = new URLSearchParams(location.search);
   function screenUrl(name, recipe) {
@@ -3127,18 +3136,38 @@
     starRow.appendChild(lbl);
   }
   var starLabels = starRow ? starRow.querySelectorAll('.star') : [];
+  var ratingRevision = 0, ratingOwner = null;
+  function ratingStatus(key) { if ($('rating-status')) $('rating-status').textContent = key ? t(key) : ''; }
+  function refreshRating() {
+    if (!starRow || !state.recipe) return;
+    var owner = window.CookAccount && window.CookAccount.userId();
+    if (owner !== ratingOwner) { resetStars(); ratingOwner = owner; }
+    if (!owner) return;
+    var ticket = ++ratingRevision, recipeId = state.recipe.id;
+    window.CookAccount.loadRating(recipeId).then(function (stars) {
+      if (ticket !== ratingRevision || !state.recipe || state.recipe.id !== recipeId || window.CookAccount.userId() !== owner) return;
+      if (stars) {
+        starRow.querySelector('input[value="' + stars + '"]').checked = true;
+        paintStars(stars);
+      }
+    }).catch(function () { if (ticket === ratingRevision) ratingStatus('ratingLoadFailed'); });
+  }
+  document.addEventListener('cook:account', refreshRating);
 
   function paintStars(count) {
     starLabels.forEach(function (l, i) { l.classList.toggle('lit', i < count); });
     $('star-text').textContent = count ? t('star' + count) : '';
   }
   function currentStars() {
-    var c = starRow.querySelector('input:checked');
+    var c = starRow && starRow.querySelector('input:checked');
     return c ? Number(c.value) : 0;
   }
   function resetStars() {
+    ratingRevision++;
+    if (!starRow) return;
     starRow.querySelectorAll('input').forEach(function (i) { i.checked = false; });
     paintStars(0);
+    ratingStatus(null);
   }
   starLabels.forEach(function (l, i) {
     l.addEventListener('mouseenter', function () { paintStars(i + 1); });
@@ -3146,6 +3175,14 @@
   if (starRow) starRow.addEventListener('mouseleave', function () { paintStars(currentStars()); });
   if (starRow) starRow.addEventListener('change', function (e) {
     paintStars(currentStars());
+    var ticket = ++ratingRevision;
+    ratingStatus(null);
+    if (signedIn() && state.recipe) {
+      var owner = window.CookAccount.userId();
+      window.CookAccount.saveRating(state.recipe.id, currentStars()).then(function (saved) {
+        if (ticket === ratingRevision && window.CookAccount.userId() === owner) ratingStatus(saved ? 'ratingSaved' : 'ratingSaveFailed');
+      });
+    }
     var star = e.target.closest('.star');
     var pop = document.createElement('span');
     pop.className = 'star-pop';
@@ -3217,7 +3254,7 @@
     if (!cook) return activeCookRecord;
     return { recipe: state.recipe.id, choices: clone(state.choices), steps: cook.steps.map(function (s) { return s.id; }),
       done: Array.from(cook.done), started: cook.started, t0: cook.t0, celebrated: !!cook.celebrated,
-      tipsShown: Array.from(cook.tipsShown), stars: currentStars() };
+      tipsShown: Array.from(cook.tipsShown) };
   }
   function saveSession() {
     return window.CookSession.save({
@@ -3249,10 +3286,6 @@
     if (cook.t0) {
       $('start-overlay').hidden = true;
       if (!cookFinished()) tickTimer = setInterval(tick, 500);
-    }
-    if (Number.isInteger(record.stars) && record.stars >= 1 && record.stars <= 5) {
-      starRow.querySelector('input[value="' + record.stars + '"]').checked = true;
-      paintStars(record.stars);
     }
     return true;
   }
@@ -3310,6 +3343,7 @@
       // Clear only this Cook tab's snapshot, preserving other sites and notice state.
       stopCooking();
       window.CookSession.save({}); savedSession = {};
+      resetStars();
       state.layout = clone(DEFAULT_LAYOUT); state.layoutSaved = false; state.layoutTouched = false;
       state.layoutWide = true; state.picks = {}; state.voice = []; state.search = '';
       state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false };

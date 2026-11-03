@@ -64,6 +64,7 @@
     <h3 data-i18n="privWho">Who is responsible?</h3>
     <p data-i18n="privWho1">Cook is operated by [operator's legal name and postal address]. Contact [privacy email address] for privacy questions and requests. These details must be completed before registration opens.</p>
     <h3 data-i18n="privWhat">What we use and why</h3>
+    <p data-i18n="privRatings">When signed in, your 1–5 star recipe ratings are stored with your account identifier and recipe identifier. Rating a recipe again updates your rating. Ratings given while signed out are not stored or uploaded later.</p>
     <p data-i18n="privWhat1">When you create an account, we use your email, an account identifier, password authentication records and verification status to provide and secure your account. Passwords are handled by the authentication provider as secure hashes; Cook does not store readable passwords. We store your kitchen layout, selected language, theme and measurement units to restore your settings across devices. Providing an account email and password is necessary for an account; you can browse recipes without one.</p>
     <p data-i18n="privWhat2">Account and settings processing is necessary to provide the account service you request (GDPR Article 6(1)(b)). Limited security and abuse-prevention records may be processed under legitimate interests (Article 6(1)(f)), subject to necessity and balancing. Verification and password-reset emails are service messages, not marketing. No advertising or analytics is added by the account feature.</p>
     <h3 data-i18n="privStorage">Browser storage</h3>
@@ -191,6 +192,7 @@
         <legend data-i18n="howTaste">How does it taste?</legend>
         <div class="stars-row"></div>
         <p id="star-text" class="star-text" aria-live="polite"></p>
+        <p id="rating-status" role="status" aria-live="polite"></p>
       </fieldset>
       <div class="stack">
         <button id="btn-fav-done" class="btn btn-secondary btn-fav" type="button" aria-pressed="false"><span class="fav-icon"></span><span class="btn-label">Add to favorites</span></button>

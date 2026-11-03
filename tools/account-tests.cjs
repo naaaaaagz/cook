@@ -11,7 +11,7 @@ const server = http.createServer((req,res) => {
   if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
   fs.readFile(file, (error, data) => { if(error)res.writeHead(404).end();else {res.setHeader('Content-Type',mime[path.extname(file)]||'application/octet-stream');res.end(data);} });
 });
-const accounts = new Map(), rows = new Map(), calls = [];
+const accounts = new Map(), rows = new Map(), ratings = new Map(), calls = [];
 let failWrites = false, writeDelay = 0;
 function addAccount(email,id) { const value={id,email,email_confirmed_at:'2026-10-28T12:00:00Z',aud:'authenticated',role:'authenticated',app_metadata:{provider:'email'},user_metadata:{}};accounts.set(email,value);return value; }
 const a=addAccount('peter@gmail.com','00000000-0000-4000-8000-000000000001');
@@ -39,6 +39,17 @@ async function backend(route) {
   if(url.pathname==='/auth/v1/verify')return body.token_hash==='good-link'?reply(session(a)):reply({msg:'Expired link'},403);
   if(url.pathname==='/auth/v1/user')return user?reply(user):reply({msg:'Not authenticated'},401);
   if(url.pathname==='/auth/v1/logout'||url.pathname==='/auth/v1/recover'||url.pathname==='/auth/v1/resend')return reply({});
+  if(url.pathname==='/rest/v1/recipe_ratings') {
+    if(!user)return reply({message:'Not authenticated'},401);
+    if(method==='GET') {
+      const recipe=url.searchParams.get('recipe_id').replace(/^eq\./,'');
+      const row=ratings.get(user.id+':'+recipe);return reply(row?[{stars:row.stars}]:[]);
+    }
+    if(failWrites)return reply({message:'Simulated unavailable database'},503);
+    if(writeDelay)await new Promise(resolve=>setTimeout(resolve,writeDelay));
+    assert.equal(body.user_id,user.id);assert(Number.isInteger(body.stars)&&body.stars>=1&&body.stars<=5);
+    ratings.set(user.id+':'+body.recipe_id,body);return reply(null,201);
+  }
   if(url.pathname==='/rest/v1/user_settings') {
     if(!user)return reply({message:'Not authenticated'},401);
     if(method==='GET')return reply(rows.has(user.id)?[rows.get(user.id)]:[]);
@@ -49,11 +60,74 @@ async function backend(route) {
   }
   throw Error('Unexpected mock request: '+method+' '+url.pathname);
 }
+async function checkRatings(browser,base) {
+  const context=await browser.newContext();
+  await context.route('**/js/account-config.js',route=>route.fulfill({contentType:'text/javascript',body:'window.COOK_ACCOUNT_CONFIG='+JSON.stringify({supabaseUrl:testBackend,publishableKey:'sb_publishable_localtest',siteUrl:base+'/index.html',registrationEnabled:true})}));
+  await context.route(testBackend+'/**',backend);
+  await context.route('https://api.country.is/**',route=>route.fulfill({contentType:'application/json',body:'{"country":"HU"}'}));
+  const page=await context.newPage(),recipe='spaghetti_carbonara';
+  const writes=()=>calls.filter(x=>x.path==='/rest/v1/recipe_ratings'&&x.method==='POST').length;
+  async function revealRating(){await page.evaluate(()=>{document.getElementById('cook-finished').hidden=false;document.getElementById('start-overlay').hidden=true;});}
+  async function signin(account){
+    await page.locator('#btn-account').click();await page.locator('#account-email').fill(account.email);
+    await page.locator('#account-stay').uncheck();await page.locator('#account-password').fill('rating-test-password-123');
+    await page.locator('#account-submit').click();await page.waitForFunction(()=>window.CookAccount.signedIn());
+  }
+  try {
+    await page.goto(base+'/recipe.html?id='+recipe);await page.locator('#storage-close').click();
+    await page.locator('#btn-start-cooking').click();
+    await page.waitForFunction(()=>location.pathname.endsWith('/cook.html')||document.getElementById('nolayout-dialog').open);
+    if(await page.locator('#nolayout-dialog').isVisible())await page.locator('#nolayout-yes').click();
+    await page.waitForURL('**/cook.html?id='+recipe);await revealRating();
+    const before=writes();
+    await page.locator('#taste .star').nth(4).click();
+    assert.equal(await page.evaluate(()=>window.CookAccount.saveRating('spaghetti_carbonara',5)),false);
+    await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+    assert.equal(writes(),before);
+    assert(!Object.hasOwn(await page.evaluate(()=>window.CookSession.read().cooking),'stars'));
+    await page.reload();await revealRating();assert.equal(await page.locator('#taste input:checked').count(),0);
+    await page.locator('#taste .star').nth(2).click();
+    await signin(a);
+    await page.waitForFunction(()=>!document.querySelector('#taste input:checked'));
+    assert.equal(writes(),before); // Guest selection was not uploaded on sign-in.
+    await page.locator('#taste .star').nth(4).click();
+    await page.waitForFunction(()=>document.getElementById('rating-status').textContent===window.CookI18n.t('ratingSaved'));
+    assert.equal(ratings.get(a.id+':'+recipe).stars,5);
+    writeDelay=150;await page.locator('#taste .star').nth(3).click();
+    await page.evaluate(()=>window.CookAccount.flushPending());writeDelay=0;
+    assert.equal(ratings.get(a.id+':'+recipe).stars,4);
+    assert.equal([...ratings.keys()].filter(key=>key===a.id+':'+recipe).length,1);
+    const safe=writes();
+    assert.equal(await page.evaluate(()=>window.CookAccount.saveRating('spaghetti_carbonara',0)),false);
+    assert.equal(await page.evaluate(()=>window.CookAccount.saveRating('spaghetti_carbonara',6)),false);
+    assert.equal(await page.evaluate(()=>window.CookAccount.saveRating('spaghetti_carbonara',1.5)),false);
+    assert.equal(writes(),safe);
+    await page.reload();await revealRating();
+    await page.waitForFunction(()=>document.querySelector('#taste input:checked')?.value==='4');
+    failWrites=true;await page.locator('#taste .star').nth(0).click();
+    await page.waitForFunction(()=>document.getElementById('rating-status').textContent===window.CookI18n.t('ratingSaveFailed'));
+    assert.equal(ratings.get(a.id+':'+recipe).stars,4);failWrites=false;
+    await page.locator('#taste .star').nth(1).click();await page.evaluate(()=>window.CookAccount.flushPending());
+    assert.equal(ratings.get(a.id+':'+recipe).stars,2);
+    await page.locator('#btn-account').click();await page.locator('#account-logout').click();await page.waitForURL('**/index.html');
+    await signin(b);await page.waitForURL('**/recipes.html');
+    await page.goto(base+'/recipe.html?id='+recipe);await page.locator('#btn-start-cooking').click();
+    await page.waitForFunction(()=>location.pathname.endsWith('/cook.html')||document.getElementById('nolayout-dialog').open);
+    if(await page.locator('#nolayout-dialog').isVisible())await page.locator('#nolayout-yes').click();
+    await page.waitForURL('**/cook.html?id='+recipe);await revealRating();await page.waitForFunction(()=>window.CookAccount.signedIn());
+    assert.equal(await page.locator('#taste input:checked').count(),0);
+    await page.locator('#taste .star').nth(4).click();await page.evaluate(()=>window.CookAccount.flushPending());
+    assert.equal(ratings.get(b.id+':'+recipe).stars,5);assert.equal(ratings.get(a.id+':'+recipe).stars,2);
+    assert(!JSON.stringify(await page.evaluate(()=>window.CookPreferences.read())).includes('stars'));
+    console.log('PASS: guest ratings never persisted/uploaded, no upload after sign-in, per-user ratings, overwrite/reload, invalid values and save failure/retry.');
+  } finally {failWrites=false;writeDelay=0;await context.close();}
+}
 async function main() {
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const base='http://localhost:'+server.address().port;
   const browser=await chromium.launch({headless:true, ...(process.env.COOK_BROWSER_CHANNEL ? {channel:process.env.COOK_BROWSER_CHANNEL} : {})});
   try {
+    await checkRatings(browser,base);
     const disabled=await browser.newContext();
     await disabled.route('**/js/account-config.js',route=>route.fulfill({contentType:'text/javascript',body:'window.COOK_ACCOUNT_CONFIG={registrationEnabled:false};'}));
     const off=await disabled.newPage();await off.goto(base+'/index.html');
