@@ -3667,7 +3667,8 @@ window.I18N["hu"] = {
   "Cold, firm": "Hideg, tömör",
   "Turn out": "Borítsd ki",
   "Run a knife round the edge, put a plate on top and flip it so the caramel runs over.": "Húzz körbe egy kést a szélén, tegyél rá egy tányért, és fordítsd meg, hogy a karamell ráfolyjon.",
-  "Preheat · Bake in a water bath": "Melegítsd elő · Süsd vízfürdőben"
+  "Preheat · Bake in a water bath": "Melegítsd elő · Süsd vízfürdőben",
+  "see Homemade Mayonnaise": "lásd: Házi majonéz"
  },
  "amounts": {
   "L": "l",
