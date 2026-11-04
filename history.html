@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://api.country.is https://cbpkslivwdxxfhyoauhd.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cook</title>
+<link rel="preload" href="fonts/Fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/DMSans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/fridge.css">
+<link rel="stylesheet" href="css/account.css">
+<script src="js/page-session.js"></script>
+</head>
+<body data-page="history">
+
+<dialog id="account-dialog" class="dialog account-dialog" aria-labelledby="account-title">
+  <div class="account-content">
+    <button class="account-close" type="button" data-close="account-dialog" aria-label="Close account" data-i18n-label="accClose">&times;</button>
+    <h2 id="account-title" data-i18n="accTitle">Your Cook account</h2>
+    <p id="account-status" role="status" aria-live="polite"></p>
+    <div id="account-guest">
+      <form id="account-form">
+        <label class="field"><span data-i18n="accEmail">Email address</span><input id="account-email" name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <label class="field" id="account-signup-name-field" hidden><span data-i18n="accUsername">Username</span><input id="account-signup-name" type="text" maxlength="30" autocomplete="nickname"><small class="field-note" data-i18n="accNameNote">For display only, you still log in with your email address.</small></label>
+        <label class="field" id="account-password-field"><span data-i18n="accPassword">Password</span><input id="account-password" name="password" type="password" autocomplete="current-password" maxlength="72" required></label>
+        <label class="account-check" id="account-stay-field"><input id="account-stay" type="checkbox" checked> <span data-i18n="accStay">Stay signed in on this device</span></label>
+        <button class="btn btn-primary btn-wide" id="account-submit" type="submit">Sign in</button>
+      </form>
+      <button id="account-switch" class="btn btn-secondary btn-wide account-switch" type="button">Create account</button>
+      <div class="account-links">
+        <button class="text-button" type="button" data-account-mode="reset" data-i18n="accForgot">Forgot password?</button>
+        <button class="text-button" type="button" data-account-mode="resend" data-i18n="accResend">Resend confirmation</button>
+      </div>
+    </div>
+    <div id="account-member" hidden>
+      <p id="account-email-display"></p>
+      <form id="account-name-form" class="account-name-form">
+        <label class="field"><span data-i18n="accUsername">Username</span><input id="account-username" type="text" maxlength="30" autocomplete="nickname"></label>
+        <button class="btn btn-secondary" type="submit" data-i18n="save">Save</button>
+        <small class="field-note" data-i18n="accNameNote">For display only, you still log in with your email address.</small>
+      </form>
+      <a id="account-history" class="btn btn-secondary account-history" href="history.html" data-i18n="histTitle">My recipe history</a>
+      <p data-i18n="accMemberNote">Your kitchen layout, language, theme and units are saved when you save your kitchen or close Options. You can also save them here.</p>
+      <button id="account-save" class="btn btn-primary" type="button" data-i18n="accSave">Save kitchen and settings</button>
+      <button id="account-export" class="btn btn-secondary" type="button" data-i18n="accExport">Download my settings</button>
+      <button id="account-logout" class="btn btn-secondary" type="button" data-i18n="accLogOut">Log out</button>
+      <button id="account-delete-open" class="text-button account-danger" type="button" data-i18n="accDelete">Delete account</button>
+      <form id="account-delete" class="account-delete" hidden>
+        <p data-i18n="accDeleteConfirm">Are you sure? Your account will be permanently removed! Please enter your password to confirm:</p>
+        <label class="field"><span data-i18n="accPassword">Password</span><input id="account-delete-password" type="password" autocomplete="current-password" maxlength="72" required></label>
+        <button class="btn btn-danger" type="submit" data-i18n="accDeleteNow">Delete my account</button>
+        <button id="account-delete-cancel" class="btn btn-secondary" type="button" data-i18n="cancel">Cancel</button>
+      </form>
+    </div>
+    <form id="account-recovery" hidden>
+      <p id="account-recovery-email" class="account-recovery-email"></p>
+      <label class="field"><span data-i18n="accEnterNew">Enter your new password</span><input id="account-new-password" type="password" autocomplete="new-password" minlength="12" maxlength="72" required></label>
+      <label class="field"><span data-i18n="accRepeat">Repeat password</span><input id="account-new-password2" type="password" autocomplete="new-password" minlength="12" maxlength="72" required></label>
+      <button class="btn btn-primary btn-wide" type="submit" data-i18n="accSaveNewPassword">Save new password</button>
+    </form>
+  </div>
+</dialog>
+<dialog id="shop-dialog" class="dialog account-dialog" aria-labelledby="shop-title">
+  <div class="account-content">
+    <button class="account-close" type="button" data-close="shop-dialog" aria-label="Close" data-i18n-label="close">&times;</button>
+    <h2 id="shop-title" data-i18n="shopTitle">Shopping list</h2>
+    <p id="shop-status" role="status" aria-live="polite"></p>
+    <ul id="shop-list" class="shop-list"></ul>
+    <p id="shop-empty" class="hint" data-i18n="shopEmpty">Your shopping list is empty. Add ingredients on a recipe page.</p>
+    <div class="shop-actions">
+      <button id="shop-clear-done" class="btn btn-secondary btn-small" type="button" data-i18n="shopClearDone">Remove ticked</button>
+      <button id="shop-clear" class="btn btn-secondary btn-small" type="button" data-i18n="shopClear">Clear list</button>
+    </div>
+  </div>
+</dialog>
+<dialog id="privacy-dialog" class="dialog privacy-dialog" aria-labelledby="privacy-title">
+  <div class="account-content">
+    <button class="account-close" type="button" data-close="privacy-dialog" aria-label="Close privacy notice" data-i18n-label="privClose">&times;</button>
+    <h2 id="privacy-title" data-i18n="privTitle">Privacy and browser storage</h2>
+    <p><strong data-i18n="privDraftLabel">Draft — updated 28 October 2026.</strong> <span data-i18n="privDraft">Account features are currently being tested. The operator and service details below must be completed before public launch.</span></p>
+    <h3 data-i18n="privWho">Who is responsible?</h3>
+    <p data-i18n="privWho1">Cook is operated by [operator's legal name and postal address]. Contact [privacy email address] for privacy questions and requests. These details must be completed before registration opens.</p>
+    <h3 data-i18n="privWhat">What we use and why</h3>
+    <p data-i18n="privRatings">When signed in, your 1–5 star recipe ratings are stored with your account identifier and recipe identifier. Rating a recipe again updates your rating. Ratings given while signed out are not stored or uploaded later.</p>
+    <p data-i18n="privWhat1">When you create an account, we use your email, an account identifier, password authentication records and verification status to provide and secure your account. Passwords are handled by the authentication provider as secure hashes; Cook does not store readable passwords. We store your kitchen layout, selected language, theme and measurement units to restore your settings across devices. Providing an account email and password is necessary for an account; you can browse recipes without one.</p>
+    <p data-i18n="privWhat2">Account and settings processing is necessary to provide the account service you request (GDPR Article 6(1)(b)). Limited security and abuse-prevention records may be processed under legitimate interests (Article 6(1)(f)), subject to necessity and balancing. Verification and password-reset emails are service messages, not marketing. No advertising or analytics is added by the account feature.</p>
+    <h3 data-i18n="privStorage">Browser storage</h3>
+    <p data-i18n="privStorage1">Cook uses sessionStorage to carry your kitchen, cooking progress and choices between pages in the same tab. When signed in, it also holds your authentication session. The browser normally clears this when the tab session ends, but browser session restoration can retain it. Signing out clears Cook's tab data. The storage-notice dismissal is kept in that tab only. Cook's own scripts do not set cookies. Your hosting or service providers may have separate security processing that must be documented before launch.</p>
+    <p data-i18n="privStorage3">If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.</p>
+    <p data-i18n="privCommunity">If you choose a username, it is shown next to your public comments. Comments and their date are visible to everyone, together with the star rating you gave that recipe; average ratings are shown without names. Your recipe history, personal notes and shopping list are private to your account. Deleting your account removes all of them.</p>
+    <p data-i18n="privStorage2">OK and the close button on the storage notice only dismiss the notice. They do not authorise analytics, advertising or other optional tracking. Any future non-essential storage requires a separate choice before it starts, with an equally easy refusal and withdrawal.</p>
+    <h3 data-i18n="privOther">Other existing features</h3>
+    <p data-i18n="privOther1">The current recipe-list speech feature requests an approximate country from country.is using your IP address to choose a speech language. If you use microphone recognition, your browser may send audio to its speech-service provider. Typed ingredient entry is available instead. These providers, their policies and the legal basis for these features must be reviewed before public launch.</p>
+    <h3 data-i18n="privProviders">Service providers and international transfers</h3>
+    <p data-i18n="privProviders1">Planned account provider: Supabase (managed PostgreSQL and authentication), using a selected EU database region. Email provider: [provider]. Website host: [provider]. The operator must confirm the actual providers, processing agreements, subprocessors, log locations and any transfers outside the EEA. An EU database region does not by itself rule out international transfers. Where relevant, identify the applicable adequacy decision or contractual safeguards and how to obtain a copy.</p>
+    <h3 data-i18n="privRetention">Retention and deletion</h3>
+    <p data-i18n="privRetention1">Account settings are kept while your account is active. You may request deletion using the privacy contact above. Before launch the operator must specify the deletion response process, unverified-account expiry, security-log retention and backup-expiry periods. Deleted data may remain in restricted backups until the documented backup retention period ends.</p>
+    <h3 data-i18n="privRights">Your rights</h3>
+    <p data-i18n="privRights1">Depending on the applicable conditions, you may request access, correction, deletion, restriction, portability, or object to legitimate-interest processing. Contact the operator above; requests are normally answered within one month, with any lawful extension explained. You can complain to your supervisory authority, including Hungary's NAIH at naih.hu. Cook does not use account settings for automated decisions with legal or similarly significant effects.</p>
+  </div>
+</dialog>
+
+<div class="top-icons">
+  <button id="btn-shopping" class="btn-icon-top" type="button" aria-haspopup="dialog" data-i18n-label="shopTitle" data-i18n-title="shopTitle" aria-label="Shopping list" title="Shopping list">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11h13l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H5.6a1.8 1.8 0 0 1-1.8-1.5z"/><path d="M5.5 11l3-5M12.5 11l-2-3.5"/><path d="M18.4 3.6a1.5 1.5 0 0 1 2.1 2.1L15 11.2l-2.8.7.7-2.8z"/></svg>
+  </button>
+  <button id="btn-account" class="btn-icon-top btn-account" type="button" aria-haspopup="dialog" data-i18n-label="accAccount" aria-label="Account">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.8 3.4-6 7-6s6.4 2.2 7 6"/></svg>
+  </button>
+  <button id="btn-options" class="btn-icon-top btn-options" type="button" aria-haspopup="dialog" data-i18n-label="options">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M8.5 6H20M8.5 12H20M8.5 18H20"/><circle cx="4" cy="6" r="1.1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.1" fill="currentColor" stroke="none"/></svg>
+  </button>
+</div>
+
+<dialog id="options-dialog" class="dialog" aria-labelledby="options-title">
+  <form method="dialog">
+    <h2 id="options-title" data-i18n="options">Options</h2>
+    <fieldset class="choices">
+      <legend data-i18n="theme">Theme</legend>
+      <div class="segmented">
+        <label class="seg" title="Light"><input type="radio" name="theme" value="light" checked><span class="sr-only" data-i18n="themeLight">Light</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></label>
+        <label class="seg" title="Dark"><input type="radio" name="theme" value="dark"><span class="sr-only" data-i18n="themeDark">Dark</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></label>
+        <label class="seg seg-text"><input type="radio" name="theme" value="system"><span data-i18n="themeSystem">System</span></label>
+      </div>
+    </fieldset>
+    <fieldset class="choices">
+      <legend data-i18n="units">Units</legend>
+      <div class="choices-row">
+        <label class="choice"><input type="radio" name="units" value="metric" checked> <span data-i18n="metric">Metric</span></label>
+        <label class="choice"><input type="radio" name="units" value="imperial"> <span data-i18n="imperial">Imperial</span></label>
+      </div>
+    </fieldset>
+    <label class="field field-inline">
+      <span class="field-label" data-i18n="language">Language</span>
+      <select id="lang-select">
+        <option value="en">English (EN)</option>
+      </select>
+    </label>
+    <div class="field">
+      <span class="field-label" data-i18n="kitchenLayout">Kitchen layout</span>
+      <button id="btn-layout" class="btn btn-secondary btn-small" type="button" data-i18n="setupLayout">Set up kitchen layout</button>
+    </div>
+    <button class="btn btn-primary btn-wide" value="save" data-i18n="save">Save</button>
+  </form>
+</dialog>
+
+<dialog id="nolayout-dialog" class="dialog exit-dialog nolayout-dialog" aria-labelledby="nolayout-title">
+  <h2 id="nolayout-title" data-i18n="noLayoutAsk">You don't have the kitchen layout set up. Continue in list view only?</h2>
+  <div class="dialog-actions">
+    <button id="nolayout-setup" class="btn btn-primary" type="button" data-i18n="noSetUp">No, let's set it up</button>
+    <button id="nolayout-yes" class="btn btn-secondary" type="button" data-i18n="yes">Yes</button>
+  </div>
+</dialog>
+
+<dialog id="exit-dialog" class="dialog exit-dialog" aria-labelledby="exit-title">
+  <h2 id="exit-title" data-i18n="giveUp">You want to give up?</h2>
+  <div class="dialog-actions">
+    <button id="exit-no" class="btn btn-secondary" type="button" data-i18n="no">No</button>
+    <button id="exit-yes" class="btn btn-primary" type="button" data-i18n="yes">Yes</button>
+  </div>
+</dialog>
+
+<dialog id="read-dialog" class="dialog read-dialog" aria-labelledby="read-title">
+  <h2 id="read-title"></h2>
+  <div id="read-body" class="read-body"></div>
+  <p id="here-badge" class="here-badge" role="status" hidden data-i18n="youAreHere">You are here now!</p>
+  <div class="dialog-actions">
+    <button class="btn btn-secondary" type="button" disabled data-i18n="share">Share</button>
+    <button id="read-close" class="btn btn-primary" type="button" data-i18n="close">Close</button>
+  </div>
+</dialog>
+
+<main id="app">
+  <section id="screen-history" class="screen">
+    <div class="wrap">
+      <div class="top-row">
+        <button class="btn btn-ghost btn-back" type="button" data-back data-i18n="back">Back</button>
+      </div>
+      <h2 class="section-title" data-i18n="histTitle">My recipe history</h2>
+      <p id="hist-status" class="hint"></p>
+      <ul id="hist-list" class="hist-list"></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="account-footer"><button class="text-button" type="button" data-open-privacy data-i18n="privFooter">Privacy &amp; storage</button><button id="storage-reopen" class="text-button" type="button" data-i18n="noticeReopen">Storage notice</button></footer>
+<div class="slide-stack">
+<aside id="account-message" class="slide-note" role="status" aria-live="polite" hidden>
+  <p id="account-message-text"></p>
+  <button id="account-message-ok" class="btn btn-primary" type="button" data-i18n="accOk">OK</button>
+</aside>
+<aside id="storage-notice" class="slide-note storage-notice" aria-label="Browser storage notice" data-i18n-label="noticeLabel" hidden>
+  <p><span data-i18n="noticeText">Cook uses browser storage for your requested cooking and sign-in features. No advertising or analytics storage is added.</span> <button class="text-button" type="button" data-open-privacy data-i18n="privFooter">Privacy &amp; storage</button></p>
+  <button id="storage-ok" class="btn btn-primary" type="button" data-i18n="accOk">OK</button>
+  <button id="storage-close" class="account-close" type="button" aria-label="Close storage notice" data-i18n-label="noticeClose">&times;</button>
+</aside>
+</div>
+
+<button id="due-toast" class="due-toast" type="button" hidden></button>
+
+<button id="jump-bottom" class="jump-bottom" type="button" hidden data-i18n-label="jumpBottom">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+
+<div id="step-pop" class="step-pop" role="dialog" aria-modal="false" hidden>
+  <button id="step-pop-close" class="step-pop-close" type="button" data-i18n-label="close">&times;</button>
+  <div id="step-pop-body"></div>
+</div>
+<div id="step-pop-arrow" class="step-pop-arrow" aria-hidden="true" hidden></div>
+
+<div id="tip" class="tip" role="status" hidden>
+  <div class="tip-body">
+    <p class="tip-label" id="tip-label"></p>
+    <p class="tip-text" id="tip-text"></p>
+  </div>
+  <button id="tip-close" class="tip-close" type="button" data-i18n-label="dismissTip">&times;</button>
+</div>
+
+<script src="js/cook-core.js"></script>
+<script src="js/recipes-sheet.js"></script>
+<script src="js/recipes.js"></script>
+<script src="js/fridge.js"></script>
+<script src="js/app.js"></script>
+<script src="js/account-config.js"></script>
+<script src="js/vendor/supabase.js"></script>
+<script src="js/account.js"></script>
+</body>
+</html>

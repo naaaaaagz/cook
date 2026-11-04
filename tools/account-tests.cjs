@@ -12,6 +12,7 @@ const server = http.createServer((req,res) => {
   fs.readFile(file, (error, data) => { if(error)res.writeHead(404).end();else {res.setHeader('Content-Type',mime[path.extname(file)]||'application/octet-stream');res.end(data);} });
 });
 const accounts = new Map(), rows = new Map(), ratings = new Map(), calls = [];
+const profiles = new Map(), shoppingLists = new Map(), history = [], comments = [];
 let failWrites = false, writeDelay = 0;
 function addAccount(email,id) { const value={id,email,email_confirmed_at:'2026-10-28T12:00:00Z',aud:'authenticated',role:'authenticated',app_metadata:{provider:'email'},user_metadata:{}};accounts.set(email,value);return value; }
 const a=addAccount('peter@gmail.com','00000000-0000-4000-8000-000000000001');
@@ -58,6 +59,38 @@ async function backend(route) {
     assert.equal(body.user_id,user.id);
     rows.set(user.id,body);return reply(null,201);
   }
+  // Community data: averages and comments are public; the rest belongs to the signed-in user.
+  const idParam=()=>Number(url.searchParams.get('id').replace(/^eq\./,''));
+  if(url.pathname==='/rest/v1/rpc/cook_rating_summary') {
+    const sums={};for(const r of ratings.values())(sums[r.recipe_id]=sums[r.recipe_id]||[]).push(r.stars);
+    return reply(Object.entries(sums).map(([id,s])=>({recipe_id:id,average:Math.round(s.reduce((x,y)=>x+y,0)/s.length*10)/10,votes:s.length})));
+  }
+  if(url.pathname==='/rest/v1/rpc/cook_recipe_comments') {
+    return reply(comments.filter(c=>c.recipe_id===body.p_recipe).slice().reverse().map(c=>({id:c.id,created_at:c.created_at,
+      username:profiles.get(c.user_id)||null,body:c.body,stars:(ratings.get(c.user_id+':'+c.recipe_id)||{}).stars||null,mine:!!user&&c.user_id===user.id})));
+  }
+  if(url.pathname==='/rest/v1/profiles') {
+    if(!user)return reply({message:'Not authenticated'},401);
+    if(method==='GET')return reply(profiles.has(user.id)?[{username:profiles.get(user.id)}]:[]);
+    if([...profiles.entries()].some(([id,n])=>id!==user.id&&n.toLowerCase()===body.username.toLowerCase()))return reply({code:'23505',message:'duplicate key'},409);
+    profiles.set(user.id,body.username);return reply(null,201);
+  }
+  if(url.pathname==='/rest/v1/shopping_lists') {
+    if(!user)return reply({message:'Not authenticated'},401);
+    if(method==='GET')return reply(shoppingLists.has(user.id)?[{items:shoppingLists.get(user.id)}]:[]);
+    shoppingLists.set(user.id,body.items);return reply(null,201);
+  }
+  if(url.pathname==='/rest/v1/cook_history') {
+    if(!user)return reply({message:'Not authenticated'},401);
+    if(method==='GET')return reply(history.filter(h=>h.user_id===user.id).slice().reverse());
+    if(method==='POST'){const row=Object.assign({id:history.length+1,cooked_at:new Date().toISOString(),note:null},body);history.push(row);return reply(row,201);}
+    if(method==='PATCH'){const row=history.find(h=>h.id===idParam()&&h.user_id===user.id);Object.assign(row,body);return reply(null,200);}
+  }
+  if(url.pathname==='/rest/v1/recipe_comments') {
+    if(!user)return reply({message:'Not authenticated'},401);
+    if(method==='POST'){comments.push(Object.assign({id:comments.length+1,created_at:new Date().toISOString()},body));return reply(null,201);}
+    if(method==='DELETE'){const i=comments.findIndex(c=>c.id===idParam()&&c.user_id===user.id);if(i>=0)comments.splice(i,1);return reply(null,200);}
+  }
   throw Error('Unexpected mock request: '+method+' '+url.pathname);
 }
 async function checkRatings(browser,base) {
@@ -71,7 +104,7 @@ async function checkRatings(browser,base) {
   async function signin(account){
     await page.locator('#btn-account').click();await page.locator('#account-email').fill(account.email);
     await page.locator('#account-stay').uncheck();await page.locator('#account-password').fill('rating-test-password-123');
-    await page.locator('#account-submit').click();await page.waitForFunction(()=>window.CookAccount.signedIn());
+    await page.locator('#account-submit').click();await page.waitForFunction(()=>!!window.CookAccount&&window.CookAccount.signedIn());
   }
   try {
     await page.goto(base+'/recipe.html?id='+recipe);await page.locator('#storage-close').click();
@@ -114,7 +147,7 @@ async function checkRatings(browser,base) {
     await page.goto(base+'/recipe.html?id='+recipe);await page.locator('#btn-start-cooking').click();
     await page.waitForFunction(()=>location.pathname.endsWith('/cook.html')||document.getElementById('nolayout-dialog').open);
     if(await page.locator('#nolayout-dialog').isVisible())await page.locator('#nolayout-yes').click();
-    await page.waitForURL('**/cook.html?id='+recipe);await revealRating();await page.waitForFunction(()=>window.CookAccount.signedIn());
+    await page.waitForURL('**/cook.html?id='+recipe);await revealRating();await page.waitForFunction(()=>!!window.CookAccount&&window.CookAccount.signedIn());
     assert.equal(await page.locator('#taste input:checked').count(),0);
     await page.locator('#taste .star').nth(4).click();await page.evaluate(()=>window.CookAccount.flushPending());
     assert.equal(ratings.get(b.id+':'+recipe).stars,5);assert.equal(ratings.get(a.id+':'+recipe).stars,2);
@@ -183,7 +216,7 @@ async function main() {
     // "Stay signed in" (ticked by default): a new tab is still signed in and starts in the account's theme.
     const reopened=await context.newPage();await reopened.goto(base+'/recipes.html');
     assert.equal(await reopened.evaluate(()=>document.documentElement.getAttribute('data-theme')),'dark');
-    await reopened.waitForFunction(()=>window.CookAccount.signedIn());await reopened.close();
+    await reopened.waitForFunction(()=>!!window.CookAccount&&window.CookAccount.signedIn());await reopened.close();
     // Favorites: the star on a photo saves to the account; "Favorites only" lists just those.
     await page.locator('.filter-star').waitFor();
     // No favorites yet: a large note and "Check all recipes", which clears the filters.
@@ -207,6 +240,26 @@ async function main() {
     assert(await page.evaluate(()=>window.CookPreferences.read().layoutSaved));
     failWrites=false;
     await page.locator('#account-save').click();await page.locator('#account-status').filter({hasText:await tx('accSaved')}).waitFor();
+    await page.locator('[data-close="account-dialog"]').click();
+    // Shopping list: "+" next to an ingredient, then "− n +"; the list window shows it; saved to the account.
+    await page.goto(base+'/recipe.html?id='+favId);
+    await page.locator('#ing-list [data-shop="add"]').first().click();await page.locator('#ing-list .shop-step').first().waitFor();
+    await page.waitForTimeout(700);await page.evaluate(()=>window.CookAccount.flushPending());
+    assert.equal(shoppingLists.get(a.id).length,1);
+    await page.locator('#btn-shopping').click();assert.equal(await page.locator('#shop-list .shop-item').count(),1);
+    await page.locator('[data-close="shop-dialog"]').click();
+    // Username (display only), a public comment under it, and the private history page.
+    await page.locator('#btn-account').click();await page.locator('#account-username').fill('Peter');
+    await page.locator('#account-name-form button').click();await page.waitForFunction(()=>window.CookAccount.username()==='Peter');
+    assert.equal(profiles.get(a.id),'Peter');await page.locator('[data-close="account-dialog"]').click();
+    assert(await page.evaluate(id=>window.CookAccount.addComment(id,'Lovely <b>dish</b>'),favId));
+    assert(await page.evaluate(id=>window.CookAccount.addHistory({recipe_id:id,choices:{adults:2,kids:0,mode:'detailed'},minutes_taken:30,minutes_suggested:25,stars:null}),favId));
+    await page.reload();await page.locator('#det-comments .comment').waitFor();
+    assert.equal(await page.locator('#det-comments .comment-head b').textContent(),'Peter');
+    assert.equal(await page.locator('#det-comments .comment-body').textContent(),'Lovely <b>dish</b>'); // shown as text, never as HTML
+    await page.goto(base+'/history.html');await page.locator('#hist-list .hist-item').waitFor();
+    assert.equal(await page.locator('#hist-list .hist-item').count(),1);
+    await page.goto(base+'/recipes.html');await page.locator('#btn-account').click();
     await page.locator('#account-logout').click();await page.waitForURL('**/index.html');
     assert.equal(await page.evaluate(()=>window.CookPreferences.read().layoutSaved),false);
     assert.equal(await page.evaluate(()=>document.documentElement.getAttribute('data-theme')),'light');
@@ -269,7 +322,7 @@ async function main() {
     await mobile.screenshot({path:path.join(root,'.tmp/account-storage.png')});
     assert.deepEqual(errors,[]);
     await context.close();
-    console.log('PASS: disabled setup, OK/X storage notice, privacy, +aliases, sign-in, isolated accounts, kitchen/preferences save/reload, failure/retry, verification/expired links, recovery with repeat, stay signed in / tab only, sign-out, favorites, delete account, email-error reasons, mobile layout. Auth/database are mocked; live RLS/delivery not tested.');
+    console.log('PASS: disabled setup, OK/X storage notice, privacy, +aliases, sign-in, isolated accounts, kitchen/preferences save/reload, failure/retry, verification/expired links, recovery with repeat, stay signed in / tab only, sign-out, favorites, delete account, email-error reasons, shopping list, username, comments, history, mobile layout. Auth/database are mocked; live RLS/delivery not tested.');
   } finally { await browser.close(); }
 }
 main().catch(error=>{console.error(error);process.exitCode=1;}).finally(()=>server.close());

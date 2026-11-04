@@ -712,7 +712,7 @@ select {
 .keyword { font-size: 13px; border: 1px solid var(--line); border-radius: 4px; padding: 1px 7px; }
 
 /* Recipe page */
-.top-row { display: flex; justify-content: space-between; align-items: center; padding-right: 60px; }
+.top-row { display: flex; justify-content: space-between; align-items: center; padding-right: 152px; }
 .detail-hero { display: flex; align-items: center; gap: 16px; margin: 8px 0 16px; }
 .detail-hero .meta-line { margin-top: 6px; }
 /* "Read instead" on the recipe page: a small button under the cooking time */
@@ -788,7 +788,7 @@ select {
   flex-wrap: wrap;
   align-items: center;
   gap: 4px 12px;
-  padding: 10px 64px 0 16px;
+  padding: 10px 152px 0 16px; /* room for the three top-right icons */
   background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
@@ -1291,7 +1291,7 @@ body.overdo::before {
   .photo-hero { width: 96px; height: 96px; }
 
   /* Cooking header */
-  .cook-head { padding-right: 64px; gap: 8px 10px; }
+  .cook-head { padding-right: 128px; gap: 8px 10px; }
   .cook-title { order: -1; flex-basis: 100%; min-height: 44px; display: flex; flex-direction: column; justify-content: center; }
   .cook-clock { font-size: 16px; }
 }
@@ -1680,3 +1680,78 @@ html:has(.screen-cook.is-map:not([hidden])) { overflow: hidden; }
 .filter-voice .mic-icon { display: inline-block; vertical-align: -0.12em; margin-right: 6px; }
 .need-line { display: block; margin-top: 6px; padding: 4px 8px; border-radius: 8px; font-size: .9rem; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .need-line b { font-weight: 700; }
+
+/* ---------- 2026-11-03: language, ratings, shopping list, comments, pause, history, kitchen ---------- */
+/* Hidden until the chosen language is applied (set early in <head>, removed by app.js, at most 3 s) */
+html.i18n-wait body { visibility: hidden; }
+
+/* Average rating: small, after the recipe name */
+.rating-avg { margin-inline-start: 8px; font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; vertical-align: middle; }
+.rating-avg[hidden] { display: none; }
+.det-rating { margin-top: 2px; }
+
+/* Shopping list buttons next to each ingredient: "+ Add to shopping list", then "− n +" */
+.shop-add, .shop-step button { font: inherit; font-size: 13px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; }
+.shop-add { flex: none; margin-inline-end: 12px; padding: 4px 10px; white-space: nowrap; }
+.shop-add:disabled, .shop-step button:disabled { color: var(--disabled-fg); background: var(--disabled-bg); border-color: var(--disabled-bg); cursor: not-allowed; }
+.shop-step { flex: none; display: inline-flex; align-items: center; gap: 8px; margin-inline-end: 12px; }
+.shop-step button { width: 30px; height: 30px; padding: 0; font-size: 16px; line-height: 1; }
+.shop-step b { min-width: 1.2em; text-align: center; }
+@media (max-width: 600px) {
+  .ing-card { flex-wrap: wrap; }
+  .shop-add span { display: none; }
+}
+
+/* Shopping list window */
+.shop-list { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 6px; }
+.shop-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.shop-item label { flex: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; cursor: pointer; }
+.shop-item input { width: auto; }
+.shop-item small { flex-basis: 100%; padding-inline-start: 24px; font-size: 12px; color: var(--muted); }
+.shop-item.is-done .shop-name, .shop-item.is-done .shop-amount { text-decoration: line-through; color: var(--muted); }
+.shop-amount { font-weight: 700; }
+.shop-remove { border: 0; background: transparent; color: var(--muted); font-size: 1.3rem; cursor: pointer; width: 32px; height: 32px; }
+.shop-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+
+/* Comments at the bottom of a recipe page */
+.comments { margin-top: 36px; }
+.comment-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.comment { padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+.comment p { margin: 0; }
+.comment-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; font-size: 14px; }
+.comment-head time { color: var(--muted); font-size: 13px; }
+.comment-stars { color: var(--star); letter-spacing: 1px; }
+.comment-body { margin-top: 6px !important; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comment-delete { margin-inline-start: auto; font-size: 13px; color: var(--muted); }
+
+/* After cooking: time note, personal note and public comment (content-wide) */
+.time-note { max-width: 560px; margin: 8px auto 0; color: var(--text-2); }
+.time-note.is-off { color: var(--accent); font-weight: 600; }
+.after-notes { max-width: 720px; margin: 24px auto 0; display: grid; gap: 10px; text-align: start; }
+.note-row { display: flex; gap: 8px; align-items: stretch; }
+.note-row textarea { flex: 1; min-height: 44px; padding: 10px; font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); resize: vertical; }
+.after-status { min-height: 1.4em; margin: 0; }
+
+/* Pause while cooking: the page dims, a big Continue button */
+.btn-pause { display: inline-flex; align-items: center; gap: 6px; }
+.pause-overlay { position: fixed; inset: 0; z-index: 9; display: flex; justify-content: center; align-items: center; background: rgba(24, 22, 19, .55); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+.pause-overlay[hidden] { display: none; }
+
+/* My recipe history */
+.hist-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+.hist-item { padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+.hist-item p { margin: 0; }
+.hist-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.hist-head a { font-family: var(--font-serif); font-size: 19px; font-weight: 600; color: var(--ink); }
+.hist-head time { color: var(--muted); font-size: 13px; }
+.hist-line { margin-top: 4px !important; font-size: 14px; color: var(--text-2); }
+.hist-mods { font-size: 13px; color: var(--muted); }
+.hist-note { margin-top: 6px !important; font-size: 12px; color: var(--muted); font-style: italic; white-space: pre-wrap; }
+
+/* Kitchen editor: the + flashes on opening; dragging an item shows an X to drop it on */
+.btn-layout-add.flash { animation: add-flash 1.4s ease-out 2; }
+@keyframes add-flash { 0%, 100% { box-shadow: 0 4px 14px var(--shadow); } 40% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--primary-bg) 35%, transparent); transform: scale(1.08); } }
+.layout-trash { position: fixed; left: 50%; bottom: 18px; z-index: 50; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 10px 18px; color: #fff; background: rgba(160, 30, 30, .85); border-radius: 999px; box-shadow: 0 4px 18px var(--shadow); pointer-events: none; transition: transform .15s, background .15s; }
+.layout-trash[hidden] { display: none; }
+.layout-trash.hot { background: #b3261e; transform: translateX(-50%) scale(1.15); }
+@media (prefers-reduced-motion: reduce) { .btn-layout-add.flash { animation: none; } }

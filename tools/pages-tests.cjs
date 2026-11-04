@@ -1,7 +1,7 @@
 /* Local targeted checks for document navigation and tab-session state. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const app=fs.readFileSync('js/app.js','utf8');
-const files={'index.html':'welcome','recipes.html':'recipes','recipe.html':'details','kitchen.html':'layout','cook.html':'cook'};
+const files={'index.html':'welcome','recipes.html':'recipes','recipe.html':'details','kitchen.html':'layout','cook.html':'cook','history.html':'history'};
 let policy;
 for(const [file,screen] of Object.entries(files)) {
   const html=fs.readFileSync(file,'utf8');
@@ -39,7 +39,7 @@ const c=ui.cleanChoices(r,{adults:-50,kids:500,mode:'other',opt_meat:'bad',injec
 assert.equal(c.adults,0);assert.equal(c.kids,8);assert.equal(c.mode,'detailed');assert.equal(c.opt_meat,'guanciale');assert(!('injected'in c));
 assert.equal(ui.cleanChoices(r,{adults:0,kids:0}).adults,1);
 const jar=ui.window.RECIPES.find(r=>r.unit==='jar');assert.equal(ui.cleanChoices(jar,{adults:1,kids:4}).kids,0);
-vm.runInContext("var state={recipe:window.RECIPES[0]},PAGES={welcome:'index.html',recipes:'recipes.html',details:'recipe.html',layout:'kitchen.html',cook:'cook.html'},pageScreen='details',pageParams=new URLSearchParams(location.search);",ui);
+vm.runInContext("var state={recipe:window.RECIPES[0]},PAGES={welcome:'index.html',recipes:'recipes.html',details:'recipe.html',layout:'kitchen.html',cook:'cook.html',history:'history.html'},pageScreen='details',pageParams=new URLSearchParams(location.search);",ui);
 vm.runInContext(app.slice(app.indexOf('  function screenUrl'),app.indexOf('  function updateTitle')),ui);
 for(const recipe of ui.window.RECIPES) {
   ui.pageParams=new URLSearchParams('?id='+encodeURIComponent(recipe.id));
@@ -58,4 +58,4 @@ vm.runInContext(fridge.slice(fridge.lastIndexOf('  var api = {'),fridge.lastInde
 mic.api.open();mic.api.stop();mic.queued[0](true);assert.equal(mic.starts,0);
 mic.api.open();mic.queued[1](true);assert.equal(mic.starts,1);
 mic.api.open();mic.api.close();mic.queued[2](true);assert.equal(mic.starts,1);
-console.log('PASS: five single-screen documents, matching CSP, relative assets, session round trips/failures, validated choices, all '+ui.window.RECIPES.length+' recipe routes and project-subpath URLs.');
+console.log('PASS: six single-screen documents, matching CSP, relative assets, session round trips/failures, validated choices, all '+ui.window.RECIPES.length+' recipe routes and project-subpath URLs.');

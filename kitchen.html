@@ -24,6 +24,7 @@
     <div id="account-guest">
       <form id="account-form">
         <label class="field"><span data-i18n="accEmail">Email address</span><input id="account-email" name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <label class="field" id="account-signup-name-field" hidden><span data-i18n="accUsername">Username</span><input id="account-signup-name" type="text" maxlength="30" autocomplete="nickname"><small class="field-note" data-i18n="accNameNote">For display only, you still log in with your email address.</small></label>
         <label class="field" id="account-password-field"><span data-i18n="accPassword">Password</span><input id="account-password" name="password" type="password" autocomplete="current-password" maxlength="72" required></label>
         <label class="account-check" id="account-stay-field"><input id="account-stay" type="checkbox" checked> <span data-i18n="accStay">Stay signed in on this device</span></label>
         <button class="btn btn-primary btn-wide" id="account-submit" type="submit">Sign in</button>
@@ -36,6 +37,12 @@
     </div>
     <div id="account-member" hidden>
       <p id="account-email-display"></p>
+      <form id="account-name-form" class="account-name-form">
+        <label class="field"><span data-i18n="accUsername">Username</span><input id="account-username" type="text" maxlength="30" autocomplete="nickname"></label>
+        <button class="btn btn-secondary" type="submit" data-i18n="save">Save</button>
+        <small class="field-note" data-i18n="accNameNote">For display only, you still log in with your email address.</small>
+      </form>
+      <a id="account-history" class="btn btn-secondary account-history" href="history.html" data-i18n="histTitle">My recipe history</a>
       <p data-i18n="accMemberNote">Your kitchen layout, language, theme and units are saved when you save your kitchen or close Options. You can also save them here.</p>
       <button id="account-save" class="btn btn-primary" type="button" data-i18n="accSave">Save kitchen and settings</button>
       <button id="account-export" class="btn btn-secondary" type="button" data-i18n="accExport">Download my settings</button>
@@ -56,6 +63,19 @@
     </form>
   </div>
 </dialog>
+<dialog id="shop-dialog" class="dialog account-dialog" aria-labelledby="shop-title">
+  <div class="account-content">
+    <button class="account-close" type="button" data-close="shop-dialog" aria-label="Close" data-i18n-label="close">&times;</button>
+    <h2 id="shop-title" data-i18n="shopTitle">Shopping list</h2>
+    <p id="shop-status" role="status" aria-live="polite"></p>
+    <ul id="shop-list" class="shop-list"></ul>
+    <p id="shop-empty" class="hint" data-i18n="shopEmpty">Your shopping list is empty. Add ingredients on a recipe page.</p>
+    <div class="shop-actions">
+      <button id="shop-clear-done" class="btn btn-secondary btn-small" type="button" data-i18n="shopClearDone">Remove ticked</button>
+      <button id="shop-clear" class="btn btn-secondary btn-small" type="button" data-i18n="shopClear">Clear list</button>
+    </div>
+  </div>
+</dialog>
 <dialog id="privacy-dialog" class="dialog privacy-dialog" aria-labelledby="privacy-title">
   <div class="account-content">
     <button class="account-close" type="button" data-close="privacy-dialog" aria-label="Close privacy notice" data-i18n-label="privClose">&times;</button>
@@ -70,6 +90,7 @@
     <h3 data-i18n="privStorage">Browser storage</h3>
     <p data-i18n="privStorage1">Cook uses sessionStorage to carry your kitchen, cooking progress and choices between pages in the same tab. When signed in, it also holds your authentication session. The browser normally clears this when the tab session ends, but browser session restoration can retain it. Signing out clears Cook's tab data. The storage-notice dismissal is kept in that tab only. Cook's own scripts do not set cookies. Your hosting or service providers may have separate security processing that must be documented before launch.</p>
     <p data-i18n="privStorage3">If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.</p>
+    <p data-i18n="privCommunity">If you choose a username, it is shown next to your public comments. Comments and their date are visible to everyone, together with the star rating you gave that recipe; average ratings are shown without names. Your recipe history, personal notes and shopping list are private to your account. Deleting your account removes all of them.</p>
     <p data-i18n="privStorage2">OK and the close button on the storage notice only dismiss the notice. They do not authorise analytics, advertising or other optional tracking. Any future non-essential storage requires a separate choice before it starts, with an equally easy refusal and withdrawal.</p>
     <h3 data-i18n="privOther">Other existing features</h3>
     <p data-i18n="privOther1">The current recipe-list speech feature requests an approximate country from country.is using your IP address to choose a speech language. If you use microphone recognition, your browser may send audio to its speech-service provider. Typed ingredient entry is available instead. These providers, their policies and the legal basis for these features must be reviewed before public launch.</p>
@@ -83,6 +104,9 @@
 </dialog>
 
 <div class="top-icons">
+  <button id="btn-shopping" class="btn-icon-top" type="button" aria-haspopup="dialog" data-i18n-label="shopTitle" data-i18n-title="shopTitle" aria-label="Shopping list" title="Shopping list">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11h13l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H5.6a1.8 1.8 0 0 1-1.8-1.5z"/><path d="M5.5 11l3-5M12.5 11l-2-3.5"/><path d="M18.4 3.6a1.5 1.5 0 0 1 2.1 2.1L15 11.2l-2.8.7.7-2.8z"/></svg>
+  </button>
   <button id="btn-account" class="btn-icon-top btn-account" type="button" aria-haspopup="dialog" data-i18n-label="accAccount" aria-label="Account">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.8 3.4-6 7-6s6.4 2.2 7 6"/></svg>
   </button>
@@ -153,6 +177,7 @@
 
 <main id="app">
   <section id="screen-layout" class="screen screen-layout">
+    <div id="layout-trash" class="layout-trash" hidden><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="dropRemove">Drop here to remove</span></div>
     <div class="layout-bar">
       <button id="btn-layout-cancel" class="btn btn-secondary btn-small" type="button" data-i18n="cancel">Cancel</button>
       <span class="hint" data-i18n="layoutHelp">Drag to move, drag the corner to resize. Things can only overlap the countertop.</span>

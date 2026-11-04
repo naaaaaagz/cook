@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const source = fs.readFileSync(path.join(__dirname, 'page-template.html'), 'utf8').replace(/\r\n/g, '\n');
-const pages = { 'index.html':'welcome', 'recipes.html':'recipes', 'recipe.html':'details', 'kitchen.html':'layout', 'cook.html':'cook' };
+const pages = { 'index.html':'welcome', 'recipes.html':'recipes', 'recipe.html':'details', 'kitchen.html':'layout', 'cook.html':'cook', 'history.html':'history' };
 function screen(name) {
   const start = source.indexOf('<section id="screen-' + name + '"');
   if (start < 0) throw Error('Missing template screen: '+name);
@@ -31,4 +31,4 @@ for (const [file,name] of Object.entries(pages)) {
   } else fs.writeFileSync(target,html);
 }
 if(failed)process.exitCode=1;
-else console.log('PASS: five separate HTML pages '+(process.argv.includes('--check')?'match the template.':'generated.'));
+else console.log('PASS: six separate HTML pages '+(process.argv.includes('--check')?'match the template.':'generated.'));

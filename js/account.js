@@ -11,9 +11,10 @@
   // Where the sign-in session is kept: this tab only, or (with "Stay signed in") this browser
   // until signing out. The account's theme is kept with it, so a reopened tab starts in that theme.
   var authKey = 'cook:auth:v1:' + scope, persistKey = 'cook:auth-persist:v1:' + scope, themeKey = 'cook:theme:v1:' + scope;
+  var langKey = 'cook:lang:v1:' + scope;
   function persistent() { try { return localStorage.getItem(persistKey) === '1'; } catch (e) { return false; } }
   function setPersistent(on) {
-    try { if (on) localStorage.setItem(persistKey, '1'); else { localStorage.removeItem(persistKey); localStorage.removeItem(themeKey); } }
+    try { if (on) localStorage.setItem(persistKey, '1'); else { localStorage.removeItem(persistKey); localStorage.removeItem(themeKey); localStorage.removeItem(langKey); } }
     catch (e) { /* browser storage blocked: the session stays in this tab */ }
   }
   var authStorage = {
@@ -30,7 +31,7 @@
     setPersistent(false);
   }
   function rememberTheme() {
-    try { if (persistent()) localStorage.setItem(themeKey, preferences().theme); } catch (e) { /* optional */ }
+    try { if (persistent()) { localStorage.setItem(themeKey, preferences().theme); localStorage.setItem(langKey, preferences().lang); } } catch (e) { /* optional */ }
   }
   var mode = 'login', client = null, user = null, ready = false, recovery = false;
   var saving = Promise.resolve(), busy = false, savedFingerprint = null;
@@ -115,6 +116,7 @@
     $('account-password').autocomplete = value === 'signup' ? 'new-password' : 'current-password';
     $('account-password').value = '';
     $('account-stay-field').hidden = value !== 'login';
+    $('account-signup-name-field').hidden = value !== 'signup';
     drawMode();
     status(null);
   }
@@ -130,7 +132,7 @@
     $('btn-account').title = label;
     $('account-email-display').textContent = user ? user.email : '';
     $('account-recovery-email').textContent = user ? user.email : '';
-    if (!user) hideDelete();
+    if (!user) { hideDelete(); profileName = null; }
     // app.js shows favorites only for a signed-in, loaded account.
     document.dispatchEvent(new Event('cook:account'));
   }
@@ -172,6 +174,12 @@
     ready = true;
     rememberTheme();
     status(data ? 'accLoaded' : 'accSignedInEmpty');
+    document.dispatchEvent(new Event('cook:account'));
+    // The display name loads in the background; a missing profile table never blocks signing in.
+    loadProfile().then(drawProfile).catch(function () {});
+  }
+  function drawProfile() {
+    if ($('account-username')) $('account-username').value = profileName || '';
     document.dispatchEvent(new Event('cook:account'));
   }
   function savePreferences() {
@@ -221,13 +229,124 @@
     });
     return saving;
   }
+  // ---------- Community data: username, history, comments, averages, shopping list ----------
+  // These writes run in their own queue: a failed note or comment never blocks page changes.
+  var side = Promise.resolve(), profileName = null;
+  function sideJob(job) {
+    if (!user || !ready) return Promise.resolve(false);
+    var accountId = user.id;
+    var run = side.then(async function () {
+      if (!user || !ready || user.id !== accountId) return false;
+      return job(accountId);
+    }).catch(function () { return false; });
+    side = run.then(function () {}, function () {});
+    return run;
+  }
+  var NAME_RE = /^[\p{L}\p{N} _.-]{3,30}$/u;
+  function cleanName(name) { return String(name || '').trim().replace(/\s+/g, ' '); }
+  // 'ok', 'invalid', 'taken' or 'failed'
+  async function saveUsername(name) {
+    name = cleanName(name);
+    if (!NAME_RE.test(name)) return 'invalid';
+    var result = await sideJob(async function (accountId) {
+      var r = await client.from('profiles').upsert({ user_id: accountId, username: name }, { onConflict: 'user_id' });
+      if (r.error) return r.error.code === '23505' ? 'taken' : 'failed';
+      profileName = name;
+      return 'ok';
+    });
+    return result || 'failed';
+  }
+  async function loadProfile() {
+    profileName = null;
+    var accountId = user.id;
+    var r = await client.from('profiles').select('username').eq('user_id', accountId).maybeSingle();
+    if (!user || user.id !== accountId || r.error) return;
+    if (r.data) { profileName = r.data.username; return; }
+    // A name chosen at registration waits in the account until the email is confirmed.
+    var wanted = user.user_metadata && cleanName(user.user_metadata.username);
+    if (wanted && (await saveUsername(wanted)) === 'taken') status('accNameTakenLater');
+  }
+  function addHistory(entry) {
+    return sideJob(async function (accountId) {
+      var r = await client.from('cook_history').insert(Object.assign({ user_id: accountId }, entry)).select('id').single();
+      return r.error ? null : r.data.id;
+    });
+  }
+  function updateHistory(id, fields) {
+    return sideJob(async function () {
+      var r = await client.from('cook_history').update(fields).eq('id', id);
+      return !r.error;
+    });
+  }
+  async function loadHistory() {
+    if (!user || !ready) return null;
+    var r = await client.from('cook_history').select('id,recipe_id,cooked_at,choices,minutes_taken,minutes_suggested,stars,note')
+      .eq('user_id', user.id).order('cooked_at', { ascending: false }).limit(500);
+    if (r.error) throw r.error;
+    return r.data;
+  }
+  // Public reads also work for guests (no account needed).
+  async function loadComments(recipeId) {
+    if (!client || !validRecipe(recipeId)) return [];
+    var r = await client.rpc('cook_recipe_comments', { p_recipe: recipeId });
+    if (r.error) throw r.error;
+    return r.data || [];
+  }
+  function addComment(recipeId, body) {
+    body = String(body || '').trim();
+    if (!validRecipe(recipeId) || !body || body.length > 1000) return Promise.resolve(false);
+    return sideJob(async function (accountId) {
+      var r = await client.from('recipe_comments').insert({ user_id: accountId, recipe_id: recipeId, body: body });
+      return !r.error;
+    });
+  }
+  function deleteComment(id) {
+    return sideJob(async function () {
+      var r = await client.from('recipe_comments').delete().eq('id', id);
+      return !r.error;
+    });
+  }
+  var summary = null;
+  async function loadRatingSummary() {
+    if (!client) return {};
+    if (!summary) summary = client.rpc('cook_rating_summary').then(function (r) {
+      var map = {};
+      (r.data || []).forEach(function (row) { map[row.recipe_id] = { average: Number(row.average), votes: row.votes }; });
+      return map;
+    }).catch(function () { return {}; });
+    return summary;
+  }
+  async function loadShopping() {
+    if (!user || !ready) return [];
+    var r = await client.from('shopping_lists').select('items').eq('user_id', user.id).maybeSingle();
+    if (r.error) throw r.error;
+    return r.data && Array.isArray(r.data.items) ? r.data.items : [];
+  }
+  function saveShopping(items) {
+    return sideJob(async function (accountId) {
+      var r = await client.from('shopping_lists').upsert({ user_id: accountId, items: items }, { onConflict: 'user_id' });
+      return !r.error;
+    });
+  }
   window.CookAccount = {
     savePreferences: savePreferences,
     loadRating: loadRating,
     saveRating: saveRating,
     userId: function () { return user && ready ? user.id : null; },
+    username: function () { return profileName; },
+    hasClient: function () { return !!client; },
+    saveUsername: saveUsername,
+    addHistory: addHistory,
+    updateHistory: updateHistory,
+    loadHistory: loadHistory,
+    loadComments: loadComments,
+    addComment: addComment,
+    deleteComment: deleteComment,
+    loadRatingSummary: loadRatingSummary,
+    loadShopping: loadShopping,
+    saveShopping: saveShopping,
     flushPending: function () {
-      return saving.then(function (ok) {
+      return side.then(function () { return saving; }).then(function (ok) {
         if (ok === false) return false;
         // A dialog's close event can arrive after a navigation click. Capture changes now.
         return user && JSON.stringify(preferences()) !== savedFingerprint ? savePreferences() : true;
@@ -243,6 +362,12 @@
     }
   };
   $('account-save').addEventListener('click', savePreferences);
+  $('account-name-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    var result = await saveUsername($('account-username').value);
+    status({ ok: 'accNameSaved', invalid: 'accNameInvalid', taken: 'accNameTaken', failed: 'accRequestFailed' }[result]);
+    if (result === 'ok') drawProfile();
+  });
   $('options-dialog').addEventListener('close', function () { if (user) savePreferences(); });
   $('account-form').addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -256,7 +381,11 @@
     status('accWait');
     try {
       if (action === 'signup') {
-        check(await client.auth.signUp({ email: email, password: password, options: { emailRedirectTo: config.siteUrl } }));
+        // The username (optional) is kept with the new account and saved once the email is confirmed.
+        var wanted = cleanName($('account-signup-name').value);
+        if (wanted && !NAME_RE.test(wanted)) { status('accNameInvalid'); return; }
+        check(await client.auth.signUp({ email: email, password: password,
+          options: { emailRedirectTo: config.siteUrl, data: wanted ? { username: wanted } : {} } }));
         status('accSignupSent');
       } else if (action === 'login') {
         clearAuth();
@@ -367,6 +496,8 @@
         storage: authStorage, storageKey: authKey, persistSession: true,
         autoRefreshToken: true, detectSessionInUrl: false, flowType: 'pkce'
       } });
+      // Public data (average ratings, comments) can load now, also for guests.
+      document.dispatchEvent(new Event('cook:account'));
       if (tokenHash && tokenType !== 'email' && tokenType !== 'recovery') throw new Error('invalid_link_type');
       if (tokenHash) {
         check(await client.auth.verifyOtp({ token_hash: tokenHash, type: tokenType }));

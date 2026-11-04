@@ -23,6 +23,7 @@
     <div id="account-guest">
       <form id="account-form">
         <label class="field"><span data-i18n="accEmail">Email address</span><input id="account-email" name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <label class="field" id="account-signup-name-field" hidden><span data-i18n="accUsername">Username</span><input id="account-signup-name" type="text" maxlength="30" autocomplete="nickname"><small class="field-note" data-i18n="accNameNote">For display only, you still log in with your email address.</small></label>
         <label class="field" id="account-password-field"><span data-i18n="accPassword">Password</span><input id="account-password" name="password" type="password" autocomplete="current-password" maxlength="72" required></label>
         <label class="account-check" id="account-stay-field"><input id="account-stay" type="checkbox" checked> <span data-i18n="accStay">Stay signed in on this device</span></label>
         <button class="btn btn-primary btn-wide" id="account-submit" type="submit">Sign in</button>
@@ -35,6 +36,12 @@
     </div>
     <div id="account-member" hidden>
       <p id="account-email-display"></p>
+      <form id="account-name-form" class="account-name-form">
+        <label class="field"><span data-i18n="accUsername">Username</span><input id="account-username" type="text" maxlength="30" autocomplete="nickname"></label>
+        <button class="btn btn-secondary" type="submit" data-i18n="save">Save</button>
+        <small class="field-note" data-i18n="accNameNote">For display only, you still log in with your email address.</small>
+      </form>
+      <a id="account-history" class="btn btn-secondary account-history" href="history.html" data-i18n="histTitle">My recipe history</a>
       <p data-i18n="accMemberNote">Your kitchen layout, language, theme and units are saved when you save your kitchen or close Options. You can also save them here.</p>
       <button id="account-save" class="btn btn-primary" type="button" data-i18n="accSave">Save kitchen and settings</button>
       <button id="account-export" class="btn btn-secondary" type="button" data-i18n="accExport">Download my settings</button>
@@ -55,6 +62,19 @@
     </form>
   </div>
 </dialog>
+<dialog id="shop-dialog" class="dialog account-dialog" aria-labelledby="shop-title">
+  <div class="account-content">
+    <button class="account-close" type="button" data-close="shop-dialog" aria-label="Close" data-i18n-label="close">&times;</button>
+    <h2 id="shop-title" data-i18n="shopTitle">Shopping list</h2>
+    <p id="shop-status" role="status" aria-live="polite"></p>
+    <ul id="shop-list" class="shop-list"></ul>
+    <p id="shop-empty" class="hint" data-i18n="shopEmpty">Your shopping list is empty. Add ingredients on a recipe page.</p>
+    <div class="shop-actions">
+      <button id="shop-clear-done" class="btn btn-secondary btn-small" type="button" data-i18n="shopClearDone">Remove ticked</button>
+      <button id="shop-clear" class="btn btn-secondary btn-small" type="button" data-i18n="shopClear">Clear list</button>
+    </div>
+  </div>
+</dialog>
 <dialog id="privacy-dialog" class="dialog privacy-dialog" aria-labelledby="privacy-title">
   <div class="account-content">
     <button class="account-close" type="button" data-close="privacy-dialog" aria-label="Close privacy notice" data-i18n-label="privClose">&times;</button>
@@ -69,6 +89,7 @@
     <h3 data-i18n="privStorage">Browser storage</h3>
     <p data-i18n="privStorage1">Cook uses sessionStorage to carry your kitchen, cooking progress and choices between pages in the same tab. When signed in, it also holds your authentication session. The browser normally clears this when the tab session ends, but browser session restoration can retain it. Signing out clears Cook's tab data. The storage-notice dismissal is kept in that tab only. Cook's own scripts do not set cookies. Your hosting or service providers may have separate security processing that must be documented before launch.</p>
     <p data-i18n="privStorage3">If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.</p>
+    <p data-i18n="privCommunity">If you choose a username, it is shown next to your public comments. Comments and their date are visible to everyone, together with the star rating you gave that recipe; average ratings are shown without names. Your recipe history, personal notes and shopping list are private to your account. Deleting your account removes all of them.</p>
     <p data-i18n="privStorage2">OK and the close button on the storage notice only dismiss the notice. They do not authorise analytics, advertising or other optional tracking. Any future non-essential storage requires a separate choice before it starts, with an equally easy refusal and withdrawal.</p>
     <h3 data-i18n="privOther">Other existing features</h3>
     <p data-i18n="privOther1">The current recipe-list speech feature requests an approximate country from country.is using your IP address to choose a speech language. If you use microphone recognition, your browser may send audio to its speech-service provider. Typed ingredient entry is available instead. These providers, their policies and the legal basis for these features must be reviewed before public launch.</p>
@@ -82,6 +103,9 @@
 </dialog>
 
 <div class="top-icons">
+  <button id="btn-shopping" class="btn-icon-top" type="button" aria-haspopup="dialog" data-i18n-label="shopTitle" data-i18n-title="shopTitle" aria-label="Shopping list" title="Shopping list">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11h13l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H5.6a1.8 1.8 0 0 1-1.8-1.5z"/><path d="M5.5 11l3-5M12.5 11l-2-3.5"/><path d="M18.4 3.6a1.5 1.5 0 0 1 2.1 2.1L15 11.2l-2.8.7.7-2.8z"/></svg>
+  </button>
   <button id="btn-account" class="btn-icon-top btn-account" type="button" aria-haspopup="dialog" data-i18n-label="accAccount" aria-label="Account">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.8 3.4-6 7-6s6.4 2.2 7 6"/></svg>
   </button>
@@ -238,6 +262,7 @@
 
   <!-- Kitchen layout editor -->
   <section id="screen-layout" class="screen screen-layout" hidden>
+    <div id="layout-trash" class="layout-trash" hidden><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="dropRemove">Drop here to remove</span></div>
     <div class="layout-bar">
       <button id="btn-layout-cancel" class="btn btn-secondary btn-small" type="button" data-i18n="cancel">Cancel</button>
       <span class="hint" data-i18n="layoutHelp">Drag to move, drag the corner to resize. Things can only overlap the countertop.</span>
@@ -270,6 +295,7 @@
         <div>
           <h2 class="title-row"><span id="det-name"></span><span id="det-star" class="det-star" hidden></span> <span id="det-diet"></span></h2>
           <p id="det-time" class="meta-line"></p>
+          <p id="det-rating" class="meta-line det-rating" hidden></p>
           <div class="hero-actions"><button id="btn-fav" class="btn btn-secondary btn-fav btn-read-hero" type="button" aria-pressed="false"><span class="fav-icon"></span><span class="btn-label">Add to favorites</span></button><button class="btn btn-secondary btn-read btn-read-hero" type="button" data-i18n-label="readInstead"><svg class="book-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13"/></svg><span class="btn-label" data-i18n="readInstead">Read instead</span></button></div>
         </div>
       </div>
@@ -326,9 +352,14 @@
       <p id="ing-meta" class="hint"></p>
       <ul id="ing-list" class="ing-list"></ul>
       <div class="stack">
-        <button class="btn btn-secondary" type="button" disabled data-i18n="addShopping">Add to shopping list</button>
+        <button id="btn-shop-all" class="btn btn-secondary" type="button" data-i18n="shopAddAll">Add all to the shopping list</button>
         <button id="btn-start-cooking" class="btn btn-primary" type="button" data-i18n="gotEverything">I got everything, let's start!</button>
       </div>
+      <section class="comments" aria-labelledby="det-comments-title">
+        <h3 id="det-comments-title" class="section-title" data-i18n="comTitle">Comments</h3>
+        <ul id="det-comments" class="comment-list"></ul>
+        <p id="det-comments-empty" class="hint" data-i18n="comNone">No comments yet.</p>
+      </section>
     </div>
   </section>
 
@@ -336,6 +367,7 @@
   <section id="screen-cook" class="screen screen-cook" hidden>
     <header class="cook-head">
       <button id="btn-cook-exit" class="btn btn-secondary btn-small" type="button" data-i18n="exit">Exit</button>
+      <button id="btn-cook-pause" class="btn btn-secondary btn-small btn-pause" type="button" hidden data-i18n-label="pause"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg><span class="btn-label" data-i18n="pause">Pause</span></button>
       <div class="cook-title">
         <h2 id="cook-name"></h2>
         <p id="cook-count" class="hint"></p>
@@ -355,6 +387,12 @@
     <div class="cook-body">
       <div id="cook-list" class="cook-list"></div>
       <div id="cook-map" class="cook-map" hidden></div>
+      <div id="pause-overlay" class="pause-overlay" hidden>
+        <button id="btn-resume" class="btn-start-now" type="button">
+          <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+          <span data-i18n="resume">Continue</span>
+        </button>
+      </div>
       <div id="start-overlay" class="start-overlay">
         <button id="btn-start-now" class="btn-start-now" type="button">
           <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
@@ -375,12 +413,36 @@
         <p id="star-text" class="star-text" aria-live="polite"></p>
         <p id="rating-status" role="status" aria-live="polite"></p>
       </fieldset>
+      <p id="time-note" class="time-note" hidden></p>
+      <div class="after-notes">
+        <form id="note-form" class="note-row">
+          <textarea id="note-text" rows="2" maxlength="1000" data-i18n-placeholder="noteAdd" data-i18n-label="noteAdd" placeholder="Add a personal note"></textarea>
+          <button class="btn btn-secondary" type="submit" data-i18n="save">Save</button>
+        </form>
+        <form id="comment-form" class="note-row">
+          <textarea id="comment-text" rows="2" maxlength="1000" data-i18n-placeholder="comAdd" data-i18n-label="comAdd" placeholder="Add a public comment"></textarea>
+          <button class="btn btn-secondary" type="submit" data-i18n="save">Save</button>
+        </form>
+        <p id="after-status" class="hint after-status" role="status" aria-live="polite"></p>
+      </div>
       <div class="stack">
         <button id="btn-fav-done" class="btn btn-secondary btn-fav" type="button" aria-pressed="false"><span class="fav-icon"></span><span class="btn-label">Add to favorites</span></button>
         <button class="btn btn-secondary" type="button" disabled data-i18n="uploadPhoto">Upload photo</button>
         <button class="btn btn-secondary" type="button" disabled data-i18n="share">Share</button>
         <button class="btn btn-primary" type="button" data-go="recipes" data-i18n="backHome">Back to home</button>
       </div>
+    </div>
+  </section>
+
+  <!-- My recipe history (signed in) -->
+  <section id="screen-history" class="screen" hidden>
+    <div class="wrap">
+      <div class="top-row">
+        <button class="btn btn-ghost btn-back" type="button" data-back data-i18n="back">Back</button>
+      </div>
+      <h2 class="section-title" data-i18n="histTitle">My recipe history</h2>
+      <p id="hist-status" class="hint"></p>
+      <ul id="hist-list" class="hist-list"></ul>
     </div>
   </section>
 

@@ -105,6 +105,55 @@
       favSignIn: 'Sign in to save favorites.',
       favNone: 'You have no favorites saved yet.',
       favShowAll: 'Check all recipes',
+      shopTitle: 'Shopping list',
+      shopEmpty: 'Your shopping list is empty. Add ingredients on a recipe page.',
+      shopClearDone: 'Remove ticked',
+      shopClear: 'Clear list',
+      shopAddAll: 'Add all to the shopping list',
+      shopAdd: 'Add to shopping list',
+      shopAdded: 'Added to the shopping list.',
+      shopSignIn: 'Sign in to use the shopping list.',
+      shopSaveFailed: 'The shopping list could not be saved. Please try again.',
+      shopRemove: 'Remove',
+      shopLess: 'Less',
+      shopMore: 'More',
+      accUsername: 'Username',
+      accNameNote: 'For display only, you still log in with your email address.',
+      accNameSaved: 'Username saved.',
+      accNameTaken: 'This username is already taken. Please choose another one.',
+      accNameInvalid: 'Use 3–30 letters, numbers, spaces, dots, dashes or underscores.',
+      accNameTakenLater: 'The username you chose is already taken. Please pick another one below.',
+      histTitle: 'My recipe history',
+      histSignIn: 'Sign in to see your recipe history.',
+      histEmpty: 'You have not finished any recipes yet.',
+      histLoadFailed: 'Your recipe history could not be loaded. Please try again later.',
+      histTime: 'Took {x} (suggested: {y})',
+      comTitle: 'Comments',
+      comNone: 'No comments yet.',
+      comAdd: 'Add a public comment',
+      comSaved: 'Your comment is published.',
+      comFailed: 'The comment could not be saved. Please try again.',
+      comDelete: 'Delete',
+      comAnon: 'Cook user',
+      comLoadFailed: 'Comments could not be loaded.',
+      noteAdd: 'Add a personal note',
+      noteSaved: 'Note saved to your recipe history.',
+      noteFailed: 'The note could not be saved. Please try again.',
+      noteSignIn: 'Sign in to save notes and comments.',
+      pause: 'Pause',
+      resume: 'Continue',
+      timeRushed: 'Done in {x}; the suggested time is {y}. Some steps may have been rushed.',
+      timeSlow: 'Took {x}; the suggested time is {y}. Something may have been overdone.',
+      timeNormal: 'Took {x} (suggested: {y}).',
+      ratingOf: '{x} / 5',
+      ratingVotes: '{n} ratings',
+      diet_nofish: 'No fish',
+      diet_noseafood: 'No seafood',
+      diet_glutenfree: 'Gluten-free',
+      diet_lowcarb: 'Low-carb',
+      diet_keto: 'Keto',
+      dropRemove: 'Drop here to remove',
+      privCommunity: 'If you choose a username, it is shown next to your public comments. Comments and their date are visible to everyone, together with the star rating you gave that recipe; average ratings are shown without names. Your recipe history, personal notes and shopping list are private to your account. Deleting your account removes all of them.',
       accStay: 'Stay signed in on this device',
       privStorage3: 'If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.',
       accLogOut: 'Log out',
@@ -407,6 +456,9 @@
     document.querySelectorAll('[data-i18n-label]').forEach(function (el) {
       el.setAttribute('aria-label', t(el.getAttribute('data-i18n-label')));
     });
+    document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+      el.setAttribute('title', t(el.getAttribute('data-i18n-title')));
+    });
   }
 
   // English (UK): US words in recipe texts become UK ones, keeping capitals.
@@ -434,10 +486,27 @@
     return n || L(fallback);
   }
   // Recipe data keeps its English text in "_field"; this (re)writes the shown text.
+  // Recipe texts (steps, options, notes, utensils) in the chosen language: each pack has
+  // texts[English] = translation. Numbers that change with the servings ("2 L water") are
+  // written as # in the key and filled back in order. Without a translation: English (or UK words).
+  var NUM_RE = /\d+(?:[.,]\d+)?/g;
+  function TX(text) {
+    if (!text) return text;
+    var texts = pack().texts;
+    if (texts) {
+      if (texts[text]) return texts[text];
+      var key = String(text).replace(NUM_RE, '#');
+      if (key !== text && texts[key]) {
+        var nums = String(text).match(NUM_RE), i = 0;
+        return texts[key].replace(/#/g, function () { return nums[i++] || '#'; });
+      }
+    }
+    return L(text);
+  }
   function localizeObj(o, fields) {
     fields.forEach(function (f) {
       if (!(('_' + f) in o)) { if (o[f] === undefined) return; o['_' + f] = o[f]; }
-      o[f] = L(o['_' + f]);
+      o[f] = TX(o['_' + f]);
     });
   }
   function localizeBuilt(b) {
@@ -494,7 +563,7 @@
   };
 
   // ---------- Separate document navigation ----------
-  var PAGES = { welcome: 'index.html', recipes: 'recipes.html', details: 'recipe.html', layout: 'kitchen.html', cook: 'cook.html' };
+  var PAGES = { welcome: 'index.html', recipes: 'recipes.html', details: 'recipe.html', layout: 'kitchen.html', cook: 'cook.html', history: 'history.html' };
   var pageScreen = document.body.getAttribute('data-page') || 'welcome';
   var savedSession = window.CookSession.read(), activeCookRecord = savedSession.cooking || null;
   // Ratings now belong only in the authenticated database, never in tab snapshots.
@@ -516,7 +585,7 @@
   function updateTitle() {
     var name = state.screen;
     document.title = (name === 'details' || name === 'cook') && state.recipe ? recipeName(state.recipe) + ' – Cook'
-      : name === 'layout' ? t('kitchenLayout') + ' – Cook' : 'Cook';
+      : name === 'layout' ? t('kitchenLayout') + ' – Cook' : name === 'history' ? t('histTitle') + ' – Cook' : 'Cook';
   }
   async function navigate(name, replace) {
     if (window.Fridge) window.Fridge.stop();
@@ -602,6 +671,7 @@
   }
   function applyLang(code) {
     lang = code;
+    document.documentElement.classList.remove('i18n-wait');
     $('lang-select').value = code;
     ukRe = null;
     document.documentElement.dir = RTL.indexOf(code) >= 0 ? 'rtl' : 'ltr';
@@ -675,6 +745,19 @@
       return toImperial(Number(a), u);
     });
   }
+  // An ingredient amount in the chosen units and language: "1½ tsp" -> "1½ tk".
+  // pack().amounts maps whole phrases ("a pinch") and unit words ("tsp") to the translation;
+  // a "#" in a unit word marks where the number goes ("小さじ#").
+  function amount(text) {
+    var s = units(text), map = pack().amounts;
+    if (!s || !map) return s;
+    s = String(s);
+    if (map[s]) return map[s];
+    return s.replace(/^([\d.,½¼¾⅓⅔⅛]+)\s*(\D+)$/, function (m, n, u) {
+      var w = map[u];
+      return !w ? m : w.indexOf('#') >= 0 ? w.replace('#', n) : n + ' ' + w;
+    });
+  }
 
   // ---------- Written-out recipe ("Read instead") ----------
   // Written from the same recipe data as the cooking guide, so it follows the
@@ -716,7 +799,7 @@
     html += '<h3>' + ht('ingredientsFor', { x: whoText(r, c) }) + '</h3>';
     groupIngredients(built.ingredients).forEach(function (g) {
       html += '<h4>' + ht('ingCat_' + g.cat) + '</h4><ul>' + g.items.map(function (i) {
-        return '<li><b>' + esc(units(i.amount)) + '</b> ' + esc(i.name) + (i.note ? ' <span class="hint">(' + esc(units(i.note)) + ')</span>' : '') + '</li>';
+        return '<li><b>' + esc(amount(i.amount)) + '</b> ' + esc(i.name) + (i.note ? ' <span class="hint">(' + esc(units(i.note)) + ')</span>' : '') + '</li>';
       }).join('') + '</ul>';
     });
     // While cooking: the steps already done are greyed and the first open one is "here".
@@ -1019,10 +1102,13 @@
       if (!(opts.snap && drag.mode === 'move' && pushOthers(layout, key, next, keys))) tryPlace(layout, key, next, keys);
       placeEl(el, layout[key]);
       if (opts.onChange) opts.onChange();
+      if (opts.onPointer && drag.mode === 'move') opts.onPointer(e);
     }
-    function end() {
+    function end(e) {
       if (!drag) return;
+      var mode = drag.mode;
       drag = null;
+      if (opts.onDrop && mode === 'move' && e && e.type === 'pointerup' && opts.onDrop(e)) return;
       el.classList.remove('dragging');
       if (opts.onEnd) opts.onEnd();
     }
@@ -1112,7 +1198,10 @@
     }
     layoutFrom = pageParams.get('from') || 'recipes';
     draft = clone(state.layout);
-    fullscreenTo('landscape');
+    // A kitchen arranged in portrait opens in portrait (phones and tablets go full screen).
+    fullscreenTo(state.layoutSaved && state.layoutWide === false ? 'portrait' : 'landscape');
+    var plus = $('btn-layout-add');
+    if (plus) { plus.classList.remove('flash'); void plus.offsetWidth; plus.classList.add('flash'); }
     show('layout', fromHistory === true);
     buildCanvas();
   }
@@ -1129,6 +1218,8 @@
   // Plus button: adds another countertop (up to 3 in all) or a small appliance.
   // A new item goes to the free spot nearest the middle of a
   // countertop (appliances) or of the kitchen (countertops).
+  // Basic items show in the menu only after being removed (dropped on the X).
+  var BASIC = ['stove', 'oven', 'fridge', 'freezer', 'microwave', 'sink', 'board'];
   var ADDABLE = ['countertop', 'airfryer', 'mixer', 'blender', 'kettle', 'toaster', 'ricecooker', 'slowcooker', 'pressurecooker', 'foodprocessor'];
   function addKey(kind) {
     if (kind !== 'countertop') return draft[kind] ? null : kind;
@@ -1141,7 +1232,7 @@
     var cw = canvas.clientWidth || 800, ch = canvas.clientHeight || 450, m = MIN_PX[kind];
     var w = Math.min(0.9, m.w * 1.25 / cw), h = Math.min(0.9, m.h * 1.25 / ch);
     var keys = keysOf(draft).concat([key]);
-    var targets = kind === 'countertop' ? [{ x: 0, y: 0, w: 1, h: 1 }]
+    var targets = ON_COUNTER.indexOf(kind) < 0 ? [{ x: 0, y: 0, w: 1, h: 1 }]
       : keysOf(draft).filter(isCounter).map(function (k) { return draft[k]; }).concat([{ x: 0, y: 0, w: 1, h: 1 }]);
     var best = null;
     targets.some(function (t) {
@@ -1162,7 +1253,7 @@
   function renderAddMenu() {
     var menu = $('layout-add-menu');
     menu.innerHTML = '';
-    ADDABLE.forEach(function (kind) {
+    BASIC.filter(function (k) { return !draft[k]; }).concat(ADDABLE).forEach(function (kind) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'add-item';
@@ -1184,7 +1275,7 @@
   // The sink's tap sits in the middle of a long side: the one facing away from "Me".
   function updateSinkTap() {
     var el = blockEls.sink, canvas = $('layout-canvas');
-    if (!el || !draft) return;
+    if (!el || !draft || !draft.sink || !draft.me) return;
     var s = draft.sink, me = draft.me, cw = canvas.clientWidth || 800, ch = canvas.clientHeight || 450;
     var sx = s.x + s.w / 2, sy = s.y + s.h / 2, mx = me.x + me.w / 2, my = me.y + me.h / 2;
     var wide = s.w * cw >= s.h * ch;
@@ -1217,15 +1308,27 @@
       el.innerHTML = '<img class="icon" alt="" src="' + (key === 'me' ? ICON.me : AREAS[key].icon) + '"><span>' + ht(baseKey(key)) + '</span>' +
         (key === 'me' ? '' : '<span class="resize" aria-hidden="true"></span>');
       placeEl(el, draft[key]);
+      var removable = key !== 'me' && key !== 'countertop';
       makeMovable(el, key, canvas, draft, keys, {
         resizer: el.querySelector('.resize'),
         snap: true,
+        // While dragging, an X appears at the bottom; dropping the item on it removes it.
+        onPointer: removable ? function (e) { trashAt(e); } : null,
+        onDrop: removable ? function (e) {
+          var hit = trashAt(e);
+          hideTrash();
+          if (!hit) return false;
+          delete draft[key];
+          state.layoutTouched = true;
+          buildCanvas();
+          return true;
+        } : null,
         onChange: function () {
           state.layoutTouched = true;
           keys.forEach(function (k) { placeEl(blockEls[k], draft[k]); });
           updateSinkTap();
         },
-        onEnd: updateSeams
+        onEnd: function () { hideTrash(); updateSeams(); }
       });
       canvas.appendChild(el);
     });
@@ -1233,6 +1336,17 @@
     updateSinkTap();
     applyTextures();
   }
+
+  function trashAt(e) {
+    var bin = $('layout-trash');
+    if (!bin) return false;
+    bin.hidden = false;
+    var b = bin.getBoundingClientRect();
+    var hit = e.clientX >= b.left - 20 && e.clientX <= b.right + 20 && e.clientY >= b.top - 20 && e.clientY <= b.bottom + 20;
+    bin.classList.toggle('hot', hit);
+    return hit;
+  }
+  function hideTrash() { if ($('layout-trash')) { $('layout-trash').hidden = true; $('layout-trash').classList.remove('hot'); } }
 
   // Where two areas touch, a seam with a grip appears on the shared edge.
   // Dragging it (or arrow keys) moves that edge: one area grows, the other shrinks.
@@ -1466,6 +1580,10 @@
   on('btn-fav-done', 'click', function () { if (state.recipe) toggleFav(state.recipe); });
   // Signing in or out changes which favorites (and the "Favorites only" filter) show.
   document.addEventListener('cook:account', function () {
+    loadShopping();
+    loadRatings();
+    if (state.screen === 'details') { loadComments(true); refreshShopControls(); }
+    renderHistory();
     if ($('filters')) renderFilters();
     if (state.filters.fav && $('screen-recipes')) renderRecipes();
     paintFavs();
@@ -1539,7 +1657,9 @@
     ['African', ['Nigerian', 'Moroccan']]
   ];
   // Diet filters: Vegetarian also lists the vegan recipes (judged with the default options).
-  var DIETS = ['veg', 'vegan'];
+  var DIETS = ['veg', 'vegan', 'nofish', 'noseafood', 'glutenfree', 'lowcarb', 'keto'];
+  // Carbohydrates per person, default options: low-carb up to 20 g, keto up to 10 g.
+  var LOW_CARB = 20, KETO = 10;
   // Cooking-method filters (judged with the default options):
   // Air fryer / Slow cooker: that appliance is the only heat (no stovetop, no oven).
   // No-cook: no stovetop, oven or heating appliance at all.
@@ -1559,8 +1679,17 @@
   function defaultBuild(r) { return defaultBuilds[r.id] || (defaultBuilds[r.id] = r.build(defaultChoices(r))); }
   function dietOk(r, diets) {
     if (!diets.length) return true;
-    var label = dietInfo(defaultBuild(r)).label;
-    return diets.some(function (d) { return d === 'vegan' ? label === 'vegan' : VEGETARIAN.indexOf(label) >= 0; });
+    var built = defaultBuild(r), label = dietInfo(built).label, x = tagsOf(built);
+    function has(a) { return x.allergens.indexOf(a) >= 0; }
+    return diets.some(function (d) {
+      if (d === 'vegan') return label === 'vegan';
+      if (d === 'veg') return VEGETARIAN.indexOf(label) >= 0;
+      if (d === 'nofish') return !x.tags.fish && !has('Fish');
+      if (d === 'noseafood') return !has('Crustaceans') && !has('Molluscs');
+      if (d === 'glutenfree') return !has('Gluten');
+      var carbs = nutritionPerPerson(built).carbs;
+      return d === 'keto' ? carbs <= KETO : carbs <= LOW_CARB;
+    });
   }
   var defaultBuilds = {};
 
@@ -1624,7 +1753,8 @@
       });
       rows.diet.appendChild(star);
     }
-    DIETS.forEach(function (d) { text('diet', '\u00b7'); word('diet', d, t('diet_' + d)); });
+    // A separator before each diet, except the first when "Favorites only" is not shown.
+    DIETS.forEach(function (d, i) { if (i || signedIn()) text('diet', '\u00b7'); word('diet', d, t('diet_' + d)); });
     CATEGORIES.forEach(function (c, i) { if (i) text('cat', '\u00b7'); word('cat', c, t('cat_' + c)); });
     CUISINE_GROUPS.forEach(function (g, i) {
       if (i) text('cuisine', '\u00b7');
@@ -1809,7 +1939,7 @@
         b.ingredients.forEach(function (i) { add('ingredient', i.name, r); });
         b.steps.forEach(function (st) {
           add('method', st.title, r);
-          (st.tools || []).forEach(function (id) { if (window.EQUIPMENT[id]) add('utensil', L(window.EQUIPMENT[id].name), r); });
+          (st.tools || []).forEach(function (id) { if (window.EQUIPMENT[id]) add('utensil', TX(window.EQUIPMENT[id].name), r); });
         });
       });
       add('label', t('cat_' + r.category), r);
@@ -1970,7 +2100,7 @@
         li.innerHTML =
           '<a class="recipe-card" href="' + esc(screenUrl('details', r)) + '">' +
           '<span class="recipe-card-body">' +
-          '<span class="title-row"><span>' + esc(recipeName(r)) + '</span>' + dietBadge(info) + '</span>' +
+          '<span class="title-row"><span>' + esc(recipeName(r)) + '</span>' + ratingHtml(r) + dietBadge(info) + '</span>' +
           '<span class="meta-line time-line">⏱️ ' + esc(fmtMinutes(estimateMinutes(built.steps))) + '</span>' +
           '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' kcal · ' +
           Math.round(n.carbs) + ' g ' + ht('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + ht('proteinShort') +
@@ -2114,13 +2244,13 @@
   // prefix keeps the radio groups of the reading window apart from the recipe page's.
   function optionsHtml(r, c, prefix, disabled) {
     return r.options.map(function (o) {
-      return '<fieldset class="choices"><legend>' + esc(L(o.question)) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
+      return '<fieldset class="choices"><legend>' + esc(TX(o.question)) + '</legend><div class="choices-row">' + o.choices.map(function (ch) {
         var parts = labelParts(r, o.id, ch);
         var see = parts[1].match(/^see (.+)$/i), sub = see && recipeNamed(see[1]);
         return '<label class="choice"><input type="radio" name="' + esc(prefix + o.id) + '" value="' + esc(ch.id) + '"' +
-          (c[o.id] === ch.id ? ' checked' : '') + (disabled ? ' disabled' : '') + '> <span class="choice-text"><span>' + esc(L(parts[0])) + '</span>' +
+          (c[o.id] === ch.id ? ' checked' : '') + (disabled ? ' disabled' : '') + '> <span class="choice-text"><span>' + esc(TX(parts[0])) + '</span>' +
           (sub ? '<button type="button" class="see-recipe" data-recipe="' + esc(sub.id) + '">' + ht('seeRecipe') + '</button>'
-            : parts[1] ? '<small>' + esc(L(parts[1])) + '</small>' : '') + '</span></label>';
+            : parts[1] ? '<small>' + esc(TX(parts[1])) + '</small>' : '') + '</span></label>';
       }).join('') + '</div></fieldset>';
     }).join('');
   }
@@ -2152,6 +2282,8 @@
   // Equipment cards: one row if they fit, else the fewest rows with the same
   // number of cards in each (the last row may have one fewer).
   var EQ_MIN = 48, EQ_MAX = 96, EQ_GAP = 6;
+  // Everyday table items every kitchen has; not worth listing as utensils.
+  var NOT_LISTED = ['plates', 'fork', 'knife'];
   function layoutEquipment() {
     var ul = $('det-equipment');
     if (!ul) return;
@@ -2186,11 +2318,11 @@
     // Equipment: every tool the steps use (with the options picked), in order of first use.
     var tools = [];
     built.steps.forEach(function (s) {
-      (s.tools || []).forEach(function (id) { if (window.EQUIPMENT[id] && tools.indexOf(id) < 0) tools.push(id); });
+      (s.tools || []).forEach(function (id) { if (window.EQUIPMENT[id] && NOT_LISTED.indexOf(id) < 0 && tools.indexOf(id) < 0) tools.push(id); });
     });
     $('det-equipment').innerHTML = tools.map(function (id) {
       var eq = window.EQUIPMENT[id];
-      return '<li>' + (eq.icon ? '<img class="icon" src="' + esc(eq.icon) + '" alt="">' : '') + '<span>' + esc(L(eq.name)) + '</span></li>';
+      return '<li>' + (eq.icon ? '<img class="icon" src="' + esc(eq.icon) + '" alt="">' : '') + '<span>' + esc(TX(eq.name)) + '</span></li>';
     }).join('');
     document.querySelector('.equipment').hidden = !tools.length;
     layoutEquipment();
@@ -2224,6 +2356,8 @@
       warn.hidden = true;
     }
 
+    if ($('btn-shop-all')) $('btn-shop-all').disabled = !signedIn();
+    paintRatings();
     // Ingredients
     $('ing-meta').textContent = t('ingredientsFor', { x: whoText(r, c) });
     var list = $('ing-list');
@@ -2236,12 +2370,195 @@
       g.items.forEach(function (ing) {
         var li = document.createElement('li');
         li.className = 'ing-card';
+        li.setAttribute('data-ing', ing.key || ing.id);
         li.innerHTML =
           ingImg(ing) +
           '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(units(ing.note)) + '</span>' : '') + '</span>' +
-          '<span class="amount">' + esc(units(ing.amount)) + '</span>';
+          '<span class="amount">' + esc(amount(ing.amount)) + '</span>' + shopControl(r, ing);
         list.appendChild(li);
       });
+    });
+  }
+
+  // ---------- Shopping list (signed in; saved with the account) ----------
+  // An item: { k: recipe id + ':' + ingredient key, key, name, qty, unit, count, recipe, done }.
+  // qty is null for things sold loose (a pinch of salt): only the name goes on the list.
+  var shopping = [], shopOwner = null, shopTimer = null;
+  var FRACTIONS = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 1 / 3, '⅔': 2 / 3, '⅛': 0.125 };
+  function parseAmount(text) {
+    var m = String(text || '').trim().match(/^(\d+(?:[.,]\d+)?|\d*[½¼¾⅓⅔⅛])\s*(.*)$/);
+    if (!m) return null;
+    var raw = m[1], last = raw.slice(-1);
+    var n = FRACTIONS[last] ? (Number(raw.slice(0, -1)) || 0) + FRACTIONS[last] : Number(raw.replace(',', '.'));
+    return Number.isFinite(n) && n > 0 ? { qty: n, unit: m[2] } : null;
+  }
+  function shopKey(r, ing) { return r.id + ':' + (ing.key || ing.id); }
+  function shopItem(r, ing) {
+    var k = shopKey(r, ing);
+    return shopping.filter(function (x) { return x.k === k; })[0] || null;
+  }
+  function shopSet(r, ing, count) {
+    var item = shopItem(r, ing), parsed = parseAmount(ing.amount);
+    if (!parsed) count = Math.min(count, 1);
+    if (count <= 0) { shopping = shopping.filter(function (x) { return x !== item; }); }
+    else if (item) { item.count = count; item.qty = parsed ? parsed.qty : null; item.unit = parsed ? parsed.unit : ''; }
+    else {
+      shopping.push({ k: shopKey(r, ing), key: ing.key || ing.id, name: ing._name || ing.name, qty: parsed ? parsed.qty : null,
+        unit: parsed ? parsed.unit : '', count: count, recipe: r.id, done: false });
+    }
+    shopChanged();
+  }
+  function shopChanged() {
+    renderShopping();
+    if (state.screen === 'details') refreshShopControls();
+    clearTimeout(shopTimer);
+    shopTimer = setTimeout(function () {
+      window.CookAccount.saveShopping(shopping).then(function (ok) {
+        if (!ok && $('shop-status')) $('shop-status').textContent = t('shopSaveFailed');
+      });
+    }, 500);
+  }
+  function shopAmount(item) {
+    if (item.qty == null) return '';
+    var total = Math.round(item.qty * item.count * 100) / 100;
+    return amount((String(total) + ' ' + (item.unit || '')).trim());
+  }
+  // The control next to an ingredient: "+ Add to shopping list", then "− n +".
+  function shopControl(r, ing) {
+    var item = signedIn() ? shopItem(r, ing) : null;
+    if (!item) {
+      return '<button class="shop-add" type="button" data-shop="add"' + (signedIn() ? '' : ' disabled') + '>+ <span>' + ht('shopAdd') + '</span></button>';
+    }
+    var loose = !parseAmount(ing.amount);
+    return '<span class="shop-step"><button type="button" data-shop="less" aria-label="' + ht('shopLess') + '">−</button>' +
+      '<b>' + item.count + '</b><button type="button" data-shop="more" aria-label="' + ht('shopMore') + '"' + (loose ? ' disabled' : '') + '>+</button></span>';
+  }
+  function refreshShopControls() {
+    if (!$('ing-list') || !state.built) return;
+    state.built.ingredients.forEach(function (ing) {
+      var li = $('ing-list').querySelector('[data-ing="' + (ing.key || ing.id) + '"]');
+      if (!li) return;
+      var old = li.querySelector('.shop-add, .shop-step');
+      if (old) old.outerHTML = shopControl(state.recipe, ing);
+    });
+    if ($('btn-shop-all')) $('btn-shop-all').disabled = !signedIn();
+  }
+  on('ing-list', 'click', function (e) {
+    var b = e.target.closest('[data-shop]'), li = e.target.closest('[data-ing]');
+    if (!b || !li || !state.built) return;
+    if (!signedIn()) { window.CookAccount.prompt('shopSignIn'); return; }
+    var ing = state.built.ingredients.filter(function (i) { return (i.key || i.id) === li.getAttribute('data-ing'); })[0];
+    var item = shopItem(state.recipe, ing), count = item ? item.count : 0;
+    shopSet(state.recipe, ing, count + (b.getAttribute('data-shop') === 'less' ? -1 : 1));
+  });
+  on('btn-shop-all', 'click', function () {
+    if (!signedIn()) { window.CookAccount.prompt('shopSignIn'); return; }
+    state.built.ingredients.forEach(function (ing) { if (!shopItem(state.recipe, ing)) shopSet(state.recipe, ing, 1); });
+    var b = $('btn-shop-all');
+    b.textContent = t('shopAdded');
+    setTimeout(function () { b.textContent = t('shopAddAll'); }, 2000);
+  });
+  function renderShopping() {
+    var list = $('shop-list');
+    if (!list) return;
+    list.innerHTML = '';
+    shopping.forEach(function (item, i) {
+      var r = window.RECIPES.filter(function (x) { return x.id === item.recipe; })[0];
+      var li = document.createElement('li');
+      li.className = 'shop-item' + (item.done ? ' is-done' : '');
+      li.innerHTML = '<label><input type="checkbox"' + (item.done ? ' checked' : '') + '> <span class="shop-name">' +
+        esc(ingName(item.key, L(item.name))) + '</span> <span class="shop-amount">' + esc(shopAmount(item)) + '</span>' +
+        (r ? '<small>' + esc(recipeName(r)) + '</small>' : '') + '</label>' +
+        '<button class="shop-remove" type="button" aria-label="' + ht('shopRemove') + '">&times;</button>';
+      li.querySelector('input').addEventListener('change', function (e) { item.done = e.target.checked; shopChanged(); });
+      li.querySelector('.shop-remove').addEventListener('click', function () { shopping.splice(shopping.indexOf(item), 1); shopChanged(); });
+      list.appendChild(li);
+    });
+    $('shop-empty').hidden = shopping.length > 0;
+    $('shop-clear-done').hidden = !shopping.some(function (x) { return x.done; });
+    $('shop-clear').hidden = !shopping.length;
+  }
+  on('shop-clear-done', 'click', function () { shopping = shopping.filter(function (x) { return !x.done; }); shopChanged(); });
+  on('shop-clear', 'click', function () { shopping = []; shopChanged(); });
+  on('btn-shopping', 'click', function () {
+    if (!signedIn()) { window.CookAccount.prompt('shopSignIn'); return; }
+    $('shop-status').textContent = '';
+    renderShopping();
+    openDialog($('shop-dialog'));
+  });
+  function loadShopping() {
+    var owner = signedIn() ? window.CookAccount.userId() : null;
+    if (owner === shopOwner) return;
+    shopOwner = owner;
+    shopping = [];
+    renderShopping();
+    if (state.screen === 'details') refreshShopControls();
+    if (!owner) return;
+    window.CookAccount.loadShopping().then(function (items) {
+      if (window.CookAccount.userId() !== owner) return;
+      shopping = items.filter(function (x) { return x && typeof x.name === 'string' && x.k; });
+      renderShopping();
+      if (state.screen === 'details') refreshShopControls();
+    }).catch(function () {});
+  }
+
+  // ---------- Average ratings (everyone can see them) ----------
+  var ratingSummary = {}, summaryAsked = false;
+  function ratingHtml(r) {
+    var x = ratingSummary[r.id];
+    return '<span class="rating-avg" data-rating="' + esc(r.id) + '"' + (x && x.votes ? ' title="' + ht('ratingVotes', { n: x.votes }) + '">' +
+      esc(t('ratingOf', { x: x.average.toFixed(1) })) : ' hidden>') + '</span>';
+  }
+  function paintRatings() {
+    document.querySelectorAll('[data-rating]').forEach(function (el) {
+      var r = window.RECIPES.filter(function (x) { return x.id === el.getAttribute('data-rating'); })[0];
+      if (r) el.outerHTML = ratingHtml(r);
+    });
+    var det = $('det-rating'), x = state.recipe && ratingSummary[state.recipe.id];
+    if (det) {
+      det.hidden = !(x && x.votes);
+      det.textContent = x && x.votes ? '★ ' + t('ratingOf', { x: x.average.toFixed(1) }) + ' · ' + t('ratingVotes', { n: x.votes }) : '';
+    }
+  }
+  function loadRatings() {
+    if (summaryAsked || !window.CookAccount || !window.CookAccount.hasClient()) return;
+    summaryAsked = true;
+    window.CookAccount.loadRatingSummary().then(function (map) { ratingSummary = map || {}; paintRatings(); });
+  }
+
+  // ---------- Comments at the bottom of a recipe page ----------
+  var commentsFor = null;
+  function starsText(n) { return n ? '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n) : ''; }
+  function fmtWhen(iso) {
+    try { return new Date(iso).toLocaleString(lang, { dateStyle: 'medium', timeStyle: 'short' }); } catch (e) { return iso; }
+  }
+  function loadComments(force) {
+    var list = $('det-comments');
+    if (!list || !state.recipe || !window.CookAccount || !window.CookAccount.hasClient()) return;
+    var id = state.recipe.id;
+    if (commentsFor === id && !force) return;
+    commentsFor = id;
+    window.CookAccount.loadComments(id).then(function (rows) {
+      if (!state.recipe || state.recipe.id !== id) return;
+      list.innerHTML = '';
+      rows.forEach(function (c) {
+        var li = document.createElement('li');
+        li.className = 'comment';
+        li.innerHTML = '<p class="comment-head"><b>' + esc(c.username || t('comAnon')) + '</b> <time datetime="' + esc(c.created_at) + '">' +
+          esc(fmtWhen(c.created_at)) + '</time>' + (c.stars ? ' <span class="comment-stars" aria-label="' + ht('stars', { n: c.stars }) + '">' + starsText(c.stars) + '</span>' : '') +
+          (c.mine && signedIn() ? ' <button class="text-button comment-delete" type="button">' + ht('comDelete') + '</button>' : '') + '</p>' +
+          '<p class="comment-body">' + esc(c.body) + '</p>';
+        var del = li.querySelector('.comment-delete');
+        if (del) del.addEventListener('click', function () {
+          window.CookAccount.deleteComment(c.id).then(function (ok) { if (ok) loadComments(true); });
+        });
+        list.appendChild(li);
+      });
+      $('det-comments-empty').textContent = t('comNone');
+      $('det-comments-empty').hidden = rows.length > 0;
+    }).catch(function () {
+      $('det-comments-empty').textContent = t('comLoadFailed');
+      $('det-comments-empty').hidden = false;
     });
   }
 
@@ -2437,6 +2754,7 @@
   function beginCooking() {
     cook.t0 = Date.now();
     $('start-overlay').hidden = true;
+    $('btn-cook-pause').hidden = false;
     showTips(cook.steps.filter(function (s) { return cook.status[s.id] === 'active'; }));
     tick();
     tickTimer = setInterval(tick, 500);
@@ -2465,8 +2783,84 @@
     setTimeout(function () { box.remove(); }, 2000);
   }
 
+  // Pause: the clocks stop; Continue shifts every running timer by the paused time.
+  function pauseCooking() {
+    if (!cook || !cook.t0 || cook.pausedAt || cookFinished()) return;
+    cook.pausedAt = Date.now();
+    clearInterval(tickTimer);
+    tickTimer = null;
+    $('pause-overlay').hidden = false;
+    $('btn-resume').focus();
+    saveSession();
+  }
+  function resumeCooking() {
+    if (!cook || !cook.pausedAt) return;
+    var d = Date.now() - cook.pausedAt;
+    cook.t0 += d;
+    Object.keys(cook.started).forEach(function (id) { cook.started[id] += d; });
+    cook.pausedAt = null;
+    $('pause-overlay').hidden = true;
+    tick();
+    tickTimer = setInterval(tick, 500);
+    saveSession();
+  }
+  on('btn-cook-pause', 'click', pauseCooking);
+  on('btn-resume', 'click', resumeCooking);
+
+  // The finish: time taken against the suggested time, and (signed in) a history entry.
+  function onFinished() {
+    cook.taken = Math.max(0, Math.round((Date.now() - (cook.t0 || Date.now())) / 60000));
+    cook.suggested = estimateMinutes(cook.steps);
+    paintTimeNote();
+    recordHistory();
+    saveSession();
+  }
+  function paintTimeNote() {
+    var p = $('time-note');
+    if (!p || !cook || cook.taken == null) return;
+    var x = fmtMinutes(cook.taken), y = fmtMinutes(cook.suggested);
+    var key = cook.taken < cook.suggested * 0.6 && cook.suggested - cook.taken >= 5 ? 'timeRushed'
+      : cook.taken > cook.suggested * 1.5 && cook.taken - cook.suggested >= 10 ? 'timeSlow' : 'timeNormal';
+    p.textContent = t(key, { x: x, y: y });
+    p.className = 'time-note' + (key === 'timeNormal' ? '' : ' is-off');
+    p.hidden = false;
+  }
+  function recordHistory() {
+    var c = cook;
+    if (!c || !signedIn() || c.taken == null) return Promise.resolve(null);
+    if (c.historyId) return Promise.resolve(c.historyId);
+    if (c.historyPending) return c.historyPending;
+    c.historyPending = window.CookAccount.addHistory({ recipe_id: state.recipe.id, choices: clone(state.choices),
+      minutes_taken: c.taken, minutes_suggested: c.suggested, stars: currentStars() || null }).then(function (id) {
+      c.historyPending = null;
+      if (id) { c.historyId = id; saveSession(); }
+      return id;
+    });
+    return c.historyPending;
+  }
+  function afterStatus(key) { if ($('after-status')) $('after-status').textContent = key ? t(key) : ''; }
+  on('note-form', 'submit', function (e) {
+    e.preventDefault();
+    if (!signedIn()) { window.CookAccount.prompt('noteSignIn'); return; }
+    var note = $('note-text').value.trim().slice(0, 1000);
+    recordHistory().then(function (id) {
+      return id ? window.CookAccount.updateHistory(id, { note: note || null }) : false;
+    }).then(function (ok) { afterStatus(ok ? 'noteSaved' : 'noteFailed'); });
+  });
+  on('comment-form', 'submit', function (e) {
+    e.preventDefault();
+    if (!signedIn()) { window.CookAccount.prompt('noteSignIn'); return; }
+    var text = $('comment-text').value.trim();
+    if (!text || !state.recipe) return;
+    window.CookAccount.addComment(state.recipe.id, text).then(function (ok) {
+      afterStatus(ok ? 'comSaved' : 'comFailed');
+      if (ok) $('comment-text').value = '';
+    });
+  });
+
   function stopCooking() {
     clearTimeout(countdownTimer);
+    if ($('pause-overlay')) $('pause-overlay').hidden = true;
     closePop();
     clearInterval(tickTimer);
     tickTimer = null;
@@ -2525,7 +2919,7 @@
   function ingItem(i) {
     var base = cook.ingredients.filter(function (x) { return x.id === i.id; })[0];
     var name = (i.label || (base ? base.name : i.id)).replace(/\s*\([^)]*\)/g, '');
-    return '<li>' + ingImg(i) + '<span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(units(i.qty)) + '</b>' : '') + '</li>';
+    return '<li>' + ingImg(i) + '<span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(amount(i.qty)) + '</b>' : '') + '</li>';
   }
 
   function cardFor(step) {
@@ -2537,8 +2931,8 @@
 
     var tools = step.tools.map(function (id) {
       var eq = window.EQUIPMENT[id];
-      return eq.icon ? '<img class="icon" src="' + esc(eq.icon) + '" alt="' + esc(L(eq.name)) + '" title="' + esc(L(eq.name)) + '">' :
-        '<span class="tool-label">' + esc(L(eq.name)) + '</span>';
+      return eq.icon ? '<img class="icon" src="' + esc(eq.icon) + '" alt="' + esc(TX(eq.name)) + '" title="' + esc(TX(eq.name)) + '">' :
+        '<span class="tool-label">' + esc(TX(eq.name)) + '</span>';
     }).join('');
     var ings = step.ings.map(ingItem).join('');
     var body = step.parts
@@ -2640,7 +3034,8 @@
     $('cook-list').hidden = map || finished;
     $('cook-map').hidden = !map || finished;
     if (finished) {
-      if (!cook.celebrated) { cook.celebrated = true; celebrate(); }
+      if (!cook.celebrated) { cook.celebrated = true; celebrate(); onFinished(); }
+      $('btn-cook-pause').hidden = true;
       clearInterval(tickTimer);
       document.body.classList.remove('overdo');
       hideTip(true);
@@ -2726,7 +3121,7 @@
     var n = document.createElement('div');
     n.className = 'notif';
     n.setAttribute('data-step', step.id);
-    n.setAttribute('data-area', step.area);
+    n.setAttribute('data-area', areaOn(step.area));
     var tools = step.tools.map(function (id) { return window.EQUIPMENT[id]; }).filter(function (eq) { return eq && eq.icon; });
     var icon = (AREAS[step.area] || AREAS.countertop).icon;
     var toolIcons = tools.map(function (eq) { return '<img class="notif-tool" alt="" src="' + eq.icon + '">'; }).join('');
@@ -2800,9 +3195,10 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
 
   // Only the areas this recipe uses, back to front.
+  function areaOn(area) { return state.layout && state.layout[area] ? area : 'countertop'; }
   function usedAreas() {
     return areaKeysOf(state.layout).filter(function (key) {
-      return cook.steps.some(function (s) { return s.area === key; });
+      return cook.steps.some(function (s) { return areaOn(s.area) === key; });
     });
   }
 
@@ -2947,7 +3343,7 @@
   // count only their remaining time; late steps count as nothing left.
   function updateClocks() {
     if (!cook) return;
-    var now = Date.now();
+    var now = cook.pausedAt || Date.now(); // paused: the clocks stand still
     var left = scheduleSeconds(cook.steps, function (s) {
       if (isDone(s.id)) return 0;
       if (cook.started[s.id]) return Math.max(0, s.duration - (now - cook.started[s.id]) / 1000);
@@ -2965,7 +3361,7 @@
       var el = cook.els[id];
       if (!el) return;
       var step = stepById(id);
-      var elapsed = (Date.now() - cook.started[id]) / 1000;
+      var elapsed = ((cook.pausedAt || Date.now()) - cook.started[id]) / 1000;
       var left = step.duration - elapsed;
       var up = left <= 0;
       el.querySelector('.ring-time').innerHTML = (up ? '+' + fmt(-left) : fmt(left)) + '<small>' + (up ? ht('over') : ht('left')) + '</small>';
@@ -3179,7 +3575,9 @@
     ratingStatus(null);
     if (signedIn() && state.recipe) {
       var owner = window.CookAccount.userId();
-      window.CookAccount.saveRating(state.recipe.id, currentStars()).then(function (saved) {
+      var picked = currentStars();
+      recordHistory().then(function (id) { if (id) window.CookAccount.updateHistory(id, { stars: picked }); });
+      window.CookAccount.saveRating(state.recipe.id, picked).then(function (saved) {
         if (ticket === ratingRevision && window.CookAccount.userId() === owner) ratingStatus(saved ? 'ratingSaved' : 'ratingSaveFailed');
       });
     }
@@ -3192,6 +3590,42 @@
     pop.addEventListener('animationend', function () { pop.remove(); });
   });
 
+
+  // ---------- My recipe history (history.html) ----------
+  var historyOwner;
+  function renderHistory() {
+    if (pageScreen !== 'history' || !$('hist-list')) return;
+    var owner = signedIn() ? window.CookAccount.userId() : null;
+    if (owner === historyOwner) return;
+    historyOwner = owner;
+    var list = $('hist-list'), st = $('hist-status');
+    list.innerHTML = '';
+    if (!owner) { st.textContent = t('histSignIn'); return; }
+    st.textContent = '…';
+    window.CookAccount.loadHistory().then(function (rows) {
+      if (window.CookAccount.userId() !== owner) return;
+      st.textContent = rows.length ? '' : t('histEmpty');
+      rows.forEach(function (h) {
+        var r = window.RECIPES.filter(function (x) { return x.id === h.recipe_id; })[0];
+        if (!r) return;
+        var c = cleanChoices(r, h.choices), mods = [];
+        r.options.forEach(function (o) {
+          var ch = o.choices.filter(function (x) { return x.id === c[o.id]; })[0];
+          if (ch) { var lp = labelParts(r, o.id, ch); mods.push(TX(o.question) + ': ' + TX(lp[0])); }
+        });
+        mods.push(t(c.mode === 'quick' ? 'modeQuick' : 'modeDetailed'));
+        var li = document.createElement('li');
+        li.className = 'hist-item';
+        li.innerHTML = '<p class="hist-head"><a href="' + esc(screenUrl('details', r)) + '">' + esc(recipeName(r)) + '</a> ' +
+          '<time datetime="' + esc(h.cooked_at) + '">' + esc(fmtWhen(h.cooked_at)) + '</time>' +
+          (h.stars ? ' <span class="comment-stars">' + starsText(h.stars) + '</span>' : '') + '</p>' +
+          '<p class="hist-line">' + esc(whoText(r, c)) + ' · ' + esc(t('histTime', { x: fmtMinutes(h.minutes_taken), y: fmtMinutes(h.minutes_suggested) })) + '</p>' +
+          '<p class="hist-line hist-mods">' + esc(mods.join(' · ')) + '</p>' +
+          (h.note ? '<p class="hist-note">' + esc(h.note) + '</p>' : '');
+        list.appendChild(li);
+      });
+    }).catch(function () { st.textContent = t('histLoadFailed'); });
+  }
 
   // ---------- Tab session ----------
   function cleanChoices(r, value) {
@@ -3232,7 +3666,7 @@
       var layout = {}, valid = true;
       ALL_KEYS.forEach(function (key) {
         var rect = value.layout[key];
-        if (!rect) { if (DEFAULT_LAYOUT[key]) valid = false; return; }
+        if (!rect) { if (key === 'countertop' || key === 'me') valid = false; return; }
         if (!['x', 'y', 'w', 'h'].every(function (field) { return Number.isFinite(rect[field]); }) ||
           rect.x < 0 || rect.y < 0 || rect.w <= 0 || rect.h <= 0 || rect.x + rect.w > 1.001 || rect.y + rect.h > 1.001) { valid = false; return; }
         layout[key] = { x: rect.x, y: rect.y, w: rect.w, h: rect.h };
@@ -3254,7 +3688,9 @@
     if (!cook) return activeCookRecord;
     return { recipe: state.recipe.id, choices: clone(state.choices), steps: cook.steps.map(function (s) { return s.id; }),
       done: Array.from(cook.done), started: cook.started, t0: cook.t0, celebrated: !!cook.celebrated,
-      tipsShown: Array.from(cook.tipsShown) };
+      tipsShown: Array.from(cook.tipsShown), pausedAt: cook.pausedAt || null,
+      taken: cook.taken == null ? null : cook.taken, suggested: cook.suggested == null ? null : cook.suggested,
+      historyId: cook.historyId || null };
   }
   function saveSession() {
     return window.CookSession.save({
@@ -3282,11 +3718,18 @@
     cook.t0 = Number.isFinite(record.t0) && record.t0 > 0 && record.t0 <= now ? record.t0 : null;
     cook.tipsShown = new Set((Array.isArray(record.tipsShown) ? record.tipsShown : []).filter(function (id) { return ids.indexOf(id) >= 0; }));
     cook.celebrated = record.celebrated === true;
+    cook.pausedAt = Number.isFinite(record.pausedAt) && record.pausedAt > 0 && record.pausedAt <= now ? record.pausedAt : null;
+    cook.taken = Number.isInteger(record.taken) ? record.taken : null;
+    cook.suggested = Number.isInteger(record.suggested) ? record.suggested : null;
+    cook.historyId = Number.isInteger(record.historyId) ? record.historyId : null;
     redrawCooking();
     if (cook.t0) {
       $('start-overlay').hidden = true;
-      if (!cookFinished()) tickTimer = setInterval(tick, 500);
+      $('btn-cook-pause').hidden = cookFinished();
+      if (cook.pausedAt && !cookFinished()) $('pause-overlay').hidden = false;
+      else if (!cookFinished()) tickTimer = setInterval(tick, 500);
     }
+    paintTimeNote();
     return true;
   }
   window.addEventListener('pagehide', function () {
@@ -3360,6 +3803,9 @@
   on('layout-canvas', 'keydown', function () { preferencesRevision++; });
 
   // ---------- Start ----------
+  // The language pack was loaded in <head> (page-session.js), so the first render is already translated.
+  var earlyLang = typeof savedSession.lang === 'string' ? savedSession.lang : window.CookSession.earlyLang;
+  if (earlyLang && window.I18N[earlyLang]) setLang(earlyLang);
   restoreSession();
   applyStrings();
   renderFilters();
@@ -3392,5 +3838,6 @@
       if (!restoreCooking(activeCookRecord)) navigate('details', true);
     } else show(pageScreen);
   }
-  if (typeof savedSession.lang === 'string') setLang(savedSession.lang);
+  if (earlyLang && earlyLang !== lang) setLang(earlyLang);
+  document.documentElement.classList.remove('i18n-wait');
 })();
