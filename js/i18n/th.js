@@ -1953,7 +1953,7 @@ window.I18N["th"] = {
   "In the slow cooker pot mix the oil, salt, pepper, brown sugar, MSG, crushed cardamom seeds, cumin, cinnamon, smoked paprika, garlic powder, mustard, Worcestershire sauce, chili powder, thyme and red wine. Taste until satisfied.": "ผสมน้ำมัน เกลือ พริกไทย น้ำตาลทรายแดง ผงชูรส เมล็ดกระวานตำ ยี่หร่า อบเชย ปาปริการมควัน ผงกระเทียม มัสตาร์ด ซอสวูสเตอร์ไชร์ พริกป่น ไธม์ และไวน์แดงในหม้อตุ๋นไฟฟ้า ชิมจนพอใจ",
   "Tastes balanced": "รสชาติลงตัว",
   "Beef in, coat it": "ใส่เนื้อวัว คลุก",
-  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "วางเนื้อวัวทั้งชิ้นในหม้อแล้วพลิกให้เคลือบทั่ว ไม่จำเป็นต้องจมในน้ำ",
+  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "วางเนื้อวัวทั้งชิ้นในหม้อแล้วพลิกให้เคลือบทั่ว อย่าให้เนื้อจมอยู่ในน้ำทั้งหมด",
   "Coated all over": "เคลือบทั่วแล้ว",
   "Slow cook": "ตุ๋นช้าๆ",
   "Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.": "ปิดฝาแล้วตุ๋น พลิกเนื้อหนึ่งหรือสองครั้งให้ทุกส่วนได้จมน้ำหมัก การเปิดฝาแต่ละครั้งเพิ่มเวลา 15 ถึง 20 นาที",

@@ -1953,7 +1953,7 @@ window.I18N["nl"] = {
   "In the slow cooker pot mix the oil, salt, pepper, brown sugar, MSG, crushed cardamom seeds, cumin, cinnamon, smoked paprika, garlic powder, mustard, Worcestershire sauce, chili powder, thyme and red wine. Taste until satisfied.": "Meng in de pan van de slowcooker de olie, het zout, de peper, de bruine suiker, MSG, de gekneusde kardemomzaadjes, komijn, kaneel, gerookt paprikapoeder, knoflookpoeder, mosterd, Worcestershiresaus, chilipoeder, tijm en rode wijn. Proef tot je tevreden bent.",
   "Tastes balanced": "Smaakt in balans",
   "Beef in, coat it": "Rundvlees erin, insmeren",
-  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "Leg het ongesneden rundvlees in de pan en rol het rond zodat het goed bedekt is. Het hoeft niet onder te staan.",
+  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "Leg het ongesneden rundvlees in de pan en rol het rond zodat het goed bedekt is. Het mag niet onder het vocht staan.",
   "Coated all over": "Overal bedekt",
   "Slow cook": "Langzaam garen",
   "Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.": "Gaar met het deksel erop. Draai het vlees een of twee keer zodat elk deel onder de marinade komt; elke keer dat je het deksel optilt, kost 15 tot 20 min.",

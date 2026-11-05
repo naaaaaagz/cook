@@ -1953,7 +1953,7 @@ window.I18N["el"] = {
   "In the slow cooker pot mix the oil, salt, pepper, brown sugar, MSG, crushed cardamom seeds, cumin, cinnamon, smoked paprika, garlic powder, mustard, Worcestershire sauce, chili powder, thyme and red wine. Taste until satisfied.": "Στο δοχείο της γάστρας αργού μαγειρέματος, ανακατέψτε λάδι, αλάτι, πιπέρι, καστανή ζάχαρη, MSG, πατημένους σπόρους κάρδαμου, κύμινο, κανέλα, καπνιστή πάπρικα, σκόρδο σε σκόνη, μουστάρδα, σάλτσα Γουόρτσεστερ, τσίλι σε σκόνη, θυμάρι και κόκκινο κρασί. Δοκιμάστε μέχρι να είστε ικανοποιημένοι.",
   "Tastes balanced": "Ισορροπημένη γεύση",
   "Beef in, coat it": "Το μοσχάρι μέσα, γυρίστε το",
-  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "Βάλτε το άκοπο μοσχάρι στο δοχείο και γυρίστε το ώστε να καλυφθεί καλά. Δεν χρειάζεται να είναι βυθισμένο.",
+  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "Βάλτε το άκοπο μοσχάρι στο δοχείο και γυρίστε το ώστε να καλυφθεί καλά. Δεν πρέπει να είναι βυθισμένο.",
   "Coated all over": "Καλυμμένο από όλες τις πλευρές",
   "Slow cook": "Αργό μαγείρεμα",
   "Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.": "Μαγειρέψτε σκεπασμένο. Γυρίστε το κρέας μία-δύο φορές ώστε κάθε μέρος να μείνει στη μαρινάδα· κάθε άνοιγμα του καπακιού κοστίζει 15–20 λεπτά.",

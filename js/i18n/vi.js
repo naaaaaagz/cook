@@ -1953,7 +1953,7 @@ window.I18N["vi"] = {
   "In the slow cooker pot mix the oil, salt, pepper, brown sugar, MSG, crushed cardamom seeds, cumin, cinnamon, smoked paprika, garlic powder, mustard, Worcestershire sauce, chili powder, thyme and red wine. Taste until satisfied.": "Trong nồi nấu chậm, trộn dầu, muối, tiêu, đường nâu, bột ngọt, hạt thảo quả giã, thì là Ai Cập, quế, ớt bột paprika xông khói, bột tỏi, mù tạt, sốt Worcestershire, ớt bột, cỏ xạ hương và rượu vang đỏ. Nếm đến khi vừa ý.",
   "Tastes balanced": "Vị cân bằng",
   "Beef in, coat it": "Cho bò vào, lăn đều",
-  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "Đặt nguyên tảng thịt bò vào nồi và lật cho thấm đều. Không cần ngập.",
+  "Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.": "Đặt nguyên tảng thịt bò vào nồi và lật cho thấm đều. Không để thịt ngập hoàn toàn.",
   "Coated all over": "Phủ đều xung quanh",
   "Slow cook": "Nấu chậm",
   "Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.": "Đậy nắp và nấu. Lật thịt một hai lần để mọi phần đều ngập nước ướp; mỗi lần mở nắp thêm 15 đến 20 phút.",
