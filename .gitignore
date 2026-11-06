@@ -35,6 +35,7 @@
 /convert_ready_images.bat
 
 # Claude, editor and temp files (incl. Claude/Codex handoff notes)
+/*HANDOFF*.md
 /.handoff/
 /.claude/
 /.codex/

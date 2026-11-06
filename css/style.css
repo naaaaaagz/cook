@@ -514,6 +514,11 @@ select {
 
 /* Recipe list */
 .layout-home { margin: 7px 0 16px; }
+/* Small screens: keep the button clear of the three top-right icons (3 × 44px + gaps) */
+@media (max-width: 600px) {
+  .layout-home { display: block; width: fit-content; max-width: calc(100% - 146px); margin: 7px auto 16px 0; text-align: start; }
+  [dir="rtl"] .layout-home { margin: 7px 146px 16px auto; }
+}
 .filters { display: grid; gap: 10px; margin: 16px 0 8px; }
 /* Recipe search: a box with a list of suggestions that opens under it */
 .search { position: relative; margin: 12px 0 4px; }
@@ -1674,6 +1679,12 @@ html:has(.screen-cook.is-map:not([hidden])) { overflow: hidden; }
 .fridge-cta-text { display: flex; flex-direction: column; gap: 2px; }
 .fridge-cta-main { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
 .fridge-cta-sub { font-size: .9rem; opacity: .9; }
+@media (max-width: 600px) {
+  .fridge-cta { gap: 10px; padding: 12px 16px; border-radius: 12px; }
+  .fridge-cta svg { width: 22px; height: 22px; }
+  .fridge-cta-main { font-size: 1.05rem; }
+  .fridge-cta-sub { font-size: .8rem; }
+}
 /* "Based on what you said" filter and the missing ingredients on the cards */
 .filter-row-voice { border-top: 1px solid var(--line); padding-top: 10px; }
 .filter-voice { display: inline; }
