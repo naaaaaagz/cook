@@ -65,7 +65,11 @@ window.EQUIPMENT = {
   mixer: { name: "Hand mixer", icon: null },
   pie_dish: { name: "Pie dish", icon: null },
   cake_tin: { name: "Round cake tin", icon: null },
-  ramekins: { name: "Ramekins", icon: null }
+  ramekins: { name: "Ramekins", icon: null },
+  potato_masher: { name: "Potato masher", icon: "icons/potato-masher.svg" },
+  kitchen_scale: { name: "Kitchen scale", icon: "icons/kitchen-scale.svg" },
+  cooling_rack: { name: "Cooling rack", icon: "icons/cooling-rack.svg" },
+  pastry_brush: { name: "Pastry brush", icon: "icons/pastry-brush.svg" }
 };
 
 /*
@@ -345,7 +349,11 @@ window.INGREDIENT_INFO = (function () {
     yeast: '325 41 40 7.6 1 27 0.13||',
     chocolate_chips: '480 63 4.2 24 14 6 0.03|Milk, Soy|dairy',
     red_palm_oil: '884 0 0 100 49 0 0||',
-    ice: '0 0 0 0 0 0 0||'
+    ice: '0 0 0 0 0 0 0||',
+    // Added 2026-11-06 with the recipes added back
+    dumpling_wrappers: '290 58 9 1.5 0.3 2 0.8|Gluten|',
+    red_curry_paste: '110 15 2.5 4.5 0.6 6 9|Crustaceans|fish spicy',
+    chocolate_sprinkles: '450 75 4 15 9 3 0.05|Milk, Soy|dairy'
   };
   var CATEGORY = {
     meat: 'guanciale bacon ham ground_pork ground_beef beef chicken_breast',
@@ -377,17 +385,17 @@ window.INGREDIENT_INFO = (function () {
     egg: "egg_white",
     dairy: "buttermilk cream_cheese mascarpone ricotta paneer ghee condensed_milk evaporated_milk",
     grain: "basmati_rice short_grain_rice arborio_rice bulgur couscous quinoa lentil penne macaroni fettuccine lasagna_noodles gnocchi egg_noodles rice_noodles precooked_cornmeal whole_wheat_flour urad_dal dosa_batter",
-    bread: "pita corn_tortilla breadcrumb phyllo_dough puff_pastry dough ladyfingers digestive_biscuits rice_paper injera",
+    bread: "pita corn_tortilla breadcrumb phyllo_dough puff_pastry dough ladyfingers digestive_biscuits rice_paper injera dumpling_wrappers",
     legume: "chickpea black_beans white_beans red_lentil pea peanut",
     veg: "potato sweet_potato spinach cabbage zucchini eggplant bell_pepper green_bell_pepper broccoli cauliflower green_beans okra squash celery_stalk shallot chili_pepper dried_red_chilies ginger_root galangal lemongrass daikon collard_greens bean_sprouts olives capers kimchi wakame nori_sheet plantain avocado oyster_mushroom shiitake_mushroom",
     fruit: "apple banana lemon orange pear pineapple kiwi strawberry raspberry raisins tamarind preserved_lemon kaffir_lime_leaves lemon_zest",
     nuts: "almond walnut egusi_seeds",
     herbs: "thai_basil chives sage curry_leaves dried_fenugreek_leaves",
     spices: "allspice cloves ginger_powder turmeric_powder star_anise saffron curry_powder garam_masala fenugreek_seeds mustard_seed asafoetida ras_el_hanout berbere chili_flakes sichuan_peppercorn vanilla",
-    sauces: "fish_sauce oyster_sauce dark_soy_sauce kecap_manis hoisin_sauce doubanjiang miso_paste dashi curry_roux green_curry_paste laksa_paste thai_chili_paste peanut_butter tahini pesto hot_sauce apricot_jam red_wine_vinegar bouillon_cube mirin coffee",
+    sauces: "fish_sauce oyster_sauce dark_soy_sauce kecap_manis hoisin_sauce doubanjiang miso_paste dashi curry_roux green_curry_paste red_curry_paste laksa_paste thai_chili_paste peanut_butter tahini pesto hot_sauce apricot_jam red_wine_vinegar bouillon_cube mirin coffee",
     sweet: "powdered_sugar maple_syrup",
     alcohol: "rum shaoxing_wine",
-    baking: "baking_powder baking_soda cornstarch yeast chocolate_chips",
+    baking: "baking_powder baking_soda cornstarch yeast chocolate_chips chocolate_sprinkles",
     oil: "red_palm_oil",
     water: "ice"
   };
@@ -795,7 +803,17 @@ window.INGREDIENT_INFO = (function () {
     cheesecake: { starred: 0, category: "dessert", cuisine: ['American'] },
     tiramisu: { starred: 0, category: "dessert", cuisine: ['Italian'], kids: { 'opt_alcohol': 'none' }, rawEgg: function () { return true; } },
     rice_pudding: { starred: 0, category: "dessert" },
-    flan: { starred: 0, category: "dessert", cuisine: ['Latin American'] }
+    flan: { starred: 0, category: "dessert", cuisine: ['Latin American'] },
+    // Added back 2026-11-06 from the 150-recipe list
+    baked_ziti: { starred: 0, category: "main", cuisine: ['Italian', 'American'] },
+    arroz_con_pollo: { starred: 0, category: "main", cuisine: ['Latin American'] },
+    rice_and_beans: { starred: 0, category: "side", cuisine: ['Latin American'], kids: { 'opt_heat': 'mild' } },
+    jiaozi: { starred: 0, category: "main", cuisine: ['Asian'] },
+    thai_red_curry: { starred: 0, category: "main", cuisine: ['Asian'], kids: { 'opt_heat': 'medium' } },
+    brigadeiros: { starred: 0, category: "dessert", cuisine: ['Latin American'] },
+    imam_bayildi: { starred: 0, category: "main", cuisine: ['Middle Eastern'] },
+    chicken_yassa: { starred: 0, category: "main", cuisine: ['African'], kids: { 'opt_heat': 'mild' } },
+    pad_kra_pao: { starred: 0, category: "main", cuisine: ['Asian'], kids: { 'opt_heat': 'medium' } }
   };
   window.RECIPES.forEach(function (r) {
     var m = META[r.id] || {};
@@ -810,15 +828,17 @@ window.INGREDIENT_INFO = (function () {
   // once it has 2 or more recipes. The region tag (e.g. Asian) stays as well.
   var COUNTRY = {
     egg_fried_rice: 'Chinese', chow_mein: 'Chinese', mapo_tofu: 'Chinese', kung_pao_chicken: 'Chinese',
-    beef_and_broccoli: 'Chinese', sweet_and_sour_pork: 'Chinese', tomato_and_egg_stir_fry: 'Chinese', congee: 'Chinese',
+    beef_and_broccoli: 'Chinese', sweet_and_sour_pork: 'Chinese', tomato_and_egg_stir_fry: 'Chinese', congee: 'Chinese', jiaozi: 'Chinese',
     japanese_curry_rice: 'Japanese', teriyaki_chicken: 'Japanese', miso_soup: 'Japanese', yakisoba: 'Japanese', onigiri: 'Japanese',
     bibimbap: 'Korean', bulgogi: 'Korean', kimchi_fried_rice: 'Korean',
-    pad_thai: 'Thai', thai_green_curry: 'Thai', tom_yum_soup: 'Thai',
+    pad_thai: 'Thai', thai_green_curry: 'Thai', tom_yum_soup: 'Thai', thai_red_curry: 'Thai', pad_kra_pao: 'Thai',
     pho: 'Vietnamese', fresh_spring_rolls: 'Vietnamese',
     nasi_goreng: 'Indonesian', mie_goreng: 'Indonesian', gado_gado: 'Indonesian', chicken_satay: 'Indonesian',
     chicken_adobo: 'Filipino', sinigang: 'Filipino', pancit_bihon: 'Filipino',
     jollof_rice: 'Nigerian', egusi_soup: 'Nigerian',
-    chicken_tagine: 'Moroccan', vegetable_couscous: 'Moroccan'
+    chicken_tagine: 'Moroccan', vegetable_couscous: 'Moroccan',
+    feijoada: 'Brazilian', brigadeiros: 'Brazilian',
+    menemen: 'Turkish', imam_bayildi: 'Turkish'
   };
   // Extra recipe-list sections, so Main isn't one long list.
   var SECTION = {

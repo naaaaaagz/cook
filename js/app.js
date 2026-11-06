@@ -375,6 +375,8 @@
       slowcooker: 'Slow cooker',
       pressurecooker: 'Pressure cooker',
       foodprocessor: 'Food processor',
+      pantry: 'Pantry',
+      bin: 'Bin',
       addToKitchen: 'Add to the kitchen',
       doFirst: 'Do this first!',
       sink: 'Kitchen sink',
@@ -409,6 +411,8 @@
       cuisine_Filipino: 'Filipino',
       cuisine_Nigerian: 'Nigerian',
       cuisine_Moroccan: 'Moroccan',
+      cuisine_Brazilian: 'Brazilian',
+      cuisine_Turkish: 'Turkish',
       cuisine_Indian: 'Indian',
       'cuisine_Middle Eastern': 'Middle Eastern',
       'cuisine_Latin American': 'Latin American',
@@ -890,7 +894,9 @@
     ricecooker: { icon: 'icons/rice-cooker.svg' },
     slowcooker: { icon: 'icons/slow-cooker.svg' },
     pressurecooker: { icon: 'icons/pressure-cooker.svg' },
-    foodprocessor: { icon: 'icons/food-processor.svg' }
+    foodprocessor: { icon: 'icons/food-processor.svg' },
+    pantry: { icon: 'icons/pantry.svg' },
+    bin: { icon: 'icons/bin.svg' }
   };
   var AREA_KEYS = Object.keys(AREAS);
   var ALL_KEYS = AREA_KEYS.concat(['me']);
@@ -902,7 +908,7 @@
   function isCounter(k) { return baseKey(k) === 'countertop'; }
   // These may stand on a countertop; the fridge, freezer and oven may not.
   var APPLIANCES = ['microwave', 'airfryer', 'mixer', 'blender', 'kettle', 'toaster', 'ricecooker', 'slowcooker', 'pressurecooker', 'foodprocessor'];
-  var ON_COUNTER = ['stove', 'sink', 'board'].concat(APPLIANCES);
+  var ON_COUNTER = ['stove', 'sink', 'board', 'bin'].concat(APPLIANCES);
   function canOverlap(a, b) {
     if (a === 'me' || b === 'me') return true;
     if (isCounter(a) && isCounter(b)) return false;
@@ -910,7 +916,7 @@
     if (isCounter(b)) return ON_COUNTER.indexOf(baseKey(a)) >= 0;
     return false;
   }
-  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, microwave: 3, sink: 3, board: 3, airfryer: 3, mixer: 3, blender: 3, kettle: 3, toaster: 3, ricecooker: 3, slowcooker: 3, pressurecooker: 3, foodprocessor: 3, me: 4 };
+  var Z = { countertop: 1, stove: 2, oven: 2, fridge: 2, freezer: 2, microwave: 3, sink: 3, board: 3, airfryer: 3, mixer: 3, blender: 3, kettle: 3, toaster: 3, ricecooker: 3, slowcooker: 3, pressurecooker: 3, foodprocessor: 3, pantry: 2, bin: 3, me: 4 };
   // Smallest size per block in pixels, so blocks keep their shape in landscape and portrait.
   var MIN_PX = {
     countertop: { w: 160, h: 110 },
@@ -930,6 +936,8 @@
     slowcooker: { w: 70, h: 64 },
     pressurecooker: { w: 70, h: 64 },
     foodprocessor: { w: 64, h: 64 },
+    pantry: { w: 70, h: 90 },
+    bin: { w: 56, h: 56 },
     me: { w: 64, h: 64 }
   };
   var ME_PX = 64; // "Me" is always a 64 px circle
@@ -1220,7 +1228,7 @@
   // countertop (appliances) or of the kitchen (countertops).
   // Basic items show in the menu only after being removed (dropped on the X).
   var BASIC = ['stove', 'oven', 'fridge', 'freezer', 'microwave', 'sink', 'board'];
-  var ADDABLE = ['countertop', 'airfryer', 'mixer', 'blender', 'kettle', 'toaster', 'ricecooker', 'slowcooker', 'pressurecooker', 'foodprocessor'];
+  var ADDABLE = ['countertop', 'airfryer', 'mixer', 'blender', 'kettle', 'toaster', 'ricecooker', 'slowcooker', 'pressurecooker', 'foodprocessor', 'pantry', 'bin'];
   function addKey(kind) {
     if (kind !== 'countertop') return draft[kind] ? null : kind;
     return ['countertop2', 'countertop3'].filter(function (k) { return !draft[k]; })[0] || null;
@@ -1653,7 +1661,7 @@
   // shown as "Asian (Chinese · Japanese · …)".
   var CUISINE_GROUPS = [
     ['Italian'], ['Asian', ['Chinese', 'Japanese', 'Korean', 'Thai', 'Vietnamese', 'Indonesian', 'Filipino']],
-    ['Indian'], ['Middle Eastern'], ['Greek'], ['French'], ['Mexican'], ['Latin American'], ['American'],
+    ['Indian'], ['Middle Eastern', ['Turkish']], ['Greek'], ['French'], ['Mexican'], ['Latin American', ['Brazilian']], ['American'],
     ['African', ['Nigerian', 'Moroccan']]
   ];
   // Diet filters: Vegetarian also lists the vegan recipes (judged with the default options).

@@ -789,7 +789,7 @@ I|oil|Oil (for the iron)|img/350/oil.webp|0.25|tsp|1|linear|—|—
 I|strawberry|Strawberries|img/350/strawberry.webp|70|g|70|linear|opt_topping = strawberry|sliced
 I|powdered_sugar|Powdered sugar|img/350/powdered_sugar.webp|1|tsp|3|linear|opt_topping = strawberry|—
 I|maple_syrup|Maple syrup|img/350/maple_syrup.webp|2|tbsp|40|linear|opt_topping = syrup|—
-S|W1|W|Heat the waffle iron|Switch on the waffle iron and brush it with a little oil.|action|—|30|—|On|oil|waffle_iron|—|countertop
+S|W1|W|Heat the waffle iron|Switch on the waffle iron and brush it with a little oil.|action|—|30|—|On|oil|waffle_iron, pastry_brush|—|countertop
 S|W2|W|Wait for the iron|Let it heat up fully; the first waffle sticks if the iron is not hot.|wait|—|300|W1|Ready light on|—|waffle_iron|—|countertop
 S|B1|B|Melt the butter|Melt the butter and let it cool a little.|action|—|60|—|Melted|butter|bowl|—|countertop
 S|B2|B|Make the batter|Mix flour, sugar, baking powder and salt. Whisk egg, milk, vanilla and melted butter, pour in and stir until just combined.|action|—|(60 + 20 × servings) × skill_factor|B1|Thick batter, a few lumps|flour; sugar; baking_powder; salt; egg; milk; vanilla|bowl, whisk|—
@@ -853,14 +853,14 @@ I|sugar|Sugar|img/350/sugar.webp|0.25|tsp|1|linear|—|—
 I|salt|Salt|img/350/salt.webp|0.375|tsp|2.2|linear|—|—
 I|oil|Oil or soft butter|img/350/oil.webp|0.5|tbsp|7|linear|—|—
 S|D1|D|Wake the yeast|Stir the yeast and sugar into the lukewarm water and leave until foamy.|wait|—|300|—|Foamy|water; yeast; sugar|bowl|—
-S|D2|D|Mix the dough|Mix the flour and salt, add the yeast water and the oil and stir into a shaggy dough.|action|—|(90 + 15 × servings) × skill_factor|D1|No dry flour left|flour; salt; oil|bowl, wooden_spoon|—
+S|D2|D|Mix the dough|Mix the flour and salt, add the yeast water and the oil and stir into a shaggy dough.|action|—|(90 + 15 × servings) × skill_factor|D1|No dry flour left|flour; salt; oil|kitchen_scale, bowl, wooden_spoon|—
 S|D3|D|Knead|Knead on a floured surface until smooth and springy.|action|—|600 (doc: 8 to 10 min)|D2|Smooth, springs back when poked|—|chopping_board|—|countertop
 S|D4|D|First rise|Put it back in the bowl, cover and let it double in a warm place.|wait|—|3600 (doc: 1 to 1.5 h)|D3|Doubled|—|bowl, plastic_wrap|—
 S|D5|D|Shape|Press out the air, roll into a log and put it in the greased loaf pan (or shape a round loaf on a tray with baking paper).|action|—|180 × skill_factor|D4|Shaped|—|loaf_pan|—|countertop
 S|D6|D|Second rise|Cover loosely and let it rise again.|wait|—|2400 (doc: 30 to 45 min)|D5|Risen above the pan rim|—|loaf_pan, plastic_wrap|—
 S|O1|O|Preheat the oven|Turn the oven on to 200 °C conventional (180 °C fan).|action|200 °C (180 °C fan)|15|D5|Oven on|—|oven|—
 S|O2|O|Bake|Bake until deep golden and hollow-sounding when you tap the bottom.|wait|200 °C (180 °C fan)|1800 (doc: 30 to 35 min)|D6, O1|Golden, sounds hollow|—|oven, loaf_pan|—
-S|F1|F|Cool|Take it out of the pan and let it cool on a rack before slicing, or the inside turns gummy.|wait|—|1800|O2|Cool enough to slice|—|chef_knife, chopping_board|—
+S|F1|F|Cool|Take it out of the pan and let it cool on a rack before slicing, or the inside turns gummy.|wait|—|1800|O2|Cool enough to slice|—|chef_knife, chopping_board, cooling_rack|—
 `
   },
   {
@@ -1062,7 +1062,7 @@ I|tomato_passata|Tomato passata|img/350/tomato_passata.webp|150|g|150|linear|—
 I|basil|Fresh basil leaves|img/350/basil.webp|3|leaves|1.5|linear|—|—
 I|parmesan|Parmesan, to serve|img/350/parmesan.webp|15|g|15|linear|—|grated
 S|G1|G|Boil the potatoes|Boil the whole unpeeled potatoes until a knife slides in easily.|wait|medium-high|1800 (doc: 25 to 35 min)|—|Tender all the way|potato|cooking_pot, stovetop|opt_gnocchi = homemade
-S|G2|G|Peel and mash|Peel them while hot (hold with a fork) and press through a ricer or mash until completely smooth. Spread out to let the steam escape.|action|—|(240 + 60 × servings) × skill_factor|G1|Smooth, steaming off|—|fork, bowl|opt_gnocchi = homemade|countertop
+S|G2|G|Peel and mash|Peel them while hot (hold with a fork) and press through a ricer or mash until completely smooth. Spread out to let the steam escape.|action|—|(240 + 60 × servings) × skill_factor|G1|Smooth, steaming off|—|fork, potato_masher, bowl|opt_gnocchi = homemade|countertop
 S|G3|G|Make the dough|Add the flour, egg yolk and a pinch of salt and knead briefly into a soft dough. Use as little flour as possible; too much makes them heavy.|action|—|(120 + 30 × servings) × skill_factor|G2|Soft, not sticky|flour; egg_yolk|bowl|opt_gnocchi = homemade|countertop
 S|G4|G|Shape the gnocchi|Roll into finger-thick ropes on a floured board and cut into 2 cm pieces. Roll each over a fork for ridges if you like.|action|—|(180 + 120 × servings) × skill_factor|G3|Shaped, dusted with flour|—|chopping_board, knife, fork|opt_gnocchi = homemade
 S|S1|S|Make the sauce|Warm the oil with the garlic, add the passata and a pinch of salt and simmer until slightly thick. Tear in the basil.|wait|low|900|—|Slightly thick|olive_oil; garlic; tomato_passata; salt; basil|pan, stovetop, wooden_spoon|—
@@ -1188,7 +1188,7 @@ S|D1|D|Make the pasta dough|Make a well in the flour, add the egg and oil and wo
 S|D2|D|Rest the dough|Wrap and rest so it rolls out easily.|wait|—|1800|D1|Rested|—|plastic_wrap|—
 S|K1|K|Wilt the spinach|Wilt the spinach in a dry pan, cool, squeeze out all the water and chop finely.|action|medium|300|—|Dry and chopped|spinach|pan, stovetop, chef_knife, chopping_board|—
 S|K2|K|Mix the filling|Mix the spinach with ricotta, most of the Parmesan, nutmeg, salt and pepper.|action|—|(60 + 30 × servings) × skill_factor|K1|Thick filling|ricotta; parmesan; nutmeg; salt; ground_black_pepper|bowl, spoon|—|countertop
-S|D3|D|Roll and fill|Roll the dough very thin (you should almost see your hand through it). Put teaspoons of filling on one sheet, brush around with water, cover with a second sheet, press out the air and cut into squares.|action|—|(600 + 300 × servings) × skill_factor|D2, K2|Sealed ravioli|—|rolling_pin, knife|—|countertop
+S|D3|D|Roll and fill|Roll the dough very thin (you should almost see your hand through it). Put teaspoons of filling on one sheet, brush around with water, cover with a second sheet, press out the air and cut into squares.|action|—|(600 + 300 × servings) × skill_factor|D2, K2|Sealed ravioli|—|rolling_pin, knife, pastry_brush|—|countertop
 S|P1|P|Boil the water|Bring a large pot of salted water to the boil.|wait|high|600|K2|Rolling boil|—|cooking_pot, stovetop|—
 S|S1|S|Make the sauce|Brown the butter with the sage leaves until nutty and the sage is crisp, or warm the passata with a pinch of salt.|action|medium|240|D3|Nutty brown butter / warm sauce|butter; sage; tomato_passata|pan, stovetop|—
 S|P2|P|Cook the ravioli|Cook the ravioli in gently boiling water until they float and the edges are tender, 3 to 4 minutes.|wait|medium-high|210|P1, D3|Tender edges|—|cooking_pot, spoon|—
@@ -1238,9 +1238,9 @@ S|M1|M|Marinate|Mix the buttermilk with half the salt, add the chicken and turn 
 S|M2|M|Chill|Let it marinate in the fridge.|wait|—|7200 (doc: 2 h to overnight)|M1|Marinated|—|fridge|—
 S|C1|C|Mix the coating|Mix the flour, cornstarch, paprika, garlic powder, pepper, the rest of the salt (and cayenne).|action|—|(60 + 15 × servings) × skill_factor|—|Mixed|flour; cornstarch; paprika_powder; garlic_powder; ground_black_pepper; cayenne_pepper|bowl, whisk|—
 S|P1|P|Heat the oil|Heat 4 to 5 cm of oil in a deep heavy pot to 165 °C. Never leave hot oil alone.|wait|medium-high|600|M2|165 °C|oil|cooking_pot, stovetop|—
-S|C2|C|Coat the chicken|Lift the chicken from the buttermilk, let it drip, and press it firmly into the flour mix. Rest on a rack 10 minutes so the coating sticks.|action|—|(60 + 60 × servings) × skill_factor|M2, C1|Evenly coated|—|bowl, tongs|—
+S|C2|C|Coat the chicken|Lift the chicken from the buttermilk, let it drip, and press it firmly into the flour mix. Rest on a rack 10 minutes so the coating sticks.|action|—|(60 + 60 × servings) × skill_factor|M2, C1|Evenly coated|—|bowl, tongs, cooling_rack|—
 S|P2|P|Fry|Fry a few pieces at a time, turning now and then, until deep golden and 75 °C inside, 12 to 15 minutes. Keep the oil around 160 °C.|action|medium-high|780 + 120 × servings|P1, C2|Deep golden, 75 °C inside|—|cooking_pot, tongs|—
-S|F1|F|Drain and serve|Drain on a rack or paper towel for a few minutes and serve hot.|wait|off|180|P2|Crisp, drained|—|plates|—
+S|F1|F|Drain and serve|Drain on a rack or paper towel for a few minutes and serve hot.|wait|off|180|P2|Crisp, drained|—|cooling_rack, plates|—
 `
   },
   {
@@ -1300,7 +1300,7 @@ S|K1|K|Dice the vegetables|Dice the onion and carrot.|action|—|(60 + 60 × ser
 S|S1|S|Brown the meat|Brown the meat in the oil, breaking it up. Add the onion and carrot and cook until soft.|action|medium-high|600|K1|Browned, vegetables soft|ground_lamb; ground_beef; oil|pan, stovetop, wooden_spoon|—
 S|S2|S|Make the gravy|Stir in the tomato paste and flour, then the Worcestershire sauce, stock and thyme. Simmer until thick, add the peas and season.|wait|low|900|S1|Thick gravy|tomato_paste; flour; worcestershire_sauce; beef_stock; thyme; pea|pan, wooden_spoon|—
 S|O1|O|Preheat the oven|Turn the oven on to 200 °C conventional (180 °C fan).|action|200 °C (180 °C fan)|15|S1|Oven on|—|oven|—
-S|M2|M|Mash|Drain the potatoes and mash with butter, warm milk, salt and pepper until smooth.|action|—|(120 + 30 × servings) × skill_factor|M1|Smooth mash|butter; milk; salt; ground_black_pepper|cooking_pot, colander, fork|—
+S|M2|M|Mash|Drain the potatoes and mash with butter, warm milk, salt and pepper until smooth.|action|—|(120 + 30 × servings) × skill_factor|M1|Smooth mash|butter; milk; salt; ground_black_pepper|cooking_pot, colander, potato_masher|—
 S|O2|O|Assemble|Spoon the filling into the baking dish, spread the mash on top, rough it up with a fork and scatter the cheese.|action|—|(120 + 30 × servings) × skill_factor|S2, M2|Covered|cheddar|baking_dish, fork|—|countertop
 S|O3|O|Bake|Bake until the top is golden and the filling bubbles at the edges.|wait|200 °C (180 °C fan)|1500|O2, O1|Golden, bubbling|—|oven, baking_dish|—
 S|F1|F|Rest and serve|Rest 5 minutes, then serve.|wait|—|300|O3|Served|—|spoon, plates|—
@@ -1599,7 +1599,7 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.062
 S|P1|P|Peel and cut|Peel the potatoes and cut into equal chunks.|action|—|(60 + 90 × servings) × skill_factor|—|Even chunks|potato|vegetable_peeler, chef_knife, chopping_board|—
 S|P2|P|Boil|Cover with cold salted water (with the garlic, if using), bring to a boil and cook until very tender.|wait|medium-high|1200 (doc: 15 to 20 min)|P1|Falls apart on a knife|salt; garlic|cooking_pot, stovetop|—
 S|F1|F|Drain and steam dry|Drain and leave in the pot on the turned-off hob for a minute so excess water steams off.|action|off|90|P2|Dry and fluffy|—|colander, cooking_pot|—
-S|F2|F|Mash|Mash with the butter, then beat in the warm milk a little at a time. Season with nutmeg, pepper and salt.|action|—|(90 + 30 × servings) × skill_factor|F1|Smooth and fluffy|butter; milk; nutmeg; ground_black_pepper|fork, wooden_spoon|—
+S|F2|F|Mash|Mash with the butter, then beat in the warm milk a little at a time. Season with nutmeg, pepper and salt.|action|—|(90 + 30 × servings) × skill_factor|F1|Smooth and fluffy|butter; milk; nutmeg; ground_black_pepper|potato_masher, wooden_spoon|—
 `
   },
   {
@@ -1677,7 +1677,7 @@ I|sour_cream|Sour cream, to serve|img/350/sour_cream.webp|1|tbsp|15|linear|—|�
 I|tomato|Salsa or chopped tomato|img/350/tomato.webp|40|g|40|linear|—|—
 S|K1|K|Prepare the filling|Grate the cheese, slice the green onion and dice the tomato. Shred the cooked chicken or drain the beans; season with the cumin.|action|—|(90 + 60 × servings) × skill_factor|—|Ready|cheddar; chicken_breast; black_beans; green_onion; cumin; tomato|cheese_grater, chef_knife, chopping_board|—
 S|K2|K|Fill|Spread the filling over half of each tortilla and fold over.|action|—|30 + 30 × servings|K1|Folded|tortilla|chopping_board|—
-S|P1|P|Toast|Brush the pan with a little oil and cook the quesadillas over medium heat, pressing with the spatula, until golden and the cheese melts, about 2 to 3 minutes per side.|action|medium|300 × servings|K2|Golden, cheese melted|oil|pan, stovetop, spatula|—
+S|P1|P|Toast|Brush the pan with a little oil and cook the quesadillas over medium heat, pressing with the spatula, until golden and the cheese melts, about 2 to 3 minutes per side.|action|medium|300 × servings|K2|Golden, cheese melted|oil|pan, stovetop, spatula, pastry_brush|—
 S|F1|F|Cut and serve|Cut into wedges and serve with sour cream and salsa.|action|off|30 + 15 × servings|P1|Served|sour_cream|chef_knife, chopping_board, plates|—
 `
   },
@@ -1761,7 +1761,7 @@ S|D1|D|Make the dough|Rub the cold butter into the flour and salt, add the cold 
 S|D2|D|Chill the dough|Chill the dough in the fridge.|wait|—|1800|D1|Firm|—|plastic_wrap, fridge|opt_dough = homemade
 S|S1|S|Cook the filling|Fry the onion and pepper in the oil until soft, add the beef, cumin, paprika and salt and cook until browned. Stir in the olives and let it cool. Boil the egg 10 minutes and chop it.|action|medium|720|—|Cooked, cooling|oil; onion; red_bell_pepper; ground_beef; cumin; paprika_powder; salt; olives; egg|pan, stovetop, wooden_spoon, chef_knife, chopping_board|—
 S|O1|O|Preheat the oven|Turn the oven on to 200 °C conventional (180 °C fan).|action|200 °C (180 °C fan)|15|S1|Oven on|—|oven|—
-S|D3|D|Fill and seal|Roll the dough out and cut 12 cm rounds (about 3 per person). Put a spoon of cool filling on each, fold into half-moons and crimp the edges with a fork. Brush with beaten egg.|action|—|(240 + 180 × servings) × skill_factor|D2, S1|Sealed half-moons|puff_pastry|rolling_pin, fork, tray, parchment_paper|—|countertop
+S|D3|D|Fill and seal|Roll the dough out and cut 12 cm rounds (about 3 per person). Put a spoon of cool filling on each, fold into half-moons and crimp the edges with a fork. Brush with beaten egg.|action|—|(240 + 180 × servings) × skill_factor|D2, S1|Sealed half-moons|puff_pastry|rolling_pin, fork, tray, parchment_paper, pastry_brush|—|countertop
 S|O2|O|Bake|Bake until golden.|wait|200 °C (180 °C fan)|1200|D3, O1|Golden|—|oven, tray|—
 S|F1|F|Serve|Let them cool for a few minutes (the filling is very hot) and serve.|wait|—|300|O2|Served|—|plates|—
 `
@@ -2218,7 +2218,7 @@ S|D2|D|Rest|Cover and rest so the gluten relaxes.|wait|—|1200|D1|Rested|—|bo
 S|D3|D|Divide and roll|Divide into golf-ball pieces (2 per person). Dust with flour and roll each into a thin 15 cm circle.|action|—|(60 + 120 × servings) × skill_factor|D2|Thin circles|—|rolling_pin|—|countertop
 S|P1|P|Heat the pan|Heat a flat pan or tawa until very hot.|action|medium-high|120|D2|Very hot|—|pan, stovetop|—
 S|P2|P|Cook the rotis|Cook each roti until bubbles appear (about 30 s), flip and cook 30 s, then press the edges with a cloth or hold over the open flame with tongs so it puffs.|action|medium-high|90 × servings|P1, D3|Puffed, brown spots|—|pan, tongs, spatula|—
-S|F1|F|Ghee and serve|Brush with ghee and stack in a cloth to keep them soft.|action|—|20 + 20 × servings|P2|Served|ghee|spoon, plates|—
+S|F1|F|Ghee and serve|Brush with ghee and stack in a cloth to keep them soft.|action|—|20 + 20 × servings|P2|Served|ghee|pastry_brush, plates|—
 `
   },
   {
@@ -2242,7 +2242,7 @@ S|D2|D|Let it rise|Cover and leave in a warm place until doubled.|wait|—|3600 
 S|D3|D|Shape|Divide into balls (2 per person) and stretch or roll each into a teardrop about 5 mm thick. Press garlic and cilantro on top if making garlic naan.|action|—|(60 + 90 × servings) × skill_factor|D2|Shaped|garlic; cilantro|rolling_pin|—|countertop
 S|P1|P|Heat the pan|Heat a heavy pan (cast iron is best) until very hot.|action|high|180|D2|Smoking hot|—|pan, stovetop|—
 S|P2|P|Cook the naan|Lay a naan in the dry pan. When big bubbles form (1 min), flip and cook until charred in spots. Cover with a lid for a softer naan.|action|high|150 × servings|P1, D3|Puffed, charred spots|—|pan, tongs|—
-S|F1|F|Butter and serve|Brush with melted butter while hot and serve.|action|—|20 + 20 × servings|P2|Served|butter|spoon, plates|—
+S|F1|F|Butter and serve|Brush with melted butter while hot and serve.|action|—|20 + 20 × servings|P2|Served|butter|pastry_brush, plates|—
 `
   },
   {
@@ -3377,7 +3377,7 @@ I|red_onion|Red onion|img/350/red_onion.webp|15|g|15|linear|—|sliced
 S|K1|K|Mix|Mix the meat with the onion, garlic, parsley, spices, salt and pepper and knead for 2 minutes until sticky.|action|—|(150 + 45 × servings) × skill_factor|—|Sticky, well mixed|ground_lamb; ground_beef; onion; garlic; parsley; cumin; coriander_seeds; cinnamon; paprika_powder; salt; ground_black_pepper|bowl, microplane, chef_knife, chopping_board|—
 S|K2|K|Shape|With wet hands, mould the mix into long sausages around skewers (about 3 per person) and chill 20 minutes.|action|—|1200 + (60 + 90 × servings) × skill_factor|K1|Shaped, firm|—|skewers, tray, fridge|—
 S|S1|S|Yogurt sauce|Stir the yogurt with the tahini, lemon juice and a pinch of salt; slice the tomato and red onion.|action|—|(90 + 30 × servings) × skill_factor|—|Smooth|yogurt; tahini; lemon_juice; tomato; red_onion|bowl, spoon, chef_knife, chopping_board|—
-S|G1|G|Grill|Brush with oil and grill on a very hot pan, turning, until browned outside and just cooked inside.|action|high|480|K2|Browned, juicy|oil|pan, stovetop, tongs|—
+S|G1|G|Grill|Brush with oil and grill on a very hot pan, turning, until browned outside and just cooked inside.|action|high|480|K2|Browned, juicy|oil|pan, stovetop, tongs, pastry_brush|—
 S|F1|F|Serve|Warm the pitas and serve the kofta with the yogurt sauce, tomato and onion.|action|off|45 + 15 × servings|G1, S1|Served|pita|tongs, plates|—
 `
   },
@@ -3434,7 +3434,7 @@ I|nutmeg|Nutmeg|img/350/nutmeg.webp|0.0625|tsp|0.15|linear|—|—
 I|egg_yolk|Egg yolk|img/350/egg_yolk.webp|0.5|pcs|9|linear|—|—
 I|parmesan|Kefalotyri or parmesan|img/350/parmesan.webp|20|g|20|linear|—|grated
 S|K1|K|Slice|Slice the eggplants and potatoes; dice the onion and chop the garlic.|action|—|(150 + 90 × servings) × skill_factor|—|Sliced|onion; garlic|chef_knife, chopping_board, vegetable_peeler|—
-S|E1|E|Roast the vegetables|Brush the eggplant and potato slices with oil, season with salt and roast on lined trays at 200 °C until soft and golden.|wait|200 °C|1500|K1|Soft, golden|eggplant; potato; olive_oil; salt|oven, tray, parchment_paper|—
+S|E1|E|Roast the vegetables|Brush the eggplant and potato slices with oil, season with salt and roast on lined trays at 200 °C until soft and golden.|wait|200 °C|1500|K1|Soft, golden|eggplant; potato; olive_oil; salt|oven, tray, parchment_paper, pastry_brush|—
 S|M1|M|Meat sauce|Brown the meat, add the onion and garlic and cook until soft. Add the wine and let it bubble away, then the passata, tomato paste, cinnamon, allspice and oregano. Simmer until thick.|action|medium|1500|K1|Thick, not watery|ground_lamb; ground_beef; red_wine; tomato_passata; tomato_paste; cinnamon; allspice; oregano|pan, stovetop, wooden_spoon|—
 S|B1|B|Béchamel|Melt the butter, stir in the flour for 1 minute, whisk in the milk and cook until thick. Off the heat, whisk in the nutmeg, egg yolk and half the cheese.|action|medium-low|480|—|Thick, smooth|butter; flour; milk; nutmeg; egg_yolk|saucepan, stovetop, whisk|—
 S|O1|O|Layer and bake|Layer potatoes, half the eggplant, the meat sauce, the rest of the eggplant, then the béchamel. Sprinkle with the remaining cheese and bake at 180 °C until deep golden.|wait|180 °C|2700|E1, M1, B1|Deep golden top|parmesan|oven, baking_dish, spatula, cheese_grater|—
@@ -3487,7 +3487,7 @@ I|sesame_seeds|Sesame seeds (optional)|img/350/sesame_seeds.webp|0.5|tsp|1.5|lin
 S|K1|K|Prep|Wash and roughly chop the fresh spinach (or squeeze the thawed spinach very dry). Slice the green onions, dice the onion, chop the herbs.|action|—|(180 + 90 × servings) × skill_factor|—|Ready|spinach; green_onion; onion; dill; parsley|chef_knife, chopping_board, colander|—
 S|P1|P|Wilt|Soften the onions in a third of the oil, add the spinach and cook until wilted and the liquid has evaporated. Cool, then squeeze out any remaining liquid.|action|medium|600|K1|Dry, wilted|—|pan, stovetop, wooden_spoon, colander|—
 S|A1|A|Filling|Mix the spinach with the herbs, feta, beaten eggs, nutmeg and pepper.|action|—|(90 + 30 × servings) × skill_factor|P1|Mixed|feta_cheese; egg; nutmeg; ground_black_pepper|bowl, fork|—
-S|A2|A|Layer|Mix the rest of the oil with the butter. Line the dish with half the phyllo, brushing each sheet. Spread the filling, cover with the remaining sheets, brushing each, and tuck the edges. Score the top into squares and sprinkle with sesame.|action|—|(240 + 120 × servings) × skill_factor|A1|Assembled, scored|phyllo_dough; olive_oil; butter; sesame_seeds|baking_dish, knife|—|countertop
+S|A2|A|Layer|Mix the rest of the oil with the butter. Line the dish with half the phyllo, brushing each sheet. Spread the filling, cover with the remaining sheets, brushing each, and tuck the edges. Score the top into squares and sprinkle with sesame.|action|—|(240 + 120 × servings) × skill_factor|A1|Assembled, scored|phyllo_dough; olive_oil; butter; sesame_seeds|baking_dish, knife, pastry_brush|—|countertop
 S|O1|O|Bake|Bake at 180 °C until deep golden and crisp.|wait|180 °C|2700|A2|Deep golden, crisp|—|oven|—
 S|F1|F|Serve|Cool 15 minutes, then cut along the score lines.|wait|off|900|O1|Served|—|knife, spatula, plates|—
 `
@@ -3752,12 +3752,12 @@ I|baking_soda|Baking soda|img/350/baking_soda.webp|0.125|tsp|0.6|linear|—|—
 I|salt|Salt|img/350/salt.webp|0.125|tsp|0.7|linear|—|—
 I|chocolate_chips|Chocolate chips or chopped chocolate|img/350/chocolate_chips.webp|35|g|35|linear|—|—
 S|D1|D|Cream|Beat the butter with both sugars until fluffy, then beat in the egg and vanilla.|action|—|240|—|Pale, fluffy|butter; brown_sugar; sugar; egg; vanilla|bowl, mixer|—
-S|D2|D|Dry ingredients|Stir in the flour, baking soda and salt until just combined, then the chocolate chips.|action|—|(90 + 15 × servings) × skill_factor|D1|No dry flour|flour; baking_soda; salt; chocolate_chips|bowl, spatula|—
+S|D2|D|Dry ingredients|Stir in the flour, baking soda and salt until just combined, then the chocolate chips.|action|—|(90 + 15 × servings) × skill_factor|D1|No dry flour|flour; baking_soda; salt; chocolate_chips|kitchen_scale, bowl, spatula|—
 S|D3|D|Chill|Cover and chill the dough (makes thicker, chewier cookies).|wait|—|1800|D2|Firm|—|plastic_wrap, fridge|opt_texture = chewy
 S|O1|O|Preheat|Heat the oven to 180 °C (160 °C fan) and line a tray.|action|180 °C|60|D2|Oven on|—|oven, tray, parchment_paper|—
 S|D4|D|Shape|Roll the dough into balls of about 2 tablespoons (about 3 per person) and space well apart on the tray.|action|—|(60 + 60 × servings) × skill_factor|D3, O1|Spaced balls|—|spoon, tray|—
 S|O2|O|Bake|Bake until the edges are golden but the centres still look soft.|wait|180 °C|660 (doc: 10 to 12 min)|D4|Golden edges, soft middle|—|oven|—
-S|F1|F|Cool|Leave on the tray 5 minutes, then move to a rack.|wait|—|600|O2|Set|—|spatula|—
+S|F1|F|Cool|Leave on the tray 5 minutes, then move to a rack.|wait|—|600|O2|Set|—|spatula, cooling_rack|—
 `
   },
   {
@@ -3777,7 +3777,7 @@ I|walnut|Walnuts|img/350/walnut.webp|10|g|10|linear|opt_nuts = walnut|chopped
 S|O1|O|Preheat|Heat the oven to 180 °C (160 °C fan); line a square tin (20 cm for 8 people) with baking paper.|action|180 °C|120|—|Oven on, tin lined|—|oven, baking_dish, parchment_paper|—
 S|M1|M|Melt|Melt the chocolate and butter together over low heat, stirring. Cool slightly.|action|low|240|—|Smooth|dark_chocolate; butter|saucepan, stovetop, spatula|—
 S|B1|B|Whisk eggs and sugar|Whisk the eggs, sugar and vanilla until thick and pale (gives the shiny crust).|action|—|240|M1|Thick, pale|egg; sugar; vanilla|bowl, whisk|—
-S|B2|B|Combine|Fold in the chocolate, then sift over the flour, cocoa and salt and fold until just combined; add the walnuts.|action|—|(90 + 15 × servings) × skill_factor|B1|Glossy, no streaks|flour; cocoa_powder; salt; walnut|bowl, spatula, sieve|—
+S|B2|B|Combine|Fold in the chocolate, then sift over the flour, cocoa and salt and fold until just combined; add the walnuts.|action|—|(90 + 15 × servings) × skill_factor|B1|Glossy, no streaks|flour; cocoa_powder; salt; walnut|kitchen_scale, bowl, spatula, sieve|—
 S|O2|O|Bake|Pour into the tin and bake until the top is crackly and a skewer comes out with moist crumbs.|wait|180 °C|1500 (doc: 22 to 28 min)|B2, O1|Crackly top, fudgy middle|—|oven, baking_dish, skewers|—
 S|F1|F|Cool and cut|Cool completely in the tin before cutting into squares.|wait|—|3600|O2|Set, cut|—|knife|—
 `
@@ -3801,9 +3801,9 @@ I|walnut|Walnuts|img/350/walnut.webp|6|g|6|linear|opt_add = walnut|chopped
 I|chocolate_chips|Chocolate chips|img/350/chocolate_chips.webp|8|g|8|linear|opt_add = choc|—
 S|O1|O|Preheat|Heat the oven to 175 °C (155 °C fan) and grease and line a loaf pan (one loaf serves about 10).|action|175 °C|120|—|Oven on, pan lined|—|oven, loaf_pan, parchment_paper|—
 S|B1|B|Mash and mix|Mash the bananas, then stir in the melted butter, sugar, egg and vanilla.|action|—|(120 + 15 × servings) × skill_factor|—|Smooth-ish|banana; butter; brown_sugar; egg; vanilla|bowl, fork|—
-S|B2|B|Dry ingredients|Fold in the flour, baking soda, salt and cinnamon until just combined, then the nuts or chocolate.|action|—|(60 + 15 × servings) × skill_factor|B1|Just combined|flour; baking_soda; salt; cinnamon; walnut; chocolate_chips|bowl, spatula|—
+S|B2|B|Dry ingredients|Fold in the flour, baking soda, salt and cinnamon until just combined, then the nuts or chocolate.|action|—|(60 + 15 × servings) × skill_factor|B1|Just combined|flour; baking_soda; salt; cinnamon; walnut; chocolate_chips|kitchen_scale, bowl, spatula|—
 S|O2|O|Bake|Pour into the pan and bake until risen and a skewer comes out clean (cover with foil if browning too fast).|wait|175 °C|3300 (doc: 50 to 60 min)|B2, O1|Skewer clean|—|oven, loaf_pan, skewers, tin_foil|—
-S|F1|F|Cool|Cool 10 minutes in the pan, then on a rack before slicing.|wait|—|1800|O2|Cool enough to slice|—|knife|—
+S|F1|F|Cool|Cool 10 minutes in the pan, then on a rack before slicing.|wait|—|1800|O2|Cool enough to slice|—|knife, cooling_rack|—
 `
   },
   {
@@ -3823,11 +3823,11 @@ I|cinnamon|Cinnamon|img/350/cinnamon.webp|0.125|tsp|0.3|linear|—|—
 I|nutmeg|Nutmeg|img/350/nutmeg.webp|0.03|tsp|0.07|linear|—|—
 I|cornstarch|Cornstarch (or flour)|img/350/cornstarch.webp|0.5|tbsp|4|linear|—|—
 I|egg|Egg (wash)|img/350/egg.webp|0.125|pcs|7|linear, rounded up|—|—
-S|C1|C|Make the crust|Rub the cold butter into the flour and salt until like breadcrumbs with some pea-size pieces, add ice water until it just holds together. Make two discs, wrap and chill.|action|—|(300 + 30 × servings) × skill_factor|—|Holds together|flour; butter; water; salt|bowl, plastic_wrap, fridge|opt_crust = homemade
+S|C1|C|Make the crust|Rub the cold butter into the flour and salt until like breadcrumbs with some pea-size pieces, add ice water until it just holds together. Make two discs, wrap and chill.|action|—|(300 + 30 × servings) × skill_factor|—|Holds together|flour; butter; water; salt|kitchen_scale, bowl, plastic_wrap, fridge|opt_crust = homemade
 S|C2|C|Chill|Chill the dough.|wait|—|3600|C1|Firm|—|fridge|opt_crust = homemade
 S|K1|K|Filling|Peel, core and slice the apples and toss with the sugar, lemon juice, spices and cornstarch.|action|—|(180 + 90 × servings) × skill_factor|—|Coated|apple; sugar; lemon_juice; cinnamon; nutmeg; cornstarch|vegetable_peeler, chef_knife, chopping_board, bowl|—
 S|O1|O|Preheat|Heat the oven to 200 °C (180 °C fan) with a tray on the bottom shelf.|action|200 °C|60|K1|Oven on|—|oven, tray|—
-S|A1|A|Assemble|Roll out half the dough and line the pie dish (one pie serves 8). Pile in the apples, cover with the second sheet, crimp the edges, cut steam vents and brush with beaten egg.|action|—|(300 + 30 × servings) × skill_factor|K1, C2|Sealed, vented|dough; egg|rolling_pin, pie_dish, knife|—|countertop
+S|A1|A|Assemble|Roll out half the dough and line the pie dish (one pie serves 8). Pile in the apples, cover with the second sheet, crimp the edges, cut steam vents and brush with beaten egg.|action|—|(300 + 30 × servings) × skill_factor|K1, C2|Sealed, vented|dough; egg|rolling_pin, pie_dish, knife, pastry_brush|—|countertop
 S|O2|O|Bake|Bake 20 minutes, then lower to 180 °C and bake until deep golden and the juices bubble through the vents.|wait|200 °C then 180 °C|3300 (doc: 50 to 60 min)|A1, O1|Deep golden, bubbling|—|oven, pie_dish|—
 S|F1|F|Cool|Cool at least 2 hours so the filling sets before slicing.|wait|—|7200|O2|Filling set|—|knife|—
 `
@@ -3852,10 +3852,10 @@ I|butter|Soft butter (frosting)|img/350/butter.webp|20|g|20|linear|opt_frosting 
 I|powdered_sugar|Powdered sugar|img/350/powdered_sugar.webp|30|g|30|linear|—|—
 I|milk|Milk (frosting)|img/350/milk.webp|1|tsp|5|linear|opt_frosting = buttercream|—
 S|O1|O|Preheat|Heat the oven to 175 °C (155 °C fan). Grease two 20 cm cake tins and line the bases (one cake serves 10).|action|175 °C|180|—|Oven on, tins lined|—|oven, cake_tin, parchment_paper|—
-S|B1|B|Dry ingredients|Whisk the flour, sugar, cocoa, baking soda, baking powder and salt in a large bowl.|action|—|(60 + 15 × servings) × skill_factor|—|Even colour|flour; sugar; cocoa_powder; baking_soda; baking_powder; salt|bowl, whisk, sieve|—
+S|B1|B|Dry ingredients|Whisk the flour, sugar, cocoa, baking soda, baking powder and salt in a large bowl.|action|—|(60 + 15 × servings) × skill_factor|—|Even colour|flour; sugar; cocoa_powder; baking_soda; baking_powder; salt|kitchen_scale, bowl, whisk, sieve|—
 S|B2|B|Wet ingredients|Whisk in the eggs, buttermilk, oil and vanilla, then the hot coffee. The batter will be thin.|action|—|180|B1|Smooth, thin|egg; buttermilk; oil; vanilla; coffee|bowl, whisk|—
 S|O2|O|Bake|Divide between the tins and bake until a skewer comes out clean.|wait|175 °C|1800 (doc: 28 to 35 min)|B2, O1|Skewer clean|—|oven, cake_tin, skewers|—
-S|F1|F|Cool|Cool 10 minutes in the tins, then turn out onto a rack and cool completely.|wait|—|3600|O2|Completely cool|—|knife|—
+S|F1|F|Cool|Cool 10 minutes in the tins, then turn out onto a rack and cool completely.|wait|—|3600|O2|Completely cool|—|knife, cooling_rack|—
 S|C1|C|Buttercream|Beat the butter until pale, then beat in the powdered sugar, a little cocoa and the milk until fluffy.|action|—|(180 + 30 × servings) × skill_factor|O2|Fluffy, spreadable|butter; milk|bowl, mixer|opt_frosting = buttercream
 S|F2|F|Fill and frost|Sandwich the layers with buttercream and spread the rest over the top and sides (or just dust with powdered sugar).|action|—|(300 + 30 × servings) × skill_factor|F1, C1|Frosted|powdered_sugar|spatula, plates|—
 `
@@ -3876,7 +3876,7 @@ I|vanilla|Vanilla extract|img/350/vanilla.webp|0.25|tsp|1|linear|—|—
 I|lemon_zest|Lemon zest|img/350/lemon_zest.webp|0.125|tsp|0.3|linear|—|—
 I|raspberry|Fresh berries|img/350/raspberry.webp|25|g|25|linear|opt_topping = berries|—
 S|O1|O|Preheat|Heat the oven to 160 °C (140 °C fan). Line the base of a 20 cm springform tin (serves 10).|action|160 °C|120|—|Oven on|—|oven, cake_tin, parchment_paper|—
-S|B1|B|Biscuit base|Crush the biscuits finely, mix with the melted butter and press firmly into the tin. Bake 10 minutes.|action|160 °C|(180 + 15 × servings) × skill_factor + 600|O1|Firm, lightly toasted|digestive_biscuits; butter|bowl, spoon, cake_tin|—
+S|B1|B|Biscuit base|Crush the biscuits finely, mix with the melted butter and press firmly into the tin. Bake 10 minutes.|action|160 °C|(180 + 15 × servings) × skill_factor + 600|O1|Firm, lightly toasted|digestive_biscuits; butter|kitchen_scale, bowl, spoon, cake_tin|—
 S|K1|K|Filling|Beat the cream cheese, sugar and cornstarch on low until smooth. Beat in the eggs one at a time, then the sour cream, vanilla and lemon zest. Do not whip in air.|action|—|360|—|Smooth, no lumps|cream_cheese; sugar; cornstarch; egg; sour_cream; vanilla; lemon_zest|bowl, mixer, spatula, microplane|—
 S|O2|O|Bake low|Pour onto the base and bake until set at the edges but still wobbly in the middle. Turn off the oven, prop the door open and leave it for 1 hour (prevents cracks).|wait|160 °C|6300 (doc: 45 min bake + 1 h in the cooling oven)|B1, K1|Wobbly centre, no cracks|—|oven|—
 S|F1|F|Chill|Chill at least 6 hours or overnight.|wait|—|21600 (doc: 6 h to overnight)|O2|Firm, cold|—|fridge|—
@@ -3941,6 +3941,259 @@ S|K1|K|Custard|Whisk the eggs gently with the condensed milk, evaporated milk an
 S|O2|O|Bake in a water bath|Pour the custard over the caramel, cover with foil, set in a deep tray and pour hot water halfway up. Bake until set but still slightly wobbly in the centre.|wait|160 °C|3000 one / 1800 ramekins|C1, K1, O1|Set, slight wobble|—|oven, tray, tin_foil, ramekins|—
 S|F1|F|Chill|Cool, then chill at least 4 hours.|wait|—|14400 (doc: 4 h to overnight)|O2|Cold, firm|—|fridge|—
 S|F2|F|Turn out|Run a knife round the edge, put a plate on top and flip it so the caramel runs over.|action|—|60 + 15 × servings|F1|Served|—|knife, plates|—
+`
+  },
+  {
+    id: "baked_ziti", name: "Baked Ziti", image: "img/350/penne.webp",
+    rows: `
+O|opt_meat|beef|With ground beef|TRUE
+O|opt_meat|none|Meatless|FALSE
+I|ziti|Ziti (or penne)|img/350/penne.webp|100|g|100|linear|—|—
+I|olive_oil|Olive oil|img/350/olive_oil.webp|0.5|tbsp|7|linear|—|—
+I|onion|Onion|img/350/onion.webp|40|g|40|linear|—|finely diced
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|minced
+I|ground_beef|Ground beef|img/350/ground_beef.webp|80|g|80|linear|opt_meat = beef|—
+I|tomato_passata|Tomato passata (or crushed canned tomatoes)|img/350/tomato_passata.webp|170|g|170|linear|—|—
+I|oregano|Dried oregano|img/350/oregano.webp|0.25|tsp|0.3|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.375|tsp|2.2|linear|—|—
+I|ricotta|Ricotta|img/350/ricotta.webp|60|g|60|linear|—|—
+I|egg|Egg|img/350/egg.webp|0.25|pcs|13|linear, rounded up|—|beaten
+I|mozzarella|Mozzarella|img/350/mozzarella.webp|60|g|60|linear|—|grated
+I|parmesan|Parmesan|img/350/parmesan.webp|20|g|20|linear|—|grated
+I|basil|Fresh basil leaves|img/350/basil.webp|3|leaves|1.5|linear|—|torn
+S|P1|P|Boil the pasta water|Bring a large pot of salted water to the boil.|wait|high|600|—|Rolling boil|—|cooking_pot, stovetop|—
+S|K1|K|Chop|Finely dice the onion and mince the garlic.|action|—|(60 + 30 × servings) × skill_factor|—|Diced|onion; garlic|chef_knife, chopping_board|—
+S|S1|S|Soften the onion|Fry the onion in the oil until soft, adding the garlic for the last minute.|action|medium|360|K1|Soft, fragrant|olive_oil|pan, stovetop, wooden_spoon|—
+S|S2|S|Brown the meat|Add the ground beef and fry, breaking it up, until browned.|action|medium-high|360|S1|Browned|ground_beef|pan, wooden_spoon|opt_meat = beef
+S|S3|S|Simmer the sauce|Stir in the passata, oregano and half the salt and simmer until slightly thickened.|wait|low|900|S2|Slightly thickened|tomato_passata; oregano; salt|pan, wooden_spoon|—
+S|C1|C|Ricotta mix|Mix the ricotta with the egg, half the Parmesan and the rest of the salt.|action|—|(60 + 15 × servings) × skill_factor|—|Smooth|ricotta; egg|bowl, fork|—
+S|O1|O|Preheat the oven|Turn the oven on to 200 °C conventional (180 °C fan).|action|200 °C (180 °C fan)|15|S1|Oven on|—|oven|—
+S|P2|P|Cook the pasta|Cook the pasta 2 minutes less than the packet says; it finishes cooking in the oven.|wait|high|480|P1|Firm, still a little underdone|ziti|cooking_pot, stovetop|—
+S|P3|P|Drain|Drain the pasta.|action|—|30|P2|Drained|—|colander|—
+S|A1|A|Assemble|Toss the pasta with most of the sauce. Put half in the baking dish, dot with the ricotta mix and add half the mozzarella, then the rest of the pasta and sauce. Top with the remaining mozzarella and Parmesan.|action|—|(180 + 30 × servings) × skill_factor|P3, S3, C1|Dish full, cheese on top|mozzarella; parmesan|baking_dish, spoon|—
+S|O2|O|Bake|Bake until bubbling and golden in spots.|wait|200 °C (180 °C fan)|1500 (doc: 20 to 30 min)|A1, O1|Bubbling, golden in spots|—|oven, baking_dish|—
+S|F1|F|Rest and serve|Let it rest for 5 minutes, scatter with the torn basil and serve.|wait|—|300|O2|Served|basil|spoon, plates|—
+`
+  },
+  {
+    id: "arroz_con_pollo", name: "Arroz con Pollo", image: "img/350/chicken_legs.webp",
+    rows: `
+O|opt_color|turmeric|Turmeric (easy to find)|TRUE
+O|opt_color|saffron|Saffron|FALSE
+O|opt_olives|with|With green olives|TRUE
+O|opt_olives|without|Without olives|FALSE
+I|chicken_legs|Bone-in chicken thighs|img/350/chicken_legs.webp|1.5|pcs|180|linear, rounded up|—|skin on
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|cumin|Ground cumin|img/350/cumin.webp|0.25|tsp|0.6|linear|—|—
+I|oregano|Dried oregano|img/350/oregano.webp|0.25|tsp|0.3|linear|—|—
+I|oil|Oil|img/350/oil.webp|0.5|tbsp|7|linear|—|—
+I|onion|Onion|img/350/onion.webp|50|g|50|linear|—|diced
+I|green_bell_pepper|Green bell pepper|img/350/green_bell_pepper.webp|0.25|pcs|40|linear|—|diced
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|minced
+I|tomato_passata|Tomato passata|img/350/tomato_passata.webp|50|g|50|linear|—|—
+I|turmeric_powder|Turmeric powder|img/350/turmeric_powder.webp|0.125|tsp|0.4|linear|opt_color = turmeric|—
+I|saffron|Saffron threads|img/350/saffron.webp|0.05|tsp|0.1|fixed|opt_color = saffron|crushed
+I|white_rice|Long-grain rice|img/350/white_rice.webp|80|g|80|linear|—|—
+I|chicken_stock|Chicken stock|img/350/chicken_stock.webp|180|ml|180|linear|—|—
+I|pea|Peas (frozen)|img/350/pea.webp|30|g|30|linear|—|—
+I|olives|Green olives|img/350/olives.webp|3|pcs|10|linear|opt_olives = with|—
+I|cilantro|Cilantro|img/350/cilantro.webp|2|g|2|linear|—|chopped
+S|K1|K|Season the chicken|Rub the chicken with the salt, cumin and oregano.|action|—|(30 + 30 × servings) × skill_factor|—|Seasoned all over|chicken_legs; salt; cumin; oregano|bowl|—
+S|K2|K|Chop|Dice the onion and the pepper and mince the garlic.|action|—|(60 + 60 × servings) × skill_factor|—|Diced|onion; green_bell_pepper; garlic|chef_knife, chopping_board|—
+S|P1|P|Brown the chicken|Heat the oil in a deep pan with a lid and brown the chicken, skin side down first, until golden on both sides. Take it out.|action|medium-high|600|K1|Golden on both sides|oil|pan, stovetop, tongs|—
+S|P2|P|Soften the vegetables|Fry the onion and pepper in the chicken fat until soft, adding the garlic for the last minute.|action|medium|360|P1, K2|Soft|—|pan, wooden_spoon|—
+S|P3|P|Coat the rice|Stir in the passata and the turmeric (or crushed saffron), then the rice, and stir for 2 minutes until coated.|action|medium|150|P2|Rice coated and glossy|tomato_passata; turmeric_powder; saffron; white_rice|pan, wooden_spoon|—
+S|P4|P|Simmer covered|Pour in the stock, put the chicken back on top, bring to the boil, then cover and cook on low without stirring.|wait|low|1200 (doc: 20 min)|P3|Most of the liquid absorbed|chicken_stock|pan|—
+S|P5|P|Peas and olives|Scatter over the peas (and the olives), cover again and cook until the rice is tender and the chicken is cooked through.|wait|low|300|P4|Rice tender, chicken cooked through|pea; olives|pan|—
+S|F1|F|Rest and serve|Leave it covered off the heat for 5 minutes, fluff the rice and serve with cilantro.|wait|off|300|P5|Served|cilantro|spoon, plates|—
+`
+  },
+  {
+    id: "rice_and_beans", name: "Rice and Beans", image: "img/350/kidney_beans.webp",
+    rows: `
+O|opt_beans|kidney|Red kidney beans|TRUE
+O|opt_beans|black|Black beans|FALSE
+O|opt_heat|mild|Mild (whole chili)|TRUE
+O|opt_heat|hot|Hot (chili cut open)|FALSE
+I|white_rice|Long-grain rice|img/350/white_rice.webp|75|g|75|linear|—|—
+I|kidney_beans|Red kidney beans (canned)|img/350/kidney_beans.webp|60|g drained|60|linear|opt_beans = kidney|drained and rinsed
+I|black_beans|Black beans (canned)|img/350/black_beans.webp|60|g drained|60|linear|opt_beans = black|drained and rinsed
+I|coconut_milk|Coconut milk|img/350/coconut_milk.webp|100|ml|100|linear|—|—
+I|water|Water|img/350/water.webp|100|ml|100|linear|—|—
+I|green_onion|Spring onion|img/350/green_onion.webp|0.5|pcs|8|linear, rounded up|—|bruised
+I|garlic|Garlic clove|img/350/garlic.webp|0.5|pcs|3|linear, rounded up|—|crushed
+I|thyme|Fresh thyme sprig|img/350/thyme.webp|1|pcs|0.5|linear|—|—
+I|allspice|Allspice berries|img/350/allspice.webp|2|pcs|0.2|linear|—|—
+I|chili_pepper|Scotch bonnet chili|img/350/chili_pepper.webp|1|pcs|10|fixed|—|whole
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+S|K1|K|Prep|Rinse the rice until the water runs clear. Drain and rinse the beans, crush the garlic and bruise the spring onion with the back of a knife.|action|—|(90 + 30 × servings) × skill_factor|—|Ready|white_rice; kidney_beans; black_beans; garlic; green_onion|sieve, chef_knife, chopping_board|—
+S|P1|P|Infuse the coconut milk|Bring the coconut milk and water to a simmer with the beans, garlic, spring onion, thyme, allspice and salt. Add the whole chili (cut a slit in it for the hot version).|action|medium|300|K1|Simmering, fragrant|coconut_milk; water; thyme; allspice; chili_pepper; salt|cooking_pot, stovetop, wooden_spoon|—
+S|P2|P|Cook the rice|Stir in the rice, bring back to the boil, then cover and cook on the lowest heat without stirring. Don't burst the chili.|wait|low|1200 (doc: 20 min)|P1|Liquid absorbed, rice tender|—|cooking_pot|—
+S|F1|F|Rest and serve|Leave it covered off the heat for 5 minutes. Remove the chili, thyme stems and spring onion, then fluff with a fork.|wait|off|300|P2|Fluffy|—|fork, plates|—
+`
+  },
+  {
+    id: "jiaozi", name: "Jiaozi", image: "img/350/ground_pork.webp",
+    rows: `
+O|opt_cook|boiled|Boiled|TRUE
+O|opt_cook|potstickers|Pan-fried (potstickers)|FALSE
+O|opt_wrappers|store|Store-bought wrappers|TRUE
+O|opt_wrappers|homemade|Homemade dough|FALSE
+I|dumpling_wrappers|Dumpling wrappers|— (placeholder: no image yet)|12|pcs|100|linear|opt_wrappers = store|—
+I|flour|Plain flour|img/350/flour.webp|80|g|80|linear|opt_wrappers = homemade|—
+I|water|Cold water|img/350/water.webp|40|ml|40|linear|opt_wrappers = homemade|—
+I|ground_pork|Ground pork (not too lean)|img/350/ground_pork.webp|100|g|100|linear|—|—
+I|cabbage|Napa or white cabbage|img/350/cabbage.webp|60|g|60|linear|—|finely chopped
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|ginger_root|Fresh ginger|img/350/ginger_root.webp|5|g|5|linear|—|grated
+I|green_onion|Spring onion|img/350/green_onion.webp|0.5|pcs|8|linear, rounded up|—|finely chopped
+I|light_soy_sauce|Light soy sauce|img/350/light_soy_sauce.webp|0.75|tbsp|11|linear|—|—
+I|shaoxing_wine|Shaoxing wine|img/350/shaoxing_wine.webp|1|tsp|5|linear|—|—
+I|toasted_sesame_oil|Toasted sesame oil|img/350/toasted_sesame_oil.webp|0.5|tsp|2|linear|—|—
+I|white_pepper|White pepper|img/350/white_pepper.webp|0.0625|tsp|0.15|linear|—|—
+I|oil|Neutral oil|img/350/oil.webp|0.5|tbsp|7|linear|opt_cook = potstickers|—
+I|water_steam|Water (for steaming)|img/350/water.webp|30|ml|30|linear|opt_cook = potstickers|—
+I|rice_vinegar|Rice or black vinegar|img/350/rice_vinegar.webp|1|tbsp|15|linear|—|—
+S|D1|D|Mix the dough|Mix the flour with the cold water into a firm dough and knead until smooth. Cover it.|action|—|(300 + 60 × servings) × skill_factor|—|Smooth, firm dough|flour; water|kitchen_scale, bowl, plastic_wrap|opt_wrappers = homemade
+S|D2|D|Rest the dough|Let the dough rest, covered.|wait|—|1800|D1|Soft and relaxed|—|—|opt_wrappers = homemade
+S|K1|K|Salt the cabbage|Mix the chopped cabbage with a pinch of the salt, leave for 10 minutes, then squeeze out the water.|action|—|600 + (120 + 60 × servings) × skill_factor|—|Squeezed dry|cabbage; salt|chef_knife, chopping_board, bowl|—
+S|K2|K|Make the filling|Mix the pork with the cabbage, ginger, spring onion, two thirds of the soy sauce, the Shaoxing wine, sesame oil and white pepper. Stir in one direction until sticky.|action|—|(120 + 60 × servings) × skill_factor|K1|Sticky filling|ground_pork; ginger_root; green_onion; shaoxing_wine; toasted_sesame_oil; white_pepper|bowl, microplane, chef_knife, chopping_board|—
+S|D3|D|Roll the wrappers|Roll the dough into a log, cut it into walnut-size pieces and roll each into a thin 8 cm round, thinner at the edge.|action|—|(240 + 360 × servings) × skill_factor|D2|Thin rounds|—|rolling_pin, knife|opt_wrappers = homemade
+S|A1|A|Fill and fold|Put a teaspoon of filling in the middle of each wrapper, wet the edge with water, fold into a half-moon and pleat or press to seal.|action|—|(120 + 480 × servings) × skill_factor|K2, D3|All sealed|dumpling_wrappers|spoon, tray|—
+S|S1|S|Dipping sauce|Mix the vinegar with the rest of the soy sauce.|action|—|30 + 10 × servings|—|Mixed|rice_vinegar; light_soy_sauce|bowl, spoon|—
+S|B1|B|Boil the water|Bring a large pot of water to the boil.|wait|high|600|K2|Rolling boil|—|cooking_pot, stovetop|opt_cook = boiled
+S|B2|B|Boil the dumplings|Add the dumplings and stir gently. Each time it boils up again, add a cup of cold water; after the third time they float and puff up.|action|high|480|A1|Floating and puffed|—|cooking_pot, ladle|opt_cook = boiled
+S|B3|B|Serve the dumplings|Lift out the dumplings and serve hot with the dipping sauce.|action|off|30 + 15 × servings|B2, S1|Served|—|ladle, plates|opt_cook = boiled
+S|G1|G|Fry the potstickers|Heat the oil in a non-stick pan with a lid and set the dumplings in, flat side down. Fry until the bottoms are golden.|action|medium|180|A1|Golden bottoms|oil|pan, stovetop|opt_cook = potstickers
+S|G2|G|Steam the potstickers|Pour in the water, cover at once and cook until the water is gone and the bottoms are crisp again.|wait|medium|420|G1|Water gone, bottoms crisp|water_steam|pan, spatula|opt_cook = potstickers
+S|G3|G|Serve the potstickers|Serve hot, crispy side up, with the dipping sauce.|action|off|30 + 15 × servings|G2, S1|Served|—|spatula, plates|opt_cook = potstickers
+`
+  },
+  {
+    id: "thai_red_curry", name: "Thai Red Curry", image: "img/350/coconut_milk.webp",
+    rows: `
+O|opt_protein|chicken|Chicken|TRUE
+O|opt_protein|tofu|Tofu and vegetables|FALSE
+O|opt_heat|medium|Medium|TRUE
+O|opt_heat|hot|Hot|FALSE
+I|red_curry_paste|Thai red curry paste|— (placeholder: no image yet)|1|tbsp|15|linear; doubled if hot|—|—
+I|coconut_milk|Coconut milk|img/350/coconut_milk.webp|200|ml|200|linear|—|—
+I|oil|Oil|img/350/oil.webp|0.5|tbsp|7|linear|—|—
+I|chicken_legs|Boneless chicken thighs|img/350/chicken_legs.webp|120|g|120|linear|opt_protein = chicken|thin slices
+I|tofu|Firm tofu|img/350/tofu.webp|120|g|120|linear|opt_protein = tofu|cubes
+I|red_bell_pepper|Red bell pepper|img/350/red_bell_pepper.webp|0.25|pcs|40|linear|—|strips
+I|green_beans|Green beans|img/350/green_beans.webp|40|g|40|linear|—|4 cm pieces
+I|kaffir_lime_leaves|Kaffir lime leaves|img/350/kaffir_lime_leaves.webp|2|pcs|0.5|linear|—|torn
+I|fish_sauce|Fish sauce|img/350/fish_sauce.webp|2|tsp|10|linear|—|—
+I|brown_sugar|Palm or brown sugar|img/350/brown_sugar.webp|1|tsp|4|linear|—|—
+I|thai_basil|Thai basil leaves|img/350/thai_basil.webp|5|g|5|linear|—|—
+I|chili_pepper|Red chili (to garnish)|img/350/chili_pepper.webp|0.25|pcs|3|linear; doubled if hot|—|sliced
+I|jasmine_rice|Jasmine rice|img/350/jasmine_rice.webp|80|g|80|linear|—|—
+S|R1|R|Cook the rice|Rinse the jasmine rice and cook it (1 part rice to 1.25 parts water, covered, 12 min, rest 10 min).|wait|low|1320|—|Fluffy|jasmine_rice|saucepan, stovetop, sieve|—
+S|K1|K|Prep|Slice the protein and the pepper, cut the green beans, tear the lime leaves and slice the chili.|action|—|(120 + 90 × servings) × skill_factor|—|Ready|chicken_legs; tofu; red_bell_pepper; green_beans; kaffir_lime_leaves; chili_pepper|chef_knife, chopping_board|—
+S|P1|P|Fry the paste|Heat the oil with a third of the coconut milk until it bubbles and the oil starts to separate, then fry the curry paste until fragrant.|action|medium|240|K1|Fragrant, oil separating|red_curry_paste; oil|wok, stovetop, wooden_spoon|—
+S|P2|P|Protein|Add the chicken (or tofu) and stir to coat.|action|medium|180|P1|Coated, outside cooked|—|wok, wooden_spoon|—
+S|P3|P|Simmer|Pour in the rest of the coconut milk, add the pepper, green beans and lime leaves and simmer until the chicken is cooked and the vegetables are tender. Season with fish sauce and sugar.|wait|low|600|P2|Vegetables tender|coconut_milk; fish_sauce; brown_sugar|wok, wooden_spoon|—
+S|F1|F|Serve|Stir in the Thai basil and serve with rice, topped with chili.|action|off|30 + 15 × servings|P3, R1|Served|thai_basil|ladle, bowl|—
+`
+  },
+  {
+    id: "brigadeiros", name: "Brigadeiros", image: "img/350/condensed_milk.webp",
+    rows: `
+I|condensed_milk|Sweetened condensed milk|img/350/condensed_milk.webp|66|g|66|linear|—|—
+I|cocoa_powder|Cocoa powder|img/350/cocoa_powder.webp|1|tsp|2.5|linear|—|—
+I|butter|Butter|img/350/butter.webp|4|g|4|linear|—|—
+I|chocolate_sprinkles|Chocolate sprinkles|img/350/chocolate_sprinkles.webp|8|g|8|linear|—|—
+S|P1|P|Cook the mixture|Put the condensed milk, cocoa and most of the butter in a non-stick saucepan and cook, stirring all the time, until it thickens.|action|medium-low|600 (doc: 8 to 12 min)|—|Pulls away from the pan; a line dragged with the spatula stays open|condensed_milk; cocoa_powder|saucepan, stovetop, spatula|—
+S|C1|C|Cool|Brush a plate with a little of the butter, spread the mixture on it and let it cool completely.|wait|—|3600 (doc: 1 hour)|P1|Cool and firm enough to roll|butter|plates, pastry_brush|—
+S|F1|F|Roll|With buttered hands, roll teaspoon-size balls and roll them in the sprinkles.|action|—|(120 + 120 × servings) × skill_factor|C1|All rolled and coated|chocolate_sprinkles|spoon, plates|—
+`
+  },
+  {
+    id: "imam_bayildi", name: "Imam Bayildi", image: "img/350/eggplant.webp",
+    rows: `
+I|eggplant|Eggplant, medium|img/350/eggplant.webp|1|pcs|250|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|olive_oil|Olive oil|img/350/olive_oil.webp|3|tbsp|40|linear|—|—
+I|onion|Onion|img/350/onion.webp|100|g|100|linear|—|thinly sliced
+I|garlic|Garlic clove|img/350/garlic.webp|2|pcs|10|linear|—|sliced
+I|green_bell_pepper|Green pepper|img/350/green_bell_pepper.webp|0.25|pcs|40|linear|—|diced
+I|tomato|Tomato, medium|img/350/tomato.webp|1|pcs|125|linear|—|diced
+I|tomato_paste|Tomato paste|img/350/tomato_paste.webp|0.5|tbsp|8|linear|—|—
+I|sugar|Sugar|img/350/sugar.webp|0.5|tsp|2|linear|—|—
+I|parsley|Fresh parsley|img/350/parsley.webp|5|g|5|linear|—|chopped
+I|water|Hot water|img/350/water.webp|50|ml|50|linear|—|—
+S|K1|K|Peel in stripes|Peel the eggplants lengthwise in stripes, salt them and leave for 20 minutes, then rinse and pat dry.|action|—|1200 + (60 + 30 × servings) × skill_factor|—|Striped and dry|eggplant; salt|vegetable_peeler, chopping_board|—
+S|K2|K|Chop the filling|Thinly slice the onion, slice the garlic and dice the pepper and the tomato.|action|—|(120 + 90 × servings) × skill_factor|—|Chopped|onion; garlic; green_bell_pepper; tomato|chef_knife, chopping_board|—
+S|P1|P|Fry the eggplants|Brush the eggplants with oil and fry them whole, turning, until soft and golden on all sides. Lay them in the baking dish.|action|medium|600|K1|Soft and golden|olive_oil|pan, stovetop, tongs, pastry_brush, baking_dish|—
+S|P2|P|Cook the filling|In the same pan, cook the onion slowly in the oil until very soft, then add the garlic and pepper, then the tomato, tomato paste, sugar and a pinch of the salt. Cook until thick, then stir in most of the parsley.|action|medium-low|900|P1, K2|Soft and jammy|tomato_paste; sugar; parsley|pan, wooden_spoon|—
+S|O1|O|Preheat the oven|Turn the oven on to 180 °C conventional (160 °C fan).|action|180 °C (160 °C fan)|15|K2|Oven on|—|oven|—
+S|A1|A|Stuff|Slit each eggplant lengthwise without cutting through, open it like a boat and fill it with the onion mixture.|action|—|(60 + 60 × servings) × skill_factor|P2|Filled|—|knife, spoon, baking_dish|—
+S|O2|O|Bake|Pour the hot water into the dish, cover with foil and bake until very soft.|wait|180 °C (160 °C fan)|2400 (doc: 35 to 45 min)|A1, O1|Very soft, collapsing|water|oven, baking_dish, tin_foil|—
+S|F1|F|Cool and serve|Let it cool until warm or at room temperature (that is how it is eaten) and scatter over the rest of the parsley.|wait|—|1200|O2|Warm or room temperature|—|spoon, plates|—
+`
+  },
+  {
+    id: "chicken_yassa", name: "Chicken Yassa", image: "img/350/onion.webp",
+    rows: `
+O|opt_heat|mild|Mild|TRUE
+O|opt_heat|hot|Hot (with chili)|FALSE
+I|chicken_legs|Bone-in chicken thighs or drumsticks|img/350/chicken_legs.webp|200|g|200|linear|—|—
+I|onion|Onion, large|img/350/onion.webp|1|pcs|200|linear|—|thinly sliced
+I|lemon|Lemon (juice)|img/350/lemon.webp|0.5|pcs|50|linear|—|juiced
+I|mustard|Dijon mustard|img/350/mustard.webp|1|tbsp|15|linear|—|—
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|minced
+I|bouillon_cube|Stock cube|img/350/bouillon_cube.webp|0.25|pcs|3|linear, rounded up|—|crumbled
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|oil|Oil|img/350/oil.webp|1|tbsp|14|linear|—|—
+I|chili_pepper|Scotch bonnet or other hot chili|img/350/chili_pepper.webp|0.25|pcs|3|linear, rounded up|opt_heat = hot|whole, pricked
+I|bay_leaf|Bay leaf|img/350/bay_leaf.webp|0.5|pcs|0.2|linear, rounded up|—|—
+I|water|Water|img/350/water.webp|60|ml|60|linear|—|—
+I|olives|Green olives|img/350/olives.webp|4|pcs|12|linear|—|—
+I|white_rice|Long-grain rice|img/350/white_rice.webp|75|g|75|linear|—|—
+S|K1|K|Slice the onions|Peel and thinly slice the onions.|action|—|(60 + 120 × servings) × skill_factor|—|Thin slices|onion|chef_knife, chopping_board|—
+S|K2|K|Make the marinade|Mix the lemon juice, mustard, garlic, crumbled stock cube, pepper, salt and half the oil. Add the chicken and the onions and mix well.|action|—|(120 + 30 × servings) × skill_factor|K1|Everything coated|chicken_legs; lemon; mustard; garlic; bouillon_cube; ground_black_pepper; salt|bowl, citrus_juicer|—
+S|K3|K|Marinate|Cover and marinate in the fridge for at least 1 hour (or overnight).|wait|—|3600 (doc: at least 1 hour)|K2|Marinated|—|bowl, plastic_wrap|—
+S|P1|P|Brown the chicken|Lift the chicken out of the marinade (keep the onions and the marinade) and brown it in the rest of the oil. Take it out.|action|medium-high|600|K3|Browned on both sides|oil|pan, stovetop, tongs|—
+S|P2|P|Cook the onions|Fry the onions from the marinade in the same pan until soft and golden.|action|medium|900|P1|Soft and golden|—|pan, wooden_spoon|—
+S|P3|P|Simmer|Add the rest of the marinade, the water and the bay leaf (and the chili), put the chicken back, cover and simmer until the chicken is tender. Add the olives for the last 5 minutes.|wait|low|1800 (doc: 30 min)|P2|Chicken tender, onions jammy|water; bay_leaf; chili_pepper; olives|pan, wooden_spoon|—
+S|R1|R|Cook the rice|Rinse the rice and cook it (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|K3|Fluffy|white_rice|saucepan, stovetop, sieve|—
+S|F1|F|Serve|Serve the chicken and onions over the rice.|action|off|30 + 15 × servings|P3, R1|Served|—|spoon, plates|—
+`
+  },
+  {
+    id: "pad_kra_pao", name: "Pad Kra Pao", image: "img/350/thai_basil.webp",
+    rows: `
+O|opt_meat|pork|Ground pork|TRUE
+O|opt_meat|chicken|Chicken, finely chopped|FALSE
+O|opt_heat|medium|Medium|TRUE
+O|opt_heat|hot|Hot|FALSE
+O|opt_egg|egg|With a crispy fried egg|TRUE
+O|opt_egg|none|Without egg|FALSE
+I|ground_pork|Ground pork|img/350/ground_pork.webp|130|g|130|linear|opt_meat = pork|—
+I|chicken_breast|Chicken breast or thigh|img/350/chicken_breast.webp|130|g|130|linear|opt_meat = chicken|finely chopped
+I|garlic|Garlic cloves|img/350/garlic.webp|2|pcs|10|linear|—|—
+I|chili_pepper|Thai chilies|img/350/chili_pepper.webp|2|pcs|4|linear; doubled if hot|—|—
+I|oil|Oil|img/350/oil.webp|1|tbsp|14|linear|—|—
+I|oyster_sauce|Oyster sauce|img/350/oyster_sauce.webp|2|tsp|12|linear|—|—
+I|light_soy_sauce|Light soy sauce|img/350/light_soy_sauce.webp|1|tsp|5|linear|—|—
+I|dark_soy_sauce|Dark soy sauce|img/350/dark_soy_sauce.webp|0.5|tsp|3|linear|—|—
+I|fish_sauce|Fish sauce|img/350/fish_sauce.webp|1|tsp|5|linear|—|—
+I|sugar|Sugar|img/350/sugar.webp|0.5|tsp|2|linear|—|—
+I|water|Water|img/350/water.webp|15|ml|15|linear|—|—
+I|thai_basil|Holy basil (or Thai basil) leaves|img/350/thai_basil.webp|10|g|10|linear|—|—
+I|egg|Egg|img/350/egg.webp|1|pcs|50|linear|opt_egg = egg|—
+I|oil_egg|Oil for frying the eggs|img/350/oil.webp|2|tbsp|28|fixed|opt_egg = egg|—
+I|jasmine_rice|Jasmine rice|img/350/jasmine_rice.webp|80|g|80|linear|—|—
+S|R1|R|Cook the rice|Rinse the jasmine rice and cook it (1 part rice to 1.25 parts water, covered, 12 min, rest 10 min).|wait|low|1320|—|Fluffy|jasmine_rice|saucepan, stovetop, sieve|—
+S|K1|K|Pound the garlic and chilies|Pound the garlic and chilies to a rough paste in a mortar (or chop them finely).|action|—|(60 + 30 × servings) × skill_factor|—|Rough paste|garlic; chili_pepper|mortar_and_pestle|—
+S|K2|K|Mix the sauce|Mix the oyster sauce, both soy sauces, fish sauce, sugar and water.|action|—|30 + 10 × servings|—|Mixed|oyster_sauce; light_soy_sauce; dark_soy_sauce; fish_sauce; sugar; water|bowl, spoon|—
+S|E1|E|Fry the eggs|Heat the oil in the wok until very hot and fry the eggs one at a time, spooning hot oil over them, until the edges are crispy and the yolk is still runny. Keep them on a plate.|action|high|120 × servings|R1|Crispy edges, runny yolk|egg; oil_egg|wok, stovetop, spatula, plates|opt_egg = egg
+S|W1|W|Fry the garlic and chilies|Heat the oil in the wok and fry the garlic and chili paste for a few seconds until fragrant.|action|high|30|K1, E1|Fragrant, not brown|oil|wok, stovetop, spatula|—
+S|W2|W|Fry the meat|Add the meat and stir-fry, breaking it up, until cooked through.|action|high|240|W1|Cooked through|ground_pork; chicken_breast|wok, spatula|—
+S|W3|W|Sauce and basil|Pour in the sauce and toss until glossy, then turn off the heat and stir in the basil until it wilts.|action|high|60|W2, K2|Glossy, basil wilted|thai_basil|wok, spatula|—
+S|F1|F|Serve|Serve over the rice (with the fried egg on top).|action|off|30 + 15 × servings|W3, R1|Served|—|spoon, plates|—
 `
   }
 ];

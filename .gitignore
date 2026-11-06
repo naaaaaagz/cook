@@ -23,6 +23,7 @@
 /*.csv
 /food stock photos.txt
 /Recipes - text - review.txt
+/recipes - not added.txt
 
 # Local tools stay private, except the source needed to maintain the shipped pages.
 /tools/*

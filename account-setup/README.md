@@ -9,6 +9,13 @@ address. Complete the privacy details and live checks below before public launch
 Google/Facebook remain deferred. See the current code and update-2026-10-30.sql for
 the subsequently added favourites/account-deletion features.
 
+## Kitchen items: pantry and bin (2026-11-06)
+
+Run update-2026-11-06-kitchen-items.sql ONCE in the existing Supabase project's SQL editor
+after update-2026-11-03-community.sql. It only replaces cook_valid_preferences so a saved
+kitchen layout may contain the new pantry and bin items. Until it is run, signed-in users
+who add either item cannot save that layout to their account.
+
 ## Recipe ratings (2026-11-03)
 
 Run update-2026-11-03-ratings.sql ONCE in the existing Supabase project's SQL editor

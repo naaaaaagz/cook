@@ -463,7 +463,7 @@ select {
 .block.area-mixer, .map-area.area-mixer,
 .block.area-blender, .map-area.area-blender,
 .block.area-kettle, .block.area-toaster, .block.area-ricecooker,
-.block.area-slowcooker, .block.area-pressurecooker, .block.area-foodprocessor { border-style: dashed; }
+.block.area-slowcooker, .block.area-pressurecooker, .block.area-foodprocessor, .block.area-bin { border-style: dashed; }
 /* The countertop's name stays at the top, clear of the sink and board on it */
 .block.area-countertop { flex-direction: row; align-items: flex-start; justify-content: center; padding-top: 10px; }
 .block.area-countertop img { width: 26px; height: 26px; max-height: none; }
@@ -504,7 +504,8 @@ select {
 .area-sink { color: var(--sink); background: var(--sink-bg); }
 .area-me { color: var(--me); background: var(--me-bg); }
 .area-microwave, .area-airfryer, .area-mixer, .area-blender,
-.area-kettle, .area-toaster, .area-ricecooker, .area-slowcooker, .area-pressurecooker, .area-foodprocessor { color: var(--appliance); background: var(--appliance-bg); }
+.area-kettle, .area-toaster, .area-ricecooker, .area-slowcooker, .area-pressurecooker, .area-foodprocessor,
+.area-pantry, .area-bin { color: var(--appliance); background: var(--appliance-bg); }
 
 /* Rotate buttons: phones and tablets only; they show the shape they switch to */
 .btn-rotate { display: none; }
