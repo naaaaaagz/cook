@@ -93,7 +93,6 @@
   }
   $('storage-ok').addEventListener('click', dismissNotice);
   $('storage-close').addEventListener('click', dismissNotice);
-  $('storage-reopen').addEventListener('click', function () { $('storage-notice').hidden = false; });
   try { $('storage-notice').hidden = sessionStorage.getItem(noticeKey) === 'dismissed'; }
   catch (e) { $('storage-notice').hidden = false; }
   document.querySelectorAll('[data-open-privacy]').forEach(function (el) { el.addEventListener('click', function () { open('privacy-dialog'); }); });
@@ -296,8 +295,8 @@
     body = String(body || '').trim();
     if (!validRecipe(recipeId) || !body || body.length > 1000) return Promise.resolve(false);
     return sideJob(async function (accountId) {
-      var r = await client.from('recipe_comments').insert({ user_id: accountId, recipe_id: recipeId, body: body });
-      return !r.error;
+      var r = await client.from('recipe_comments').insert({ user_id: accountId, recipe_id: recipeId, body: body }).select('id').single();
+      return r.error ? false : (r.data && r.data.id) || true;
     });
   }
   function deleteComment(id) {

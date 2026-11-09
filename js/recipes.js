@@ -496,7 +496,7 @@ window.INGREDIENT_INFO = (function () {
             ings: [{ id: 'black_peppercorn', qty: tsp(0.5 * s) }, { id: 'pecorino_romano', qty: g(30 * s) }], doneWhen: 'Pepper ground, cheese grated' },
           { id: 'Q5', members: ['E1'], thread: 'E', area: 'countertop', title: 'Mix eggs and cheese',
             text: 'Beat ' + eggText + ' with most of the pecorino until smooth. Keep the rest for serving.',
-            duration: d.E1, deps: ['Q2', 'Q4'], tools: ['bowl', 'fork'],
+            duration: d.E1, deps: ['Q2', 'Q4'], tools: ['bowl'],
             ings: eggIngs.concat([{ id: 'pecorino_romano', qty: g(25 * s), label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
           { id: 'Q6', members: ['E2'], thread: 'E', area: 'sink', title: 'Warm the plates',
             text: 'Rinse the plates with hot water and dry them.',
@@ -564,7 +564,7 @@ window.INGREDIENT_INFO = (function () {
 
       { id: 'E1', thread: 'E', area: 'countertop', title: 'Mix eggs and cheese',
         text: 'In the bowl, beat ' + eggText + ' with most of the grated pecorino until smooth. Keep the rest for serving.',
-        duration: d.E1, deps: ['B1', 'B5'], tools: ['bowl', 'fork'],
+        duration: d.E1, deps: ['B1', 'B5'], tools: ['bowl'],
         ings: eggIngs.concat([{ id: 'pecorino_romano', qty: g(25 * s), label: 'Pecorino, grated' }]), doneWhen: 'Smooth, thick, no lumps' },
       // Warm plates only help when the food is nearly ready: after the pan comes off the heat.
       { id: 'E2', thread: 'E', area: 'sink', title: 'Warm the plates',
@@ -857,7 +857,8 @@ window.INGREDIENT_INFO = (function () {
   // The sheet's free-text columns are read with a few simple rules; anything
   // a rule can't read falls back to the plain number at the start of the cell.
 
-  var NOT_TOOLS = ['stovetop', 'oven', 'fridge'];
+  // Not shown as utensils: places, and everyday cutlery (spoon, fork, table knife) every kitchen has.
+  var NOT_TOOLS = ['stovetop', 'oven', 'fridge', 'spoon', 'fork', 'knife'];
   var FRACTIONS = { 0.25: '¼', 0.5: '½', 0.75: '¾' };
 
   function empty(v) { return !v || v === '—'; }

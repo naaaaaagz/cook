@@ -45,7 +45,8 @@
       ingCat_baking: 'Baking',
       ingCat_oil: 'Oil & fat',
       ingCat_water: 'Water',
-      layoutHelp: 'Drag to move, drag the corner to resize. Things can only overlap the countertop.',
+      ingCat_fish: 'Fish & seafood',
+      layoutHelp: 'Drag to move, drag an edge or corner to resize. Things can only overlap the countertop.',
       cancel: 'Cancel',
       rotateScreen: 'Rotate the screen',
       back: 'Back',
@@ -130,6 +131,7 @@
       histTime: 'Took {x} (suggested: {y})',
       comTitle: 'Comments',
       comNone: 'No comments yet.',
+      comAfterCook: 'You can leave a comment after you have made this meal.',
       comAdd: 'Add a public comment',
       comSaved: 'Your comment is published.',
       comFailed: 'The comment could not be saved. Please try again.',
@@ -155,6 +157,7 @@
       dropRemove: 'Drop here to remove',
       privCommunity: 'If you choose a username, it is shown next to your public comments. Comments and their date are visible to everyone, together with the star rating you gave that recipe; average ratings are shown without names. Your recipe history, personal notes and shopping list are private to your account. Deleting your account removes all of them.',
       accStay: 'Stay signed in on this device',
+      privStorage4: 'Cook also keeps the number of adults and children you last chose in this browser’s localStorage, so the next recipe starts with them. It contains no personal details.',
       privStorage3: 'If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.',
       accLogOut: 'Log out',
       accDelete: 'Delete account',
@@ -272,9 +275,10 @@
       perServing: 'per person',
       perServing_jar: 'per jar',
       perServing_batch: 'per batch',
-      perPerson: 'Per person (estimated)',
-      perPerson_jar: 'Per jar (estimated)',
-      perPerson_batch: 'Per batch (estimated)',
+      perPerson: 'Nutrition per person (estimated)',
+      perPerson_jar: 'Nutrition per jar (estimated)',
+      perPerson_batch: 'Nutrition per batch (estimated)',
+      kcalUnit: 'kcal',
       guideMode: 'Do you need guidance for every single step?',
       modeDetailed: 'Detail every step',
       modeQuick: "I know what I'm doing",
@@ -341,7 +345,6 @@
       dismissTip: 'Dismiss tip',
       finishedTitle: 'You did it! Bon appétit!',
       howTaste: 'How does it taste?',
-      ratingSaved: 'Your rating has been saved.',
       ratingSaveFailed: 'Your rating could not be saved. Select the stars again to retry.',
       ratingLoadFailed: 'Your saved rating could not be loaded.',
       stars: '{n} of 5 stars',
@@ -382,7 +385,7 @@
       sink: 'Kitchen sink',
       fridge: 'Fridge',
       freezer: 'Freezer',
-      me: 'Me',
+      me: 'You',
       allergen_Celery: 'Celery',
       allergen_Crustaceans: 'Crustaceans',
       allergen_Molluscs: 'Molluscs',
@@ -629,9 +632,24 @@
     document.documentElement.classList.add('no-scroll');
     if (!d.open) d.showModal();
   }
+  // The page behind an open dialog keeps its scrollbar but does not scroll.
+  function blockPageScroll(e) {
+    if (!document.documentElement.classList.contains('no-scroll')) return;
+    var box = e.target.closest && e.target.closest('dialog[open]');
+    if (box && e.target !== box) return;
+    e.preventDefault();
+  }
+  document.addEventListener('wheel', blockPageScroll, { passive: false });
+  document.addEventListener('touchmove', blockPageScroll, { passive: false });
 
   // ---------- Options: theme, language, kitchen layout ----------
-  on('btn-options', 'click', function () { openDialog($('options-dialog')); });
+  function openOptions() {
+    // In the kitchen editor the "Kitchen layout" button would reopen the editor: hidden there.
+    $('btn-layout').closest('.field').hidden = state.screen === 'layout';
+    openDialog($('options-dialog'));
+  }
+  on('btn-options', 'click', openOptions);
+  on('btn-layout-options', 'click', openOptions);
   document.querySelectorAll('input[name="theme"]').forEach(function (r) {
     r.addEventListener('change', function () { document.documentElement.setAttribute('data-theme', r.value); });
   });
@@ -898,6 +916,16 @@
     pantry: { icon: 'icons/pantry.svg' },
     bin: { icon: 'icons/bin.svg' }
   };
+  // Every item except the countertop (up to three) may be added a second time: stove2, sink2, ...
+  // The copy sits right after the original in this back-to-front order.
+  (function () {
+    var ordered = {};
+    Object.keys(AREAS).forEach(function (k) {
+      ordered[k] = AREAS[k];
+      if (!/^countertop/.test(k)) ordered[k + '2'] = { icon: AREAS[k].icon };
+    });
+    AREAS = ordered;
+  })();
   var AREA_KEYS = Object.keys(AREAS);
   var ALL_KEYS = AREA_KEYS.concat(['me']);
   // The areas (and "Me") a layout has, back to front.
@@ -1019,7 +1047,7 @@
   // nearby areas, and pushes an area it runs into out of the way when there is
   // room for it. The chopping board and "Me" don't snap.
   var SNAP_PX = 12;
-  function snappable(k) { return k !== 'board' && k !== 'me' && APPLIANCES.indexOf(k) < 0; }
+  function snappable(k) { k = baseKey(k); return k !== 'board' && k !== 'me' && APPLIANCES.indexOf(k) < 0; }
 
   function snapRect(layout, key, r, keys, container) {
     if (!snappable(key)) return r;
@@ -1050,8 +1078,10 @@
   function pushOthers(layout, key, next, keys) {
     if (key === 'me') return false;
     var hits = keys.filter(function (k) { return k !== key && !canOverlap(key, k) && overlaps(next, layout[k]); });
-    // A countertop is never pushed: what stands on it would be left behind.
-    if (!hits.length || hits.some(isCounter)) return false;
+    // A countertop is never pushed (what stands on it would be left behind), and neither is
+    // anything standing on a countertop: only free-standing items make way.
+    function onCounter(k) { return keys.some(function (c) { return isCounter(c) && layout[c] && overlaps(layout[k], layout[c]); }); }
+    if (!hits.length || hits.some(function (k) { return isCounter(k) || onCounter(k); })) return false;
     var test = Object.assign({}, layout);
     test[key] = next;
     function free(k, c) {
@@ -1088,12 +1118,25 @@
     var handle = opts.handle || el;
     var drag = null;
 
+    // With opts.edges, pressing near any side (or corner) of el resizes from there.
+    function edgesAt(e) {
+      if (!opts.edges) return null;
+      var b = el.getBoundingClientRect(), z = e.pointerType === 'touch' ? 16 : 10;
+      z = Math.min(z, b.width / 4, b.height / 4);
+      var x = { l: e.clientX - b.left < z, r: b.right - e.clientX < z, t: e.clientY - b.top < z, b: b.bottom - e.clientY < z };
+      return x.l || x.r || x.t || x.b ? x : null;
+    }
+    var CURSOR = { lt: 'nwse-resize', rb: 'nwse-resize', rt: 'nesw-resize', lb: 'nesw-resize', l: 'ew-resize', r: 'ew-resize', t: 'ns-resize', b: 'ns-resize' };
+    function cursorFor(x) { return x ? CURSOR[(x.l ? 'l' : x.r ? 'r' : '') + (x.t ? 't' : x.b ? 'b' : '')] : ''; }
+    if (opts.edges) handle.addEventListener('pointermove', function (e) { if (!drag && e.pointerType !== 'touch') el.style.cursor = cursorFor(edgesAt(e)); });
     function start(e, mode) {
       e.preventDefault();
       e.stopPropagation();
       e.currentTarget.setPointerCapture(e.pointerId);
       var c = container.getBoundingClientRect();
-      drag = { mode: mode, sx: e.clientX, sy: e.clientY, cw: c.width, ch: c.height, r: clone(layout[key]) };
+      var edges = mode === 'resize' ? { r: true, b: true } : edgesAt(e);
+      if (edges) mode = 'resize';
+      drag = { mode: mode, edges: edges, sx: e.clientX, sy: e.clientY, cw: c.width, ch: c.height, r: clone(layout[key]) };
       el.classList.add('dragging');
       handle.focus();
     }
@@ -1104,8 +1147,12 @@
         next = { x: clamp(r.x + dx, 0, 1 - r.w), y: clamp(r.y + dy, 0, 1 - r.h), w: r.w, h: r.h };
         if (opts.snap) next = snapRect(layout, key, next, keys, container);
       } else {
-        var m = minSize(key, container);
-        next = { x: r.x, y: r.y, w: clamp(r.w + dx, m.w, 1 - r.x), h: clamp(r.h + dy, m.h, 1 - r.y) };
+        var m = minSize(key, container), ed = drag.edges, x1 = r.x, y1 = r.y, x2 = r.x + r.w, y2 = r.y + r.h;
+        if (ed.l) x1 = clamp(r.x + dx, 0, x2 - m.w);
+        if (ed.r) x2 = clamp(x2 + dx, x1 + m.w, 1);
+        if (ed.t) y1 = clamp(r.y + dy, 0, y2 - m.h);
+        if (ed.b) y2 = clamp(y2 + dy, y1 + m.h, 1);
+        next = { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
       }
       if (!(opts.snap && drag.mode === 'move' && pushOthers(layout, key, next, keys))) tryPlace(layout, key, next, keys);
       placeEl(el, layout[key]);
@@ -1230,9 +1277,10 @@
   var BASIC = ['stove', 'oven', 'fridge', 'freezer', 'microwave', 'sink', 'board'];
   var ADDABLE = ['countertop', 'airfryer', 'mixer', 'blender', 'kettle', 'toaster', 'ricecooker', 'slowcooker', 'pressurecooker', 'foodprocessor', 'pantry', 'bin'];
   function addKey(kind) {
-    if (kind !== 'countertop') return draft[kind] ? null : kind;
-    return ['countertop2', 'countertop3'].filter(function (k) { return !draft[k]; })[0] || null;
+    var options = kind === 'countertop' ? ['countertop2', 'countertop3'] : [kind, kind + '2'];
+    return options.filter(function (k) { return !draft[k]; })[0] || null;
   }
+  var CHECK = '<svg class="add-check" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function addItem(kind) {
     var key = addKey(kind), canvas = $('layout-canvas');
     if (!key) return;
@@ -1261,11 +1309,13 @@
   function renderAddMenu() {
     var menu = $('layout-add-menu');
     menu.innerHTML = '';
-    BASIC.filter(function (k) { return !draft[k]; }).concat(ADDABLE).forEach(function (kind) {
+    // Everything is listed; items already in the kitchen get a green tick and can be added once more.
+    BASIC.concat(ADDABLE).forEach(function (kind) {
+      var have = keysOf(draft).some(function (k) { return baseKey(k) === kind; });
       var b = document.createElement('button');
       b.type = 'button';
-      b.className = 'add-item';
-      b.innerHTML = '<img class="icon" alt="" src="' + AREAS[kind].icon + '"><span>' + ht(kind) + '</span>';
+      b.className = 'add-item' + (have ? ' is-there' : '');
+      b.innerHTML = '<img class="icon" alt="" src="' + AREAS[kind].icon + '"><span>' + ht(kind) + '</span>' + (have ? CHECK : '');
       b.disabled = !addKey(kind);
       b.addEventListener('click', function () { menu.hidden = true; addItem(kind); });
       menu.appendChild(b);
@@ -1307,7 +1357,7 @@
     keys.forEach(function (key) {
       var el = document.createElement('div');
       blockEls[key] = el;
-      el.className = 'block area-' + baseKey(key) + (key === 'me' ? ' block-me' : '') + (APPLIANCES.indexOf(key) > 0 ? ' small-appliance' : '');
+      el.className = 'block area-' + baseKey(key) + (key === 'me' ? ' block-me' : '') + (APPLIANCES.indexOf(baseKey(key)) > 0 ? ' small-appliance' : '');
       el.setAttribute('data-key', key);
       el.style.zIndex = Z[baseKey(key)];
       el.tabIndex = 0;
@@ -1319,6 +1369,7 @@
       var removable = key !== 'me' && key !== 'countertop';
       makeMovable(el, key, canvas, draft, keys, {
         resizer: el.querySelector('.resize'),
+        edges: key !== 'me',
         snap: true,
         // While dragging, an X appears at the bottom; dropping the item on it removes it.
         onPointer: removable ? function (e) { trashAt(e); } : null,
@@ -1345,12 +1396,13 @@
     applyTextures();
   }
 
+  // The X in a circle at the bottom: an item is removed only when dropped on it or just around it.
   function trashAt(e) {
     var bin = $('layout-trash');
     if (!bin) return false;
     bin.hidden = false;
     var b = bin.getBoundingClientRect();
-    var hit = e.clientX >= b.left - 20 && e.clientX <= b.right + 20 && e.clientY >= b.top - 20 && e.clientY <= b.bottom + 20;
+    var hit = Math.hypot(e.clientX - (b.left + b.width / 2), e.clientY - (b.top + b.height / 2)) <= b.width / 2 + 14;
     bin.classList.toggle('hot', hit);
     return hit;
   }
@@ -1476,7 +1528,20 @@
   // Earliest possible finish, respecting explicit dependencies and thread order.
   function scheduleSeconds(steps, remaining) { return window.CookCore.schedule(steps, remaining).total; }
 
-  function estimateMinutes(steps) { return Math.round(scheduleSeconds(steps) / 60); }
+  // Shown cooking time: hands-on time only, rounded to the nearest 5 minutes (at least 5).
+  // Waiting in the fridge (marinating, chilling, overnight) and long unheated waits
+  // (soaking or fermenting for hours) don't count: the time ends once it goes in.
+  var LONG_WAIT = 3 * 3600;
+  function passiveWait(s) {
+    var cold = !s.heat || s.heat === '—' || s.heat === 'off';
+    return s.kind === 'wait' && cold && (s.area === 'fridge' || s.duration >= LONG_WAIT);
+  }
+  function estimateMinutes(steps) {
+    var sec = scheduleSeconds(steps, function (s) { return passiveWait(s) ? 0 : s.duration; });
+    return Math.max(5, Math.round(sec / 300) * 5);
+  }
+  // The whole planned time including waits, for "took x (suggested y)" after cooking.
+  function plannedMinutes(steps) { return Math.round(scheduleSeconds(steps) / 60); }
 
   function fmtMinutes(min) {
     return min < 60 ? min + ' ' + t('min') : t('hours', { h: Math.floor(min / 60), m: min % 60 });
@@ -1597,16 +1662,32 @@
     paintFavs();
   });
 
+  // Vegetarian kinds get a green "V" logo; its name shows on hover, focus or tap. Pescatarian keeps the word badge.
+  var VEG_LOGO = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/>' +
+    '<path d="M7 7.5l5 10 5-10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function dietBadge(info) {
     if (!info.label) return '';
-    var cls = info.label === 'vegan' ? 'diet-vegan' : info.label === 'pesc' ? 'diet-pesc' : 'diet-veg';
-    return '<span class="diet-badge ' + cls + '">' + ht('diet_' + info.label) + '</span>';
+    if (info.label === 'pesc') return '<span class="diet-badge diet-pesc">' + ht('diet_pesc') + '</span>';
+    var name = ht('diet_' + info.label);
+    return '<button type="button" class="veg-logo" data-tip="' + name + '" aria-label="' + name + '">' + VEG_LOGO + '</button>';
   }
+  // Tapping the logo shows its name (phones have no hover); a tap anywhere else hides it.
+  document.addEventListener('click', function (e) {
+    var logo = e.target.closest('.veg-logo');
+    document.querySelectorAll('.veg-logo.tip-on').forEach(function (x) { if (x !== logo) x.classList.remove('tip-on'); });
+    if (!logo) return;
+    e.preventDefault();
+    e.stopPropagation();
+    logo.classList.toggle('tip-on');
+  }, true);
 
+  // "Contains": a thin reddish strip with a warning triangle and the items separated by interpuncts.
+  var WARN_ICON = '<svg class="warn-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 3L1.8 20.5h20.4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>' +
+    '<path d="M12 9.5v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17.6" r="1.25" fill="currentColor"/></svg>';
   function containsRow(info) {
     if (!info.contains.length) return '';
-    return '<span class="warn-icon" role="img" aria-label="' + ht('containsLabel') + '">❗</span> ' +
-      '<span>' + info.contains.map(esc).join(', ') + '</span>';
+    return '<span class="warn-strip"><span class="sr-only">' + ht('containsLabel') + ': </span>' + WARN_ICON +
+      '<span>' + info.contains.map(esc).join(' · ') + '</span></span>';
   }
 
   function nutritionPerPerson(built) {
@@ -1621,6 +1702,8 @@
     return tot;
   }
   function kcal5(n) { return Math.round(n / 5) * 5; }
+  // Units in nutrition figures: kcal and g in the chosen language (千卡 / 克, ккал / г …).
+  function gramWord() { return (pack().amounts || {}).g || 'g'; }
 
   // Things children shouldn't get: alcohol, hot spices, raw egg.
   function hazards(r, c, built) {
@@ -2106,19 +2189,20 @@
         var li = document.createElement('li');
         li.className = 'recipe-item';
         li.innerHTML =
-          '<a class="recipe-card" href="' + esc(screenUrl('details', r)) + '">' +
+          '<div class="recipe-card">' +
           '<span class="recipe-card-body">' +
-          '<span class="title-row"><span>' + esc(recipeName(r)) + '</span>' + ratingHtml(r) + dietBadge(info) + '</span>' +
+          '<span class="title-row"><a class="recipe-title-link" href="' + esc(screenUrl('details', r)) + '">' + esc(recipeName(r)) + '</a>' +
+          '<button class="btn-read-card" type="button" aria-label="' + ht('readInstead') + '" title="' + ht('readInstead') + '">' +
+          "<svg class=\"book-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13\"/></svg>" + '</button>' +
+          ratingHtml(r) + dietBadge(info) + '</span>' +
           '<span class="meta-line time-line">⏱️ ' + esc(fmtMinutes(estimateMinutes(built.steps))) + '</span>' +
-          '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' kcal · ' +
-          Math.round(n.carbs) + ' g ' + ht('carbsShort') + ' · ' + Math.round(n.protein) + ' g ' + ht('proteinShort') +
+          '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' ' + ht('kcalUnit') + ' · ' +
+          Math.round(n.carbs) + ' ' + esc(gramWord()) + ' ' + ht('carbsShort') + ' · ' + Math.round(n.protein) + ' ' + esc(gramWord()) + ' ' + ht('proteinShort') +
           '<small>' + esc(unitText(r, 'perServing')) + '</small></span>' +
-          '<span class="warn-row">' + containsRow(info) + '</span>' +
+          (info.contains.length ? '<span class="warn-row">' + containsRow(info) + '</span>' : '') +
           (voice && voiceFit(r).missing.length ? '<span class="need-line"><b>' + ht('alsoNeed') + '</b> ' +
             voiceFit(r).missing.map(function (m) { return esc(m.name); }).join(', ') + '</span>' : '') +
-          '</span></a>' +
-          '<button class="btn btn-secondary btn-read-card" type="button" aria-label="' + ht('readInstead') + '" title="' + ht('readInstead') + '">' +
-          "<svg class=\"book-icon\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13\"/></svg>" + '</button>';
+          '</span></div>';
         var card = li.querySelector('.recipe-card');
         var wrap = document.createElement('span');
         wrap.className = 'photo-wrap';
@@ -2128,7 +2212,8 @@
         time.textContent = fmtMinutes(estimateMinutes(built.steps));
         wrap.appendChild(time);
         card.insertBefore(wrap, card.firstChild);
-        card.addEventListener('click', function (e) {
+        // The title link covers the whole card (see .recipe-title-link::after).
+        li.querySelector('.recipe-title-link').addEventListener('click', function (e) {
           if (e.button || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
           e.preventDefault();
           // From "Based on what you said": open it with the options that fit.
@@ -2136,7 +2221,7 @@
           openDetails(r);
         });
         li.querySelector('.btn-read-card').addEventListener('click', function () { openRead(r); });
-        // Favorite toggle on the photo (outside the link, so it is its own button)
+        // Favorite toggle on the photo's top-left corner (its own button, above the link)
         var fav = document.createElement('button');
         fav.type = 'button';
         fav.className = 'fav-card';
@@ -2178,8 +2263,30 @@
     }
     requestAnimationFrame(frame);
   });
+  // The adults / children last picked on a recipe page are remembered in this browser
+  // (localStorage) and used for the next recipe served per person. Default: 2 adults, 0 children.
+  var peopleKey = 'cook:people:v1:' + location.pathname.replace(/[^/]*$/, '');
+  function lastPeople() {
+    try {
+      var p = JSON.parse(localStorage.getItem(peopleKey) || 'null');
+      if (p && p.adults >= 0 && p.adults <= 8 && p.kids >= 0 && p.kids <= 8 && p.adults + p.kids > 0 &&
+        p.adults === Math.floor(p.adults) && p.kids === Math.floor(p.kids)) return p;
+    } catch (e) { /* storage blocked or unreadable: use the defaults */ }
+    return null;
+  }
+  function rememberPeople(adults, kids) {
+    try { localStorage.setItem(peopleKey, JSON.stringify({ adults: adults, kids: kids })); } catch (e) { /* not remembered */ }
+  }
   function picksFor(r) {
-    return state.picks[r.id] || (state.picks[r.id] = defaultChoices(r));
+    if (state.picks[r.id]) return state.picks[r.id];
+    var c = defaultChoices(r), p = isPerson(r) && lastPeople();
+    if (p) {
+      c.adults = Math.min(p.adults, r.maxServings || 8);
+      c.kids = c.adults ? p.kids : Math.max(1, p.kids);
+      if (c.kids) Object.keys(r.kids || {}).forEach(function (k) { c[k] = r.kids[k]; });
+      setServings(r, c);
+    }
+    return (state.picks[r.id] = c);
   }
 
   function openDetails(r, fromHistory) {
@@ -2291,7 +2398,7 @@
   // number of cards in each (the last row may have one fewer).
   var EQ_MIN = 48, EQ_MAX = 96, EQ_GAP = 6;
   // Everyday table items every kitchen has; not worth listing as utensils.
-  var NOT_LISTED = ['plates', 'fork', 'knife'];
+  var NOT_LISTED = ['plates', 'fork', 'knife', 'spoon'];
   function layoutEquipment() {
     var ul = $('det-equipment');
     if (!ul) return;
@@ -2317,10 +2424,11 @@
 
     var n = nutritionPerPerson(built);
     $('det-per').textContent = unitText(r, 'perPerson');
-    var rows = [['kcal', kcal5(n.kcal) + ' kcal'], ['carbs', Math.round(n.carbs) + ' g'], ['protein', Math.round(n.protein) + ' g'],
-      ['fatSat', Math.round(n.fat) + ' g / ' + Math.round(n.satFat) + ' g'], ['fiber', n.fiber.toFixed(1) + ' g'], ['salt', n.salt.toFixed(1) + ' g']];
+    var g = ' ' + gramWord();
+    var rows = [['kcal', kcal5(n.kcal) + ' ' + t('kcalUnit')], ['carbs', Math.round(n.carbs) + g], ['protein', Math.round(n.protein) + g],
+      ['fatSat', Math.round(n.fat) + g + ' / ' + Math.round(n.satFat) + g], ['fiber', n.fiber.toFixed(1) + g], ['salt', n.salt.toFixed(1) + g]];
     $('det-nutrition').innerHTML = rows.map(function (x) {
-      return '<div><dt>' + ht(x[0]) + '</dt><dd>' + x[1] + '</dd></div>';
+      return '<div><dt>' + ht(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>';
     }).join('');
 
     // Equipment: every tool the steps use (with the options picked), in order of first use.
@@ -2439,7 +2547,7 @@
     }
     var loose = !parseAmount(ing.amount);
     return '<span class="shop-step"><button type="button" data-shop="less" aria-label="' + ht('shopLess') + '">−</button>' +
-      '<b>' + item.count + '</b><button type="button" data-shop="more" aria-label="' + ht('shopMore') + '"' + (loose ? ' disabled' : '') + '>+</button></span>';
+      '<b>' + Math.round(item.count * 100) / 100 + '</b><button type="button" data-shop="more" aria-label="' + ht('shopMore') + '"' + (loose ? ' disabled' : '') + '>+</button></span>';
   }
   function refreshShopControls() {
     if (!$('ing-list') || !state.built) return;
@@ -2466,20 +2574,56 @@
     b.textContent = t('shopAdded');
     setTimeout(function () { b.textContent = t('shopAddAll'); }, 2000);
   });
+  // Amount steps in the shopping list: 1 up to 25, then 5 up to 100, then 20 (snapped to whole steps).
+  function shopStep(n, up) {
+    var s = up ? (n >= 100 ? 20 : n >= 25 ? 5 : 1) : (n > 100 ? 20 : n > 25 ? 5 : 1);
+    return up ? Math.floor(n / s + 1e-9) * s + s : Math.ceil(n / s - 1e-9) * s - s;
+  }
+  function shopTotal(item) { return Math.round(item.qty * item.count * 100) / 100; }
+  function shopSetTotal(item, n) {
+    if (!(n > 0) || item.qty == null) return;
+    item.count = Math.min(n, 9999) / item.qty;
+    shopChanged();
+  }
+  // The unit word after a number in the chosen language, split around where the number goes.
+  function unitAround(unit) {
+    var map = pack().amounts || {}, w = unit ? (map[unit] || unit) : '';
+    if (w.indexOf('#') >= 0) return [w.split('#')[0], w.split('#')[1]];
+    return ['', w];
+  }
   function renderShopping() {
     var list = $('shop-list');
     if (!list) return;
     list.innerHTML = '';
     shopping.forEach(function (item, i) {
       var r = window.RECIPES.filter(function (x) { return x.id === item.recipe; })[0];
-      var li = document.createElement('li');
+      var li = document.createElement('li'), id = 'shop-check-' + i;
       li.className = 'shop-item' + (item.done ? ' is-done' : '');
-      li.innerHTML = '<label><input type="checkbox"' + (item.done ? ' checked' : '') + '> <span class="shop-name">' +
-        esc(ingName(item.key, L(item.name))) + '</span> <span class="shop-amount">' + esc(shopAmount(item)) + '</span>' +
-        (r ? '<small>' + esc(recipeName(r)) + '</small>' : '') + '</label>' +
+      var qty = '';
+      if (item.qty != null) {
+        var n = shopTotal(item), u = unitAround(item.unit), metric = units(n + ' ' + (item.unit || ''));
+        qty = '<span class="shop-qty">' + (u[0] ? '<span class="shop-unit">' + esc(u[0]) + '</span>' : '') +
+          '<button type="button" class="shop-qty-btn" data-qty="down" aria-label="' + ht('shopLess') + '"' + (n <= 1 ? ' disabled' : '') + '>&lsaquo;</button>' +
+          '<input class="shop-qty-input" type="number" inputmode="decimal" min="0" step="any" value="' + n + '" aria-label="' + esc(ingName(item.key, L(item.name))) + '">' +
+          '<button type="button" class="shop-qty-btn" data-qty="up" aria-label="' + ht('shopMore') + '">&rsaquo;</button>' +
+          (u[1] ? '<span class="shop-unit">' + esc(u[1]) + '</span>' : '') +
+          (state.units === 'imperial' && metric !== n + ' ' + (item.unit || '') ? '<small class="shop-imperial">≈ ' + esc(amount(n + ' ' + item.unit)) + '</small>' : '') +
+          '</span>';
+      }
+      li.innerHTML = '<input class="shop-check" id="' + id + '" type="checkbox"' + (item.done ? ' checked' : '') + '>' +
+        '<label class="shop-text" for="' + id + '"><span class="shop-name">' + esc(ingName(item.key, L(item.name))) + '</span>' +
+        (r ? '<small>' + esc(recipeName(r)) + '</small>' : '') + '</label>' + qty +
         '<button class="shop-remove" type="button" aria-label="' + ht('shopRemove') + '">&times;</button>';
-      li.querySelector('input').addEventListener('change', function (e) { item.done = e.target.checked; shopChanged(); });
+      li.querySelector('.shop-check').addEventListener('change', function (e) { item.done = e.target.checked; shopChanged(); });
       li.querySelector('.shop-remove').addEventListener('click', function () { shopping.splice(shopping.indexOf(item), 1); shopChanged(); });
+      li.querySelectorAll('.shop-qty-btn').forEach(function (b) {
+        b.addEventListener('click', function () { shopSetTotal(item, shopStep(shopTotal(item), b.getAttribute('data-qty') === 'up')); });
+      });
+      var input = li.querySelector('.shop-qty-input');
+      if (input) input.addEventListener('change', function () {
+        var v = Number(String(input.value).replace(',', '.'));
+        if (v > 0) shopSetTotal(item, Math.round(v * 100) / 100); else input.value = shopTotal(item);
+      });
       list.appendChild(li);
     });
     $('shop-empty').hidden = shopping.length > 0;
@@ -2562,7 +2706,7 @@
         });
         list.appendChild(li);
       });
-      $('det-comments-empty').textContent = t('comNone');
+      $('det-comments-empty').innerHTML = '<span data-i18n="comNone">' + ht('comNone') + '</span> <span data-i18n="comAfterCook">' + ht('comAfterCook') + '</span>';
       $('det-comments-empty').hidden = rows.length > 0;
     }).catch(function () {
       $('det-comments-empty').textContent = t('comLoadFailed');
@@ -2580,6 +2724,7 @@
     var c = state.choices, hadKids = c.kids > 0;
     c.adults = adults;
     c.kids = kids;
+    if (isPerson(state.recipe)) rememberPeople(adults, kids);
     // Adding children switches on the child-friendly options.
     if (!hadKids && kids > 0) {
       Object.keys(state.recipe.kids).forEach(function (k) { c[k] = state.recipe.kids[k]; });
@@ -2592,10 +2737,18 @@
   on('kids-minus', 'click', function () { setPeople(state.choices.adults, state.choices.kids - 1); });
   on('kids-plus', 'click', function () { setPeople(state.choices.adults, state.choices.kids + 1); });
 
-  function imgFor(i) { return 'img/350/' + (i.key || i.id) + '.webp'; }
-  // Ingredients without a photo yet get the same pot placeholder as the meals.
+  // Ingredients without their own photo borrow the closest one (only the picture;
+  // name, info and shopping list stay the ingredient's own).
+  var IMG_STANDIN = {
+    curry_roux: 'curry_powder', dashi: 'bouillon_cube', dosa_batter: 'dough', doubanjiang: 'gochujang',
+    dumpling_wrappers: 'rice_paper', egg_noodles: 'fettuccine', green_curry_paste: 'pesto', hoisin_sauce: 'oyster_sauce',
+    injera: 'tortilla', kecap_manis: 'dark_soy_sauce', laksa_paste: 'gochujang', preserved_lemon: 'lemon',
+    red_curry_paste: 'gochujang', thai_chili_paste: 'gochujang', urad_dal: 'lentil', whole_chicken: 'chicken_legs'
+  };
+  function imgFor(i) { var k = i.key || i.id; return 'img/350/' + (i.noImage && IMG_STANDIN[k] || k) + '.webp'; }
+  // Ingredients without a photo or a stand-in get the same pot placeholder as the meals.
   function ingImg(i) {
-    return i.noImage ? '<span class="ing-ph" aria-hidden="true"></span>' : '<img alt="" src="' + esc(imgFor(i)) + '">';
+    return i.noImage && !IMG_STANDIN[i.key || i.id] ? '<span class="ing-ph" aria-hidden="true"></span>' : '<img alt="" src="' + esc(imgFor(i)) + '">';
   }
 
   // No kitchen layout yet: ask first. Yes cooks in list view; No opens the layout
@@ -2812,13 +2965,14 @@
     tickTimer = setInterval(tick, 500);
     saveSession();
   }
-  on('btn-cook-pause', 'click', pauseCooking);
+  // The Pause button at the top pauses, and while paused it continues too.
+  on('btn-cook-pause', 'click', function () { if (cook && cook.pausedAt) resumeCooking(); else pauseCooking(); });
   on('btn-resume', 'click', resumeCooking);
 
   // The finish: time taken against the suggested time, and (signed in) a history entry.
   function onFinished() {
     cook.taken = Math.max(0, Math.round((Date.now() - (cook.t0 || Date.now())) / 60000));
-    cook.suggested = estimateMinutes(cook.steps);
+    cook.suggested = plannedMinutes(cook.steps);
     paintTimeNote();
     recordHistory();
     saveSession();
@@ -2847,22 +3001,45 @@
     return c.historyPending;
   }
   function afterStatus(key) { if ($('after-status')) $('after-status').textContent = key ? t(key) : ''; }
+  // A saved note or comment shows a green tick in its box and the button becomes Edit;
+  // Edit makes the text editable again and the button Save.
+  function markSaved(form, saved) {
+    form.classList.toggle('is-saved', saved);
+    form.querySelector('textarea').readOnly = saved;
+    var b = form.querySelector('button[type="submit"]');
+    b.setAttribute('data-i18n', saved ? 'fvEdit' : 'save');
+    b.textContent = t(saved ? 'fvEdit' : 'save');
+  }
+  function editSaved(form) {
+    if (!form.classList.contains('is-saved')) return false;
+    markSaved(form, false);
+    form.querySelector('textarea').focus();
+    return true;
+  }
   on('note-form', 'submit', function (e) {
     e.preventDefault();
+    if (editSaved(e.currentTarget)) return;
     if (!signedIn()) { window.CookAccount.prompt('noteSignIn'); return; }
-    var note = $('note-text').value.trim().slice(0, 1000);
+    var form = e.currentTarget, note = $('note-text').value.trim().slice(0, 1000);
+    afterStatus(null);
     recordHistory().then(function (id) {
       return id ? window.CookAccount.updateHistory(id, { note: note || null }) : false;
-    }).then(function (ok) { afterStatus(ok ? 'noteSaved' : 'noteFailed'); });
+    }).then(function (ok) { if (ok) markSaved(form, true); else afterStatus('noteFailed'); });
   });
+  // An edited comment replaces the published one (it is added again, then the old one removed).
+  var commentId = null;
   on('comment-form', 'submit', function (e) {
     e.preventDefault();
+    if (editSaved(e.currentTarget)) return;
     if (!signedIn()) { window.CookAccount.prompt('noteSignIn'); return; }
-    var text = $('comment-text').value.trim();
+    var form = e.currentTarget, text = $('comment-text').value.trim();
     if (!text || !state.recipe) return;
-    window.CookAccount.addComment(state.recipe.id, text).then(function (ok) {
-      afterStatus(ok ? 'comSaved' : 'comFailed');
-      if (ok) $('comment-text').value = '';
+    afterStatus(null);
+    window.CookAccount.addComment(state.recipe.id, text).then(function (id) {
+      if (!id) { afterStatus('comFailed'); return; }
+      if (commentId && id !== true) window.CookAccount.deleteComment(commentId);
+      commentId = id === true ? null : id;
+      markSaved(form, true);
     });
   });
 
@@ -3131,17 +3308,20 @@
     n.setAttribute('data-step', step.id);
     n.setAttribute('data-area', areaOn(step.area));
     var tools = step.tools.map(function (id) { return window.EQUIPMENT[id]; }).filter(function (eq) { return eq && eq.icon; });
-    var icon = (AREAS[step.area] || AREAS.countertop).icon;
     var toolIcons = tools.map(function (eq) { return '<img class="notif-tool" alt="" src="' + eq.icon + '">'; }).join('');
     n.innerHTML =
       '<span class="notif-icon"><svg class="notif-ring" viewBox="0 0 36 36" aria-hidden="true">' +
       '<circle class="nr-track" cx="18" cy="18" r="16"/><circle class="nr-fill" cx="18" cy="18" r="16" ' +
-      'stroke-dasharray="' + NOTIF_RING + '" stroke-dashoffset="0"/></svg><img class="icon" alt="" src="' + icon + '">' + animHtml(step, 'notif-anim') + '</span>' +
+      'stroke-dasharray="' + NOTIF_RING + '" stroke-dashoffset="0"/></svg>' +
+      '<button class="notif-start" type="button" aria-label="' + ht('start') + '"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8.5 5.5v13l10-6.5z" fill="currentColor"/></svg></button>' +
+      animHtml(step, 'notif-anim') + '</span>' +
       '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + (toolIcons ? ' <span class="notif-tools">' + toolIcons + '</span>' : '') + '</span>' +
       '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span> · <span class="notif-hint">' + ht('tapInfo') + '</span></span></button>' +
-      '<button class="notif-btn notif-start" type="button" aria-label="' + ht('start') + '">▶</button>' +
       '<button class="notif-btn notif-done" type="button" aria-label="' + esc(doneLabel(step)) + '">✓</button>';
-    n.querySelector('.notif-open').addEventListener('click', function () { openPop(step, n); });
+    n.querySelector('.notif-open').addEventListener('click', function () {
+      if (popClosedBy === step.id) { popClosedBy = null; return; }
+      openPop(step, n);
+    });
     n.querySelector('.notif-start').addEventListener('click', function (e) {
       cardFor(step).querySelector('.btn-start').click();
       e.currentTarget.hidden = true;
@@ -3154,7 +3334,7 @@
     return n;
   }
 
-  var popStep = null;
+  var popStep = null, popClosedBy = null;
   function openPop(step, anchor) {
     var pop = $('step-pop'), body = $('step-pop-body');
     var card = cardFor(step);
@@ -3197,8 +3377,13 @@
     popStep = null;
   }
   on('step-pop-close', 'click', closePop);
+  // A tap anywhere outside the pop-up closes it. Tapping the same to-do card's title
+  // closes it too (popClosedBy stops the click that follows from opening it again).
   document.addEventListener('pointerdown', function (e) {
-    if (!$('step-pop').hidden && !e.target.closest('#step-pop') && !e.target.closest('.notif-open')) closePop();
+    if ($('step-pop').hidden || e.target.closest('#step-pop')) return;
+    var open = e.target.closest('.notif-open'), notif = open && open.closest('.notif');
+    popClosedBy = notif && notif.getAttribute('data-step') === popStep ? popStep : null;
+    closePop();
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
 
@@ -3568,6 +3753,9 @@
   }
   function resetStars() {
     ratingRevision++;
+    commentId = null;
+    ['note-form', 'comment-form'].forEach(function (id) { if ($(id)) { markSaved($(id), false); $(id).querySelector('textarea').value = ''; } });
+    afterStatus(null);
     if (!starRow) return;
     starRow.querySelectorAll('input').forEach(function (i) { i.checked = false; });
     paintStars(0);
@@ -3586,7 +3774,7 @@
       var picked = currentStars();
       recordHistory().then(function (id) { if (id) window.CookAccount.updateHistory(id, { stars: picked }); });
       window.CookAccount.saveRating(state.recipe.id, picked).then(function (saved) {
-        if (ticket === ratingRevision && window.CookAccount.userId() === owner) ratingStatus(saved ? 'ratingSaved' : 'ratingSaveFailed');
+        if (ticket === ratingRevision && window.CookAccount.userId() === owner) ratingStatus(saved ? null : 'ratingSaveFailed');
       });
     }
     var star = e.target.closest('.star');

@@ -115,7 +115,8 @@ RELATIONSHIPS AND PERMISSIONS
 - cook_delete_account(password) checks the current user's password hash and deletes
   that Auth user; it runs with elevated function privileges.
 - Schema order: schema.sql, update-2026-10-30.sql, update-2026-11-03-ratings.sql,
-  then update-2026-11-03-community.sql, then update-2026-11-06-kitchen-items.sql. Do not rerun initial setup on existing data.
+  then update-2026-11-03-community.sql, then update-2026-11-06-kitchen-items.sql,
+  then update-2026-11-09-kitchen-copies.sql. Do not rerun initial setup on existing data.
 
 Current review findings and verification limits are in:
 .handoff/BACKEND_REVIEW_2026-11-04.txt

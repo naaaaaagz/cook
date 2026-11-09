@@ -87,8 +87,10 @@
     <p data-i18n="privWhat1">When you create an account, we use your email, an account identifier, password authentication records and verification status to provide and secure your account. Passwords are handled by the authentication provider as secure hashes; Cook does not store readable passwords. We store your kitchen layout, selected language, theme and measurement units to restore your settings across devices. Providing an account email and password is necessary for an account; you can browse recipes without one.</p>
     <p data-i18n="privWhat2">Account and settings processing is necessary to provide the account service you request (GDPR Article 6(1)(b)). Limited security and abuse-prevention records may be processed under legitimate interests (Article 6(1)(f)), subject to necessity and balancing. Verification and password-reset emails are service messages, not marketing. No advertising or analytics is added by the account feature.</p>
     <h3 data-i18n="privStorage">Browser storage</h3>
+    <p data-i18n="noticeText">Cook uses browser storage for your requested cooking and sign-in features. No advertising or analytics storage is added.</p>
     <p data-i18n="privStorage1">Cook uses sessionStorage to carry your kitchen, cooking progress and choices between pages in the same tab. When signed in, it also holds your authentication session. The browser normally clears this when the tab session ends, but browser session restoration can retain it. Signing out clears Cook's tab data. The storage-notice dismissal is kept in that tab only. Cook's own scripts do not set cookies. Your hosting or service providers may have separate security processing that must be documented before launch.</p>
     <p data-i18n="privStorage3">If you tick “Stay signed in on this device”, your sign-in session and your theme are kept in this browser’s localStorage until you sign out, so you stay signed in after closing the tab. Without it, they are kept in this tab only.</p>
+    <p data-i18n="privStorage4">Cook also keeps the number of adults and children you last chose in this browser’s localStorage, so the next recipe starts with them. It contains no personal details.</p>
     <p data-i18n="privCommunity">If you choose a username, it is shown next to your public comments. Comments and their date are visible to everyone, together with the star rating you gave that recipe; average ratings are shown without names. Your recipe history, personal notes and shopping list are private to your account. Deleting your account removes all of them.</p>
     <p data-i18n="privStorage2">OK and the close button on the storage notice only dismiss the notice. They do not authorise analytics, advertising or other optional tracking. Any future non-essential storage requires a separate choice before it starts, with an equally easy refusal and withdrawal.</p>
     <h3 data-i18n="privOther">Other existing features</h3>
@@ -104,7 +106,7 @@
 
 <div class="top-icons">
   <button id="btn-shopping" class="btn-icon-top" type="button" aria-haspopup="dialog" data-i18n-label="shopTitle" data-i18n-title="shopTitle" aria-label="Shopping list" title="Shopping list">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 11h13l-1.3 7.5a1.8 1.8 0 0 1-1.8 1.5H5.6a1.8 1.8 0 0 1-1.8-1.5z"/><path d="M5.5 11l3-5M12.5 11l-2-3.5"/><path d="M18.4 3.6a1.5 1.5 0 0 1 2.1 2.1L15 11.2l-2.8.7.7-2.8z"/></svg>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3H6a1.5 1.5 0 0 0-1.5 1.5v15A1.5 1.5 0 0 0 6 21h10a1.5 1.5 0 0 0 1.5-1.5V14"/><path d="M8 8h6M8 11.5h5M8 15h3"/><path d="M19.6 3.4a1.4 1.4 0 0 1 2 2L14.5 12.5l-2.6.6.6-2.6z"/></svg>
   </button>
   <button id="btn-account" class="btn-icon-top btn-account" type="button" aria-haspopup="dialog" data-i18n-label="accAccount" aria-label="Account">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.8 3.4-6 7-6s6.4 2.2 7 6"/></svg>
@@ -144,7 +146,7 @@
       <span class="field-label" data-i18n="kitchenLayout">Kitchen layout</span>
       <button id="btn-layout" class="btn btn-secondary btn-small" type="button" data-i18n="setupLayout">Set up kitchen layout</button>
     </div>
-    <button class="btn btn-primary btn-wide" value="save" data-i18n="save">Save</button>
+    <button class="btn btn-primary btn-wide" value="save" data-i18n="close">Close</button>
   </form>
 </dialog>
 
@@ -262,10 +264,10 @@
 
   <!-- Kitchen layout editor -->
   <section id="screen-layout" class="screen screen-layout" hidden>
-    <div id="layout-trash" class="layout-trash" hidden><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="dropRemove">Drop here to remove</span></div>
+    <div id="layout-trash" class="layout-trash" role="img" aria-label="Drop here to remove" data-i18n-label="dropRemove" hidden><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
     <div class="layout-bar">
       <button id="btn-layout-cancel" class="btn btn-secondary btn-small" type="button" data-i18n="cancel">Cancel</button>
-      <span class="hint" data-i18n="layoutHelp">Drag to move, drag the corner to resize. Things can only overlap the countertop.</span>
+      <span class="hint" data-i18n="layoutHelp">Drag to move, drag an edge or corner to resize. Things can only overlap the countertop.</span>
       <button id="btn-layout-theme" class="btn btn-secondary btn-small btn-icon" type="button" data-i18n-label="toggleTheme">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
       </button>
@@ -273,6 +275,9 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 3.5 10 13"/><path d="M14.5 4.5 18 3l2 2-1.5 3.5L12 15l-3-3z"/><path d="M8.5 13.5c-2.5 0-4 1.6-4 4 0 1.4-.6 2.3-1.5 3 3.5.6 7.5-.4 7.5-4.5z"/></svg>
       </button>
       <button class="btn btn-secondary btn-small btn-icon btn-rotate" type="button" data-i18n-label="rotateScreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-landscape"><rect x="3" y="6.5" width="18" height="11" rx="2"/><path d="M17.5 12h.01"/></svg><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="to-portrait"><rect x="6.5" y="3" width="11" height="18" rx="2"/><path d="M12 17.5h.01"/></svg></button>
+      <button id="btn-layout-options" class="btn btn-secondary btn-small btn-icon" type="button" aria-haspopup="dialog" data-i18n-label="options">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M8.5 6H20M8.5 12H20M8.5 18H20"/><circle cx="4" cy="6" r="1.1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </button>
       <button id="btn-layout-save" class="btn btn-primary btn-small" type="button" data-i18n="save">Save</button>
     </div>
     <div id="layout-canvas" class="canvas"></div>
@@ -301,9 +306,9 @@
       </div>
 
       <div class="info">
-        <p id="det-warnings" class="warn-row"></p>
         <h3 id="det-per" class="info-label"></h3>
         <dl id="det-nutrition" class="nutrition"></dl>
+        <p id="det-warnings" class="warn-row"></p>
       </div>
 
       <section class="equipment">
@@ -358,7 +363,7 @@
       <section class="comments" aria-labelledby="det-comments-title">
         <h3 id="det-comments-title" class="section-title" data-i18n="comTitle">Comments</h3>
         <ul id="det-comments" class="comment-list"></ul>
-        <p id="det-comments-empty" class="hint" data-i18n="comNone">No comments yet.</p>
+        <p id="det-comments-empty" class="hint"><span data-i18n="comNone">No comments yet.</span> <span data-i18n="comAfterCook">You can leave a comment after you have made this meal.</span></p>
       </section>
     </div>
   </section>
@@ -416,11 +421,11 @@
       <p id="time-note" class="time-note" hidden></p>
       <div class="after-notes">
         <form id="note-form" class="note-row">
-          <textarea id="note-text" rows="2" maxlength="1000" data-i18n-placeholder="noteAdd" data-i18n-label="noteAdd" placeholder="Add a personal note"></textarea>
+          <span class="note-box"><textarea id="note-text" rows="2" maxlength="1000" data-i18n-placeholder="noteAdd" data-i18n-label="noteAdd" placeholder="Add a personal note"></textarea><svg class="saved-tick" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <button class="btn btn-secondary" type="submit" data-i18n="save">Save</button>
         </form>
         <form id="comment-form" class="note-row">
-          <textarea id="comment-text" rows="2" maxlength="1000" data-i18n-placeholder="comAdd" data-i18n-label="comAdd" placeholder="Add a public comment"></textarea>
+          <span class="note-box"><textarea id="comment-text" rows="2" maxlength="1000" data-i18n-placeholder="comAdd" data-i18n-label="comAdd" placeholder="Add a public comment"></textarea><svg class="saved-tick" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <button class="btn btn-secondary" type="submit" data-i18n="save">Save</button>
         </form>
         <p id="after-status" class="hint after-status" role="status" aria-live="polite"></p>
@@ -448,7 +453,7 @@
 
 </main>
 
-<footer class="account-footer"><button class="text-button" type="button" data-open-privacy data-i18n="privFooter">Privacy &amp; storage</button><button id="storage-reopen" class="text-button" type="button" data-i18n="noticeReopen">Storage notice</button></footer>
+<footer class="account-footer"><button class="text-button" type="button" data-open-privacy data-i18n="privFooter">Privacy &amp; storage</button></footer>
 <div class="slide-stack">
 <aside id="account-message" class="slide-note" role="status" aria-live="polite" hidden>
   <p id="account-message-text"></p>

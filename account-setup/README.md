@@ -9,6 +9,13 @@ address. Complete the privacy details and live checks below before public launch
 Google/Facebook remain deferred. See the current code and update-2026-10-30.sql for
 the subsequently added favourites/account-deletion features.
 
+## Kitchen items: a second copy of each (2026-11-09)
+
+Run update-2026-11-09-kitchen-copies.sql ONCE in the existing Supabase project's SQL editor
+after update-2026-11-06-kitchen-items.sql. It only replaces cook_valid_preferences so a saved
+kitchen layout may contain a second stove, sink, fridge and so on (stove2, sink2, ...). Until it
+is run, signed-in users who add a second item cannot save that layout to their account.
+
 ## Kitchen items: pantry and bin (2026-11-06)
 
 Run update-2026-11-06-kitchen-items.sql ONCE in the existing Supabase project's SQL editor

@@ -24,6 +24,7 @@
 /food stock photos.txt
 /Recipes - text - review.txt
 /recipes - not added.txt
+/ingredient_missing_img.txt
 
 # Local tools stay private, except the source needed to maintain the shipped pages.
 /tools/*

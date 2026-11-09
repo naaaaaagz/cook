@@ -88,7 +88,7 @@ async function backend(route) {
   }
   if(url.pathname==='/rest/v1/recipe_comments') {
     if(!user)return reply({message:'Not authenticated'},401);
-    if(method==='POST'){comments.push(Object.assign({id:comments.length+1,created_at:new Date().toISOString()},body));return reply(null,201);}
+    if(method==='POST'){const row=Object.assign({id:comments.length+1,created_at:new Date().toISOString()},body);comments.push(row);return reply(row,201);}
     if(method==='DELETE'){const i=comments.findIndex(c=>c.id===idParam()&&c.user_id===user.id);if(i>=0)comments.splice(i,1);return reply(null,200);}
   }
   throw Error('Unexpected mock request: '+method+' '+url.pathname);
@@ -124,7 +124,7 @@ async function checkRatings(browser,base) {
     await page.waitForFunction(()=>!document.querySelector('#taste input:checked'));
     assert.equal(writes(),before); // Guest selection was not uploaded on sign-in.
     await page.locator('#taste .star').nth(4).click();
-    await page.waitForFunction(()=>document.getElementById('rating-status').textContent===window.CookI18n.t('ratingSaved'));
+    await page.evaluate(()=>window.CookAccount.flushPending());assert.equal(await page.locator('#rating-status').textContent(),''); // A saved rating shows no sentence.
     assert.equal(ratings.get(a.id+':'+recipe).stars,5);
     writeDelay=150;await page.locator('#taste .star').nth(3).click();
     await page.evaluate(()=>window.CookAccount.flushPending());writeDelay=0;
@@ -315,11 +315,7 @@ async function main() {
     await mobile.locator('.account-footer [data-open-privacy]').click();
     await mobile.screenshot({path:path.join(root,'.tmp/account-privacy.png')});
     await mobile.locator('[data-close="privacy-dialog"]').click();
-    await mobile.locator('#storage-reopen').click();
-    await mobile.waitForTimeout(300); // Allow the requested slide-up animation to finish.
-    assert(await mobile.locator('#storage-notice').isVisible());
-    const bar=await mobile.locator('#storage-notice').boundingBox();assert(bar.y>=0&&bar.y+bar.height<=844);
-    await mobile.screenshot({path:path.join(root,'.tmp/account-storage.png')});
+    assert(!(await mobile.locator('#storage-notice').isVisible())); // Dismissed; the footer no longer reopens it.
     assert.deepEqual(errors,[]);
     await context.close();
     console.log('PASS: disabled setup, OK/X storage notice, privacy, +aliases, sign-in, isolated accounts, kitchen/preferences save/reload, failure/retry, verification/expired links, recovery with repeat, stay signed in / tab only, sign-out, favorites, delete account, email-error reasons, shopping list, username, comments, history, mobile layout. Auth/database are mocked; live RLS/delivery not tested.');

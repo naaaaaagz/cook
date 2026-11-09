@@ -26,6 +26,7 @@
   --highlight-fg: #ffffff;
 
   --veg: #2e7d32;
+  --veg-logo: #2eb82e;
   --vegan: #689f38;
   --pesc: #00838f;
 
@@ -169,7 +170,9 @@ body {
 [hidden] { display: none !important; }
 
 /* While a dialog is open the page behind it doesn't scroll */
-html.no-scroll { overflow: hidden; }
+/* While a dialog is open the page keeps its scrollbar (no jump); app.js stops wheel/touch scrolling behind it. */
+html.no-scroll { overscroll-behavior: none; }
+html.no-scroll dialog, html.no-scroll dialog * { overscroll-behavior: contain; }
 
 h1, h2, h3, p { margin: 0; }
 h1, h2, h3, .section-title, .category-title { font-family: var(--font-serif); font-weight: 600; letter-spacing: -.01em; }
@@ -309,7 +312,10 @@ img.icon, .anim img, img.notif-tool { filter: var(--icon-filter); }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); margin-top: 12px; }
 
 /* Options: a compact panel */
-#options-dialog { width: min(320px, calc(100% - 32px)); }
+/* Grows with long words (Metric / Imperial in some languages) so the buttons stay on one row. */
+#options-dialog { width: max-content; min-width: min(320px, calc(100% - 32px)); max-width: calc(100% - 32px); }
+#options-dialog .choices-row { flex-wrap: nowrap; }
+#options-dialog .choice { white-space: nowrap; }
 #options-dialog form { padding: 16px; }
 #options-dialog h2 { font-size: 22px; margin-bottom: 12px; }
 #options-dialog .choices, #options-dialog .field { margin-bottom: 14px; }
@@ -427,6 +433,12 @@ select {
 .layout-add-menu[hidden] { display: none; }
 .add-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; font: inherit; font-weight: 600; color: var(--ink); background: transparent; border: none; border-radius: 6px; cursor: pointer; text-align: left; }
 .add-item:hover, .add-item:focus-visible { background: var(--highlight-bg); }
+/* The list holds everything; items already in the kitchen carry a green tick on the right. */
+.layout-add-menu { max-height: min(70vh, 560px); overflow-y: auto; }
+.layout-add-menu .add-item { padding: 6px 10px; font-size: 13px; }
+.layout-add-menu .add-item .icon { width: 20px; height: 20px; }
+.add-item > span { flex: 1; }
+.add-check { flex: none; color: var(--veg-logo); }
 .add-item:disabled { opacity: .4; cursor: default; background: transparent; }
 .add-item img { width: 24px; height: 24px; }
 .block {
@@ -488,8 +500,8 @@ select {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 14px;
-  height: 14px;
+  width: 9px;
+  height: 9px;
   cursor: nwse-resize;
   touch-action: none;
   background: linear-gradient(135deg, transparent 50%, currentColor 50%);
@@ -590,12 +602,12 @@ select {
 .filter-star { display: inline; }
 .filter-star .star-icon { display: inline-block; vertical-align: -0.12em; margin-right: 6px; }
 .filter-star .star-icon { color: var(--star); }
-/* Favorite toggle on a recipe card: a small white circle on the photo's top-right corner */
+/* Favorite toggle on a recipe card: a small white circle on the photo's top-left corner */
 .fav-card {
   position: absolute;
   top: 6px;
-  inset-inline-start: calc(120px - 30px);
-  z-index: 1;
+  inset-inline-start: 6px;
+  z-index: 2;
   display: grid;
   place-items: center;
   width: 24px;
@@ -648,6 +660,11 @@ select {
   cursor: pointer;
 }
 .recipe-card:hover { border-color: var(--muted); }
+.recipe-card:has(.recipe-title-link:focus-visible) { outline: 3px solid var(--highlight); outline-offset: 2px; }
+/* The title is the link; its ::after stretches over the whole card so the card stays one big click target. */
+.recipe-title-link { color: inherit; text-decoration: none; }
+.recipe-title-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--radius); }
+.recipe-title-link:focus-visible { outline: none; }
 .photo-wrap { position: relative; display: block; width: 120px; flex: none; }
 .recipe-card .photo { width: 100%; height: 100%; min-height: 120px; }
 .photo-time {
@@ -664,22 +681,25 @@ select {
 }
 .recipe-card-body { display: grid; align-content: start; gap: 5px; padding: 12px 12px 12px 0; min-width: 0; }
 .recipe-card-body .title-row { font-size: 20px; }
-/* "Read instead" on a recipe card: a book icon on the photo's top-left corner */
+/* "Read instead" on a recipe card: a small circled book icon right after the title */
 .btn-read-card {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  z-index: 1;
-  display: grid;
+  position: relative;
+  z-index: 2;
+  display: inline-grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  flex: none;
+  width: 28px;
+  height: 28px;
   min-height: 0;
   padding: 0;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--card) 88%, transparent);
-  box-shadow: 0 1px 4px var(--shadow);
+  cursor: pointer;
 }
+.btn-read-card:hover { border-color: var(--muted); }
+.btn-read-card:focus-visible { outline: 3px solid var(--highlight); outline-offset: 2px; }
 .meta-line { font-size: 14px; color: var(--text-2); }
 .nutri-line small { display: block; font-size: 12px; color: var(--muted); padding-left: 1.6em; }
 
@@ -712,9 +732,61 @@ select {
 .diet-vegan { color: var(--vegan); }
 .diet-pesc { color: var(--pesc); }
 
-/* "Contains" row: meat, pork, fish and allergens */
-.warn-row { display: block; }
-.warn-row .warn-icon { font-size: 14px; margin-right: 2px; }
+/* "Contains" row: a divider, then a thin reddish strip: warning triangle and items with interpuncts */
+.warn-row { display: block; margin: 4px 0 0; padding-top: 6px; border-top: 1px solid var(--line); }
+.warn-row[hidden] { display: none; }
+.warn-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--warn) 9%, transparent);
+  border-radius: 6px;
+}
+.warn-strip .warn-icon { flex: none; width: 14px; height: 14px; color: var(--warn); }
+/* Vegetarian logo: a bright green circle with a white V; its kind shows as a tooltip */
+.veg-logo {
+  position: relative;
+  z-index: 2;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: var(--veg-logo);
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: help;
+  font: inherit;
+}
+.veg-logo:focus-visible { outline: 3px solid var(--highlight); outline-offset: 2px; }
+.veg-logo::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(20, 18, 15, .9);
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .15s ease;
+}
+.veg-logo:hover::after, .veg-logo:focus-visible::after, .veg-logo.tip-on::after { opacity: 1; visibility: visible; }
 .keyword { font-size: 13px; border: 1px solid var(--line); border-radius: 4px; padding: 1px 7px; }
 
 /* Recipe page */
@@ -952,30 +1024,30 @@ select {
 }
 .step-ings img, .step-ings .ing-ph { width: 36px; height: 36px; object-fit: cover; display: block; }
 .step-ings b { white-space: nowrap; }
-.done-when { font-size: 13px; color: var(--muted); }
+.done-when { font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--veg); }
 
 /* Footer: round timer with Start in the middle, Done next to it */
 .step-foot { display: flex; align-items: center; gap: 16px; }
-.ring { position: relative; width: 92px; height: 92px; flex: none; }
+.ring { position: relative; width: 128px; height: 128px; flex: none; }
 .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .ring circle { fill: none; stroke-width: 6; }
 .ring .ring-track { stroke: var(--line); }
 .ring .ring-fill { stroke: var(--area-color); stroke-linecap: round; transition: stroke-dashoffset .5s linear; }
-.ring-center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
+.ring-center { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 2px; text-align: center; }
 .btn-start {
-  width: 64px;
-  height: 64px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   border: 1px solid var(--ink);
   background: var(--card);
   color: var(--ink);
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
 }
 .btn-start:disabled { border-color: var(--line); color: var(--disabled-fg); cursor: not-allowed; }
-.ring-time { display: grid; font-variant-numeric: tabular-nums; font-weight: 700; font-size: 16px; line-height: 1.1; }
+.ring-time { display: grid; font-variant-numeric: tabular-nums; font-weight: 700; font-size: 18px; line-height: 1.1; }
 .ring-time small { font-size: 11px; font-weight: 600; color: var(--muted); }
 .step-foot .btn-done { flex: 1; }
 .step.time-up { background: color-mix(in srgb, var(--card) 86%, var(--warn)); border-color: color-mix(in srgb, var(--line) 50%, var(--warn)); }
@@ -1079,8 +1151,9 @@ select {
 .cook-map .step-text, .cook-map .step-parts { font-size: 13px; }
 .cook-map .btn { min-height: 34px; padding: 4px 8px; font-size: 13px; }
 .cook-map .step-foot { gap: 8px; flex-wrap: wrap; }
-.cook-map .ring { width: 64px; height: 64px; }
-.cook-map .btn-start { width: 44px; height: 44px; font-size: 11px; }
+.cook-map .ring { width: 96px; height: 96px; }
+.cook-map .btn-start { width: 64px; height: 64px; font-size: 12px; }
+.cook-map .step.is-running .ring-anim { width: 40px; height: 40px; }
 .cook-map .ring-time { font-size: 12px; }
 
 .map-area-ings { list-style: none; margin: 0; padding: 0 6px 6px; display: flex; flex-wrap: wrap; gap: 4px; pointer-events: none; }
@@ -1276,14 +1349,13 @@ body.overdo::before {
 
   /* Recipe cards: book button on the photo, time on the photo, tidy rows */
   .recipe-card .photo-wrap { width: 108px; }
-  .fav-card { inset-inline-start: calc(108px - 30px); }
   .photo-time { display: block; }
   .recipe-card .time-line { display: none; }
   .recipe-card-body { display: flex; flex-direction: column; gap: 4px; padding: 10px 10px 10px 0; }
   .recipe-card-body .title-row { font-size: 18px; padding-right: 0; }
   .nutri-line { font-size: 12px; }
   .nutri-line small { font-size: 11px; padding-left: 0; display: inline; margin-left: 4px; }
-  .recipe-card-body .warn-row { margin-top: auto; font-size: 13px; }
+  .recipe-card-body .warn-row { margin-top: auto; }
 
   /* "Read instead" is a book icon on phones */
   .btn-read .btn-label { display: none; }
@@ -1323,8 +1395,9 @@ body.overdo::before {
   .cook-map .step-head { display: none; }
   .cook-map .step:not(.expanded) :is(.step-text, .step-parts, .step-ings) { display: none; }
   .cook-map .step-foot { flex-wrap: nowrap; }
-  .cook-map .ring { width: 44px; height: 44px; }
-  .cook-map .btn-start { width: 34px; height: 34px; font-size: 9px; }
+  .cook-map .ring { width: 72px; height: 72px; }
+  .cook-map .btn-start { width: 50px; height: 50px; font-size: 10px; }
+  .cook-map .step.is-running .ring-anim { width: 30px; height: 30px; }
   .cook-map .ring-time { font-size: 10px; }
   .cook-map .btn-done { min-height: 32px; }
   .map-area-cards { width: max(calc(100% + 4px), 170px); padding-top: 6px; gap: 6px; }
@@ -1377,26 +1450,63 @@ body.overdo::before {
   position: relative;
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: 56px;
+  height: 56px;
   flex: none;
 }
-.notif-icon img { width: 18px; height: 18px; }
+.notif-icon img { width: 28px; height: 28px; }
+/* Start (play) sits inside the green ring; a blurred light runs round the ring now and then until it is pressed */
+.notif-start {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0 0 0 2px;
+  color: var(--veg);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.notif-start:hover { background: color-mix(in srgb, var(--veg) 12%, transparent); }
+.notif-start:focus-visible { outline: 3px solid var(--highlight); outline-offset: 1px; }
+.notif:not(.is-running) .notif-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 62%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, .55) 90%, #fff 98%, transparent 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  filter: blur(1.5px);
+  pointer-events: none;
+  animation: ring-sweep 2.6s ease-in-out infinite;
+}
+@keyframes ring-sweep {
+  0% { transform: rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  55% { transform: rotate(360deg); opacity: 1; }
+  62%, 100% { transform: rotate(360deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .notif:not(.is-running) .notif-icon::after { animation: none; opacity: 0; } }
 /* Two-frame action picture: shown in the ring while the step runs, 0.4 s per frame */
 .anim { display: none; position: relative; }
 .anim img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .anim img + img { animation: anim-frame .8s steps(1, end) infinite; }
 .anim img:first-child { animation: anim-frame .8s steps(1, end) infinite reverse; }
 @keyframes anim-frame { 0% { opacity: 0; } 50% { opacity: 1; } }
-.notif.is-running .notif-anim { display: block; width: 22px; height: 22px; }
+.notif.is-running .notif-anim { display: block; width: 36px; height: 36px; }
+.notif.is-running .notif-start { display: none; }
 .notif.is-running .notif-anim ~ .icon, .notif.is-running .icon:has(+ .notif-anim) { display: none; }
-.step.is-running .ring-anim { display: block; width: 26px; height: 26px; margin: 0 auto 2px; color: var(--ink); }
+.step.is-running .ring-anim { display: block; width: 52px; height: 52px; margin: 0 auto; color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   .anim img { animation: none !important; }
   .anim img + img { opacity: 0; }
 }
 .notif-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg) scaleY(-1); }
-.notif-ring circle { fill: none; stroke-width: 3; }
+.notif-ring circle { fill: none; stroke-width: 2.5; }
 .nr-track { stroke: var(--line); }
 .nr-fill { stroke: #2e7d32; stroke-linecap: round; transition: stroke-dashoffset .5s linear, stroke .3s; }
 .notif.ring-warn .nr-fill { stroke: #f59e0b; }
@@ -1439,7 +1549,6 @@ body.overdo::before {
   border-radius: 50%;
   cursor: pointer;
 }
-.notif-start { color: var(--ink); background: var(--card); border: 1px solid var(--ink); }
 .notif-done { color: var(--primary-fg); background: var(--primary-bg); border: 1px solid var(--primary-bg); }
 .notif.time-up { background: color-mix(in srgb, var(--card) 80%, var(--warn)); border-color: var(--warn); }
 .notif.time-up .notif-time { color: var(--warn); }
@@ -1521,7 +1630,7 @@ body.overdo::before {
 .step-pop .first-badge { display: none; }
 
 /* Map view: the page itself doesn't scroll */
-html:has(.screen-cook.is-map:not([hidden])) { overflow: hidden; }
+html:has(.screen-cook.is-map:not([hidden]):not(.is-finished)) { overflow: hidden; }
 
 /* "You want to give up?" */
 .exit-dialog { padding: 22px; width: min(360px, calc(100% - 32px)); text-align: center; }
@@ -1716,13 +1825,22 @@ html.i18n-wait body { visibility: hidden; }
 
 /* Shopping list window */
 .shop-list { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 6px; }
-.shop-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
-.shop-item label { flex: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; cursor: pointer; }
-.shop-item input { width: auto; }
-.shop-item small { flex-basis: 100%; padding-inline-start: 24px; font-size: 12px; color: var(--muted); }
-.shop-item.is-done .shop-name, .shop-item.is-done .shop-amount { text-decoration: line-through; color: var(--muted); }
-.shop-amount { font-weight: 700; }
-.shop-remove { border: 0; background: transparent; color: var(--muted); font-size: 1.3rem; cursor: pointer; width: 32px; height: 32px; }
+/* Row: big tick box | name with the recipe under it | ‹ amount › | big × */
+.shop-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.shop-item .shop-check { flex: none; width: 24px; height: 24px; margin: 0; accent-color: var(--highlight); cursor: pointer; }
+.shop-text { flex: 1; min-width: 0; display: grid; gap: 2px; cursor: pointer; }
+.shop-name { font-weight: 600; overflow-wrap: anywhere; }
+.shop-text small { font-size: 12px; color: var(--muted); }
+.shop-item.is-done .shop-name, .shop-item.is-done .shop-qty { text-decoration: line-through; color: var(--muted); }
+.shop-qty { flex: none; display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px; font-size: 14px; }
+.shop-qty-btn { width: 28px; height: 28px; padding: 0; font: inherit; font-size: 20px; line-height: 1; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; }
+.shop-qty-btn:disabled { color: var(--disabled-fg); cursor: not-allowed; }
+.shop-qty-input { width: 4.2em; min-height: 28px; padding: 2px 4px; text-align: center; font: inherit; font-weight: 700; -moz-appearance: textfield; appearance: textfield; }
+.shop-qty-input::-webkit-outer-spin-button, .shop-qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.shop-unit { font-weight: 700; }
+.shop-imperial { flex-basis: 100%; text-align: end; font-size: 11px; color: var(--muted); }
+.shop-remove { flex: none; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 2rem; line-height: 1; cursor: pointer; }
+.shop-remove:hover { color: var(--ink); background: var(--line); }
 .shop-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
 
 /* Comments at the bottom of a recipe page */
@@ -1741,8 +1859,15 @@ html.i18n-wait body { visibility: hidden; }
 .time-note.is-off { color: var(--accent); font-weight: 600; }
 .after-notes { max-width: 720px; margin: 24px auto 0; display: grid; gap: 10px; text-align: start; }
 .note-row { display: flex; gap: 8px; align-items: stretch; }
+.note-box { position: relative; flex: 1; display: flex; }
 .note-row textarea { flex: 1; min-height: 44px; padding: 10px; font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); resize: vertical; }
 .after-status { min-height: 1.4em; margin: 0; }
+/* Saved: a green tick centred on the right of the box; the text stays until Edit */
+.saved-tick { display: none; position: absolute; top: 50%; right: 12px; transform: translateY(-50%); color: var(--veg); pointer-events: none; }
+.note-row.is-saved .saved-tick { display: block; }
+.note-row.is-saved textarea { padding-right: 44px; border-color: var(--veg); }
+/* Room under "Back to home" before the footer */
+.finished { padding-bottom: 48px; }
 
 /* Pause while cooking: the page dims, a big Continue button */
 .btn-pause { display: inline-flex; align-items: center; gap: 6px; }
@@ -1763,7 +1888,7 @@ html.i18n-wait body { visibility: hidden; }
 /* Kitchen editor: the + flashes on opening; dragging an item shows an X to drop it on */
 .btn-layout-add.flash { animation: add-flash 1.4s ease-out 2; }
 @keyframes add-flash { 0%, 100% { box-shadow: 0 4px 14px var(--shadow); } 40% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--primary-bg) 35%, transparent); transform: scale(1.08); } }
-.layout-trash { position: fixed; left: 50%; bottom: 18px; z-index: 50; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 10px 18px; color: #fff; background: rgba(160, 30, 30, .85); border-radius: 999px; box-shadow: 0 4px 18px var(--shadow); pointer-events: none; transition: transform .15s, background .15s; }
+.layout-trash { position: fixed; left: 50%; bottom: 18px; z-index: 50; transform: translateX(-50%); display: grid; place-items: center; width: 60px; height: 60px; padding: 0; color: #fff; background: rgba(160, 30, 30, .85); border-radius: 50%; box-shadow: 0 4px 18px var(--shadow); pointer-events: none; transition: transform .15s, background .15s; }
 .layout-trash[hidden] { display: none; }
 .layout-trash.hot { background: #b3261e; transform: translateX(-50%) scale(1.15); }
 @media (prefers-reduced-motion: reduce) { .btn-layout-add.flash { animation: none; } }
