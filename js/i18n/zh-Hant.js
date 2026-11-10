@@ -248,6 +248,7 @@ window.I18N["zh-Hant"] = {
   "fvNoSRShort": "無語音辨識",
   "fvLangUnavailable": "{x}暫不支援語音辨識。請選擇語言：",
   "fvLanguage": "語音語言",
+  "fvOtherLangs": "其他語言",
   "fvMicBlocked": "麥克風已被封鎖。請在瀏覽器網址列中允許，然後再輕觸麥克風。",
   "fvMicError": "麥克風或語音服務目前無法使用。你可以改為輸入。",
   "fvNoRecipes": "還沒有合適的食譜。再新增幾樣食材吧。",

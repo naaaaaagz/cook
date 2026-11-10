@@ -248,6 +248,7 @@ window.I18N["ca"] = {
   "fvNoSRShort": "Sense reconeixement de veu",
   "fvLangUnavailable": "El reconeixement de veu no està disponible per a {x}. Tria un idioma:",
   "fvLanguage": "Idioma de la veu",
+  "fvOtherLangs": "Altres llengües",
   "fvMicBlocked": "El micròfon està bloquejat. Permet-lo a la barra d'adreces del navegador i torna a tocar el micròfon.",
   "fvMicError": "El micròfon o el servei de veu no funcionen ara mateix. Pots escriure-ho.",
   "fvNoRecipes": "Encara no hi encaixa cap recepta. Afegeix-hi uns quants ingredients més.",

@@ -248,6 +248,7 @@ window.I18N["fi"] = {
   "fvNoSRShort": "Ei puheentunnistusta",
   "fvLangUnavailable": "Puheentunnistus ei ole käytettävissä kielelle {x}. Valitse kieli:",
   "fvLanguage": "Puheen kieli",
+  "fvOtherLangs": "Muut kielet",
   "fvMicBlocked": "Mikrofoni on estetty. Salli se selaimen osoiterivillä ja napauta sitten mikrofonia uudelleen.",
   "fvMicError": "Mikrofoni tai puhepalvelu ei nyt toimi. Voit kirjoittaa sen sijaan.",
   "fvNoRecipes": "Mikään resepti ei vielä sovi. Lisää muutama ainesosa.",

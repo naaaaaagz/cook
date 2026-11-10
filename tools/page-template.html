@@ -204,9 +204,12 @@
           <div class="banner" id="fv-banner" hidden></div>
           <div class="settings" id="fv-settings" hidden>
             <div class="status" id="fv-status"></div>
-            <label class="check" id="fv-langWrap" for="fv-lang" hidden><span class="label" data-i18n="fvLanguage">Speech language</span>
-              <select id="fv-lang"></select>
-            </label>
+          </div>
+          <div class="fv-langs" role="group" aria-labelledby="fv-langLabel">
+            <span class="label" id="fv-langLabel" data-i18n="fvLanguage">Speech language</span>
+            <button class="fv-btn small" id="fv-langEn" type="button" aria-pressed="false">English</button>
+            <button class="fv-btn small" id="fv-langSite" type="button" aria-pressed="false" hidden></button>
+            <select id="fv-lang" data-i18n-label="fvOtherLangs"></select>
           </div>
           <div class="deck">
             <button class="mic" id="fv-mic" type="button">

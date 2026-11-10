@@ -248,6 +248,7 @@ window.I18N["de"] = {
   "fvNoSRShort": "Keine Spracherkennung",
   "fvLangUnavailable": "Spracherkennung ist für {x} nicht verfügbar. Wähle eine Sprache:",
   "fvLanguage": "Sprache der Spracherkennung",
+  "fvOtherLangs": "Weitere Sprachen",
   "fvMicBlocked": "Das Mikrofon ist blockiert. Erlaube es in der Adressleiste des Browsers und tippe dann erneut auf das Mikrofon.",
   "fvMicError": "Mikrofon oder Spracherkennung funktionieren gerade nicht. Du kannst stattdessen tippen.",
   "fvNoRecipes": "Noch passt kein Rezept. Nenne noch ein paar Zutaten.",

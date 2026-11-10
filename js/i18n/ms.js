@@ -248,6 +248,7 @@ window.I18N["ms"] = {
   "fvNoSRShort": "Tiada pengecaman suara",
   "fvLangUnavailable": "Pengecaman suara tiada untuk {x}. Pilih bahasa:",
   "fvLanguage": "Bahasa pertuturan",
+  "fvOtherLangs": "Bahasa lain",
   "fvMicBlocked": "Mikrofon disekat. Benarkan dalam bar alamat pelayar, kemudian ketik mikrofon sekali lagi.",
   "fvMicError": "Mikrofon atau perkhidmatan suara tidak berfungsi sekarang. Anda boleh menaip.",
   "fvNoRecipes": "Belum ada resipi yang sesuai. Tambah beberapa bahan lagi.",

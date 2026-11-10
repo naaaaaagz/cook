@@ -248,6 +248,7 @@ window.I18N["id"] = {
   "fvNoSRShort": "Tanpa pengenalan suara",
   "fvLangUnavailable": "Pengenalan suara tidak tersedia untuk {x}. Pilih bahasa:",
   "fvLanguage": "Bahasa ucapan",
+  "fvOtherLangs": "Bahasa lain",
   "fvMicBlocked": "Mikrofon diblokir. Izinkan di bilah alamat browser, lalu ketuk mikrofon lagi.",
   "fvMicError": "Mikrofon atau layanan suara sedang tidak berfungsi. Kamu bisa mengetik.",
   "fvNoRecipes": "Belum ada resep yang cocok. Tambahkan beberapa bahan lagi.",

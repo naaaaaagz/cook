@@ -87,6 +87,7 @@
       fvNoSRShort: 'No speech recognition',
       fvLangUnavailable: "Speech recognition isn't available for {x}. Pick a language:",
       fvLanguage: 'Speech language',
+      fvOtherLangs: 'Other languages',
       fvMicBlocked: "The microphone is blocked. Allow it in the browser's address bar, then tap the microphone again.",
       fvMicError: "The microphone or the speech service isn't working right now. You can type instead.",
       fvNoRecipes: 'No recipe fits yet. Add a few more ingredients.',
@@ -608,6 +609,7 @@
     var section = $('screen-' + name);
     if (section) section.hidden = false;
     document.querySelector('.top-icons').hidden = name === 'layout';
+    $('btn-shopping').hidden = name === 'cook';
     updateTitle();
     window.scrollTo(0, 0);
     if (typeof updateJump === 'function') setTimeout(updateJump, 0);
@@ -1968,6 +1970,7 @@
     keys: function () { return state.voice.slice(); },
     nameOf: ingredientName,
     langs: LANGS,
+    lang: function () { return lang; },
     onChange: function (keys, why) {
       state.voice = keys;
       if (why === 'finish' && keys.length) {

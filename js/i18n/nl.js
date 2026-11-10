@@ -248,6 +248,7 @@ window.I18N["nl"] = {
   "fvNoSRShort": "Geen spraakherkenning",
   "fvLangUnavailable": "Spraakherkenning is niet beschikbaar voor {x}. Kies een taal:",
   "fvLanguage": "Spraaktaal",
+  "fvOtherLangs": "Andere talen",
   "fvMicBlocked": "De microfoon is geblokkeerd. Sta hem toe in de adresbalk van de browser en tik dan opnieuw op de microfoon.",
   "fvMicError": "De microfoon of de spraakdienst werkt nu niet. Je kunt ook typen.",
   "fvNoRecipes": "Er past nog geen recept. Noem nog een paar ingrediënten.",

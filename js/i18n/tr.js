@@ -248,6 +248,7 @@ window.I18N["tr"] = {
   "fvNoSRShort": "Ses tanıma yok",
   "fvLangUnavailable": "{x} için ses tanıma kullanılamıyor. Bir dil seç:",
   "fvLanguage": "Konuşma dili",
+  "fvOtherLangs": "Diğer diller",
   "fvMicBlocked": "Mikrofon engellendi. Tarayıcının adres çubuğundan izin ver, sonra mikrofona tekrar dokun.",
   "fvMicError": "Mikrofon ya da ses hizmeti şu anda çalışmıyor. Yazarak da ekleyebilirsin.",
   "fvNoRecipes": "Henüz uyan bir tarif yok. Birkaç malzeme daha ekle.",

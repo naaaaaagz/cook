@@ -248,6 +248,7 @@ window.I18N["ko"] = {
   "fvNoSRShort": "음성 인식 없음",
   "fvLangUnavailable": "{x}에서는 음성 인식을 사용할 수 없습니다. 언어를 선택하세요:",
   "fvLanguage": "말하는 언어",
+  "fvOtherLangs": "다른 언어",
   "fvMicBlocked": "마이크가 차단되었습니다. 브라우저 주소 표시줄에서 허용한 뒤 마이크를 다시 누르세요.",
   "fvMicError": "지금은 마이크나 음성 서비스가 작동하지 않습니다. 대신 입력할 수 있어요.",
   "fvNoRecipes": "아직 맞는 레시피가 없습니다. 재료를 몇 가지 더 추가하세요.",

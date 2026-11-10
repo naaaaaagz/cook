@@ -4,8 +4,9 @@
    shows what you can cook. Element ids start with "fv-".
 
    Speech language: the user's country (looked up from the IP address once,
-   1.5 s at most), else the browser's language, else English (US). The
-   language picker and the browser checks only show up when something is wrong.
+   1.5 s at most), else the browser's language, else English (US). It can be
+   switched to English, the site language or any other language at the top of
+   the panel. The browser checks only show up when something is wrong.
    Spoken words per language come from js/voice/<lang>.js, loaded on demand.
    The app carries ingredient keys between pages in tab session storage;
    this panel does not store audio or speech transcripts. */
@@ -186,7 +187,6 @@ function setup() {
     var b = $('banner');
     b.textContent = msg || ''; b.hidden = !msg;
     $('settings').hidden = !msg;
-    $('langWrap').hidden = !showLang;
     var st = $('status'); st.textContent = '';
     if (msg) {
       var proto = location.protocol.replace(':', ''), secure = window.isSecureContext && proto !== 'file';
@@ -199,19 +199,42 @@ function setup() {
     var hit = opts.langs.filter(function (l) { return l && l[0] === c; })[0];
     return hit ? hit[1] : c;
   }
-  // The picker lists the languages there are spoken words for.
+  // Speech language: English, the site language, and "Other languages" with every language.
   var sel = $('lang');
-  sel.innerHTML = '';
-  opts.langs.forEach(function (l) {
-    if (!l || !SPEECH[l[0]]) return;
-    var o = document.createElement('option'); o.value = l[0]; o.textContent = l[1]; sel.appendChild(o);
-  });
-  sel.addEventListener('change', function () {
-    useLang(sel.value, true).then(function () { problem(''); if (SR) startListening(); });
-  });
+  function siteLang() { return opts.lang ? opts.lang() : 'en-US'; }
+  function englishCode() { return siteLang() === 'en-GB' ? 'en-GB' : 'en-US'; }
+  function renderLangs() {
+    var site = siteLang(), en = englishCode(), siteBtn = $('langSite');
+    var showSite = !/^en-/.test(site) && !!SPEECH[site];
+    $('langEn').textContent = 'English';
+    $('langEn').setAttribute('aria-pressed', String(code === en));
+    siteBtn.hidden = !showSite;
+    siteBtn.textContent = showSite ? langName(site) : '';
+    siteBtn.setAttribute('aria-pressed', String(showSite && code === site));
+    sel.innerHTML = '';
+    var first = document.createElement('option'); first.value = ''; first.textContent = t('fvOtherLangs'); sel.appendChild(first);
+    opts.langs.forEach(function (l) {
+      if (!l || !SPEECH[l[0]]) return;
+      var o = document.createElement('option'); o.value = l[0]; o.textContent = l[1]; sel.appendChild(o);
+    });
+    var other = code !== en && !(showSite && code === site);
+    sel.value = other ? code : '';
+    sel.classList.toggle('is-on', other);
+  }
+  // A new language restarts listening if it was on (or if a problem stopped it).
+  function pickLang(c) {
+    if (!c || c === code) { renderLangs(); return; }
+    var resume = want || !$('banner').hidden;
+    if (want) stopListening();
+    useLang(c, true).then(function () { problem(''); if (SR && resume) startListening(); });
+  }
+  $('langEn').addEventListener('click', function () { pickLang(englishCode()); });
+  $('langSite').addEventListener('click', function () { pickLang(siteLang()); });
+  sel.addEventListener('change', function () { pickLang(sel.value); });
+  renderLangs();
 
   function useLang(c, picked) {
-    code = c; speech = SPEECH[c] || 'en-US'; sel.value = c;
+    code = c; speech = SPEECH[c] || 'en-US'; renderLangs();
     log('info', 'language → ' + c + ' (' + speech + ')' + (picked ? ' picked by hand' : ''));
     return loadPack(c).then(function (pack) {
       if (!pack && c !== 'en-US') { log('err', 'no spoken words for ' + c + ', using English'); return useLang('en-US'); }
@@ -442,7 +465,7 @@ function setup() {
     },
     stop: function () { opening++; if (want) stopListening(); },
     close: function () { opening++; stopListening(); panel.hidden = true; opts.onClose(); },
-    redraw: function () { renderChips(); renderTranscript(); if (!want) stopUI(); else setState(t('fvListening'), true); }
+    redraw: function () { renderLangs(); renderChips(); renderTranscript(); if (!want) stopUI(); else setState(t('fvListening'), true); }
   };
   return api;
 }

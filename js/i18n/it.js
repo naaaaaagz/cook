@@ -248,6 +248,7 @@ window.I18N["it"] = {
   "fvNoSRShort": "Nessun riconoscimento vocale",
   "fvLangUnavailable": "Il riconoscimento vocale non è disponibile per {x}. Scegli una lingua:",
   "fvLanguage": "Lingua della voce",
+  "fvOtherLangs": "Altre lingue",
   "fvMicBlocked": "Il microfono è bloccato. Consentilo nella barra degli indirizzi del browser, poi tocca di nuovo il microfono.",
   "fvMicError": "Il microfono o il servizio vocale non funzionano al momento. Puoi scrivere invece.",
   "fvNoRecipes": "Ancora nessuna ricetta adatta. Aggiungi qualche ingrediente.",

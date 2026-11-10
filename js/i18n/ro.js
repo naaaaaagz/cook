@@ -248,6 +248,7 @@ window.I18N["ro"] = {
   "fvNoSRShort": "Fără recunoaștere vocală",
   "fvLangUnavailable": "Recunoașterea vocală nu e disponibilă pentru {x}. Alege o limbă:",
   "fvLanguage": "Limba vorbirii",
+  "fvOtherLangs": "Alte limbi",
   "fvMicBlocked": "Microfonul este blocat. Permite-l din bara de adrese a browserului, apoi atinge din nou microfonul.",
   "fvMicError": "Microfonul sau serviciul vocal nu funcționează acum. Poți scrie în schimb.",
   "fvNoRecipes": "Încă nu se potrivește nicio rețetă. Adaugă câteva ingrediente.",

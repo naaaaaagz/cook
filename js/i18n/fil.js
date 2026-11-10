@@ -248,6 +248,7 @@ window.I18N["fil"] = {
   "fvNoSRShort": "Walang pagkilala sa boses",
   "fvLangUnavailable": "Walang pagkilala sa boses para sa {x}. Pumili ng wika:",
   "fvLanguage": "Wika ng pagsasalita",
+  "fvOtherLangs": "Ibang wika",
   "fvMicBlocked": "Naka-block ang mikropono. Payagan ito sa address bar ng browser, saka i-tap ulit ang mikropono.",
   "fvMicError": "Hindi gumagana ngayon ang mikropono o ang serbisyo ng boses. Puwede kang mag-type.",
   "fvNoRecipes": "Wala pang tugmang recipe. Magdagdag pa ng ilang sangkap.",

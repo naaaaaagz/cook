@@ -248,6 +248,7 @@ window.I18N["sk"] = {
   "fvNoSRShort": "Bez rozpoznávania reči",
   "fvLangUnavailable": "Rozpoznávanie reči nie je pre {x} dostupné. Vyberte jazyk:",
   "fvLanguage": "Jazyk reči",
+  "fvOtherLangs": "Ďalšie jazyky",
   "fvMicBlocked": "Mikrofón je zablokovaný. Povoľte ho v paneli s adresou prehliadača a znova ťuknite na mikrofón.",
   "fvMicError": "Mikrofón alebo služba rozpoznávania reči teraz nefunguje. Môžete písať.",
   "fvNoRecipes": "Zatiaľ nesedí žiadny recept. Pridajte ešte pár surovín.",

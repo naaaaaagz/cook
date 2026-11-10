@@ -248,6 +248,7 @@ window.I18N["sv"] = {
   "fvNoSRShort": "Ingen röstigenkänning",
   "fvLangUnavailable": "Röstigenkänning finns inte för {x}. Välj ett språk:",
   "fvLanguage": "Talspråk",
+  "fvOtherLangs": "Andra språk",
   "fvMicBlocked": "Mikrofonen är blockerad. Tillåt den i webbläsarens adressfält och tryck sedan på mikrofonen igen.",
   "fvMicError": "Mikrofonen eller taltjänsten fungerar inte just nu. Du kan skriva i stället.",
   "fvNoRecipes": "Inget recept passar än. Lägg till några fler ingredienser.",

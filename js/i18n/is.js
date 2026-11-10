@@ -248,6 +248,7 @@ window.I18N["is"] = {
   "fvNoSRShort": "Engin talgreining",
   "fvLangUnavailable": "Talgreining er ekki í boði fyrir {x}. Veldu tungumál:",
   "fvLanguage": "Tungumál tals",
+  "fvOtherLangs": "Önnur tungumál",
   "fvMicBlocked": "Hljóðneminn er lokaður. Leyfðu hann í veffangastiku vafrans og ýttu svo aftur á hljóðnemann.",
   "fvMicError": "Hljóðneminn eða talþjónustan virkar ekki núna. Þú getur skrifað í staðinn.",
   "fvNoRecipes": "Engin uppskrift passar enn. Bættu við nokkrum hráefnum.",

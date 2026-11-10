@@ -248,6 +248,7 @@ window.I18N["sl"] = {
   "fvNoSRShort": "Ni prepoznavanja govora",
   "fvLangUnavailable": "Prepoznavanje govora za {x} ni na voljo. Izberite jezik:",
   "fvLanguage": "Jezik govora",
+  "fvOtherLangs": "Drugi jeziki",
   "fvMicBlocked": "Mikrofon je blokiran. Dovolite ga v naslovni vrstici brskalnika in znova tapnite mikrofon.",
   "fvMicError": "Mikrofon ali storitev za govor trenutno ne deluje. Lahko vpišete.",
   "fvNoRecipes": "Noben recept še ne ustreza. Dodajte še nekaj sestavin.",

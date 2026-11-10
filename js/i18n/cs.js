@@ -248,6 +248,7 @@ window.I18N["cs"] = {
   "fvNoSRShort": "Bez rozpoznávání řeči",
   "fvLangUnavailable": "Rozpoznávání řeči není pro {x} dostupné. Vyberte jazyk:",
   "fvLanguage": "Jazyk řeči",
+  "fvOtherLangs": "Další jazyky",
   "fvMicBlocked": "Mikrofon je zablokovaný. Povolte ho v adresním řádku prohlížeče a znovu klepněte na mikrofon.",
   "fvMicError": "Mikrofon nebo služba rozpoznávání řeči teď nefunguje. Můžete psát.",
   "fvNoRecipes": "Zatím nesedí žádný recept. Přidejte ještě pár surovin.",

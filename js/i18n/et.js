@@ -248,6 +248,7 @@ window.I18N["et"] = {
   "fvNoSRShort": "Kõnetuvastus puudub",
   "fvLangUnavailable": "Kõnetuvastus pole keele {x} jaoks saadaval. Vali keel:",
   "fvLanguage": "Kõne keel",
+  "fvOtherLangs": "Teised keeled",
   "fvMicBlocked": "Mikrofon on blokeeritud. Luba see brauseri aadressiribal ja puuduta siis uuesti mikrofoni.",
   "fvMicError": "Mikrofon või kõneteenus ei tööta praegu. Võid hoopis kirjutada.",
   "fvNoRecipes": "Ükski retsept ei sobi veel. Lisa veel mõni koostisosa.",

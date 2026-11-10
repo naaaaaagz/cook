@@ -248,6 +248,7 @@ window.I18N["lt"] = {
   "fvNoSRShort": "Nėra balso atpažinimo",
   "fvLangUnavailable": "Balso atpažinimas kalbai {x} nepasiekiamas. Pasirink kalbą:",
   "fvLanguage": "Kalbėjimo kalba",
+  "fvOtherLangs": "Kitos kalbos",
   "fvMicBlocked": "Mikrofonas užblokuotas. Leisk jį naršyklės adreso juostoje ir vėl paliesk mikrofoną.",
   "fvMicError": "Mikrofonas arba kalbos paslauga dabar neveikia. Gali rašyti.",
   "fvNoRecipes": "Kol kas netinka joks receptas. Pridėk dar kelis produktus.",

@@ -248,6 +248,7 @@ window.I18N["hu"] = {
   "fvNoSRShort": "Nincs hangfelismerés",
   "fvLangUnavailable": "A hangfelismerés nem érhető el ehhez: {x}. Válassz nyelvet:",
   "fvLanguage": "Beszéd nyelve",
+  "fvOtherLangs": "Más nyelvek",
   "fvMicBlocked": "A mikrofon le van tiltva. Engedélyezd a böngésző címsorában, majd koppints újra a mikrofonra.",
   "fvMicError": "A mikrofon vagy a hangfelismerő szolgáltatás most nem működik. Beírhatod helyette.",
   "fvNoRecipes": "Még nincs illő recept. Mondj még néhány hozzávalót.",

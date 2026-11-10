@@ -248,6 +248,7 @@ window.I18N["sq"] = {
   "fvNoSRShort": "Pa njohje zëri",
   "fvLangUnavailable": "Njohja e zërit nuk ofrohet për {x}. Zgjidh një gjuhë:",
   "fvLanguage": "Gjuha e të folurit",
+  "fvOtherLangs": "Gjuhë të tjera",
   "fvMicBlocked": "Mikrofoni është i bllokuar. Lejoje te shiriti i adresës së shfletuesit dhe prek sërish mikrofonin.",
   "fvMicError": "Mikrofoni ose shërbimi i zërit nuk punon tani. Mund të shkruash.",
   "fvNoRecipes": "Ende asnjë recetë nuk përshtatet. Shto disa përbërës të tjerë.",

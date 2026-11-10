@@ -248,6 +248,7 @@ window.I18N["lv"] = {
   "fvNoSRShort": "Nav balss atpazīšanas",
   "fvLangUnavailable": "Balss atpazīšana nav pieejama valodai {x}. Izvēlies valodu:",
   "fvLanguage": "Runas valoda",
+  "fvOtherLangs": "Citas valodas",
   "fvMicBlocked": "Mikrofons ir bloķēts. Atļauj to pārlūka adreses joslā un vēlreiz pieskaries mikrofonam.",
   "fvMicError": "Mikrofons vai runas pakalpojums pašlaik nedarbojas. Vari rakstīt.",
   "fvNoRecipes": "Vēl neder neviena recepte. Pievieno vēl dažas sastāvdaļas.",

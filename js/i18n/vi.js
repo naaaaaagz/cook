@@ -248,6 +248,7 @@ window.I18N["vi"] = {
   "fvNoSRShort": "Không có nhận dạng giọng nói",
   "fvLangUnavailable": "Không có nhận dạng giọng nói cho {x}. Chọn ngôn ngữ:",
   "fvLanguage": "Ngôn ngữ nói",
+  "fvOtherLangs": "Ngôn ngữ khác",
   "fvMicBlocked": "Micrô đang bị chặn. Hãy cho phép trên thanh địa chỉ của trình duyệt rồi chạm lại vào micrô.",
   "fvMicError": "Micrô hoặc dịch vụ giọng nói hiện không hoạt động. Bạn có thể nhập thay thế.",
   "fvNoRecipes": "Chưa có công thức phù hợp. Hãy thêm vài nguyên liệu nữa.",

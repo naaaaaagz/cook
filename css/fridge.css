@@ -110,6 +110,12 @@
 [dir="rtl"] #fridge-panel .fv-close { right: auto; left: 8px; }
 #fridge-panel .fv-close:hover { background: var(--fv-line); color: var(--fv-ink); }
 #fridge-panel .settings { flex-direction: column; align-items: flex-start; }
+#fridge-panel .fv-langs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-right: 36px; }
+#fridge-panel .fv-langs .label { flex-basis: 100%; }
+#fridge-panel .fv-langs .fv-btn[aria-pressed="true"] { background: var(--fv-accent); color: var(--fv-accent-ink); border-color: var(--fv-accent); }
+#fridge-panel .fv-langs select { font-size: 0.82rem; padding: 5px 8px; max-width: 100%; }
+#fridge-panel .fv-langs select.is-on { border-color: var(--fv-accent); box-shadow: inset 0 0 0 1px var(--fv-accent); }
+[dir="rtl"] #fridge-panel .fv-langs { padding-right: 0; padding-left: 36px; }
 #fridge-panel .deck { padding-right: 36px; }
 #fridge-panel .fv-mini { display: flex; align-items: center; gap: 12px; padding-right: 36px; }
 #fridge-panel .fv-mini[hidden], #fridge-panel .fv-full[hidden] { display: none; }

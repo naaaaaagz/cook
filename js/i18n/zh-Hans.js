@@ -248,6 +248,7 @@ window.I18N["zh-Hans"] = {
   "fvNoSRShort": "无语音识别",
   "fvLangUnavailable": "{x}暂不支持语音识别。请选择一种语言：",
   "fvLanguage": "语音语言",
+  "fvOtherLangs": "其他语言",
   "fvMicBlocked": "麦克风已被阻止。请在浏览器地址栏中允许，然后再次点按麦克风。",
   "fvMicError": "麦克风或语音服务暂时无法使用。你可以改为输入。",
   "fvNoRecipes": "还没有合适的食谱。再添加几样食材吧。",
