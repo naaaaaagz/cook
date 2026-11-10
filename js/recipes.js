@@ -947,7 +947,14 @@ window.INGREDIENT_INFO = (function () {
     if (eq.indexOf('stovetop') >= 0 || STOVE_HEAT.test(st.heat)) return 'stove';
     if ((eq.indexOf('pan') >= 0 || eq.indexOf('cooking_pot') >= 0) && !empty(st.heat)) return 'stove';
     if (/\b(wash|rinse|drain)/i.test(st.title)) return 'sink';
-    if (eq.indexOf('chopping_board') >= 0) return 'board';
+    // The board only when something is cut there: the text says so, or a knife is used and the
+    // step is not mixing or serving (bowl, plates, rack). Everything else is countertop work.
+    if (eq.indexOf('chopping_board') >= 0) {
+      if (/\b(chop|dice|slice|cut|mince|julienne|halve|quarter|carve|shred|trim|peel|crush|score|flatten|pound|bash)\b/.test(text)) return 'board';
+      var knife = eq.indexOf('chef_knife') >= 0 || eq.indexOf('knife') >= 0;
+      var elsewhere = ['bowl', 'plates', 'cooling_rack'].some(function (e) { return eq.indexOf(e) >= 0; });
+      if (knife && !elsewhere) return 'board';
+    }
     return 'countertop';
   }
 

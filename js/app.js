@@ -149,8 +149,7 @@
       timeNormal: 'Took {x} (suggested: {y}).',
       ratingOf: '{x} / 5',
       ratingVotes: '{n} ratings',
-      diet_nofish: 'No fish',
-      diet_noseafood: 'No seafood',
+      diet_nofish: 'No fish/seafood',
       diet_glutenfree: 'Gluten-free',
       diet_lowcarb: 'Low-carb',
       diet_keto: 'Keto',
@@ -1223,6 +1222,13 @@
       fullscreenTo(window.matchMedia('(orientation: landscape)').matches ? 'portrait' : 'landscape');
     });
   });
+  if (pageScreen === 'cook' || pageScreen === 'layout') {
+    document.addEventListener('click', function firstTap(e) {
+      document.removeEventListener('click', firstTap, true);
+      if (e.target.closest('.btn-rotate, [data-close], #btn-cook-exit, #btn-layout-cancel')) return;
+      fullscreenTo('landscape');
+    }, true);
+  }
   function leaveFullscreen() {
     var el = document.fullscreenElement || document.webkitFullscreenElement;
     if (!el) return;
@@ -1681,13 +1687,10 @@
     logo.classList.toggle('tip-on');
   }, true);
 
-  // "Contains": a thin reddish strip with a warning triangle and the items separated by interpuncts.
-  var WARN_ICON = '<svg class="warn-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 3L1.8 20.5h20.4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>' +
-    '<path d="M12 9.5v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17.6" r="1.25" fill="currentColor"/></svg>';
+  // "Contains": a quiet tinted strip along the bottom of the card, the items separated by interpuncts.
   function containsRow(info) {
     if (!info.contains.length) return '';
-    return '<span class="warn-strip"><span class="sr-only">' + ht('containsLabel') + ': </span>' + WARN_ICON +
-      '<span>' + info.contains.map(esc).join(' · ') + '</span></span>';
+    return '<span class="warn-strip"><b>' + ht('containsLabel') + ':</b> <span>' + info.contains.map(esc).join(' · ') + '</span></span>';
   }
 
   function nutritionPerPerson(built) {
@@ -1748,7 +1751,7 @@
     ['African', ['Nigerian', 'Moroccan']]
   ];
   // Diet filters: Vegetarian also lists the vegan recipes (judged with the default options).
-  var DIETS = ['veg', 'vegan', 'nofish', 'noseafood', 'glutenfree', 'lowcarb', 'keto'];
+  var DIETS = ['veg', 'vegan', 'nofish', 'glutenfree', 'lowcarb', 'keto'];
   // Carbohydrates per person, default options: low-carb up to 20 g, keto up to 10 g.
   var LOW_CARB = 20, KETO = 10;
   // Cooking-method filters (judged with the default options):
@@ -1775,8 +1778,7 @@
     return diets.some(function (d) {
       if (d === 'vegan') return label === 'vegan';
       if (d === 'veg') return VEGETARIAN.indexOf(label) >= 0;
-      if (d === 'nofish') return !x.tags.fish && !has('Fish');
-      if (d === 'noseafood') return !has('Crustaceans') && !has('Molluscs');
+      if (d === 'nofish') return !x.tags.fish && !has('Fish') && !has('Crustaceans') && !has('Molluscs');
       if (d === 'glutenfree') return !has('Gluten');
       var carbs = nutritionPerPerson(built).carbs;
       return d === 'keto' ? carbs <= KETO : carbs <= LOW_CARB;
@@ -2572,7 +2574,11 @@
     state.built.ingredients.forEach(function (ing) { if (!shopItem(state.recipe, ing)) shopSet(state.recipe, ing, 1); });
     var b = $('btn-shop-all');
     b.textContent = t('shopAdded');
-    setTimeout(function () { b.textContent = t('shopAddAll'); }, 2000);
+    b.classList.remove('is-added');
+    void b.offsetWidth; // restart the flash on a second click
+    b.classList.add('is-added');
+    clearTimeout(b._added);
+    b._added = setTimeout(function () { b.textContent = t('shopAddAll'); b.classList.remove('is-added'); }, 2400);
   });
   // Amount steps in the shopping list: 1 up to 25, then 5 up to 100, then 20 (snapped to whole steps).
   function shopStep(n, up) {
@@ -2684,6 +2690,8 @@
   function fmtWhen(iso) {
     try { return new Date(iso).toLocaleString(lang, { dateStyle: 'medium', timeStyle: 'short' }); } catch (e) { return iso; }
   }
+  var BIN_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M4 7h16M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/></svg>';
   function loadComments(force) {
     var list = $('det-comments');
     if (!list || !state.recipe || !window.CookAccount || !window.CookAccount.hasClient()) return;
@@ -2695,10 +2703,10 @@
       list.innerHTML = '';
       rows.forEach(function (c) {
         var li = document.createElement('li');
-        li.className = 'comment';
+        li.className = 'comment' + (c.mine && signedIn() ? ' is-mine' : '');
         li.innerHTML = '<p class="comment-head"><b>' + esc(c.username || t('comAnon')) + '</b> <time datetime="' + esc(c.created_at) + '">' +
           esc(fmtWhen(c.created_at)) + '</time>' + (c.stars ? ' <span class="comment-stars" aria-label="' + ht('stars', { n: c.stars }) + '">' + starsText(c.stars) + '</span>' : '') +
-          (c.mine && signedIn() ? ' <button class="text-button comment-delete" type="button">' + ht('comDelete') + '</button>' : '') + '</p>' +
+          '</p>' + (c.mine && signedIn() ? '<button class="comment-delete" type="button" aria-label="' + ht('comDelete') + '" title="' + ht('comDelete') + '">' + BIN_ICON + '</button>' : '') +
           '<p class="comment-body">' + esc(c.body) + '</p>';
         var del = li.querySelector('.comment-delete');
         if (del) del.addEventListener('click', function () {
@@ -2876,6 +2884,7 @@
     $('cook-map').innerHTML = '';
     $('cook-finished').hidden = true;
     $('start-overlay').hidden = false;
+    headHeight();
     $('btn-start-now').hidden = false;
     $('countdown').hidden = true;
     $('start-takes').textContent = t('takes', { x: fmtMinutes(estimateMinutes(b.steps)) });
@@ -3099,7 +3108,12 @@
     markOrientation();
     if (cook) render();
   });
-  window.addEventListener('resize', function () { if (cook && isMap()) render(); });
+  // The start overlay begins under the cooking header, so the countdown is never covered.
+  function headHeight() {
+    var h = document.querySelector('.cook-head');
+    if (h) document.documentElement.style.setProperty('--cook-head-h', h.offsetHeight + 'px');
+  }
+  window.addEventListener('resize', function () { headHeight(); if (cook && isMap()) render(); });
 
   function ingItem(i) {
     var base = cook.ingredients.filter(function (x) { return x.id === i.id; })[0];
@@ -3346,7 +3360,8 @@
     pop.hidden = false;
     popStep = step.id;
     placePop(anchor);
-    card.querySelector('.btn-done').focus();
+    pop.scrollTop = 0;
+    card.querySelector('.btn-done').focus({ preventScroll: true });
   }
   // Under the notification if the card fits there, else above it, else on the
   // roomier side with a scrollbar. The pointer (arrow) joins it to the notification.
@@ -3355,11 +3370,24 @@
     pop.style.maxHeight = '';
     var a = anchor.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
     var vw = window.innerWidth, vh = window.innerHeight;
-    var below = vh - edge - (a.bottom + gap), above = a.top - gap - edge;
+    // Below the cooking header, so its buttons and the top-right icons stay clear.
+    var head = document.querySelector('.cook-head'), roof = (head ? head.getBoundingClientRect().bottom : 0) + edge;
+    // Wide, short screens (phone in landscape): beside the to-do card, on the roomier side.
+    if (vw > vh && vh <= 520) {
+      var room = vh - roof - edge;
+      if (h > room) { pop.style.maxHeight = room + 'px'; h = pop.offsetHeight; }
+      var right = vw - a.right - gap - edge >= a.left - gap - edge;
+      var x = right ? Math.min(a.right + gap, vw - w - edge) : Math.max(edge, a.left - gap - w);
+      pop.style.left = Math.round(x) + 'px';
+      pop.style.top = Math.round(clamp(a.top + a.height / 2 - h / 2, roof, vh - edge - h)) + 'px';
+      arrow.hidden = true;
+      return;
+    }
+    var below = vh - edge - (a.bottom + gap), above = a.top - gap - roof;
     var under = h <= below || (h > above && below >= above);
     if (h > (under ? below : above)) { pop.style.maxHeight = Math.max(120, under ? below : above) + 'px'; h = pop.offsetHeight; }
     var left = clamp(a.left + a.width / 2 - w / 2, edge, Math.max(edge, vw - w - edge));
-    var top = under ? a.bottom + gap : a.top - gap - h;
+    var top = under ? a.bottom + gap : Math.max(roof, a.top - gap - h);
     pop.style.left = Math.round(left) + 'px';
     pop.style.top = Math.round(top) + 'px';
     arrow.hidden = false;
@@ -3975,6 +4003,7 @@
         $('layout-home-label').setAttribute('data-i18n', state.layoutSaved ? 'editLayoutMap' : 'setupLayoutMap');
         $('layout-home-label').textContent = t(state.layoutSaved ? 'editLayoutMap' : 'setupLayoutMap');
         document.querySelector('.layout-check').hidden = !state.layoutSaved;
+        $('btn-layout-home').hidden = state.layoutSaved;
       }
       saveSession();
     },
@@ -4016,6 +4045,7 @@
       $('layout-home-label').setAttribute('data-i18n', 'editLayoutMap');
       $('layout-home-label').textContent = t('editLayoutMap');
       document.querySelector('.layout-check').hidden = false;
+      $('btn-layout-home').hidden = true;
     }
   }
   var start = route();
