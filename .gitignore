@@ -1,5 +1,20 @@
-# Only what the site needs goes to GitHub. Everything listed here stays on
-# this computer only (it is still in the folder, git just ignores it).
+# Only what the site needs goes to GitHub. Everything else stays on this
+# computer only (it is still in the folder, git just ignores it).
+# Allow-list: ignore everything in the root, then let the site files back in.
+# A new page or site folder must be added here before git will see it.
+/*
+!/.gitignore
+!/index.html
+!/recipes.html
+!/recipe.html
+!/kitchen.html
+!/cook.html
+!/history.html
+!/css/
+!/js/
+!/fonts/
+!/icons/
+!/img/
 
 # Full-size original photos - the site only uses the small copies in img/350/
 /img/*.jpg
@@ -14,35 +29,7 @@
 # Photos of recipes taken off the list (kept locally, not published)
 /img/ready/nope/
 
-# Mockups and reference images made while designing
-/mockup-cooking-guide.png
-/flowchart-carbonara.png
-/kitchen-icons.jpg
-
-# Working data and notes
-/*.csv
-/food stock photos.txt
-/Recipes - text - review.txt
-/recipes - not added.txt
-/ingredient_missing_img.txt
-
-# Local tools stay private, except the source needed to maintain the shipped pages.
-/tools/*
-!/tools/build-pages.cjs
-!/tools/page-template.html
-!/tools/pages-tests.cjs
-!/tools/PAGES.md
-!/tools/account-tests.cjs
-/convert_images.bat
-/convert_ready_images.bat
-
-# Claude, editor and temp files (incl. Claude/Codex handoff notes)
-/*HANDOFF*.md
-/.handoff/
-/.claude/
-/.codex/
-/.tmp/
-/.vscode/
+# Editor and system files
 Thumbs.db
 desktop.ini
 .DS_Store
@@ -50,9 +37,5 @@ desktop.ini
 # Credentials must never become website assets or enter version control.
 .env
 .env.*
-!.env.example
 *.pem
 *.key
-
-# Ads folder: local only, everything in it now and later
-/ads/

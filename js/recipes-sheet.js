@@ -1,5 +1,7 @@
 /*
   Recipes copied from the "Recipes" Google Sheet (schema cook-recipe v0.1), 2026-10-19.
+  Since 2026-11-10 the source of truth is the "Recipes - A" … "Recipes - Z" sheets
+  (English first letter, one tab per recipe); the old single sheet is an archive.
   Spaghetti Carbonara is hand-built in recipes.js; every other tab is here.
 
   One block per recipe, one row per line, fields split by "|". "—" means empty.
