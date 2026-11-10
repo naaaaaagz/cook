@@ -69,7 +69,8 @@ window.EQUIPMENT = {
   potato_masher: { name: "Potato masher", icon: "icons/potato-masher.svg" },
   kitchen_scale: { name: "Kitchen scale", icon: "icons/kitchen-scale.svg" },
   cooling_rack: { name: "Cooling rack", icon: "icons/cooling-rack.svg" },
-  pastry_brush: { name: "Pastry brush", icon: "icons/pastry-brush.svg" }
+  pastry_brush: { name: "Pastry brush", icon: "icons/pastry-brush.svg" },
+  spaetzle_maker: { name: "Spaetzle maker", icon: null }
 };
 
 /*
@@ -353,7 +354,13 @@ window.INGREDIENT_INFO = (function () {
     // Added 2026-11-06 with the recipes added back
     dumpling_wrappers: '290 58 9 1.5 0.3 2 0.8|Gluten|',
     red_curry_paste: '110 15 2.5 4.5 0.6 6 9|Crustaceans|fish spicy',
-    chocolate_sprinkles: '450 75 4 15 9 3 0.05|Milk, Soy|dairy'
+    chocolate_sprinkles: '450 75 4 15 9 3 0.05|Milk, Soy|dairy',
+    // Added 2026-11-10 with the Hungarian recipes
+    cottage_cheese: '98 3.4 11 4.3 1.7 0 0.4|Milk|dairy',
+    lard: '902 0 0 100 39 0 0||meat pork',
+    caraway_seeds: '333 50 20 15 0.6 38 0.04||',
+    parsley_root: '55 12 2.3 0.6 0.1 4.3 0.03||',
+    celery_root: '42 9.2 1.5 0.3 0.1 1.8 0.25|Celery|'
   };
   var CATEGORY = {
     meat: 'guanciale bacon ham ground_pork ground_beef beef chicken_breast',
@@ -399,6 +406,9 @@ window.INGREDIENT_INFO = (function () {
     oil: "red_palm_oil",
     water: "ice"
   };
+  // Ingredients added with the Hungarian recipes
+  var HU = { dairy: "cottage_cheese", oil: "lard", spices: "caraway_seeds", veg: "parsley_root celery_root" };
+  Object.keys(HU).forEach(function (c) { MORE[c] += ' ' + HU[c]; });
   Object.keys(MORE).forEach(function (c) { CATEGORY[c] += ' ' + MORE[c]; });
   var catOf = {};
   Object.keys(CATEGORY).forEach(function (c) { CATEGORY[c].split(' ').forEach(function (k) { catOf[k] = c; }); });
@@ -659,7 +669,7 @@ window.INGREDIENT_INFO = (function () {
   var META = {
     spaghetti_carbonara: { starred: 1, category: 'main', cuisine: ['Italian'] },
     chilli_con_carne: { starred: 1, category: 'main', cuisine: ['Mexican'], kids: { opt_heat: 'mild' } },
-    semolina_pudding: { starred: 1, category: 'dessert' },
+    semolina_pudding: { starred: 1, category: 'dessert', cuisine: ['European'] },
     bibimbap: { starred: 1, category: 'main', cuisine: ['Asian'] },
     honey_tarragon_chicken: { starred: 1, category: 'main', kids: { opt_wine: 'alcohol_free' } },
     caesar_salad: { starred: 1, category: 'main', cuisine: ['American'], kids: { opt_mayo: 'store' },
@@ -813,7 +823,15 @@ window.INGREDIENT_INFO = (function () {
     brigadeiros: { starred: 0, category: "dessert", cuisine: ['Latin American'] },
     imam_bayildi: { starred: 0, category: "main", cuisine: ['Middle Eastern'] },
     chicken_yassa: { starred: 0, category: "main", cuisine: ['African'], kids: { 'opt_heat': 'mild' } },
-    pad_kra_pao: { starred: 0, category: "main", cuisine: ['Asian'], kids: { 'opt_heat': 'medium' } }
+    pad_kra_pao: { starred: 0, category: "main", cuisine: ['Asian'], kids: { 'opt_heat': 'medium' } },
+    // Hungarian recipes, added 2026-11-10
+    turos_csusza: { starred: 0, category: "main", cuisine: ['European'] },
+    tokfozelek: { starred: 0, category: "main", cuisine: ['European'] },
+    hungarian_goulash: { starred: 0, category: "soup", cuisine: ['European'], kids: { 'opt_heat': 'mild' } },
+    hortobagyi_palacsinta: { starred: 0, category: "main", cuisine: ['European'] },
+    chicken_paprikash: { starred: 0, category: "main", cuisine: ['European'] },
+    lecso: { starred: 0, category: "main", cuisine: ['European'] },
+    somloi_galuska: { starred: 0, category: "dessert", cuisine: ['European'], kids: { 'opt_alcohol': 'none' } }
   };
   window.RECIPES.forEach(function (r) {
     var m = META[r.id] || {};
@@ -838,7 +856,9 @@ window.INGREDIENT_INFO = (function () {
     jollof_rice: 'Nigerian', egusi_soup: 'Nigerian',
     chicken_tagine: 'Moroccan', vegetable_couscous: 'Moroccan',
     feijoada: 'Brazilian', brigadeiros: 'Brazilian',
-    menemen: 'Turkish', imam_bayildi: 'Turkish'
+    menemen: 'Turkish', imam_bayildi: 'Turkish',
+    semolina_pudding: 'Hungarian', turos_csusza: 'Hungarian', tokfozelek: 'Hungarian', hungarian_goulash: 'Hungarian',
+    hortobagyi_palacsinta: 'Hungarian', chicken_paprikash: 'Hungarian', lecso: 'Hungarian', somloi_galuska: 'Hungarian'
   };
   // Extra recipe-list sections, so Main isn't one long list.
   var SECTION = {
@@ -848,7 +868,10 @@ window.INGREDIENT_INFO = (function () {
     caesar_salad: 'salad', summer_salad: 'salad', greek_salad: 'salad', potato_salad: 'salad', tabbouleh: 'salad', gado_gado: 'salad',
     tzatziki: 'dip', homemade_mayonnaise: 'dip', hummus: 'dip', guacamole: 'dip', baba_ganoush: 'dip'
   };
+  // Italian, Greek and French are countries of the European group too.
+  var EUROPEAN = ['Italian', 'Greek', 'French'];
   window.RECIPES.forEach(function (r) {
+    if (r.cuisine.some(function (c) { return EUROPEAN.indexOf(c) >= 0; }) && r.cuisine.indexOf('European') < 0) r.cuisine = ['European'].concat(r.cuisine);
     if (COUNTRY[r.id]) r.cuisine = r.cuisine.concat(COUNTRY[r.id]);
     if (SECTION[r.id]) r.category = SECTION[r.id];
   });
@@ -1046,7 +1069,8 @@ window.INGREDIENT_INFO = (function () {
         var item = {
           id: r[0], name: r[1], key: photo ? r[2].replace(/^.*\//, '').replace(/\.webp$/, '') : r[0],
           amount: amountText(total, unit, shownUnit),
-          grams: qty ? g * total / qty : 0,
+          // Salt for drained pasta/cooking water is not eaten (same as the built-in pasta recipe).
+          grams: qty && !/^salt_(pasta|water)$/.test(r[0]) ? g * total / qty : 0,
           note: empty(r[8]) ? '' : r[8]
         };
         if (!photo) item.noImage = true;

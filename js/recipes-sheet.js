@@ -4195,5 +4195,258 @@ S|W2|W|Fry the meat|Add the meat and stir-fry, breaking it up, until cooked thro
 S|W3|W|Sauce and basil|Pour in the sauce and toss until glossy, then turn off the heat and stir in the basil until it wilts.|action|high|60|W2, K2|Glossy, basil wilted|thai_basil|wok, spatula|—
 S|F1|F|Serve|Serve over the rice (with the fried egg on top).|action|off|30 + 15 × servings|W3, R1|Served|—|spoon, plates|—
 `
+  },
+  {
+    id: "turos_csusza", name: "Túrós Csusza", image: "img/350/cottage_cheese.webp",
+    rows: `
+O|opt_bacon|with|With tepertő (crispy diced bacon)|TRUE
+O|opt_bacon|without|Without bacon|FALSE
+O|opt_sugar|without|No sugar|TRUE
+O|opt_sugar|with|Sprinkled with sugar|FALSE
+I|fettuccine|Wide egg noodles (csusza) or fettuccine|img/350/fettuccine.webp|100|g|100|linear|—|broken into 3 to 4 cm pieces
+I|salt_pasta|Salt for the pasta water|img/350/salt.webp|1|tsp|6|linear|—|—
+I|turo|Túró or cottage cheese|img/350/cottage_cheese.webp|100|g|100|linear|—|crumbled
+I|sour_cream|Sour cream|img/350/sour_cream.webp|60|g|60|linear|—|—
+I|bacon|Smoked bacon|img/350/bacon.webp|50|g|50|linear|opt_bacon = with|5 mm cubes
+I|butter|Butter|img/350/butter.webp|10|g|10|linear|opt_bacon = without|—
+I|sugar|Sugar|img/350/sugar.webp|1|tbsp|12|linear|opt_sugar = with|—
+S|W1|W|Boil the pasta water|Bring a large pot of water to the boil and salt it.|wait|high|600|—|Rolling boil|salt_pasta|cooking_pot, stovetop|—
+S|K1|K|Dice the bacon|Cut the bacon into small cubes, about 5 mm.|action|—|(60 + 30 × servings) × skill_factor|—|Diced|bacon|chef_knife, chopping_board|opt_bacon = with
+S|B1|B|Crisp the bacon|Put the bacon in the cold frying pan and fry it slowly until the fat melts out and the cubes are golden and crisp. Leave the fat in the pan.|action|medium|600|K1|Golden, crisp cubes|—|pan, stovetop, wooden_spoon|opt_bacon = with
+S|K2|K|Break the pasta|Break the noodles into pieces 3 to 4 cm long.|action|—|30 + 15 × servings|—|Broken up|fettuccine|—|—|countertop
+S|K3|K|Crumble the túró|Crumble the túró with a fork in a bowl. Cottage cheese: drain it in a sieve first.|action|—|60 + 20 × servings|—|Crumbly|turo|bowl, fork|—
+S|W2|W|Cook the pasta|Cook the pasta until al dente, stirring now and then (see the packet, about 8 to 10 minutes).|wait|high|540|W1, K2|Al dente|fettuccine|cooking_pot, wooden_spoon|—
+S|W3|W|Drain the pasta|Drain the pasta in a colander.|action|off|60|W2|Drained|—|colander|—
+S|F1|F|Toss in the fat|Tip the pasta into the pan with the bacon fat (or into the pot with the butter) and toss over low heat for a minute.|action|low|60|W3, B1|Coated and hot|butter|pan, wooden_spoon|—
+S|F2|F|Top and serve|Put the pasta on warm plates. Top with the túró, a spoonful of sour cream and the crispy bacon (sprinkle with sugar if you like it sweet).|action|off|30 + 20 × servings|F1, K3|Served|sour_cream; sugar|spoon, plates|—
+`
+  },
+  {
+    id: "tokfozelek", name: "Tökfőzelék", image: "img/350/zucchini.webp",
+    rows: `
+O|opt_dill|fresh|Fresh dill|TRUE
+O|opt_dill|dried|Dried dill|FALSE
+I|zucchini|Summer squash or zucchini|img/350/zucchini.webp|300|g|300|linear|—|coarsely grated
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|onion|Onion|img/350/onion.webp|30|g|30|linear|—|finely chopped
+I|oil|Oil|img/350/oil.webp|1|tbsp|13|linear|—|—
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|0.25|tsp|0.6|linear|—|—
+I|dill|Fresh dill|img/350/dill.webp|1|tbsp|3|linear|opt_dill = fresh|chopped
+I|dill_dried|Dried dill|img/350/dill.webp|0.5|tsp|0.5|linear|opt_dill = dried|—
+I|water|Water|img/350/water.webp|100|ml|100|linear|—|—
+I|sour_cream|Sour cream|img/350/sour_cream.webp|60|g|60|linear|—|—
+I|flour|Flour|img/350/flour.webp|1|tbsp|8|linear|—|—
+I|white_vinegar|Vinegar|img/350/white_vinegar.webp|1|tsp|5|linear|—|—
+I|sugar|Sugar|img/350/sugar.webp|0.5|tsp|2|linear|—|—
+S|K1|K|Grate the squash|Peel the squash if the skin is tough, scoop out any big seeds and grate it coarsely into a bowl.|action|—|(120 + 60 × servings) × skill_factor|—|Grated|zucchini|vegetable_peeler, cheese_grater, bowl|—
+S|K2|K|Salt and wait|Mix in the salt and leave for 15 minutes so the squash lets out its water.|wait|—|900|K1|Liquid in the bowl|salt|bowl|—
+S|K3|K|Chop the onion and dill|Finely chop the onion (and the fresh dill).|action|—|(60 + 30 × servings) × skill_factor|—|Chopped|onion; dill|chef_knife, chopping_board|—
+S|K4|K|Squeeze the squash|Squeeze the squash firmly by the handful and pour away the liquid.|action|—|60 + 30 × servings|K2|Squeezed dry|—|bowl|—
+S|P1|P|Soften the onion|Heat the oil in the pot and cook the onion gently until glassy; do not let it brown.|action|medium|240|K3|Soft and glassy|oil|cooking_pot, stovetop, wooden_spoon|—
+S|P2|P|Squash in|Take the pot off the heat, stir in the paprika, then add the squash, half the dill and the water.|action|off|60|P1, K4|Squash in the pot|paprika_powder; water; dill_dried|cooking_pot, wooden_spoon|—
+S|P3|P|Simmer|Cover and cook until the squash is soft but still has a little bite, stirring now and then.|wait|low|600|P2|Soft, a little bite|—|cooking_pot|—
+S|K5|K|Sour cream mix|Whisk the sour cream and the flour smooth in a small bowl.|action|—|60|—|No lumps|sour_cream; flour|bowl, whisk|—
+S|P4|P|Thicken|Stir a ladle of the hot liquid into the sour cream mix, then stir it all into the pot. Simmer 2 to 3 minutes until thick.|action|medium|180|P3, K5|Thick and creamy|—|cooking_pot, ladle, wooden_spoon|—
+S|P5|P|Season|Turn off the heat. Add the vinegar, the sugar, the rest of the dill and salt to taste. It should taste gently sweet and sour.|action|off|60|P4|Gently sweet and sour|white_vinegar; sugar|cooking_pot, wooden_spoon|—
+S|F1|F|Serve|Ladle into deep plates. Serve with bread, or with a fried sausage or a meat patty on top.|action|off|30 + 15 × servings|P5|Served|—|ladle, plates|—
+`
+  },
+  {
+    id: "hungarian_goulash", name: "Hungarian Goulash", image: "img/350/paprika_powder.webp",
+    rows: `
+O|opt_heat|mild|Mild|TRUE
+O|opt_heat|hot|Hot (with a fresh chili)|FALSE
+O|opt_csipetke|with|With csipetke (pinched pasta)|TRUE
+O|opt_csipetke|without|Without csipetke|FALSE
+I|beef|Beef shin or chuck|img/350/beef.webp|150|g|150|linear|—|1.5 cm cubes
+I|lard|Lard or oil|img/350/lard.webp|10|g|10|linear|—|—
+I|onion|Onion|img/350/onion.webp|60|g|60|linear|—|finely chopped
+I|garlic|Garlic clove|img/350/garlic.webp|0.5|pcs|3|linear, rounded up|—|crushed
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|1|tsp|2.5|linear|—|—
+I|caraway_seeds|Caraway seeds|img/350/caraway_seeds.webp|0.25|tsp|0.5|linear|—|crushed
+I|salt|Salt|img/350/salt.webp|0.375|tsp|2.2|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|water|Water|img/350/water.webp|500|ml|500|linear|—|—
+I|carrot|Carrot|img/350/carrot.webp|50|g|50|linear|—|small cubes
+I|parsley_root|Parsley root|img/350/parsley_root.webp|30|g|30|linear|—|small cubes
+I|celery_root|Celery root|img/350/celery_root.webp|20|g|20|linear|—|small cubes
+I|tomato|Tomato|img/350/tomato.webp|0.5|pcs|60|linear|—|chopped
+I|green_bell_pepper|Green pepper (Hungarian wax or bell pepper)|img/350/green_bell_pepper.webp|0.5|pcs|60|linear|—|chopped
+I|chili_pepper|Fresh chili|img/350/chili_pepper.webp|0.25|pcs|3|linear, rounded up|opt_heat = hot|chopped
+I|potato|Potatoes|img/350/potato.webp|150|g|150|linear|—|1.5 cm cubes
+I|flour|Flour (csipetke)|img/350/flour.webp|25|g|25|linear|opt_csipetke = with|—
+I|egg|Egg (csipetke)|img/350/egg.webp|0.25|pcs|14|linear, rounded up|opt_csipetke = with|—
+S|K1|K|Cut the beef|Cut the beef into 1.5 cm cubes.|action|—|(60 + 60 × servings) × skill_factor|—|Cubed|beef|chef_knife, chopping_board|—
+S|K2|K|Chop the onion and garlic|Finely chop the onion; crush the garlic.|action|—|(60 + 30 × servings) × skill_factor|—|Chopped|onion; garlic|chef_knife, chopping_board|—
+S|P1|P|Soften the onion|Melt the lard in the large pot and cook the onion until soft and golden.|action|medium|360|K2|Soft, golden|lard|cooking_pot, stovetop, wooden_spoon|—
+S|P2|P|Brown the beef|Turn up the heat, add the beef and stir until it has lost its red colour all over.|action|high|300|P1, K1|No red left|—|cooking_pot, wooden_spoon|—
+S|P3|P|Paprika off the heat|Pull the pot off the heat. Stir in the paprika, the crushed caraway and the garlic, then add a splash of water at once: paprika burns quickly and turns bitter.|action|off|30|P2|Red and fragrant|paprika_powder; caraway_seeds|cooking_pot, wooden_spoon|—
+S|P4|P|Stew the beef|Add the salt, the pepper and enough water to just cover the meat. Cover and simmer gently, adding a little water when it gets low.|wait|low|3600 (doc: 1 h, until nearly tender)|P3|Beef nearly tender|salt; ground_black_pepper|cooking_pot|—
+S|K3|K|Cut the vegetables|Peel the carrot, parsley root, celery root and potatoes. Cut the roots into small cubes and the potatoes into 1.5 cm cubes; chop the tomato and pepper (and the chili).|action|—|(180 + 120 × servings) × skill_factor|—|All cut|carrot; parsley_root; celery_root; potato; tomato; green_bell_pepper; chili_pepper|vegetable_peeler, chef_knife, chopping_board|—
+S|P5|P|Roots, tomato and pepper|Add the carrot, parsley root, celery root, tomato, pepper (and chili) with the rest of the water. Bring back to a simmer.|wait|low|900|P4, K3|Roots softening|water|cooking_pot, wooden_spoon|—
+S|C1|C|Make the csipetke dough|Knead the flour, the egg and a pinch of salt into a firm dough. Add a drop of water if it crumbles.|action|—|(120 + 30 × servings) × skill_factor|—|Firm, smooth dough|flour; egg|bowl|opt_csipetke = with
+S|C2|C|Pinch the csipetke|Flatten the dough thinly between your palms and pinch off pea-sized pieces onto a floured plate.|action|—|(120 + 60 × servings) × skill_factor|C1|Small pieces on the plate|—|plates|opt_csipetke = with
+S|P6|P|Potatoes in|Add the potatoes and simmer until soft.|wait|medium-low|1200|P5|Potatoes soft|—|cooking_pot|—
+S|P7|P|Csipetke in|Drop in the csipetke and cook until they float and are soft.|wait|medium|300|P6, C2|Csipetke floating, soft|—|cooking_pot, wooden_spoon|opt_csipetke = with
+S|P8|P|Taste|Turn off the heat. Taste and add salt if needed.|action|off|60|P7|Seasoned|—|cooking_pot, spoon|—
+S|F1|F|Serve|Ladle into bowls and serve with fresh bread.|action|off|30 + 15 × servings|P8|Served|—|ladle|—
+`
+  },
+  {
+    id: "hortobagyi_palacsinta", name: "Hortobágyi Húsos Palacsinta", image: "img/350/sour_cream.webp",
+    rows: `
+O|opt_meat|chicken|Chicken thigh|TRUE
+O|opt_meat|pork|Pork shoulder|FALSE
+I|chicken_legs|Boneless chicken thighs|img/350/chicken_legs.webp|120|g|120|linear|opt_meat = chicken|1 cm pieces
+I|pork|Pork shoulder|img/350/pork.webp|120|g|120|linear|opt_meat = pork|1 cm pieces
+I|oil|Oil|img/350/oil.webp|1|tbsp|13|linear|—|—
+I|onion|Onion|img/350/onion.webp|40|g|40|linear|—|finely chopped
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|1|tsp|2.5|linear|—|—
+I|tomato|Tomato|img/350/tomato.webp|0.25|pcs|30|linear|—|chopped
+I|green_bell_pepper|Green pepper (Hungarian wax or bell pepper)|img/350/green_bell_pepper.webp|0.25|pcs|30|linear|—|chopped
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|water_stew|Water (stew)|img/350/water.webp|100|ml|100|linear|—|—
+I|sour_cream|Sour cream|img/350/sour_cream.webp|80|g|80|linear|—|—
+I|flour_sauce|Flour (sauce)|img/350/flour.webp|1|tsp|3|linear|—|—
+I|flour|Flour (crêpes)|img/350/flour.webp|40|g|40|linear|—|—
+I|egg|Egg|img/350/egg.webp|0.5|pcs|27|linear, rounded up|—|—
+I|milk|Milk|img/350/milk.webp|80|ml|82|linear|—|—
+I|water|Water or sparkling water (crêpes)|img/350/water.webp|20|ml|20|linear|—|—
+I|salt_batter|Pinch of salt (crêpes)|img/350/salt.webp|0.03125|tsp|0.2|linear|—|—
+I|oil_pan|Oil (for the pan)|img/350/oil.webp|1|tsp|4.5|linear|—|—
+I|parsley|Parsley, to serve|img/350/parsley.webp|1|tsp|1|linear|—|chopped
+S|B1|B|Make the batter|Whisk the flour, the egg and the salt, then whisk in the milk and the water little by little until smooth.|action|—|(60 + 30 × servings) × skill_factor|—|Smooth and runny like cream|flour; egg; salt_batter; milk; water|bowl, whisk|—
+S|B2|B|Rest the batter|Let it rest so the flour swells; the crêpes tear less.|wait|—|900 (15 to 30 min)|B1|Rested|—|bowl|—
+S|K1|K|Chop the vegetables|Finely chop the onion; chop the tomato and the pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Chopped|onion; tomato; green_bell_pepper|chef_knife, chopping_board|—
+S|K2|K|Cut the meat|Cut the meat into 1 cm pieces.|action|—|(60 + 45 × servings) × skill_factor|—|Cut|chicken_legs; pork|chef_knife, chopping_board|—
+S|P1|P|Soften the onion|Heat the oil in the saucepan and cook the onion until soft and golden.|action|medium|300|K1|Soft, golden|oil|saucepan, stovetop, wooden_spoon|—
+S|P2|P|Paprika and meat|Take the pan off the heat and stir in the paprika. Add the meat, the tomato, the pepper, the salt and the water.|action|off|60|P1, K2|Meat in the red sauce|paprika_powder; salt; water_stew|saucepan, wooden_spoon|—|stove
+S|P3|P|Stew|Cover and simmer gently until the meat is tender.|wait|low|1500 (doc: 25 to 30 min)|P2|Meat tender|—|saucepan|—
+S|P4|P|Lift out the meat|Lift the meat out with a slotted spoon onto the board; keep the juice in the pan.|action|off|60|P3|Juice left in the pan|—|saucepan, spoon, chopping_board|—|stove
+S|K3|K|Chop the filling|Chop the meat finely and mix it with 2 tablespoons of the sour cream and a spoonful of the juice.|action|—|(90 + 60 × servings) × skill_factor|P4|Juicy filling|sour_cream|chef_knife, chopping_board, bowl|—
+S|C1|C|Heat the pan|Heat the frying pan and wipe it with a little oil.|action|medium-high|120|B2|Hot|oil_pan|pan, stovetop|—
+S|C2|C|Cook the crêpes|Pour in a small ladle of batter and tilt the pan so it covers the bottom thinly. When the edge lifts (about 1 min), flip and cook 30 seconds. About 2 crêpes per person.|action|medium-high|180 × servings|C1|Thin, golden spots|—|pan, spatula, ladle|—
+S|O1|O|Preheat the oven|Turn the oven on to 180 °C conventional (160 °C fan).|action|180 °C (160 °C fan)|15|P3|Oven on|—|oven|—
+S|S1|S|Make the sauce|Whisk the rest of the sour cream with the flour, stir it into the juice with a splash of water and simmer 2 to 3 minutes until creamy.|action|medium|180|K3|Creamy, pourable|sour_cream; flour_sauce|saucepan, whisk|—
+S|A1|A|Fill and roll|Put a spoonful of filling on each crêpe, fold in the sides and roll it up. Lay them side by side in the baking dish.|action|—|(60 + 60 × servings) × skill_factor|C2, K3|All rolled|—|baking_dish, spoon|—|countertop
+S|O2|O|Sauce and bake|Pour the sauce over the crêpes and bake until bubbling.|wait|180 °C (160 °C fan)|720 (doc: 10 to 15 min)|O1, A1, S1|Bubbling sauce|—|oven, baking_dish|—
+S|F1|F|Serve|Serve hot, with a spoonful of the sauce and chopped parsley on top.|action|—|30 + 15 × servings|O2|Served|parsley|spatula, plates|—
+`
+  },
+  {
+    id: "chicken_paprikash", name: "Csirkepaprikás Nokedlivel", image: "img/350/chicken_legs.webp",
+    rows: `
+O|opt_nokedli|maker|Spaetzle maker (nokedliszaggató)|TRUE
+O|opt_nokedli|board|Scraped off a wet board with a knife|FALSE
+I|chicken_legs|Chicken legs|img/350/chicken_legs.webp|1|pcs|250|linear|—|cut into thigh and drumstick
+I|lard|Lard or oil|img/350/lard.webp|10|g|10|linear|—|—
+I|onion|Onion|img/350/onion.webp|60|g|60|linear|—|finely chopped
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|1.25|tsp|3|linear|—|—
+I|tomato|Tomato|img/350/tomato.webp|0.5|pcs|60|linear|—|chopped
+I|green_bell_pepper|Green pepper (Hungarian wax or bell pepper)|img/350/green_bell_pepper.webp|0.5|pcs|60|linear|—|chopped
+I|salt|Salt|img/350/salt.webp|0.375|tsp|2.2|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|water_stew|Water (stew)|img/350/water.webp|150|ml|150|linear|—|—
+I|sour_cream|Sour cream|img/350/sour_cream.webp|80|g|80|linear|—|—
+I|flour_sauce|Flour (sauce)|img/350/flour.webp|1|tbsp|8|linear|—|—
+I|flour|Flour (nokedli)|img/350/flour.webp|100|g|100|linear|—|—
+I|egg|Egg (nokedli)|img/350/egg.webp|0.5|pcs|27|linear, rounded up|—|—
+I|water|Water (nokedli dough)|img/350/water.webp|60|ml|60|linear|—|—
+I|salt_dough|Salt (nokedli dough)|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|salt_water|Salt for the cooking water|img/350/salt.webp|1|tsp|6|linear|—|—
+I|butter|Butter or oil (to toss)|img/350/butter.webp|5|g|5|linear|—|—
+S|K1|K|Cut the chicken|Cut the legs at the joint into thighs and drumsticks. Pat dry and sprinkle with the salt and pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Cut and seasoned|chicken_legs; salt; ground_black_pepper|chef_knife, chopping_board|—
+S|K2|K|Chop the vegetables|Finely chop the onion; chop the tomato and the pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Chopped|onion; tomato; green_bell_pepper|chef_knife, chopping_board|—
+S|P1|P|Soften the onion|Melt the lard in the saucepan and cook the onion until soft and golden.|action|medium|420|K2|Soft, golden|lard|saucepan, stovetop, wooden_spoon|—
+S|P2|P|Paprika off the heat|Take the pan off the heat, stir in the paprika and add a splash of the water at once so the paprika doesn't burn.|action|off|30|P1|Red and fragrant|paprika_powder|saucepan, wooden_spoon|—|stove
+S|P3|P|Chicken in|Add the chicken and turn it in the paprika. Add the tomato, the pepper and the rest of the water.|action|medium|120|P2, K1|Chicken coated|water_stew|saucepan, tongs|—
+S|P4|P|Simmer|Cover and simmer gently, turning the chicken once, until it is tender and comes away from the bone.|wait|low|2100 (doc: 35 to 40 min)|P3|Tender at the bone|—|saucepan, tongs|—
+S|D1|D|Make the nokedli dough|Mix the flour, the eggs, the salt and the water into a thick, sticky dough that drops slowly from the spoon. Beat until smooth.|action|—|(120 + 30 × servings) × skill_factor|—|Thick, sticky, smooth|flour; egg; water; salt_dough|bowl, wooden_spoon|—
+S|D2|D|Rest the dough|Let the dough rest so it becomes smooth.|wait|—|600|D1|Rested|—|bowl|—
+S|N1|N|Boil the water|Bring a large pot of water to the boil and salt it.|wait|high|600|P3|Rolling boil|salt_water|cooking_pot, stovetop|—
+S|N2|N|Make the nokedli|Set the spaetzle maker over the boiling water, fill the box with dough and slide it back and forth. Work in 2 or 3 batches.|action|high|120 + 60 × servings|N1, D2|Dough all in the water|—|cooking_pot, spaetzle_maker|opt_nokedli = maker
+S|N3|N|Make the nokedli|Wet the chopping board and spread some dough near its edge. Hold it over the pot and scrape thin strips into the boiling water with a wet knife, dipping the knife in the water as you go. Work in batches.|action|high|(180 + 120 × servings) × skill_factor|N1, D2|Dough all in the water|—|cooking_pot, chopping_board, knife|opt_nokedli = board
+S|N4|N|Cook until they float|Boil until the nokedli float, then 1 more minute.|wait|high|120|—|Floating|—|cooking_pot|—
+S|N5|N|Drain and toss|Drain the nokedli in a colander, rinse quickly with hot water and toss with the butter or oil so they don't stick.|action|off|60|N4|Loose, not sticky|butter|colander, wooden_spoon|—
+S|K3|K|Sour cream mix|Whisk the sour cream and the flour smooth in a bowl.|action|—|60|—|No lumps|sour_cream; flour_sauce|bowl, whisk|—
+S|P5|P|Thicken the sauce|Lift out the chicken. Stir a ladle of the hot sauce into the sour cream mix, then stir it all into the pan. Simmer 3 minutes and put the chicken back.|action|medium|240|P4, K3|Creamy, coats the spoon|—|saucepan, ladle, whisk, tongs|—
+S|F1|F|Serve|Serve the chicken and plenty of sauce with the nokedli.|action|off|30 + 20 × servings|P5, N5|Served|—|tongs, ladle, plates|—
+`
+  },
+  {
+    id: "lecso", name: "Lecsó", image: "img/350/green_bell_pepper.webp",
+    rows: `
+O|opt_sausage|without|Without sausage|TRUE
+O|opt_sausage|with|With sliced sausage (kolbász)|FALSE
+O|opt_egg|without|Without egg|TRUE
+O|opt_egg|with|With egg stirred in|FALSE
+I|green_bell_pepper|Green peppers (Hungarian wax or bell pepper)|img/350/green_bell_pepper.webp|250|g|250|linear|—|1 cm rings
+I|tomato|Ripe tomatoes|img/350/tomato.webp|150|g|150|linear|—|chunks
+I|onion|Onion|img/350/onion.webp|60|g|60|linear|—|sliced
+I|oil|Oil or lard|img/350/oil.webp|1|tbsp|13|linear|—|—
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|0.5|tsp|1.2|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|sugar|Pinch of sugar|img/350/sugar.webp|0.125|tsp|0.5|linear|—|—
+I|sausage|Smoked sausage (kolbász)|img/350/sausage.webp|60|g|60|linear|opt_sausage = with|sliced
+I|egg|Egg|img/350/egg.webp|1|pcs|55|linear|opt_egg = with|beaten
+S|K1|K|Slice the onion|Halve the onion and slice it thinly.|action|—|(30 + 30 × servings) × skill_factor|—|Sliced|onion|chef_knife, chopping_board|—
+S|K2|K|Cut the peppers|Remove the stems and seeds and cut the peppers into 1 cm rings.|action|—|(60 + 60 × servings) × skill_factor|—|Cut into rings|green_bell_pepper|chef_knife, chopping_board|—
+S|K3|K|Cut the tomatoes|Cut the tomatoes into chunks.|action|—|(30 + 30 × servings) × skill_factor|—|Chunks|tomato|chef_knife, chopping_board|—
+S|K4|K|Slice the sausage|Slice the sausage into rounds.|action|—|(30 + 15 × servings) × skill_factor|—|Sliced|sausage|chef_knife, chopping_board|opt_sausage = with
+S|P1|P|Soften the onion|Heat the oil in the large frying pan and cook the onion until soft and glassy.|action|medium|300|K1|Soft, glassy|oil|pan, stovetop, wooden_spoon|—
+S|P2|P|Sausage in|Add the sausage and fry for 2 minutes so it releases its red fat.|action|medium|120|P1, K4|Red fat in the pan|—|pan, wooden_spoon|opt_sausage = with
+S|P3|P|Peppers in|Take the pan off the heat for a moment, stir in the paprika, then add the peppers. Cook, stirring now and then, until they soften and lose their bright colour.|action|medium|600|P2, K2|Peppers soft|paprika_powder|pan, wooden_spoon|—
+S|P4|P|Tomatoes in|Add the tomatoes, the salt and the sugar. Simmer uncovered until the tomatoes fall apart and most of the liquid is gone.|wait|medium|600|P3, K3|Thick, saucy|salt; sugar|pan, wooden_spoon|—
+S|K5|K|Beat the eggs|Beat the eggs with a fork in a bowl.|action|—|30 + 10 × servings|—|Beaten|egg|bowl, fork|opt_egg = with
+S|P5|P|Eggs in|Pour the eggs over the lecsó and stir gently until they have just set.|action|low|120|P4, K5|Eggs just set|—|pan, wooden_spoon|opt_egg = with
+S|F1|F|Serve|Serve hot with fresh bread (or rice).|action|off|30 + 15 × servings|P4, P5|Served|—|spoon, plates|—
+`
+  },
+  {
+    id: "somloi_galuska", name: "Somlói Galuska", image: "img/350/walnut.webp",
+    rows: `
+O|opt_alcohol|rum|With rum|TRUE
+O|opt_alcohol|none|Without alcohol|FALSE
+I|egg|Eggs (sponge)|img/350/egg.webp|0.75|pcs|41|linear, rounded up|—|separated
+I|sugar|Sugar (sponge)|img/350/sugar.webp|15|g|15|linear|—|—
+I|flour|Flour (sponge)|img/350/flour.webp|12|g|12|linear|—|—
+I|baking_powder|Baking powder|img/350/baking_powder.webp|0.0625|tsp|0.25|linear|—|—
+I|walnut|Walnuts, ground (sponge)|img/350/walnut.webp|5|g|5|linear|—|ground
+I|cocoa_powder|Cocoa powder (sponge)|img/350/cocoa_powder.webp|2|g|2|linear|—|—
+I|milk|Milk (custard)|img/350/milk.webp|60|ml|62|linear|—|—
+I|egg_yolk|Egg yolks (custard)|img/350/egg_yolk.webp|0.5|pcs|9|linear, rounded up|—|—
+I|sugar_custard|Sugar (custard)|img/350/sugar.webp|10|g|10|linear|—|—
+I|flour_custard|Flour (custard)|img/350/flour.webp|4|g|4|linear|—|—
+I|vanilla|Vanilla extract|img/350/vanilla.webp|0.125|tsp|0.5|linear|—|—
+I|water|Water (syrup)|img/350/water.webp|20|ml|20|linear|—|—
+I|sugar_syrup|Sugar (syrup)|img/350/sugar.webp|10|g|10|linear|—|—
+I|lemon_zest|Strip of lemon zest|img/350/lemon_zest.webp|0.25|tsp|0.5|linear|—|—
+I|rum|Rum|img/350/rum.webp|6|ml|6|linear|opt_alcohol = rum|—
+I|raisins|Raisins|img/350/raisins.webp|6|g|6|linear|—|—
+I|walnut_top|Walnuts, chopped (layers)|img/350/walnut.webp|8|g|8|linear|—|roughly chopped
+I|dark_chocolate|Dark chocolate|img/350/dark_chocolate.webp|12|g|12|linear|—|chopped
+I|cream_sauce|Cream (chocolate sauce)|img/350/cream.webp|15|ml|15|linear|—|—
+I|cream|Whipping cream|img/350/cream.webp|25|ml|25|linear|—|—
+S|O1|O|Preheat the oven|Turn the oven on to 180 °C conventional (160 °C fan). Line the baking tray with baking paper.|action|180 °C (160 °C fan)|15|—|Oven on, tray lined|—|oven, tray, parchment_paper|—
+S|R1|R|Soak the raisins|Put the raisins in a small bowl and pour half the rum over them (or a little warm water).|action|—|30|—|Soaking|raisins; rum|bowl|—
+S|S1|S|Separate the eggs|Separate the eggs for the sponge: whites into a clean bowl, yolks into another.|action|—|(30 + 30 × servings) × skill_factor|—|Separated|egg|bowl|—
+S|S2|S|Whisk the whites|Whisk the whites to soft peaks, then add half the sugar a little at a time and whisk until stiff and glossy.|action|—|240|S1|Stiff, glossy peaks|sugar|bowl, mixer|—
+S|S3|S|Yolks in|Beat the yolks with the rest of the sugar until pale, then fold them gently into the whites.|action|—|120|S2|Light and airy|—|bowl, mixer, spatula|—
+S|S4|S|Fold in the flour|Mix the flour with the baking powder and fold it in gently in two goes.|action|—|90|S3|No dry flour|flour; baking_powder|spatula|—|countertop
+S|S5|S|Walnut and cocoa|Divide the batter in two bowls. Fold the ground walnuts into one and the cocoa into the other.|action|—|90|S4|Two batters|walnut; cocoa_powder|bowl, spatula|—
+S|S6|S|Spread on the tray|Fold a ridge in the middle of the baking paper and spread the walnut batter on one half, the cocoa batter on the other, about 1 cm thick.|action|—|(60 + 15 × servings) × skill_factor|S5, O1|Evenly spread|—|tray, spatula|—|countertop
+S|S7|S|Bake the sponge|Bake until springy and a toothpick comes out clean.|wait|180 °C (160 °C fan)|780 (doc: 12 to 15 min)|S6|Springy, toothpick clean|—|oven, tray|—
+S|S8|S|Cool the sponge|Let the sponge cool on the rack.|wait|—|1800|S7|Cool|—|cooling_rack|—
+S|C1|C|Custard base|Whisk the yolks, the sugar and the flour smooth with a few spoons of the milk. Heat the rest of the milk in the saucepan until it steams.|action|medium|240|—|Smooth base, milk steaming|egg_yolk; sugar_custard; flour_custard; milk|saucepan, stovetop, bowl, whisk|—
+S|C2|C|Cook the custard|Pour the hot milk onto the yolks while whisking, pour it all back into the pan and cook on low, whisking all the time, until thick. Stir in the vanilla.|action|low|360|C1|Thick, coats the whisk|vanilla|saucepan, whisk|—
+S|C3|C|Cool the custard|Pour into a bowl, press cling film onto the surface and let it cool.|wait|—|1800|C2|Cool, no skin|—|bowl, plastic_wrap|—|countertop
+S|Y1|Y|Make the syrup|Boil the water and the sugar with the lemon zest for 2 minutes. Take off the heat and add the rest of the rum.|action|medium|180|C2|Syrupy|water; sugar_syrup; lemon_zest|saucepan, stovetop|—
+S|K1|K|Chop the walnuts|Roughly chop the walnuts for the layers.|action|—|(30 + 15 × servings) × skill_factor|—|Chopped|walnut_top|chef_knife, chopping_board|—
+S|A1|A|Layer|Tear the sponges into rough pieces. In a deep dish, layer the walnut sponge, half the syrup, half the custard, half the raisins and walnuts; then the cocoa sponge, the rest of the syrup, raisins and walnuts, and finish with the custard.|action|—|(180 + 30 × servings) × skill_factor|S8, C3, Y1, K1, R1|Layered|—|baking_dish, spoon|—|countertop
+S|A2|A|Chill|Cover and chill for at least 4 hours; overnight is best.|wait|—|14400 (doc: 4 h to overnight)|A1|Set and cold|—|plastic_wrap, fridge|—
+S|H1|H|Chocolate sauce|Heat the cream for the sauce until it steams, take it off the heat and stir in the chocolate until smooth.|action|low|180|A2|Smooth, glossy|cream_sauce; dark_chocolate|saucepan, stovetop, spoon|—
+S|W1|W|Whip the cream|Whip the cream to soft peaks.|action|—|120 + 15 × servings|A2|Soft peaks|cream|bowl, mixer|—
+S|F1|F|Scoop and serve|Scoop dumpling-sized portions into bowls with a big spoon, pour over the chocolate sauce and top with whipped cream.|action|—|30 + 20 × servings|H1, W1|Served|—|spoon, plates|—
+`
   }
 ];

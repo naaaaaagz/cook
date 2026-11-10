@@ -257,7 +257,7 @@
       diet_lacto: 'Lacto-Vegetarian',
       diet_ovo: 'Ovo-Vegetarian',
       diet_lactoOvo: 'Lacto-Ovo Vegetarian',
-      diet_pesc: 'Pescatarian',
+      diet_pesc: 'Pescetarian',
       meat: 'Meat',
       pork: 'Pork',
       fish: 'Fish',
@@ -418,7 +418,9 @@
       cuisine_Indian: 'Indian',
       'cuisine_Middle Eastern': 'Middle Eastern',
       'cuisine_Latin American': 'Latin American',
-      cuisine_African: 'African'
+      cuisine_African: 'African',
+      cuisine_European: 'European',
+      cuisine_Hungarian: 'Hungarian'
     }
   };
   // Languages: English (US) first (the default), then the most used ones, then
@@ -1676,7 +1678,7 @@
     paintFavs();
   });
 
-  // Vegetarian kinds get a green "V" logo; its name shows on hover, focus or tap. Pescatarian keeps the word badge.
+  // Vegetarian kinds get a green "V" logo; its name shows on hover, focus or tap. Pescetarian keeps the word badge.
   // A green V whose right arm ends in a leaf (drawn for Cook; not the EVU trademark).
   var VEG_LOGO = '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">' +
     '<path d="M3.5 4.5C7 9.5 9.6 14.6 11.2 21" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>' +
@@ -1757,8 +1759,8 @@
   // Cuisine filters: regions, each with its countries that have 2 or more recipes,
   // shown as "Asian (Chinese · Japanese · …)".
   var CUISINE_GROUPS = [
-    ['Italian'], ['Asian', ['Chinese', 'Japanese', 'Korean', 'Thai', 'Vietnamese', 'Indonesian', 'Filipino']],
-    ['Indian'], ['Middle Eastern', ['Turkish']], ['Greek'], ['French'], ['Mexican'], ['Latin American', ['Brazilian']], ['American'],
+    ['European', ['Italian', 'Greek', 'French', 'Hungarian']], ['Asian', ['Chinese', 'Japanese', 'Korean', 'Thai', 'Vietnamese', 'Indonesian', 'Filipino']],
+    ['Indian'], ['Middle Eastern', ['Turkish']], ['Mexican'], ['Latin American', ['Brazilian']], ['American'],
     ['African', ['Nigerian', 'Moroccan']]
   ];
   // Diet filters: Vegetarian also lists the vegan recipes (judged with the default options).
