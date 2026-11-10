@@ -543,6 +543,9 @@ select {
 .is-landscape .btn-rotate .to-portrait { display: inline; }
 
 /* Recipe list */
+/* "Cook" name on the recipe list: same row as the top-right icons, content starts below */
+.home-brand { display: flex; align-items: center; min-height: 44px; margin: 3px 0 16px; padding-right: 146px; font-family: var(--font-serif); font-size: 28px; font-weight: 700; line-height: 1; color: var(--ink); }
+@media (max-height: 520px) { .home-brand { min-height: 38px; margin-top: -16px; font-size: 24px; } }
 .layout-home { margin: 7px 0 16px; }
 .layout-home[hidden] { display: none !important; }
 /* Small screens: keep the button clear of the three top-right icons (3 × 44px + gaps) */
@@ -1945,8 +1948,8 @@ html.i18n-wait body { visibility: hidden; }
 .comment-head time { color: var(--muted); font-size: 13px; }
 .comment-stars { color: var(--star); letter-spacing: 1px; }
 .comment-body { margin-top: 6px !important; white-space: pre-wrap; overflow-wrap: anywhere; }
-.comment-delete { position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; color: var(--danger, #c62828); background: transparent; border: 0; border-radius: 50%; cursor: pointer; }
-.comment-delete:hover { background: color-mix(in srgb, #c62828 12%, transparent); }
+.comment-delete { position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; color: #e06666; background: transparent; border: 0; border-radius: 50%; cursor: pointer; }
+.comment-delete:hover { background: color-mix(in srgb, #e06666 14%, transparent); }
 .comment-delete:focus-visible { outline: 3px solid var(--highlight); outline-offset: 1px; }
 [dir="rtl"] .comment-delete { right: auto; left: 6px; }
 [dir="rtl"] .comment.is-mine { padding-right: 14px; padding-left: 48px; }
