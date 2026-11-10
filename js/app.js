@@ -1603,6 +1603,8 @@
   // ---------- Favorites (saved with the account; only while signed in) ----------
   function signedIn() { return !!(window.CookAccount && window.CookAccount.signedIn()); }
   function isFav(r) { return state.favorites.indexOf(r.id) >= 0; }
+  // "Done when: Ready" (or Served / Done) tells nothing, so it is left out.
+  var EMPTY_DONE = /^(|ready|served|done)\.?$/i;
   function cleanFavorites(list) {
     var known = window.RECIPES.map(function (r) { return r.id; });
     return list.filter(function (id, i) { return known.indexOf(id) >= 0 && list.indexOf(id) === i; }).slice(0, 500);
@@ -1656,7 +1658,13 @@
     renderFilters();
     renderRecipes();
   });
-  on('btn-fav-done', 'click', function () { if (state.recipe) toggleFav(state.recipe); });
+  on('btn-fav-done', 'click', function () {
+    if (!state.recipe) return;
+    toggleFav(state.recipe);
+    var b = $('btn-fav-done');
+    b.classList.remove('is-flash');
+    if (signedIn() && isFav(state.recipe)) { void b.offsetWidth; b.classList.add('is-flash'); }
+  });
   // Signing in or out changes which favorites (and the "Favorites only" filter) show.
   document.addEventListener('cook:account', function () {
     loadShopping();
@@ -1669,8 +1677,11 @@
   });
 
   // Vegetarian kinds get a green "V" logo; its name shows on hover, focus or tap. Pescatarian keeps the word badge.
-  var VEG_LOGO = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/>' +
-    '<path d="M7 7.5l5 10 5-10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  // A green V whose right arm ends in a leaf (drawn for Cook; not the EVU trademark).
+  var VEG_LOGO = '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">' +
+    '<path d="M3.5 4.5C7 9.5 9.6 14.6 11.2 21" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>' +
+    '<path d="M11.2 21C12.4 16.6 14.2 13 16.6 10.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>' +
+    '<path d="M16.2 11C15.6 6.6 17.9 3.6 22 2.6 22.5 7 20.4 10.2 16.2 11Z" fill="currentColor"/></svg>';
   function dietBadge(info) {
     if (!info.label) return '';
     if (info.label === 'pesc') return '<span class="diet-badge diet-pesc">' + ht('diet_pesc') + '</span>';
@@ -2541,8 +2552,11 @@
     var total = Math.round(item.qty * item.count * 100) / 100;
     return amount((String(total) + ' ' + (item.unit || '')).trim());
   }
+  // Water and ice come from the tap: nothing to buy.
+  function shoppable(ing) { return (infoFor(ing) || {}).category !== 'water'; }
   // The control next to an ingredient: "+ Add to shopping list", then "− n +".
   function shopControl(r, ing) {
+    if (!shoppable(ing)) return '';
     var item = signedIn() ? shopItem(r, ing) : null;
     if (!item) {
       return '<button class="shop-add" type="button" data-shop="add"' + (signedIn() ? '' : ' disabled') + '>+ <span>' + ht('shopAdd') + '</span></button>';
@@ -2571,7 +2585,7 @@
   });
   on('btn-shop-all', 'click', function () {
     if (!signedIn()) { window.CookAccount.prompt('shopSignIn'); return; }
-    state.built.ingredients.forEach(function (ing) { if (!shopItem(state.recipe, ing)) shopSet(state.recipe, ing, 1); });
+    state.built.ingredients.forEach(function (ing) { if (shoppable(ing) && !shopItem(state.recipe, ing)) shopSet(state.recipe, ing, 1); });
     var b = $('btn-shop-all');
     b.textContent = t('shopAdded');
     b.classList.remove('is-added');
@@ -3146,7 +3160,7 @@
       '<h3>' + esc(step.title) + '</h3>' +
       body +
       (ings ? '<ul class="step-ings">' + ings + '</ul>' : '') +
-      '<p class="done-when">' + ht('doneWhen') + esc(units(step.doneWhen)) + '</p>' +
+      (EMPTY_DONE.test(String(step.doneWhen || '').trim()) ? '' : '<p class="done-when">' + ht('doneWhen') + esc(units(step.doneWhen)) + '</p>') +
       (step.overcook ? '<p class="overdo-note" role="alert">' + ht('dontOverdo') + '</p>' : '') +
       '<div class="step-foot">' +
         '<div class="ring">' +

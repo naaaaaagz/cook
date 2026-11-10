@@ -647,6 +647,14 @@ select {
 .hero-actions .btn-read-hero { margin-top: 0; }
 .btn-fav { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .btn-fav .fav-icon { display: inline-flex; color: var(--star); }
+.btn-fav.is-flash { animation: fav-flash .9s ease-out; }
+.btn-fav.is-flash .fav-icon { animation: fav-flash-icon .9s ease-out; }
+@keyframes fav-flash-icon { 0% { color: #fff; } 100% { } }
+@keyframes fav-flash {
+  0% { background: var(--star); border-color: var(--star); color: #fff; }
+  100% { }
+}
+@media (prefers-reduced-motion: reduce) { .btn-fav.is-flash, .btn-fav.is-flash .fav-icon { animation: none; } }
 .btn-read-hero .fav-icon .star-icon { width: 15px; height: 15px; }
 .det-star { display: inline-flex; align-items: center; color: var(--star); vertical-align: middle; }
 .det-star[hidden] { display: none; }
@@ -764,10 +772,11 @@ select {
   background: var(--allergen-bg);
 }
 .warn-strip b { font-weight: 700; color: var(--ink); }
-.recipe-card-body .warn-row { margin-top: auto; }
+.recipe-card-body .warn-row { margin: auto -12px -12px -14px; }
+.recipe-card-body .warn-strip { padding-left: 14px; }
 .info .warn-row { margin: 4px -16px -14px; border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
 .info .warn-strip { padding: 7px 16px 8px; font-size: 13px; }
-/* Vegetarian logo: a bright green circle with a white V; its kind shows as a tooltip */
+/* Vegetarian logo: a plain green V with a leaf; its kind shows as a tooltip */
 .veg-logo {
   position: relative;
   z-index: 2;
@@ -1199,6 +1208,8 @@ select {
 
 /* Finished */
 .is-finished .cook-clock + .cook-clock, .is-finished .cook-head .btn-read, .is-finished .view-fab-wrap { display: none; }
+/* After cooking the header scrolls away with the top-right icons, so no empty space is left where they were */
+.screen-cook.is-finished .cook-head { position: static; }
 .finished { text-align: center; }
 .finished .stack { max-width: 360px; margin: 24px auto 0; }
 /* Finish celebration */
@@ -1378,8 +1389,8 @@ body.overdo::before {
   .recipe-card-body .title-row { font-size: 18px; padding-right: 0; }
   .nutri-line { font-size: 12px; }
   .nutri-line small { font-size: 11px; padding-left: 0; display: inline; margin-left: 4px; }
-  .recipe-card-body .warn-row { margin: auto -10px -10px 0; }
-  .recipe-card-body .warn-strip { padding: 4px 10px 5px; }
+  .recipe-card-body .warn-row { margin: auto -10px -10px -14px; }
+  .recipe-card-body .warn-strip { padding: 4px 10px 5px 14px; }
 
   /* "Read instead" is a book icon on phones */
   .btn-read .btn-label { display: none; }
@@ -1508,18 +1519,23 @@ body.overdo::before {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent 0 62%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, .55) 90%, #fff 98%, transparent 100%);
+  background: conic-gradient(from calc(var(--sweep) - var(--tail)), rgba(255, 255, 255, 0) 0deg, rgba(255, 255, 255, .55) calc(var(--tail) * .75), #fff var(--tail), transparent calc(var(--tail) + 2deg));
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
   mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
   filter: blur(1.5px);
   pointer-events: none;
-  animation: ring-sweep 2.6s ease-in-out infinite;
+  animation: ring-sweep 2.8s linear infinite;
 }
+@property --sweep { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --tail { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+/* The dot runs round once at an even pace; its trail is only as long as the way it has come
+   (up to 100deg), and after the full circle it keeps going a little while fading out. */
 @keyframes ring-sweep {
-  0% { transform: rotate(0deg); opacity: 0; }
-  8% { opacity: 1; }
-  55% { transform: rotate(360deg); opacity: 1; }
-  62%, 100% { transform: rotate(360deg); opacity: 0; }
+  0% { --sweep: 0deg; --tail: 0deg; opacity: 1; }
+  15% { --sweep: 100deg; --tail: 100deg; }
+  52% { --sweep: 360deg; --tail: 100deg; opacity: 1; }
+  66% { --sweep: 460deg; --tail: 100deg; opacity: 0; }
+  100% { --sweep: 460deg; --tail: 100deg; opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .notif:not(.is-running) .notif-icon::after { animation: none; opacity: 0; } }
 /* Two-frame action picture: shown in the ring while the step runs, 0.4 s per frame */
