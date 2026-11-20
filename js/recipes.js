@@ -371,7 +371,11 @@ window.INGREDIENT_INFO = (function () {
     sour_cabbage_leaves: '20 4.3 1 0.1 0 2.9 1.7||',
     sauerkraut: '19 4.3 0.9 0.1 0 2.9 1.7||',
     lepinja: '275 54 9 1.5 0.3 2.4 1.2|Gluten|',
-    lima_beans: '113 20 6.8 0.3 0.1 5 0.03||'
+    lima_beans: '113 20 6.8 0.3 0.1 5 0.03||',
+    // Added 2026-11-20 with the popular easy recipes
+    burrata: '240 2 12 21 14 0 0.5|Milk|dairy',
+    sun_dried_tomatoes: '213 23 5 14 1.9 6 0.7||',
+    peach: '39 9.5 0.9 0.3 0 1.5 0||'
   };
   var CATEGORY = {
     meat: 'guanciale bacon ham ground_pork ground_beef beef chicken_breast',
@@ -423,6 +427,9 @@ window.INGREDIENT_INFO = (function () {
   // Ingredients added with the European and American recipes (2026-11-20)
   var EU = { dairy: "bryndza", sauces: "lingonberry_jam", bread: "bread_dumplings baguette lepinja", veg: "beetroot sour_cabbage_leaves sauerkraut", grain: "barley", legume: "lima_beans" };
   Object.keys(EU).forEach(function (c) { MORE[c] += ' ' + EU[c]; });
+  // Ingredients added with the popular easy recipes (2026-11-20)
+  var POP = { dairy: "burrata", veg: "sun_dried_tomatoes", fruit: "peach" };
+  Object.keys(POP).forEach(function (c) { MORE[c] += ' ' + POP[c]; });
   Object.keys(MORE).forEach(function (c) { CATEGORY[c] += ' ' + MORE[c]; });
   var catOf = {};
   Object.keys(CATEGORY).forEach(function (c) { CATEGORY[c].split(' ').forEach(function (k) { catOf[k] = c; }); });
@@ -860,7 +867,14 @@ window.INGREDIENT_INFO = (function () {
     cevapi: { starred: 0, category: "main", cuisine: ['European'] },
     succotash: { starred: 0, category: "side", cuisine: ['American'] },
     syrniki: { starred: 0, category: "dessert", cuisine: ['European'] },
-    jambalaya: { starred: 0, category: "main", cuisine: ['American'] }
+    jambalaya: { starred: 0, category: "main", cuisine: ['American'] },
+    marry_me_chicken: { starred: 0, category: "main", cuisine: ['American'] },
+    birria_tacos: { starred: 0, category: "main", cuisine: ['Mexican'] },
+    garlic_butter_steak_bites: { starred: 0, category: "main", cuisine: ['American'], kids: { opt_chili: 'without' } },
+    smashed_potatoes: { starred: 0, category: "side", cuisine: ['American'] },
+    burrata_salad: { starred: 0, category: "side", cuisine: ['Italian'] },
+    lava_cakes: { starred: 0, category: "dessert", cuisine: ['French'] },
+    focaccia: { starred: 0, category: "side", cuisine: ['Italian'] }
   };
   window.RECIPES.forEach(function (r) {
     var m = META[r.id] || {};
@@ -894,7 +908,7 @@ window.INGREDIENT_INFO = (function () {
     scrambled_eggs: 'breakfast', omelette: 'breakfast', french_toast: 'breakfast', oatmeal_porridge: 'breakfast',
     overnight_oats: 'breakfast', breakfast_muffin: 'breakfast', pancakes: 'breakfast', waffles: 'breakfast',
     huevos_rancheros: 'breakfast', menemen: 'breakfast', shakshuka: 'breakfast',
-    caesar_salad: 'salad', summer_salad: 'salad', greek_salad: 'salad', potato_salad: 'salad', tabbouleh: 'salad', gado_gado: 'salad',
+    caesar_salad: 'salad', summer_salad: 'salad', burrata_salad: 'salad', greek_salad: 'salad', potato_salad: 'salad', tabbouleh: 'salad', gado_gado: 'salad',
     tzatziki: 'dip', homemade_mayonnaise: 'dip', hummus: 'dip', guacamole: 'dip', baba_ganoush: 'dip'
   };
   // Italian, Greek and French are countries of the European group too.

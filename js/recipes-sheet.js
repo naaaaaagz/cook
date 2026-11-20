@@ -559,7 +559,7 @@ S|F1|F|Slice and serve|Slice the meat. Serve with the side of your choice (not c
     id: 'burger', name: 'Burger', image: 'img/350/hamburger_buns.webp',
     vars: function (c) { return { patties: Math.ceil(c.servings) * (c.opt_patty === 'thick' ? 1 : 2) }; },
     rows: `
-O|opt_patty|thin|Thin smashed: 2 × 65 g per burger, 3 to 4 min|TRUE
+O|opt_patty|thin|Smash burger: 2 balls of 65 g per burger, pressed flat in the pan, about 3 min|TRUE
 O|opt_patty|thick|Thick: 1 × 130 g with a center divot, 5 to 6 min|FALSE
 O|opt_sauce_heat|with|Sauce with chili or cayenne|TRUE
 O|opt_sauce_heat|without|Without|FALSE
@@ -588,8 +588,9 @@ I|pickle_juice|Pickle juice (sauce)|img/350/pickle_juice.webp|0.25|tsp|1.3|linea
 I|cayenne_pepper|Cayenne pepper or chili powder (sauce)|img/350/cayenne_pepper.webp|0.02|tsp|0.05|linear|opt_sauce_heat = with|—
 S|Y1|S|Make the mayonnaise|Make the mayonnaise from the Homemade Mayonnaise recipe (1 tbsp per person is needed for the sauce).|action|—|300 (see Homemade Mayonnaise)|—|Thick mayonnaise|mayonnaise|—|opt_mayo = homemade
 S|P1|P|Season the beef|In a bowl, mix the ground beef with black pepper and a little Worcestershire sauce.|action|—|60|—|Evenly mixed|ground_beef; ground_black_pepper; worcestershire_sauce|bowl|—
-S|P2|P|Shape the patties|Roll balls slightly larger than a golf ball and squeeze them into disks. Thicker than a finger? Leave a small divot in the center.|action|—|(30 + 30 × patties) × skill_factor|P1|Even disks|beef_mixed|—|—
-S|P3|P|Chill the patties|Cover them well and put them in the fridge.|wait|—|600 (the doc gives no time; minimum is an assumption)|P2|Chilled|—|fridge|—
+S|P2|P|Shape the patties|Roll balls slightly larger than a golf ball and squeeze them into disks. Thicker than a finger? Leave a small divot in the center.|action|—|(30 + 30 × patties) × skill_factor|P1|Even disks|beef_mixed|—|opt_patty = thick
+S|P2S|P|Shape the balls|Roll the beef into loose balls of about 65 g. Do not flatten them yet.|action|—|(30 + 15 × patties) × skill_factor|P1|Loose balls|beef_mixed|—|opt_patty = thin
+S|P3|P|Chill the patties|Cover them well and put them in the fridge.|wait|—|600 (the doc gives no time; minimum is an assumption)|P2, P2S|Chilled|—|fridge|—
 S|S1|S|Chop the pickles|Shred or finely chop the pickles for the sauce.|action|—|(30 + 15 × servings) × skill_factor|—|Finely chopped|pickles_chopped|chef_knife, chopping_board|—
 S|S2|S|Mix the sauce|Mix 4 parts mayonnaise, 2 parts ketchup, 1 part yellow mustard, a little salt, pepper and sugar, the chopped pickles and pickle juice (and a pinch of cayenne or chili). Stir well.|action|—|60|S1, Y1|Smooth sauce|mayonnaise; ketchup; mustard; salt_sauce; pepper_sauce; sugar; pickles_chopped_ready; pickle_juice; cayenne_pepper|bowl, spoon|—
 S|S3|S|Rest the sauce|Let the sauce rest in the fridge so the flavors blend.|wait|—|1800|S2|30 min passed|—|fridge|—
@@ -597,8 +598,9 @@ S|O1|O|Cut the onion|Cut the white onion into rings.|action|—|(30 + 30 × serv
 S|O2|O|Sauté the onion|Stir-fry the rings in a pan on medium heat with a little oil and a pinch of salt.|wait|medium|540 (doc: 8 to 10 min)|O1|Soft and glassy|onion_rings; oil; salt|pan, stovetop, spatula|—
 S|K1|K|Tomato and lettuce|Slice the tomato (2 slices per burger) and wash the lettuce leaves.|action|—|(30 + 30 × servings) × skill_factor|—|Ready|tomato; lettuce|chef_knife, chopping_board|—
 S|G1|G|Heat the big pan|Heat a large pan with a little oil on high.|action|high|60|P3, S3|Very hot|oil|pan, stovetop|—
-S|G2|G|Fry the patties|Salt the patties slightly and fry them, flipping every minute.|action|high|210 thin (doc: 3 to 4 min) / 330 thick (doc: 5 to 6 min), incl. G3|G1|Browned crust|patties_chilled; salt|pan, spatula|—
-S|G3|G|Cheese on, cover|After the last flip, put the cheese slices on the patties and cover the pan.|action|high|45 (doc: last 30 to 60 s)|G2|Cheese melted|cheese_slice|pan|—
+S|G2|G|Fry the patties|Salt the patties slightly and fry them, flipping every minute.|action|high|330 (doc: 5 to 6 min, incl. G3)|G1|Browned crust|patties_chilled; salt|pan, spatula|opt_patty = thick
+S|G2S|G|Smash the patties|Put a few balls in the very hot pan, cover each with a piece of baking paper and press it very flat with a sturdy spatula in the first 10 seconds. Peel off the paper, salt them and fry without moving for about 2 minutes, until the edges are brown and crispy. Scrape them loose and flip.|action|high|150 (doc: about 2 min + flip)|G1|Crispy edges, flipped|patties_chilled; salt|pan, spatula, parchment_paper|opt_patty = thin
+S|G3|G|Cheese on, cover|After the last flip, put the cheese slices on the patties and cover the pan.|action|high|45 (doc: last 30 to 60 s)|G2, G2S|Cheese melted|cheese_slice|pan|—
 S|G4|G|Toast the buns|Cut the buns in half and place them cut side down on a slightly buttered pan on medium heat.|action|medium|45 (doc: 30 to 60 s)|G3|Lightly toasted|hamburger_buns; butter|pan, stovetop|—
 S|A1|A|Build the burger|Bottom to top: bottom bun, sauce, lettuce, patty, cheese, tomato, pickles, sautéed onion, sauce, top bun. Push a wooden skewer through the middle.|action|—|60 + 60 × servings|G4, O2, K1, S3|Served|buns_toasted; sauce; veg_ready; patties_ready; pickles; onion_sauteed|skewers|—
 `
@@ -4876,6 +4878,199 @@ S|P5|P|Simmer|Add the tomatoes, the stock, the bay leaf, the salt and the pepper
 S|P6|P|Shrimp in|Push the shrimp into the rice, cover again and cook until pink.|wait|low|300|P5|Shrimp pink|shrimp|cooking_pot|opt_shrimp = with
 S|P7|P|Rest|Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.|wait|off|300|P5, P6|Rested|—|cooking_pot|—
 S|F1|F|Serve|Fluff the rice with a fork and serve sprinkled with the green onions.|action|off|30 + 15 × servings|P7|Served|green_onion|fork, plates|—
+`
+  },
+  {
+    id: "marry_me_chicken", name: "Marry Me Chicken", image: "img/350/chicken_breast.webp",
+    rows: `
+O|opt_side|pasta|With pasta|TRUE
+O|opt_side|none|With bread or rice on the side|FALSE
+I|chicken_breast|Chicken breast|img/350/chicken_breast.webp|150|g|150|linear|—|halved into thin cutlets
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|flour|Flour (for dusting)|img/350/flour.webp|1|tbsp|8|linear|—|—
+I|olive_oil|Olive oil|img/350/olive_oil.webp|0.5|tbsp|7|linear|—|—
+I|butter|Butter|img/350/butter.webp|5|g|5|linear|—|—
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|finely chopped
+I|sun_dried_tomatoes|Sun-dried tomatoes in oil|— (placeholder: no image yet)|20|g|20|linear|—|roughly chopped
+I|chicken_stock|Chicken stock|img/350/chicken_stock.webp|60|ml|60|linear|—|—
+I|cream|Cream (30% fat or more)|img/350/cream.webp|60|ml|60|linear|—|—
+I|parmesan|Grated parmesan|img/350/parmesan.webp|15|g|15|linear|—|—
+I|chili_flakes|Chili flakes|img/350/chili_flakes.webp|0.0625|tsp|0.1|linear|—|—
+I|oregano|Dried oregano|img/350/oregano.webp|0.25|tsp|0.3|linear|—|—
+I|basil|Fresh basil|img/350/basil.webp|3|leaves|1.5|linear|—|torn
+I|penne|Penne or other short pasta|img/350/penne.webp|80|g|80|linear|opt_side = pasta|—
+I|salt_pasta|Salt (pasta water)|img/350/salt.webp|1|tsp|6|linear|opt_side = pasta|—
+S|K1|K|Prepare the chicken|Cut each chicken breast in half horizontally into two thin cutlets. Season them with the salt and the pepper and dust them lightly with flour.|action|—|(60 + 60 × servings) × skill_factor|—|Seasoned and floured|chicken_breast; salt; ground_black_pepper; flour|chef_knife, chopping_board|—
+S|K2|K|Garlic and tomatoes|Chop the garlic finely and the sun-dried tomatoes roughly.|action|—|(40 + 20 × servings) × skill_factor|—|Chopped|garlic; sun_dried_tomatoes|chef_knife, chopping_board|—
+S|N1|N|Boil the water|Bring a large pot of salted water to the boil.|wait|high|600|—|Boiling|salt_pasta|cooking_pot, stovetop|opt_side = pasta
+S|N2|N|Cook the pasta|Cook the pasta until al dente, then drain it.|wait|high|660 (doc: see the packet)|N1|Al dente|penne|cooking_pot, colander|opt_side = pasta
+S|P1|P|Fry the chicken|Heat the oil and the butter in the large pan and fry the chicken until golden on both sides and cooked through. Lift it out onto a plate.|action|medium-high|480 (doc: 3 to 4 min per side)|K1|Golden, cooked through|olive_oil; butter|pan, stovetop, tongs|—
+S|P2|P|Garlic and tomatoes|Fry the garlic and the sun-dried tomatoes in the same pan for 1 minute.|action|medium|60|P1, K2|Fragrant|garlic; sun_dried_tomatoes|pan, wooden_spoon|—
+S|P3|P|Make the sauce|Pour in the stock and the cream, stir in the parmesan, the chili flakes and the oregano and simmer until slightly thickened.|wait|medium-low|240|P2|Slightly thickened|chicken_stock; cream; parmesan; chili_flakes; oregano|pan, wooden_spoon|—
+S|P4|P|Chicken back in|Put the chicken back into the sauce and simmer for 2 minutes, spooning the sauce over it.|wait|low|120|P3|Hot through|—|pan, spoon|—
+S|F1|F|Serve|Toss the pasta with a little of the sauce, then serve the chicken on top with the rest of the sauce and the torn basil.|action|off|30 + 15 × servings|P4, N2|Served|basil|plates|opt_side = pasta
+S|F2|F|Serve|Serve the chicken with the sauce and the torn basil, with bread or rice on the side.|action|off|30 + 15 × servings|P4|Served|basil|plates|opt_side = none
+`
+  },
+  {
+    id: "birria_tacos", name: "Birria Tacos", image: "img/350/corn_tortilla.webp",
+    rows: `
+O|opt_cheese|with|With melted cheese|TRUE
+O|opt_cheese|without|Without cheese|FALSE
+I|beef|Beef chuck or other stewing beef|img/350/beef.webp|200|g|200|linear|—|large chunks
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|oil|Oil|img/350/oil.webp|0.5|tbsp|7|linear|—|—
+I|dried_red_chilies|Dried mild chilies (ancho or guajillo)|img/350/dried_red_chilies.webp|1|pcs|6|linear|—|stems and seeds removed
+I|onion|Onion|img/350/onion.webp|40|g|40|linear|—|roughly chopped
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|—
+I|tomato|Tomato|img/350/tomato.webp|0.5|pcs|60|linear, rounded up|—|quartered
+I|cumin|Ground cumin|img/350/cumin.webp|0.25|tsp|0.5|linear|—|—
+I|oregano|Dried oregano|img/350/oregano.webp|0.25|tsp|0.3|linear|—|—
+I|cinnamon|Ground cinnamon|img/350/cinnamon.webp|0.0625|tsp|0.15|linear|—|—
+I|apple_cider_vinegar|Apple cider vinegar|img/350/apple_cider_vinegar.webp|0.5|tbsp|7.5|linear|—|—
+I|bay_leaf|Bay leaf|img/350/bay_leaf.webp|0.5|pcs|0.2|linear, rounded up|—|—
+I|beef_stock|Beef stock|img/350/beef_stock.webp|250|ml|250|linear|—|—
+I|corn_tortilla|Small corn tortillas|img/350/corn_tortilla.webp|3|pcs|75|linear|—|—
+I|mozzarella|Grated mozzarella (or Oaxaca cheese)|img/350/mozzarella.webp|40|g|40|linear|opt_cheese = with|—
+I|white_onion|White onion|img/350/white_onion.webp|20|g|20|linear|—|finely diced
+I|cilantro|Fresh cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
+I|lime|Lime|img/350/lime.webp|0.25|pcs|15|linear, rounded up|—|wedges
+S|K1|K|Prepare the chilies|Remove the stems and seeds from the chilies and cover them with hot water in a bowl.|action|—|(60 + 30 × servings) × skill_factor|—|Covered with hot water|dried_red_chilies|bowl|—
+S|K2|K|Soak the chilies|Let the chilies soak until soft.|wait|—|900|K1|Soft|—|bowl|—
+S|M1|M|Brown the beef|Salt the beef and brown it on all sides in the oil in the large pot. Do it in batches so the pieces don't touch.|action|medium-high|240 + 60 × servings|—|Browned all over|beef; salt; oil|cooking_pot, stovetop, tongs|—
+S|M2|K|Blend the sauce|Blend the soaked chilies with the onion, the garlic, the tomato, the cumin, the oregano, the cinnamon, the vinegar and a little of the stock until smooth.|action|—|120|K2|Smooth|onion; garlic; tomato; cumin; oregano; cinnamon; apple_cider_vinegar|blender|—
+S|M3|M|Simmer|Pour the sauce and the rest of the stock over the beef, add the bay leaf, cover and cook on low heat until the beef falls apart.|wait|low|9000 (doc: 2.5 to 3 h)|M1, M2|Falls apart|beef_stock; bay_leaf|cooking_pot|—
+S|M4|M|Shred the beef|Lift the beef out and shred it with two forks. Keep the broth hot and add salt if needed.|action|low|180|M3|Shredded|—|fork, bowl, cooking_pot|—
+S|T1|T|Toppings|Finely dice the white onion, chop the cilantro and cut the lime into wedges.|action|—|(60 + 30 × servings) × skill_factor|—|Ready|white_onion; cilantro; lime|chef_knife, chopping_board|—
+S|F1|F|Fry the tacos|Dip a tortilla in the fat on top of the broth and lay it in the hot pan. Put beef (and cheese) on one half, fold it over and fry until crispy on both sides. Repeat with the rest.|action|medium|60 + 180 × servings|M4|Crispy|corn_tortilla; mozzarella|pan, stovetop, tongs|—
+S|F2|F|Serve|Serve the tacos with a small bowl of the hot broth for dipping and the onion, the cilantro and the lime on the side.|action|off|30 + 15 × servings|F1, T1|Served|—|plates, ladle|—
+`
+  },
+  {
+    id: "garlic_butter_steak_bites", name: "Garlic Butter Steak Bites", image: "img/350/beef.webp",
+    rows: `
+O|opt_chili|without|No chili|TRUE
+O|opt_chili|with|With chili flakes|FALSE
+I|beef|Sirloin or rump steak|img/350/beef.webp|180|g|180|linear|—|2 to 3 cm cubes
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|oil|Oil|img/350/oil.webp|0.5|tbsp|7|linear|—|—
+I|butter|Butter|img/350/butter.webp|15|g|15|linear|—|—
+I|garlic|Garlic clove|img/350/garlic.webp|2|pcs|10|linear|—|finely chopped
+I|parsley|Fresh parsley|img/350/parsley.webp|1|tbsp|3|linear|—|finely chopped
+I|chili_flakes|Chili flakes|img/350/chili_flakes.webp|0.125|tsp|0.2|linear|opt_chili = with|—
+I|lemon_juice|Lemon juice|img/350/lemon_juice.webp|0.5|tsp|2.5|linear|—|—
+S|K1|K|Cut the steak|Pat the steak dry and cut it into 2 to 3 cm cubes. Season with the salt and the pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Cubed and seasoned|beef; salt; ground_black_pepper|chef_knife, chopping_board|—
+S|K2|K|Garlic and parsley|Chop the garlic and the parsley finely.|action|—|(40 + 30 × servings) × skill_factor|—|Chopped|garlic; parsley|chef_knife, chopping_board|—
+S|P1|P|Heat the pan|Heat the oil in the large pan until it just starts to smoke.|action|high|120|—|Smoking hot|oil|pan, stovetop|—
+S|P2|P|Sear the steak|Add the steak in a single layer (in batches if needed) and sear without moving for 1 to 2 minutes, then turn and sear the other sides.|action|high|150 + 60 × servings|P1, K1|Browned all over|—|pan, tongs|—
+S|P3|P|Garlic butter|Turn the heat down, add the butter and the garlic and toss for 1 minute, until the garlic smells good but is not brown.|action|medium|60|P2, K2|Coated in garlic butter|butter; garlic|pan, wooden_spoon|—
+S|P4|P|Chili flakes|Stir in the chili flakes.|action|medium|15|P3|Mixed in|chili_flakes|pan, wooden_spoon|opt_chili = with
+S|F1|F|Serve|Squeeze over the lemon juice, sprinkle with the parsley and serve right away with the butter from the pan.|action|off|30 + 15 × servings|P3, P4|Served|lemon_juice; parsley|plates|—
+`
+  },
+  {
+    id: "smashed_potatoes", name: "Crispy Smashed Potatoes", image: "img/350/potato.webp",
+    rows: `
+O|opt_parmesan|with|With parmesan|TRUE
+O|opt_parmesan|without|Without|FALSE
+I|potato|Small potatoes (waxy or new)|img/350/potato.webp|200|g|200|linear|—|whole, unpeeled
+I|salt_water|Salt (cooking water)|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|olive_oil|Olive oil|img/350/olive_oil.webp|1.5|tbsp|21|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|garlic_powder|Garlic powder|img/350/garlic_powder.webp|0.25|tsp|0.8|linear|—|—
+I|rosemary|Fresh rosemary (or thyme)|img/350/rosemary.webp|0.5|tsp|0.5|linear|—|chopped
+I|parmesan|Grated parmesan|img/350/parmesan.webp|10|g|10|linear|opt_parmesan = with|—
+S|O1|O|Preheat the oven|Turn the oven on to 220 °C conventional (200 °C fan).|action|220 °C (200 °C fan)|15|B1|Oven on|—|oven|—
+S|B1|B|Boil the potatoes|Put the potatoes in the pot, cover them with cold water, add the salt and boil until a knife slides in easily.|wait|medium-high|1200 (doc: 15 to 20 min)|—|Knife slides in easily|potato; salt_water|cooking_pot, stovetop|—
+S|B2|B|Drain and steam dry|Drain the potatoes and let them steam dry for 5 minutes.|wait|off|300|B1|Dry on the surface|—|colander|—
+S|S1|S|Smash the potatoes|Oil the tray, put the potatoes on it and press each one flat with the bottom of a glass to about 1.5 cm thick.|action|—|(60 + 45 × servings) × skill_factor|B2|Flattened|olive_oil|tray|—
+S|S2|S|Season|Drizzle with the rest of the oil and sprinkle with the salt, the pepper, the garlic powder and the rosemary.|action|—|60|S1|Seasoned|salt; ground_black_pepper; garlic_powder; rosemary|tray|—
+S|R1|S|Roast|Roast until deep golden and crispy at the edges.|wait|220 °C (200 °C fan)|1800 (doc: 25 to 35 min)|S2, O1|Golden and crispy|—|tray, oven|—
+S|R2|S|Parmesan on top|Sprinkle the parmesan over the potatoes and roast until it melts.|wait|220 °C (200 °C fan)|180|R1|Cheese melted|parmesan|tray, oven|opt_parmesan = with
+S|F1|F|Serve|Serve hot.|action|off|30 + 15 × servings|R1, R2|Served|—|plates|—
+`
+  },
+  {
+    id: "burrata_salad", name: "Burrata Salad", image: "img/350/mozzarella.webp",
+    rows: `
+O|opt_fruit|tomato|With tomatoes|TRUE
+O|opt_fruit|peach|With peaches|FALSE
+I|burrata|Burrata|— (placeholder: no image yet)|0.5|pcs|60|linear, rounded up|—|—
+I|cherry_tomato|Ripe tomatoes (mixed, or cherry tomatoes)|img/350/cherry_tomato.webp|120|g|120|linear|opt_fruit = tomato|—
+I|peach|Ripe peach|img/350/peach.webp|1|pcs|150|linear|opt_fruit = peach|—
+I|extra_virgin_olive_oil|Extra virgin olive oil|img/350/extra_virgin_olive_oil.webp|1|tbsp|14|linear|—|—
+I|balsamic_vinegar|Balsamic vinegar|img/350/balsamic_vinegar.webp|1|tsp|5|linear|—|—
+I|honey|Honey|img/350/honey.webp|0.5|tsp|3.5|linear|opt_fruit = peach|—
+I|salt|Flaky or regular salt|img/350/salt.webp|0.125|tsp|0.75|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.0625|tsp|0.15|linear|—|—
+I|basil|Fresh basil|img/350/basil.webp|4|leaves|2|linear|—|—
+I|bread|Crusty bread|img/350/bread.webp|1|slices|40|linear|—|—
+S|W1|W|Take out the burrata|Take the burrata out of the fridge so it can lose its chill.|wait|—|1200|—|20 min passed|burrata|—|—
+S|K1|K|Slice the tomatoes|Slice the large tomatoes and halve the cherry tomatoes.|action|—|(60 + 45 × servings) × skill_factor|—|Sliced|cherry_tomato|chef_knife, chopping_board|opt_fruit = tomato
+S|K2|K|Slice the peaches|Cut the peaches into thin wedges.|action|—|(30 + 45 × servings) × skill_factor|—|Sliced|peach|chef_knife, chopping_board|opt_fruit = peach
+S|T1|T|Toast the bread|Toast the bread slices in a dry pan until golden on both sides.|action|medium|180|—|Golden|bread|pan, stovetop|—
+S|A1|A|Arrange|Lay the slices on a plate and set the burrata in the middle.|action|—|30 + 15 × servings|W1, K1, K2|Arranged|—|plates|—
+S|A2|A|Dress|Tear the burrata open, drizzle everything with the olive oil and the balsamic vinegar, season with the salt and the pepper and scatter over the basil.|action|—|60|A1|Dressed|extra_virgin_olive_oil; balsamic_vinegar; salt; ground_black_pepper; basil|plates|—
+S|A3|A|Honey|Drizzle a little honey over the peaches.|action|—|15|A2|Drizzled|honey|plates|opt_fruit = peach
+S|F1|F|Serve|Serve right away with the toasted bread.|action|off|15|A2, A3, T1|Served|—|plates|—
+`
+  },
+  {
+    id: "lava_cakes", name: "Chocolate Lava Cakes", image: "img/350/dark_chocolate.webp",
+    rows: `
+O|opt_topping|sugar|Dusted with powdered sugar|TRUE
+O|opt_topping|berries|With raspberries|FALSE
+I|dark_chocolate|Dark chocolate (60 to 70%)|img/350/dark_chocolate.webp|30|g|30|linear|—|chopped
+I|butter|Butter|img/350/butter.webp|30|g|30|linear|—|—
+I|butter_mold|Butter (for the ramekins)|img/350/butter.webp|3|g|3|linear|—|soft
+I|cocoa_powder|Cocoa powder (for the ramekins)|img/350/cocoa_powder.webp|0.5|tsp|1.5|linear|—|—
+I|egg|Egg|img/350/egg.webp|0.5|pcs|25|linear, rounded up|—|—
+I|egg_yolk|Egg yolk|img/350/egg_yolk.webp|0.5|pcs|9|linear, rounded up|—|—
+I|sugar|Sugar|img/350/sugar.webp|12|g|12|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.02|tsp|0.1|linear|—|—
+I|flour|Flour|img/350/flour.webp|0.5|tbsp|4|linear|—|—
+I|powdered_sugar|Powdered sugar|img/350/powdered_sugar.webp|0.5|tsp|1.5|linear|opt_topping = sugar|—
+I|raspberry|Raspberries|img/350/raspberry.webp|30|g|30|linear|opt_topping = berries|—
+S|O1|O|Preheat the oven|Turn the oven on to 220 °C conventional (200 °C fan).|action|220 °C (200 °C fan)|15|—|Oven on|—|oven|—
+S|M1|M|Prepare the ramekins|Butter the ramekins well and dust them with cocoa powder, tapping out the extra.|action|—|(30 + 30 × servings) × skill_factor|—|Buttered and dusted|butter_mold; cocoa_powder|ramekins, pastry_brush|—
+S|C1|C|Melt the chocolate|Melt the chocolate and the butter in a bowl over a pot of barely simmering water, stirring until smooth. Take it off the heat.|wait|low|300|—|Smooth|dark_chocolate; butter|bowl, saucepan, stovetop|—
+S|E1|E|Whisk the eggs|Whisk the eggs, the yolks, the sugar and the salt until pale and a little thick.|action|—|90 + 15 × servings|—|Pale and thick|egg; egg_yolk; sugar; salt|bowl, whisk|—
+S|C2|C|Mix the batter|Fold the chocolate into the eggs, then sift in the flour and fold until just combined.|action|—|90|C1, E1|Just combined|flour|bowl, spatula, sieve|—
+S|C3|C|Fill the ramekins|Divide the batter between the ramekins and put them on a tray.|action|—|(30 + 15 × servings) × skill_factor|C2, M1|Filled|—|ramekins, tray, spoon|—
+S|B1|C|Bake|Bake until the tops are firm but the middle still wobbles.|wait|220 °C (200 °C fan)|720 (doc: 12 to 14 min)|C3, O1|Firm top, soft middle|—|tray, oven|—
+S|B2|C|Turn out|Let them stand for 1 minute, run a knife around the edge and turn them out onto plates.|action|off|60 + 15 × servings|B1|On the plates|—|knife, plates|—
+S|F1|F|Serve|Dust with the powdered sugar and serve right away.|action|off|30|B2|Served|powdered_sugar|plates|opt_topping = sugar
+S|F2|F|Serve|Serve right away with the raspberries.|action|off|30|B2|Served|raspberry|plates|opt_topping = berries
+`
+  },
+  {
+    id: "focaccia", name: "Focaccia", image: "img/350/bread.webp",
+    maxServings: 12, defaultServings: 6,
+    rows: `
+O|opt_topping|rosemary|Rosemary and sea salt|TRUE
+O|opt_topping|tomato|Cherry tomatoes and olives|FALSE
+I|flour|Flour (bread flour if you have it)|img/350/flour.webp|80|g|80|linear|—|—
+I|yeast|Instant dry yeast|img/350/yeast.webp|1|g|1|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|water|Lukewarm water|img/350/water.webp|65|ml|65|linear|—|—
+I|olive_oil|Olive oil|img/350/olive_oil.webp|1|tbsp|14|linear|—|—
+I|rosemary|Fresh rosemary|img/350/rosemary.webp|0.5|tsp|0.5|linear|opt_topping = rosemary|needles only
+I|cherry_tomato|Cherry tomatoes|img/350/cherry_tomato.webp|30|g|30|linear|opt_topping = tomato|halved
+I|olives|Pitted olives|img/350/olives.webp|15|g|15|linear|opt_topping = tomato|—
+I|salt_top|Flaky sea salt (for the top)|img/350/salt.webp|0.125|tsp|0.6|linear|—|—
+S|D1|D|Mix the dough|In a big bowl, stir the flour, the yeast, the salt and the water into a sticky dough with no dry flour left.|action|—|(120 + 10 × servings) × skill_factor|—|No dry flour left|flour; yeast; salt; water|bowl, wooden_spoon|—
+S|D2|D|First rise|Pour a little of the olive oil over the dough, turn it to coat, cover and leave it in a warm place until doubled.|wait|—|5400 (doc: 1.5 to 2 h)|D1|Doubled|olive_oil|bowl|—
+S|D3|D|Into the tray|Oil the tray generously, tip the dough in and gently stretch it towards the corners. If it springs back, wait 10 minutes and stretch again.|action|—|120 + 10 × servings|D2|Stretched to the corners|—|tray|—
+S|D4|D|Second rise|Cover and leave until puffy and bubbly.|wait|—|2400 (doc: 30 to 45 min)|D3|Puffy and bubbly|—|tray|—
+S|O1|O|Preheat the oven|Turn the oven on to 220 °C conventional (200 °C fan).|action|220 °C (200 °C fan)|15|D3|Oven on|—|oven|—
+S|D5|D|Dimple the dough|Oil your fingers and press deep dimples all over the dough, then drizzle with the rest of the oil.|action|—|60 + 5 × servings|D4|Dimpled|—|tray|—
+S|D6|D|Add the toppings|Scatter the rosemary and the flaky salt over the top.|action|—|30 + 5 × servings|D5|Topped|rosemary; salt_top|tray|opt_topping = rosemary
+S|D7|D|Add the toppings|Press the cherry tomatoes and the olives into the dough and sprinkle with the flaky salt.|action|—|(60 + 15 × servings) × skill_factor|D5|Topped|cherry_tomato; olives; salt_top|tray|opt_topping = tomato
+S|B1|D|Bake|Bake until golden brown on top and underneath.|wait|220 °C (200 °C fan)|1320 (doc: 20 to 25 min)|D6, D7, O1|Golden brown|—|tray, oven|—
+S|B2|D|Cool|Let it cool on a rack for at least 10 minutes before cutting.|wait|off|600|B1|Cooled a little|—|cooling_rack|—
 `
   }
 ];

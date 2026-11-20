@@ -2772,7 +2772,8 @@
     injera: 'tortilla', kecap_manis: 'dark_soy_sauce', laksa_paste: 'gochujang', preserved_lemon: 'lemon',
     red_curry_paste: 'gochujang', thai_chili_paste: 'gochujang', urad_dal: 'lentil', whole_chicken: 'chicken_legs',
     bryndza: 'feta_cheese', lingonberry_jam: 'raspberry', bread_dumplings: 'bread', baguette: 'bread',
-    sour_cabbage_leaves: 'cabbage', lepinja: 'pita', lima_beans: 'fava_beans'
+    sour_cabbage_leaves: 'cabbage', lepinja: 'pita', lima_beans: 'fava_beans',
+    burrata: 'mozzarella', sun_dried_tomatoes: 'tomato'
   };
   function imgFor(i) { var k = i.key || i.id; return 'img/350/' + (i.noImage && IMG_STANDIN[k] || k) + '.webp'; }
   // Ingredients without a photo or a stand-in get the same pot placeholder as the meals.
