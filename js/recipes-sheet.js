@@ -4450,5 +4450,377 @@ S|H1|H|Chocolate sauce|Heat the cream for the sauce until it steams, take it off
 S|W1|W|Whip the cream|Whip the cream to soft peaks.|action|—|120 + 15 × servings|A2|Soft peaks|cream|bowl, mixer|—
 S|F1|F|Scoop and serve|Scoop dumpling-sized portions into bowls with a big spoon, pour over the chocolate sauce and top with whipped cream.|action|—|30 + 20 × servings|H1, W1|Served|—|spoon, plates|—
 `
+  },
+  {
+    id: "bryndzove_halusky", name: "Bryndzové Halušky", image: "img/350/potato.webp",
+    rows: `
+O|opt_bacon|with|With crispy bacon|TRUE
+O|opt_bacon|without|Without bacon|FALSE
+I|potato|Floury potatoes|img/350/potato.webp|200|g|200|linear|—|—
+I|flour|Flour|img/350/flour.webp|80|g|80|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|salt_water|Salt for the cooking water|img/350/salt.webp|1|tsp|6|linear|—|—
+I|bryndza|Bryndza (soft sheep's cheese)|—|80|g|80|linear|—|—
+I|milk|Milk|img/350/milk.webp|1|tbsp|15|linear|—|—
+I|bacon|Smoked bacon|img/350/bacon.webp|50|g|50|linear|opt_bacon = with|5 mm cubes
+I|chives|Chives|img/350/chives.webp|1|tsp|1|linear|—|chopped
+S|W1|W|Boil the water|Bring a large pot of water to the boil and salt it.|wait|high|600|—|Rolling boil|salt_water|cooking_pot, stovetop|—
+S|K1|K|Grate the potatoes|Peel the potatoes and grate them on the finest side of the grater into a bowl.|action|—|(120 + 90 × servings) × skill_factor|—|Finely grated|potato|vegetable_peeler, cheese_grater, bowl|—
+S|K2|K|Make the dough|Pour off any liquid, then mix in the flour and the salt. The dough should be thick and sticky; add a little more flour if it runs.|action|—|60 + 30 × servings|K1|Thick, sticky dough|flour; salt|bowl, wooden_spoon|—
+S|B1|B|Dice the bacon|Cut the bacon into small cubes, about 5 mm.|action|—|(60 + 30 × servings) × skill_factor|—|Diced|bacon|chef_knife, chopping_board|opt_bacon = with
+S|B2|B|Crisp the bacon|Put the bacon in the cold frying pan and fry it slowly until golden and crisp. Keep the fat.|action|medium|600|B1|Golden, crisp|—|pan, stovetop, wooden_spoon|opt_bacon = with
+S|K3|K|Soften the bryndza|Mash the bryndza with the milk in a large bowl until creamy.|action|—|60 + 20 × servings|—|Creamy|bryndza; milk|bowl, fork|—
+S|W2|W|Cook the halušky|Press the dough through the spaetzle maker into the boiling water in batches (or scrape small pieces off a wet board with a knife). Stir once; they are done 1 to 2 minutes after they float.|action|high|(120 + 120 × servings) × skill_factor|W1, K2|All floating, cooked through|—|spaetzle_maker, cooking_pot, wooden_spoon|—
+S|W3|W|Drain the halušky|Drain them in a colander; do not rinse.|action|off|60|W2|Drained|—|colander|—
+S|F1|F|Mix with the bryndza|Tip the hot halušky into the bryndza bowl and mix until every piece is coated.|action|—|60|W3, K3|Coated|—|bowl, wooden_spoon|—
+S|F2|F|Serve|Put on warm plates, top with the crispy bacon and a little of its fat and sprinkle with chives.|action|off|30 + 15 × servings|F1, B2|Served|chives|spoon, plates|—
+`
+  },
+  {
+    id: "svickova", name: "Svíčková", image: "img/350/beef.webp",
+    rows: `
+O|opt_dumplings|homemade|Homemade bread dumplings|TRUE
+O|opt_dumplings|ready|Ready-made bread dumplings|FALSE
+I|beef|Beef sirloin or topside|img/350/beef.webp|180|g|180|linear|—|in one piece
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|butter|Butter|img/350/butter.webp|15|g|15|linear|—|—
+I|bacon|Smoked bacon|img/350/bacon.webp|20|g|20|linear|—|diced
+I|onion|Onion|img/350/onion.webp|60|g|60|linear|—|sliced
+I|carrot|Carrot|img/350/carrot.webp|70|g|70|linear|—|chunks
+I|parsley_root|Parsley root|img/350/parsley_root.webp|50|g|50|linear|—|chunks
+I|celery_root|Celery root|img/350/celery_root.webp|50|g|50|linear|—|chunks
+I|allspice|Allspice berries|img/350/allspice.webp|2|pcs|0.4|linear|—|—
+I|black_peppercorn|Black peppercorns|img/350/black_peppercorn.webp|3|pcs|0.2|linear|—|—
+I|bay_leaf|Bay leaf|img/350/bay_leaf.webp|0.5|pcs|0.1|linear, rounded up|—|—
+I|water|Water|img/350/water.webp|250|ml|250|linear|—|—
+I|cream|Cream (30% fat)|img/350/cream.webp|80|ml|80|linear|—|—
+I|lemon_juice|Lemon juice|img/350/lemon_juice.webp|1|tsp|5|linear|—|—
+I|sugar|Sugar|img/350/sugar.webp|1|tsp|4|linear|—|—
+I|mustard|Mustard|img/350/mustard.webp|0.5|tsp|3|linear|—|—
+I|flour|Flour (dumplings)|img/350/flour.webp|100|g|100|linear|opt_dumplings = homemade|—
+I|milk|Lukewarm milk (dumplings)|img/350/milk.webp|60|ml|60|linear|opt_dumplings = homemade|—
+I|yeast|Dried yeast|img/350/yeast.webp|0.25|tsp|1|linear|opt_dumplings = homemade|—
+I|egg|Egg (dumplings)|img/350/egg.webp|0.25|pcs|14|linear, rounded up|opt_dumplings = homemade|—
+I|bread|Stale white bread|img/350/bread.webp|20|g|20|linear|opt_dumplings = homemade|1 cm cubes
+I|bread_dumplings|Ready-made bread dumplings|—|150|g|150|linear|opt_dumplings = ready|—
+I|cream_whip|Cream for whipping|img/350/cream.webp|20|ml|20|linear|—|—
+I|lingonberry_jam|Cranberry or lingonberry jam|—|1|tbsp|20|linear|—|—
+I|lemon|Lemon|img/350/lemon.webp|1|slices|10|linear|—|—
+S|K1|K|Cut the vegetables|Peel the carrot, parsley root and celery root and cut them into chunks; slice the onion.|action|—|(120 + 90 × servings) × skill_factor|—|All cut|carrot; parsley_root; celery_root; onion|vegetable_peeler, chef_knife, chopping_board|—
+S|P1|P|Brown the beef|Season the beef with the salt and pepper. Heat the butter in the large pot and brown the meat on all sides, then lift it out.|action|high|480|—|Browned all over|beef; salt; ground_black_pepper; butter|cooking_pot, stovetop, tongs|—
+S|P2|P|Bacon and vegetables|Fry the bacon in the same pot, then add the vegetables and cook until golden, stirring now and then.|action|medium|600|P1, K1|Vegetables golden|bacon|cooking_pot, wooden_spoon|—
+S|P3|P|Braise the beef|Put the beef back with the allspice, peppercorns, bay leaf and water. Cover and simmer very gently until tender, turning the meat once and adding a little water if it gets low.|wait|low|7200 (doc: 1.5 to 2 h)|P2|Beef tender|allspice; black_peppercorn; bay_leaf; water|cooking_pot|—
+S|D1|D|Wake the yeast|Stir the yeast and a pinch of sugar into the lukewarm milk and leave until foamy.|wait|—|600|—|Foamy|milk; yeast|bowl|opt_dumplings = homemade
+S|D2|D|Cube the bread|Cut the stale bread into 1 cm cubes.|action|—|(30 + 20 × servings) × skill_factor|—|Cubed|bread|knife, chopping_board|opt_dumplings = homemade
+S|D3|D|Knead the dough|Mix the flour, the egg, a pinch of salt and the yeast milk into a soft dough and knead it for 5 minutes until smooth. Work in the bread cubes.|action|—|300 + 30 × servings|D1, D2|Smooth, soft dough|flour; egg|bowl|opt_dumplings = homemade
+S|D4|D|Let it rise|Cover the bowl and leave it somewhere warm until doubled.|wait|—|2700 (doc: 45 to 60 min)|D3|Doubled|—|bowl, plastic_wrap|opt_dumplings = homemade
+S|D5|D|Shape the dumplings|Shape the dough into logs about 6 cm thick and 20 cm long. Rest them on a floured board for 15 minutes.|wait|—|900|D4|Puffy logs|—|chopping_board|opt_dumplings = homemade
+S|W1|W|Boil the water|Bring a large pot of water to the boil and salt it.|wait|high|600|D4|Rolling boil|—|cooking_pot, stovetop|opt_dumplings = homemade
+S|W2|W|Cook the dumplings|Lower the logs into the boiling water, cover and simmer for 10 minutes, then turn them over and cook 10 minutes more.|wait|medium|1200|W1, D5|Cooked through|—|cooking_pot, spatula|opt_dumplings = homemade
+S|W3|W|Slice the dumplings|Lift them out, prick them with a skewer to let the steam out and cut into 1.5 cm slices with a sharp knife or a thread.|action|—|60 + 30 × servings|W2|Sliced|—|skewers, knife, chopping_board|opt_dumplings = homemade
+S|W4|W|Heat the dumplings|Steam the ready-made dumpling slices until hot through, or heat them as the packet says.|wait|medium|600|P3|Hot through|bread_dumplings|steamer, stovetop|opt_dumplings = ready
+S|S1|S|Lift out the beef|Lift the beef onto a board and cover it with foil. Fish out the bay leaf.|action|off|60|P3|Beef resting|—|tongs, tin_foil, chopping_board|—
+S|S2|S|Blend the sauce|Blend the vegetables with the cooking liquid until completely smooth.|action|off|120|S1|Smooth|—|immersion_blender, cooking_pot|—
+S|S3|S|Cream the sauce|Stir in the cream and simmer for 5 minutes. Season with the lemon juice, sugar, mustard and salt: it should taste creamy, gently sweet and a little sour.|action|low|300|S2|Creamy, sweet and sour|cream; lemon_juice; sugar; mustard|cooking_pot, wooden_spoon|—
+S|K2|K|Whip the cream|Whip the cream to soft peaks.|action|—|120 + 15 × servings|—|Soft peaks|cream_whip|bowl, whisk|—
+S|S4|S|Slice the beef|Slice the beef across the grain, about 1 cm thick.|action|—|60 + 30 × servings|S1|Sliced|—|chef_knife, chopping_board|—
+S|F1|F|Serve|Lay the beef and the dumpling slices on warm plates and pour plenty of sauce over them. Top with a spoon of whipped cream, a slice of lemon and a spoon of cranberry jam.|action|off|30 + 20 × servings|S3, S4, K2, W3, W4|Served|lingonberry_jam; lemon|ladle, plates|—
+`
+  },
+  {
+    id: "burek", name: "Burek", image: "img/350/phyllo_dough.webp",
+    rows: `
+O|opt_meat|beef|Ground beef|TRUE
+O|opt_meat|mix|Half beef, half lamb|FALSE
+I|ground_beef|Ground beef|img/350/ground_beef.webp|125|g|125|linear; half if mix|opt_meat = beef (or mix)|—
+I|ground_lamb|Ground lamb|img/350/ground_lamb.webp|125|g|125|linear; half if mix|opt_meat = mix|—
+I|onion|Onion|img/350/onion.webp|50|g|50|linear|—|finely chopped
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.25|tsp|0.6|linear|—|—
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|0.25|tsp|0.6|linear|—|—
+I|oil|Oil|img/350/oil.webp|2|tbsp|26|linear|—|—
+I|phyllo_dough|Phyllo sheets|img/350/phyllo_dough.webp|3|pcs|60|linear|—|—
+I|water|Water|img/350/water.webp|1|tbsp|15|linear|—|—
+I|yogurt|Plain yogurt|img/350/yogurt.webp|100|g|100|linear|—|—
+S|K1|K|Chop the onion|Peel the onion and chop it finely.|action|—|(60 + 30 × servings) × skill_factor|—|Finely chopped|onion|chef_knife, chopping_board|—
+S|P1|P|Cook the filling|Heat a spoon of the oil in the frying pan and soften the onion. Add the meat, break it up and cook until no pink is left. Season with the salt, pepper and paprika.|action|medium|600|K1|No pink left|ground_beef; ground_lamb; salt; ground_black_pepper; paprika_powder|pan, stovetop, wooden_spoon|—
+S|P2|P|Cool the filling|Spread the filling on a plate and let it cool.|wait|—|900|P1|Lukewarm|—|plates|—
+S|O1|O|Preheat the oven|Turn the oven on to 200 °C conventional (180 °C fan).|action|200 °C (180 °C fan)|15|P1|Oven on|—|oven|—
+S|K2|K|Roll the burek|Lay a phyllo sheet on the counter and brush it with oil; lay a second sheet on top. Spoon a line of filling along the long edge and roll it up loosely into a long snake. Repeat with the rest.|action|—|(60 + 120 × servings) × skill_factor|P2|All rolled|phyllo_dough|pastry_brush|—
+S|K3|K|Coil in the dish|Oil a round baking dish and coil the rolls into a spiral, starting in the middle. Brush the top with oil and sprinkle with the water.|action|—|120|K2|Spiral in the dish|oil; water|baking_dish, pastry_brush|—
+S|O2|O|Bake|Bake until deep golden and crisp.|wait|200 °C (180 °C fan)|2100 (doc: 35 to 40 min)|O1, K3|Deep golden, crisp|—|oven|—
+S|O3|O|Rest|Cover with a clean kitchen towel and leave for 10 minutes.|wait|off|600|O2|Rested|—|—|—
+S|F1|F|Serve|Cut into wedges and serve warm with plain yogurt.|action|—|30 + 15 × servings|O3|Served|yogurt|knife, plates|—
+`
+  },
+  {
+    id: "trilece", name: "Trileçe", image: "img/350/condensed_milk.webp", defaultServings: 8, maxServings: 12,
+    rows: `
+I|egg|Eggs|img/350/egg.webp|0.5|pcs|28|linear, rounded up|—|room temperature
+I|sugar|Sugar (sponge)|img/350/sugar.webp|15|g|15|linear|—|—
+I|flour|Flour|img/350/flour.webp|15|g|15|linear|—|—
+I|baking_powder|Baking powder|img/350/baking_powder.webp|0.125|tsp|0.5|linear|—|—
+I|vanilla|Vanilla extract|img/350/vanilla.webp|0.125|tsp|0.5|linear|—|—
+I|milk|Milk|img/350/milk.webp|60|ml|60|linear|—|—
+I|cream|Cream (30% fat)|img/350/cream.webp|25|ml|25|linear|—|—
+I|condensed_milk|Sweetened condensed milk|img/350/condensed_milk.webp|40|g|40|linear|—|—
+I|sugar_caramel|Sugar (caramel)|img/350/sugar.webp|12|g|12|linear|—|—
+I|cream_caramel|Cream (caramel)|img/350/cream.webp|20|ml|20|linear|—|—
+I|butter|Butter|img/350/butter.webp|3|g|3|linear|—|—
+S|O1|O|Preheat the oven|Turn the oven on to 180 °C conventional (160 °C fan).|action|180 °C (160 °C fan)|15|—|Oven on|—|oven|—
+S|K1|K|Beat the eggs and sugar|Beat the eggs with the sugar until pale, thick and tripled in volume.|action|—|480 (doc: 6 to 8 min)|—|Pale, thick, ribbons|egg; sugar|bowl, mixer|—
+S|K2|K|Fold in the flour|Sift the flour and the baking powder over the eggs, add the vanilla and fold in gently so the foam stays airy.|action|—|120|K1|No dry flour, still airy|flour; baking_powder; vanilla|sieve, spatula, bowl|—
+S|O2|O|Bake the sponge|Pour into a baking dish lined with baking paper (about 20 × 30 cm for 8 pieces) and bake until golden and a skewer comes out clean.|wait|180 °C (160 °C fan)|1320 (doc: 20 to 25 min)|O1, K2|Golden, skewer clean|—|oven, baking_dish, parchment_paper, skewers|—
+S|M1|M|Mix the three milks|Whisk the milk, the cream and the condensed milk together.|action|—|60|—|Smooth|milk; cream; condensed_milk|bowl, whisk|—
+S|M2|M|Soak the sponge|Prick the warm sponge all over with a fork and pour the milk mix evenly over it.|action|—|120|O2, M1|All soaked up|—|fork|—
+S|C1|C|Make the caramel|Melt the sugar in the saucepan without stirring, just swirling the pan, until amber. Off the heat, whisk in the cream (it bubbles up) and the butter.|action|medium|480|—|Smooth amber caramel|sugar_caramel; cream_caramel; butter|saucepan, stovetop, whisk|—
+S|C2|C|Cool the caramel|Let the caramel cool until just warm.|wait|—|900|C1|Warm, pourable|—|saucepan|—
+S|M3|M|Caramel on top|Pour the caramel over the soaked sponge and spread it evenly.|action|—|60|M2, C2|Evenly covered|—|spatula|—
+S|M4|M|Chill|Cover and chill in the fridge for at least 4 hours, overnight is best.|wait|—|14400 (doc: at least 4 h)|M3|Cold and set|—|plastic_wrap|—
+S|F1|F|Serve|Cut into squares and serve cold, with a spoon of the milk from the dish.|action|—|30 + 15 × servings|M4|Served|—|knife, spatula, plates|—
+`
+  },
+  {
+    id: "borscht", name: "Borscht", image: "img/350/beetroot.webp",
+    rows: `
+O|opt_meat|beef|With beef|TRUE
+O|opt_meat|veg|Vegetarian (vegetable stock)|FALSE
+I|beef|Beef (brisket or shin)|img/350/beef.webp|100|g|100|linear|opt_meat = beef|2 cm cubes
+I|water|Water|img/350/water.webp|400|ml|400|linear|opt_meat = beef|—
+I|vegetable_stock|Vegetable stock|img/350/vegetable_stock.webp|400|ml|400|linear|opt_meat = veg|—
+I|beetroot|Beetroot|img/350/beetroot.webp|120|g|120|linear|—|coarsely grated
+I|potato|Potatoes|img/350/potato.webp|100|g|100|linear|—|2 cm cubes
+I|cabbage|White cabbage|img/350/cabbage.webp|80|g|80|linear|—|finely shredded
+I|carrot|Carrot|img/350/carrot.webp|40|g|40|linear|—|coarsely grated
+I|onion|Onion|img/350/onion.webp|40|g|40|linear|—|diced
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|crushed
+I|oil|Oil|img/350/oil.webp|1|tbsp|13|linear|—|—
+I|tomato_paste|Tomato paste|img/350/tomato_paste.webp|1|tbsp|15|linear|—|—
+I|white_vinegar|Vinegar|img/350/white_vinegar.webp|1|tsp|5|linear|—|—
+I|sugar|Sugar|img/350/sugar.webp|0.5|tsp|2|linear|—|—
+I|bay_leaf|Bay leaf|img/350/bay_leaf.webp|0.5|pcs|0.1|linear, rounded up|—|—
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|dill|Fresh dill|img/350/dill.webp|1|tbsp|3|linear|—|chopped
+I|sour_cream|Sour cream|img/350/sour_cream.webp|30|g|30|linear|—|—
+S|P1|P|Simmer the beef|Put the beef in the large pot with the cold water, bring to the boil and skim off the foam. Cover and simmer gently until nearly tender.|wait|low|3600 (doc: about 1 h)|—|Beef nearly tender|beef; water|cooking_pot, stovetop, ladle|opt_meat = beef
+S|P0|P|Heat the stock|Bring the vegetable stock to the boil in the large pot.|wait|high|300|—|Boiling|vegetable_stock|cooking_pot, stovetop|opt_meat = veg
+S|K1|K|Prepare the vegetables|Peel the vegetables. Grate the beetroot and the carrot coarsely, dice the onion, cut the potatoes into 2 cm cubes and shred the cabbage finely.|action|—|(240 + 120 × servings) × skill_factor|—|All prepared|beetroot; carrot; onion; potato; cabbage|vegetable_peeler, cheese_grater, chef_knife, chopping_board|—
+S|B1|B|Soften the onion and carrot|Heat the oil in the frying pan and cook the onion and the carrot until soft.|action|medium|300|K1|Soft|oil|pan, stovetop, wooden_spoon|—
+S|B2|B|Cook the beetroot|Add the beetroot, the tomato paste, the vinegar and the sugar. Cook gently, stirring, until the beetroot is soft. The vinegar keeps it bright red.|action|medium-low|600|B1|Beetroot soft, deep red|tomato_paste; white_vinegar; sugar|pan, wooden_spoon|—
+S|P2|P|Potatoes in|Add the potatoes to the pot and simmer.|wait|medium|600|P1, P0, K1|Potatoes nearly soft|—|cooking_pot|—
+S|P3|P|Cabbage in|Add the cabbage and simmer.|wait|medium|300|P2|Cabbage soft|—|cooking_pot|—
+S|P4|P|Beetroot in|Stir in the beetroot mix, the garlic, the bay leaf, the salt and the pepper. Simmer gently without boiling hard, so it stays red.|wait|low|600|P3, B2|Everything soft|garlic; bay_leaf; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
+S|P5|P|Rest|Turn off the heat, stir in half the dill, taste for salt and leave covered for 10 minutes.|wait|off|600|P4|Rested|dill|cooking_pot|—
+S|F1|F|Serve|Ladle into bowls and top with a spoon of sour cream and the rest of the dill. Serve with rye bread.|action|off|30 + 15 × servings|P5|Served|sour_cream|ladle|—
+`
+  },
+  {
+    id: "zapiekanka", name: "Zapiekanka", image: "img/350/white_mushroom.webp",
+    rows: `
+O|opt_ham|without|Mushrooms and cheese|TRUE
+O|opt_ham|with|With ham|FALSE
+I|baguette|Baguette|—|0.5|pcs|120|linear, rounded up|—|halved lengthwise
+I|white_mushroom|Mushrooms|img/350/white_mushroom.webp|100|g|100|linear|—|thinly sliced
+I|onion|Onion|img/350/onion.webp|30|g|30|linear|—|finely chopped
+I|butter|Butter|img/350/butter.webp|10|g|10|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|ham|Ham|img/350/ham.webp|30|g|30|linear|opt_ham = with|thin strips
+I|grated_cheese|Grated cheese (Gouda or Edam)|img/350/grated_cheese.webp|50|g|50|linear|—|—
+I|ketchup|Ketchup|img/350/ketchup.webp|1|tbsp|15|linear|—|—
+I|chives|Chives|img/350/chives.webp|1|tsp|1|linear|—|chopped
+S|O1|O|Preheat the oven|Turn the oven on to 220 °C conventional (200 °C fan).|action|220 °C (200 °C fan)|15|—|Oven on|—|oven|—
+S|K1|K|Slice the mushrooms and onion|Slice the mushrooms thinly and chop the onion finely.|action|—|(60 + 60 × servings) × skill_factor|—|Sliced and chopped|white_mushroom; onion|chef_knife, chopping_board|—
+S|P1|P|Fry the mushrooms|Melt the butter in the frying pan and fry the onion and the mushrooms until all their liquid has cooked away. Season with the salt and pepper.|action|medium-high|480|K1|Dry and golden|butter; salt; ground_black_pepper|pan, stovetop, wooden_spoon|—
+S|K2|K|Halve the baguette|Cut the baguette in half lengthwise and lay the halves cut side up on a baking tray.|action|—|30 + 15 × servings|—|Halved|baguette|knife, chopping_board, tray|—
+S|K3|K|Top the bread|Spread the mushrooms over the bread (add the ham) and cover with plenty of grated cheese.|action|—|60 + 30 × servings|P1, K2|Covered in cheese|ham; grated_cheese|tray, spoon|—
+S|O2|O|Bake|Bake until the cheese bubbles and the edges are crisp.|wait|220 °C (200 °C fan)|540 (doc: 8 to 10 min)|O1, K3|Cheese bubbling, edges crisp|—|oven, tray|—
+S|F1|F|Serve|Squeeze a zigzag of ketchup over each one, sprinkle with chives and serve hot.|action|—|30 + 15 × servings|O2|Served|ketchup; chives|plates|—
+`
+  },
+  {
+    id: "mulgipuder", name: "Mulgipuder", image: "img/350/barley.webp",
+    rows: `
+O|opt_topping|bacon|Bacon and onion|TRUE
+O|opt_topping|butter|Onion in butter (vegetarian)|FALSE
+I|barley|Pearl barley|img/350/barley.webp|40|g|40|linear|—|rinsed
+I|water|Water|img/350/water.webp|300|ml|300|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|potato|Floury potatoes|img/350/potato.webp|250|g|250|linear|—|chunks
+I|bacon|Smoked bacon|img/350/bacon.webp|60|g|60|linear|opt_topping = bacon|1 cm cubes
+I|butter|Butter|img/350/butter.webp|20|g|20|linear|opt_topping = butter|—
+I|onion|Onion|img/350/onion.webp|60|g|60|linear|—|diced
+S|R1|R|Rinse the barley|Rinse the barley in a sieve until the water runs clear.|action|—|60|—|Rinsed|barley|sieve|—
+S|P1|P|Simmer the barley|Put the barley in the large pot with half the water and the salt. Bring to the boil, cover and simmer gently.|wait|low|1200 (doc: 20 min)|R1|Barley half cooked|water; salt|cooking_pot, stovetop|—
+S|K1|K|Cut the potatoes|Peel the potatoes and cut them into large chunks.|action|—|(60 + 60 × servings) × skill_factor|—|Cut|potato|vegetable_peeler, chef_knife, chopping_board|—
+S|P2|P|Potatoes in|Lay the potatoes on top of the barley and add the rest of the water, just to cover. Cover and cook until the potatoes are completely soft.|wait|medium-low|1200 (doc: 20 to 25 min)|P1, K1|Potatoes soft|—|cooking_pot|—
+S|P3|P|Mash|Pour off most of the water, keeping a little, and mash the potatoes and barley together into a thick, rough mash. Taste for salt.|action|off|180|P2|Thick, rough mash|—|cooking_pot, potato_masher|—
+S|B1|B|Dice the bacon and onion|Cut the bacon into 1 cm cubes and dice the onion.|action|—|(60 + 45 × servings) × skill_factor|—|Diced|bacon; onion|chef_knife, chopping_board|—
+S|B2|B|Fry the topping|Fry the bacon slowly in the frying pan until the fat runs (or melt the butter), then add the onion and cook until golden.|action|medium|600|B1|Golden onion, crisp bacon|butter|pan, stovetop, wooden_spoon|—
+S|F1|F|Serve|Spoon the mash onto warm plates, make a hollow in the middle and fill it with the hot bacon, onion and fat.|action|off|30 + 15 × servings|P3, B2|Served|—|spoon, plates|—
+`
+  },
+  {
+    id: "swedish_meatballs", name: "Swedish Meatballs", image: "img/350/ground_beef.webp",
+    rows: `
+O|opt_side|mash|Mashed potatoes|TRUE
+O|opt_side|boiled|Boiled potatoes|FALSE
+I|ground_beef|Ground beef|img/350/ground_beef.webp|75|g|75|linear|—|—
+I|ground_pork|Ground pork|img/350/ground_pork.webp|75|g|75|linear|—|—
+I|breadcrumb|Breadcrumbs|img/350/breadcrumb.webp|10|g|10|linear|—|—
+I|milk|Milk (meatballs)|img/350/milk.webp|30|ml|30|linear|—|—
+I|egg|Egg|img/350/egg.webp|0.25|pcs|14|linear, rounded up|—|—
+I|onion|Onion|img/350/onion.webp|20|g|20|linear|—|grated
+I|allspice|Ground allspice|img/350/allspice.webp|0.125|tsp|0.2|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|white_pepper|White pepper|img/350/white_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|butter|Butter|img/350/butter.webp|15|g|15|linear|—|—
+I|flour|Flour|img/350/flour.webp|1|tsp|5|linear|—|—
+I|beef_stock|Beef stock|img/350/beef_stock.webp|100|ml|100|linear|—|—
+I|cream|Cream|img/350/cream.webp|40|ml|40|linear|—|—
+I|light_soy_sauce|Soy sauce|img/350/light_soy_sauce.webp|0.5|tsp|3|linear|—|—
+I|potato|Floury potatoes|img/350/potato.webp|200|g|200|linear|—|—
+I|salt_water|Salt for the potato water|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|butter_mash|Butter (mash)|img/350/butter.webp|10|g|10|linear|opt_side = mash|—
+I|milk_mash|Hot milk (mash)|img/350/milk.webp|40|ml|40|linear|opt_side = mash|—
+I|lingonberry_jam|Lingonberry jam|—|1|tbsp|20|linear|—|—
+S|M1|M|Soak the breadcrumbs|Stir the breadcrumbs into the milk in a large bowl and leave for 5 minutes.|wait|—|300|—|Soft|breadcrumb; milk|bowl|—
+S|K1|K|Grate the onion|Peel the onion and grate it finely.|action|—|(30 + 20 × servings) × skill_factor|—|Grated|onion|cheese_grater|—
+S|M2|M|Mix the meat|Add the meats, the egg, the onion, the allspice, the salt and the pepper to the soaked crumbs and mix well with your hands.|action|—|60 + 30 × servings|M1, K1|Evenly mixed|ground_beef; ground_pork; egg; allspice; salt; white_pepper|bowl|—
+S|M3|M|Roll the meatballs|With wet hands, roll the mix into balls about 3 cm across.|action|—|(60 + 120 × servings) × skill_factor|M2|All rolled|—|plates|—
+S|P1|P|Fry the meatballs|Melt the butter in the frying pan and fry the meatballs in batches, rolling them around, until brown all over and cooked through. Keep them on a plate.|action|medium|600 + 60 × servings|M3|Brown, cooked through|butter|pan, stovetop, spatula, plates|—
+S|P2|P|Make the gravy|Stir the flour into the fat in the pan for 1 minute, then whisk in the stock and simmer until slightly thick. Add the cream and the soy sauce and simmer 2 minutes.|action|medium|300|P1|Smooth, light brown gravy|flour; beef_stock; cream; light_soy_sauce|pan, whisk|—
+S|P3|P|Meatballs back in|Put the meatballs back into the gravy and heat through. Taste for salt and pepper.|action|low|120|P2|Hot through|—|pan, spatula|—
+S|Z1|Z|Cook the potatoes|Peel the potatoes, cut big ones in half and boil them in salted water until soft.|wait|medium|1200 (doc: 18 to 22 min)|—|Soft through|potato; salt_water|vegetable_peeler, cooking_pot, stovetop|—
+S|Z2|Z|Drain the potatoes|Drain the potatoes in a colander.|action|off|60|Z1|Drained|—|colander|—
+S|Z3|Z|Mash the potatoes|Mash the potatoes with the butter and the hot milk until smooth.|action|off|120|Z2|Smooth|butter_mash; milk_mash|cooking_pot, potato_masher|opt_side = mash
+S|F1|F|Serve|Serve the meatballs and gravy with the potatoes and a spoon of lingonberry jam.|action|off|30 + 20 × servings|P3, Z2, Z3|Served|lingonberry_jam|spoon, plates|—
+`
+  },
+  {
+    id: "gazpacho", name: "Gazpacho", image: "img/350/tomato.webp",
+    rows: `
+O|opt_garnish|with|With diced vegetables and croutons|TRUE
+O|opt_garnish|plain|Plain|FALSE
+I|tomato|Very ripe tomatoes|img/350/tomato.webp|250|g|250|linear|—|roughly chopped
+I|cucumber|Cucumber|img/350/cucumber.webp|60|g|60|linear|—|peeled, roughly chopped
+I|green_bell_pepper|Green bell pepper|img/350/green_bell_pepper.webp|40|g|40|linear|—|roughly chopped
+I|onion|Onion|img/350/onion.webp|10|g|10|linear|—|—
+I|garlic|Garlic clove|img/350/garlic.webp|0.25|pcs|1.5|linear, rounded up|—|—
+I|bread|Stale white bread|img/350/bread.webp|20|g|20|linear|—|crusts removed
+I|water|Cold water|img/350/water.webp|30|ml|30|linear|—|—
+I|red_wine_vinegar|Sherry or red wine vinegar|img/350/red_wine_vinegar.webp|1|tsp|5|linear|—|—
+I|extra_virgin_olive_oil|Extra virgin olive oil|img/350/extra_virgin_olive_oil.webp|2|tbsp|25|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|croutons|Croutons|img/350/croutons.webp|10|g|10|linear|opt_garnish = with|—
+S|K1|K|Chop the vegetables|Roughly chop the tomatoes, the peeled cucumber, the pepper and the onion; peel the garlic. Keep a small piece of cucumber and pepper back for the garnish.|action|—|(120 + 60 × servings) × skill_factor|—|Roughly chopped|tomato; cucumber; green_bell_pepper; onion; garlic|chef_knife, chopping_board, vegetable_peeler|—
+S|K2|K|Soak the bread|Soak the bread in the cold water.|wait|—|300|—|Soft|bread; water|bowl|—
+S|B1|B|Blend|Blend the vegetables, the soaked bread, the vinegar and the salt until completely smooth.|action|—|120|K1, K2|Completely smooth|red_wine_vinegar; salt|blender|—
+S|B2|B|Blend in the oil|With the blender running, pour in the olive oil slowly. The soup turns paler and creamy.|action|—|60|B1|Creamy, orange-pink|extra_virgin_olive_oil|blender|—
+S|B3|B|Sieve and taste|Pass it through a sieve for a silky soup (optional). Taste and add salt or vinegar.|action|—|120|B2|Tastes right|—|sieve, bowl, spoon|—
+S|B4|B|Chill|Cover and chill in the fridge.|wait|—|7200 (doc: at least 2 h)|B3|Very cold|—|bowl, plastic_wrap|—
+S|K3|K|Dice the garnish|Dice the kept cucumber and pepper very finely.|action|—|(30 + 20 × servings) × skill_factor|K1|Finely diced|—|chef_knife, chopping_board|opt_garnish = with
+S|F1|F|Serve|Stir, pour into chilled bowls or glasses and top with the diced vegetables, croutons and a drop of olive oil.|action|—|30 + 15 × servings|B4, K3|Served|croutons|ladle, bowl|—
+`
+  },
+  {
+    id: "stuffed_cabbage", name: "Stuffed Cabbage Rolls", image: "img/350/cabbage.webp",
+    rows: `
+O|opt_leaves|pickled|Pickled (sour) cabbage leaves|TRUE
+O|opt_leaves|fresh|Fresh cabbage, blanched|FALSE
+I|sour_cabbage_leaves|Pickled cabbage leaves|—|3|leaves|90|linear|opt_leaves = pickled|—
+I|cabbage|White cabbage|img/350/cabbage.webp|0.25|head|250|linear, rounded up|opt_leaves = fresh|whole
+I|ground_pork|Ground pork|img/350/ground_pork.webp|120|g|120|linear|—|—
+I|short_grain_rice|Short-grain rice|img/350/short_grain_rice.webp|20|g|20|linear|—|rinsed
+I|onion|Onion|img/350/onion.webp|40|g|40|linear|—|finely chopped
+I|garlic|Garlic clove|img/350/garlic.webp|0.5|pcs|3|linear, rounded up|—|crushed
+I|lard|Lard or oil|img/350/lard.webp|5|g|5|linear|—|—
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|1|tsp|2.5|linear|—|—
+I|egg|Egg|img/350/egg.webp|0.25|pcs|14|linear, rounded up|—|—
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|sauerkraut|Sauerkraut|img/350/sauerkraut.webp|150|g|150|linear|—|—
+I|bacon|Smoked bacon|img/350/bacon.webp|30|g|30|linear|—|strips
+I|bay_leaf|Bay leaf|img/350/bay_leaf.webp|0.5|pcs|0.1|linear, rounded up|—|—
+I|tomato_passata|Tomato passata|img/350/tomato_passata.webp|80|ml|80|linear|—|—
+I|water|Water|img/350/water.webp|150|ml|150|linear|—|—
+I|sour_cream|Sour cream|img/350/sour_cream.webp|40|g|40|linear|—|—
+S|K1|K|Chop the onion and garlic|Finely chop the onion; crush the garlic.|action|—|(60 + 30 × servings) × skill_factor|—|Chopped|onion; garlic|chef_knife, chopping_board|—
+S|P1|P|Soften the onion|Melt the lard in the frying pan and cook the onion until soft and golden.|action|medium|300|K1|Soft, golden|lard|pan, stovetop, wooden_spoon|—
+S|P2|P|Cool the onion|Pull the pan off the heat, stir in the paprika and the garlic and let it cool.|wait|off|600|P1|Lukewarm|paprika_powder|pan, wooden_spoon|—
+S|M1|M|Mix the filling|Mix the meat, the rinsed rice, the onion, the egg, the salt and the pepper in a bowl.|action|—|60 + 30 × servings|P2|Evenly mixed|ground_pork; short_grain_rice; egg; salt; ground_black_pepper|bowl|—
+S|L1|L|Rinse the leaves|Separate the pickled leaves and rinse them. Taste one: if very salty, soak them in cold water for 15 minutes. Shave off the thick part of the rib.|action|—|(60 + 60 × servings) × skill_factor|—|Rinsed, ribs thinned|sour_cabbage_leaves|colander, knife|opt_leaves = pickled
+S|L2|L|Blanch the cabbage|Cut out the core and lower the whole cabbage into a large pot of boiling water. Peel off the outer leaves as they soften, then let them cool. Shave off the thick part of the rib.|action|high|(300 + 120 × servings) × skill_factor|—|Soft, pliable leaves|cabbage|cooking_pot, stovetop, tongs, knife|opt_leaves = fresh
+S|L3|L|Roll the cabbage|Put a spoon of filling near the rib end of each leaf, fold in the sides and roll up tightly.|action|—|(60 + 120 × servings) × skill_factor|L1, L2, M1|All rolled|—|plates|—
+S|K2|K|Squeeze the sauerkraut|Rinse the sauerkraut if it is very sour and squeeze it out.|action|—|60|—|Squeezed|sauerkraut|colander|—
+S|P3|P|Layer the pot|Spread half the sauerkraut in the large pot with half the bacon. Lay the rolls on top, seam side down, then the rest of the sauerkraut, the bacon and the bay leaf. Mix the passata with the water and pour it over, just to cover.|action|—|180|L3, K2|Rolls covered|bacon; bay_leaf; tomato_passata; water|cooking_pot, ladle|—
+S|P4|P|Simmer|Bring to a gentle boil, cover and simmer very gently. Do not stir; shake the pot now and then instead.|wait|low|5400 (doc: 90 min to 2 h)|P3|Rice tender, leaves soft|—|cooking_pot, stovetop|—
+S|F1|F|Serve|Serve the rolls with the sauerkraut and a spoon of sour cream, with bread on the side.|action|off|30 + 20 × servings|P4|Served|sour_cream|ladle, plates|—
+`
+  },
+  {
+    id: "cevapi", name: "Ćevapi with Ajvar", image: "img/350/ground_beef.webp",
+    rows: `
+O|opt_side|lepinja|Lepinja (flatbread) and onion|TRUE
+O|opt_side|fries|Oven fries|FALSE
+I|ground_beef|Ground beef (20% fat)|img/350/ground_beef.webp|150|g|150|linear|—|—
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|crushed
+I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.25|tsp|0.6|linear|—|—
+I|baking_soda|Baking soda|img/350/baking_soda.webp|0.0625|tsp|0.3|linear|—|—
+I|water|Cold water|img/350/water.webp|1|tbsp|15|linear|—|—
+I|red_bell_pepper|Red bell peppers (ajvar)|img/350/red_bell_pepper.webp|1|pcs|200|linear|—|whole
+I|eggplant|Eggplant (ajvar)|img/350/eggplant.webp|60|g|60|linear|—|whole
+I|garlic_ajvar|Garlic clove (ajvar)|img/350/garlic.webp|0.5|pcs|3|linear, rounded up|—|crushed
+I|oil|Oil (ajvar)|img/350/oil.webp|1|tbsp|13|linear|—|—
+I|white_vinegar|Vinegar (ajvar)|img/350/white_vinegar.webp|1|tsp|5|linear|—|—
+I|salt_ajvar|Salt (ajvar)|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|lepinja|Lepinja or pita bread|—|1|pcs|90|linear|opt_side = lepinja|—
+I|onion|Onion|img/350/onion.webp|40|g|40|linear|—|finely chopped
+I|potato|Potatoes (fries)|img/350/potato.webp|200|g|200|linear|opt_side = fries|sticks
+I|oil_fries|Oil (fries)|img/350/oil.webp|1|tbsp|13|linear|opt_side = fries|—
+S|M1|M|Mix the meat|Mix the meat with the garlic, the salt, the pepper, the baking soda and the cold water. Knead for 3 minutes until sticky.|action|—|180 + 20 × servings|—|Sticky, evenly mixed|ground_beef; garlic; salt; ground_black_pepper; baking_soda; water|bowl|—
+S|M2|M|Rest in the fridge|Cover the bowl and leave it in the fridge.|wait|—|3600 (doc: 1 h, up to overnight)|M1|Rested|—|bowl, plastic_wrap|—
+S|M3|M|Shape the ćevapi|With wet hands, shape the meat into fingers about 2 cm thick and 7 cm long.|action|—|(60 + 90 × servings) × skill_factor|M2|All shaped|—|plates|—
+S|O1|O|Preheat the oven|Turn the oven on to 220 °C conventional (200 °C fan).|action|220 °C (200 °C fan)|15|—|Oven on|—|oven|—
+S|A1|A|Roast the peppers|Prick the peppers and the eggplant with a fork and roast them on a tray, turning once, until the skins are blistered and blackened in places.|wait|220 °C (200 °C fan)|1800 (doc: 30 to 35 min)|O1|Skins blistered, flesh soft|red_bell_pepper; eggplant|oven, tray, fork|—
+S|A2|A|Steam the peppers|Put them in a bowl, cover and leave for 10 minutes, so the skins come off easily.|wait|—|600|A1|Skins loose|—|bowl, plastic_wrap|—
+S|A3|A|Peel and chop|Peel the peppers and the eggplant, remove the seeds and stems and chop the flesh very finely.|action|—|(120 + 90 × servings) × skill_factor|A2|Finely chopped|—|knife, chopping_board|—
+S|A4|A|Cook the ajvar|Heat the oil in the saucepan, add the garlic and the chopped peppers and cook, stirring often, until thick and glossy. Season with the vinegar and the salt.|action|medium-low|900|A3|Thick, glossy, spreadable|garlic_ajvar; oil; white_vinegar; salt_ajvar|saucepan, stovetop, wooden_spoon|—
+S|S1|S|Chop the onion|Peel the onion and chop it finely.|action|—|(30 + 20 × servings) × skill_factor|—|Finely chopped|onion|chef_knife, chopping_board|—
+S|S2|S|Cut the fries|Cut the potatoes into sticks, toss them with the oil and a pinch of salt and spread them on a tray.|action|—|(60 + 60 × servings) × skill_factor|—|On the tray|potato; oil_fries|chef_knife, chopping_board, tray|opt_side = fries
+S|S3|S|Bake the fries|Bake until golden and crisp, turning once.|wait|220 °C (200 °C fan)|2100 (doc: 30 to 35 min)|S2, O1|Golden, crisp|—|oven, tray, spatula|opt_side = fries
+S|G1|G|Grill the ćevapi|Heat the grill pan until very hot and cook the ćevapi, turning them, until browned all over and cooked through.|action|high|540 (doc: 8 to 10 min)|M3|Browned, cooked through|—|pan, stovetop, tongs|—
+S|S4|S|Warm the lepinja|Cut the lepinja open and warm it in the hot pan with the meat juices, 30 seconds per side.|action|medium|60 × servings|G1|Warm, soft|lepinja|pan, tongs|opt_side = lepinja
+S|F1|F|Serve|Serve the ćevapi in or with the lepinja (or with the fries), with the chopped onion and plenty of ajvar.|action|off|30 + 20 × servings|G1, A4, S1, S3, S4|Served|—|spoon, plates|—
+`
+  },
+  {
+    id: "succotash", name: "Succotash", image: "img/350/corn.webp",
+    rows: `
+O|opt_bacon|with|With bacon|TRUE
+O|opt_bacon|without|Without bacon (vegetarian)|FALSE
+I|bacon|Bacon|img/350/bacon.webp|25|g|25|linear|opt_bacon = with|1 cm pieces
+I|butter|Butter|img/350/butter.webp|10|g|10|linear|—|—
+I|onion|Onion|img/350/onion.webp|30|g|30|linear|—|diced
+I|red_bell_pepper|Red bell pepper|img/350/red_bell_pepper.webp|40|g|40|linear|—|diced
+I|garlic|Garlic clove|img/350/garlic.webp|0.5|pcs|3|linear, rounded up|—|finely chopped
+I|lima_beans|Lima beans (frozen)|—|80|g|80|linear|—|—
+I|corn|Corn kernels (frozen or fresh)|img/350/corn.webp|100|g|100|linear|—|—
+I|water|Water|img/350/water.webp|2|tbsp|30|linear|—|—
+I|cherry_tomato|Cherry tomatoes|img/350/cherry_tomato.webp|50|g|50|linear|—|halved
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|parsley|Parsley|img/350/parsley.webp|1|tbsp|3|linear|—|chopped
+S|K1|K|Chop the vegetables|Dice the onion and the pepper, chop the garlic finely and halve the cherry tomatoes.|action|—|(90 + 45 × servings) × skill_factor|—|All cut|onion; red_bell_pepper; garlic; cherry_tomato|chef_knife, chopping_board|—
+S|P1|P|Crisp the bacon|Fry the bacon in the frying pan until crisp, then lift it out and leave the fat in the pan.|action|medium|420|—|Crisp|bacon|pan, stovetop, spatula|opt_bacon = with
+S|P2|P|Onion and pepper|Add the butter to the pan and cook the onion and the pepper until soft. Add the garlic for the last minute.|action|medium|360|P1, K1|Soft, fragrant|butter|pan, stovetop, spatula|—
+S|P3|P|Lima beans in|Add the lima beans and the water, cover and cook until tender.|wait|medium-low|300|P2|Beans tender|lima_beans; water|pan|—
+S|P4|P|Corn in|Stir in the corn and cook until hot and just tender.|action|medium|240|P3|Corn tender|corn|pan, spatula|—
+S|P5|P|Tomatoes and seasoning|Stir in the tomatoes, the salt and the pepper and cook just until the tomatoes soften.|action|medium|120|P4|Tomatoes just soft|salt; ground_black_pepper|pan, spatula|—
+S|F1|F|Serve|Sprinkle with the parsley and the crispy bacon and serve warm.|action|off|30 + 15 × servings|P5|Served|parsley|spoon, plates|—
+`
   }
 ];

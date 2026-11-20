@@ -360,7 +360,18 @@ window.INGREDIENT_INFO = (function () {
     lard: '902 0 0 100 39 0 0||meat pork',
     caraway_seeds: '333 50 20 15 0.6 38 0.04||',
     parsley_root: '55 12 2.3 0.6 0.1 4.3 0.03||',
-    celery_root: '42 9.2 1.5 0.3 0.1 1.8 0.25|Celery|'
+    celery_root: '42 9.2 1.5 0.3 0.1 1.8 0.25|Celery|',
+    // Added 2026-11-20 with the European and American recipes
+    bryndza: '290 2 16 25 17 0 2.2|Milk|dairy',
+    lingonberry_jam: '200 49 0.3 0.3 0 2 0.02||',
+    bread_dumplings: '230 46 7.5 1.5 0.4 2 0.9|Gluten, Egg, Milk|egg dairy',
+    beetroot: '43 9.6 1.6 0.2 0 2.8 0.2||',
+    baguette: '270 54 9 1.5 0.3 2.7 1.4|Gluten|',
+    barley: '352 78 10 1.2 0.2 15.6 0.02|Gluten|',
+    sour_cabbage_leaves: '20 4.3 1 0.1 0 2.9 1.7||',
+    sauerkraut: '19 4.3 0.9 0.1 0 2.9 1.7||',
+    lepinja: '275 54 9 1.5 0.3 2.4 1.2|Gluten|',
+    lima_beans: '113 20 6.8 0.3 0.1 5 0.03||'
   };
   var CATEGORY = {
     meat: 'guanciale bacon ham ground_pork ground_beef beef chicken_breast',
@@ -409,6 +420,9 @@ window.INGREDIENT_INFO = (function () {
   // Ingredients added with the Hungarian recipes
   var HU = { dairy: "cottage_cheese", oil: "lard", spices: "caraway_seeds", veg: "parsley_root celery_root" };
   Object.keys(HU).forEach(function (c) { MORE[c] += ' ' + HU[c]; });
+  // Ingredients added with the European and American recipes (2026-11-20)
+  var EU = { dairy: "bryndza", sauces: "lingonberry_jam", bread: "bread_dumplings baguette lepinja", veg: "beetroot sour_cabbage_leaves sauerkraut", grain: "barley", legume: "lima_beans" };
+  Object.keys(EU).forEach(function (c) { MORE[c] += ' ' + EU[c]; });
   Object.keys(MORE).forEach(function (c) { CATEGORY[c] += ' ' + MORE[c]; });
   var catOf = {};
   Object.keys(CATEGORY).forEach(function (c) { CATEGORY[c].split(' ').forEach(function (k) { catOf[k] = c; }); });
@@ -831,7 +845,20 @@ window.INGREDIENT_INFO = (function () {
     hortobagyi_palacsinta: { starred: 0, category: "main", cuisine: ['European'] },
     chicken_paprikash: { starred: 0, category: "main", cuisine: ['European'] },
     lecso: { starred: 0, category: "main", cuisine: ['European'] },
-    somloi_galuska: { starred: 0, category: "dessert", cuisine: ['European'], kids: { 'opt_alcohol': 'none' } }
+    somloi_galuska: { starred: 0, category: "dessert", cuisine: ['European'], kids: { 'opt_alcohol': 'none' } },
+    // European and American recipes, added 2026-11-20
+    bryndzove_halusky: { starred: 0, category: "main", cuisine: ['European'] },
+    svickova: { starred: 0, category: "main", cuisine: ['European'] },
+    burek: { starred: 0, category: "main", cuisine: ['European'] },
+    trilece: { starred: 0, category: "dessert", cuisine: ['European'] },
+    borscht: { starred: 0, category: "soup", cuisine: ['European'] },
+    zapiekanka: { starred: 0, category: "main", cuisine: ['European'] },
+    mulgipuder: { starred: 0, category: "main", cuisine: ['European'] },
+    swedish_meatballs: { starred: 0, category: "main", cuisine: ['European'] },
+    gazpacho: { starred: 0, category: "soup", cuisine: ['European'] },
+    stuffed_cabbage: { starred: 0, category: "main", cuisine: ['European'] },
+    cevapi: { starred: 0, category: "main", cuisine: ['European'] },
+    succotash: { starred: 0, category: "side", cuisine: ['American'] }
   };
   window.RECIPES.forEach(function (r) {
     var m = META[r.id] || {};
