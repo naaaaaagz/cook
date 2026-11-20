@@ -828,7 +828,8 @@ window.I18N["uk"] = {
   "stuffed_cabbage": "Голубці",
   "cevapi": "Чевапі з айваром",
   "succotash": "Сукоташ (кукурудза з квасолею ліма)",
-  "syrniki": "Сирники"
+  "syrniki": "Сирники",
+  "jambalaya": "Джамбалая"
  },
  "texts": {
   "Aluminium foil": "Алюмінієва фольга",
@@ -4449,7 +4450,25 @@ window.I18N["uk"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Розігрійте олію на сковороді й обсмажуйте сирники партіями до золотисто-коричневого кольору, приблизно по 3 хвилини з кожного боку.",
   "Golden brown on both sides": "Золотисті з обох боків",
   "Serve warm with sour cream and jam.": "Подавайте теплими зі сметаною та варенням.",
-  "Mash the cheese … Shape the syrniki": "Розімніть сир … Сформуйте сирники"
+  "Mash the cheese … Shape the syrniki": "Розімніть сир … Сформуйте сирники",
+  "Chicken and sausage": "Курка й ковбаса",
+  "With shrimp too": "Ще й з креветками",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Наріжте кубиками цибулю, перець і стебло селери, часник дрібно посічіть.",
+  "All chopped": "Усе нарізано",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Наріжте курку шматочками по 2 см, а ковбасу — кружальцями.",
+  "Brown the sausage": "Обсмажте ковбасу",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Розігрійте олію у великій каструлі й обсмажте ковбасу до рум’яності. Вийміть її, а жир залиште в каструлі.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "У тій самій каструлі злегка обсмажте курку з усіх боків і теж вийміть.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Обсмажте в каструлі цибулю, перець і селеру до м’якості. Останньої хвилини додайте часник.",
+  "Spices and rice": "Спеції та рис",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Вмішайте паприку, кайєнський перець, чебрець, орегано й рис і перемішуйте 1 хвилину.",
+  "Rice coated": "Рис укритий олією",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Додайте помідори, бульйон, лавровий лист, сіль і перець і поверніть курку та ковбасу в каструлю. Доведіть до кипіння, накрийте кришкою й варіть на слабкому вогні, не перемішуючи, доки рис не стане м’яким.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Зніміть каструлю з вогню й залиште під кришкою на 5 хвилин. Вийміть лавровий лист.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Розпушіть рис виделкою й подавайте, посипавши зеленою цибулею.",
+  "Brown the sausage … Rest": "Обсмажте ковбасу … Дайте відпочити",
+  "Shrimp in": "Додайте креветки",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Втисніть креветки в рис, знову накрийте й варіть, доки вони не порожевіють."
  },
  "amounts": {
   "g": "г",

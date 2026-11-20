@@ -827,7 +827,8 @@ window.I18N["th"] = {
   "stuffed_cabbage": "กะหล่ำปลีม้วนสอดไส้",
   "cevapi": "Ćevapi (กับอัยวาร์)",
   "succotash": "Succotash (ข้าวโพดกับถั่วลิมา)",
-  "syrniki": "Syrniki (แพนเค้กชีสสด)"
+  "syrniki": "Syrniki (แพนเค้กชีสสด)",
+  "jambalaya": "Jambalaya (ข้าวไก่และไส้กรอก)"
  },
  "texts": {
   "Aluminium foil": "ฟอยล์อะลูมิเนียม",
@@ -4448,7 +4449,25 @@ window.I18N["th"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "ตั้งน้ำมันในกระทะแล้วทอดซีร์นิกิทีละชุดจนเหลืองน้ำตาล ด้านละประมาณ 3 นาที",
   "Golden brown on both sides": "เหลืองน้ำตาลทั้งสองด้าน",
   "Serve warm with sour cream and jam.": "เสิร์ฟอุ่นๆ กับซาวร์ครีมและแยม",
-  "Mash the cheese … Shape the syrniki": "บดชีส … ปั้นซีร์นิกิ"
+  "Mash the cheese … Shape the syrniki": "บดชีส … ปั้นซีร์นิกิ",
+  "Chicken and sausage": "ไก่และไส้กรอก",
+  "With shrimp too": "ใส่กุ้งด้วย",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "หั่นหัวหอม พริกหยวก และขึ้นฉ่ายฝรั่งเป็นลูกเต๋า แล้วสับกระเทียมละเอียด",
+  "All chopped": "หั่นครบแล้ว",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "หั่นไก่เป็นชิ้นขนาด 2 ซม. และหั่นไส้กรอกเป็นแว่น",
+  "Brown the sausage": "ทอดไส้กรอก",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "ตั้งน้ำมันในหม้อใบใหญ่แล้วทอดไส้กรอกจนเกรียม ตักขึ้นและเหลือน้ำมันไว้ในหม้อ",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "ทอดไก่ในหม้อเดิมจนเกรียมเล็กน้อยทุกด้าน แล้วตักขึ้นเช่นกัน",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "ผัดหัวหอม พริกหยวก และขึ้นฉ่ายฝรั่งในหม้อจนนุ่ม ใส่กระเทียมในนาทีสุดท้าย",
+  "Spices and rice": "เครื่องเทศและข้าว",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "ใส่ปาปริกา พริกคาเยน ไธม์ ออริกาโน และข้าวสาร แล้วผัด 1 นาที",
+  "Rice coated": "ข้าวเคลือบทั่ว",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "ใส่มะเขือเทศ น้ำซุป ใบกระวาน เกลือ และพริกไทย แล้วใส่ไก่และไส้กรอกกลับลงไป ต้มให้เดือด ปิดฝาแล้วหุงด้วยไฟอ่อนโดยไม่คนจนข้าวนุ่ม",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "ยกหม้อลงจากเตาแล้วปิดฝาพักไว้ 5 นาที หยิบใบกระวานออก",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "ใช้ส้อมยีข้าวให้ร่วน แล้วโรยต้นหอมก่อนเสิร์ฟ",
+  "Brown the sausage … Rest": "ทอดไส้กรอก … พัก",
+  "Shrimp in": "ใส่กุ้ง",
+  "Push the shrimp into the rice, cover again and cook until pink.": "กดกุ้งลงในข้าว ปิดฝาอีกครั้งแล้วปรุงจนกุ้งเป็นสีชมพู"
  },
  "amounts": {
   "g": "กรัม",

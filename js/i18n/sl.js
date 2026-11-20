@@ -819,7 +819,8 @@ window.I18N["sl"] = {
   "stuffed_cabbage": "Sarma",
   "cevapi": "Ćevapčiči z ajvarjem",
   "succotash": "Succotash (koruza z limskim fižolom)",
-  "syrniki": "Sirniki (skutne palačinke)"
+  "syrniki": "Sirniki (skutne palačinke)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Aluminijasta folija",
@@ -4440,7 +4441,25 @@ window.I18N["sl"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "V ponvi segrejte olje in sirnike pecite v več delih, da so zlato rjavi, približno 3 minute na vsaki strani.",
   "Golden brown on both sides": "Zlato rjavi na obeh straneh",
   "Serve warm with sour cream and jam.": "Postrezite tople s kislo smetano in marmelado.",
-  "Mash the cheese … Shape the syrniki": "Pretlačite skuto … Oblikujte sirnike"
+  "Mash the cheese … Shape the syrniki": "Pretlačite skuto … Oblikujte sirnike",
+  "Chicken and sausage": "Piščanec in klobasa",
+  "With shrimp too": "Tudi s kozicami",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Čebulo, papriko in steblasto zeleno narežite na kocke, česen pa drobno sesekljajte.",
+  "All chopped": "Vse narezano",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Piščanca narežite na 2 cm kose, klobaso pa na kolobarje.",
+  "Brown the sausage": "Popecite klobaso",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "V velikem loncu segrejte olje in klobaso popecite, da porjavi. Vzemite jo ven, maščobo pa pustite v loncu.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "V istem loncu piščanca rahlo popecite z vseh strani in ga prav tako vzemite ven.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "V loncu prepražite čebulo, papriko in zeleno, da se zmehčajo. V zadnji minuti dodajte česen.",
+  "Spices and rice": "Začimbe in riž",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Vmešajte papriko, kajenski poper, timijan, origano in riž ter mešajte 1 minuto.",
+  "Rice coated": "Riž obdan z maščobo",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Dodajte paradižnik, jušno osnovo, lovorov list, sol in poper ter vrnite piščanca in klobaso v lonec. Zavrite, pokrijte in kuhajte na nizki temperaturi brez mešanja, dokler riž ni mehak.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Lonec odstavite s štedilnika in ga pustite pokritega 5 minut. Odstranite lovorov list.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Riž zrahljajte z vilicami in postrezite s spomladansko čebulo po vrhu.",
+  "Brown the sausage … Rest": "Popecite klobaso … Pustite počivati",
+  "Shrimp in": "Dodajte kozice",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Kozice potisnite v riž, ponovno pokrijte in kuhajte, dokler ne postanejo rožnate."
  },
  "amounts": {
   "L": "l",

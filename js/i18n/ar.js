@@ -828,7 +828,8 @@ window.I18N["ar"] = {
   "stuffed_cabbage": "ملفوف محشي",
   "cevapi": "تشيفابي مع الأيفار",
   "succotash": "ساكوتاش (ذرة مع فاصوليا ليما)",
-  "syrniki": "سيرنيكي (فطائر الجبن القريش)"
+  "syrniki": "سيرنيكي (فطائر الجبن القريش)",
+  "jambalaya": "جامبالايا"
  },
  "texts": {
   "Aluminium foil": "ورق ألومنيوم",
@@ -4449,7 +4450,25 @@ window.I18N["ar"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "سخّن الزيت في المقلاة واقلِ السيرنيكي على دفعات حتى تصبح ذهبية بنية، نحو 3 دقائق لكل جانب.",
   "Golden brown on both sides": "ذهبية بنية من الجانبين",
   "Serve warm with sour cream and jam.": "قدّمها دافئة مع القشدة الحامضة والمربى.",
-  "Mash the cheese … Shape the syrniki": "اهرس الجبن … شكّل السيرنيكي"
+  "Mash the cheese … Shape the syrniki": "اهرس الجبن … شكّل السيرنيكي",
+  "Chicken and sausage": "دجاج ونقانق",
+  "With shrimp too": "مع الروبيان أيضًا",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "قطّع البصل والفلفل والكرفس مكعبات، وافرم الثوم ناعمًا.",
+  "All chopped": "كل شيء مقطّع",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "قطّع الدجاج قطعًا بحجم 2 سم والنقانق شرائح.",
+  "Brown the sausage": "حمّر النقانق",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "سخّن الزيت في القدر الكبيرة وحمّر النقانق. أخرجها واترك الدهن في القدر.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "حمّر الدجاج قليلًا من كل الجوانب في القدر نفسها، ثم أخرجه أيضًا.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "قلّب البصل والفلفل والكرفس في القدر حتى تطرى. أضف الثوم في الدقيقة الأخيرة.",
+  "Spices and rice": "التوابل والأرز",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "أضف البابريكا والفلفل الكايين والزعتر والأوريغانو والأرز وقلّب لمدة 1 دقيقة.",
+  "Rice coated": "الأرز مغلّف",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "أضف الطماطم والمرق وورقة الغار والملح والفلفل وأعد الدجاج والنقانق إلى القدر. اتركه يغلي، ثم غطِّه واطهه على نار هادئة دون تقليب حتى ينضج الأرز.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "ارفع القدر عن النار واتركها مغطاة 5 دقائق. أخرج ورقة الغار.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "فكّك الأرز بالشوكة وقدّمه مرشوشًا بالبصل الأخضر.",
+  "Brown the sausage … Rest": "حمّر النقانق … الراحة",
+  "Shrimp in": "أضف الروبيان",
+  "Push the shrimp into the rice, cover again and cook until pink.": "ادفع الروبيان داخل الأرز، وغطِّ القدر مجددًا واطهه حتى يصبح ورديًا."
  },
  "amounts": {
   "g": "غ",

@@ -827,7 +827,8 @@ window.I18N["ja"] = {
   "stuffed_cabbage": "ロールキャベツ",
   "cevapi": "チェヴァピ（アイヴァル添え）",
   "succotash": "サコタッシュ（とうもろこしとライマ豆）",
-  "syrniki": "シルニキ"
+  "syrniki": "シルニキ",
+  "jambalaya": "ジャンバラヤ"
  },
  "texts": {
   "Aluminium foil": "アルミホイル",
@@ -4448,7 +4449,25 @@ window.I18N["ja"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "フライパンに油を熱し、シルニキを数回に分けて、片面約3分ずつきつね色になるまで焼く。",
   "Golden brown on both sides": "両面きつね色",
   "Serve warm with sour cream and jam.": "サワークリームとジャムを添えて温かいうちに出す。",
-  "Mash the cheese … Shape the syrniki": "チーズをつぶす … シルニキを成形する"
+  "Mash the cheese … Shape the syrniki": "チーズをつぶす … シルニキを成形する",
+  "Chicken and sausage": "鶏肉とソーセージ",
+  "With shrimp too": "えびも入れる",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "玉ねぎ、ピーマン、セロリをさいの目に切り、にんにくをみじん切りにする。",
+  "All chopped": "すべて切った",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "鶏肉を2 cm角に切り、ソーセージを輪切りにする。",
+  "Brown the sausage": "ソーセージを焼く",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "大きな鍋に油を熱し、ソーセージを焼き色がつくまで焼く。取り出し、脂は鍋に残す。",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "同じ鍋で鶏肉の全面に軽く焼き色をつけ、これも取り出す。",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "鍋で玉ねぎ、ピーマン、セロリをやわらかくなるまで炒める。最後の1分でにんにくを加える。",
+  "Spices and rice": "スパイスと米",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "パプリカ、カイエンペッパー、タイム、オレガノ、米を加え、1分炒める。",
+  "Rice coated": "米に油が回った",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "トマト、ブイヨン、ローリエ、塩、こしょうを加え、鶏肉とソーセージを戻し入れる。沸騰させてふたをし、米がやわらかくなるまで混ぜずに弱火で炊く。",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "鍋を火から下ろし、ふたをしたまま5分蒸らす。ローリエを取り除く。",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "フォークで米をほぐし、小ねぎを散らして出す。",
+  "Brown the sausage … Rest": "ソーセージを焼く … 休ませる",
+  "Shrimp in": "えびを加える",
+  "Push the shrimp into the rice, cover again and cook until pink.": "えびを米に押し込み、再びふたをして、えびがピンク色になるまで火を通す。"
  },
  "amounts": {
   "tsp": "小さじ#",

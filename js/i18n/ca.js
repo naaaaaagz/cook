@@ -820,7 +820,8 @@ window.I18N["ca"] = {
   "stuffed_cabbage": "Rotlles de col farcits",
   "cevapi": "Ćevapi amb ajvar",
   "succotash": "Succotash (blat de moro amb mongetes de Lima)",
-  "syrniki": "Syrniki (coquetes de mató)"
+  "syrniki": "Syrniki (coquetes de mató)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Paper d’alumini",
@@ -4441,7 +4442,25 @@ window.I18N["ca"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Escalfa l’oli a la paella i fregeix els syrniki per tandes fins que estiguin daurats, uns 3 minuts per costat.",
   "Golden brown on both sides": "Daurats per les dues bandes",
   "Serve warm with sour cream and jam.": "Serveix-los calents amb crema agra i melmelada.",
-  "Mash the cheese … Shape the syrniki": "Aixafar el formatge … Formar els syrniki"
+  "Mash the cheese … Shape the syrniki": "Aixafar el formatge … Formar els syrniki",
+  "Chicken and sausage": "Pollastre i botifarra",
+  "With shrimp too": "També amb gambes",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Talla a daus la ceba, el pebrot i l’api i pica fi l’all.",
+  "All chopped": "Tot tallat",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Talla el pollastre a trossos de 2 cm i la botifarra a rodanxes.",
+  "Brown the sausage": "Daurar la botifarra",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Escalfa l’oli a l’olla gran i daura la botifarra. Treu-la i deixa el greix a l’olla.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Daura lleugerament el pollastre per tots els costats a la mateixa olla i treu-lo també.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Sofregeix la ceba, el pebrot i l’api a l’olla fins que siguin tous. Afegeix-hi l’all l’últim minut.",
+  "Spices and rice": "Espècies i arròs",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Afegeix-hi el pebre vermell, el bitxo de Caiena, la farigola, l’orenga i l’arròs i remena durant 1 minut.",
+  "Rice coated": "Arròs ben impregnat",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Afegeix-hi el tomàquet, el brou, la fulla de llorer, la sal i el pebre i torna a posar-hi el pollastre i la botifarra. Porta-ho a ebullició, tapa i cou a foc baix sense remenar fins que l’arròs sigui tendre.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Treu l’olla del foc i deixa-la tapada 5 minuts. Treu la fulla de llorer.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Esgrana l’arròs amb una forquilla i serveix-lo amb ceba tendra per sobre.",
+  "Brown the sausage … Rest": "Daurar la botifarra … Reposar",
+  "Shrimp in": "Afegir les gambes",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Enfonsa les gambes a l’arròs, torna a tapar i cou fins que siguin rosades."
  },
  "amounts": {
   "L": "l",

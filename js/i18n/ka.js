@@ -828,7 +828,8 @@ window.I18N["ka"] = {
   "stuffed_cabbage": "კომბოსტოს ტოლმა",
   "cevapi": "ჩევაპი აივარით",
   "succotash": "საქოთაში (სიმინდი ლიმა ლობიოთი)",
-  "syrniki": "სირნიკი (ხაჭოს ბლინები)"
+  "syrniki": "სირნიკი (ხაჭოს ბლინები)",
+  "jambalaya": "ჯამბალაია"
  },
  "texts": {
   "Aluminium foil": "ალუმინის ფოლგა",
@@ -4449,7 +4450,25 @@ window.I18N["ka"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "ტაფაზე გააცხელეთ ზეთი და სირნიკები ნაწილ-ნაწილ შეწვით ოქროსფრად, თითო მხარეს დაახლოებით 3 წუთი.",
   "Golden brown on both sides": "ორივე მხრიდან ოქროსფერი",
   "Serve warm with sour cream and jam.": "მიირთვით თბილი არაჟნითა და მურაბით.",
-  "Mash the cheese … Shape the syrniki": "დაჭყლიტეთ ხაჭო … გამოძერწეთ სირნიკები"
+  "Mash the cheese … Shape the syrniki": "დაჭყლიტეთ ხაჭო … გამოძერწეთ სირნიკები",
+  "Chicken and sausage": "ქათამი და ძეხვი",
+  "With shrimp too": "ასევე კრევეტებით",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "დაჭერით კუბიკებად ხახვი, წიწაკა და ნიახური, ნიორი კი წვრილად დაჭერით.",
+  "All chopped": "ყველაფერი დაჭრილია",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "ქათამი დაჭერით 2 სმ ნაჭრებად, ძეხვი კი რგოლებად.",
+  "Brown the sausage": "შეწვით ძეხვი",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "დიდ ქვაბში გააცხელეთ ზეთი და შეწვით ძეხვი. ამოიღეთ, ცხიმი კი ქვაბში დატოვეთ.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "იმავე ქვაბში ქათამი ყველა მხრიდან ოდნავ შეწვით და ისიც ამოიღეთ.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "ქვაბში მოშუშეთ ხახვი, წიწაკა და ნიახური, სანამ არ დარბილდება. ნიორი ბოლო წუთზე დაამატეთ.",
+  "Spices and rice": "სანელებლები და ბრინჯი",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "შეურიეთ პაპრიკა, კაიენის წიწაკა, ქონდარი, ორეგანო და ბრინჯი და ურიეთ 1 წუთი.",
+  "Rice coated": "ბრინჯი დაფარულია",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "დაამატეთ პომიდორი, ბულიონი, დაფნის ფოთოლი, მარილი და პილპილი და ქათამი და ძეხვი ქვაბში დააბრუნეთ. აადუღეთ, დახურეთ და მოხარშეთ დაბალ ცეცხლზე ურევლად, სანამ ბრინჯი არ დარბილდება.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "ქვაბი გადმოდგით ცეცხლიდან და დატოვეთ დახურული 5 წუთით. ამოიღეთ დაფნის ფოთოლი.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "ბრინჯი ჩანგლით გააფხვიერეთ და მიირთვით მწვანე ხახვმოყრილი.",
+  "Brown the sausage … Rest": "შეწვით ძეხვი … დასვენება",
+  "Shrimp in": "დაამატეთ კრევეტები",
+  "Push the shrimp into the rice, cover again and cook until pink.": "კრევეტები ჩააჭყლიტეთ ბრინჯში, ისევ დახურეთ და მოხარშეთ, სანამ არ ავარდისფრდება."
  },
  "amounts": {
   "g": "გ",

@@ -819,7 +819,8 @@ window.I18N["fr"] = {
   "stuffed_cabbage": "Feuilles de chou farcies",
   "cevapi": "Ćevapi à l’ajvar",
   "succotash": "Succotash (maïs et haricots de Lima)",
-  "syrniki": "Syrniki (galettes au fromage blanc)"
+  "syrniki": "Syrniki (galettes au fromage blanc)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Papier aluminium",
@@ -4440,7 +4441,25 @@ window.I18N["fr"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Faites chauffer l’huile dans la poêle et faites dorer les syrniki en plusieurs fois, environ 3 minutes de chaque côté.",
   "Golden brown on both sides": "Dorées des deux côtés",
   "Serve warm with sour cream and jam.": "Servez chaud avec de la crème aigre et de la confiture.",
-  "Mash the cheese … Shape the syrniki": "Écraser le fromage … Façonner les syrniki"
+  "Mash the cheese … Shape the syrniki": "Écraser le fromage … Façonner les syrniki",
+  "Chicken and sausage": "Poulet et saucisse",
+  "With shrimp too": "Avec des crevettes en plus",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Coupez en dés l’oignon, le poivron et le céleri et hachez finement l’ail.",
+  "All chopped": "Tout est coupé",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Coupez le poulet en morceaux de 2 cm et la saucisse en rondelles.",
+  "Brown the sausage": "Faire dorer la saucisse",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Faites chauffer l’huile dans la grande casserole et faites dorer la saucisse. Retirez-la et laissez la graisse dans la casserole.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Faites dorer légèrement le poulet de tous côtés dans la même casserole, puis retirez-le aussi.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Faites fondre l’oignon, le poivron et le céleri dans la casserole. Ajoutez l’ail pendant la dernière minute.",
+  "Spices and rice": "Épices et riz",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Ajoutez le paprika, le piment de Cayenne, le thym, l’origan et le riz et remuez pendant 1 minute.",
+  "Rice coated": "Riz bien enrobé",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Ajoutez les tomates, le bouillon, la feuille de laurier, le sel et le poivre et remettez le poulet et la saucisse. Portez à ébullition, couvrez et laissez cuire à feu doux sans remuer jusqu’à ce que le riz soit tendre.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Retirez la casserole du feu et laissez reposer 5 minutes à couvert. Retirez la feuille de laurier.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Égrenez le riz à la fourchette et servez parsemé d’oignons nouveaux.",
+  "Brown the sausage … Rest": "Faire dorer la saucisse … Reposer",
+  "Shrimp in": "Ajouter les crevettes",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Enfoncez les crevettes dans le riz, couvrez de nouveau et laissez cuire jusqu’à ce qu’elles soient roses."
  },
  "amounts": {
   "L": "l",

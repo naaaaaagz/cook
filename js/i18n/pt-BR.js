@@ -819,7 +819,8 @@ window.I18N["pt-BR"] = {
   "stuffed_cabbage": "Charutos de repolho",
   "cevapi": "Ćevapi com ajvar",
   "succotash": "Succotash (milho com feijão-de-lima)",
-  "syrniki": "Syrniki (panquecas de ricota)"
+  "syrniki": "Syrniki (panquecas de ricota)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Papel-alumínio",
@@ -4440,7 +4441,25 @@ window.I18N["pt-BR"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Aqueça o óleo na frigideira e frite os syrniki aos poucos até dourarem, cerca de 3 minutos de cada lado.",
   "Golden brown on both sides": "Dourados dos dois lados",
   "Serve warm with sour cream and jam.": "Sirva quente com creme azedo e geleia.",
-  "Mash the cheese … Shape the syrniki": "Amassar o queijo … Modelar os syrniki"
+  "Mash the cheese … Shape the syrniki": "Amassar o queijo … Modelar os syrniki",
+  "Chicken and sausage": "Frango e linguiça",
+  "With shrimp too": "Com camarão também",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Corte em cubos a cebola, o pimentão e o salsão e pique o alho bem fino.",
+  "All chopped": "Tudo picado",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Corte o frango em pedaços de 2 cm e a linguiça em rodelas.",
+  "Brown the sausage": "Dourar a linguiça",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Aqueça o óleo na panela grande e doure a linguiça. Retire-a e deixe a gordura na panela.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Doure levemente o frango por todos os lados na mesma panela e retire-o também.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Refogue a cebola, o pimentão e o salsão na panela até ficarem macios. Junte o alho no último minuto.",
+  "Spices and rice": "Temperos e arroz",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Junte a páprica, a pimenta-caiena, o tomilho, o orégano e o arroz e mexa por 1 minuto.",
+  "Rice coated": "Arroz envolvido",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Junte o tomate, o caldo, a folha de louro, o sal e a pimenta e volte o frango e a linguiça para a panela. Deixe ferver, tampe e cozinhe em fogo baixo sem mexer até o arroz ficar macio.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Tire a panela do fogo e deixe tampada por 5 minutos. Retire a folha de louro.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Solte o arroz com um garfo e sirva polvilhado com cebolinha.",
+  "Brown the sausage … Rest": "Dourar a linguiça … Descansar",
+  "Shrimp in": "Colocar o camarão",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Afunde o camarão no arroz, tampe de novo e cozinhe até ficar rosado."
  },
  "amounts": {
   "L": "l",

@@ -819,7 +819,8 @@ window.I18N["sk"] = {
   "stuffed_cabbage": "Holúbky",
   "cevapi": "Ćevapi s ajvarom",
   "succotash": "Succotash (kukurica s fazuľou lima)",
-  "syrniki": "Syrniky (tvarohové placky)"
+  "syrniki": "Syrniky (tvarohové placky)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Alobal",
@@ -4440,7 +4441,25 @@ window.I18N["sk"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Na panvici rozohrejte olej a syrniky opekajte po dávkach dozlatista, asi 3 minúty z každej strany.",
   "Golden brown on both sides": "Zlatohnedé z oboch strán",
   "Serve warm with sour cream and jam.": "Podávajte teplé s kyslou smotanou a džemom.",
-  "Mash the cheese … Shape the syrniki": "Roztlačte tvaroh … Vytvarujte syrniky"
+  "Mash the cheese … Shape the syrniki": "Roztlačte tvaroh … Vytvarujte syrniky",
+  "Chicken and sausage": "Kura a klobása",
+  "With shrimp too": "Aj s krevetami",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Nakrájajte na kocky cibuľu, papriku a stopkový zeler a nadrobno nasekajte cesnak.",
+  "All chopped": "Všetko nakrájané",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Kura nakrájajte na 2 cm kúsky a klobásu na kolieska.",
+  "Brown the sausage": "Opečte klobásu",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Vo veľkom hrnci rozohrejte olej a klobásu opečte dohneda. Vyberte ju a tuk nechajte v hrnci.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "V tom istom hrnci kura zľahka opečte zo všetkých strán a tiež ho vyberte.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "V hrnci speňte cibuľu, papriku a zeler domäkka. V poslednej minúte pridajte cesnak.",
+  "Spices and rice": "Korenie a ryža",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Vmiešajte papriku, kajenské korenie, tymian, oregano a ryžu a 1 minútu miešajte.",
+  "Rice coated": "Ryža obalená",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Pridajte paradajky, vývar, bobkový list, soľ a korenie a vráťte do hrnca kura a klobásu. Priveďte do varu, prikryte a varte na miernom ohni bez miešania, kým ryža nezmäkne.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Odstavte hrniec z platne a nechajte 5 minút prikrytý odpočívať. Vyberte bobkový list.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Ryžu prekyprite vidličkou a podávajte posypanú jarnou cibuľkou.",
+  "Brown the sausage … Rest": "Opečte klobásu … Nechať odpočinúť",
+  "Shrimp in": "Pridajte krevety",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Vtlačte krevety do ryže, znova prikryte a varte, kým nezružovejú."
  },
  "amounts": {
   "L": "l",

@@ -827,7 +827,8 @@ window.I18N["ko"] = {
   "stuffed_cabbage": "양배추 롤",
   "cevapi": "Ćevapi (아이바르 곁들임)",
   "succotash": "Succotash (옥수수 리마콩 볶음)",
-  "syrniki": "Syrniki (코티지 치즈 팬케이크)"
+  "syrniki": "Syrniki (코티지 치즈 팬케이크)",
+  "jambalaya": "잠발라야"
  },
  "texts": {
   "Aluminium foil": "쿠킹 포일",
@@ -4448,7 +4449,25 @@ window.I18N["ko"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "팬에 기름을 두르고 시르니키를 여러 번에 나눠 한 면에 약 3분씩 황금빛 갈색이 될 때까지 구우세요.",
   "Golden brown on both sides": "양면이 황금빛 갈색",
   "Serve warm with sour cream and jam.": "사워크림과 잼을 곁들여 따뜻할 때 내세요.",
-  "Mash the cheese … Shape the syrniki": "치즈 으깨기 … 시르니키 빚기"
+  "Mash the cheese … Shape the syrniki": "치즈 으깨기 … 시르니키 빚기",
+  "Chicken and sausage": "닭고기와 소시지",
+  "With shrimp too": "새우도 넣어서",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "양파, 피망, 셀러리를 깍둑썰기하고 마늘은 잘게 다지세요.",
+  "All chopped": "모두 썰었어요",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "닭고기는 2cm 크기로, 소시지는 동그랗게 써세요.",
+  "Brown the sausage": "소시지 굽기",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "큰 냄비에 기름을 두르고 소시지를 노릇하게 구우세요. 건져 내고 기름은 냄비에 남겨 두세요.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "같은 냄비에서 닭고기를 모든 면이 살짝 노릇해지도록 구운 뒤 역시 건져 내세요.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "냄비에 양파, 피망, 셀러리를 넣고 부드러워질 때까지 볶으세요. 마지막 1분에 마늘을 넣으세요.",
+  "Spices and rice": "향신료와 쌀",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "파프리카, 카이엔페퍼, 타임, 오레가노, 쌀을 넣고 1분간 볶으세요.",
+  "Rice coated": "쌀에 기름이 고루 묻었어요",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "토마토, 육수, 월계수 잎, 소금, 후추를 넣고 닭고기와 소시지를 다시 넣으세요. 끓으면 뚜껑을 덮고 젓지 말고 약한 불에서 쌀이 부드러워질 때까지 익히세요.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "냄비를 불에서 내리고 뚜껑을 덮은 채 5분 두세요. 월계수 잎을 건져 내세요.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "포크로 밥을 풀어 주고 쪽파를 뿌려 내세요.",
+  "Brown the sausage … Rest": "소시지 굽기 … 레스팅하기",
+  "Shrimp in": "새우 넣기",
+  "Push the shrimp into the rice, cover again and cook until pink.": "새우를 밥 속에 눌러 넣고 다시 뚜껑을 덮어 분홍색이 될 때까지 익히세요."
  },
  "amounts": {
   "tsp": "작은술",

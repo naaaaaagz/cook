@@ -827,7 +827,8 @@ window.I18N["hi"] = {
   "stuffed_cabbage": "भरवाँ पत्तागोभी रोल",
   "cevapi": "Ćevapi (अयवार के साथ)",
   "succotash": "Succotash (मक्का और लिमा बीन्स)",
-  "syrniki": "Syrniki (पनीर के पैनकेक)"
+  "syrniki": "Syrniki (पनीर के पैनकेक)",
+  "jambalaya": "Jambalaya (चावल, चिकन और सॉसेज)"
  },
  "texts": {
   "Aluminium foil": "एल्युमिनियम फ़ॉइल",
@@ -4448,7 +4449,25 @@ window.I18N["hi"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "पैन में तेल गरम करें और सिरनिकी को थोड़ी-थोड़ी करके सुनहरा भूरा होने तक तलें, हर तरफ़ लगभग 3 मिनट।",
   "Golden brown on both sides": "दोनों तरफ़ सुनहरे भूरे",
   "Serve warm with sour cream and jam.": "खट्टी क्रीम और जैम के साथ गरम परोसें।",
-  "Mash the cheese … Shape the syrniki": "पनीर मसलें … सिरनिकी का आकार दें"
+  "Mash the cheese … Shape the syrniki": "पनीर मसलें … सिरनिकी का आकार दें",
+  "Chicken and sausage": "चिकन और सॉसेज",
+  "With shrimp too": "झींगे के साथ भी",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "प्याज़, शिमला मिर्च और सेलरी को छोटे टुकड़ों में काटें और लहसुन बारीक काटें।",
+  "All chopped": "सब कट गया",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "चिकन को 2 सेमी के टुकड़ों में और सॉसेज को स्लाइस में काटें।",
+  "Brown the sausage": "सॉसेज भूनें",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "बड़े पतीले में तेल गरम करें और सॉसेज को भूरा होने तक भूनें। उसे निकाल लें और चर्बी पतीले में छोड़ दें।",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "उसी पतीले में चिकन को सभी तरफ़ से हल्का भूरा होने तक भूनें, फिर उसे भी निकाल लें।",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "पतीले में प्याज़, शिमला मिर्च और सेलरी को नरम होने तक भूनें। आख़िरी मिनट में लहसुन डालें।",
+  "Spices and rice": "मसाले और चावल",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "पैपरिका, लाल मिर्च (कैयेन), थाइम, ओरिगैनो और चावल मिलाएँ और 1 मिनट चलाएँ।",
+  "Rice coated": "चावल पर परत चढ़ गई",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "टमाटर, स्टॉक, तेज़ पत्ता, नमक और काली मिर्च डालें और चिकन व सॉसेज वापस डालें। उबाल आने दें, ढकें और बिना चलाए धीमी आँच पर चावल नरम होने तक पकाएँ।",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "पतीले को आँच से हटाएँ और 5 मिनट ढककर रहने दें। तेज़ पत्ता निकाल दें।",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "काँटे से चावल खिला करें और ऊपर हरा प्याज़ छिड़ककर परोसें।",
+  "Brown the sausage … Rest": "सॉसेज भूनें … आराम देना",
+  "Shrimp in": "झींगे डालें",
+  "Push the shrimp into the rice, cover again and cook until pink.": "झींगों को चावल में दबाएँ, फिर से ढकें और गुलाबी होने तक पकाएँ।"
  },
  "amounts": {
   "g": "ग्राम",

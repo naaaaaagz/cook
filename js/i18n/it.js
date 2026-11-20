@@ -819,7 +819,8 @@ window.I18N["it"] = {
   "stuffed_cabbage": "Involtini di cavolo",
   "cevapi": "Ćevapi con ajvar",
   "succotash": "Succotash (mais e fagioli di Lima)",
-  "syrniki": "Syrniki (frittelle di ricotta)"
+  "syrniki": "Syrniki (frittelle di ricotta)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Carta stagnola",
@@ -4440,7 +4441,25 @@ window.I18N["it"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Scalda l’olio nella padella e friggi i syrniki un po’ alla volta finché sono dorati, circa 3 minuti per lato.",
   "Golden brown on both sides": "Dorati su entrambi i lati",
   "Serve warm with sour cream and jam.": "Servi caldi con panna acida e marmellata.",
-  "Mash the cheese … Shape the syrniki": "Schiaccia il formaggio … Forma i syrniki"
+  "Mash the cheese … Shape the syrniki": "Schiaccia il formaggio … Forma i syrniki",
+  "Chicken and sausage": "Pollo e salsiccia",
+  "With shrimp too": "Anche con gamberi",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Taglia a dadini la cipolla, il peperone e il sedano e trita finemente l’aglio.",
+  "All chopped": "Tutto tagliato",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Taglia il pollo a pezzi di 2 cm e la salsiccia a rondelle.",
+  "Brown the sausage": "Rosola la salsiccia",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Scalda l’olio nella pentola grande e rosola la salsiccia. Toglila e lascia il grasso nella pentola.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Rosola leggermente il pollo su tutti i lati nella stessa pentola, poi toglilo anche lui.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Fai appassire la cipolla, il peperone e il sedano nella pentola. Aggiungi l’aglio nell’ultimo minuto.",
+  "Spices and rice": "Spezie e riso",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Aggiungi la paprica, il pepe di Cayenna, il timo, l’origano e il riso e mescola per 1 minuto.",
+  "Rice coated": "Riso ben condito",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Aggiungi i pomodori, il brodo, la foglia di alloro, il sale e il pepe e rimetti il pollo e la salsiccia. Porta a bollore, copri e cuoci a fuoco basso senza mescolare finché il riso è tenero.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Togli la pentola dal fuoco e lasciala coperta per 5 minuti. Togli la foglia di alloro.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Sgrana il riso con una forchetta e servi cosparso di cipollotto.",
+  "Brown the sausage … Rest": "Rosola la salsiccia … Riposare",
+  "Shrimp in": "Aggiungi i gamberi",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Affonda i gamberi nel riso, copri di nuovo e cuoci finché diventano rosa."
  },
  "amounts": {
   "L": "l",

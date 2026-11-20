@@ -4841,5 +4841,41 @@ S|K3|K|Shape the syrniki|Dust the board with the rest of the flour. With floured
 S|P1|P|Fry the syrniki|Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.|action|medium-low|300 + 120 × servings|K3|Golden brown on both sides|oil|pan, stovetop, spatula|—
 S|F1|F|Serve|Serve warm with sour cream and jam.|action|off|30 + 15 × servings|P1|Served|sour_cream; apricot_jam|spoon, plates|—
 `
+  },
+  {
+    id: "jambalaya", name: "Jambalaya", image: "img/350/sausage.webp",
+    rows: `
+O|opt_shrimp|without|Chicken and sausage|TRUE
+O|opt_shrimp|with|With shrimp too|FALSE
+I|chicken_breast|Chicken breast or boneless thighs|img/350/chicken_breast.webp|100|g|100|linear|—|2 cm pieces
+I|sausage|Smoked sausage|img/350/sausage.webp|60|g|60|linear|—|sliced
+I|shrimp|Shrimp, peeled|img/350/shrimp.webp|60|g|60|linear|opt_shrimp = with|—
+I|onion|Onion|img/350/onion.webp|40|g|40|linear|—|diced
+I|green_bell_pepper|Green bell pepper|img/350/green_bell_pepper.webp|40|g|40|linear|—|diced
+I|celery_stalk|Celery stalk|img/350/celery_stalk.webp|25|g|25|linear|—|diced
+I|garlic|Garlic clove|img/350/garlic.webp|1|pcs|5|linear|—|finely chopped
+I|tomato|Chopped tomatoes (canned)|img/350/tomato.webp|80|g|80|linear|—|—
+I|white_rice|Long-grain white rice|img/350/white_rice.webp|70|g|70|linear|—|—
+I|chicken_stock|Chicken stock|img/350/chicken_stock.webp|180|ml|180|linear|—|—
+I|oil|Oil|img/350/oil.webp|0.5|tbsp|7|linear|—|—
+I|paprika_powder|Sweet paprika|img/350/paprika_powder.webp|0.5|tsp|1.2|linear|—|—
+I|cayenne_pepper|Cayenne pepper|img/350/cayenne_pepper.webp|0.0625|tsp|0.1|linear|—|—
+I|thyme|Dried thyme|img/350/thyme.webp|0.25|tsp|0.3|linear|—|—
+I|oregano|Dried oregano|img/350/oregano.webp|0.25|tsp|0.3|linear|—|—
+I|bay_leaf|Bay leaf|img/350/bay_leaf.webp|0.25|pcs|0.1|linear, rounded up|—|—
+I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
+I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125|tsp|0.3|linear|—|—
+I|green_onion|Green onions|img/350/green_onion.webp|1|tbsp|5|linear|—|sliced
+S|K1|K|Chop the vegetables|Dice the onion, the pepper and the celery and chop the garlic finely.|action|—|(90 + 60 × servings) × skill_factor|—|All chopped|onion; green_bell_pepper; celery_stalk; garlic|chef_knife, chopping_board|—
+S|K2|K|Cut the meat|Cut the chicken into 2 cm pieces and slice the sausage.|action|—|(60 + 40 × servings) × skill_factor|—|All cut|chicken_breast; sausage|chef_knife, chopping_board|—
+S|P1|P|Brown the sausage|Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.|action|medium-high|300|K2|Browned|oil|cooking_pot, stovetop, wooden_spoon|—
+S|P2|P|Brown the chicken|Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.|action|medium-high|360|P1|Lightly browned|—|cooking_pot, wooden_spoon|—
+S|P3|P|Soften the vegetables|Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.|action|medium|420|P2, K1|Soft|—|cooking_pot, wooden_spoon|—
+S|P4|P|Spices and rice|Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.|action|medium|90|P3|Rice coated|paprika_powder; cayenne_pepper; thyme; oregano; white_rice|cooking_pot, wooden_spoon|—
+S|P5|P|Simmer|Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.|wait|low|1200 (doc: 20 to 25 min)|P4|Rice tender, liquid absorbed|tomato; chicken_stock; bay_leaf; salt; ground_black_pepper|cooking_pot|—
+S|P6|P|Shrimp in|Push the shrimp into the rice, cover again and cook until pink.|wait|low|300|P5|Shrimp pink|shrimp|cooking_pot|opt_shrimp = with
+S|P7|P|Rest|Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.|wait|off|300|P5, P6|Rested|—|cooking_pot|—
+S|F1|F|Serve|Fluff the rice with a fork and serve sprinkled with the green onions.|action|off|30 + 15 × servings|P7|Served|green_onion|fork, plates|—
+`
   }
 ];

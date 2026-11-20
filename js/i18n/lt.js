@@ -820,7 +820,8 @@ window.I18N["lt"] = {
   "stuffed_cabbage": "Kopūstų balandėliai",
   "cevapi": "Ćevapi su ajvaru",
   "succotash": "Succotash (kukurūzai su limos pupelėmis)",
-  "syrniki": "Sirnikai (varškėčiai)"
+  "syrniki": "Sirnikai (varškėčiai)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Aliuminio folija",
@@ -4441,7 +4442,25 @@ window.I18N["lt"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Keptuvėje įkaitinkite aliejų ir kepkite sirnikus partijomis, kol taps auksiškai rudi, maždaug po 3 minutes iš kiekvienos pusės.",
   "Golden brown on both sides": "Auksiškai rudi iš abiejų pusių",
   "Serve warm with sour cream and jam.": "Patiekite šiltus su grietine ir uogiene.",
-  "Mash the cheese … Shape the syrniki": "Sutrinkite varškę … Suformuokite sirnikus"
+  "Mash the cheese … Shape the syrniki": "Sutrinkite varškę … Suformuokite sirnikus",
+  "Chicken and sausage": "Vištiena ir dešra",
+  "With shrimp too": "Dar ir su krevetėmis",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Supjaustykite kubeliais svogūną, paprikas ir lapinį salierą, smulkiai supjaustykite česnaką.",
+  "All chopped": "Viskas supjaustyta",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Vištieną supjaustykite 2 cm gabalėliais, o dešrą – griežinėliais.",
+  "Brown the sausage": "Apskrudinkite dešrą",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Dideliame puode įkaitinkite aliejų ir apskrudinkite dešrą. Išimkite ją, o riebalus palikite puode.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Tame pačiame puode lengvai apskrudinkite vištieną iš visų pusių ir taip pat išimkite.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Puode pakepinkite svogūną, paprikas ir salierą, kol suminkštės. Paskutinę minutę įdėkite česnaką.",
+  "Spices and rice": "Prieskoniai ir ryžiai",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Įmaišykite paprikos miltelius, kajenos pipirus, čiobrelius, raudonėlį ir ryžius ir maišykite 1 minutę.",
+  "Rice coated": "Ryžiai pasidengę",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Sudėkite pomidorus, sultinį, lauro lapą, druską ir pipirus, sudėkite atgal vištieną ir dešrą. Užvirinkite, uždenkite ir virkite ant silpnos ugnies nemaišydami, kol ryžiai suminkštės.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Nukelkite puodą nuo ugnies ir palikite uždengtą 5 minutes. Išimkite lauro lapą.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Išpurenkite ryžius šakute ir patiekite pabarstę svogūnų laiškais.",
+  "Brown the sausage … Rest": "Apskrudinkite dešrą … Leisti pailsėti",
+  "Shrimp in": "Krevetės į puodą",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Įspauskite krevetes į ryžius, vėl uždenkite ir virkite, kol jos taps rausvos."
  },
  "amounts": {
   "L": "l",

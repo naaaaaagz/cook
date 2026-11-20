@@ -827,7 +827,8 @@ window.I18N["el"] = {
   "stuffed_cabbage": "Λαχανοντολμάδες",
   "cevapi": "Τσεβάπια με άιβαρ",
   "succotash": "Σάκοτας (καλαμπόκι με φασόλια λίμα)",
-  "syrniki": "Σίρνικι (τηγανίτες με τυρί κότατζ)"
+  "syrniki": "Σίρνικι (τηγανίτες με τυρί κότατζ)",
+  "jambalaya": "Τζαμπαλάγια"
  },
  "texts": {
   "Aluminium foil": "Αλουμινόχαρτο",
@@ -4448,7 +4449,25 @@ window.I18N["el"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Ζεστάνετε το λάδι στο τηγάνι και τηγανίστε τα σίρνικι σε δόσεις μέχρι να ροδίσουν, περίπου 3 λεπτά από κάθε πλευρά.",
   "Golden brown on both sides": "Ροδισμένα και από τις δύο πλευρές",
   "Serve warm with sour cream and jam.": "Σερβίρετέ τα ζεστά με ξινή κρέμα και μαρμελάδα.",
-  "Mash the cheese … Shape the syrniki": "Λιώστε το τυρί … Πλάστε τα σίρνικι"
+  "Mash the cheese … Shape the syrniki": "Λιώστε το τυρί … Πλάστε τα σίρνικι",
+  "Chicken and sausage": "Κοτόπουλο και λουκάνικο",
+  "With shrimp too": "Και με γαρίδες",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Κόψτε σε κυβάκια το κρεμμύδι, την πιπεριά και το σέλινο και ψιλοκόψτε το σκόρδο.",
+  "All chopped": "Όλα κομμένα",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Κόψτε το κοτόπουλο σε κομμάτια 2 εκ. και το λουκάνικο σε ροδέλες.",
+  "Brown the sausage": "Ροδίστε το λουκάνικο",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Ζεστάνετε το λάδι στη μεγάλη κατσαρόλα και ροδίστε το λουκάνικο. Βγάλτε το και αφήστε το λίπος στην κατσαρόλα.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Ροδίστε ελαφρά το κοτόπουλο από όλες τις πλευρές στην ίδια κατσαρόλα και βγάλτε το κι αυτό.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Σοτάρετε στην κατσαρόλα το κρεμμύδι, την πιπεριά και το σέλινο μέχρι να μαλακώσουν. Προσθέστε το σκόρδο το τελευταίο λεπτό.",
+  "Spices and rice": "Μπαχαρικά και ρύζι",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Ανακατέψτε την πάπρικα, το πιπέρι καγιέν, το θυμάρι, τη ρίγανη και το ρύζι και ανακατεύετε για 1 λεπτό.",
+  "Rice coated": "Το ρύζι έχει λαδωθεί",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Προσθέστε τις ντομάτες, τον ζωμό, το φύλλο δάφνης, το αλάτι και το πιπέρι και επιστρέψτε το κοτόπουλο και το λουκάνικο στην κατσαρόλα. Φέρτε σε βρασμό, σκεπάστε και μαγειρέψτε σε χαμηλή φωτιά χωρίς ανακάτεμα μέχρι να μαλακώσει το ρύζι.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Αποσύρετε την κατσαρόλα από τη φωτιά και αφήστε τη σκεπασμένη για 5 λεπτά. Αφαιρέστε το φύλλο δάφνης.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Αφρατέψτε το ρύζι με ένα πιρούνι και σερβίρετε πασπαλισμένο με φρέσκο κρεμμυδάκι.",
+  "Brown the sausage … Rest": "Ροδίστε το λουκάνικο … Ξεκουράστε",
+  "Shrimp in": "Προσθέστε τις γαρίδες",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Βυθίστε τις γαρίδες στο ρύζι, σκεπάστε ξανά και μαγειρέψτε μέχρι να ροδίσουν."
  },
  "amounts": {
   "g": "γρ.",

@@ -819,7 +819,8 @@ window.I18N["ro"] = {
   "stuffed_cabbage": "Sarmale",
   "cevapi": "Ćevapi cu ajvar",
   "succotash": "Succotash (porumb cu fasole lima)",
-  "syrniki": "Sîrniki (clătite cu brânză de vaci)"
+  "syrniki": "Sîrniki (clătite cu brânză de vaci)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Folie de aluminiu",
@@ -4440,7 +4441,25 @@ window.I18N["ro"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Încinge uleiul în tigaie și prăjește sirnikii pe rând până devin aurii, circa 3 minute pe fiecare parte.",
   "Golden brown on both sides": "Aurii pe ambele părți",
   "Serve warm with sour cream and jam.": "Servește-i calzi cu smântână și dulceață.",
-  "Mash the cheese … Shape the syrniki": "Zdrobește brânza … Formează sirnikii"
+  "Mash the cheese … Shape the syrniki": "Zdrobește brânza … Formează sirnikii",
+  "Chicken and sausage": "Pui și cârnați",
+  "With shrimp too": "Și cu creveți",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Taie cubulețe ceapa, ardeiul și țelina și toacă mărunt usturoiul.",
+  "All chopped": "Totul tocat",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Taie puiul în bucăți de 2 cm și cârnații felii.",
+  "Brown the sausage": "Rumenește cârnații",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Încinge uleiul în oala mare și rumenește cârnații. Scoate-i și lasă grăsimea în oală.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Rumenește ușor puiul pe toate părțile în aceeași oală, apoi scoate-l și pe el.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Călește ceapa, ardeiul și țelina în oală până se înmoaie. Adaugă usturoiul în ultimul minut.",
+  "Spices and rice": "Condimente și orez",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Adaugă boiaua, piperul cayenne, cimbrul, oregano și orezul și amestecă 1 minut.",
+  "Rice coated": "Orez acoperit",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Adaugă roșiile, supa, foaia de dafin, sarea și piperul și pune la loc puiul și cârnații. Adu la fierbere, acoperă și gătește la foc mic fără să amesteci până se înmoaie orezul.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Ia oala de pe foc și las-o acoperită 5 minute. Scoate foaia de dafin.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Afânează orezul cu o furculiță și servește presărat cu ceapă verde.",
+  "Brown the sausage … Rest": "Rumenește cârnații … Lasă să stea",
+  "Shrimp in": "Adaugă creveții",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Afundă creveții în orez, acoperă din nou și gătește până devin roz."
  },
  "amounts": {
   "L": "l",

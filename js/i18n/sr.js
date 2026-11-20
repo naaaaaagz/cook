@@ -819,7 +819,8 @@ window.I18N["sr"] = {
   "stuffed_cabbage": "Sarma",
   "cevapi": "Ćevapi sa ajvarom",
   "succotash": "Succotash (kukuruz sa lima pasuljem)",
-  "syrniki": "Sirniki (pogačice od mladog sira)"
+  "syrniki": "Sirniki (pogačice od mladog sira)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Aluminijumska folija",
@@ -4440,7 +4441,25 @@ window.I18N["sr"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "U tiganju zagrejte ulje i pržite sirnike u turama dok ne porumene, oko 3 minuta sa svake strane.",
   "Golden brown on both sides": "Zlatnosmeđi sa obe strane",
   "Serve warm with sour cream and jam.": "Poslužite tople sa kiselom pavlakom i džemom.",
-  "Mash the cheese … Shape the syrniki": "Zgnječite sir … Oblikujte sirnike"
+  "Mash the cheese … Shape the syrniki": "Zgnječite sir … Oblikujte sirnike",
+  "Chicken and sausage": "Piletina i kobasica",
+  "With shrimp too": "I sa škampima",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Iseckajte na kockice crni luk, papriku i celer, a beli luk sitno iseckajte.",
+  "All chopped": "Sve iseckano",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Piletinu isecite na komade od 2 cm, a kobasicu na kolutove.",
+  "Brown the sausage": "Zapecite kobasicu",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "U velikoj šerpi zagrejte ulje i zapecite kobasicu. Izvadite je, a masnoću ostavite u šerpi.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "U istoj šerpi piletinu lagano zapecite sa svih strana pa i nju izvadite.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "U šerpi propržite crni luk, papriku i celer dok ne omekšaju. U poslednjem minutu dodajte beli luk.",
+  "Spices and rice": "Začini i pirinač",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Umešajte alevu papriku, kajenski biber, majčinu dušicu, origano i pirinač i mešajte 1 minut.",
+  "Rice coated": "Pirinač obavijen masnoćom",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Dodajte paradajz, supu, lovorov list, so i biber i vratite piletinu i kobasicu u šerpu. Prokuvajte, poklopite i kuvajte na tihoj vatri bez mešanja dok pirinač ne omekša.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Sklonite šerpu sa vatre i ostavite je poklopljenu 5 minuta. Izvadite lovorov list.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Rastresite pirinač viljuškom i poslužite posut mladim lukom.",
+  "Brown the sausage … Rest": "Zapecite kobasicu … Odmaranje",
+  "Shrimp in": "Dodajte škampe",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Utisnite škampe u pirinač, ponovo poklopite i kuvajte dok ne postanu ružičasti."
  },
  "amounts": {
   "L": "l",

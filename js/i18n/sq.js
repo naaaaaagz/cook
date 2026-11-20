@@ -820,7 +820,8 @@ window.I18N["sq"] = {
   "stuffed_cabbage": "Sarma me lakër",
   "cevapi": "Qebapë me ajvar",
   "succotash": "Succotash (misër me fasule lima)",
-  "syrniki": "Sirniki (petulla me gjizë)"
+  "syrniki": "Sirniki (petulla me gjizë)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Letër alumini",
@@ -4441,7 +4442,25 @@ window.I18N["sq"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Ngroh vajin në tigan dhe skuq sirnikët me radhë derisa të marrin ngjyrë kafe të artë, rreth 3 minuta për çdo anë.",
   "Golden brown on both sides": "Kafe të artë nga të dyja anët",
   "Serve warm with sour cream and jam.": "Shërbeji të ngrohtë me salcë kosi dhe reçel.",
-  "Mash the cheese … Shape the syrniki": "Shtype djathin … Formo sirnikët"
+  "Mash the cheese … Shape the syrniki": "Shtype djathin … Formo sirnikët",
+  "Chicken and sausage": "Pulë dhe salsiçe",
+  "With shrimp too": "Edhe me karkaleca",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Prije kubikë qepën, specin dhe selinon dhe grije hollë hudhrën.",
+  "All chopped": "Gjithçka e prerë",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Prije pulën në copa 2 cm dhe salsiçen në rrathë.",
+  "Brown the sausage": "Skuq salsiçen",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Ngroh vajin në tenxheren e madhe dhe skuq salsiçen. Hiqe dhe lëre yndyrën në tenxhere.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Skuq lehtë pulën nga të gjitha anët në të njëjtën tenxhere dhe hiqe edhe atë.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Kaurdis qepën, specin dhe selinon në tenxhere derisa të zbuten. Shto hudhrën në minutën e fundit.",
+  "Spices and rice": "Erëza dhe oriz",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Përziej paprikën, piperin kajen, trumzën, rigonin dhe orizin dhe trazo për 1 minutë.",
+  "Rice coated": "Orizi i mbuluar",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Shto domatet, lëngun, gjethen e dafinës, kripën dhe piperin dhe ktheji pulën dhe salsiçen në tenxhere. Lëre të ziejë, mbuloje dhe gatuaje në zjarr të ulët pa e trazuar derisa orizi të zbutet.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Hiqe tenxheren nga zjarri dhe lëre të mbuluar për 5 minuta. Hiq gjethen e dafinës.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Shkrifëro orizin me pirun dhe shërbeje të spërkatur me qepë të njomë.",
+  "Brown the sausage … Rest": "Skuq salsiçen … Lëre të pushojë",
+  "Shrimp in": "Shto karkalecat",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Shtyji karkalecat në oriz, mbuloje përsëri dhe gatuaje derisa të marrin ngjyrë rozë."
  },
  "amounts": {
   "L": "l",

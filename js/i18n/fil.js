@@ -818,7 +818,8 @@ window.I18N["fil"] = {
   "stuffed_cabbage": "Repolyong may palaman",
   "cevapi": "Ćevapi na may ajvar",
   "succotash": "Succotash (mais at lima beans)",
-  "syrniki": "Syrniki (pancake na keso)"
+  "syrniki": "Syrniki (pancake na keso)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Aluminum foil",
@@ -4439,7 +4440,25 @@ window.I18N["fil"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Painitin ang mantika sa kawali at iprito ang syrniki nang paisa-isang batch hanggang golden brown, mga 3 minuto bawat side.",
   "Golden brown on both sides": "Golden brown sa magkabilang side",
   "Serve warm with sour cream and jam.": "Ihain nang mainit kasama ang sour cream at jam.",
-  "Mash the cheese … Shape the syrniki": "Durugin ang keso … Hubugin ang syrniki"
+  "Mash the cheese … Shape the syrniki": "Durugin ang keso … Hubugin ang syrniki",
+  "Chicken and sausage": "Manok at sausage",
+  "With shrimp too": "May hipon din",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Hiwain nang dice ang sibuyas, bell pepper at celery, at tadtarin nang pino ang bawang.",
+  "All chopped": "Lahat nahiwa na",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Hiwain ang manok nang 2 cm na piraso at ang sausage nang pahiwa.",
+  "Brown the sausage": "Igisa ang sausage",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Painitin ang mantika sa malaking kaldero at iprito ang sausage hanggang mag-brown. Hanguin at iwan ang mantika sa kaldero.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Iprito ang manok sa parehong kaldero hanggang bahagyang mag-brown sa lahat ng side, saka hanguin din.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Igisa ang sibuyas, bell pepper at celery sa kaldero hanggang lumambot. Idagdag ang bawang sa huling minuto.",
+  "Spices and rice": "Mga pampalasa at bigas",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Ihalo ang paprika, cayenne, thyme, oregano at bigas at haluin nang 1 minuto.",
+  "Rice coated": "Nabalot ang bigas",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Idagdag ang kamatis, stock, dahon ng laurel, asin at paminta, at ibalik ang manok at sausage. Pakuluan, takpan at lutuin sa mahinang apoy nang hindi hinahalo hanggang lumambot ang kanin.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Alisin ang kaldero sa apoy at hayaang nakatakip nang 5 minuto. Alisin ang dahon ng laurel.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Paluwagin ang kanin gamit ang tinidor at ihain na may budbod na dahon ng sibuyas.",
+  "Brown the sausage … Rest": "Igisa ang sausage … Ipahinga",
+  "Shrimp in": "Ilagay ang hipon",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Ibaon ang hipon sa kanin, takpan ulit at lutuin hanggang mamula-mula."
  },
  "amounts": {
   "tsp": "kutsarita",

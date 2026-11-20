@@ -828,7 +828,8 @@ window.I18N["he"] = {
   "stuffed_cabbage": "כרוב ממולא",
   "cevapi": "צ'בפי עם אייבר",
   "succotash": "סקוטאש (תירס עם שעועית לימה)",
-  "syrniki": "סירניקי (לביבות גבינה)"
+  "syrniki": "סירניקי (לביבות גבינה)",
+  "jambalaya": "ג׳מבלאיה"
  },
  "texts": {
   "Aluminium foil": "נייר כסף",
@@ -4449,7 +4450,25 @@ window.I18N["he"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "חממו את השמן במחבת וטגנו את הסירניקי במנות עד שהן זהובות-חומות, כ-3 דקות מכל צד.",
   "Golden brown on both sides": "זהובות-חומות משני הצדדים",
   "Serve warm with sour cream and jam.": "הגישו חמים עם שמנת חמוצה וריבה.",
-  "Mash the cheese … Shape the syrniki": "מעכו את הגבינה … עצבו את הסירניקי"
+  "Mash the cheese … Shape the syrniki": "מעכו את הגבינה … עצבו את הסירניקי",
+  "Chicken and sausage": "עוף ונקניק",
+  "With shrimp too": "גם עם שרימפס",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "חתכו לקוביות את הבצל, הפלפל והסלרי, וקצצו דק את השום.",
+  "All chopped": "הכול חתוך",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "חתכו את העוף לחתיכות של 2 ס״מ ואת הנקניק לפרוסות.",
+  "Brown the sausage": "השחימו את הנקניק",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "חממו את השמן בסיר הגדול והשחימו את הנקניק. הוציאו אותו והשאירו את השומן בסיר.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "השחימו קלות את העוף מכל הצדדים באותו סיר, ואז הוציאו גם אותו.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "טגנו בסיר את הבצל, הפלפל והסלרי עד שיתרככו. הוסיפו את השום בדקה האחרונה.",
+  "Spices and rice": "תבלינים ואורז",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "ערבבו פנימה את הפפריקה, פלפל הקאיין, הטימין, האורגנו והאורז וערבבו במשך 1 דקה.",
+  "Rice coated": "האורז מצופה",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "הוסיפו את העגבניות, הציר, עלה הדפנה, המלח והפלפל והחזירו את העוף והנקניק לסיר. הביאו לרתיחה, כסו ובשלו על אש קטנה בלי לערבב עד שהאורז רך.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "הורידו את הסיר מהאש והשאירו אותו מכוסה 5 דקות. הוציאו את עלה הדפנה.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "פזרו את האורז במזלג והגישו עם בצל ירוק מפוזר מעל.",
+  "Brown the sausage … Rest": "השחימו את הנקניק … מנוחה",
+  "Shrimp in": "הוסיפו את השרימפס",
+  "Push the shrimp into the rice, cover again and cook until pink.": "דחפו את השרימפס לתוך האורז, כסו שוב ובשלו עד שהם מוורידים."
  },
  "amounts": {
   "g": "גרם",

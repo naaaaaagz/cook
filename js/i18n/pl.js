@@ -818,7 +818,8 @@ window.I18N["pl"] = {
   "stuffed_cabbage": "Gołąbki",
   "cevapi": "Ćevapi z ajvarem",
   "succotash": "Succotash (kukurydza z fasolą limeńską)",
-  "syrniki": "Syrniki (placuszki z twarogu)"
+  "syrniki": "Syrniki (placuszki z twarogu)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Folia aluminiowa",
@@ -4439,7 +4440,25 @@ window.I18N["pl"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Rozgrzej olej na patelni i smaż syrniki partiami na złoty kolor, około 3 minuty z każdej strony.",
   "Golden brown on both sides": "Złote z obu stron",
   "Serve warm with sour cream and jam.": "Podawaj na ciepło ze śmietaną i dżemem.",
-  "Mash the cheese … Shape the syrniki": "Rozgnieć ser … Uformuj syrniki"
+  "Mash the cheese … Shape the syrniki": "Rozgnieć ser … Uformuj syrniki",
+  "Chicken and sausage": "Kurczak i kiełbasa",
+  "With shrimp too": "Także z krewetkami",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Pokrój w kostkę cebulę, paprykę i seler naciowy, a czosnek drobno posiekaj.",
+  "All chopped": "Wszystko pokrojone",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Pokrój kurczaka na kawałki 2 cm, a kiełbasę w plasterki.",
+  "Brown the sausage": "Zrumień kiełbasę",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Rozgrzej olej w dużym garnku i zrumień kiełbasę. Wyjmij ją, a tłuszcz zostaw w garnku.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "W tym samym garnku lekko zrumień kurczaka ze wszystkich stron i też go wyjmij.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Podsmaż w garnku cebulę, paprykę i seler do miękkości. W ostatniej minucie dodaj czosnek.",
+  "Spices and rice": "Przyprawy i ryż",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Wmieszaj paprykę w proszku, pieprz cayenne, tymianek, oregano i ryż i mieszaj przez 1 minutę.",
+  "Rice coated": "Ryż pokryty tłuszczem",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Dodaj pomidory, bulion, liść laurowy, sól i pieprz i włóż z powrotem kurczaka i kiełbasę. Zagotuj, przykryj i gotuj na małym ogniu bez mieszania, aż ryż będzie miękki.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Zdejmij garnek z ognia i zostaw pod przykryciem na 5 minut. Wyjmij liść laurowy.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Rozluźnij ryż widelcem i podawaj posypany zieloną cebulką.",
+  "Brown the sausage … Rest": "Zrumień kiełbasę … Odstaw",
+  "Shrimp in": "Dodaj krewetki",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Wciśnij krewetki w ryż, znów przykryj i gotuj, aż staną się różowe."
  },
  "amounts": {
   "L": "l",

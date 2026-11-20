@@ -819,7 +819,8 @@ window.I18N["id"] = {
   "stuffed_cabbage": "Kubis gulung isi",
   "cevapi": "Ćevapi dengan ajvar",
   "succotash": "Succotash (jagung dengan kacang lima)",
-  "syrniki": "Syrniki (panekuk keju cottage)"
+  "syrniki": "Syrniki (panekuk keju cottage)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Aluminium foil",
@@ -4440,7 +4441,25 @@ window.I18N["id"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Panaskan minyak di wajan dan goreng syrniki bertahap sampai cokelat keemasan, sekitar 3 menit per sisi.",
   "Golden brown on both sides": "Cokelat keemasan di kedua sisi",
   "Serve warm with sour cream and jam.": "Sajikan hangat dengan krim asam dan selai.",
-  "Mash the cheese … Shape the syrniki": "Haluskan keju … Bentuk syrniki"
+  "Mash the cheese … Shape the syrniki": "Haluskan keju … Bentuk syrniki",
+  "Chicken and sausage": "Ayam dan sosis",
+  "With shrimp too": "Dengan udang juga",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Potong dadu bawang bombai, paprika, dan seledri batang, lalu cincang halus bawang putih.",
+  "All chopped": "Semua terpotong",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Potong ayam menjadi potongan 2 cm dan iris sosis.",
+  "Brown the sausage": "Cokelatkan sosis",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Panaskan minyak di panci besar dan goreng sosis sampai kecokelatan. Angkat dan biarkan lemaknya di panci.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Goreng ayam di panci yang sama sampai sedikit kecokelatan di semua sisi, lalu angkat juga.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Tumis bawang bombai, paprika, dan seledri di panci sampai layu. Masukkan bawang putih di menit terakhir.",
+  "Spices and rice": "Bumbu dan beras",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Aduk paprika bubuk, cabai cayenne, timi, oregano, dan beras, lalu aduk selama 1 menit.",
+  "Rice coated": "Beras terlapisi",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Masukkan tomat, kaldu, daun salam, garam, dan merica, lalu kembalikan ayam dan sosis ke panci. Didihkan, tutup, dan masak dengan api kecil tanpa diaduk sampai nasi empuk.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Angkat panci dari kompor dan biarkan tertutup selama 5 menit. Buang daun salam.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Aduk nasi dengan garpu agar terurai dan sajikan dengan taburan daun bawang.",
+  "Brown the sausage … Rest": "Cokelatkan sosis … Diamkan",
+  "Shrimp in": "Masukkan udang",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Benamkan udang ke dalam nasi, tutup lagi, dan masak sampai berwarna merah muda."
  },
  "amounts": {
   "L": "l",

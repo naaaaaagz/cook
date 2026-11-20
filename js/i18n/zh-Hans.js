@@ -828,7 +828,8 @@ window.I18N["zh-Hans"] = {
   "stuffed_cabbage": "卷心菜卷",
   "cevapi": "Ćevapi（配阿伊瓦尔酱）",
   "succotash": "Succotash（玉米利马豆）",
-  "syrniki": "Syrniki（奶渣煎饼）"
+  "syrniki": "Syrniki（奶渣煎饼）",
+  "jambalaya": "什锦饭（Jambalaya）"
  },
  "texts": {
   "Aluminium foil": "锡纸",
@@ -4449,7 +4450,25 @@ window.I18N["zh-Hans"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "锅中热油，把饼分批煎至两面金黄，每面约3分钟。",
   "Golden brown on both sides": "两面金黄",
   "Serve warm with sour cream and jam.": "配酸奶油和果酱趁热上桌。",
-  "Mash the cheese … Shape the syrniki": "压碎奶酪 … 做成饼"
+  "Mash the cheese … Shape the syrniki": "压碎奶酪 … 做成饼",
+  "Chicken and sausage": "鸡肉和香肠",
+  "With shrimp too": "也加虾",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "把洋葱、青椒和芹菜切丁，大蒜切碎。",
+  "All chopped": "全部切好",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "把鸡肉切成2厘米的块，香肠切片。",
+  "Brown the sausage": "煎香肠",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "在大锅中热油，把香肠煎至上色。取出，油脂留在锅中。",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "在同一口锅中把鸡肉各面煎至微黄，也取出。",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "在锅中把洋葱、青椒和芹菜炒软。最后一分钟加入大蒜。",
+  "Spices and rice": "香料和米",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "拌入红椒粉、卡宴辣椒粉、百里香、牛至和米，翻炒1分钟。",
+  "Rice coated": "米粒裹匀",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "加入番茄、高汤、月桂叶、盐和胡椒，把鸡肉和香肠放回锅中。煮沸后盖上盖，小火焖煮，不要搅拌，直到米饭变软。",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "把锅离火，盖着盖焖5分钟。取出月桂叶。",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "用叉子把米饭拨松，撒上葱花上桌。",
+  "Brown the sausage … Rest": "煎香肠 … 静置",
+  "Shrimp in": "加虾",
+  "Push the shrimp into the rice, cover again and cook until pink.": "把虾压入米饭中，再盖上盖，煮至虾变粉红色。"
  },
  "amounts": {
   "g": "克",

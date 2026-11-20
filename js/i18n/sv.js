@@ -819,7 +819,8 @@ window.I18N["sv"] = {
   "stuffed_cabbage": "Kåldolmar",
   "cevapi": "Ćevapi med ajvar",
   "succotash": "Succotash (majs med limabönor)",
-  "syrniki": "Syrniki (kvargplättar)"
+  "syrniki": "Syrniki (kvargplättar)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Aluminiumfolie",
@@ -4440,7 +4441,25 @@ window.I18N["sv"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Hetta upp oljan i stekpannan och stek syrniki i omgångar tills de är gyllenbruna, cirka 3 minuter per sida.",
   "Golden brown on both sides": "Gyllenbruna på båda sidor",
   "Serve warm with sour cream and jam.": "Servera varma med gräddfil och sylt.",
-  "Mash the cheese … Shape the syrniki": "Mosa osten … Forma syrniki"
+  "Mash the cheese … Shape the syrniki": "Mosa osten … Forma syrniki",
+  "Chicken and sausage": "Kyckling och korv",
+  "With shrimp too": "Även med räkor",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Tärna löken, paprikan och blekselleriet och hacka vitlöken fint.",
+  "All chopped": "Allt hackat",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Skär kycklingen i bitar på 2 cm och korven i skivor.",
+  "Brown the sausage": "Bryn korven",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Hetta upp oljan i den stora kastrullen och bryn korven. Lyft upp den och låt fettet vara kvar i kastrullen.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Bryn kycklingen lätt runt om i samma kastrull och lyft upp den också.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Fräs löken, paprikan och blekselleriet mjuka i kastrullen. Tillsätt vitlöken den sista minuten.",
+  "Spices and rice": "Kryddor och ris",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Rör ner paprikapulvret, cayennepepparn, timjan, oreganon och riset och rör i 1 minut.",
+  "Rice coated": "Riset täckt",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Tillsätt tomaterna, buljongen, lagerbladet, saltet och pepparn och lägg tillbaka kycklingen och korven. Låt koka upp, lägg på locket och låt koka på låg värme utan att röra tills riset är mjukt.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Ta kastrullen från värmen och låt den stå med lock i 5 minuter. Ta bort lagerbladet.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Luckra upp riset med en gaffel och servera med vårlök strödd över.",
+  "Brown the sausage … Rest": "Bryn korven … Vila",
+  "Shrimp in": "Räkorna i",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Tryck ner räkorna i riset, lägg på locket igen och låt dem koka tills de är rosa."
  },
  "amounts": {
   "L": "l",

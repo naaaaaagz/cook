@@ -827,7 +827,8 @@ window.I18N["hu"] = {
   "stuffed_cabbage": "Töltött káposzta",
   "cevapi": "Ćevapi ajvarral",
   "succotash": "Succotash (kukoricás limabab)",
-  "syrniki": "Szirnyiki"
+  "syrniki": "Szirnyiki",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Alufólia",
@@ -4448,7 +4449,25 @@ window.I18N["hu"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Hevítsd fel az olajat a serpenyőben, és adagonként süsd aranybarnára a szirnyikit, oldalanként kb. 3 percig.",
   "Golden brown on both sides": "Mindkét oldala aranybarna",
   "Serve warm with sour cream and jam.": "Tálald melegen tejföllel és lekvárral.",
-  "Mash the cheese … Shape the syrniki": "Törd össze a túrót … Formázd meg a szirnyikit"
+  "Mash the cheese … Shape the syrniki": "Törd össze a túrót … Formázd meg a szirnyikit",
+  "Chicken and sausage": "Csirke és kolbász",
+  "With shrimp too": "Garnélával is",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Kockázd fel a hagymát, a paprikát és a zellert, a fokhagymát pedig vágd apróra.",
+  "All chopped": "Minden felaprítva",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Vágd a csirkét 2 cm-es darabokra, a kolbászt karikázd fel.",
+  "Brown the sausage": "Pirítsd meg a kolbászt",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Hevítsd fel az olajat a nagy fazékban, és pirítsd meg benne a kolbászt. Szedd ki, a zsírt hagyd a fazékban.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Ugyanebben a fazékban süsd a csirkét minden oldalán enyhén pirosra, majd azt is szedd ki.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Párold puhára a hagymát, a paprikát és a zellert a fazékban. Az utolsó percben add hozzá a fokhagymát.",
+  "Spices and rice": "Fűszerek és rizs",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Keverd hozzá a pirospaprikát, a cayenne-borsot, a kakukkfüvet, az oregánót és a rizst, és kevergesd 1 percig.",
+  "Rice coated": "A rizs bevonva",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Add hozzá a paradicsomot, az alaplevet, a babérlevelet, a sót és a borsot, és tedd vissza a csirkét és a kolbászt. Forrald fel, fedd le, és kis lángon, keverés nélkül főzd, amíg a rizs megpuhul.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Vedd le a fazekat a tűzről, és hagyd lefedve 5 percig. Vedd ki a babérlevelet.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Lazítsd fel a rizst egy villával, és újhagymával megszórva tálald.",
+  "Brown the sausage … Rest": "Pirítsd meg a kolbászt … Pihentesd",
+  "Shrimp in": "Garnéla bele",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Nyomd a garnélát a rizsbe, fedd le újra, és főzd, amíg rózsaszín lesz."
  },
  "amounts": {
   "L": "l",

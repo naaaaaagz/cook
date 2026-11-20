@@ -821,7 +821,8 @@ window.I18N["tr"] = {
   "stuffed_cabbage": "Lahana sarması",
   "cevapi": "Ajvarlı ćevapi",
   "succotash": "Succotash (lima fasulyeli mısır)",
-  "syrniki": "Sırniki (lor peynirli pankek)"
+  "syrniki": "Sırniki (lor peynirli pankek)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Alüminyum folyo",
@@ -4442,7 +4443,25 @@ window.I18N["tr"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Yağı tavada ısıtın ve sırnikileri parti parti, her yüzü yaklaşık 3 dakika, altın kahverengi olana kadar kızartın.",
   "Golden brown on both sides": "İki yüzü de altın kahverengi",
   "Serve warm with sour cream and jam.": "Ekşi krema ve reçelle sıcak servis yapın.",
-  "Mash the cheese … Shape the syrniki": "Peyniri ezin … Sırnikileri şekillendirin"
+  "Mash the cheese … Shape the syrniki": "Peyniri ezin … Sırnikileri şekillendirin",
+  "Chicken and sausage": "Tavuk ve sucuk",
+  "With shrimp too": "Karidesli de",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Soğanı, biberi ve sap kerevizi küp küp doğrayın, sarımsağı ince kıyın.",
+  "All chopped": "Hepsi doğrandı",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Tavuğu 2 cm'lik parçalara, sucuğu dilimlere kesin.",
+  "Brown the sausage": "Sucuğu kızartın",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Yağı büyük tencerede ısıtın ve sucuğu kızarana kadar pişirin. Çıkarın, yağı tencerede bırakın.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Tavuğu aynı tencerede her tarafı hafifçe kızarana kadar pişirin, sonra onu da çıkarın.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Soğanı, biberi ve kerevizi tencerede yumuşayana kadar kavurun. Sarımsağı son dakikada ekleyin.",
+  "Spices and rice": "Baharatlar ve pirinç",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Toz kırmızı biberi, acı kırmızı biberi, kekiği, dağ kekiğini ve pirinci ekleyip 1 dakika karıştırın.",
+  "Rice coated": "Pirinç yağlandı",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Domatesleri, et suyunu, defne yaprağını, tuzu ve karabiberi ekleyin, tavukla sucuğu tencereye geri koyun. Kaynatın, kapağını kapatın ve pirinç yumuşayana kadar karıştırmadan kısık ateşte pişirin.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Tencereyi ocaktan alın ve 5 dakika kapalı bekletin. Defne yaprağını çıkarın.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Pirinci çatalla havalandırın ve üzerine taze soğan serperek servis yapın.",
+  "Brown the sausage … Rest": "Sucuğu kızartın … Dinlendirin",
+  "Shrimp in": "Karidesleri ekleyin",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Karidesleri pirincin içine bastırın, kapağı tekrar kapatın ve pembeleşene kadar pişirin."
  },
  "amounts": {
   "L": "l",

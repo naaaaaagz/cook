@@ -819,7 +819,8 @@ window.I18N["es"] = {
   "stuffed_cabbage": "Rollitos de col rellenos",
   "cevapi": "Ćevapi con ajvar",
   "succotash": "Succotash (maíz con habas de Lima)",
-  "syrniki": "Syrniki (tortitas de requesón)"
+  "syrniki": "Syrniki (tortitas de requesón)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Papel de aluminio",
@@ -4440,7 +4441,25 @@ window.I18N["es"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Calienta el aceite en la sartén y fríe los syrniki por tandas hasta que estén dorados, unos 3 minutos por lado.",
   "Golden brown on both sides": "Dorados por ambos lados",
   "Serve warm with sour cream and jam.": "Sírvelos calientes con nata agria y mermelada.",
-  "Mash the cheese … Shape the syrniki": "Aplastar el queso … Formar los syrniki"
+  "Mash the cheese … Shape the syrniki": "Aplastar el queso … Formar los syrniki",
+  "Chicken and sausage": "Pollo y salchicha",
+  "With shrimp too": "También con gambas",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Corta en dados la cebolla, el pimiento y el apio y pica el ajo fino.",
+  "All chopped": "Todo picado",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Corta el pollo en trozos de 2 cm y la salchicha en rodajas.",
+  "Brown the sausage": "Dorar la salchicha",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Calienta el aceite en la olla grande y dora la salchicha. Sácala y deja la grasa en la olla.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Dora ligeramente el pollo por todos lados en la misma olla y sácalo también.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Pocha la cebolla, el pimiento y el apio en la olla hasta que estén blandos. Añade el ajo en el último minuto.",
+  "Spices and rice": "Especias y arroz",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Añade el pimentón, la cayena, el tomillo, el orégano y el arroz y remueve durante 1 minuto.",
+  "Rice coated": "Arroz impregnado",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Añade el tomate, el caldo, la hoja de laurel, la sal y la pimienta y vuelve a poner el pollo y la salchicha. Lleva a ebullición, tapa y cuece a fuego bajo sin remover hasta que el arroz esté tierno.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Retira la olla del fuego y déjala tapada 5 minutos. Quita la hoja de laurel.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Suelta el arroz con un tenedor y sírvelo espolvoreado con cebolleta.",
+  "Brown the sausage … Rest": "Dorar la salchicha … Reposar",
+  "Shrimp in": "Añadir las gambas",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Hunde las gambas en el arroz, vuelve a tapar y cuece hasta que estén rosadas."
  },
  "amounts": {
   "L": "l",

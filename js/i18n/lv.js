@@ -820,7 +820,8 @@ window.I18N["lv"] = {
   "stuffed_cabbage": "Kāpostu tītenīši",
   "cevapi": "Ćevapi ar ajvaru",
   "succotash": "Succotash (kukurūza ar limas pupiņām)",
-  "syrniki": "Sirņiki (biezpiena plācenīši)"
+  "syrniki": "Sirņiki (biezpiena plācenīši)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Alumīnija folija",
@@ -4441,7 +4442,25 @@ window.I18N["lv"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Pannā uzkarsē eļļu un cep sirņikus pa daļām zeltaini brūnus, apmēram 3 minūtes no katras puses.",
   "Golden brown on both sides": "Zeltaini brūni no abām pusēm",
   "Serve warm with sour cream and jam.": "Pasniedz siltus ar skābo krējumu un ievārījumu.",
-  "Mash the cheese … Shape the syrniki": "Saspaidi biezpienu … Izveido sirņikus"
+  "Mash the cheese … Shape the syrniki": "Saspaidi biezpienu … Izveido sirņikus",
+  "Chicken and sausage": "Vista un desa",
+  "With shrimp too": "Arī ar garnelēm",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Sagriez sīpolu, papriku un kātu seleriju kubiņos un smalki sakapā ķiploku.",
+  "All chopped": "Viss sagriezts",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Sagriez vistu 2 cm gabaliņos un desu ripiņās.",
+  "Brown the sausage": "Apbrūnini desu",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Lielajā katlā uzkarsē eļļu un apbrūnini desu. Izņem to un atstāj taukus katlā.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Tajā pašā katlā viegli apbrūnini vistu no visām pusēm un arī to izņem.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Katlā apcep sīpolu, papriku un seleriju mīkstus. Pēdējā minūtē pievieno ķiploku.",
+  "Spices and rice": "Garšvielas un rīsi",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Iemaisi papriku, kajēnas piparus, timiānu, oregano un rīsus un maisi 1 minūti.",
+  "Rice coated": "Rīsi pārklāti",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Pievieno tomātus, buljonu, lauru lapu, sāli un piparus un liec atpakaļ vistu un desu. Uzvāri, uzliec vāku un vāri uz lēnas uguns nemaisot, līdz rīsi ir mīksti.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Noņem katlu no uguns un atstāj zem vāka 5 minūtes. Izņem lauru lapu.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Sairdini rīsus ar dakšu un pasniedz, pārkaisītus ar lociņiem.",
+  "Brown the sausage … Rest": "Apbrūnini desu … Ļaut atpūsties",
+  "Shrimp in": "Garneles klāt",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Iespied garneles rīsos, atkal uzliec vāku un vāri, līdz tās kļūst rozā."
  },
  "amounts": {
   "L": "l",

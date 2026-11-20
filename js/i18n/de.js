@@ -819,7 +819,8 @@ window.I18N["de"] = {
   "stuffed_cabbage": "Kohlrouladen",
   "cevapi": "Ćevapi mit Ajvar",
   "succotash": "Succotash (Mais mit Limabohnen)",
-  "syrniki": "Syrniki (Quarkpfannkuchen)"
+  "syrniki": "Syrniki (Quarkpfannkuchen)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Alufolie",
@@ -4440,7 +4441,25 @@ window.I18N["de"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Erhitze das Öl in der Pfanne und brate die Syrniki portionsweise goldbraun, etwa 3 Minuten pro Seite.",
   "Golden brown on both sides": "Beidseitig goldbraun",
   "Serve warm with sour cream and jam.": "Warm mit saurer Sahne und Marmelade servieren.",
-  "Mash the cheese … Shape the syrniki": "Quark zerdrücken … Syrniki formen"
+  "Mash the cheese … Shape the syrniki": "Quark zerdrücken … Syrniki formen",
+  "Chicken and sausage": "Hähnchen und Wurst",
+  "With shrimp too": "Auch mit Garnelen",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Würfle die Zwiebel, die Paprika und den Sellerie und hacke den Knoblauch fein.",
+  "All chopped": "Alles geschnitten",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Schneide das Hähnchen in 2 cm große Stücke und die Wurst in Scheiben.",
+  "Brown the sausage": "Wurst anbraten",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Erhitze das Öl im großen Topf und brate die Wurst an, bis sie gebräunt ist. Nimm sie heraus und lass das Fett im Topf.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Brate das Hähnchen im selben Topf rundum leicht an und nimm es dann ebenfalls heraus.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Dünste Zwiebel, Paprika und Sellerie im Topf weich. Gib den Knoblauch in der letzten Minute dazu.",
+  "Spices and rice": "Gewürze und Reis",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Rühre Paprikapulver, Cayennepfeffer, Thymian, Oregano und den Reis ein und rühre 1 Minute lang.",
+  "Rice coated": "Reis überzogen",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Gib die Tomaten, die Brühe, das Lorbeerblatt, das Salz und den Pfeffer dazu und lege Hähnchen und Wurst zurück in den Topf. Aufkochen lassen, zudecken und bei schwacher Hitze ohne Umrühren garen, bis der Reis weich ist.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Nimm den Topf vom Herd und lass ihn 5 Minuten zugedeckt stehen. Entferne das Lorbeerblatt.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Lockere den Reis mit einer Gabel auf und serviere ihn mit Frühlingszwiebeln bestreut.",
+  "Brown the sausage … Rest": "Wurst anbraten … Ruhen lassen",
+  "Shrimp in": "Garnelen dazu",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Drücke die Garnelen in den Reis, decke wieder zu und gare sie, bis sie rosa sind."
  },
  "amounts": {
   "L": "l",

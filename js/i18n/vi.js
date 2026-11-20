@@ -820,7 +820,8 @@ window.I18N["vi"] = {
   "stuffed_cabbage": "Bắp cải cuộn thịt",
   "cevapi": "Ćevapi với ajvar",
   "succotash": "Succotash (ngô với đậu lima)",
-  "syrniki": "Syrniki (bánh phô mai tươi chiên)"
+  "syrniki": "Syrniki (bánh phô mai tươi chiên)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Giấy bạc",
@@ -4441,7 +4442,25 @@ window.I18N["vi"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Đun nóng dầu trong chảo và rán syrniki từng mẻ đến khi vàng nâu, mỗi mặt khoảng 3 phút.",
   "Golden brown on both sides": "Vàng nâu cả hai mặt",
   "Serve warm with sour cream and jam.": "Dùng nóng với kem chua và mứt.",
-  "Mash the cheese … Shape the syrniki": "Nghiền phô mai … Nặn syrniki"
+  "Mash the cheese … Shape the syrniki": "Nghiền phô mai … Nặn syrniki",
+  "Chicken and sausage": "Gà và xúc xích",
+  "With shrimp too": "Thêm cả tôm",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Thái hạt lựu hành tây, ớt chuông và cần tây, băm nhỏ tỏi.",
+  "All chopped": "Đã thái xong",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Cắt gà thành miếng 2 cm và thái xúc xích thành lát.",
+  "Brown the sausage": "Áp chảo xúc xích",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Đun nóng dầu trong nồi lớn và áp chảo xúc xích đến khi vàng nâu. Gắp ra và để lại mỡ trong nồi.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Áp chảo gà trong cùng nồi đến khi hơi vàng đều các mặt, rồi cũng gắp ra.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Xào hành tây, ớt chuông và cần tây trong nồi đến khi mềm. Cho tỏi vào trong phút cuối.",
+  "Spices and rice": "Gia vị và gạo",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Cho ớt bột, ớt cayenne, cỏ xạ hương, lá oregano và gạo vào, đảo trong 1 phút.",
+  "Rice coated": "Gạo đã thấm dầu",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Cho cà chua, nước dùng, lá nguyệt quế, muối và tiêu vào, rồi cho gà và xúc xích trở lại nồi. Đun sôi, đậy nắp và nấu lửa nhỏ, không khuấy, đến khi gạo chín mềm.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Nhấc nồi khỏi bếp và để đậy nắp 5 phút. Bỏ lá nguyệt quế ra.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Xới cơm tơi bằng nĩa và rắc hành lá lên khi dọn.",
+  "Brown the sausage … Rest": "Áp chảo xúc xích … Để nghỉ",
+  "Shrimp in": "Cho tôm vào",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Ấn tôm vào cơm, đậy nắp lại và nấu đến khi tôm chuyển hồng."
  },
  "amounts": {
   "L": "l",

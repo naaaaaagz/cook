@@ -828,7 +828,8 @@ window.I18N["hy"] = {
   "stuffed_cabbage": "Կաղամբի տոլմա",
   "cevapi": "Չևապի այվարով",
   "succotash": "Սաքոթաշ (եգիպտացորեն լիմա լոբով)",
-  "syrniki": "Սիռնիկի (կաթնաշոռով բլիթներ)"
+  "syrniki": "Սիռնիկի (կաթնաշոռով բլիթներ)",
+  "jambalaya": "Ջամբալայա"
  },
  "texts": {
   "Aluminium foil": "Ալյումինե փայլաթիթեղ",
@@ -4449,7 +4450,25 @@ window.I18N["hy"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Տապակի մեջ տաքացրեք ձեթը և սիռնիկները մաս-մաս տապակեք մինչև ոսկեգույն դառնան՝ յուրաքանչյուր կողմից մոտ 3 րոպե։",
   "Golden brown on both sides": "Երկու կողմից ոսկեգույն",
   "Serve warm with sour cream and jam.": "Մատուցեք տաք՝ թթվասերով և մուրաբայով։",
-  "Mash the cheese … Shape the syrniki": "Ճզմեք պանիրը … Ձևավորեք սիռնիկները"
+  "Mash the cheese … Shape the syrniki": "Ճզմեք պանիրը … Ձևավորեք սիռնիկները",
+  "Chicken and sausage": "Հավ և երշիկ",
+  "With shrimp too": "Նաև ծովախեցգետնով",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Խորանարդիկներով կտրատեք սոխը, պղպեղը և նեխուրը, իսկ սխտորը մանր կտրատեք։",
+  "All chopped": "Ամեն ինչ կտրատված է",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Հավը կտրատեք 2 սմ կտորներով, իսկ երշիկը՝ օղակներով։",
+  "Brown the sausage": "Կարմրացրեք երշիկը",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Մեծ կաթսայում տաքացրեք ձեթը և կարմրացրեք երշիկը։ Հանեք այն, իսկ ճարպը թողեք կաթսայում։",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Նույն կաթսայում հավը թեթևակի կարմրացրեք բոլոր կողմերից, ապա այն նույնպես հանեք։",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Կաթսայում տապակեք սոխը, պղպեղը և նեխուրը, մինչև փափկեն։ Սխտորն ավելացրեք վերջին րոպեին։",
+  "Spices and rice": "Համեմունքներ և բրինձ",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Խառնեք պապրիկան, կայեն պղպեղը, ուրցը, օրեգանոն և բրինձը և խառնեք 1 րոպե։",
+  "Rice coated": "Բրինձը պատված է",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Ավելացրեք լոլիկը, արգանակը, դափնու տերևը, աղը և պղպեղը և հավն ու երշիկը վերադարձրեք կաթսա։ Եռացրեք, ծածկեք և թույլ կրակի վրա եփեք առանց խառնելու, մինչև բրինձը փափկի։",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Կաթսան վերցրեք կրակից և թողեք ծածկված 5 րոպե։ Հանեք դափնու տերևը։",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Պատառաքաղով փխրեցրեք բրինձը և մատուցեք կանաչ սոխ ցանած։",
+  "Brown the sausage … Rest": "Կարմրացրեք երշիկը … Թողեք հանգստանա",
+  "Shrimp in": "Ավելացրեք ծովախեցգետինը",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Ծովախեցգետինը սեղմեք բրնձի մեջ, նորից ծածկեք և եփեք, մինչև վարդագույն դառնա։"
  },
  "amounts": {
   "g": "գ",

@@ -819,7 +819,8 @@ window.I18N["fi"] = {
   "stuffed_cabbage": "Kaalikääryleet",
   "cevapi": "Ćevapi ja ajvar",
   "succotash": "Succotash (maissia ja limapapuja)",
-  "syrniki": "Syrniki (rahkaletut)"
+  "syrniki": "Syrniki (rahkaletut)",
+  "jambalaya": "Jambalaya"
  },
  "texts": {
   "Aluminium foil": "Alumiinifolio",
@@ -4440,7 +4441,25 @@ window.I18N["fi"] = {
   "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Kuumenna öljy pannulla ja paista syrnikit erissä kullanruskeiksi, noin 3 minuuttia kummaltakin puolelta.",
   "Golden brown on both sides": "Kullanruskeat molemmin puolin",
   "Serve warm with sour cream and jam.": "Tarjoile lämpiminä smetanan ja hillon kanssa.",
-  "Mash the cheese … Shape the syrniki": "Survo juusto … Muotoile syrnikit"
+  "Mash the cheese … Shape the syrniki": "Survo juusto … Muotoile syrnikit",
+  "Chicken and sausage": "Kana ja makkara",
+  "With shrimp too": "Myös katkaravuilla",
+  "Dice the onion, the pepper and the celery and chop the garlic finely.": "Kuutioi sipuli, paprika ja varsiselleri ja hienonna valkosipuli.",
+  "All chopped": "Kaikki pilkottu",
+  "Cut the chicken into 2 cm pieces and slice the sausage.": "Leikkaa kana 2 cm paloiksi ja makkara viipaleiksi.",
+  "Brown the sausage": "Ruskista makkara",
+  "Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.": "Kuumenna öljy isossa kattilassa ja ruskista makkara. Nosta se pois ja jätä rasva kattilaan.",
+  "Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.": "Ruskista kana kevyesti joka puolelta samassa kattilassa ja nosta sekin pois.",
+  "Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.": "Kuullota sipuli, paprika ja varsiselleri pehmeiksi kattilassa. Lisää valkosipuli viimeisellä minuutilla.",
+  "Spices and rice": "Mausteet ja riisi",
+  "Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.": "Sekoita joukkoon paprikajauhe, cayennepippuri, timjami, oregano ja riisi ja sekoittele 1 minuutti.",
+  "Rice coated": "Riisi maustunut",
+  "Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.": "Lisää tomaatit, liemi, laakerinlehti, suola ja pippuri ja palauta kana ja makkara kattilaan. Kiehauta, peitä kannella ja keitä miedolla lämmöllä sekoittamatta, kunnes riisi on kypsää.",
+  "Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.": "Nosta kattila liedeltä ja anna seistä kannen alla 5 minuuttia. Poista laakerinlehti.",
+  "Fluff the rice with a fork and serve sprinkled with the green onions.": "Kuohkeuta riisi haarukalla ja tarjoile kevätsipulilla ripoteltuna.",
+  "Brown the sausage … Rest": "Ruskista makkara … Anna levätä",
+  "Shrimp in": "Katkaravut joukkoon",
+  "Push the shrimp into the rice, cover again and cook until pink.": "Painele katkaravut riisiin, peitä taas kannella ja kypsennä, kunnes ne ovat vaaleanpunaisia."
  },
  "amounts": {
   "L": "l",

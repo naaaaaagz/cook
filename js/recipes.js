@@ -859,7 +859,8 @@ window.INGREDIENT_INFO = (function () {
     stuffed_cabbage: { starred: 0, category: "main", cuisine: ['European'] },
     cevapi: { starred: 0, category: "main", cuisine: ['European'] },
     succotash: { starred: 0, category: "side", cuisine: ['American'] },
-    syrniki: { starred: 0, category: "dessert", cuisine: ['European'] }
+    syrniki: { starred: 0, category: "dessert", cuisine: ['European'] },
+    jambalaya: { starred: 0, category: "main", cuisine: ['American'] }
   };
   window.RECIPES.forEach(function (r) {
     var m = META[r.id] || {};
