@@ -827,7 +827,8 @@ window.I18N["ar"] = {
   "gazpacho": "غازباتشو",
   "stuffed_cabbage": "ملفوف محشي",
   "cevapi": "تشيفابي مع الأيفار",
-  "succotash": "ساكوتاش (ذرة مع فاصوليا ليما)"
+  "succotash": "ساكوتاش (ذرة مع فاصوليا ليما)",
+  "syrniki": "سيرنيكي (فطائر الجبن القريش)"
  },
  "texts": {
   "Aluminium foil": "ورق ألومنيوم",
@@ -4435,7 +4436,20 @@ window.I18N["ar"] = {
   "Tomatoes just soft": "الطماطم طرية بالكاد",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "رشّ البقدونس والبيكون المقرمش وقدّمه دافئًا.",
   "Crisp the bacon … Tomatoes and seasoning": "تحمير اللحم المقدد … الطماطم والتتبيل",
-  "Onion and pepper … Tomatoes and seasoning": "البصل والفلفل … الطماطم والتتبيل"
+  "Onion and pepper … Tomatoes and seasoning": "البصل والفلفل … الطماطم والتتبيل",
+  "Mash the cheese": "اهرس الجبن",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "اهرس الجبن في وعاء بالشوكة حتى يصبح ناعمًا إلى حد ما، بلا كتل كبيرة. إذا كان رطبًا، فاعصره أولًا في قطعة قماش نظيفة.",
+  "Smooth, no big lumps": "ناعم، بلا كتل كبيرة",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "اخلط البيضة والسكر والفانيليا والملح، ثم معظم الدقيق. يجب أن تكون العجينة طرية ولزجة قليلًا فقط.",
+  "Soft, a little sticky": "طرية، لزجة قليلًا",
+  "Shape the syrniki": "شكّل السيرنيكي",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "رشّ اللوح ببقية الدقيق. بيدين مغبّرتين بالدقيق، شكّل العجينة أقراصًا بعرض 6 سم تقريبًا وسمك 1,5 سم، ثم اغمرها في الدقيق قليلًا.",
+  "All shaped, floured": "كلها مشكّلة ومغبّرة بالدقيق",
+  "Fry the syrniki": "اقلِ السيرنيكي",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "سخّن الزيت في المقلاة واقلِ السيرنيكي على دفعات حتى تصبح ذهبية بنية، نحو 3 دقائق لكل جانب.",
+  "Golden brown on both sides": "ذهبية بنية من الجانبين",
+  "Serve warm with sour cream and jam.": "قدّمها دافئة مع القشدة الحامضة والمربى.",
+  "Mash the cheese … Shape the syrniki": "اهرس الجبن … شكّل السيرنيكي"
  },
  "amounts": {
   "g": "غ",

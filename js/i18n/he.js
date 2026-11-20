@@ -827,7 +827,8 @@ window.I18N["he"] = {
   "gazpacho": "גספצ'ו",
   "stuffed_cabbage": "כרוב ממולא",
   "cevapi": "צ'בפי עם אייבר",
-  "succotash": "סקוטאש (תירס עם שעועית לימה)"
+  "succotash": "סקוטאש (תירס עם שעועית לימה)",
+  "syrniki": "סירניקי (לביבות גבינה)"
  },
  "texts": {
   "Aluminium foil": "נייר כסף",
@@ -4435,7 +4436,20 @@ window.I18N["he"] = {
   "Tomatoes just soft": "עגבניות בדיוק מתרככות",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "פזרו פטרוזיליה ובייקון פריך והגישו חם.",
   "Crisp the bacon … Tomatoes and seasoning": "טיגון הבייקון … עגבניות ותיבול",
-  "Onion and pepper … Tomatoes and seasoning": "בצל ופלפל … עגבניות ותיבול"
+  "Onion and pepper … Tomatoes and seasoning": "בצל ופלפל … עגבניות ותיבול",
+  "Mash the cheese": "מעכו את הגבינה",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "מעכו את הגבינה בקערה במזלג עד שהיא חלקה למדי, בלי גושים גדולים. אם היא רטובה, סחטו אותה קודם במגבת נקייה.",
+  "Smooth, no big lumps": "חלקה, בלי גושים גדולים",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "ערבבו פנימה את הביצה, הסוכר, הווניל והמלח, ואז את רוב הקמח. הבצק צריך להיות רך ודביק רק מעט.",
+  "Soft, a little sticky": "רך, דביק מעט",
+  "Shape the syrniki": "עצבו את הסירניקי",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "קמחו את הקרש בשארית הקמח. בידיים מקומחות עצבו מהבצק לביבות ברוחב של כ-6 ס״מ ובעובי 1,5 ס״מ, וגלגלו אותן קלות בקמח.",
+  "All shaped, floured": "כולן מעוצבות ומקומחות",
+  "Fry the syrniki": "טגנו את הסירניקי",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "חממו את השמן במחבת וטגנו את הסירניקי במנות עד שהן זהובות-חומות, כ-3 דקות מכל צד.",
+  "Golden brown on both sides": "זהובות-חומות משני הצדדים",
+  "Serve warm with sour cream and jam.": "הגישו חמים עם שמנת חמוצה וריבה.",
+  "Mash the cheese … Shape the syrniki": "מעכו את הגבינה … עצבו את הסירניקי"
  },
  "amounts": {
   "g": "גרם",

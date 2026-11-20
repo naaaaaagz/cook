@@ -819,7 +819,8 @@ window.I18N["sq"] = {
   "gazpacho": "Gaspaço",
   "stuffed_cabbage": "Sarma me lakër",
   "cevapi": "Qebapë me ajvar",
-  "succotash": "Succotash (misër me fasule lima)"
+  "succotash": "Succotash (misër me fasule lima)",
+  "syrniki": "Sirniki (petulla me gjizë)"
  },
  "texts": {
   "Aluminium foil": "Letër alumini",
@@ -4427,7 +4428,20 @@ window.I18N["sq"] = {
   "Tomatoes just soft": "Domatet sapo të zbutura",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Spërkat me majdanoz dhe proshutën krokante dhe servir të ngrohtë.",
   "Crisp the bacon … Tomatoes and seasoning": "Skuq proshutën … Domate dhe erëza",
-  "Onion and pepper … Tomatoes and seasoning": "Qepë dhe spec … Domate dhe erëza"
+  "Onion and pepper … Tomatoes and seasoning": "Qepë dhe spec … Domate dhe erëza",
+  "Mash the cheese": "Shtype djathin",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Shtype djathin në një tas me pirun derisa të bëhet mjaft i lëmuar, pa gunga të mëdha. Nëse është i lagësht, shtrydhe më parë në një leckë të pastër.",
+  "Smooth, no big lumps": "I lëmuar, pa gunga të mëdha",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Përziej vezën, sheqerin, vaniljen dhe kripën, pastaj pjesën më të madhe të miellit. Brumi duhet të jetë i butë dhe vetëm pak ngjitës.",
+  "Soft, a little sticky": "I butë, pak ngjitës",
+  "Shape the syrniki": "Formo sirnikët",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Spërkat dërrasën me pjesën tjetër të miellit. Me duar të lyera me miell, formo nga brumi petulla rreth 6 cm të gjera dhe 1,5 cm të trasha dhe rrotulloji lehtë në miell.",
+  "All shaped, floured": "Të gjithë të formuar, me miell",
+  "Fry the syrniki": "Skuq sirnikët",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Ngroh vajin në tigan dhe skuq sirnikët me radhë derisa të marrin ngjyrë kafe të artë, rreth 3 minuta për çdo anë.",
+  "Golden brown on both sides": "Kafe të artë nga të dyja anët",
+  "Serve warm with sour cream and jam.": "Shërbeji të ngrohtë me salcë kosi dhe reçel.",
+  "Mash the cheese … Shape the syrniki": "Shtype djathin … Formo sirnikët"
  },
  "amounts": {
   "L": "l",

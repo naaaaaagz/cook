@@ -818,7 +818,8 @@ window.I18N["hr"] = {
   "swedish_meatballs": "Švedske mesne okruglice",
   "stuffed_cabbage": "Sarma",
   "cevapi": "Ćevapi s ajvarom",
-  "succotash": "Succotash (kukuruz s lima grahom)"
+  "succotash": "Succotash (kukuruz s lima grahom)",
+  "syrniki": "Sirniki (pogačice od svježeg sira)"
  },
  "texts": {
   "Aluminium foil": "Aluminijska folija",
@@ -4426,7 +4427,20 @@ window.I18N["hr"] = {
   "Tomatoes just soft": "Rajčice tek omekšale",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Pospite peršinom i hrskavom slaninom i poslužite toplo.",
   "Crisp the bacon … Tomatoes and seasoning": "Popržite slaninu … Rajčice i začini",
-  "Onion and pepper … Tomatoes and seasoning": "Luk i paprika … Rajčice i začini"
+  "Onion and pepper … Tomatoes and seasoning": "Luk i paprika … Rajčice i začini",
+  "Mash the cheese": "Zgnječite sir",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "U zdjeli vilicom zgnječite sir dok ne bude prilično gladak, bez velikih grudica. Ako je vlažan, najprije ga iscijedite u čistoj krpi.",
+  "Smooth, no big lumps": "Gladak, bez velikih grudica",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Umiješajte jaje, šećer, vaniliju i sol, zatim veći dio brašna. Tijesto treba biti mekano i tek malo ljepljivo.",
+  "Soft, a little sticky": "Mekano, malo ljepljivo",
+  "Shape the syrniki": "Oblikujte sirnike",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Pobrašnite dasku ostatkom brašna. Pobrašnjenim rukama od tijesta oblikujte pogačice široke oko 6 cm i debele 1,5 cm te ih lagano uvaljajte u brašno.",
+  "All shaped, floured": "Svi oblikovani, pobrašnjeni",
+  "Fry the syrniki": "Pržite sirnike",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "U tavi zagrijte ulje i pržite sirnike u dijelovima dok ne porumene, oko 3 minute sa svake strane.",
+  "Golden brown on both sides": "Zlatnosmeđi s obje strane",
+  "Serve warm with sour cream and jam.": "Poslužite tople s kiselim vrhnjem i pekmezom.",
+  "Mash the cheese … Shape the syrniki": "Zgnječite sir … Oblikujte sirnike"
  },
  "amounts": {
   "L": "l",

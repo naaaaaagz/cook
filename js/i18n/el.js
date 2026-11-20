@@ -826,7 +826,8 @@ window.I18N["el"] = {
   "gazpacho": "Γκασπάτσο",
   "stuffed_cabbage": "Λαχανοντολμάδες",
   "cevapi": "Τσεβάπια με άιβαρ",
-  "succotash": "Σάκοτας (καλαμπόκι με φασόλια λίμα)"
+  "succotash": "Σάκοτας (καλαμπόκι με φασόλια λίμα)",
+  "syrniki": "Σίρνικι (τηγανίτες με τυρί κότατζ)"
  },
  "texts": {
   "Aluminium foil": "Αλουμινόχαρτο",
@@ -4434,7 +4435,20 @@ window.I18N["el"] = {
   "Tomatoes just soft": "Ντομάτες μόλις μαλακές",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Πασπαλίστε με μαϊντανό και το τραγανό μπέικον και σερβίρετε ζεστό.",
   "Crisp the bacon … Tomatoes and seasoning": "Καβουρδίστε το μπέικον … Ντομάτες και καρυκεύματα",
-  "Onion and pepper … Tomatoes and seasoning": "Κρεμμύδι και πιπεριά … Ντομάτες και καρυκεύματα"
+  "Onion and pepper … Tomatoes and seasoning": "Κρεμμύδι και πιπεριά … Ντομάτες και καρυκεύματα",
+  "Mash the cheese": "Λιώστε το τυρί",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Λιώστε το τυρί σε ένα μπολ με ένα πιρούνι μέχρι να γίνει αρκετά λείο, χωρίς μεγάλους σβόλους. Αν είναι υγρό, στραγγίξτε το πρώτα σε ένα καθαρό πανί.",
+  "Smooth, no big lumps": "Λείο, χωρίς μεγάλους σβόλους",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Ανακατέψτε το αυγό, τη ζάχαρη, τη βανίλια και το αλάτι και μετά το μεγαλύτερο μέρος του αλευριού. Η ζύμη πρέπει να είναι μαλακή και μόνο λίγο κολλώδης.",
+  "Soft, a little sticky": "Μαλακή, λίγο κολλώδης",
+  "Shape the syrniki": "Πλάστε τα σίρνικι",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Πασπαλίστε την επιφάνεια κοπής με το υπόλοιπο αλεύρι. Με αλευρωμένα χέρια, πλάστε τη ζύμη σε μικρές πίτες πλάτους περίπου 6 εκ. και πάχους 1,5 εκ. και αλευρώστε τες ελαφρά.",
+  "All shaped, floured": "Όλα πλασμένα, αλευρωμένα",
+  "Fry the syrniki": "Τηγανίστε τα σίρνικι",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Ζεστάνετε το λάδι στο τηγάνι και τηγανίστε τα σίρνικι σε δόσεις μέχρι να ροδίσουν, περίπου 3 λεπτά από κάθε πλευρά.",
+  "Golden brown on both sides": "Ροδισμένα και από τις δύο πλευρές",
+  "Serve warm with sour cream and jam.": "Σερβίρετέ τα ζεστά με ξινή κρέμα και μαρμελάδα.",
+  "Mash the cheese … Shape the syrniki": "Λιώστε το τυρί … Πλάστε τα σίρνικι"
  },
  "amounts": {
   "g": "γρ.",

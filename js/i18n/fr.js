@@ -818,7 +818,8 @@ window.I18N["fr"] = {
   "swedish_meatballs": "Boulettes suédoises",
   "stuffed_cabbage": "Feuilles de chou farcies",
   "cevapi": "Ćevapi à l’ajvar",
-  "succotash": "Succotash (maïs et haricots de Lima)"
+  "succotash": "Succotash (maïs et haricots de Lima)",
+  "syrniki": "Syrniki (galettes au fromage blanc)"
  },
  "texts": {
   "Aluminium foil": "Papier aluminium",
@@ -4426,7 +4427,20 @@ window.I18N["fr"] = {
   "Tomatoes just soft": "Tomates juste ramollies",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Parsemez de persil et de lardons croustillants et servez chaud.",
   "Crisp the bacon … Tomatoes and seasoning": "Faire griller les lardons … Tomates et assaisonnement",
-  "Onion and pepper … Tomatoes and seasoning": "Oignon et poivron … Tomates et assaisonnement"
+  "Onion and pepper … Tomatoes and seasoning": "Oignon et poivron … Tomates et assaisonnement",
+  "Mash the cheese": "Écraser le fromage",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Écrasez le fromage dans un saladier à la fourchette jusqu’à ce qu’il soit assez lisse, sans gros grumeaux. S’il est humide, pressez-le d’abord dans un linge propre.",
+  "Smooth, no big lumps": "Lisse, sans gros grumeaux",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Incorporez l’œuf, le sucre, la vanille et le sel, puis la plus grande partie de la farine. La pâte doit être souple et juste un peu collante.",
+  "Soft, a little sticky": "Souple, un peu collante",
+  "Shape the syrniki": "Façonner les syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Farinez la planche avec le reste de la farine. Les mains farinées, façonnez la pâte en galettes d’environ 6 cm de large et 1,5 cm d’épaisseur, puis enrobez-les légèrement de farine.",
+  "All shaped, floured": "Toutes façonnées, farinées",
+  "Fry the syrniki": "Cuire les syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Faites chauffer l’huile dans la poêle et faites dorer les syrniki en plusieurs fois, environ 3 minutes de chaque côté.",
+  "Golden brown on both sides": "Dorées des deux côtés",
+  "Serve warm with sour cream and jam.": "Servez chaud avec de la crème aigre et de la confiture.",
+  "Mash the cheese … Shape the syrniki": "Écraser le fromage … Façonner les syrniki"
  },
  "amounts": {
   "L": "l",

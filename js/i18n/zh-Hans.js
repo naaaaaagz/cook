@@ -827,7 +827,8 @@ window.I18N["zh-Hans"] = {
   "gazpacho": "西班牙冷汤",
   "stuffed_cabbage": "卷心菜卷",
   "cevapi": "Ćevapi（配阿伊瓦尔酱）",
-  "succotash": "Succotash（玉米利马豆）"
+  "succotash": "Succotash（玉米利马豆）",
+  "syrniki": "Syrniki（奶渣煎饼）"
  },
  "texts": {
   "Aluminium foil": "锡纸",
@@ -4435,7 +4436,20 @@ window.I18N["zh-Hans"] = {
   "Tomatoes just soft": "番茄刚变软",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "撒上欧芹和脆培根，温热上桌。",
   "Crisp the bacon … Tomatoes and seasoning": "煸培根 … 番茄和调味",
-  "Onion and pepper … Tomatoes and seasoning": "洋葱和甜椒 … 番茄和调味"
+  "Onion and pepper … Tomatoes and seasoning": "洋葱和甜椒 … 番茄和调味",
+  "Mash the cheese": "压碎奶酪",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "在碗中用叉子把奶酪压碎，直至比较顺滑、没有大块。如果奶酪较湿，先用干净的布挤干水分。",
+  "Smooth, no big lumps": "顺滑，没有大块",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "拌入鸡蛋、糖、香草和盐，再加入大部分面粉。面团应柔软，只略微粘手。",
+  "Soft, a little sticky": "柔软，略粘手",
+  "Shape the syrniki": "做成饼",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "在案板上撒上剩下的面粉。手上沾面粉，把面团做成直径约6厘米、厚1.5厘米的小圆饼，再轻轻裹一层面粉。",
+  "All shaped, floured": "全部做好，裹上面粉",
+  "Fry the syrniki": "煎饼",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "锅中热油，把饼分批煎至两面金黄，每面约3分钟。",
+  "Golden brown on both sides": "两面金黄",
+  "Serve warm with sour cream and jam.": "配酸奶油和果酱趁热上桌。",
+  "Mash the cheese … Shape the syrniki": "压碎奶酪 … 做成饼"
  },
  "amounts": {
   "g": "克",

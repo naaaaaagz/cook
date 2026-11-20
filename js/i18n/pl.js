@@ -817,7 +817,8 @@ window.I18N["pl"] = {
   "swedish_meatballs": "Szwedzkie klopsiki",
   "stuffed_cabbage": "Gołąbki",
   "cevapi": "Ćevapi z ajvarem",
-  "succotash": "Succotash (kukurydza z fasolą limeńską)"
+  "succotash": "Succotash (kukurydza z fasolą limeńską)",
+  "syrniki": "Syrniki (placuszki z twarogu)"
  },
  "texts": {
   "Aluminium foil": "Folia aluminiowa",
@@ -4425,7 +4426,20 @@ window.I18N["pl"] = {
   "Tomatoes just soft": "Pomidory ledwo zmiękłe",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Posyp natką pietruszki i chrupiącym boczkiem i podawaj na ciepło.",
   "Crisp the bacon … Tomatoes and seasoning": "Wytop boczek … Pomidory i przyprawy",
-  "Onion and pepper … Tomatoes and seasoning": "Cebula i papryka … Pomidory i przyprawy"
+  "Onion and pepper … Tomatoes and seasoning": "Cebula i papryka … Pomidory i przyprawy",
+  "Mash the cheese": "Rozgnieć ser",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Rozgnieć ser w misce widelcem, aż będzie dość gładki, bez dużych grudek. Jeśli jest mokry, najpierw odciśnij go w czystej ściereczce.",
+  "Smooth, no big lumps": "Gładki, bez dużych grudek",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Wmieszaj jajko, cukier, wanilię i sól, a potem większość mąki. Ciasto ma być miękkie i tylko trochę klejące.",
+  "Soft, a little sticky": "Miękkie, trochę klejące",
+  "Shape the syrniki": "Uformuj syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Oprósz deskę resztą mąki. Oprószonymi mąką dłońmi uformuj z ciasta placuszki o średnicy około 6 cm i grubości 1,5 cm i lekko obtocz je w mące.",
+  "All shaped, floured": "Wszystkie uformowane, obtoczone w mące",
+  "Fry the syrniki": "Usmaż syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Rozgrzej olej na patelni i smaż syrniki partiami na złoty kolor, około 3 minuty z każdej strony.",
+  "Golden brown on both sides": "Złote z obu stron",
+  "Serve warm with sour cream and jam.": "Podawaj na ciepło ze śmietaną i dżemem.",
+  "Mash the cheese … Shape the syrniki": "Rozgnieć ser … Uformuj syrniki"
  },
  "amounts": {
   "L": "l",

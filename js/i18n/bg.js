@@ -827,7 +827,8 @@ window.I18N["bg"] = {
   "gazpacho": "Гаспачо",
   "stuffed_cabbage": "Зелеви сарми",
   "cevapi": "Кебапчета с айвар",
-  "succotash": "Сукоташ (царевица с боб лима)"
+  "succotash": "Сукоташ (царевица с боб лима)",
+  "syrniki": "Сирники (палачинки с извара)"
  },
  "texts": {
   "Aluminium foil": "Алуминиево фолио",
@@ -4435,7 +4436,20 @@ window.I18N["bg"] = {
   "Tomatoes just soft": "Доматите току-що омекнали",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Поръсете с магданоз и хрупкавия бекон и сервирайте топло.",
   "Crisp the bacon … Tomatoes and seasoning": "Запечете бекона … Домати и подправки",
-  "Onion and pepper … Tomatoes and seasoning": "Лук и чушка … Домати и подправки"
+  "Onion and pepper … Tomatoes and seasoning": "Лук и чушка … Домати и подправки",
+  "Mash the cheese": "Намачкайте изварата",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Намачкайте изварата в купа с вилица, докато стане доста гладка, без големи бучки. Ако е влажна, първо я изцедете в чиста кърпа.",
+  "Smooth, no big lumps": "Гладка, без големи бучки",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Вмесете яйцето, захарта, ванилията и солта, а след това по-голямата част от брашното. Тестото трябва да е меко и само леко лепкаво.",
+  "Soft, a little sticky": "Меко, леко лепкаво",
+  "Shape the syrniki": "Оформете сирниците",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Поръсете дъската с останалото брашно. С набрашнени ръце оформете от тестото питки с ширина около 6 см и дебелина 1,5 см и ги оваляйте леко в брашно.",
+  "All shaped, floured": "Всички оформени, оваляни в брашно",
+  "Fry the syrniki": "Изпържете сирниците",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Загрейте олиото в тигана и пържете сирниците на порции до златисто-кафяво, около 3 минути от всяка страна.",
+  "Golden brown on both sides": "Златисто-кафяви от двете страни",
+  "Serve warm with sour cream and jam.": "Сервирайте топли със сметана и конфитюр.",
+  "Mash the cheese … Shape the syrniki": "Намачкайте изварата … Оформете сирниците"
  },
  "amounts": {
   "g": "г",

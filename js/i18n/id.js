@@ -818,7 +818,8 @@ window.I18N["id"] = {
   "swedish_meatballs": "Bakso Swedia",
   "stuffed_cabbage": "Kubis gulung isi",
   "cevapi": "Ćevapi dengan ajvar",
-  "succotash": "Succotash (jagung dengan kacang lima)"
+  "succotash": "Succotash (jagung dengan kacang lima)",
+  "syrniki": "Syrniki (panekuk keju cottage)"
  },
  "texts": {
   "Aluminium foil": "Aluminium foil",
@@ -4426,7 +4427,20 @@ window.I18N["id"] = {
   "Tomatoes just soft": "Tomat baru melunak",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Taburi peterseli dan bacon renyah lalu sajikan hangat.",
   "Crisp the bacon … Tomatoes and seasoning": "Panggang bacon … Tomat dan bumbu",
-  "Onion and pepper … Tomatoes and seasoning": "Bawang bombai dan paprika … Tomat dan bumbu"
+  "Onion and pepper … Tomatoes and seasoning": "Bawang bombai dan paprika … Tomat dan bumbu",
+  "Mash the cheese": "Haluskan keju",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Haluskan keju dalam mangkuk dengan garpu sampai cukup halus, tanpa gumpalan besar. Jika basah, peras dulu dengan kain bersih.",
+  "Smooth, no big lumps": "Halus, tanpa gumpalan besar",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Aduk telur, gula, vanili, dan garam, lalu sebagian besar tepung. Adonan harus lembut dan hanya sedikit lengket.",
+  "Soft, a little sticky": "Lembut, sedikit lengket",
+  "Shape the syrniki": "Bentuk syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Taburi talenan dengan sisa tepung. Dengan tangan bertepung, bentuk adonan menjadi bulatan pipih selebar sekitar 6 cm dan setebal 1,5 cm, lalu gulingkan perlahan di tepung.",
+  "All shaped, floured": "Semua terbentuk, bertepung",
+  "Fry the syrniki": "Goreng syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Panaskan minyak di wajan dan goreng syrniki bertahap sampai cokelat keemasan, sekitar 3 menit per sisi.",
+  "Golden brown on both sides": "Cokelat keemasan di kedua sisi",
+  "Serve warm with sour cream and jam.": "Sajikan hangat dengan krim asam dan selai.",
+  "Mash the cheese … Shape the syrniki": "Haluskan keju … Bentuk syrniki"
  },
  "amounts": {
   "L": "l",

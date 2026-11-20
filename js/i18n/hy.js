@@ -827,7 +827,8 @@ window.I18N["hy"] = {
   "gazpacho": "Գասպաչո",
   "stuffed_cabbage": "Կաղամբի տոլմա",
   "cevapi": "Չևապի այվարով",
-  "succotash": "Սաքոթաշ (եգիպտացորեն լիմա լոբով)"
+  "succotash": "Սաքոթաշ (եգիպտացորեն լիմա լոբով)",
+  "syrniki": "Սիռնիկի (կաթնաշոռով բլիթներ)"
  },
  "texts": {
   "Aluminium foil": "Ալյումինե փայլաթիթեղ",
@@ -4435,7 +4436,20 @@ window.I18N["hy"] = {
   "Tomatoes just soft": "Լոլիկը հենց նոր փափկած",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Ցանեք մաղադանոս և խրթխրթան բեկոն և մատուցեք տաք։",
   "Crisp the bacon … Tomatoes and seasoning": "Բովեք բեկոնը … Լոլիկ և համեմունքներ",
-  "Onion and pepper … Tomatoes and seasoning": "Սոխ և բիբար … Լոլիկ և համեմունքներ"
+  "Onion and pepper … Tomatoes and seasoning": "Սոխ և բիբար … Լոլիկ և համեմունքներ",
+  "Mash the cheese": "Ճզմեք պանիրը",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Ամանի մեջ պատառաքաղով ճզմեք պանիրը, մինչև բավականին հարթ դառնա՝ առանց մեծ գնդիկների։ Եթե խոնավ է, նախ քամեք այն մաքուր կտորի մեջ։",
+  "Smooth, no big lumps": "Հարթ, առանց մեծ գնդիկների",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Խառնեք ձուն, շաքարը, վանիլը և աղը, ապա ալյուրի մեծ մասը։ Խմորը պետք է լինի փափուկ և միայն մի քիչ կպչուն։",
+  "Soft, a little sticky": "Փափուկ, մի քիչ կպչուն",
+  "Shape the syrniki": "Ձևավորեք սիռնիկները",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Տախտակին ցանեք մնացած ալյուրը։ Ալյուրոտ ձեռքերով խմորից ձևավորեք մոտ 6 սմ լայնությամբ և 1,5 սմ հաստությամբ բլիթներ և թեթևակի թաթախեք ալյուրի մեջ։",
+  "All shaped, floured": "Բոլորը ձևավորված են, ալյուրոտ",
+  "Fry the syrniki": "Տապակեք սիռնիկները",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Տապակի մեջ տաքացրեք ձեթը և սիռնիկները մաս-մաս տապակեք մինչև ոսկեգույն դառնան՝ յուրաքանչյուր կողմից մոտ 3 րոպե։",
+  "Golden brown on both sides": "Երկու կողմից ոսկեգույն",
+  "Serve warm with sour cream and jam.": "Մատուցեք տաք՝ թթվասերով և մուրաբայով։",
+  "Mash the cheese … Shape the syrniki": "Ճզմեք պանիրը … Ձևավորեք սիռնիկները"
  },
  "amounts": {
   "g": "գ",

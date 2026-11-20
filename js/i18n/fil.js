@@ -817,7 +817,8 @@ window.I18N["fil"] = {
   "swedish_meatballs": "Swedish na bola-bola",
   "stuffed_cabbage": "Repolyong may palaman",
   "cevapi": "Ćevapi na may ajvar",
-  "succotash": "Succotash (mais at lima beans)"
+  "succotash": "Succotash (mais at lima beans)",
+  "syrniki": "Syrniki (pancake na keso)"
  },
  "texts": {
   "Aluminium foil": "Aluminum foil",
@@ -4425,7 +4426,20 @@ window.I18N["fil"] = {
   "Tomatoes just soft": "Kalalambot lang ng kamatis",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Budburan ng parsley at malutong na bacon at ihain nang mainit.",
   "Crisp the bacon … Tomatoes and seasoning": "Prituhin ang bacon … Kamatis at timpla",
-  "Onion and pepper … Tomatoes and seasoning": "Sibuyas at bell pepper … Kamatis at timpla"
+  "Onion and pepper … Tomatoes and seasoning": "Sibuyas at bell pepper … Kamatis at timpla",
+  "Mash the cheese": "Durugin ang keso",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Durugin ang keso sa mangkok gamit ang tinidor hanggang medyo makinis at walang malalaking buo. Kung basa, pigain muna ito sa malinis na tela.",
+  "Smooth, no big lumps": "Makinis, walang malalaking buo",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Ihalo ang itlog, asukal, vanilla at asin, saka ang karamihan ng harina. Dapat malambot ang masa at bahagyang malagkit lang.",
+  "Soft, a little sticky": "Malambot, bahagyang malagkit",
+  "Shape the syrniki": "Hubugin ang syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Budburan ang sangkalan ng natitirang harina. Gamit ang kamay na may harina, hubugin ang masa na parang maliliit na patty na mga 6 cm ang lapad at 1.5 cm ang kapal, at bahagyang igulong sa harina.",
+  "All shaped, floured": "Lahat nahubog na, may harina",
+  "Fry the syrniki": "Iprito ang syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Painitin ang mantika sa kawali at iprito ang syrniki nang paisa-isang batch hanggang golden brown, mga 3 minuto bawat side.",
+  "Golden brown on both sides": "Golden brown sa magkabilang side",
+  "Serve warm with sour cream and jam.": "Ihain nang mainit kasama ang sour cream at jam.",
+  "Mash the cheese … Shape the syrniki": "Durugin ang keso … Hubugin ang syrniki"
  },
  "amounts": {
   "tsp": "kutsarita",

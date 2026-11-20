@@ -818,7 +818,8 @@ window.I18N["it"] = {
   "swedish_meatballs": "Polpette svedesi",
   "stuffed_cabbage": "Involtini di cavolo",
   "cevapi": "Ćevapi con ajvar",
-  "succotash": "Succotash (mais e fagioli di Lima)"
+  "succotash": "Succotash (mais e fagioli di Lima)",
+  "syrniki": "Syrniki (frittelle di ricotta)"
  },
  "texts": {
   "Aluminium foil": "Carta stagnola",
@@ -4426,7 +4427,20 @@ window.I18N["it"] = {
   "Tomatoes just soft": "Pomodorini appena morbidi",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Cospargi di prezzemolo e pancetta croccante e servi caldo.",
   "Crisp the bacon … Tomatoes and seasoning": "Rosolare la pancetta … Pomodori e condimento",
-  "Onion and pepper … Tomatoes and seasoning": "Cipolla e peperone … Pomodori e condimento"
+  "Onion and pepper … Tomatoes and seasoning": "Cipolla e peperone … Pomodori e condimento",
+  "Mash the cheese": "Schiaccia il formaggio",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Schiaccia il formaggio in una ciotola con una forchetta finché è abbastanza liscio, senza grumi grossi. Se è umido, prima strizzalo in un canovaccio pulito.",
+  "Smooth, no big lumps": "Liscio, senza grumi grossi",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Incorpora l’uovo, lo zucchero, la vaniglia e il sale, poi gran parte della farina. L’impasto deve essere morbido e solo un po’ appiccicoso.",
+  "Soft, a little sticky": "Morbido, un po’ appiccicoso",
+  "Shape the syrniki": "Forma i syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Infarina il tagliere con il resto della farina. Con le mani infarinate, forma con l’impasto dei dischetti larghi circa 6 cm e spessi 1,5 cm e passali leggermente nella farina.",
+  "All shaped, floured": "Tutti formati e infarinati",
+  "Fry the syrniki": "Friggi i syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Scalda l’olio nella padella e friggi i syrniki un po’ alla volta finché sono dorati, circa 3 minuti per lato.",
+  "Golden brown on both sides": "Dorati su entrambi i lati",
+  "Serve warm with sour cream and jam.": "Servi caldi con panna acida e marmellata.",
+  "Mash the cheese … Shape the syrniki": "Schiaccia il formaggio … Forma i syrniki"
  },
  "amounts": {
   "L": "l",

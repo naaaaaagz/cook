@@ -819,7 +819,8 @@ window.I18N["ca"] = {
   "gazpacho": "Gaspatxo",
   "stuffed_cabbage": "Rotlles de col farcits",
   "cevapi": "Ćevapi amb ajvar",
-  "succotash": "Succotash (blat de moro amb mongetes de Lima)"
+  "succotash": "Succotash (blat de moro amb mongetes de Lima)",
+  "syrniki": "Syrniki (coquetes de mató)"
  },
  "texts": {
   "Aluminium foil": "Paper d’alumini",
@@ -4427,7 +4428,20 @@ window.I18N["ca"] = {
   "Tomatoes just soft": "Tomàquets just estovats",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Escampa-hi el julivert i la cansalada cruixent i serveix calent.",
   "Crisp the bacon … Tomatoes and seasoning": "Torrar la cansalada … Tomàquets i condiments",
-  "Onion and pepper … Tomatoes and seasoning": "Ceba i pebrot … Tomàquets i condiments"
+  "Onion and pepper … Tomatoes and seasoning": "Ceba i pebrot … Tomàquets i condiments",
+  "Mash the cheese": "Aixafar el formatge",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Aixafa el formatge en un bol amb una forquilla fins que quedi força llis, sense grumolls grossos. Si és humit, escorre’l abans amb un drap net.",
+  "Smooth, no big lumps": "Llis, sense grumolls grossos",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Incorpora-hi l’ou, el sucre, la vainilla i la sal, i després la major part de la farina. La massa ha de quedar tova i només una mica enganxosa.",
+  "Soft, a little sticky": "Tova, una mica enganxosa",
+  "Shape the syrniki": "Formar els syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Enfarina la post amb la resta de la farina. Amb les mans enfarinades, forma amb la massa coquetes d’uns 6 cm d’ample i 1,5 cm de gruix i passa-les lleugerament per farina.",
+  "All shaped, floured": "Totes formades i enfarinades",
+  "Fry the syrniki": "Fregir els syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Escalfa l’oli a la paella i fregeix els syrniki per tandes fins que estiguin daurats, uns 3 minuts per costat.",
+  "Golden brown on both sides": "Daurats per les dues bandes",
+  "Serve warm with sour cream and jam.": "Serveix-los calents amb crema agra i melmelada.",
+  "Mash the cheese … Shape the syrniki": "Aixafar el formatge … Formar els syrniki"
  },
  "amounts": {
   "L": "l",

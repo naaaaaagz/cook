@@ -826,7 +826,8 @@ window.I18N["hu"] = {
   "gazpacho": "Gazpacho",
   "stuffed_cabbage": "Töltött káposzta",
   "cevapi": "Ćevapi ajvarral",
-  "succotash": "Succotash (kukoricás limabab)"
+  "succotash": "Succotash (kukoricás limabab)",
+  "syrniki": "Szirnyiki"
  },
  "texts": {
   "Aluminium foil": "Alufólia",
@@ -4434,7 +4435,20 @@ window.I18N["hu"] = {
   "Tomatoes just soft": "A paradicsom épp megpuhult",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Szórd meg petrezselyemmel és a ropogós szalonnával, és melegen tálald.",
   "Crisp the bacon … Tomatoes and seasoning": "Pirítsd ropogósra a szalonnát … Paradicsom és fűszerezés",
-  "Onion and pepper … Tomatoes and seasoning": "Hagyma és paprika … Paradicsom és fűszerezés"
+  "Onion and pepper … Tomatoes and seasoning": "Hagyma és paprika … Paradicsom és fűszerezés",
+  "Mash the cheese": "Törd össze a túrót",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Egy tálban villával törd össze a túrót, amíg elég sima lesz, nagyobb csomók nélkül. Ha nedves, előbb nyomd ki egy tiszta konyharuhában.",
+  "Smooth, no big lumps": "Sima, nincsenek nagy csomók",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Keverd hozzá a tojást, a cukrot, a vaníliát és a sót, majd a liszt nagyobb részét. A tészta legyen puha és csak kicsit ragacsos.",
+  "Soft, a little sticky": "Puha, kicsit ragacsos",
+  "Shape the syrniki": "Formázd meg a szirnyikit",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Szórd meg a deszkát a maradék liszttel. Lisztes kézzel formázz a tésztából kb. 6 cm széles és 1,5 cm vastag pogácsákat, és forgasd meg őket enyhén lisztben.",
+  "All shaped, floured": "Mind megformázva, lisztezve",
+  "Fry the syrniki": "Süsd ki a szirnyikit",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Hevítsd fel az olajat a serpenyőben, és adagonként süsd aranybarnára a szirnyikit, oldalanként kb. 3 percig.",
+  "Golden brown on both sides": "Mindkét oldala aranybarna",
+  "Serve warm with sour cream and jam.": "Tálald melegen tejföllel és lekvárral.",
+  "Mash the cheese … Shape the syrniki": "Törd össze a túrót … Formázd meg a szirnyikit"
  },
  "amounts": {
   "L": "l",

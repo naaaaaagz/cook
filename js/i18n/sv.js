@@ -818,7 +818,8 @@ window.I18N["sv"] = {
   "swedish_meatballs": "Köttbullar",
   "stuffed_cabbage": "Kåldolmar",
   "cevapi": "Ćevapi med ajvar",
-  "succotash": "Succotash (majs med limabönor)"
+  "succotash": "Succotash (majs med limabönor)",
+  "syrniki": "Syrniki (kvargplättar)"
  },
  "texts": {
   "Aluminium foil": "Aluminiumfolie",
@@ -4426,7 +4427,20 @@ window.I18N["sv"] = {
   "Tomatoes just soft": "Tomater precis mjuka",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Strö över persilja och det krispiga baconet och servera varm.",
   "Crisp the bacon … Tomatoes and seasoning": "Rosta baconet … Tomater och kryddor",
-  "Onion and pepper … Tomatoes and seasoning": "Lök och paprika … Tomater och kryddor"
+  "Onion and pepper … Tomatoes and seasoning": "Lök och paprika … Tomater och kryddor",
+  "Mash the cheese": "Mosa osten",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Mosa osten i en skål med en gaffel tills den är ganska slät utan stora klumpar. Är den blöt, krama först ur den i en ren handduk.",
+  "Smooth, no big lumps": "Slät, inga stora klumpar",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Rör ner ägget, sockret, vaniljen och saltet och sedan det mesta av mjölet. Degen ska vara mjuk och bara lite kladdig.",
+  "Soft, a little sticky": "Mjuk, lite kladdig",
+  "Shape the syrniki": "Forma syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Strö resten av mjölet på brädan. Forma med mjöliga händer degen till små plättar, cirka 6 cm breda och 1,5 cm tjocka, och vänd dem lätt i mjöl.",
+  "All shaped, floured": "Alla formade och mjölade",
+  "Fry the syrniki": "Stek syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Hetta upp oljan i stekpannan och stek syrniki i omgångar tills de är gyllenbruna, cirka 3 minuter per sida.",
+  "Golden brown on both sides": "Gyllenbruna på båda sidor",
+  "Serve warm with sour cream and jam.": "Servera varma med gräddfil och sylt.",
+  "Mash the cheese … Shape the syrniki": "Mosa osten … Forma syrniki"
  },
  "amounts": {
   "L": "l",

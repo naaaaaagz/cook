@@ -827,7 +827,8 @@ window.I18N["ka"] = {
   "gazpacho": "გასპაჩო",
   "stuffed_cabbage": "კომბოსტოს ტოლმა",
   "cevapi": "ჩევაპი აივარით",
-  "succotash": "საქოთაში (სიმინდი ლიმა ლობიოთი)"
+  "succotash": "საქოთაში (სიმინდი ლიმა ლობიოთი)",
+  "syrniki": "სირნიკი (ხაჭოს ბლინები)"
  },
  "texts": {
   "Aluminium foil": "ალუმინის ფოლგა",
@@ -4435,7 +4436,20 @@ window.I18N["ka"] = {
   "Tomatoes just soft": "პომიდორი ახლახან დარბილებული",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "მოაყარეთ ოხრახუში და ხრაშუნა ბეკონი და მიართვით თბილი.",
   "Crisp the bacon … Tomatoes and seasoning": "ბეკონის მოშუშვა … პომიდორი და სანელებლები",
-  "Onion and pepper … Tomatoes and seasoning": "ხახვი და წიწაკა … პომიდორი და სანელებლები"
+  "Onion and pepper … Tomatoes and seasoning": "ხახვი და წიწაკა … პომიდორი და სანელებლები",
+  "Mash the cheese": "დაჭყლიტეთ ხაჭო",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "ჯამში ჩანგლით დაჭყლიტეთ ხაჭო, სანამ საკმაოდ გლუვი არ გახდება, დიდი გუნდების გარეშე. თუ ნოტიოა, ჯერ სუფთა ქსოვილში გამოწურეთ.",
+  "Smooth, no big lumps": "გლუვი, დიდი გუნდების გარეშე",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "შეურიეთ კვერცხი, შაქარი, ვანილი და მარილი, შემდეგ ფქვილის დიდი ნაწილი. ცომი უნდა იყოს რბილი და მხოლოდ ოდნავ წებოვანი.",
+  "Soft, a little sticky": "რბილი, ოდნავ წებოვანი",
+  "Shape the syrniki": "გამოძერწეთ სირნიკები",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "დაფას მოაყარეთ დარჩენილი ფქვილი. ფქვილიანი ხელებით ცომისგან გამოძერწეთ დაახლოებით 6 სმ სიგანის და 1,5 სმ სისქის ბლინები და მსუბუქად ამოავლეთ ფქვილში.",
+  "All shaped, floured": "ყველა გამოძერწილია, ფქვილში ამოვლებული",
+  "Fry the syrniki": "შეწვით სირნიკები",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "ტაფაზე გააცხელეთ ზეთი და სირნიკები ნაწილ-ნაწილ შეწვით ოქროსფრად, თითო მხარეს დაახლოებით 3 წუთი.",
+  "Golden brown on both sides": "ორივე მხრიდან ოქროსფერი",
+  "Serve warm with sour cream and jam.": "მიირთვით თბილი არაჟნითა და მურაბით.",
+  "Mash the cheese … Shape the syrniki": "დაჭყლიტეთ ხაჭო … გამოძერწეთ სირნიკები"
  },
  "amounts": {
   "g": "გ",

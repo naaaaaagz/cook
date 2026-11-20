@@ -818,7 +818,8 @@ window.I18N["is"] = {
   "swedish_meatballs": "Sænskar kjötbollur",
   "stuffed_cabbage": "Fylltar kálrúllur",
   "cevapi": "Ćevapi með ajvar",
-  "succotash": "Succotash (maís með límabaunum)"
+  "succotash": "Succotash (maís með límabaunum)",
+  "syrniki": "Syrniki (skyrpönnukökur)"
  },
  "texts": {
   "Aluminium foil": "Álpappír",
@@ -4426,7 +4427,20 @@ window.I18N["is"] = {
   "Tomatoes just soft": "Tómatar rétt mjúkir",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Stráðu steinselju og stökka beikoninu yfir og berðu fram heitt.",
   "Crisp the bacon … Tomatoes and seasoning": "Steiktu beikonið stökkt … Tómatar og krydd",
-  "Onion and pepper … Tomatoes and seasoning": "Laukur og paprika … Tómatar og krydd"
+  "Onion and pepper … Tomatoes and seasoning": "Laukur og paprika … Tómatar og krydd",
+  "Mash the cheese": "Stappaðu ostinn",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Stappaðu ostinn í skál með gaffli þar til hann er nokkuð sléttur, án stórra kekkja. Ef hann er blautur skaltu fyrst kreista hann í hreinu viskastykki.",
+  "Smooth, no big lumps": "Sléttur, engir stórir kekkir",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Hrærðu egginu, sykrinum, vanillunni og saltinu saman við og síðan mestöllu hveitinu. Deigið á að vera mjúkt og aðeins örlítið klístrað.",
+  "Soft, a little sticky": "Mjúkt, örlítið klístrað",
+  "Shape the syrniki": "Mótaðu syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Stráðu afganginum af hveitinu á brettið. Mótaðu deigið með hveitistráðum höndum í litlar kökur, um 6 cm breiðar og 1,5 cm þykkar, og veltu þeim létt upp úr hveiti.",
+  "All shaped, floured": "Allar mótaðar og hveitistráðar",
+  "Fry the syrniki": "Steiktu syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Hitaðu olíuna á pönnunni og steiktu syrniki í skömmtum þar til þær eru gullinbrúnar, um 3 mínútur á hvorri hlið.",
+  "Golden brown on both sides": "Gullinbrúnar á báðum hliðum",
+  "Serve warm with sour cream and jam.": "Berðu þær fram heitar með sýrðum rjóma og sultu.",
+  "Mash the cheese … Shape the syrniki": "Stappaðu ostinn … Mótaðu syrniki"
  },
  "amounts": {
   "L": "l",

@@ -819,7 +819,8 @@ window.I18N["vi"] = {
   "gazpacho": "Súp gazpacho",
   "stuffed_cabbage": "Bắp cải cuộn thịt",
   "cevapi": "Ćevapi với ajvar",
-  "succotash": "Succotash (ngô với đậu lima)"
+  "succotash": "Succotash (ngô với đậu lima)",
+  "syrniki": "Syrniki (bánh phô mai tươi chiên)"
  },
  "texts": {
   "Aluminium foil": "Giấy bạc",
@@ -4427,7 +4428,20 @@ window.I18N["vi"] = {
   "Tomatoes just soft": "Cà chua vừa mềm",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Rắc mùi tây và thịt xông khói giòn lên rồi dùng ấm.",
   "Crisp the bacon … Tomatoes and seasoning": "Rang thịt xông khói … Cà chua và gia vị",
-  "Onion and pepper … Tomatoes and seasoning": "Hành và ớt chuông … Cà chua và gia vị"
+  "Onion and pepper … Tomatoes and seasoning": "Hành và ớt chuông … Cà chua và gia vị",
+  "Mash the cheese": "Nghiền phô mai",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Dùng nĩa nghiền phô mai trong tô đến khi khá mịn, không còn cục lớn. Nếu phô mai ướt, hãy vắt ráo trong khăn sạch trước.",
+  "Smooth, no big lumps": "Mịn, không còn cục lớn",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Trộn trứng, đường, vani và muối vào, sau đó cho phần lớn bột mì. Bột phải mềm và chỉ hơi dính.",
+  "Soft, a little sticky": "Mềm, hơi dính",
+  "Shape the syrniki": "Nặn syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Rắc phần bột mì còn lại lên thớt. Xoa bột vào tay rồi nặn bột thành bánh dẹt rộng khoảng 6 cm, dày 1,5 cm và lăn nhẹ qua bột mì.",
+  "All shaped, floured": "Đã nặn xong, phủ bột",
+  "Fry the syrniki": "Rán syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Đun nóng dầu trong chảo và rán syrniki từng mẻ đến khi vàng nâu, mỗi mặt khoảng 3 phút.",
+  "Golden brown on both sides": "Vàng nâu cả hai mặt",
+  "Serve warm with sour cream and jam.": "Dùng nóng với kem chua và mứt.",
+  "Mash the cheese … Shape the syrniki": "Nghiền phô mai … Nặn syrniki"
  },
  "amounts": {
   "L": "l",

@@ -4822,5 +4822,24 @@ S|P4|P|Corn in|Stir in the corn and cook until hot and just tender.|action|mediu
 S|P5|P|Tomatoes and seasoning|Stir in the tomatoes, the salt and the pepper and cook just until the tomatoes soften.|action|medium|120|P4|Tomatoes just soft|salt; ground_black_pepper|pan, spatula|—
 S|F1|F|Serve|Sprinkle with the parsley and the crispy bacon and serve warm.|action|off|30 + 15 × servings|P5|Served|parsley|spoon, plates|—
 `
+  },
+  {
+    id: "syrniki", name: "Syrniki", image: "img/350/cottage_cheese.webp",
+    rows: `
+I|cottage_cheese|Tvorog or dry cottage cheese|img/350/cottage_cheese.webp|125|g|125|linear|—|drained
+I|egg|Egg|img/350/egg.webp|0.25|pcs|14|linear, rounded up|—|—
+I|sugar|Sugar|img/350/sugar.webp|12|g|12|linear|—|—
+I|vanilla|Vanilla extract|img/350/vanilla.webp|0.125|tsp|0.5|linear|—|—
+I|salt|Salt|img/350/salt.webp|0.125|tsp|0.7|linear|—|—
+I|flour|Flour (plus extra for dusting)|img/350/flour.webp|25|g|25|linear|—|—
+I|oil|Neutral oil|img/350/oil.webp|1|tbsp|13|linear|—|—
+I|sour_cream|Sour cream|img/350/sour_cream.webp|30|g|30|linear|—|—
+I|apricot_jam|Jam (any kind)|img/350/apricot_jam.webp|1|tbsp|20|linear|—|—
+S|K1|K|Mash the cheese|Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.|action|—|(60 + 30 × servings) × skill_factor|—|Smooth, no big lumps|cottage_cheese|bowl, fork|—
+S|K2|K|Mix the dough|Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.|action|—|120|K1|Soft, a little sticky|egg; sugar; vanilla; salt; flour|bowl, spoon|—
+S|K3|K|Shape the syrniki|Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.|action|—|(60 + 60 × servings) × skill_factor|K2|All shaped, floured|—|chopping_board, plates|—
+S|P1|P|Fry the syrniki|Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.|action|medium-low|300 + 120 × servings|K3|Golden brown on both sides|oil|pan, stovetop, spatula|—
+S|F1|F|Serve|Serve warm with sour cream and jam.|action|off|30 + 15 × servings|P1|Served|sour_cream; apricot_jam|spoon, plates|—
+`
   }
 ];

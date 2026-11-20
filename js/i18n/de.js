@@ -818,7 +818,8 @@ window.I18N["de"] = {
   "swedish_meatballs": "Schwedische Hackbällchen",
   "stuffed_cabbage": "Kohlrouladen",
   "cevapi": "Ćevapi mit Ajvar",
-  "succotash": "Succotash (Mais mit Limabohnen)"
+  "succotash": "Succotash (Mais mit Limabohnen)",
+  "syrniki": "Syrniki (Quarkpfannkuchen)"
  },
  "texts": {
   "Aluminium foil": "Alufolie",
@@ -4426,7 +4427,20 @@ window.I18N["de"] = {
   "Tomatoes just soft": "Tomaten gerade weich",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Mit Petersilie und dem knusprigen Speck bestreuen und warm servieren.",
   "Crisp the bacon … Tomatoes and seasoning": "Speck knusprig braten … Tomaten und Würzen",
-  "Onion and pepper … Tomatoes and seasoning": "Zwiebel und Paprika … Tomaten und Würzen"
+  "Onion and pepper … Tomatoes and seasoning": "Zwiebel und Paprika … Tomaten und Würzen",
+  "Mash the cheese": "Quark zerdrücken",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Zerdrücke den Quark in einer Schüssel mit einer Gabel, bis er ziemlich glatt ist und keine großen Klümpchen mehr hat. Ist er feucht, drücke ihn vorher in einem sauberen Tuch aus.",
+  "Smooth, no big lumps": "Glatt, keine großen Klümpchen",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Rühre das Ei, den Zucker, die Vanille und das Salz unter, dann den größten Teil des Mehls. Der Teig soll weich und nur leicht klebrig sein.",
+  "Soft, a little sticky": "Weich, leicht klebrig",
+  "Shape the syrniki": "Syrniki formen",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Bestäube das Brett mit dem restlichen Mehl. Forme mit bemehlten Händen aus dem Teig Taler von etwa 6 cm Breite und 1,5 cm Dicke und wende sie leicht in Mehl.",
+  "All shaped, floured": "Alle geformt, bemehlt",
+  "Fry the syrniki": "Syrniki braten",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Erhitze das Öl in der Pfanne und brate die Syrniki portionsweise goldbraun, etwa 3 Minuten pro Seite.",
+  "Golden brown on both sides": "Beidseitig goldbraun",
+  "Serve warm with sour cream and jam.": "Warm mit saurer Sahne und Marmelade servieren.",
+  "Mash the cheese … Shape the syrniki": "Quark zerdrücken … Syrniki formen"
  },
  "amounts": {
   "L": "l",

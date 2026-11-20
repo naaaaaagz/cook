@@ -826,7 +826,8 @@ window.I18N["th"] = {
   "gazpacho": "กัสปาโช",
   "stuffed_cabbage": "กะหล่ำปลีม้วนสอดไส้",
   "cevapi": "Ćevapi (กับอัยวาร์)",
-  "succotash": "Succotash (ข้าวโพดกับถั่วลิมา)"
+  "succotash": "Succotash (ข้าวโพดกับถั่วลิมา)",
+  "syrniki": "Syrniki (แพนเค้กชีสสด)"
  },
  "texts": {
   "Aluminium foil": "ฟอยล์อะลูมิเนียม",
@@ -4434,7 +4435,20 @@ window.I18N["th"] = {
   "Tomatoes just soft": "มะเขือเทศเพิ่งนุ่ม",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "โรยพาร์สลีย์และเบคอนกรอบแล้วเสิร์ฟอุ่นๆ",
   "Crisp the bacon … Tomatoes and seasoning": "เจียวเบคอน … มะเขือเทศและเครื่องปรุง",
-  "Onion and pepper … Tomatoes and seasoning": "หัวหอมและพริกหยวก … มะเขือเทศและเครื่องปรุง"
+  "Onion and pepper … Tomatoes and seasoning": "หัวหอมและพริกหยวก … มะเขือเทศและเครื่องปรุง",
+  "Mash the cheese": "บดชีส",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "บดชีสในชามด้วยส้อมจนค่อนข้างเนียน ไม่มีก้อนใหญ่ ถ้าชีสแฉะให้บีบน้ำออกด้วยผ้าสะอาดก่อน",
+  "Smooth, no big lumps": "เนียน ไม่มีก้อนใหญ่",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "ผสมไข่ น้ำตาล วานิลลา และเกลือ แล้วใส่แป้งส่วนใหญ่ลงไป แป้งควรนุ่มและเหนียวเพียงเล็กน้อย",
+  "Soft, a little sticky": "นุ่ม เหนียวเล็กน้อย",
+  "Shape the syrniki": "ปั้นซีร์นิกิ",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "โรยแป้งที่เหลือบนเขียง ใช้มือที่โรยแป้งปั้นโดเป็นแผ่นกลมกว้างประมาณ 6 ซม. หนา 1.5 ซม. แล้วคลุกแป้งบางๆ",
+  "All shaped, floured": "ปั้นครบ คลุกแป้งแล้ว",
+  "Fry the syrniki": "ทอดซีร์นิกิ",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "ตั้งน้ำมันในกระทะแล้วทอดซีร์นิกิทีละชุดจนเหลืองน้ำตาล ด้านละประมาณ 3 นาที",
+  "Golden brown on both sides": "เหลืองน้ำตาลทั้งสองด้าน",
+  "Serve warm with sour cream and jam.": "เสิร์ฟอุ่นๆ กับซาวร์ครีมและแยม",
+  "Mash the cheese … Shape the syrniki": "บดชีส … ปั้นซีร์นิกิ"
  },
  "amounts": {
   "g": "กรัม",

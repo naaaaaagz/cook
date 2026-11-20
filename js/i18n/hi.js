@@ -826,7 +826,8 @@ window.I18N["hi"] = {
   "gazpacho": "गास्पाचो",
   "stuffed_cabbage": "भरवाँ पत्तागोभी रोल",
   "cevapi": "Ćevapi (अयवार के साथ)",
-  "succotash": "Succotash (मक्का और लिमा बीन्स)"
+  "succotash": "Succotash (मक्का और लिमा बीन्स)",
+  "syrniki": "Syrniki (पनीर के पैनकेक)"
  },
  "texts": {
   "Aluminium foil": "एल्युमिनियम फ़ॉइल",
@@ -4434,7 +4435,20 @@ window.I18N["hi"] = {
   "Tomatoes just soft": "टमाटर बस नरम",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "पार्सले और कुरकुरा बेकन छिड़कें और गरम परोसें।",
   "Crisp the bacon … Tomatoes and seasoning": "बेकन भूनना … टमाटर और मसाला",
-  "Onion and pepper … Tomatoes and seasoning": "प्याज़ और शिमला मिर्च … टमाटर और मसाला"
+  "Onion and pepper … Tomatoes and seasoning": "प्याज़ और शिमला मिर्च … टमाटर और मसाला",
+  "Mash the cheese": "पनीर मसलें",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "एक कटोरे में काँटे से पनीर को तब तक मसलें जब तक वह काफ़ी चिकना न हो जाए और कोई बड़ी गाँठ न रहे। अगर गीला हो, तो पहले साफ़ कपड़े में निचोड़ लें।",
+  "Smooth, no big lumps": "चिकना, कोई बड़ी गाँठ नहीं",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "अंडा, चीनी, वनीला और नमक मिलाएँ, फिर ज़्यादातर मैदा। आटा नरम और बस थोड़ा चिपचिपा होना चाहिए।",
+  "Soft, a little sticky": "नरम, थोड़ा चिपचिपा",
+  "Shape the syrniki": "सिरनिकी का आकार दें",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "बचे मैदे को तख़्ते पर छिड़कें। मैदा लगे हाथों से आटे की लगभग 6 सेमी चौड़ी और 1.5 सेमी मोटी टिक्कियाँ बनाएँ और उन्हें हल्के से मैदे में लपेटें।",
+  "All shaped, floured": "सब तैयार, मैदा लगा",
+  "Fry the syrniki": "सिरनिकी तलें",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "पैन में तेल गरम करें और सिरनिकी को थोड़ी-थोड़ी करके सुनहरा भूरा होने तक तलें, हर तरफ़ लगभग 3 मिनट।",
+  "Golden brown on both sides": "दोनों तरफ़ सुनहरे भूरे",
+  "Serve warm with sour cream and jam.": "खट्टी क्रीम और जैम के साथ गरम परोसें।",
+  "Mash the cheese … Shape the syrniki": "पनीर मसलें … सिरनिकी का आकार दें"
  },
  "amounts": {
   "g": "ग्राम",

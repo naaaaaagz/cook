@@ -817,7 +817,8 @@ window.I18N["et"] = {
   "swedish_meatballs": "Rootsi lihapallid",
   "stuffed_cabbage": "Kapsarullid",
   "cevapi": "Ćevapi ajvariga",
-  "succotash": "Succotash (mais limaubadega)"
+  "succotash": "Succotash (mais limaubadega)",
+  "syrniki": "Sõrnikud (kohupiimakotletid)"
  },
  "texts": {
   "Aluminium foil": "Alumiiniumfoolium",
@@ -4425,7 +4426,20 @@ window.I18N["et"] = {
   "Tomatoes just soft": "Tomatid just pehmed",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Puista üle peterselli ja krõbeda peekoniga ning serveeri soojalt.",
   "Crisp the bacon … Tomatoes and seasoning": "Rösti peekon … Tomatid ja maitsestamine",
-  "Onion and pepper … Tomatoes and seasoning": "Sibul ja paprika … Tomatid ja maitsestamine"
+  "Onion and pepper … Tomatoes and seasoning": "Sibul ja paprika … Tomatid ja maitsestamine",
+  "Mash the cheese": "Purusta juust",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Purusta juust kausis kahvliga üsna ühtlaseks, ilma suurte tükkideta. Kui see on märg, pigista see enne puhtas lapis kuivemaks.",
+  "Smooth, no big lumps": "Ühtlane, suuri tükke pole",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Sega juurde muna, suhkur, vanill ja sool, seejärel suurem osa jahust. Tainas peab olema pehme ja vaid veidi kleepuv.",
+  "Soft, a little sticky": "Pehme, veidi kleepuv",
+  "Shape the syrniki": "Vormi sõrnikud",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Puista lõikelauale ülejäänud jahu. Vormi jahuste kätega taignast umbes 6 cm laiused ja 1,5 cm paksused kotletid ning veereta neid kergelt jahus.",
+  "All shaped, floured": "Kõik vormitud ja jahustatud",
+  "Fry the syrniki": "Prae sõrnikud",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Kuumuta õli pannil ja prae sõrnikud osade kaupa kuldpruuniks, umbes 3 minutit kummaltki poolt.",
+  "Golden brown on both sides": "Mõlemalt poolt kuldpruunid",
+  "Serve warm with sour cream and jam.": "Serveeri soojalt hapukoore ja moosiga.",
+  "Mash the cheese … Shape the syrniki": "Purusta juust … Vormi sõrnikud"
  },
  "amounts": {
   "L": "l",

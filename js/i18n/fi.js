@@ -818,7 +818,8 @@ window.I18N["fi"] = {
   "swedish_meatballs": "Ruotsalaiset lihapullat",
   "stuffed_cabbage": "Kaalikääryleet",
   "cevapi": "Ćevapi ja ajvar",
-  "succotash": "Succotash (maissia ja limapapuja)"
+  "succotash": "Succotash (maissia ja limapapuja)",
+  "syrniki": "Syrniki (rahkaletut)"
  },
  "texts": {
   "Aluminium foil": "Alumiinifolio",
@@ -4426,7 +4427,20 @@ window.I18N["fi"] = {
   "Tomatoes just soft": "Tomaatit juuri pehmenneet",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Ripottele päälle persiljaa ja rapea pekoni ja tarjoile lämpimänä.",
   "Crisp the bacon … Tomatoes and seasoning": "Paista pekoni rapeaksi … Tomaatit ja mausteet",
-  "Onion and pepper … Tomatoes and seasoning": "Sipuli ja paprika … Tomaatit ja mausteet"
+  "Onion and pepper … Tomatoes and seasoning": "Sipuli ja paprika … Tomaatit ja mausteet",
+  "Mash the cheese": "Survo juusto",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Survo juusto kulhossa haarukalla melko tasaiseksi, ilman isoja paakkuja. Jos se on märkää, purista se ensin puhtaassa liinassa.",
+  "Smooth, no big lumps": "Tasainen, ei isoja paakkuja",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Sekoita joukkoon muna, sokeri, vanilja ja suola ja sitten suurin osa jauhoista. Taikinan pitää olla pehmeää ja vain vähän tahmeaa.",
+  "Soft, a little sticky": "Pehmeä, vähän tahmea",
+  "Shape the syrniki": "Muotoile syrnikit",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Jauhota leikkuulauta lopuilla jauhoilla. Muotoile jauhotetuin käsin taikinasta noin 6 cm leveitä ja 1,5 cm paksuja kiekkoja ja kääntele ne kevyesti jauhoissa.",
+  "All shaped, floured": "Kaikki muotoiltu ja jauhotettu",
+  "Fry the syrniki": "Paista syrnikit",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Kuumenna öljy pannulla ja paista syrnikit erissä kullanruskeiksi, noin 3 minuuttia kummaltakin puolelta.",
+  "Golden brown on both sides": "Kullanruskeat molemmin puolin",
+  "Serve warm with sour cream and jam.": "Tarjoile lämpiminä smetanan ja hillon kanssa.",
+  "Mash the cheese … Shape the syrniki": "Survo juusto … Muotoile syrnikit"
  },
  "amounts": {
   "L": "l",

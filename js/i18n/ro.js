@@ -818,7 +818,8 @@ window.I18N["ro"] = {
   "swedish_meatballs": "Chiftele suedeze",
   "stuffed_cabbage": "Sarmale",
   "cevapi": "Ćevapi cu ajvar",
-  "succotash": "Succotash (porumb cu fasole lima)"
+  "succotash": "Succotash (porumb cu fasole lima)",
+  "syrniki": "Sîrniki (clătite cu brânză de vaci)"
  },
  "texts": {
   "Aluminium foil": "Folie de aluminiu",
@@ -4426,7 +4427,20 @@ window.I18N["ro"] = {
   "Tomatoes just soft": "Roșii abia înmuiate",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Presară pătrunjel și baconul crocant și servește cald.",
   "Crisp the bacon … Tomatoes and seasoning": "Rumenește baconul … Roșii și condimente",
-  "Onion and pepper … Tomatoes and seasoning": "Ceapă și ardei … Roșii și condimente"
+  "Onion and pepper … Tomatoes and seasoning": "Ceapă și ardei … Roșii și condimente",
+  "Mash the cheese": "Zdrobește brânza",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Zdrobește brânza într-un bol cu o furculiță până devine destul de netedă, fără cocoloașe mari. Dacă e umedă, stoarce-o mai întâi într-un ștergar curat.",
+  "Smooth, no big lumps": "Netedă, fără cocoloașe mari",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Amestecă oul, zahărul, vanilia și sarea, apoi cea mai mare parte din făină. Aluatul trebuie să fie moale și doar puțin lipicios.",
+  "Soft, a little sticky": "Moale, puțin lipicios",
+  "Shape the syrniki": "Formează sirnikii",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Presară tocătorul cu restul de făină. Cu mâinile înfăinate, formează din aluat turtițe de circa 6 cm lățime și 1,5 cm grosime și tăvălește-le ușor prin făină.",
+  "All shaped, floured": "Toate formate, înfăinate",
+  "Fry the syrniki": "Prăjește sirnikii",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Încinge uleiul în tigaie și prăjește sirnikii pe rând până devin aurii, circa 3 minute pe fiecare parte.",
+  "Golden brown on both sides": "Aurii pe ambele părți",
+  "Serve warm with sour cream and jam.": "Servește-i calzi cu smântână și dulceață.",
+  "Mash the cheese … Shape the syrniki": "Zdrobește brânza … Formează sirnikii"
  },
  "amounts": {
   "L": "l",

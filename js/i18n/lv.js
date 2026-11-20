@@ -819,7 +819,8 @@ window.I18N["lv"] = {
   "gazpacho": "Gaspačo",
   "stuffed_cabbage": "Kāpostu tītenīši",
   "cevapi": "Ćevapi ar ajvaru",
-  "succotash": "Succotash (kukurūza ar limas pupiņām)"
+  "succotash": "Succotash (kukurūza ar limas pupiņām)",
+  "syrniki": "Sirņiki (biezpiena plācenīši)"
  },
  "texts": {
   "Aluminium foil": "Alumīnija folija",
@@ -4427,7 +4428,20 @@ window.I18N["lv"] = {
   "Tomatoes just soft": "Tomāti tikko mīksti",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Pārkaisi ar pētersīļiem un kraukšķīgo bekonu un pasniedz siltu.",
   "Crisp the bacon … Tomatoes and seasoning": "Apgrauzdēt bekonu … Tomāti un garšošana",
-  "Onion and pepper … Tomatoes and seasoning": "Sīpols un paprika … Tomāti un garšošana"
+  "Onion and pepper … Tomatoes and seasoning": "Sīpols un paprika … Tomāti un garšošana",
+  "Mash the cheese": "Saspaidi biezpienu",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Bļodā ar dakšu saspaidi biezpienu, līdz tas ir diezgan gluds, bez lieliem kunkuļiem. Ja tas ir mitrs, vispirms izspied to tīrā drānā.",
+  "Smooth, no big lumps": "Gluds, bez lieliem kunkuļiem",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Iemaisi olu, cukuru, vaniļu un sāli, tad lielāko daļu miltu. Mīklai jābūt mīkstai un tikai nedaudz lipīgai.",
+  "Soft, a little sticky": "Mīksta, nedaudz lipīga",
+  "Shape the syrniki": "Izveido sirņikus",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Apkaisi dēlīti ar atlikušajiem miltiem. Ar miltainām rokām izveido no mīklas apmēram 6 cm platas un 1,5 cm biezas plācenīšus un viegli apviļā tos miltos.",
+  "All shaped, floured": "Visi izveidoti, apviļāti miltos",
+  "Fry the syrniki": "Cep sirņikus",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Pannā uzkarsē eļļu un cep sirņikus pa daļām zeltaini brūnus, apmēram 3 minūtes no katras puses.",
+  "Golden brown on both sides": "Zeltaini brūni no abām pusēm",
+  "Serve warm with sour cream and jam.": "Pasniedz siltus ar skābo krējumu un ievārījumu.",
+  "Mash the cheese … Shape the syrniki": "Saspaidi biezpienu … Izveido sirņikus"
  },
  "amounts": {
   "L": "l",

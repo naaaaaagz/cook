@@ -820,7 +820,8 @@ window.I18N["tr"] = {
   "gazpacho": "Gazpaço",
   "stuffed_cabbage": "Lahana sarması",
   "cevapi": "Ajvarlı ćevapi",
-  "succotash": "Succotash (lima fasulyeli mısır)"
+  "succotash": "Succotash (lima fasulyeli mısır)",
+  "syrniki": "Sırniki (lor peynirli pankek)"
  },
  "texts": {
   "Aluminium foil": "Alüminyum folyo",
@@ -4428,7 +4429,20 @@ window.I18N["tr"] = {
   "Tomatoes just soft": "Domatesler tam yumuşamış",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Maydanoz ve çıtır pastırma serpin ve sıcak servis edin.",
   "Crisp the bacon … Tomatoes and seasoning": "Pastırmayı kavurun … Domates ve baharat",
-  "Onion and pepper … Tomatoes and seasoning": "Soğan ve biber … Domates ve baharat"
+  "Onion and pepper … Tomatoes and seasoning": "Soğan ve biber … Domates ve baharat",
+  "Mash the cheese": "Peyniri ezin",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Peyniri bir kâsede çatalla oldukça pürüzsüz olana ve büyük topak kalmayana kadar ezin. Nemliyse önce temiz bir bezde suyunu sıkın.",
+  "Smooth, no big lumps": "Pürüzsüz, büyük topak yok",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Yumurtayı, şekeri, vanilyayı ve tuzu, ardından unun büyük kısmını karıştırın. Hamur yumuşak ve yalnızca biraz yapışkan olmalı.",
+  "Soft, a little sticky": "Yumuşak, biraz yapışkan",
+  "Shape the syrniki": "Sırnikileri şekillendirin",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Tahtaya kalan unu serpin. Unlu ellerle hamurdan yaklaşık 6 cm genişliğinde ve 1,5 cm kalınlığında küçük köfteler yapın ve hafifçe una bulayın.",
+  "All shaped, floured": "Hepsi şekillendi, unlandı",
+  "Fry the syrniki": "Sırnikileri kızartın",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Yağı tavada ısıtın ve sırnikileri parti parti, her yüzü yaklaşık 3 dakika, altın kahverengi olana kadar kızartın.",
+  "Golden brown on both sides": "İki yüzü de altın kahverengi",
+  "Serve warm with sour cream and jam.": "Ekşi krema ve reçelle sıcak servis yapın.",
+  "Mash the cheese … Shape the syrniki": "Peyniri ezin … Sırnikileri şekillendirin"
  },
  "amounts": {
   "L": "l",

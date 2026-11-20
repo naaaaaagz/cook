@@ -858,7 +858,8 @@ window.INGREDIENT_INFO = (function () {
     gazpacho: { starred: 0, category: "soup", cuisine: ['European'] },
     stuffed_cabbage: { starred: 0, category: "main", cuisine: ['European'] },
     cevapi: { starred: 0, category: "main", cuisine: ['European'] },
-    succotash: { starred: 0, category: "side", cuisine: ['American'] }
+    succotash: { starred: 0, category: "side", cuisine: ['American'] },
+    syrniki: { starred: 0, category: "dessert", cuisine: ['European'] }
   };
   window.RECIPES.forEach(function (r) {
     var m = META[r.id] || {};

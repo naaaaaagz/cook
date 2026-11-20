@@ -818,7 +818,8 @@ window.I18N["cs"] = {
   "swedish_meatballs": "Švédské masové kuličky",
   "stuffed_cabbage": "Plněné zelné závitky",
   "cevapi": "Ćevapi s ajvarem",
-  "succotash": "Succotash (kukuřice s fazolemi lima)"
+  "succotash": "Succotash (kukuřice s fazolemi lima)",
+  "syrniki": "Syrniky (tvarohové placičky)"
  },
  "texts": {
   "Aluminium foil": "Alobal",
@@ -4426,7 +4427,20 @@ window.I18N["cs"] = {
   "Tomatoes just soft": "Rajčata právě změklá",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Posypte petrželkou a křupavou slaninou a podávejte teplé.",
   "Crisp the bacon … Tomatoes and seasoning": "Opéct slaninu … Rajčata a koření",
-  "Onion and pepper … Tomatoes and seasoning": "Cibule a paprika … Rajčata a koření"
+  "Onion and pepper … Tomatoes and seasoning": "Cibule a paprika … Rajčata a koření",
+  "Mash the cheese": "Rozmačkejte tvaroh",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "V misce rozmačkejte tvaroh vidličkou, až bude docela hladký, bez velkých hrudek. Je-li vlhký, nejprve ho vymačkejte v čisté utěrce.",
+  "Smooth, no big lumps": "Hladký, bez velkých hrudek",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Vmíchejte vejce, cukr, vanilku a sůl, potom většinu mouky. Těsto má být měkké a jen trochu lepivé.",
+  "Soft, a little sticky": "Měkké, trochu lepivé",
+  "Shape the syrniki": "Vytvarujte syrniky",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Pomoučněte prkénko zbytkem mouky. Pomoučenýma rukama vytvarujte z těsta placičky asi 6 cm široké a 1,5 cm silné a lehce je obalte v mouce.",
+  "All shaped, floured": "Všechny vytvarované, obalené v mouce",
+  "Fry the syrniki": "Osmažte syrniky",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Na pánvi rozehřejte olej a smažte syrniky po dávkách dozlatova, asi 3 minuty z každé strany.",
+  "Golden brown on both sides": "Zlatohnědé z obou stran",
+  "Serve warm with sour cream and jam.": "Podávejte teplé se zakysanou smetanou a marmeládou.",
+  "Mash the cheese … Shape the syrniki": "Rozmačkejte tvaroh … Vytvarujte syrniky"
  },
  "amounts": {
   "L": "l",

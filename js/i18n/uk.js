@@ -827,7 +827,8 @@ window.I18N["uk"] = {
   "gazpacho": "Гаспачо",
   "stuffed_cabbage": "Голубці",
   "cevapi": "Чевапі з айваром",
-  "succotash": "Сукоташ (кукурудза з квасолею ліма)"
+  "succotash": "Сукоташ (кукурудза з квасолею ліма)",
+  "syrniki": "Сирники"
  },
  "texts": {
   "Aluminium foil": "Алюмінієва фольга",
@@ -4435,7 +4436,20 @@ window.I18N["uk"] = {
   "Tomatoes just soft": "Помідори щойно розм’якли",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Посипте петрушкою і хрустким беконом і подавайте теплим.",
   "Crisp the bacon … Tomatoes and seasoning": "Підсмажте бекон … Помідори і приправи",
-  "Onion and pepper … Tomatoes and seasoning": "Цибуля і перець … Помідори і приправи"
+  "Onion and pepper … Tomatoes and seasoning": "Цибуля і перець … Помідори і приправи",
+  "Mash the cheese": "Розімніть сир",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Розімніть сир у мисці виделкою до досить гладкого стану, без великих грудочок. Якщо він вологий, спершу відіжміть його в чистій тканині.",
+  "Smooth, no big lumps": "Гладкий, без великих грудочок",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Вмішайте яйце, цукор, ваніль і сіль, потім більшу частину борошна. Тісто має бути м’яким і лише трохи липким.",
+  "Soft, a little sticky": "М’яке, трохи липке",
+  "Shape the syrniki": "Сформуйте сирники",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Присипте дошку рештою борошна. Руками, присипаними борошном, сформуйте з тіста коржики завширшки близько 6 см і завтовшки 1,5 см та злегка обваляйте їх у борошні.",
+  "All shaped, floured": "Усі сформовані, обваляні в борошні",
+  "Fry the syrniki": "Обсмажте сирники",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Розігрійте олію на сковороді й обсмажуйте сирники партіями до золотисто-коричневого кольору, приблизно по 3 хвилини з кожного боку.",
+  "Golden brown on both sides": "Золотисті з обох боків",
+  "Serve warm with sour cream and jam.": "Подавайте теплими зі сметаною та варенням.",
+  "Mash the cheese … Shape the syrniki": "Розімніть сир … Сформуйте сирники"
  },
  "amounts": {
   "g": "г",

@@ -819,7 +819,8 @@ window.I18N["lt"] = {
   "gazpacho": "Gaspačas",
   "stuffed_cabbage": "Kopūstų balandėliai",
   "cevapi": "Ćevapi su ajvaru",
-  "succotash": "Succotash (kukurūzai su limos pupelėmis)"
+  "succotash": "Succotash (kukurūzai su limos pupelėmis)",
+  "syrniki": "Sirnikai (varškėčiai)"
  },
  "texts": {
   "Aluminium foil": "Aliuminio folija",
@@ -4427,7 +4428,20 @@ window.I18N["lt"] = {
   "Tomatoes just soft": "Pomidorai vos suminkštėję",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Pabarstykite petražolėmis ir traškia šonine ir patiekite šiltą.",
   "Crisp the bacon … Tomatoes and seasoning": "Apskrudinti šoninę … Pomidorai ir prieskoniai",
-  "Onion and pepper … Tomatoes and seasoning": "Svogūnas ir paprika … Pomidorai ir prieskoniai"
+  "Onion and pepper … Tomatoes and seasoning": "Svogūnas ir paprika … Pomidorai ir prieskoniai",
+  "Mash the cheese": "Sutrinkite varškę",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Dubenyje šakute sutrinkite varškę, kol ji taps gana vientisa, be didelių gumulėlių. Jei ji drėgna, pirmiausia nuspauskite ją švariame skudurėlyje.",
+  "Smooth, no big lumps": "Vientisa, be didelių gumulėlių",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Įmaišykite kiaušinį, cukrų, vanilę ir druską, tada didžiąją dalį miltų. Tešla turi būti minkšta ir tik šiek tiek lipni.",
+  "Soft, a little sticky": "Minkšta, šiek tiek lipni",
+  "Shape the syrniki": "Suformuokite sirnikus",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Lentelę pabarstykite likusiais miltais. Miltuotomis rankomis suformuokite iš tešlos maždaug 6 cm pločio ir 1,5 cm storio paplotėlius ir lengvai apvoliokite juos miltuose.",
+  "All shaped, floured": "Visi suformuoti, apvolioti miltuose",
+  "Fry the syrniki": "Iškepkite sirnikus",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Keptuvėje įkaitinkite aliejų ir kepkite sirnikus partijomis, kol taps auksiškai rudi, maždaug po 3 minutes iš kiekvienos pusės.",
+  "Golden brown on both sides": "Auksiškai rudi iš abiejų pusių",
+  "Serve warm with sour cream and jam.": "Patiekite šiltus su grietine ir uogiene.",
+  "Mash the cheese … Shape the syrniki": "Sutrinkite varškę … Suformuokite sirnikus"
  },
  "amounts": {
   "L": "l",

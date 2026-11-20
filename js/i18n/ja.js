@@ -826,7 +826,8 @@ window.I18N["ja"] = {
   "gazpacho": "ガスパチョ",
   "stuffed_cabbage": "ロールキャベツ",
   "cevapi": "チェヴァピ（アイヴァル添え）",
-  "succotash": "サコタッシュ（とうもろこしとライマ豆）"
+  "succotash": "サコタッシュ（とうもろこしとライマ豆）",
+  "syrniki": "シルニキ"
  },
  "texts": {
   "Aluminium foil": "アルミホイル",
@@ -4434,7 +4435,20 @@ window.I18N["ja"] = {
   "Tomatoes just soft": "トマトが少しやわらかい",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "パセリとカリカリのベーコンを散らし、温かいうちに出す。",
   "Crisp the bacon … Tomatoes and seasoning": "ベーコンを炒る … トマトと調味料",
-  "Onion and pepper … Tomatoes and seasoning": "玉ねぎとパプリカ … トマトと調味料"
+  "Onion and pepper … Tomatoes and seasoning": "玉ねぎとパプリカ … トマトと調味料",
+  "Mash the cheese": "チーズをつぶす",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "ボウルでチーズをフォークでつぶし、大きなかたまりがなく、かなりなめらかになるまで混ぜる。水分が多ければ、先に清潔な布で絞る。",
+  "Smooth, no big lumps": "なめらかで、大きなかたまりがない",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "卵、砂糖、バニラ、塩を混ぜ、次に小麦粉の大部分を加える。生地はやわらかく、少しだけべたつく程度にする。",
+  "Soft, a little sticky": "やわらかく、少しべたつく",
+  "Shape the syrniki": "シルニキを成形する",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "残りの小麦粉をまな板にふる。粉をつけた手で、生地を直径約6 cm、厚さ1.5 cmの円形にまとめ、軽く小麦粉をまぶす。",
+  "All shaped, floured": "すべて成形し、粉をまぶした",
+  "Fry the syrniki": "シルニキを焼く",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "フライパンに油を熱し、シルニキを数回に分けて、片面約3分ずつきつね色になるまで焼く。",
+  "Golden brown on both sides": "両面きつね色",
+  "Serve warm with sour cream and jam.": "サワークリームとジャムを添えて温かいうちに出す。",
+  "Mash the cheese … Shape the syrniki": "チーズをつぶす … シルニキを成形する"
  },
  "amounts": {
   "tsp": "小さじ#",

@@ -818,7 +818,8 @@ window.I18N["nl"] = {
   "swedish_meatballs": "Zweedse gehaktballetjes",
   "stuffed_cabbage": "Gevulde koolrolletjes",
   "cevapi": "Ćevapi met ajvar",
-  "succotash": "Succotash (mais met limabonen)"
+  "succotash": "Succotash (mais met limabonen)",
+  "syrniki": "Syrniki (kwarkpannenkoekjes)"
  },
  "texts": {
   "Aluminium foil": "Aluminiumfolie",
@@ -4426,7 +4427,20 @@ window.I18N["nl"] = {
   "Tomatoes just soft": "Tomaten net zacht",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "Bestrooi met peterselie en het knapperige spek en serveer warm.",
   "Crisp the bacon … Tomatoes and seasoning": "Spek uitbakken … Tomaten en kruiden",
-  "Onion and pepper … Tomatoes and seasoning": "Ui en paprika … Tomaten en kruiden"
+  "Onion and pepper … Tomatoes and seasoning": "Ui en paprika … Tomaten en kruiden",
+  "Mash the cheese": "Prak de kaas",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "Prak de kaas in een kom met een vork tot hij vrij glad is, zonder grote klontjes. Is hij nat, knijp hem dan eerst uit in een schone doek.",
+  "Smooth, no big lumps": "Glad, geen grote klontjes",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "Meng het ei, de suiker, de vanille en het zout erdoor, daarna het grootste deel van de bloem. Het deeg moet zacht en maar een beetje plakkerig zijn.",
+  "Soft, a little sticky": "Zacht, een beetje plakkerig",
+  "Shape the syrniki": "Vorm de syrniki",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "Bestuif de plank met de rest van de bloem. Vorm met bebloemde handen van het deeg schijfjes van ongeveer 6 cm breed en 1,5 cm dik en haal ze licht door de bloem.",
+  "All shaped, floured": "Allemaal gevormd, bebloemd",
+  "Fry the syrniki": "Bak de syrniki",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "Verhit de olie in de koekenpan en bak de syrniki in porties goudbruin, ongeveer 3 minuten per kant.",
+  "Golden brown on both sides": "Aan beide kanten goudbruin",
+  "Serve warm with sour cream and jam.": "Serveer warm met zure room en jam.",
+  "Mash the cheese … Shape the syrniki": "Prak de kaas … Vorm de syrniki"
  },
  "amounts": {
   "L": "l",

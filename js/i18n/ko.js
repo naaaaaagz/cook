@@ -826,7 +826,8 @@ window.I18N["ko"] = {
   "gazpacho": "가스파초",
   "stuffed_cabbage": "양배추 롤",
   "cevapi": "Ćevapi (아이바르 곁들임)",
-  "succotash": "Succotash (옥수수 리마콩 볶음)"
+  "succotash": "Succotash (옥수수 리마콩 볶음)",
+  "syrniki": "Syrniki (코티지 치즈 팬케이크)"
  },
  "texts": {
   "Aluminium foil": "쿠킹 포일",
@@ -4434,7 +4435,20 @@ window.I18N["ko"] = {
   "Tomatoes just soft": "토마토가 막 부드러워요",
   "Sprinkle with the parsley and the crispy bacon and serve warm.": "파슬리와 바삭한 베이컨을 뿌려 따뜻할 때 내세요.",
   "Crisp the bacon … Tomatoes and seasoning": "베이컨 굽기 … 토마토와 양념",
-  "Onion and pepper … Tomatoes and seasoning": "양파와 파프리카 … 토마토와 양념"
+  "Onion and pepper … Tomatoes and seasoning": "양파와 파프리카 … 토마토와 양념",
+  "Mash the cheese": "치즈 으깨기",
+  "Mash the cheese in a bowl with a fork until fairly smooth, with no big lumps. If it is wet, squeeze it in a clean cloth first.": "볼에 치즈를 넣고 포크로 큰 덩어리 없이 꽤 매끄러워질 때까지 으깨세요. 물기가 많으면 먼저 깨끗한 천에 짜 주세요.",
+  "Smooth, no big lumps": "매끄럽고 큰 덩어리가 없어요",
+  "Mix in the egg, the sugar, the vanilla and the salt, then most of the flour. The dough should be soft and only a little sticky.": "달걀, 설탕, 바닐라, 소금을 섞은 뒤 밀가루 대부분을 넣으세요. 반죽은 부드럽고 살짝만 끈적해야 해요.",
+  "Soft, a little sticky": "부드럽고 살짝 끈적해요",
+  "Shape the syrniki": "시르니키 빚기",
+  "Dust the board with the rest of the flour. With floured hands, shape the dough into patties about 6 cm wide and 1.5 cm thick and coat them lightly in flour.": "남은 밀가루를 도마에 뿌리세요. 밀가루 묻힌 손으로 반죽을 지름 약 6cm, 두께 1.5cm의 동그란 모양으로 빚고 밀가루를 살짝 묻히세요.",
+  "All shaped, floured": "모두 빚고 밀가루를 묻혔어요",
+  "Fry the syrniki": "시르니키 굽기",
+  "Heat the oil in the frying pan and fry the syrniki in batches until golden brown, about 3 minutes per side.": "팬에 기름을 두르고 시르니키를 여러 번에 나눠 한 면에 약 3분씩 황금빛 갈색이 될 때까지 구우세요.",
+  "Golden brown on both sides": "양면이 황금빛 갈색",
+  "Serve warm with sour cream and jam.": "사워크림과 잼을 곁들여 따뜻할 때 내세요.",
+  "Mash the cheese … Shape the syrniki": "치즈 으깨기 … 시르니키 빚기"
  },
  "amounts": {
   "tsp": "작은술",
