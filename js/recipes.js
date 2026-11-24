@@ -693,7 +693,7 @@ window.INGREDIENT_INFO = (function () {
     semolina_pudding: { starred: 1, category: 'dessert', cuisine: ['European'] },
     bibimbap: { starred: 1, category: 'main', cuisine: ['Asian'] },
     honey_tarragon_chicken: { starred: 1, category: 'main', kids: { opt_wine: 'alcohol_free' } },
-    caesar_salad: { starred: 1, category: 'main', cuisine: ['American'], kids: { opt_mayo: 'store' },
+    caesar_salad: { starred: 1, category: 'main', cuisine: ['Mexican'], kids: { opt_mayo: 'store' },
       rawEgg: function (c) { return c.opt_mayo === 'homemade'; } },
     breakfast_muffin: { starred: 1, category: 'main' },
     summer_salad: { starred: 1, category: 'side' },
@@ -813,7 +813,7 @@ window.INGREDIENT_INFO = (function () {
     mujadara: { starred: 0, category: "main", cuisine: ['Middle Eastern'] },
     chicken_shawarma: { starred: 0, category: "main", cuisine: ['Middle Eastern'] },
     kofta_kebabs: { starred: 0, category: "main", cuisine: ['Middle Eastern'] },
-    stuffed_peppers: { starred: 0, category: "main", cuisine: ['Greek'] },
+    stuffed_peppers: { starred: 0, category: "main" },
     moussaka: { starred: 0, category: "main", cuisine: ['Greek'] },
     souvlaki: { starred: 0, category: "main", cuisine: ['Greek'] },
     spanakopita: { starred: 0, category: "main", cuisine: ['Greek'] },
@@ -911,6 +911,16 @@ window.INGREDIENT_INFO = (function () {
     caesar_salad: 'salad', summer_salad: 'salad', burrata_salad: 'salad', greek_salad: 'salad', potato_salad: 'salad', tabbouleh: 'salad', gado_gado: 'salad',
     tzatziki: 'dip', homemade_mayonnaise: 'dip', hummus: 'dip', guacamole: 'dip', baba_ganoush: 'dip'
   };
+  // The former "Main" list, split by kind of dish. Each recipe is in exactly one section.
+  var MAIN_SECTIONS = {
+    pasta: 'spaghetti_carbonara spaghetti_bolognese lasagna pasta_with_tomato_sauce pasta_with_basil_pesto spaghetti_aglio_e_olio fettuccine_alfredo macaroni_and_cheese potato_gnocchi tuna_tomato_pasta spinach_ricotta_ravioli baked_ziti chow_mein yakisoba pad_thai mie_goreng pancit_bihon jiaozi turos_csusza bryndzove_halusky',
+    curry: 'chicken_curry butter_chicken chicken_tikka_masala chicken_biryani dal_tadka chana_masala rajma palak_paneer aloo_gobi keema_curry khichdi japanese_curry_rice thai_green_curry thai_red_curry',
+    stew: 'chilli_con_carne slow_cooked_beef beef_stew beef_stroganoff feijoada svickova chicken_paprikash lecso tokfozelek picadillo groundnut_stew chicken_tagine doro_wat chicken_yassa stuffed_cabbage chicken_adobo ratatouille jollof_rice jambalaya arroz_con_pollo mujadara mushroom_risotto vegetable_couscous mulgipuder',
+    meat: 'roast_chicken fried_chicken chicken_schnitzel baked_salmon meatloaf honey_tarragon_chicken marry_me_chicken garlic_butter_steak_bites swedish_meatballs cevapi souvlaki kofta_kebabs chicken_shawarma jerk_chicken teriyaki_chicken bulgogi chicken_satay',
+    stirfry: 'egg_fried_rice kimchi_fried_rice nasi_goreng stir_fried_vegetables mapo_tofu kung_pao_chicken beef_and_broccoli sweet_and_sour_pork tomato_and_egg_stir_fry pad_kra_pao bibimbap congee onigiri',
+    bake: 'margherita_pizza tacos birria_tacos quesadillas chicken_enchiladas chicken_fajitas beef_empanadas cheese_arepas burger grilled_cheese_sandwich falafel masala_dosa idli moussaka spanakopita burek zapiekanka shepherds_pie stuffed_peppers hortobagyi_palacsinta frittata bobotie imam_bayildi tozza'
+  };
+  Object.keys(MAIN_SECTIONS).forEach(function (s) { MAIN_SECTIONS[s].split(' ').forEach(function (k) { SECTION[k] = s; }); });
   // Italian, Greek and French are countries of the European group too.
   var EUROPEAN = ['Italian', 'Greek', 'French'];
   window.RECIPES.forEach(function (r) {

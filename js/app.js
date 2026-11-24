@@ -93,6 +93,12 @@
       fvNoRecipes: 'No recipe fits yet. Add a few more ingredients.',
       cat_soup: 'Soup',
       cat_main: 'Main',
+      cat_pasta: 'Pasta, noodles & dumplings',
+      cat_curry: 'Curries & dals',
+      cat_stew: 'Stews & one-pots',
+      cat_meat: 'Meat & fish',
+      cat_stirfry: 'Stir-fries & rice bowls',
+      cat_bake: 'Pies, wraps & bakes',
       cat_dessert: 'Dessert',
       cat_side: 'Side dish',
       cat_breakfast: 'Breakfast',
@@ -1757,7 +1763,7 @@
   }
 
   // ---------- Recipe list ----------
-  var CATEGORIES = ['breakfast', 'soup', 'salad', 'main', 'side', 'dip', 'dessert'];
+  var CATEGORIES = ['breakfast', 'soup', 'salad', 'pasta', 'curry', 'stew', 'meat', 'stirfry', 'bake', 'side', 'dip', 'dessert'];
   // Cuisine filters: regions, each with its countries that have 2 or more recipes,
   // shown as "Asian (Chinese · Japanese · …)".
   var CUISINE_GROUPS = [
