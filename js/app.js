@@ -24,7 +24,7 @@
       units: 'Units',
       metric: 'Metric',
       imperial: 'Imperial',
-      takes: 'Takes {x}',
+      takes: 'Takes about {x}',
       timesUp: "⏰ Time's up: {x}",
       perServingNote: 'per person',
       fatSat: 'Fat / Saturated',
@@ -107,6 +107,9 @@
       method_airfryer: 'Air fryer',
       method_slowcooker: 'Slow cooker',
       method_nocook: 'No-cook',
+      diff_1: 'Easy',
+      diff_2: 'Medium',
+      diff_3: 'Hard',
       favOnly: 'Favorites only',
       favAdd: 'Add to favorites',
       favAdded: 'Added to favorites',
@@ -323,8 +326,9 @@
       no: 'No',
       yes: 'Yes',
       jumpBottom: 'Jump to the bottom',
-      elapsed: 'Time',
+      elapsed: 'Time elapsed',
       timeLeft: 'Time left',
+      totalTime: 'Total time',
       startNow: 'Start now',
       stepsDone: '{d} of {n} steps done',
       mapView: 'Map view',
@@ -388,6 +392,18 @@
       bin: 'Bin',
       addToKitchen: 'Add to the kitchen',
       doFirst: 'Do this first!',
+      doNext: 'Do this next',
+      waitWithIt: 'Wait with it',
+      heat_low: 'Low heat',
+      heat_medium_low: 'Medium-low heat',
+      heat_medium: 'Medium heat',
+      heat_medium_high: 'Medium-high heat',
+      heat_high: 'High heat',
+      removeHeat: 'Remove from heat!',
+      pauseStep: 'Pause this step',
+      resumeStep: 'Continue this step',
+      noNeed: 'No need',
+      nudgeNow: 'Time to start: {x}',
       sink: 'Kitchen sink',
       fridge: 'Fridge',
       freezer: 'Freezer',
@@ -525,7 +541,7 @@
     });
   }
   function localizeBuilt(b) {
-    b.ingredients.forEach(function (i) {
+    b.ingredients.concat(b.skipped || []).forEach(function (i) {
       localizeObj(i, ['note']);
       if (!('_name' in i)) i._name = i.name;
       i.name = ingName(i.key || i.id, i._name);
@@ -570,7 +586,7 @@
     built: null,
     mapView: true, // map or list; map needs a saved layout
     favorites: [], // recipe ids; saved with the account
-    filters: { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false }, // fav: "Favorites only" (signed in)
+    filters: { fav: false, diet: [], cat: [], cuisine: [], method: [], level: [], voice: false }, // fav: "Favorites only" (signed in)
     search: '', // text in the recipe search box
     voice: [], // ingredient keys said (or typed) in the fridge panel
     picks: {}, // the options picked per recipe, shared by "Read instead", the recipe page and cooking
@@ -1661,7 +1677,7 @@
   on('btn-fav', 'click', function () { if (state.recipe) toggleFav(state.recipe); });
   // "Check all recipes": clears every filter and the search text.
   on('btn-fav-all', 'click', function () {
-    state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false };
+    state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], level: [], voice: false };
     state.search = '';
     if ($('recipe-search')) $('recipe-search').value = '';
     saveSession();
@@ -1790,6 +1806,20 @@
     return !stoveOrOven && !tools.some(function (t) { return HEAT_TOOLS.indexOf(t) >= 0; });
   }
   function methodOk(r, list) { return !list.length || list.some(function (m) { return methodOf(r, m); }); }
+  // Difficulty 1-3 (default options): more steps, more ingredients and more hands-on time make it harder.
+  var DIFF_EASY = 16, DIFF_HARD = 28;
+  function difficultyOf(r) {
+    var built = defaultBuild(r), seen = {};
+    built.ingredients.forEach(function (i) { seen[i.key || i.id] = true; });
+    var score = built.steps.length + Object.keys(seen).length * 0.5 + estimateMinutes(built.steps) / 10;
+    return score < DIFF_EASY ? 1 : score < DIFF_HARD ? 2 : 3;
+  }
+  // Difficulty on a card: three small dots, filled up to the level.
+  function blips(r) {
+    var n = difficultyOf(r), label = t('diff_' + n), dots = '';
+    for (var i = 1; i <= 3; i++) dots += '<i' + (i <= n ? ' class="on"' : '') + '></i>';
+    return '<span class="meta-line diff-line"><span class="blips" role="img" aria-label="' + esc(label) + '" title="' + esc(label) + '">' + dots + '</span></span>';
+  }
   var VEGETARIAN = ['vegan', 'veg', 'lacto', 'ovo', 'lactoOvo'];
   function defaultBuild(r) { return defaultBuilds[r.id] || (defaultBuilds[r.id] = r.build(defaultChoices(r))); }
   function dietOk(r, diets) {
@@ -1808,7 +1838,7 @@
   var defaultBuilds = {};
 
   function defaultChoices(r) {
-    var c = { adults: r.defaultServings || 2, kids: 0, mode: 'detailed' };
+    var c = { adults: r.defaultServings || 2, kids: 0, mode: 'detailed', skip: [] };
     r.options.forEach(function (o) {
       c[o.id] = o.choices.filter(function (ch) { return ch.isDefault; })[0].id;
     });
@@ -1823,7 +1853,7 @@
     if (!box) return;
     box.innerHTML = '';
     var rows = {};
-    ['diet', 'cat', 'cuisine', 'method'].forEach(function (g) {
+    ['diet', 'cat', 'cuisine', 'method', 'level'].forEach(function (g) {
       rows[g] = document.createElement('div');
       rows[g].className = 'filter-row filter-row-' + g;
       box.appendChild(rows[g]);
@@ -1879,6 +1909,7 @@
       text('cuisine', ')', 'filter-close');
     });
     METHODS.forEach(function (m, i) { if (i) text('method', '·'); word('method', m, t('method_' + m)); });
+    [1, 2, 3].forEach(function (n, i) { if (i) text('level', '·'); word('level', String(n), t('diff_' + n)); });
     // "Based on what you said": appears once something was said in the fridge panel.
     if (state.voice.length) {
       var row = document.createElement('div');
@@ -2003,6 +2034,7 @@
     var f = state.filters;
     return (!f.cat.length || f.cat.indexOf(r.category) >= 0) && (!f.fav || !signedIn() || isFav(r)) && dietOk(r, f.diet) &&
       (!f.cuisine.length || r.cuisine.some(function (c) { return f.cuisine.indexOf(c) >= 0; })) && methodOk(r, f.method) &&
+      (!f.level.length || f.level.indexOf(String(difficultyOf(r))) >= 0) &&
       (!(f.voice && state.voice.length) || voiceOk(r));
   }
 
@@ -2219,7 +2251,7 @@
           '<button class="btn-read-card" type="button" aria-label="' + ht('readInstead') + '" title="' + ht('readInstead') + '">' +
           "<svg class=\"book-icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2zM12 6.5v13\"/></svg>" + '</button>' +
           ratingHtml(r) + dietBadge(info) + '</span>' +
-          '<span class="meta-line time-line">⏱️ ' + esc(fmtMinutes(estimateMinutes(built.steps))) + '</span>' +
+          '<span class="meta-line time-line">⏱️ ' + esc(fmtMinutes(estimateMinutes(built.steps))) + '</span>' + blips(r) +
           '<span class="meta-line nutri-line">📊 ' + kcal5(n.kcal) + ' ' + ht('kcalUnit') + ' · ' +
           Math.round(n.carbs) + ' ' + esc(gramWord()) + ' ' + ht('carbsShort') + ' · ' + Math.round(n.protein) + ' ' + esc(gramWord()) + ' ' + ht('proteinShort') +
           '<small>' + esc(unitText(r, 'perServing')) + '</small></span>' +
@@ -2422,7 +2454,7 @@
   // number of cards in each (the last row may have one fewer).
   var EQ_MIN = 48, EQ_MAX = 96, EQ_GAP = 6;
   // Everyday table items every kitchen has; not worth listing as utensils.
-  var NOT_LISTED = ['plates', 'fork', 'knife', 'spoon'];
+  var NOT_LISTED = ['plates', 'fork', 'knife', 'spoon', 'pantry', 'bin'];
   function layoutEquipment() {
     var ul = $('det-equipment');
     if (!ul) return;
@@ -2502,19 +2534,20 @@
     $('ing-meta').textContent = t('ingredientsFor', { x: whoText(r, c) });
     var list = $('ing-list');
     list.innerHTML = '';
-    groupIngredients(built.ingredients).forEach(function (g) {
+    groupIngredients(built.ingredients.concat(built.skipped || [])).forEach(function (g) {
       var h = document.createElement('li');
       h.className = 'ing-group';
       h.textContent = t('ingCat_' + g.cat);
       list.appendChild(h);
       g.items.forEach(function (ing) {
         var li = document.createElement('li');
-        li.className = 'ing-card';
+        li.className = 'ing-card' + (ing.skipped ? ' is-skipped' : '');
         li.setAttribute('data-ing', ing.key || ing.id);
         li.innerHTML =
           ingImg(ing) +
-          '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(units(ing.note)) + '</span>' : '') + '</span>' +
-          '<span class="amount">' + esc(amount(ing.amount)) + '</span>' + shopControl(r, ing);
+          '<span class="name">' + esc(ing.name) + (ing.note ? '<span class="note">' + esc(units(ing.note)) + '</span>' : '') +
+          (ing.optional ? '<label class="no-need"><input type="checkbox" data-skip="' + esc(ing.id) + '"' + (ing.skipped ? ' checked' : '') + '> ' + ht('noNeed') + '</label>' : '') + '</span>' +
+          '<span class="amount">' + esc(amount(ing.amount)) + '</span>' + (ing.skipped ? '' : shopControl(r, ing));
         list.appendChild(li);
       });
     });
@@ -2586,6 +2619,17 @@
     });
     if ($('btn-shop-all')) $('btn-shop-all').disabled = !signedIn();
   }
+  // "No need": tick an optional ingredient off (or back on); the recipe, amounts and nutrition follow.
+  on('ing-list', 'change', function (e) {
+    var box = e.target.closest('[data-skip]');
+    if (!box || !state.choices) return;
+    var id = box.getAttribute('data-skip'), list = (state.choices.skip || []).filter(function (x) { return x !== id; });
+    if (box.checked) list.push(id);
+    state.choices.skip = list;
+    state.picks[state.recipe.id] = state.choices;
+    saveSession();
+    updateDetails();
+  });
   on('ing-list', 'click', function (e) {
     var b = e.target.closest('[data-shop]'), li = e.target.closest('[data-ing]');
     if (!b || !li || !state.built) return;
@@ -2626,8 +2670,20 @@
     var list = $('shop-list');
     if (!list) return;
     list.innerHTML = '';
-    shopping.forEach(function (item, i) {
+    // Items sit under a heading per recipe, in the order the recipes were first added.
+    var order = [], lastRecipe = null;
+    shopping.forEach(function (item) { if (order.indexOf(item.recipe) < 0) order.push(item.recipe); });
+    var grouped = [].concat.apply([], order.map(function (id) { return shopping.filter(function (x) { return x.recipe === id; }); }));
+    grouped.forEach(function (item) {
+      var i = shopping.indexOf(item);
       var r = window.RECIPES.filter(function (x) { return x.id === item.recipe; })[0];
+      if (item.recipe !== lastRecipe) {
+        lastRecipe = item.recipe;
+        var head = document.createElement('li');
+        head.className = 'shop-group';
+        head.textContent = r ? recipeName(r) : '';
+        list.appendChild(head);
+      }
       var li = document.createElement('li'), id = 'shop-check-' + i;
       li.className = 'shop-item' + (item.done ? ' is-done' : '');
       var qty = '';
@@ -2643,7 +2699,7 @@
       }
       li.innerHTML = '<input class="shop-check" id="' + id + '" type="checkbox"' + (item.done ? ' checked' : '') + '>' +
         '<label class="shop-text" for="' + id + '"><span class="shop-name">' + esc(ingName(item.key, L(item.name))) + '</span>' +
-        (r ? '<small>' + esc(recipeName(r)) + '</small>' : '') + '</label>' + qty +
+        '</label>' + qty +
         '<button class="shop-remove" type="button" aria-label="' + ht('shopRemove') + '">&times;</button>';
       li.querySelector('.shop-check').addEventListener('change', function (e) { item.done = e.target.checked; shopChanged(); });
       li.querySelector('.shop-remove').addEventListener('click', function () { shopping.splice(shopping.indexOf(item), 1); shopChanged(); });
@@ -2869,10 +2925,20 @@
     next.forEach(function (n) { most = Math.max(most, workLeft(n, memo)); });
     return (memo[id] = (stepById(id).duration || 0) + most);
   }
+  // A step the recipe says to hold back ("Wait with it"): it can be started any time,
+  // but it is shown softly until the steps it waits for are done.
+  function waitingStep(step) {
+    return !!(step.waitFor && step.waitFor.some(function (id) { return !isDone(id); }));
+  }
   function doFirstId() {
     var open = cook.slots.filter(function (id) { return !cook.started[id]; });
     if (open.length < 2) return null;
     var memo = {}, best = null;
+    open = open.filter(function (id) { return !waitingStep(stepById(id)); });
+    if (open.length < 2) return null;
+    // A recipe can name the step to start with (e.g. the toast for scrambled eggs).
+    var pref = state.recipe && state.recipe.first;
+    if (pref && open.indexOf(pref) >= 0) return pref;
     open.forEach(function (id) { if (best === null || workLeft(id, memo) > workLeft(best, memo)) best = id; });
     return best;
   }
@@ -2906,7 +2972,8 @@
     var byId = {};
     b.steps.forEach(function (s) { byId[s.id] = s; });
     cook = { steps: b.steps, byId: byId, ingredients: b.ingredients, done: new Set(), slots: [], status: {},
-      started: {}, els: {}, notifs: {}, t0: null, tipsShown: new Set(), view: null };
+      started: {}, stepPaused: {}, els: {}, notifs: {}, t0: null, tipsShown: new Set(), view: null,
+      total: scheduleSeconds(b.steps, function (s) { return passiveWait(s) ? 0 : s.duration; }) };
     $('cook-name').textContent = recipeName(state.recipe);
     $('cook-list').innerHTML = '';
     $('cook-map').innerHTML = '';
@@ -2996,6 +3063,7 @@
     var d = Date.now() - cook.pausedAt;
     cook.t0 += d;
     Object.keys(cook.started).forEach(function (id) { cook.started[id] += d; });
+    Object.keys(cook.stepPaused).forEach(function (id) { cook.stepPaused[id] += d; });
     cook.pausedAt = null;
     $('pause-overlay').hidden = true;
     tick();
@@ -3149,6 +3217,49 @@
     return '<li>' + ingImg(i) + '<span>' + esc(name) + '</span>' + (i.qty ? '<b>' + esc(amount(i.qty)) + '</b>' : '') + '</li>';
   }
 
+  // Stove heat from the sheet ("medium-low" ...) as a word; other heat cells (oven degrees, off) show nothing.
+  function heatKey(step) {
+    var m = String(step.heat || '').trim().toLowerCase().match(/^(low|medium|high)(?:-(low|high))?$/);
+    return m ? 'heat_' + m[1] + (m[2] ? '_' + m[2] : '') : null;
+  }
+  // A step that keeps something on the heat: pausing it must say "Remove from heat!"
+  function onHeat(step) { return !!heatKey(step) || !!step.overcook || /°C|grill/i.test(String(step.heat || '')); }
+  function heatBadge(step) {
+    var k = heatKey(step);
+    return k ? '<span class="heat-badge" data-heat="' + esc(k) + '">🔥 ' + ht(k) + '</span>' : '';
+  }
+
+  // Pause one step (click its moving picture); the others keep running. A step on the
+  // heat also shows a red "Remove from heat!".
+  function toggleStepPause(step) {
+    if (!cook || !cook.started[step.id] || cook.pausedAt) return;
+    var now = Date.now();
+    if (cook.stepPaused[step.id]) {
+      cook.started[step.id] += now - cook.stepPaused[step.id];
+      delete cook.stepPaused[step.id];
+    } else {
+      cook.stepPaused[step.id] = now;
+    }
+    updateCard(step, cardFor(step));
+    paintHeatAlerts();
+    tick();
+    saveSession();
+  }
+  function paintHeatAlerts() {
+    var box = $('heat-alerts');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'heat-alerts';
+      box.setAttribute('role', 'alert');
+      document.body.appendChild(box);
+    }
+    var ids = Object.keys(cook.stepPaused).filter(function (id) { return cook.started[id] && onHeat(stepById(id)); });
+    box.innerHTML = ids.map(function (id) {
+      return '<p data-step="' + esc(id) + '"><b>' + ht('removeHeat') + '</b> ' + esc(stepById(id).title) + '</p>';
+    }).join('');
+    box.hidden = !ids.length;
+  }
+
   function cardFor(step) {
     if (cook.els[step.id]) return cook.els[step.id];
     var el = document.createElement('article');
@@ -3169,6 +3280,7 @@
     el.innerHTML =
       '<div class="step-head">' +
         '<span class="area-badge"><span><img class="icon" alt="" src="' + AREAS[step.area].icon + '"></span>' + ht(step.area) + '</span>' +
+        heatBadge(step) +
         '<span class="step-tools">' + tools + '</span>' +
       '</div>' +
       '<h3>' + esc(step.title) + '</h3>' +
@@ -3176,6 +3288,7 @@
       (ings ? '<ul class="step-ings">' + ings + '</ul>' : '') +
       (EMPTY_DONE.test(String(step.doneWhen || '').trim()) ? '' : '<p class="done-when">' + ht('doneWhen') + esc(units(step.doneWhen)) + '</p>') +
       (step.overcook ? '<p class="overdo-note" role="alert">' + ht('dontOverdo') + '</p>' : '') +
+      (onHeat(step) ? '<p class="heat-alert" role="alert">' + ht('removeHeat') + '</p>' : '') +
       '<div class="step-foot">' +
         '<div class="ring">' +
           '<svg viewBox="0 0 92 92" aria-hidden="true"><circle class="ring-track" cx="46" cy="46" r="40"/>' +
@@ -3183,6 +3296,9 @@
           '<div class="ring-center">' +
             '<button class="btn-start" type="button">' + ht('start') + '<br>' + fmt(step.duration) + '</button>' +
             animHtml(step, 'ring-anim') +
+            '<button class="ring-pause" type="button" aria-label="' + ht('pauseStep') + '" title="' + ht('pauseStep') + '" hidden>' +
+              '<svg class="i-pause" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>' +
+              '<svg class="i-play" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8.5 5.5v13l10-6.5z" fill="currentColor"/></svg></button>' +
             '<span class="ring-time" hidden></span>' +
           '</div>' +
         '</div>' +
@@ -3195,9 +3311,11 @@
       e.currentTarget.hidden = true;
       el.querySelector('.ring-time').hidden = false;
       el.classList.add('is-running');
+      render();
       tick();
       saveSession();
     });
+    el.querySelector('.ring-pause').addEventListener('click', function () { toggleStepPause(step); });
     el.querySelector('.btn-done').addEventListener('click', function () { finishStep(step); });
     // Compact map cards (short screens) open and close by tapping the title.
     el.querySelector('h3').addEventListener('click', function () {
@@ -3216,12 +3334,22 @@
     el.querySelector('.btn-start').hidden = running;
     el.querySelector('.ring-time').hidden = !running;
     el.classList.toggle('is-running', running);
+    var paused = running && !!cook.stepPaused[step.id];
+    var pb = el.querySelector('.ring-pause');
+    pb.hidden = !running;
+    pb.setAttribute('aria-label', t(paused ? 'resumeStep' : 'pauseStep'));
+    pb.title = t(paused ? 'resumeStep' : 'pauseStep');
+    el.classList.toggle('step-paused', paused);
+    var n = cook.notifs[step.id];
+    if (n) n.classList.toggle('step-paused', paused);
   }
 
   function finishStep(step) {
     if (cook.status[step.id] !== 'active') return;
     cook.done.add(step.id);
     delete cook.started[step.id];
+    delete cook.stepPaused[step.id];
+    paintHeatAlerts();
     var el = cook.els[step.id];
     if (el) el.classList.remove('time-up', 'expanded');
     var r = refresh();
@@ -3273,12 +3401,14 @@
     var els = ids.map(function (id) {
       var s = stepById(id), el = cardFor(s);
       updateCard(s, el);
+      markWait(el, s);
       markFirst(el, id === first);
       return el;
     });
     if (map) {
       renderMap(ids.map(function (id) {
         var n = notifFor(stepById(id));
+        markWait(n, stepById(id));
         markFirst(n, id === first);
         return n;
       }));
@@ -3288,16 +3418,54 @@
     }
   }
 
-  function markFirst(el, on) {
-    var b = el.querySelector(':scope > .first-badge');
-    el.classList.toggle('is-first', on);
+  function markWait(el, step) {
+    var on = waitingStep(step) && !cook.started[step.id];
+    var b = el.querySelector(':scope > .wait-badge');
+    el.classList.toggle('is-waiting', on);
     if (on && !b) {
       b = document.createElement('span');
-      b.className = 'first-badge';
-      b.textContent = t('doFirst');
+      b.className = 'wait-badge';
+      b.textContent = t('waitWithIt');
       el.appendChild(b);
     } else if (!on && b) b.remove();
-    else if (b) b.textContent = t('doFirst');
+  }
+
+  // "Do this first!" on the step to start with. Once anything has been started (or
+  // done) the marker on the old step is gone and the best step now gets "Do this next",
+  // one second later, with a flash and a nudge.
+  function markFirst(el, on) {
+    var b = el.querySelector(':scope > .first-badge');
+    var started = cook.done.size > 0 || Object.keys(cook.started).length > 0;
+    var want = on ? (started ? 'doNext' : 'doFirst') : null;
+    el._wantKind = want;
+    if (b && b.getAttribute('data-kind') !== want) { b.remove(); b = null; }
+    if (!want) {
+      el.classList.remove('is-first');
+      clearTimeout(el._nextTimer);
+      el._nextTimer = null;
+      return;
+    }
+    if (b) { b.textContent = t(want); return; }
+    function add(nudge) {
+      var badge = document.createElement('span');
+      badge.className = 'first-badge' + (nudge ? ' nudge' : '');
+      badge.setAttribute('data-kind', want);
+      badge.textContent = t(want);
+      el.appendChild(badge);
+      el.classList.add('is-first');
+      if (nudge) {
+        el.classList.remove('flash');
+        void el.offsetWidth;
+        el.classList.add('flash');
+      }
+    }
+    if (want === 'doFirst') { add(false); return; }
+    el.classList.remove('is-first');
+    if (el._nextTimer) return;
+    el._nextTimer = setTimeout(function () {
+      el._nextTimer = null;
+      if (el._wantKind === 'doNext' && !el.querySelector(':scope > .first-badge')) add(true);
+    }, 1000);
   }
 
   // ---------- Map notifications ----------
@@ -3356,9 +3524,14 @@
       '<circle class="nr-track" cx="18" cy="18" r="16"/><circle class="nr-fill" cx="18" cy="18" r="16" ' +
       'stroke-dasharray="' + NOTIF_RING + '" stroke-dashoffset="0"/></svg>' +
       '<button class="notif-start" type="button" aria-label="' + ht('start') + '"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8.5 5.5v13l10-6.5z" fill="currentColor"/></svg></button>' +
-      animHtml(step, 'notif-anim') + '</span>' +
+      animHtml(step, 'notif-anim') +
+      '<button class="notif-pause" type="button" aria-label="' + ht('pauseStep') + '" title="' + ht('pauseStep') + '">' +
+      '<svg class="i-pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>' +
+      '<svg class="i-play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8.5 5.5v13l10-6.5z" fill="currentColor"/></svg></button></span>' +
       '<button class="notif-open" type="button"><span class="notif-title">' + esc(step.title) + (toolIcons ? ' <span class="notif-tools">' + toolIcons + '</span>' : '') + '</span>' +
-      '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span> · <span class="notif-hint">' + ht('tapInfo') + '</span></span></button>' +
+      '<span class="notif-meta"><span class="notif-time">' + fmt(step.duration) + '</span>' +
+      (heatKey(step) ? ' · <span class="notif-heat">' + ht(heatKey(step)) + '</span>' : '') +
+      ' · <span class="notif-hint">' + ht('tapInfo') + '</span></span></button>' +
       '<button class="notif-btn notif-done" type="button" aria-label="' + esc(doneLabel(step)) + '">✓</button>';
     n.querySelector('.notif-open').addEventListener('click', function () {
       if (popClosedBy === step.id) { popClosedBy = null; return; }
@@ -3370,6 +3543,7 @@
       n.classList.add('is-running');
     });
     n.querySelector('.notif-done').addEventListener('click', function () { finishStep(step); });
+    n.querySelector('.notif-pause').addEventListener('click', function () { toggleStepPause(step); });
     n.querySelector('.notif-start').hidden = !!cook.started[step.id];
     n.classList.toggle('is-running', !!cook.started[step.id]);
     cook.notifs[step.id] = n;
@@ -3594,12 +3768,16 @@
     if (!cook) return;
     var now = cook.pausedAt || Date.now(); // paused: the clocks stand still
     var left = scheduleSeconds(cook.steps, function (s) {
-      if (isDone(s.id)) return 0;
-      if (cook.started[s.id]) return Math.max(0, s.duration - (now - cook.started[s.id]) / 1000);
+      if (isDone(s.id) || passiveWait(s)) return 0;
+      if (cook.started[s.id]) return Math.max(0, s.duration - ((cook.stepPaused[s.id] || now) - cook.started[s.id]) / 1000);
       return s.duration;
     });
-    $('cook-left').textContent = fmt(left);
-    if (cook.t0) $('cook-clock').textContent = fmt((now - cook.t0) / 1000);
+    // Time left counts down from the total (hands-on time, like "Takes about") and never
+    // shows more than the work that is still open.
+    var elapsedSec = cook.t0 ? (now - cook.t0) / 1000 : 0;
+    $('cook-total').textContent = fmt(cook.total);
+    $('cook-left').textContent = fmt(Math.max(0, Math.min(left, cook.total - elapsedSec)));
+    if (cook.t0) $('cook-clock').textContent = fmt(elapsedSec);
   }
 
   function tick() {
@@ -3610,7 +3788,7 @@
       var el = cook.els[id];
       if (!el) return;
       var step = stepById(id);
-      var elapsed = ((cook.pausedAt || Date.now()) - cook.started[id]) / 1000;
+      var elapsed = ((cook.stepPaused[id] || cook.pausedAt || Date.now()) - cook.started[id]) / 1000;
       var left = step.duration - elapsed;
       var up = left <= 0;
       el.querySelector('.ring-time').innerHTML = (up ? '+' + fmt(-left) : fmt(left)) + '<small>' + (up ? ht('over') : ht('left')) + '</small>';
@@ -3634,6 +3812,7 @@
     // Something on the heat is past its time: the whole screen pulses red.
     document.body.classList.toggle('overdo', overdo);
     dueToast();
+    nudgeToast();
   }
 
   // ---------- "Time's up" pop-over ----------
@@ -3663,6 +3842,74 @@
     if (!dueTarget) { toast.hidden = true; return; }
     var step = stepById(dueTarget.getAttribute('data-step'));
     toast.textContent = t('timesUp', { x: step.title }) + (step.overcook ? ' · ' + t('dontOverdo') : '');
+    toast.hidden = false;
+  }
+
+  // A prompt to start a step while another one is nearly done (recipe "nudges": when step
+  // WHEN has LEFT seconds left, start step STEP, e.g. warm the beans with 4 minutes of salsa to go).
+  function descendants(id) {
+    var next = CookCore.graph(cook.steps).next, seen = {}, todo = [id];
+    while (todo.length) next[todo.pop()].forEach(function (n) { if (!seen[n]) { seen[n] = true; todo.push(n); } });
+    return seen;
+  }
+  function autoNudge() {
+    var NUDGE_LEFT = 240, NUDGE_MIN = 480, memo = {}, hit = null, bestChain = -1, now = Date.now();
+    var running = Object.keys(cook.started).filter(function (id) {
+      var r = stepById(id);
+      return !cook.stepPaused[id] && !isDone(id) && r.duration >= NUDGE_MIN && r.duration - (now - cook.started[id]) / 1000 <= NUDGE_LEFT;
+    });
+    if (!running.length) return null;
+    cook.slots.forEach(function (xid) {
+      var x = stepById(xid);
+      if (cook.started[xid] || cook.status[xid] !== 'active' || waitingStep(x)) return;
+      var dx = descendants(xid);
+      var related = running.some(function (rid) {
+        if (stepById(rid).thread === x.thread) return false;
+        var dr = descendants(rid);
+        return Object.keys(dx).some(function (k) { return dr[k]; });
+      });
+      var chain = workLeft(xid, memo);
+      if (related && chain > bestChain) { bestChain = chain; hit = { step: xid }; }
+    });
+    return hit;
+  }
+  function nudgeToast() {
+    var toast = $('nudge-toast');
+    if (!toast) {
+      toast = document.createElement('button');
+      toast.id = 'nudge-toast';
+      toast.type = 'button';
+      toast.hidden = true;
+      document.body.appendChild(toast);
+      toast.addEventListener('click', function () {
+        var id = toast.getAttribute('data-step'), step = id && cook.byId[id];
+        if (!step) return;
+        if (isMap()) { var n = cook.notifs[id]; if (n) openPop(step, n); }
+        else if (cook.els[id]) cook.els[id].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+    var hit = null;
+    ((state.recipe && state.recipe.nudges) || []).forEach(function (nd) {
+      if (hit || !cook.started[nd.when] || cook.stepPaused[nd.when] || cook.started[nd.step] || cook.status[nd.step] !== 'active') return;
+      var when = cook.byId[nd.when];
+      if (!when || !cook.byId[nd.step]) return;
+      var left = when.duration - (Date.now() - cook.started[nd.when]) / 1000;
+      if (left <= nd.left) hit = nd;
+    });
+    // Automatic version: a long step (8 minutes or more) is down to its last 4 minutes and another,
+    // unrelated-looking step that feeds into the same later step has not been started: start it now.
+    if (!hit && !cook.pausedAt) hit = autoNudge();
+    var say = null;
+    // Mid-step hints (e.g. "Flip the toast now!") show for a short while around their moment.
+    if (!hit) ((state.recipe && state.recipe.hints) || []).forEach(function (h) {
+      var st = cook.byId[h.step];
+      if (hit || !st || !cook.started[h.step] || cook.stepPaused[h.step]) return;
+      var share = (Date.now() - cook.started[h.step]) / 1000 / st.duration;
+      if (share >= h.at && share < h.at + 0.12) { hit = { step: h.step }; say = TX(h.say); }
+    });
+    if (!hit || cook.pausedAt) { toast.hidden = true; return; }
+    toast.setAttribute('data-step', hit.step);
+    toast.textContent = say || t('nudgeNow', { x: cook.byId[hit.step].title });
     toast.hidden = false;
   }
 
@@ -3887,6 +4134,7 @@
     c.kids = isPerson(r) && Number.isInteger(value.kids) ? clamp(value.kids, 0, 8) : 0;
     if (!c.adults && !c.kids) c.adults = 1;
     c.mode = value.mode === 'quick' ? 'quick' : 'detailed';
+    c.skip = Array.isArray(value.skip) ? value.skip.filter(function (id) { return typeof id === 'string' && /^[a-z0-9_]+$/.test(id); }).slice(0, 40) : [];
     r.options.forEach(function (o) {
       if (o.choices.some(function (ch) { return ch.id === value[o.id]; })) c[o.id] = value[o.id];
     });
@@ -3906,8 +4154,8 @@
     if (Array.isArray(value.favorites)) state.favorites = cleanFavorites(value.favorites);
     if (Array.isArray(value.voice)) state.voice = value.voice.filter(function (key) { return typeof key === 'string' && /^[a-z0-9_]+$/.test(key); }).slice(0, 500);
     if (value.filters && typeof value.filters === 'object') {
-      ['diet', 'cat', 'cuisine', 'method'].forEach(function (key) {
-        var allowed = key === 'diet' ? DIETS : key === 'cat' ? CATEGORIES : key === 'method' ? METHODS : [];
+      ['diet', 'cat', 'cuisine', 'method', 'level'].forEach(function (key) {
+        var allowed = key === 'diet' ? DIETS : key === 'cat' ? CATEGORIES : key === 'method' ? METHODS : key === 'level' ? ['1', '2', '3'] : [];
         if (key === 'cuisine') window.RECIPES.forEach(function (r) { allowed = allowed.concat(r.cuisine); });
         if (Array.isArray(value.filters[key])) state.filters[key] = value.filters[key].filter(function (x) { return allowed.indexOf(x) >= 0; }).slice(0, 1);
       });
@@ -3939,7 +4187,7 @@
   function cookingRecord() {
     if (!cook) return activeCookRecord;
     return { recipe: state.recipe.id, choices: clone(state.choices), steps: cook.steps.map(function (s) { return s.id; }),
-      done: Array.from(cook.done), started: cook.started, t0: cook.t0, celebrated: !!cook.celebrated,
+      done: Array.from(cook.done), started: cook.started, stepPaused: cook.stepPaused, t0: cook.t0, celebrated: !!cook.celebrated,
       tipsShown: Array.from(cook.tipsShown), pausedAt: cook.pausedAt || null,
       taken: cook.taken == null ? null : cook.taken, suggested: cook.suggested == null ? null : cook.suggested,
       historyId: cook.historyId || null };
@@ -3966,6 +4214,11 @@
     if (record.started && typeof record.started === 'object') ids.forEach(function (id) {
       var stamp = record.started[id];
       if (!cook.done.has(id) && Number.isFinite(stamp) && stamp > 0 && stamp <= now) cook.started[id] = stamp;
+    });
+    cook.stepPaused = {};
+    if (record.stepPaused && typeof record.stepPaused === 'object') Object.keys(cook.started).forEach(function (id) {
+      var stamp = record.stepPaused[id];
+      if (Number.isFinite(stamp) && stamp >= cook.started[id] && stamp <= now) cook.stepPaused[id] = stamp;
     });
     cook.t0 = Number.isFinite(record.t0) && record.t0 > 0 && record.t0 <= now ? record.t0 : null;
     cook.tipsShown = new Set((Array.isArray(record.tipsShown) ? record.tipsShown : []).filter(function (id) { return ids.indexOf(id) >= 0; }));
@@ -4042,7 +4295,7 @@
       resetStars();
       state.layout = clone(DEFAULT_LAYOUT); state.layoutSaved = false; state.layoutTouched = false;
       state.layoutWide = true; state.picks = {}; state.voice = []; state.search = '';
-      state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], voice: false };
+      state.filters = { fav: false, diet: [], cat: [], cuisine: [], method: [], level: [], voice: false };
       state.favorites = [];
       activeCookRecord = null;
       restoreSession(); setTheme('light'); setLang('en-US');

@@ -43,12 +43,12 @@ window.EQUIPMENT = {
   plates: { name: 'Plates', icon: null },
   salad_spinner: { name: 'Salad spinner or kitchen towel', icon: null },
   jar: { name: 'Jar with lid', icon: null },
-  panini_press: { name: 'Panini press (adjustable gap)', icon: null },
+  panini_press: { name: 'Panini press (adjustable gap)', icon: 'icons/panini-press.svg' },
   tray: { name: 'Baking tray', icon: 'icons/baking-tray.svg' },
   tall_container: { name: 'Tall, narrow container', icon: null },
   lidded_container: { name: 'Lidded container', icon: null },
   saucepan: { name: "Saucepan", icon: "icons/saucepan.svg" },
-  waffle_iron: { name: "Waffle iron", icon: null },
+  waffle_iron: { name: "Waffle iron", icon: "icons/waffle-iron.svg" },
   plastic_wrap: { name: "Cling film", icon: "icons/plastic-wrap.svg" },
   loaf_pan: { name: "Loaf pan", icon: "icons/loaf-pan.svg" },
   baking_dish: { name: "Baking dish", icon: null },
@@ -57,7 +57,7 @@ window.EQUIPMENT = {
   parchment_paper: { name: "Baking paper", icon: "icons/parchment-paper.svg" },
   rolling_pin: { name: "Rolling pin", icon: "icons/rolling-pin.svg" },
   meat_tenderizer: { name: "Meat mallet", icon: "icons/meat-tenderizer.svg" },
-  steamer: { name: "Steamer", icon: null },
+  steamer: { name: "Steamer", icon: "icons/steamer.svg" },
   wok: { name: "Wok or large frying pan", icon: "icons/pan.svg" },
   chopsticks: { name: "Chopsticks", icon: "icons/chopsticks.svg" },
   kitchen_scissors: { name: "Kitchen scissors", icon: "icons/kitchen-scissors.svg" },
@@ -1065,13 +1065,14 @@ window.INGREDIENT_INFO = (function () {
         g.duration += s.duration;
         g.doneWhen = s.doneWhen;
         g.overcook = g.overcook || s.overcook;
+        if (empty(g.heat) || g.heat === 'off') g.heat = s.heat;
         g.deps = g.deps.concat(outside);
         s.tools.forEach(function (t) { if (g.tools.indexOf(t) < 0) g.tools.push(t); });
         s.ings.forEach(function (i) { if (!g.ings.some(function (x) { return x.id === i.id; })) g.ings.push(i); });
       } else {
         g = { id: s.id, ids: [s.id], thread: s.thread, area: s.area, parts: [{ title: s.title, text: s.text }],
           duration: s.duration, deps: s.deps.slice(), tools: s.tools.slice(), ings: s.ings.slice(),
-          doneWhen: s.doneWhen, overcook: s.overcook, tip: s.tip };
+          doneWhen: s.doneWhen, overcook: s.overcook, tip: s.tip, heat: s.heat };
         groups.push(g);
         last[s.thread] = g;
       }
@@ -1105,7 +1106,7 @@ window.INGREDIENT_INFO = (function () {
       var vars = Object.assign({ servings: s, skill_factor: 1 }, def.vars ? def.vars(c) : {});
       var chosen = options.map(function (o) { return c[o.id]; });
 
-      var ingredients = rows.I.filter(function (r) { return condOk(r[7], c); }).map(function (r) {
+      var allIngredients = rows.I.filter(function (r) { return condOk(r[7], c); }).map(function (r) {
         var qty = Number(r[3]), unit = r[4], g = Number(r[5]), scaling = r[6].toLowerCase();
         var mult = s;
         if (/per muffin/.test(scaling)) mult = vars.muffins;
@@ -1129,10 +1130,29 @@ window.INGREDIENT_INFO = (function () {
         if (!photo) item.noImage = true;
         return item;
       });
+      // Optional ingredients can be ticked off with "No need": the recipe's own list (def.optional)
+      // plus anything that only turns up in a serving step that lists two or more things
+      // (toppings, garnishes). Skipped ones leave the steps, the amounts and the nutrition.
+      var rawSteps = rows.S.filter(function (r) { return condOk(r[11], c); });
+      var tokensOf = function (r) { return (empty(r[9]) ? [] : r[9].split(/[;,/+]/)).map(function (tok) { return (tok.trim().match(/^[a-z_]+/) || [''])[0]; }); };
+      var uses = {};
+      rawSteps.forEach(function (r) { tokensOf(r).forEach(function (id) { uses[id] = (uses[id] || 0) + 1; }); });
+      var optionalIds = (def.optional || []).slice();
+      rawSteps.forEach(function (r) {
+        var ids = tokensOf(r).filter(function (id, at, all) { return id && all.indexOf(id) === at && allIngredients.some(function (i) { return i.id === id; }); });
+        if (/^(serve|garnish|top|finish)\b/i.test(r[2]) && ids.length >= 2) ids.forEach(function (id) { if (uses[id] === 1 && optionalIds.indexOf(id) < 0) optionalIds.push(id); });
+      });
+      var skip = Array.isArray(c.skip) ? c.skip : [];
+      var skipped = [];
+      var ingredients = allIngredients.filter(function (i) {
+        i.optional = optionalIds.indexOf(i.id) >= 0;
+        if (i.optional && skip.indexOf(i.id) >= 0) { i.skipped = true; skipped.push(i); return false; }
+        return true;
+      });
       var byId = {};
       ingredients.forEach(function (i) { byId[i.id] = i; });
 
-      var raw = rows.S.filter(function (r) { return condOk(r[11], c); });
+      var raw = rawSteps;
       var ids = raw.map(function (r) { return r[0]; });
       var mentions = {};
       var steps = raw.map(function (r) {
@@ -1144,6 +1164,7 @@ window.INGREDIENT_INFO = (function () {
         st.deps = empty(r[7]) ? [] : r[7].split(/,\s*/).filter(function (d) { return ids.indexOf(d) >= 0; });
         st.tools = st.equipment.filter(function (e) { return window.EQUIPMENT[e] && NOT_TOOLS.indexOf(e) < 0; });
         st.overcook = st.kind === 'wait' && !empty(st.heat) && st.heat !== 'off';
+        if (def.waitFor && def.waitFor[st.id]) st.waitFor = def.waitFor[st.id].filter(function (d) { return ids.indexOf(d) >= 0; });
         st.ings = [];
         (empty(r[9]) ? [] : r[9].split(/[;,/+]/)).forEach(function (tok) {
           var id = (tok.trim().match(/^[a-z_]+/) || [''])[0];
@@ -1165,13 +1186,13 @@ window.INGREDIENT_INFO = (function () {
         });
       });
 
-      return { servings: s, ingredients: ingredients, steps: c.mode === 'quick' ? combine(steps) : steps };
+      return { servings: s, ingredients: ingredients, skipped: skipped, steps: c.mode === 'quick' ? combine(steps) : steps };
     }
 
     return {
       id: def.id, name: def.name, image: def.image, unit: def.unit || 'person',
       maxServings: def.maxServings || 8, defaultServings: def.defaultServings || 2,
-      options: options, build: build
+      options: options, build: build, nudges: def.nudges || [], hints: def.hints || [], first: def.first || null
     };
   }
 })();

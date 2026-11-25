@@ -56,23 +56,23 @@ I|lime|Lime wedge|img/350/lime.webp|1|pcs|10|linear|—|wedge
 S|K1|K|Dice the onion|Peel the onion and dice it.|action|—|(60 + 60 × servings) × skill_factor|—|Small even dice|onion|chef_knife, chopping_board|—
 S|K2|K|Dice the peppers|Remove the seeds and dice the red bell peppers.|action|—|(60 + 60 × servings) × skill_factor|—|Small even dice|red_bell_pepper|chef_knife, chopping_board|—
 S|K3|K|Chop the garlic|Peel and finely chop the garlic.|action|—|(30 + 20 × servings) × skill_factor|—|Finely chopped|garlic|chef_knife, chopping_board|—
-S|P1|P|Onion and pepper in|Heat the oil in the large pot on medium, add the onion and the peppers.|action|medium|30|K1, K2|All in the pot|oil; onion_diced; pepper_diced|cooking_pot, stovetop, spatula|—
+S|P1|P|Add the onion and pepper|Heat the oil in the large pot on medium, add the onion and the peppers.|action|medium|30|K1, K2|All in the pot|oil; onion_diced; pepper_diced|cooking_pot, stovetop, spatula|—
 S|P2|P|Soften the vegetables|Cook on medium until soft, stirring now and then.|wait|medium|360 (doc: 6 to 8 min incl. the garlic minute)|P1|Soft and glossy|—|cooking_pot, spatula|—
 S|K4|K|Chop the tomatoes|Chop the fresh tomatoes.|action|—|(30 + 45 × servings) × skill_factor|—|Chopped|tomato|chef_knife, chopping_board|—
-S|P3|P|Garlic in|Add the garlic for the last minute, stirring.|action|medium|60|P2, K3|Fragrant|garlic_chopped|cooking_pot, spatula|—
-S|P4|P|Spices in|Add salt, black pepper, paprika, chili powder, cumin and cinnamon. Stir them in the oil for 30 to 60 s, they burn easily.|action|medium|45 (doc: 30 to 60 s)|P3|Fragrant, not burnt|salt; ground_black_pepper; paprika_powder; chili_powder; cumin; cinnamon|cooking_pot, spatula|—
-S|P5|P|Meat in|Add the ground meat and break it up with the spatula.|action|medium|60|P4|Broken up, spread out|ground_pork / ground_beef|cooking_pot, spatula|—
+S|P3|P|Add the garlic|Add the garlic for the last minute, stirring.|action|medium|60|P2, K3|Fragrant|garlic_chopped|cooking_pot, spatula|—
+S|P4|P|Add the spices|Add salt, black pepper, paprika, chili powder, cumin and cinnamon. Stir them in the oil for 30 to 60 s, they burn easily.|action|medium|45 (doc: 30 to 60 s)|P3|Fragrant, not burnt|salt; ground_black_pepper; paprika_powder; chili_powder; cumin; cinnamon|cooking_pot, spatula|—
+S|P5|P|Add the meat|Add the ground meat and break it up with the spatula.|action|medium|60|P4|Broken up, spread out|ground_pork / ground_beef|cooking_pot, spatula|—
 S|P6|P|Brown the meat|Leave it undisturbed for 2 to 3 min between stirs so it browns, breaking it up each time.|wait|medium|420 (doc: 6 to 8 min)|P5|No pink left, browned bits|—|cooking_pot, spatula|—
 S|P7|P|Deglaze|Pour in the beer and scrape the bottom of the pot.|action|medium|30|P6|Bottom scraped clean|beer|cooking_pot, spatula|—
 S|P8|P|Let it cook|Let it bubble for a couple of minutes.|wait|medium|120|P7|Beer mostly evaporated|—|cooking_pot|—
-S|P9|P|Tomato paste|Add the tomato paste and fry it for 1 minute, stirring.|action|medium|60|P8|Darker, fragrant|tomato_paste|cooking_pot, spatula|—
-S|P10|P|Tomatoes in|Add the chopped tomatoes and keep stirring.|action|medium|30|P9, K4|Mixed in|tomato_chopped|cooking_pot, spatula|—
-S|P11|P|Chocolate, oregano, liquid|Add the dark chocolate chunks, the oregano and the stock (or water). Stir.|action|medium|45|P10|Chocolate melted in|dark_chocolate; oregano; beef_stock / water|cooking_pot, spatula|—
+S|P9|P|Fry the tomato paste|Add the tomato paste and fry it for 1 minute, stirring.|action|medium|60|P8|Darker, fragrant|tomato_paste|cooking_pot, spatula|—
+S|P10|P|Add the tomatoes|Add the chopped tomatoes and keep stirring.|action|medium|30|P9, K4|Mixed in|tomato_chopped|cooking_pot, spatula|—
+S|P11|P|Add the chocolate, oregano and stock|Add the dark chocolate chunks, the oregano and the stock (or water). Stir.|action|medium|45|P10|Chocolate melted in|dark_chocolate; oregano; beef_stock / water|cooking_pot, spatula|—
 S|P12|P|Bring to a boil|Let it come to a boil.|wait|medium|300|P11|Bubbling all over|—|cooking_pot|—
 S|P13|P|Simmer, covered|Turn the heat down, cover and simmer. Stir every 10 minutes.|wait|low|1800 (first part of the doc's 45 to 60 min)|P12|30 min passed|—|cooking_pot, spatula|—
 S|K5|K|Drain beans and corn|Drain and rinse the kidney beans; drain the corn.|action|—|60|—|Drained|kidney_beans; corn|colander|—
 S|S1|S|Grate the cheddar|Grate the cheddar for serving.|action|—|(20 + 20 × servings) × skill_factor|—|Grated|cheddar|cheese_grater|—
-S|P14|P|Beans and corn in|Stir in the beans and corn.|action|low|30|P13, K5|Mixed in|beans_corn_ready|cooking_pot, spatula|—
+S|P14|P|Add the beans and corn|Stir in the beans and corn.|action|low|30|P13, K5|Mixed in|beans_corn_ready|cooking_pot, spatula|—
 S|P15|P|Finish simmering|Simmer for the last stretch. Take the lid off if it needs thickening. Stir every 10 minutes.|wait|low|900 (doc: last 15 to 20 min)|P14|Thick, beans hot|—|cooking_pot, spatula|—
 S|R1|R|Cook the rice|Wash the rice until the water runs clear. Cook it in 1.5× its volume of lightly salted water; when the water level meets the rice, cover on the lowest heat for 10 to 12 min, then rest covered 10 to 15 min.|wait|low|1500|—|Fluffy, water absorbed|white_rice|cooking_pot, stovetop|opt_serve = rice
 S|P16|P|Taste and adjust|Taste. Adjust salt and chili. Still missing something? A squeeze of lime juice.|check|low|60|P15|Tastes right|salt; chili_powder; lime|cooking_pot, spoon|—
@@ -97,13 +97,13 @@ I|cinnamon|Ground cinnamon|img/350/cinnamon.webp|0.125|tsp|0.3|linear|—|—
 I|cardamom|Green cardamom pods|img/350/cardamom.webp|1.75|pcs|0.4|linear, rounded up|opt_spice = with|seeds only, crushed
 I|rosewater|Rosewater|img/350/rosewater.webp|0.125|tsp|0.6|linear|opt_spice = with|—
 I|cocoa_powder|Cocoa powder|img/350/cocoa_powder.webp|1|tsp|2.5|linear|—|—
-S|M1|M|Milk on the stove|Pour the milk into a big pot and put it on the stove.|action|medium|30 (heat level is an assumption)|—|Pot on the burner|milk|cooking_pot, stovetop|—
+S|M1|M|Heat the milk on the stove|Pour the milk into a big pot and put it on the stove.|action|medium|30 (heat level is an assumption)|—|Pot on the burner|milk|cooking_pot, stovetop|—
 S|K1|K|Crack the cardamom|Break the pods, throw away the husks and crush the seeds in the mortar (or use ground cardamom).|action|—|(60 + 20 × servings) × skill_factor|—|Seeds crushed|cardamom|mortar_and_pestle|opt_spice = with
-S|M2|M|Spices in|Add the cinnamon and the crushed cardamom seeds to the milk.|action|medium|15|M1, K1|Spices in the milk|cinnamon; cardamom_crushed|cooking_pot|—
+S|M2|M|Add the spices|Add the cinnamon and the crushed cardamom seeds to the milk.|action|medium|15|M1, K1|Spices in the milk|cinnamon; cardamom_crushed|cooking_pot|—
 S|K2|K|Portion semolina and sugar|Measure the semolina and the sugar (or erythritol). Per 1 dl milk: 1 tbsp semolina, ½ tbsp sugar (or ⅔ tbsp erythritol).|action|—|30 + 15 × servings|—|Both measured|semolina; sugar / erythritol|spoon|—
 S|M3|M|Heat until steaming|Let the milk heat up until it steams.|wait|medium|240 + 60 × servings|M2|Steam rises from the milk|—|cooking_pot|—
 S|M4|M|Stir constantly|Once it steams, stir constantly until it starts to rise.|action|medium|120|M3|Milk starts to rise|—|cooking_pot, wooden_spoon|—
-S|M5|M|Semolina and sugar in|Pour in the semolina slowly, then the sugar, stirring all the time. Turn the heat to low.|action|low|45|M4, K2|No lumps|dry_ready|cooking_pot, wooden_spoon|—
+S|M5|M|Add the semolina and sugar|Pour in the semolina slowly, then the sugar, stirring all the time. Turn the heat to low.|action|low|45|M4, K2|No lumps|dry_ready|cooking_pot, wooden_spoon|—
 S|M6|M|Cook on low|Keep stirring on low heat.|action|low|180 (doc: 2 to 4 min)|M5|Thick and smooth|—|cooking_pot, wooden_spoon|—
 S|M7|M|Heat off, rosewater|Turn off the heat. Add a little rosewater near the end and keep stirring.|action|off|30|M6|Rosewater stirred in|rosewater|cooking_pot, wooden_spoon|—
 S|F1|F|Plate while hot|While it is still hot and runny, pour it onto flat plates. Once it cools in the pot it sets and won't spread.|action|—|30 + 15 × servings|M7|Spread on the plates|pudding_ready|plates, wooden_spoon|—
@@ -155,7 +155,7 @@ S|M2|M|Marinate in the fridge|Leave it covered in the fridge.|wait|—|1800 (doc
 S|R1|R|Measure rice and water|Measure the rice in cups. In a bowl, mix 1.5× its volume of water with the salt.|action|—|60|—|Measured|jasmine_rice / white_rice; water_rice; salt_rice|bowl|—
 S|R2|R|Wash the rice|Wash the rice in lukewarm water in a sieve, stirring slowly, until the water runs clear. Let it drain a little.|action|—|120|R1|Water runs clear|—|sieve|—
 S|R3|R|Toast the rice|Heat the oil in a pan and toast the rice, stirring slowly, until it smells fragrant. Don't really fry it.|action|medium|120|R2|Fragrant|oil_rice|pan, stovetop, spatula|—
-S|R4|R|Water in|Add the salted water and stir once, very slowly.|action|medium|15|R3|Water in|water_rice|pan|—
+S|R4|R|Add the water|Add the salted water and stir once, very slowly.|action|medium|15|R3|Water in|water_rice|pan|—
 S|R5|R|Boil down|Let it boil until the water level roughly matches the rice level.|wait|medium|300|R4|Water level at the rice|—|pan|—
 S|R6|R|Cover, lowest heat|Set the lowest heat and cover. Don't stir or lift the lid.|wait|low|660 (doc: 10 to 12 min)|R5|Time is up|—|pan|—
 S|R7|R|Rest, covered|Take it off the heat, keep the lid on.|wait|off|720 (doc: at least 10 to 15 min)|R6|Rested|—|pan|—
@@ -165,10 +165,10 @@ S|K5|K|Let the cucumber rest|Let it rest.|wait|—|600 (doc: 10 min)|K4|10 min p
 S|K6|K|Squeeze the cucumber|Squeeze the water out.|action|—|30|K5|Dry-ish|—|—|opt_veg = traditional|sink
 S|K7|K|Prepare the bok choy|Tear the bok choy apart by leaves and wash it thoroughly.|action|—|(60 + 30 × servings) × skill_factor|—|Clean leaves|bok_choy|—|—|sink
 S|S1|F|Mix the sauce|Mix the gochujang, sesame oil, sugar or honey, rice vinegar, water, sesame seeds and grated garlic.|action|—|60|K2|Smooth sauce|gochujang_sauce; sesame_oil_sauce; honey_sauce; rice_vinegar; water_sauce; sesame_seeds_sauce; garlic_grated|bowl, spoon|opt_sauce = bibimbap
-S|W1|W|Chicken into the pan|Heat a large pan on medium-high with a little oil. Add the marinated chicken.|action|medium-high|30|M2|Chicken spread out|chicken_marinated; oil_frying|pan, stovetop, spatula|—
+S|W1|W|Add the chicken to the pan|Heat a large pan on medium-high with a little oil. Add the marinated chicken.|action|medium-high|30|M2|Chicken spread out|chicken_marinated; oil_frying|pan, stovetop, spatula|—
 S|W2|W|Stir-fry the chicken|Stir-fry until done.|wait|medium-high|510 (doc: 7 to 10 min)|W1|No pink inside|—|pan, spatula|—
-S|W3|W|Chicken out|Take the chicken out of the pan.|action|off|15|W2|Chicken set aside|—|pan, spatula|—
-S|W4|W|Water and oil in the pan|Clean the pan (or use another). While cold, add a few tbsp of water and a few tsp of oil, then heat it.|action|medium|60|W3|Hot and steaming|oil_frying|pan, stovetop|—
+S|W3|W|Take the chicken out|Take the chicken out of the pan.|action|off|15|W2|Chicken set aside|—|pan, spatula|—
+S|W4|W|Add the water and oil to the pan|Clean the pan (or use another). While cold, add a few tbsp of water and a few tsp of oil, then heat it.|action|medium|60|W3|Hot and steaming|oil_frying|pan, stovetop|—
 S|W5|W|Steam-fry the bok choy|Add the bok choy with a little salt, stirring. Don't overcook it.|action|medium|180|W4, K7|Just wilted, still green|bok_choy_ready; salt|pan, spatula|—
 S|W6|W|Sauté the carrot|Sauté the julienned carrot for about 1 minute.|action|medium|60|W5, K3|Slightly soft|veg_julienned|pan, spatula|opt_veg = traditional
 S|E1|E|Fry the eggs|Fry the eggs sunny side up in a small pan with a little oil, one at a time. Keep the yolk a little runny, salt a tiny bit, add a splash of sesame oil near the end.|wait|medium|180 × servings|W3|White set, yolk runny|egg; oil_frying; salt; toasted_sesame_oil|pan, stovetop, spatula|—
@@ -213,13 +213,13 @@ S|R2|R|Wash the rice|Wash the rice in lukewarm water in a sieve, stirring slowly
 S|R3|R|Bring to a boil|Put the rice and the water in the pot and bring it to a boil.|wait|medium|300|R2|Water level roughly at the rice|—|cooking_pot, stovetop|—
 S|R4|R|Cover, lowest heat|Cover and cook on the lowest setting.|wait|low|660 (doc: 10 to 12 min)|R3|Time is up|—|cooking_pot|—
 S|R5|R|Rest, covered|Take it off the heat, keep it covered, don't open it.|wait|off|720 (doc: at least 10 to 15 min)|R4|Rested|—|cooking_pot|—
-S|P1|P|Onion into the pan|Heat a little oil in the pan and add the onion.|action|medium|30|K2|Onion sizzling|oil; onion_diced|pan, stovetop, spatula|—
+S|P1|P|Add the onion to the pan|Heat a little oil in the pan and add the onion.|action|medium|30|K2|Onion sizzling|oil; onion_diced|pan, stovetop, spatula|—
 S|P2|P|Fry the onion|Fry for a couple of minutes.|wait|medium|120|P1|Softening|—|pan, spatula|—
-S|P3|P|Garlic in|Add the garlic and fry until glassy and fragrant.|wait|medium|120|P2, K3|Glassy, fragrant|garlic_diced|pan, spatula|—
-S|P4|P|Mushrooms in|Add the mushrooms and fry until their water evaporates and they start to brown.|wait|medium|300 (doc: about 5 min)|P3, K4|Dry and browning|mushrooms_sliced|pan, spatula|—
+S|P3|P|Add the garlic|Add the garlic and fry until glassy and fragrant.|wait|medium|120|P2, K3|Glassy, fragrant|garlic_diced|pan, spatula|—
+S|P4|P|Add the mushrooms|Add the mushrooms and fry until their water evaporates and they start to brown.|wait|medium|300 (doc: about 5 min)|P3, K4|Dry and browning|mushrooms_sliced|pan, spatula|—
 S|P5|P|Sear the chicken|Lift the chicken out of the marinade (keep the marinade), put it in the pan and sear it.|wait|medium|210 (doc: 3 to 4 min)|P4, M2|Seared on the outside|chicken_marinated|pan, spatula|—
-S|P6|P|Marinade in|Pour in the rest of the marinade and let it bubble so the alcohol cooks off.|wait|medium|270 (doc: 4 to 5 min)|P5|Bubbled 4 to 5 min|—|pan|—
-S|P7|P|Cream in, simmer|Add the cream and simmer gently on medium heat, stirring (honey burns easily).|wait|medium|300|P6|Largest chunk white all the way through|cream|pan, spatula|—
+S|P6|P|Add the marinade|Pour in the rest of the marinade and let it bubble so the alcohol cooks off.|wait|medium|270 (doc: 4 to 5 min)|P5|Bubbled 4 to 5 min|—|pan|—
+S|P7|P|Add the cream and simmer|Add the cream and simmer gently on medium heat, stirring (honey burns easily).|wait|medium|300|P6|Largest chunk white all the way through|cream|pan, spatula|—
 S|P8|P|Taste and finish|Taste and adjust. Add the paprika and a little lemon juice and cook a bit more, stirring.|check|medium|90|P7|Tastes right|paprika_powder; lemon_juice; salt|pan, spatula|—
 S|F1|F|Plate it|Rice first, then the chicken and mushrooms next to it. Sprinkle dried parsley on top.|action|—|30 + 30 × servings|P8, R5|Served|rice_ready; chicken_ready; parsley|plates, spatula|—
 `
@@ -246,7 +246,7 @@ S|L2|L|Dry the lettuce|Toss it, then dry it with a kitchen towel or a salad spin
 S|C1|C|Pat the chicken dry|Take the chicken out, pat it dry with paper towel (throw it away right away).|action|—|30|—|Dry surface|chicken_breast|chopping_board|—
 S|C2|C|Halve thick fillets|Slice thick fillets horizontally into two thinner cutlets of even thickness.|action|—|(30 + 30 × servings) × skill_factor|C1|Even thickness|—|chef_knife, chopping_board|opt_chicken = cutlets
 S|C3|C|Season the chicken|Rub it well in a bowl with salt, a little black pepper and some oil.|action|—|45|C2|Evenly coated|salt; ground_black_pepper; oil|bowl|—
-S|C4|C|Chicken into the pan|Heat a little oil in the pan on medium-high and add the chicken.|action|medium-high|30|C3|Sizzling|oil|pan, stovetop, tongs|—
+S|C4|C|Add the chicken to the pan|Heat a little oil in the pan on medium-high and add the chicken.|action|medium-high|30|C3|Sizzling|oil|pan, stovetop, tongs|—
 S|C5|C|Fry side 1|Fry the first side.|wait|medium-high|210 cutlets (doc: 3 to 4 min) / 300 whole (doc: about 5 min)|C4|Golden underneath|—|pan|—
 S|C6|C|Flip|Turn the chicken over.|action|medium-high|15|C5|Flipped|—|tongs|—
 S|C7|C|Fry side 2|Fry the second side.|wait|medium-high|210 cutlets (doc: 3 to 4 min) / 300 whole (doc: about 5 min)|C6|Golden underneath|—|pan|—
@@ -276,15 +276,15 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.02|
 S|O1|O|Preheat the oven|Turn the oven on to 190 °C conventional (170 °C fan), middle rack.|action|190 °C (170 °C fan)|15|—|Oven on|—|oven|—
 S|O2|O|Wait for the oven|Let the oven heat up.|wait|190 °C (170 °C fan)|600|O1|Temperature reached|—|oven|—
 S|T1|T|Butter the cups|Butter the cups of the muffin pan, sides and bottom.|action|—|30 + 15 × muffins|—|All cups greased|butter|muffin_tin|—
-S|P1|P|Par-fry the bacon|Fry the bacon slices briefly, not until they are firm.|wait|medium|120|—|Lightly cooked, still bendy|bacon|pan, stovetop|—
-S|K1|K|Halve the tomatoes|Cut the cherry tomatoes in half.|action|—|(10 + 10 × muffins) × skill_factor|—|Halved|cherry_tomato|chef_knife, chopping_board|—
+S|P1|P|Par-fry the bacon, then set it aside|Fry the bacon slices briefly, not until they are firm. Then take the pan off the heat and set the bacon aside on a plate.|wait|medium|120|—|Lightly cooked, still bendy, set aside off the heat|bacon|pan, stovetop|—
+S|K1|K|Halve the tomatoes|Cut the cherry tomatoes in half.|action|—|(30 + 20 × muffins) × skill_factor|—|Halved|cherry_tomato|chef_knife, chopping_board|—
 S|K2|K|Grate the cheese|Grate the cheese if it is not already grated.|action|—|(20 + 5 × muffins) × skill_factor|—|Grated|cheddar / mozzarella|cheese_grater|—
 S|T2|T|Line the cups with bacon|Place a bacon slice around the wall of each cup.|action|—|10 + 15 × muffins|T1, P1|Every cup lined|bacon_parfried|muffin_tin|—
-S|T3|T|Eggs in|Crack one egg into each cup (whisked option: break it up with a fork). Add salt and pepper. Cups should be about half full: it puffs up while baking.|action|—|15 + 15 × muffins|T2|One egg per cup|egg; salt; ground_black_pepper|muffin_tin, fork|—
-S|T4|T|Tomatoes and cheese|Add a couple of tomato halves and some grated cheese to each cup. Whisked eggs: fill each cup no more than ¾ including fillings.|action|—|10 + 10 × muffins|T3, K1, K2|All cups filled|tomatoes_halved; cheese_grated|muffin_tin|—
+S|T3|T|Crack the eggs in|Crack one egg into each cup (whisked option: break it up with a fork). Add salt and pepper. Cups should be about half full: it puffs up while baking.|action|—|15 + 15 × muffins|T2|One egg per cup|egg; salt; ground_black_pepper|muffin_tin, fork|—
+S|T4|T|Add the tomatoes and cheese|Add a couple of tomato halves and some grated cheese to each cup. Whisked eggs: fill each cup no more than ¾ including fillings.|action|—|10 + 10 × muffins|T3, K1, K2|All cups filled|tomatoes_halved; cheese_grated|muffin_tin|—
 S|O3|O|Bake|Bake until the top is slightly browned and the center is set and doesn't wobble. Whole egg with runny yolk: start checking at 12 to 14 min.|wait|190 °C (170 °C fan)|900 whole / 1050 whisked (doc: 15 to 20 min; check whole eggs at 12 to 14 min)|O2, T4|Center set, no wobble|—|oven, muffin_tin|—
-S|O4|O|Rest in the pan|Take the pan out and let them rest.|wait|off|150 (doc: 2 to 3 min)|O3|Rested|—|muffin_tin|—
-S|F1|F|Release and serve|Run a thin knife around each muffin, then lift them out with a fork.|action|—|20 + 10 × muffins|O4|Out of the pan|muffins_rested|knife, fork, plates|—
+S|O4|O|Take the tin out of the oven and let it rest|Take the muffin tin out of the oven and let the muffins rest in the tin for a couple of minutes.|wait|off|150 (doc: 2 to 3 min)|O3|Rested|—|muffin_tin|—
+S|F1|F|Take them out and serve|Run a thin knife around each muffin, then lift them out of the tin with a fork and serve.|action|—|20 + 10 × muffins|O4|Out of the pan|muffins_rested|knife, fork, plates|—
 `
   },
   {
@@ -315,8 +315,8 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.062
 I|honey|Honey|img/350/honey.webp|0.25|tsp|1.8|linear|opt_dressing = honey|—
 S|L1|L|Wash the leaves|Separate the lettuce into leaves and wash them thoroughly in a colander.|action|—|(60 + 60 × servings) × skill_factor|—|Clean leaves|lettuce|colander|—
 S|L2|L|Let the leaves dry|Let them dry completely: no wet leaves. A salad spinner or towel speeds it up.|wait|—|300|L1|No water left|—|colander, salad_spinner|—
-S|V1|V|Carrot ribbons|Wash and lightly peel the carrots, then peel thin ribbons with the vegetable peeler.|action|—|(60 + 60 × servings) × skill_factor|—|Thin ribbons|carrot|vegetable_peeler|—
-S|V2|V|Cucumber ribbons|Peel ribbons from all sides of the unpeeled cucumber, skin included. Stop at the seedy core.|action|—|(60 + 45 × servings) × skill_factor|—|Ribbons, core left over|cucumber|vegetable_peeler|—
+S|V1|V|Peel the carrot ribbons|Wash and lightly peel the carrots, then peel thin ribbons with the vegetable peeler.|action|—|(60 + 60 × servings) × skill_factor|—|Thin ribbons|carrot|vegetable_peeler|—
+S|V2|V|Peel the cucumber ribbons|Peel ribbons from all sides of the unpeeled cucumber, skin included. Stop at the seedy core.|action|—|(60 + 45 × servings) × skill_factor|—|Ribbons, core left over|cucumber|vegetable_peeler|—
 S|V3|V|Tear the herbs|Tear the basil and mint by hand (don't cut them).|action|—|30 + 15 × servings|—|Torn|basil; mint|—|—
 S|N1|N|Toast the nuts|Toast the nuts in a dry pan over medium heat, stirring.|wait|medium|150 (doc: 2 to 3 min)|—|Golden, fragrant|pine_nuts|pan, stovetop|opt_nuts = toasted
 S|D1|D|Shake the dressing|In a small jar: 1 part apple cider vinegar, 3 parts olive oil, salt, pepper, Dijon mustard, tarragon (and honey). Close and shake until opaque and even.|action|—|90|—|Opaque, consistent|apple_cider_vinegar; extra_virgin_olive_oil; salt; ground_black_pepper; mustard; tarragon; honey|jar|—
@@ -353,7 +353,7 @@ S|K1|K|Dice the toppings|Dice the bacon, the garlic and the red onion.|action|�
 S|P1|K|Stir-fry the bacon|Stir-fry the diced bacon a little before baking.|wait|medium|180|K1|Lightly cooked|—|pan, stovetop|opt_version = sour_cream
 S|A1|A|Spread and top|Spread the pizza sauce (or sour cream) on each tortilla, leaving about 1 cm at the edge. Add the toppings: ham and cheese (or bacon, garlic, red onion and cheese).|action|—|30 + 45 × servings|S1, P1|All tortillas topped|tortilla; pizza_sauce / sour_cream; ham / bacon_fried, toppings_diced; grated_cheese|spoon|—
 S|O3|O|Bake in the oven|Bake on the hot tray.|wait|220 °C (200 °C fan)|420 (doc: 6 to 8 min)|O2, A1|Tortilla edge browned|tozza_raw|oven|opt_cooking = oven
-S|O4|O|Panini press|Set the press so it leaves a gap and the top surface almost touches the toppings. Cook.|wait|panini press|390 (doc: 6 to 7 min)|A1|Tortilla edge browned|tozza_raw|panini_press|opt_cooking = panini
+S|O4|O|Cook in the panini press|Set the press so it leaves a gap and the top surface almost touches the toppings. Cook.|wait|panini press|390 (doc: 6 to 7 min)|A1|Tortilla edge browned|tozza_raw|panini_press|opt_cooking = panini
 S|F1|F|Slice and serve|Take them out and slice each tozza into 4.|action|—|10 + 15 × servings|O3, O4|Sliced|tozza_baked|chef_knife, chopping_board|—
 `
   },
@@ -386,13 +386,13 @@ I|cream|Cream|img/350/cream.webp|1|tbsp|15|linear|opt_finish = cream_basil|—
 I|basil|Fresh basil leaves|img/350/basil.webp|2|leaves|1|linear|opt_finish = cream_basil|—
 S|K1|K|Dice the onion|Peel and dice the onion.|action|—|(30 + 60 × servings) × skill_factor|—|Diced|onion|chef_knife, chopping_board|—
 S|K2|K|Dice the garlic|Peel and dice the garlic.|action|—|(30 + 20 × servings) × skill_factor|—|Diced|garlic|chef_knife, chopping_board|—
-S|P1|P|Onion into the pot|Heat a little olive oil in the large pot and add the onion.|action|medium|30|K1|Sizzling|olive_oil; onion_diced|cooking_pot, stovetop, wooden_spoon|—
+S|P1|P|Add the onion to the pot|Heat a little olive oil in the large pot and add the onion.|action|medium|30|K1|Sizzling|olive_oil; onion_diced|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Soften the onion|Fry for a couple of minutes.|wait|medium|120|P1|Softening|—|cooking_pot, wooden_spoon|—
-S|P3|P|Garlic, salt, pepper|Add the garlic, salt and pepper. Stir well.|action|medium|60|P2, K2|Fragrant|garlic_diced; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
+S|P3|P|Add the garlic, salt and pepper|Add the garlic, salt and pepper. Stir well.|action|medium|60|P2, K2|Fragrant|garlic_diced; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
 S|K3|K|Halve the cherry tomatoes|Cut the cherry tomatoes in half.|action|—|(20 + 30 × servings) × skill_factor|—|Halved|cherry_tomato|chef_knife, chopping_board|—
-S|P4|P|Flour and tomato paste|Add a little flour and the tomato paste, keep stirring until the flour starts to brown a little.|action|medium|120|P3|Flour lightly browned|flour; tomato_paste|cooking_pot, wooden_spoon|—
-S|P5|P|Liquid in, slowly|Pour in the water (or stock) gradually while stirring so the flour doesn't form lumps.|action|medium|60|P4|No lumps|water / vegetable_stock|cooking_pot, wooden_spoon|—
-S|P6|P|Tomatoes and seasoning|Add the passata, diced tomatoes and cherry tomatoes. Season with salt, oregano, thyme and 1 to 2 tsp sugar per 4. It should be fairly thick.|action|medium|60|P5, K3|All in|tomato_passata; diced_tomatoes; cherry_halved; salt; oregano; thyme; sugar|cooking_pot, wooden_spoon|—
+S|P4|P|Stir in the flour and tomato paste|Add a little flour and the tomato paste, keep stirring until the flour starts to brown a little.|action|medium|120|P3|Flour lightly browned|flour; tomato_paste|cooking_pot, wooden_spoon|—
+S|P5|P|Pour in the liquid slowly|Pour in the water (or stock) gradually while stirring so the flour doesn't form lumps.|action|medium|60|P4|No lumps|water / vegetable_stock|cooking_pot, wooden_spoon|—
+S|P6|P|Add the tomatoes and seasoning|Add the passata, diced tomatoes and cherry tomatoes. Season with salt, oregano, thyme and 1 to 2 tsp sugar per 4. It should be fairly thick.|action|medium|60|P5, K3|All in|tomato_passata; diced_tomatoes; cherry_halved; salt; oregano; thyme; sugar|cooking_pot, wooden_spoon|—
 S|P7|P|Bring to a boil|Let it come to a boil.|wait|medium|300|P6|Bubbling|—|cooking_pot|—
 S|P8|P|Simmer|Simmer on low heat, stirring now and then.|wait|low|1500 (doc: 20 to 30 min)|P7|Time is up|—|cooking_pot, wooden_spoon|—
 S|K4|K|Grate the cheese|Grate the cheese if it is not already grated.|action|—|(20 + 15 × servings) × skill_factor|—|Grated|grated_cheese|cheese_grater|—
@@ -423,15 +423,15 @@ I|bread|Baguette slices|img/350/bread.webp|2|slices|50|linear|—|—
 I|extra_virgin_olive_oil|Extra virgin olive oil|img/350/extra_virgin_olive_oil.webp|1|tsp|4.5|linear|—|—
 I|grated_cheese|Gruyère, Comté or Emmental, grated|img/350/grated_cheese.webp|40|g|40|linear|—|grated
 S|K1|K|Slice the onions|Halve the onions and slice them thinly into half-moons.|action|—|(60 + 180 × servings) × skill_factor|—|Thin half-moons|onion|chef_knife, chopping_board|—
-S|P1|P|Onions into the pot|Heat the oil and butter in the large pot on medium-low. Add the onions with a little salt and white pepper.|action|medium-low|60|K1|All in, coated|oil; butter; onions_sliced; salt; white_pepper|cooking_pot, stovetop, wooden_spoon|—
+S|P1|P|Add the onions to the pot|Heat the oil and butter in the large pot on medium-low. Add the onions with a little salt and white pepper.|action|medium-low|60|K1|All in, coated|oil; butter; onions_sliced; salt; white_pepper|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Caramelize|Keep stirring and frying. If it sticks to the bottom, add a splash of water and continue.|wait|medium-low|2700 (doc: at least 45 min)|P1|Sticky and golden-brown|—|cooking_pot, wooden_spoon|—
-S|P3|P|Flour in|Add the flour for the last couple of minutes, stirring.|action|medium-low|150|P2|Flour browning|flour|cooking_pot, wooden_spoon|—
-S|P4|P|Wine in, reduce|Add the white wine and let it reduce by half, scraping the bottom of the pot.|action|medium|210 (doc: 3 to 4 min)|P3|Reduced by half|white_wine|cooking_pot, wooden_spoon|—
-S|P5|P|Stock and herbs|Add the stock (or water) and salt to taste. Add a pinch of nutmeg, the bay leaf and the thyme.|action|medium|60|P4|All in|beef_stock / chicken_stock / water; salt; nutmeg; bay_leaf; thyme|cooking_pot, microplane|—
+S|P3|P|Add the flour|Add the flour for the last couple of minutes, stirring.|action|medium-low|150|P2|Flour browning|flour|cooking_pot, wooden_spoon|—
+S|P4|P|Add the wine and reduce it|Add the white wine and let it reduce by half, scraping the bottom of the pot.|action|medium|210 (doc: 3 to 4 min)|P3|Reduced by half|white_wine|cooking_pot, wooden_spoon|—
+S|P5|P|Add the stock and herbs|Add the stock (or water) and salt to taste. Add a pinch of nutmeg, the bay leaf and the thyme.|action|medium|60|P4|All in|beef_stock / chicken_stock / water; salt; nutmeg; bay_leaf; thyme|cooking_pot, microplane|—
 S|P6|P|Simmer|Simmer, stirring now and then.|wait|low|1650 (doc: 25 to 30 min)|P5|Time is up|—|cooking_pot, wooden_spoon|—
 S|O1|O|Turn on the broiler|Switch the oven broiler on.|action|grill|15|—|Broiler on|—|oven|—
 S|O2|O|Let the broiler heat|Let it heat up.|wait|grill|300|O1|Hot|—|oven|—
-S|B1|O|Bread on the tray|Lay the bread slices on the tray, drizzle with olive oil and top with grated cheese.|action|—|30 + 30 × servings|—|All slices topped|bread; extra_virgin_olive_oil; grated_cheese|tray|—
+S|B1|O|Put the bread on the tray|Lay the bread slices on the tray, drizzle with olive oil and top with grated cheese.|action|—|30 + 30 × servings|—|All slices topped|bread; extra_virgin_olive_oil; grated_cheese|tray|—
 S|B2|O|Broil the toasts|Broil until the cheese is melted and a little browned.|wait|grill|270 (doc: 4 to 5 min)|B1, O2|Cheese melted, lightly browned|—|oven, tray|—
 S|P7|P|Season, bay leaf out|Take out the bay leaf and season to taste.|check|off|60|P6|Tastes right|salt|cooking_pot|—
 S|F1|F|Serve|Ladle the soup into bowls and serve the cheese toasts next to it.|action|—|30 + 20 × servings|P7, B2|Served|soup_ready; toasts_ready|ladle, bowl|—
@@ -472,8 +472,6 @@ O|opt_sweetener|sugar|Sugar|FALSE
 O|opt_sweetener|erythritol|Erythritol (diet-friendly)|FALSE
 O|opt_milk|drink|Coconut milk drink (carton)|TRUE
 O|opt_milk|canned|Canned coconut milk mixed 1:1 with water (richer)|FALSE
-O|opt_toppings|evening|Added in the evening (soft)|TRUE
-O|opt_toppings|morning|In the morning (fruit stays fresh, chocolate stays crunchy)|FALSE
 I|rolled_oats|Rolled oats|img/350/rolled_oats.webp|50|g|50|linear|—|—
 I|chia_seeds|Chia seeds|img/350/chia_seeds.webp|1|tbsp|12|linear|—|—
 I|coconut_milk|Coconut milk|img/350/coconut_milk.webp|165|ml|165|linear; half if canned|—|—
@@ -486,15 +484,13 @@ I|salt|Salt|img/350/salt.webp|0.03|tsp|0.2|linear|—|—
 I|blueberry|Blueberries|img/350/blueberry.webp|50|g|50|linear|—|—
 I|dark_chocolate|Dark chocolate|img/350/dark_chocolate.webp|10|g|10|linear|—|bits
 I|cinnamon|Ground cinnamon|img/350/cinnamon.webp|0.25|tsp|0.6|linear|—|—
-S|J1|J|Get the jars ready|Set out small-ish jars, one per serving.|action|—|10 + 5 × servings|—|Jars ready|—|jar|—
-S|J2|J|Oats and chia|Add the rolled oats, then the chia seeds to each jar.|action|—|15 + 15 × servings|J1|Dry layer in each jar|rolled_oats; chia_seeds|jar, spoon|—
-S|J3|J|Milk, yogurt, sweetener|Pour in the coconut milk (canned: mixed 1:1 with water), add a spoon of yogurt, a pinch of salt and the sweetener.|action|—|20 + 20 × servings|J2|Wet and mixed|coconut_milk; water; yogurt; salt; honey / sugar / erythritol|jar, spoon|—
-S|J4|J|Toppings in|Add the toppings: dark chocolate bits, cinnamon, blueberries or other fruit.|action|—|20 + 20 × servings|J3|Topped|blueberry; dark_chocolate; cinnamon|jar, spoon|opt_toppings = evening
+S|J2|J|Add the oats and chia seeds to the jars|Set out one jar per serving. Add the rolled oats, then the chia seeds, to each jar.|action|—|30 + 20 × servings|—|Dry layer in each jar|rolled_oats; chia_seeds|jar, spoon|—
+S|J3|J|Add the milk, yogurt and sweetener|Pour in the coconut milk (canned: mixed 1:1 with water), add a spoon of yogurt, a pinch of salt and the sweetener.|action|—|20 + 20 × servings|J2|Wet and mixed|coconut_milk; water; yogurt; salt; honey / sugar / erythritol|jar, spoon|—
+S|J4|J|Add the toppings|Add the toppings: dark chocolate bits, cinnamon, blueberries or other fruit.|action|—|20 + 20 × servings|J3|Topped|blueberry; dark_chocolate; cinnamon|jar, spoon|—
 S|J5|W|Let the chia swell|Let it sit so the chia seeds don't clump.|wait|—|600 (doc: 10 min)|J4, J3|10 min passed|—|jar|—
 S|J6|J|Stir again|Stir each jar again to break up chia clumps.|action|—|10 + 10 × servings|J5|No clumps|—|spoon|—
-S|J7|W|Fridge overnight|Close the jars and put them in the fridge overnight.|wait|—|21600 (doc: at least 6 hours)|J6|At least 6 hours passed|—|fridge, jar|—
-S|J8|M|Toppings in the morning|Add the toppings now: fruit stays fresh, chocolate stays crunchy.|action|—|20 + 20 × servings|J7|Topped|blueberry; dark_chocolate; cinnamon|spoon|opt_toppings = morning
-S|M1|M|Serve|Open and eat from the jar.|action|—|10|J7, J8|Served|oats_ready|jar, spoon|—
+S|J7|W|Put the jars in the fridge overnight|Close the jars and put them in the fridge overnight (at least 6 hours). Add fresh fruit in the morning if you want.|action|—|45|J6|In the fridge|—|fridge, jar|—
+S|M1|M|Serve in the morning|Open a jar, add fresh fruit if you want, and eat from the jar.|action|—|10|J7|Served|oats_ready|jar, spoon|—
 `
   },
   {
@@ -540,14 +536,14 @@ I|cream|Cooking cream|img/350/cream.webp|25|ml|25|linear|—|—
 I|flour|Flour|img/350/flour.webp|0.17|tbsp|1.7|linear|—|—
 I|cherry_tomato|Cherry tomatoes|img/350/cherry_tomato.webp|35|g|35|linear|opt_tomatoes = with|—
 S|M1|M|Mix the marinade|In the slow cooker pot mix the oil, salt, pepper, brown sugar, MSG, crushed cardamom seeds, cumin, cinnamon, smoked paprika, garlic powder, mustard, Worcestershire sauce, chili powder, thyme and red wine. Taste until satisfied.|action|—|180|—|Tastes balanced|oil; salt; ground_black_pepper; brown_sugar; msg; cardamom; cumin; cinnamon; smoked_paprika; garlic_powder; mustard; worcestershire_sauce; chili_powder; thyme; red_wine|slow_cooker, spoon|—
-S|M2|M|Beef in, coat it|Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.|action|—|60|M1|Coated all over|beef|slow_cooker|—
-S|M3|M|Slow cook|Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.|wait|High|19800 High (doc: 5 to 6 h) / 32400 Low (doc: 8 to 10 h)|M2|Fork twists in easily (≈90 to 95 °C inside)|—|slow_cooker|—
-S|G1|G|Cream and flour|Whisk the cream with the flour in a separate bowl.|action|—|60|—|Smooth, no lumps|cream; flour|bowl, whisk|—
+S|M2|M|Add the beef and coat it|Put the uncut beef into the pot and roll it so it is well covered. It should not be submerged.|action|—|60|M1|Coated all over|beef|slow_cooker|—
+S|M3|M|Slow cook the beef|Cook with the lid on. Roll the meat once or twice so every part gets under the marinade; each lid lift costs 15 to 20 min.|wait|High|19800 High (doc: 5 to 6 h) / 32400 Low (doc: 8 to 10 h)|M2|Fork twists in easily (≈90 to 95 °C inside)|—|slow_cooker|—
+S|G1|G|Mix the cream and flour|Whisk the cream with the flour in a separate bowl.|action|—|60|—|Smooth, no lumps|cream; flour|bowl, whisk|—
 S|M4|M|Check doneness|Twist a fork into the meat: it should go in easily. Don't overcook it, it dries into strings.|check|—|60|M3|Fork twists in easily|—|fork|—
-S|S1|S|Into the hot pan|Turn off the slow cooker. Move the meat carefully into a pan with a little oil, the butter and the herbs (and garlic). Leave the marinade in the pot!|action|high|60|M4|Meat in the pan|beef_done; oil_sear; butter; rosemary; thyme_fresh; garlic|pan, stovetop|—
+S|S1|S|Put the beef in the hot pan|Turn off the slow cooker. Move the meat carefully into a pan with a little oil, the butter and the herbs (and garlic). Leave the marinade in the pot!|action|high|60|M4|Meat in the pan|beef_done; oil_sear; butter; rosemary; thyme_fresh; garlic|pan, stovetop|—
 S|S2|S|Sear and baste|Fry it on all sides on high heat. Tilt the pan and spoon the melted butter and herbs over the meat.|action|high|300|S1|Browned crust on all sides|—|pan, spoon|—
 S|S3|S|Rest, covered|Set the meat aside and cover it.|wait|—|30|S2|Covered|—|chopping_board|—
-S|G2|G|Liquid into the saucepan|Pour the used marinade into the saucepan (if the butter is burnt dark brown, throw it away first).|action|medium-high|60|S3|Liquid in the pan|marinade|pan|—
+S|G2|G|Pour the liquid into the saucepan|Pour the used marinade into the saucepan (if the butter is burnt dark brown, throw it away first).|action|medium-high|60|S3|Liquid in the pan|marinade|pan|—
 S|G3|G|Boil with the extras|Add the passata, more red wine, cumin and the crushed coriander seeds. Keep it boiling.|wait|medium-high|300|G2|Reduced a little|tomato_passata; red_wine_gravy; cumin_gravy; coriander_seeds|pan, whisk|—
 S|G4|G|Thicken|Add the cream and flour mix while you keep whisking.|action|medium|120|G3, G1|Thickened, smooth|cream_mix|pan, whisk|—
 S|G5|G|Sieve the gravy|Put a large sieve over a bowl and pour the gravy through it, stirring, to keep the residue out.|action|off|90|G4|Smooth gravy|—|sieve, bowl|—
@@ -596,11 +592,11 @@ S|S2|S|Mix the sauce|Mix 4 parts mayonnaise, 2 parts ketchup, 1 part yellow must
 S|S3|S|Rest the sauce|Let the sauce rest in the fridge so the flavors blend.|wait|—|1800|S2|30 min passed|—|fridge|—
 S|O1|O|Cut the onion|Cut the white onion into rings.|action|—|(30 + 30 × servings) × skill_factor|—|Rings|white_onion|chef_knife, chopping_board|—
 S|O2|O|Sauté the onion|Stir-fry the rings in a pan on medium heat with a little oil and a pinch of salt.|wait|medium|540 (doc: 8 to 10 min)|O1|Soft and glassy|onion_rings; oil; salt|pan, stovetop, spatula|—
-S|K1|K|Tomato and lettuce|Slice the tomato (2 slices per burger) and wash the lettuce leaves.|action|—|(30 + 30 × servings) × skill_factor|—|Ready|tomato; lettuce|chef_knife, chopping_board|—
+S|K1|K|Slice the tomato and lettuce|Slice the tomato (2 slices per burger) and wash the lettuce leaves.|action|—|(30 + 30 × servings) × skill_factor|—|Ready|tomato; lettuce|chef_knife, chopping_board|—
 S|G1|G|Heat the big pan|Heat a large pan with a little oil on high.|action|high|60|P3, S3|Very hot|oil|pan, stovetop|—
 S|G2|G|Fry the patties|Salt the patties slightly and fry them, flipping every minute.|action|high|330 (doc: 5 to 6 min, incl. G3)|G1|Browned crust|patties_chilled; salt|pan, spatula|opt_patty = thick
 S|G2S|G|Smash the patties|Put a few balls in the very hot pan, cover each with a piece of baking paper and press it very flat with a sturdy spatula in the first 10 seconds. Peel off the paper, salt them and fry without moving for about 2 minutes, until the edges are brown and crispy. Scrape them loose and flip.|action|high|150 (doc: about 2 min + flip)|G1|Crispy edges, flipped|patties_chilled; salt|pan, spatula, parchment_paper|opt_patty = thin
-S|G3|G|Cheese on, cover|After the last flip, put the cheese slices on the patties and cover the pan.|action|high|45 (doc: last 30 to 60 s)|G2, G2S|Cheese melted|cheese_slice|pan|—
+S|G3|G|Put the cheese on and cover|After the last flip, put the cheese slices on the patties and cover the pan.|action|high|45 (doc: last 30 to 60 s)|G2, G2S|Cheese melted|cheese_slice|pan|—
 S|G4|G|Toast the buns|Cut the buns in half and place them cut side down on a slightly buttered pan on medium heat.|action|medium|45 (doc: 30 to 60 s)|G3|Lightly toasted|hamburger_buns; butter|pan, stovetop|—
 S|A1|A|Build the burger|Bottom to top: bottom bun, sauce, lettuce, patty, cheese, tomato, pickles, sautéed onion, sauce, top bun. Push a wooden skewer through the middle.|action|—|60 + 60 × servings|G4, O2, K1, S3|Served|buns_toasted; sauce; veg_ready; patties_ready; pickles; onion_sauteed|skewers|—
 `
@@ -628,11 +624,11 @@ I|sugar|Sugar|img/350/sugar.webp|0.5|tsp per batch|2|per batch|—|—
 I|mustard|Dijon mustard|img/350/mustard.webp|1|tsp per batch|5|per batch|opt_mustard = with|—
 I|egg_yolk|Egg yolk (rescue only)|img/350/egg_yolk.webp|1|pcs|0|only if needed|—|only if it breaks
 S|E1|E|Pick the container|Find a container your immersion blender fits to the bottom of: the more cylindrical the better.|action|—|30|—|Blender head nearly fills it|—|tall_container, immersion_blender|—
-S|E2|E|Everything in|Crack in the whole egg. Add the oil, salt, pepper, a little sugar and a tiny bit of lemon juice (or vinegar). Optional: 1 tsp Dijon mustard.|action|—|60|E1|All in|egg; olive_oil / oil; salt; white_pepper; sugar; lemon_juice / white_vinegar; mustard|tall_container, spoon|—
+S|E2|E|Add everything to the container|Crack in the whole egg. Add the oil, salt, pepper, a little sugar and a tiny bit of lemon juice (or vinegar). Optional: 1 tsp Dijon mustard.|action|—|60|E1|All in|egg; olive_oil / oil; salt; white_pepper; sugar; lemon_juice / white_vinegar; mustard|tall_container, spoon|—
 S|E3|E|Let it settle|Wait so the egg sinks to the bottom under the oil.|wait|—|15 (doc: about 15 s)|E2|Egg at the bottom|—|tall_container|—
 S|E4|E|Blend at the bottom|Put the blender all the way to the bottom, switch it on and hold it still until thick white mayonnaise forms underneath.|action|—|15 (doc: 10 to 20 s)|E3|Thick white layer at the bottom|—|immersion_blender|—
 S|E5|E|Lift slowly|Keep blending, slowly lifting to the top and back down until all the oil is incorporated.|action|—|45 (doc: about 1 min in total with E4)|E4|No oil layer left|—|immersion_blender|—
-S|E6|E|Check: did it break?|Still runny? Pour it out, put a fresh egg yolk into the clean container and blend while adding the runny mix back a little at a time.|check|—|30|E5|Thick and creamy|egg_yolk|tall_container, immersion_blender|—
+S|E6|E|Check whether it broke|Still runny? Pour it out, put a fresh egg yolk into the clean container and blend while adding the runny mix back a little at a time.|check|—|30|E5|Thick and creamy|egg_yolk|tall_container, immersion_blender|—
 S|F1|F|Taste and adjust|Taste and adjust the salt and the lemon juice.|check|—|30|E6|Tastes right|salt; lemon_juice|spoon|—
 S|F2|F|Store|Put it into a lidded container and into the fridge.|action|—|30|F1|In the fridge|mayonnaise|lidded_container|—
 `
@@ -640,6 +636,7 @@ S|F2|F|Store|Put it into a lidded container and into the fridge.|action|—|30|F
   // ---- Added 2026-10-25 from the 150-recipe list (one sheet tab each) ----
   {
     id: "scrambled_eggs", name: "Scrambled Eggs", image: "img/350/egg.webp",
+    first: 'T1',
     rows: `
 O|opt_style|soft|Soft and creamy (low heat)|TRUE
 O|opt_style|fluffy|Fluffy, larger curds (medium heat)|FALSE
@@ -653,10 +650,10 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.062
 I|chives|Chives (optional)|img/350/chives.webp|1|tsp|1|linear|—|finely snipped
 I|bread|Bread slices|img/350/bread.webp|1|slices|35|linear|opt_toast = toast|—
 I|butter_toast|Butter for the toast|img/350/butter.webp|5|g|5|linear|opt_toast = toast|—
+S|T1|T|Toast the bread and butter it|Toast the bread and butter it while hot.|action|—|150|—|Golden and buttered|bread; butter_toast|plates|opt_toast = toast|countertop
 S|P1|P|Whisk the eggs|Crack the eggs into a bowl, add the milk, salt and pepper and whisk until no streaks of white are left.|action|—|(30 + 30 × servings) × skill_factor|—|Evenly yellow|egg; milk; salt; ground_black_pepper|bowl, fork|—
 S|P2|P|Melt the butter|Melt the butter in the frying pan.|action|low|60|P1|Butter foaming|butter|pan, stovetop|—
-S|T1|T|Toast the bread|Toast the bread and butter it while hot.|action|—|150|—|Golden and buttered|bread; butter_toast|plates|opt_toast = toast|countertop
-S|P3|P|Cook the eggs|Pour in the eggs. Let them sit 20 seconds, then push them slowly from the edge to the middle with the spatula. Keep folding until they are almost set but still shiny.|action|low|240 soft / 120 fluffy|P2|Almost set, still glossy|—|pan, spatula|—
+S|P3|P|Cook and stir the eggs|Pour in the eggs. Let them sit 20 seconds, then push them slowly from the edge to the middle with the spatula. Keep folding until they are almost set but still shiny.|action|low|240 soft / 120 fluffy|P2|Almost set, still glossy|—|pan, spatula|—
 S|F1|F|Serve|Take the pan off the heat (the eggs keep cooking), sprinkle with chives and serve at once, with the toast if made.|action|off|30 + 10 × servings|P3, T1|Served|chives|plates|—
 `
   },
@@ -677,16 +674,18 @@ I|chives|Chives|img/350/chives.webp|1|tbsp|3|linear|opt_filling = cheese_herbs|s
 S|K1|K|Prepare the filling|Grate the cheese if needed, dice the ham or snip the chives, depending on the filling.|action|—|(40 + 20 × servings) × skill_factor|—|Filling ready|grated_cheese; ham; chives|chopping_board, knife|opt_filling = cheese_herbs or ham_cheese
 S|K2|K|Whisk the eggs|Whisk the eggs with the milk, salt and pepper until smooth. Make one omelette per person.|action|—|(30 + 20 × servings) × skill_factor|—|Smooth|egg; milk; salt; ground_black_pepper|bowl, fork|—
 S|P1|P|Heat the pan|Melt a knob of butter in the frying pan until it foams.|action|medium|60|—|Foaming|butter|pan, stovetop|—
-S|P2|P|Cook the omelette|Pour in one portion of egg. Stir quickly with the spatula for a few seconds, then let it set while you pull the edges in so raw egg runs underneath.|action|medium|90 × servings|P1, K2|Bottom set, top still a little wet|—|pan, spatula|—
+S|P2|P|Stir, then pull in the edges as it sets|Pour in one portion of egg. Stir quickly with the spatula for a few seconds, then let it set while you pull the edges in so raw egg runs underneath. Stop when the bottom is set and the top is still a little wet.|action|medium|90 × servings|P1, K2|Bottom set, top still a little wet|—|pan, spatula|—
 S|P3|P|Fill and fold|Scatter the filling over one half, fold the other half over and slide it onto a plate. Repeat for the next portion.|action|medium|30 × servings|P2, K1|Folded, cheese melting|—|pan, spatula, plates|—
 S|F1|F|Serve|Serve right away while the inside is still soft.|action|off|20|P3|Served|—|plates|—
 `
   },
   {
     id: "pancakes", name: "Pancakes", image: "img/350/flour.webp",
+    waitFor: { P1: ['B3'] },
     rows: `
 O|opt_topping|syrup|Maple syrup and butter|TRUE
 O|opt_topping|berries|Fresh berries and honey|FALSE
+O|opt_topping|both|Both: maple syrup and butter, plus berries and honey|FALSE
 I|flour|Flour (all-purpose)|img/350/flour.webp|65|g|65|linear|—|—
 I|sugar|Sugar|img/350/sugar.webp|0.5|tbsp|6|linear|—|—
 I|baking_powder|Baking powder|img/350/baking_powder.webp|0.75|tsp|3|linear|—|—
@@ -694,16 +693,16 @@ I|salt|Salt|img/350/salt.webp|0.0625|tsp|0.35|linear|—|—
 I|milk|Milk|img/350/milk.webp|80|ml|82|linear|—|—
 I|egg|Egg|img/350/egg.webp|0.5|pcs|27|linear, rounded up|—|—
 I|butter|Butter, melted (plus a little for the pan)|img/350/butter.webp|15|g|15|linear|—|—
-I|maple_syrup|Maple syrup|img/350/maple_syrup.webp|2|tbsp|40|linear|opt_topping = syrup|—
-I|blueberry|Blueberries or other berries|img/350/blueberry.webp|60|g|60|linear|opt_topping = berries|—
-I|honey|Honey|img/350/honey.webp|1|tbsp|21|linear|opt_topping = berries|—
-S|B1|B|Melt the butter|Melt the butter (microwave or a small pan) and let it cool a little.|action|—|60|—|Melted|butter|bowl|—|countertop
-S|B2|B|Dry ingredients|Mix the flour, sugar, baking powder and salt in the bowl.|action|—|(30 + 15 × servings) × skill_factor|—|Mixed|flour; sugar; baking_powder; salt|bowl, whisk|—
+I|maple_syrup|Maple syrup|img/350/maple_syrup.webp|2|tbsp|40|linear|opt_topping = syrup or both|—
+I|blueberry|Blueberries or other berries|img/350/blueberry.webp|60|g|60|linear|opt_topping = berries or both|—
+I|honey|Honey|img/350/honey.webp|1|tbsp|21|linear|opt_topping = berries or both|—
+S|B1|B|Melt the butter in the microwave|Melt the butter in the microwave (about 30 seconds, in short bursts) and let it cool a little.|action|—|60|—|Melted|butter|bowl|—|countertop
+S|B2|B|Add the dry ingredients|Add the flour, sugar, baking powder and salt to the bowl and mix.|action|—|(30 + 15 × servings) × skill_factor|—|Mixed|flour; sugar; baking_powder; salt|bowl, whisk|—
 S|B3|B|Make the batter|Whisk the milk, egg and melted butter together, pour into the dry mix and stir just until combined. A few lumps are fine; overmixing makes them tough.|action|—|(40 + 15 × servings) × skill_factor|B1, B2|Thick, a few lumps|milk; egg|bowl, whisk|—
 S|B4|B|Rest the batter|Let the batter rest so the baking powder starts working.|wait|—|300|B3|Bubbly on top|—|bowl|—
 S|P1|P|Heat the pan|Heat the frying pan and wipe it with a little butter.|action|medium|120|—|A drop of water sizzles|—|pan, stovetop|—
-S|P2|P|Cook the pancakes|Pour about 3 tbsp of batter per pancake. Flip when bubbles pop on the surface and the edges look dry, then cook 1 more minute.|action|medium|180 × servings|P1, B4|Golden on both sides|—|pan, spatula, ladle|—
-S|F1|F|Serve|Stack the pancakes and top with maple syrup and butter, or berries and honey.|action|off|30 + 15 × servings|P2|Served|maple_syrup; blueberry; honey|plates|—
+S|P2|P|Cook the pancakes, flipping once|Pour about 3 tbsp of batter per pancake. After 2 to 3 minutes, when bubbles pop on the surface and the edges look dry, flip it once and cook 1 more minute. Repeat with the rest of the batter.|action|medium|180 × servings|P1, B4|Golden on both sides|—|pan, spatula, ladle|—
+S|F1|F|Serve|Stack the pancakes and add the toppings: maple syrup and butter, fresh berries and honey, or both.|action|off|30 + 15 × servings|P2|Served|maple_syrup; blueberry; honey|plates|—
 `
   },
   {
@@ -731,6 +730,7 @@ S|F1|F|Fill and fold|Spread with the filling (sugar and a squeeze of lemon, jam,
   },
   {
     id: "french_toast", name: "French Toast", image: "img/350/bread.webp",
+    hints: [{ step: 'P2', at: 0.5, say: 'Flip the toast now!' }],
     rows: `
 O|opt_topping|syrup|Maple syrup|TRUE
 O|opt_topping|berries|Berries and powdered sugar|FALSE
@@ -747,7 +747,7 @@ I|powdered_sugar|Powdered sugar|img/350/powdered_sugar.webp|1|tsp|3|linear|opt_t
 S|B1|B|Make the custard|Whisk the egg, milk, sugar, cinnamon and vanilla in a shallow dish.|action|—|(30 + 15 × servings) × skill_factor|—|Smooth|egg; milk; sugar; cinnamon; vanilla|bowl, whisk|—
 S|P1|P|Heat the pan|Melt some of the butter in the frying pan.|action|medium|90|—|Foaming|butter|pan, stovetop|—
 S|B2|B|Soak the bread|Dip each slice in the custard, about 15 seconds per side, so it soaks through but does not fall apart.|action|—|30 × servings|B1|Soaked|bread|bowl|—
-S|P2|P|Fry|Fry the slices until golden, 2 to 3 minutes per side. Add butter between batches.|action|medium|300 + 60 × servings|P1, B2|Golden, springy in the middle|—|pan, spatula|—
+S|P2|P|Fry the toast, flipping once|Fry the slices on medium heat for 2 to 3 minutes until golden. When you reach the middle of the time, flip each slice once and fry the other side. Add butter between batches.|action|medium|300 + 60 × servings|P1, B2|Golden, springy in the middle|—|pan, spatula|—
 S|F1|F|Serve|Serve hot with maple syrup, or with berries and a dusting of powdered sugar.|action|off|30|P2|Served|maple_syrup; strawberry; powdered_sugar|plates|—
 `
   },
@@ -769,9 +769,9 @@ I|banana|Banana|img/350/banana.webp|0.5|pcs|60|linear|opt_topping = banana_honey
 I|honey|Honey|img/350/honey.webp|1|tbsp|21|linear|opt_topping = banana_honey|—
 I|blueberry|Berries|img/350/blueberry.webp|60|g|60|linear|opt_topping = berries|—
 I|kiwi|Kiwi|img/350/kiwi.webp|1|pcs|70|linear|opt_topping = kiwi|peeled, sliced
-S|P1|P|Oats and liquid in|Put the oats, milk and/or water and the pinch of salt in the saucepan.|action|—|45|—|In the pan|rolled_oats; milk; water; salt|saucepan|—
+S|P1|P|Add the oats and liquid to the pan|Put the oats, milk and/or water and the pinch of salt in the saucepan.|action|—|45|—|In the pan|rolled_oats; milk; water; salt|saucepan|—
 S|P2|P|Bring to a simmer|Bring to a gentle boil, stirring now and then.|wait|medium|240|P1|Bubbling|—|saucepan, stovetop, wooden_spoon|—
-S|P3|P|Simmer|Turn down and simmer, stirring often, until thick and creamy. Stir in the cinnamon. Add a splash more liquid if too thick.|wait|low|300|P2|Thick and creamy|cinnamon|saucepan, wooden_spoon|—
+S|P3|P|Simmer and stir until thick and creamy|Turn down and simmer, stirring often, until thick and creamy. Stir in the cinnamon. Add a splash more liquid if too thick.|wait|low|300|P2|Thick and creamy|cinnamon|saucepan, wooden_spoon|—
 S|K1|K|Prepare the topping|Slice the banana or kiwi, or rinse the berries.|action|—|(30 + 30 × servings) × skill_factor|—|Ready|banana; blueberry; kiwi|chopping_board, knife|—
 S|F1|F|Serve|Spoon into bowls and add the topping (and the honey).|action|off|30 + 10 × servings|P3, K1|Served|honey|ladle|—
 `
@@ -839,7 +839,7 @@ I|butter|Butter, soft|img/350/butter.webp|10|g|10|linear|—|—
 I|cheddar|Cheddar (or another melting cheese)|img/350/cheddar.webp|50|g|50|linear|—|sliced or grated
 I|ham|Ham slice|img/350/ham.webp|1|slices|25|linear|opt_extra = ham|—
 I|tomato|Tomato|img/350/tomato.webp|0.5|pcs|60|linear|opt_extra = tomato|thinly sliced
-S|K1|K|Butter and fill|Butter one side of each slice. Put the cheese (and ham or tomato) between the unbuttered sides, buttered sides out.|action|—|(40 + 40 × servings) × skill_factor|—|Assembled|bread; butter; cheddar; ham; tomato|chopping_board, knife|—
+S|K1|K|Butter the bread and fill it|Butter one side of each slice. Put the cheese (and ham or tomato) between the unbuttered sides, buttered sides out.|action|—|(40 + 40 × servings) × skill_factor|—|Assembled|bread; butter; cheddar; ham; tomato|chopping_board, knife|—
 S|P1|P|Heat the pan|Heat the frying pan on medium-low.|action|medium-low|90|—|Warm|—|pan, stovetop|—
 S|P2|P|Fry|Fry the sandwiches 3 to 4 minutes per side, pressing gently with the spatula, until golden and the cheese has melted.|action|medium-low|420 + 60 × servings|P1, K1|Golden, cheese oozing|—|pan, spatula|—
 S|F1|F|Cut and serve|Cut in half diagonally and serve hot.|action|off|20 + 10 × servings|P2|Served|—|chef_knife, plates|—
@@ -859,9 +859,9 @@ I|oil|Oil or soft butter|img/350/oil.webp|0.5|tbsp|7|linear|—|—
 S|D1|D|Wake the yeast|Stir the yeast and sugar into the lukewarm water and leave until foamy.|wait|—|300|—|Foamy|water; yeast; sugar|bowl|—
 S|D2|D|Mix the dough|Mix the flour and salt, add the yeast water and the oil and stir into a shaggy dough.|action|—|(90 + 15 × servings) × skill_factor|D1|No dry flour left|flour; salt; oil|kitchen_scale, bowl, wooden_spoon|—
 S|D3|D|Knead|Knead on a floured surface until smooth and springy.|action|—|600 (doc: 8 to 10 min)|D2|Smooth, springs back when poked|—|chopping_board|—|countertop
-S|D4|D|First rise|Put it back in the bowl, cover and let it double in a warm place.|wait|—|3600 (doc: 1 to 1.5 h)|D3|Doubled|—|bowl, plastic_wrap|—
+S|D4|D|Let the dough rise (first rise)|Put it back in the bowl, cover and let it double in a warm place.|wait|—|3600 (doc: 1 to 1.5 h)|D3|Doubled|—|bowl, plastic_wrap|—
 S|D5|D|Shape|Press out the air, roll into a log and put it in the greased loaf pan (or shape a round loaf on a tray with baking paper).|action|—|180 × skill_factor|D4|Shaped|—|loaf_pan|—|countertop
-S|D6|D|Second rise|Cover loosely and let it rise again.|wait|—|2400 (doc: 30 to 45 min)|D5|Risen above the pan rim|—|loaf_pan, plastic_wrap|—
+S|D6|D|Let the loaf rise (second rise)|Cover loosely and let it rise again.|wait|—|2400 (doc: 30 to 45 min)|D5|Risen above the pan rim|—|loaf_pan, plastic_wrap|—
 S|O1|O|Preheat the oven|Turn the oven on to 200 °C conventional (180 °C fan).|action|200 °C (180 °C fan)|15|D5|Oven on|—|oven|—
 S|O2|O|Bake|Bake until deep golden and hollow-sounding when you tap the bottom.|wait|200 °C (180 °C fan)|1800 (doc: 30 to 35 min)|D6, O1|Golden, sounds hollow|—|oven, loaf_pan|—
 S|F1|F|Cool|Take it out of the pan and let it cool on a rack before slicing, or the inside turns gummy.|wait|—|1800|O2|Cool enough to slice|—|chef_knife, chopping_board, cooling_rack|—
@@ -895,7 +895,7 @@ I|parmesan|Parmesan, to serve|img/350/parmesan.webp|15|g|15|linear|—|grated
 S|K1|K|Chop the soffritto|Finely dice the onion, carrot and celery and mince the garlic.|action|—|(120 + 90 × servings) × skill_factor|—|Finely diced|onion; carrot; celery_stalk; garlic|chef_knife, chopping_board|—
 S|S1|S|Soften the vegetables|Heat the oil in the pot and cook the onion, carrot and celery until soft, stirring now and then. Add the garlic for the last minute.|action|medium|480|K1|Soft and sweet-smelling|olive_oil|cooking_pot, stovetop, wooden_spoon|—
 S|S2|S|Brown the meat|Turn the heat up, add the meat and break it up. Fry until it is no longer pink and starts to brown.|action|medium-high|420|S1|Browned, no pink|ground_beef; ground_pork|cooking_pot, wooden_spoon|—
-S|S3|S|Tomato paste and wine|Stir in the tomato paste for a minute, then pour in the wine (or stock) and let it bubble away.|action|medium-high|180|S2|Wine almost gone|tomato_paste; red_wine; beef_stock|cooking_pot, wooden_spoon|—
+S|S3|S|Add the tomato paste and wine|Stir in the tomato paste for a minute, then pour in the wine (or stock) and let it bubble away.|action|medium-high|180|S2|Wine almost gone|tomato_paste; red_wine; beef_stock|cooking_pot, wooden_spoon|—
 S|S4|S|Simmer the sauce|Add the passata, milk, bay leaf, salt and pepper. Simmer gently with the lid ajar, stirring now and then. Add a splash of water if it gets too thick.|wait|low|2700 (doc: 45 min to 2 h)|S3|Thick and rich|tomato_passata; milk; bay_leaf; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
 S|P1|P|Boil the pasta water|Bring a large pot of water to the boil and salt it.|wait|high|600|S3|Rolling boil|salt_pasta|cooking_pot, stovetop|—
 S|P2|P|Cook the spaghetti|Cook the spaghetti until al dente (package time), then drain, keeping a cup of the water.|wait|high|600|P1, S4|Al dente|spaghetti|cooking_pot, colander, tongs|—
@@ -1072,7 +1072,7 @@ S|G4|G|Shape the gnocchi|Roll into finger-thick ropes on a floured board and cut
 S|S1|S|Make the sauce|Warm the oil with the garlic, add the passata and a pinch of salt and simmer until slightly thick. Tear in the basil.|wait|low|900|—|Slightly thick|olive_oil; garlic; tomato_passata; salt; basil|pan, stovetop, wooden_spoon|—
 S|P1|P|Boil the water|Bring a large pot of salted water to the boil.|wait|high|600|—|Rolling boil|—|cooking_pot, stovetop|—
 S|P2|P|Cook the gnocchi|Drop the gnocchi in batches. When they float to the top, cook 30 seconds more and lift them out with a slotted spoon.|action|high|180 + 30 × servings|P1, G4|Floating|gnocchi|cooking_pot, spoon|—
-S|F1|F|Sauce and serve|Toss the gnocchi gently in the sauce and serve with Parmesan.|action|low|60 + 15 × servings|P2, S1|Coated|parmesan|pan, spoon, plates|—
+S|F1|F|Add the sauce and serve|Toss the gnocchi gently in the sauce and serve with Parmesan.|action|low|60 + 15 × servings|P2, S1|Coated|parmesan|pan, spoon, plates|—
 `
   },
   {
@@ -1125,7 +1125,7 @@ S|T1|T|Prepare the toppings|Mix the passata with the oregano and a pinch of salt
 S|D3|D|Stretch the dough|Press and stretch each piece (one pizza per person or two to share) into a thin round on baking paper, leaving a thicker rim.|action|—|(120 + 90 × servings) × skill_factor|D2|Thin round|dough|parchment_paper|—|countertop
 S|D4|D|Top the pizza|Spread a thin layer of sauce, scatter the mozzarella and drizzle with the rest of the oil.|action|—|60 × servings|D3, T1|Topped|olive_oil|spoon|—|countertop
 S|O3|O|Bake|Slide the pizza on its paper onto the hot tray and bake until the rim is browned and the cheese bubbles.|wait|250 °C|540 × servings|D4, O2|Blistered rim, bubbling cheese|—|oven, tray|—
-S|F1|F|Basil and serve|Scatter fresh basil on top, cut into slices and serve.|action|off|30 + 15 × servings|O3|Served|basil|chef_knife, chopping_board|—
+S|F1|F|Add the basil and serve|Scatter fresh basil on top, cut into slices and serve.|action|off|30 + 15 × servings|O3|Served|basil|chef_knife, chopping_board|—
 `
   },
   {
@@ -1196,7 +1196,7 @@ S|D3|D|Roll and fill|Roll the dough very thin (you should almost see your hand t
 S|P1|P|Boil the water|Bring a large pot of salted water to the boil.|wait|high|600|K2|Rolling boil|—|cooking_pot, stovetop|—
 S|S1|S|Make the sauce|Brown the butter with the sage leaves until nutty and the sage is crisp, or warm the passata with a pinch of salt.|action|medium|240|D3|Nutty brown butter / warm sauce|butter; sage; tomato_passata|pan, stovetop|—
 S|P2|P|Cook the ravioli|Cook the ravioli in gently boiling water until they float and the edges are tender, 3 to 4 minutes.|wait|medium-high|210|P1, D3|Tender edges|—|cooking_pot, spoon|—
-S|F1|F|Sauce and serve|Lift the ravioli into the sauce, toss gently and serve with the rest of the Parmesan.|action|low|60 + 15 × servings|P2, S1|Served|—|pan, spoon, plates|—
+S|F1|F|Add the sauce and serve|Lift the ravioli into the sauce, toss gently and serve with the rest of the Parmesan.|action|low|60 + 15 × servings|P2, S1|Served|—|pan, spoon, plates|—
 `
   },
   {
@@ -1271,7 +1271,7 @@ I|parsley|Parsley, to serve|img/350/parsley.webp|1|tbsp|4|linear|—|chopped
 S|K1|K|Season the beef|Pat the beef dry, toss with the flour, half the salt and the pepper.|action|—|(60 + 30 × servings) × skill_factor|—|Dusted|beef; flour; salt; ground_black_pepper|bowl|—
 S|P1|P|Brown the beef|Heat the oil in the heavy pot and brown the beef in batches on all sides. Do not crowd the pot. Set aside.|action|high|480 + 120 × servings|K1|Deep brown crust|oil|cooking_pot, stovetop, tongs|—
 S|K2|K|Chop the vegetables|Chop the onion, mince the garlic, slice the carrots and celery and cut the potatoes into chunks.|action|—|(120 + 120 × servings) × skill_factor|—|Chopped|onion; garlic; carrot; potato; celery_stalk|chef_knife, chopping_board, vegetable_peeler|—
-S|P2|P|Onion and tomato paste|Cook the onion in the same pot until soft, add the garlic and tomato paste and stir 1 minute.|action|medium|360|P1, K2|Soft, paste darkened|tomato_paste|cooking_pot, wooden_spoon|—
+S|P2|P|Add the onion and tomato paste|Cook the onion in the same pot until soft, add the garlic and tomato paste and stir 1 minute.|action|medium|360|P1, K2|Soft, paste darkened|tomato_paste|cooking_pot, wooden_spoon|—
 S|P3|P|Deglaze and simmer|Pour in the wine (or extra stock), scrape up the brown bits, add the stock, bay leaf, thyme, the rest of the salt and the beef. Cover and simmer very gently.|wait|low|4500 (doc: 1.5 h before the vegetables)|P2|Beef getting tender|red_wine; beef_stock; bay_leaf; thyme; salt|cooking_pot, wooden_spoon|—
 S|P4|P|Add the vegetables|Add the carrots, potatoes and celery and simmer covered until everything is tender and the sauce has thickened.|wait|low|2400|P3|Beef falls apart, vegetables tender|—|cooking_pot|—
 S|F1|F|Serve|Remove the bay leaf, check the seasoning and serve in bowls with parsley.|action|off|60 + 15 × servings|P4|Served|parsley|ladle|—
@@ -1403,9 +1403,9 @@ I|potato|Potatoes (for mash)|img/350/potato.webp|200|g|200|linear|opt_side = mas
 S|R1|R|Cook the side|Cook the rice (1 part rice to 1.5 parts water, covered, 15 min) or boil the potatoes and mash them with a little butter and milk.|wait|low|1200|—|Ready|white_rice; potato|cooking_pot, stovetop|—
 S|K1|K|Slice|Cut the beef into thin strips across the grain, slice the mushrooms and the onion, chop the parsley.|action|—|(120 + 120 × servings) × skill_factor|—|Sliced|white_mushroom; onion; parsley|chef_knife, chopping_board|—
 S|P1|P|Sear the beef|Season the beef and sear in the hot oil in small batches, just 1 minute per side. Set aside; it finishes cooking in the sauce.|action|high|180 + 60 × servings|K1|Browned outside, pink inside|beef; oil|pan, stovetop, tongs|—
-S|P2|P|Onion and mushrooms|Melt the butter and cook the onion and mushrooms until golden. Stir in the paprika and flour.|action|medium-high|480|P1|Golden|butter; paprika_powder; flour|pan, wooden_spoon|—
+S|P2|P|Add the onion and mushrooms|Melt the butter and cook the onion and mushrooms until golden. Stir in the paprika and flour.|action|medium-high|480|P1|Golden|butter; paprika_powder; flour|pan, wooden_spoon|—
 S|P3|P|Make the sauce|Pour in the stock and mustard and simmer until slightly thick. Lower the heat and stir in the sour cream; do not let it boil or it splits.|action|low|240|P2|Creamy|beef_stock; mustard; sour_cream; salt; ground_black_pepper|pan, wooden_spoon|—
-S|P4|P|Beef back in|Return the beef and its juices and warm through for 1 minute.|action|low|60|P3|Hot through|—|pan, wooden_spoon|—
+S|P4|P|Return the beef to the pan|Return the beef and its juices and warm through for 1 minute.|action|low|60|P3|Hot through|—|pan, wooden_spoon|—
 S|F1|F|Serve|Serve over the rice or mash with parsley on top.|action|off|30 + 15 × servings|P4, R1|Served|—|spoon, plates|—
 `
   },
@@ -1431,8 +1431,8 @@ I|white_rice|Rice|img/350/white_rice.webp|70|g|70|linear|opt_serve = rice|—
 S|K1|K|Cut the vegetables|Cut the eggplant and zucchini into 2 cm cubes, the pepper into chunks, chop the onion and tomatoes and mince the garlic.|action|—|(180 + 180 × servings) × skill_factor|—|All cut|eggplant; zucchini; red_bell_pepper; onion; garlic; tomato|chef_knife, chopping_board|—
 S|R1|F|Cook the rice|Cook the rice (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|—|Cooked|white_rice|saucepan, stovetop|opt_serve = rice
 S|P1|P|Brown the eggplant|Fry the eggplant in half the oil until golden, then set aside. Eggplant soaks up oil; that is normal.|action|medium-high|420|K1|Golden|—|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Zucchini and pepper|Add a little more oil and fry the zucchini and pepper until lightly browned. Set aside with the eggplant.|action|medium-high|360|P1|Lightly browned|—|cooking_pot, wooden_spoon|—
-S|P3|P|Onion, garlic, tomatoes|Soften the onion in the rest of the oil, add the garlic, then the tomatoes, passata, thyme, salt and pepper.|action|medium|480|P2|Saucy|olive_oil; tomato_passata; thyme; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
+S|P2|P|Add the zucchini and pepper|Add a little more oil and fry the zucchini and pepper until lightly browned. Set aside with the eggplant.|action|medium-high|360|P1|Lightly browned|—|cooking_pot, wooden_spoon|—
+S|P3|P|Add the onion, garlic and tomatoes|Soften the onion in the rest of the oil, add the garlic, then the tomatoes, passata, thyme, salt and pepper.|action|medium|480|P2|Saucy|olive_oil; tomato_passata; thyme; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
 S|P4|P|Simmer together|Return all the vegetables and simmer gently, half covered, until soft but not mushy.|wait|low|1800 (doc: 30 to 40 min)|P3|Soft, rich|—|cooking_pot|—
 S|F1|F|Serve|Tear in the basil and serve warm or at room temperature with bread or rice.|action|off|30 + 15 × servings|P4, R1|Served|basil; bread|ladle|—
 `
@@ -1536,9 +1536,9 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.062
 I|basil|Fresh basil leaves|img/350/basil.webp|2|leaves|1|linear|—|—
 I|parmesan|Parmesan, to serve|img/350/parmesan.webp|10|g|10|linear|—|grated
 S|K1|K|Dice the vegetables|Dice the onion, carrot, celery, potato and zucchini, cut the beans short and mince the garlic.|action|—|(180 + 180 × servings) × skill_factor|—|Diced|onion; carrot; celery_stalk; garlic; potato; zucchini; green_beans|chef_knife, chopping_board|—
-S|P1|P|Soffritto|Cook the onion, carrot and celery in the oil until soft; add the garlic for the last minute.|action|medium|480|K1|Soft|olive_oil|cooking_pot, stovetop, wooden_spoon|—
+S|P1|P|Cook the soffritto (onion, carrot, celery)|Cook the onion, carrot and celery in the oil until soft; add the garlic for the last minute.|action|medium|480|K1|Soft|olive_oil|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Simmer the vegetables|Add the potato, tomatoes and stock. Simmer 10 minutes, then add the zucchini and green beans and simmer 10 more.|wait|low|1200|P1|Vegetables nearly tender|tomato_passata; vegetable_stock|cooking_pot|—
-S|P3|P|Beans and pasta|Add the beans and the pasta and cook until the pasta is tender. Add water if it gets too thick. Season.|wait|medium|600|P2|Pasta tender|white_beans; macaroni; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
+S|P3|P|Add the beans and pasta|Add the beans and the pasta and cook until the pasta is tender. Add water if it gets too thick. Season.|wait|medium|600|P2|Pasta tender|white_beans; macaroni; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
 S|F1|F|Serve|Tear in the basil and serve with grated Parmesan and a drizzle of olive oil.|action|off|30 + 15 × servings|P3|Served|basil; parmesan|ladle|—
 `
   },
@@ -1559,7 +1559,7 @@ I|red_wine_vinegar|Red wine vinegar|img/350/red_wine_vinegar.webp|0.5|tsp|2.5|li
 I|salt|Salt|img/350/salt.webp|0.0625|tsp|0.35|linear|—|—
 S|K1|K|Cut the vegetables|Cut the tomatoes into wedges and the cucumber into thick half-moons. Slice the pepper and onion into thin rings.|action|—|(90 + 90 × servings) × skill_factor|—|Cut|tomato; cucumber; green_bell_pepper; red_onion|chef_knife, chopping_board|—
 S|F1|F|Assemble|Put the vegetables and olives in a bowl, season with a little salt and toss with the vinegar.|action|—|45 + 15 × servings|K1|Tossed|olives; salt; red_wine_vinegar|bowl|—
-S|F2|F|Feta on top|Put the feta slab on top, sprinkle with oregano and pour over the olive oil. Serve with bread.|action|—|30 + 10 × servings|F1|Served|feta_cheese; oregano; extra_virgin_olive_oil|bowl, spoon|—
+S|F2|F|Put the feta on top|Put the feta slab on top, sprinkle with oregano and pour over the olive oil. Serve with bread.|action|—|30 + 10 × servings|F1|Served|feta_cheese; oregano; extra_virgin_olive_oil|bowl, spoon|—
 `
   },
   {
@@ -1657,7 +1657,7 @@ I|cheddar|Grated cheese|img/350/cheddar.webp|25|g|25|linear|—|—
 I|sour_cream|Sour cream|img/350/sour_cream.webp|1|tbsp|15|linear|—|—
 I|lime|Lime wedges|img/350/lime.webp|0.25|pcs|15|linear, rounded up|—|—
 I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
-S|K1|K|Prep the toppings|Dice the onion, tomato, mince the garlic, shred the lettuce, chop the cilantro and cut the lime into wedges.|action|—|(120 + 120 × servings) × skill_factor|—|Toppings ready|onion; garlic; tomato; lettuce; cilantro; lime; chili_pepper|chef_knife, chopping_board|—
+S|K1|K|Prepare the toppings|Dice the onion, tomato, mince the garlic, shred the lettuce, chop the cilantro and cut the lime into wedges.|action|—|(120 + 120 × servings) × skill_factor|—|Toppings ready|onion; garlic; tomato; lettuce; cilantro; lime; chili_pepper|chef_knife, chopping_board|—
 S|P1|P|Brown the beef|Fry the onion in the oil for 3 minutes, add the beef and break it up until browned.|action|medium-high|480|K1|Browned|oil; ground_beef|pan, stovetop, wooden_spoon|—
 S|P2|P|Season|Add the garlic, spices, salt and tomato paste, stir 1 minute, then add the water and simmer until saucy and thick.|wait|medium|300|P1|Thick and saucy|chili_powder; cumin; paprika_powder; oregano; salt; tomato_paste; water|pan, wooden_spoon|—
 S|T1|T|Warm the tortillas|Warm the tortillas one by one in a dry pan, about 30 seconds per side, and keep them wrapped in a towel.|action|medium-high|60 × servings|P2|Soft and pliable|corn_tortilla; tortilla|pan|—
@@ -1784,7 +1784,7 @@ I|oil|Oil|img/350/oil.webp|0.5|tsp|2|linear|—|—
 S|D1|D|Make the dough|Mix the warm water and salt, pour in the cornmeal and stir. (Mix in the cheese now if it goes inside.) Knead until smooth and let it rest 5 minutes.|action|—|(120 + 30 × servings) × skill_factor|—|Soft, smooth, does not crack|precooked_cornmeal; water; salt; mozzarella|bowl|—|countertop
 S|D2|D|Shape|Shape into balls (2 per person) and flatten into 1.5 cm discs. Smooth any cracks on the edges with wet fingers.|action|—|(60 + 60 × servings) × skill_factor|D1|Smooth discs|—|chopping_board|—|countertop
 S|P1|P|Cook the arepas|Cook in a lightly oiled pan on medium-low until a crust forms and they sound hollow when tapped, about 6 to 8 minutes per side.|action|medium-low|840 + 120 × servings|D2|Golden crust, hollow sound|oil|pan, stovetop, spatula|—
-S|F1|F|Butter and serve|Split open, spread with butter (and stuff with cheese if chosen) and eat while hot.|action|off|30 + 30 × servings|P1|Served|butter|knife, plates|—
+S|F1|F|Add the butter and serve|Split open, spread with butter (and stuff with cheese if chosen) and eat while hot.|action|off|30 + 30 × servings|P1|Served|butter|knife, plates|—
 `
   },
   {
@@ -1851,9 +1851,9 @@ I|egg|Eggs|img/350/egg.webp|2|pcs|110|linear|—|—
 I|avocado|Avocado|img/350/avocado.webp|0.25|pcs|40|linear, rounded up|—|sliced
 I|feta_cheese|Crumbly white cheese (queso fresco or feta)|img/350/feta_cheese.webp|20|g|20|linear|—|crumbled
 I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
-S|K1|K|Chop|Dice the onion, mince the garlic, chop the cilantro (and chili), slice the avocado.|action|—|(60 + 60 × servings) × skill_factor|—|Chopped|onion; garlic; chili_pepper; cilantro; avocado|chef_knife, chopping_board|—
+S|K1|K|Chop the onion, garlic, cilantro and avocado|Dice the onion, mince the garlic, chop the cilantro (and chili), slice the avocado.|action|—|(60 + 60 × servings) × skill_factor|—|Chopped|onion; garlic; chili_pepper; cilantro; avocado|chef_knife, chopping_board|—
 S|S1|S|Make the ranchero salsa|Soften the onion in half the oil, add the garlic (and chili), then the tomatoes, cumin and salt. Simmer until slightly thick.|wait|medium-low|600|K1|Slightly thick|tomato_passata; cumin; salt|saucepan, stovetop, wooden_spoon|—
-S|S2|S|Warm the beans|Warm the beans in a small pot and mash them roughly with a fork.|action|low|240|K1|Hot, roughly mashed|black_beans|saucepan, fork|—
+S|S2|B|Warm the beans|Warm the beans in a small pot and mash them roughly with a fork.|action|low|240|K1|Hot, roughly mashed|black_beans|saucepan, fork|—
 S|P1|P|Crisp the tortillas|Fry the tortillas briefly in a little oil until soft-crisp and put them on plates.|action|medium-high|60 × servings|S2|Soft-crisp|corn_tortilla|pan, stovetop, tongs|—
 S|P2|P|Fry the eggs|Fry the eggs in the rest of the oil until the whites are set and the yolks still runny.|action|medium|240|P1|Whites set, yolks runny|egg; oil|pan, spatula|—
 S|F1|F|Assemble|Spread beans on each tortilla, top with the eggs, spoon over the salsa and finish with avocado, cheese and cilantro.|action|off|30 + 30 × servings|P2, S1|Served|feta_cheese|spoon, plates|—
@@ -1873,9 +1873,9 @@ I|olive_oil|Olive oil|img/350/olive_oil.webp|1|tbsp|14|linear|opt_dip = garlic|�
 S|K1|K|Peel and cut|Cut off the ends, score the skin lengthwise and peel it off. Cut into 3 cm thick rounds.|action|—|(60 + 90 × servings) × skill_factor|—|Peeled rounds|plantain|knife, chopping_board|—
 S|K2|K|Make the mojo|Mix the crushed garlic with the lime juice, olive oil and a pinch of salt.|action|—|(60 + 15 × servings) × skill_factor|—|Mixed|garlic; lime_juice; olive_oil|bowl, spoon|opt_dip = garlic|countertop
 S|P1|P|Heat the oil|Heat about 2 cm of oil in the pan to 175 °C.|wait|medium-high|300|—|A drop of batter sizzles|oil|pan, stovetop|—
-S|P2|P|First fry|Fry the rounds 3 to 4 minutes, turning once, until pale gold but not brown. Drain.|action|medium-high|240|P1, K1|Pale gold, soft inside|—|pan, tongs|—
+S|P2|P|Fry the plantains the first time|Fry the rounds 3 to 4 minutes, turning once, until pale gold but not brown. Drain.|action|medium-high|240|P1, K1|Pale gold, soft inside|—|pan, tongs|—
 S|P3|P|Smash|Flatten each piece to about 1 cm with the bottom of a glass or between two plates.|action|—|(30 + 45 × servings) × skill_factor|P2|Flat discs|—|chopping_board, plates|—|countertop
-S|P4|P|Second fry|Fry again until golden and crisp, about 2 minutes per side. Drain and salt immediately.|action|medium-high|240|P3|Golden and crisp|salt|pan, tongs|—
+S|P4|P|Fry the plantains the second time|Fry again until golden and crisp, about 2 minutes per side. Drain and salt immediately.|action|medium-high|240|P3|Golden and crisp|salt|pan, tongs|—
 S|F1|F|Serve|Serve hot with the garlic mojo for dipping.|action|off|30|P4, K2|Served|—|plates|—
 `
   },
@@ -1931,7 +1931,7 @@ I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
 I|white_rice|White rice|img/350/white_rice.webp|70|g|70|linear|—|—
 S|R1|R|Cook the rice|Rinse and cook the rice (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|—|Fluffy|white_rice|saucepan, stovetop|—
 S|K1|K|Chop|Dice the onion, pepper and potato, mince the garlic and slice the olives.|action|—|(120 + 90 × servings) × skill_factor|—|Chopped|onion; green_bell_pepper; garlic; potato; olives|chef_knife, chopping_board|—
-S|P1|P|Sofrito|Cook the onion and pepper in the oil until soft, add the garlic, cumin and oregano.|action|medium|360|K1|Soft, fragrant|oil; cumin; oregano|pan, stovetop, wooden_spoon|—
+S|P1|P|Cook the sofrito (onion and pepper)|Cook the onion and pepper in the oil until soft, add the garlic, cumin and oregano.|action|medium|360|K1|Soft, fragrant|oil; cumin; oregano|pan, stovetop, wooden_spoon|—
 S|P2|P|Brown the beef|Add the beef and cook, breaking it up, until browned.|action|medium-high|360|P1|Browned|ground_beef|pan, wooden_spoon|—
 S|P3|P|Simmer|Add the potato, tomato sauce, water and salt. Cover and simmer until the potato is tender, then stir in the olives, raisins and peas for the last 5 minutes.|wait|low|1200|P2|Potato tender, saucy|tomato_passata; water; raisins; pea; salt|pan, wooden_spoon|—
 S|F1|F|Serve|Serve over the rice.|action|off|30 + 15 × servings|P3, R1|Served|—|spoon, plates|—
@@ -1963,9 +1963,9 @@ I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
 I|basmati_rice|Basmati rice|img/350/basmati_rice.webp|70|g|70|linear|opt_side = rice|—
 S|K1|K|Chop and grate|Finely chop the onion and tomatoes, grate the garlic and ginger, cut the chicken into bite-size pieces.|action|—|(180 + 120 × servings) × skill_factor|—|Ready|chicken_legs; onion; garlic; ginger_root; tomato; chili_pepper|chef_knife, chopping_board, microplane|—
 S|P1|P|Brown the onions|Fry the onion in the oil, stirring often, until deep golden. This builds the flavour; do not rush it.|action|medium|720|K1|Deep golden|oil|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Ginger, garlic and spices|Add the garlic, ginger (and chili) for a minute, then the turmeric, cumin, coriander and chili powder for 30 seconds.|action|medium|90|P1|Fragrant|turmeric_powder; cumin; coriander_seeds; chili_powder|cooking_pot, wooden_spoon|—
-S|P3|P|Tomatoes|Add the tomatoes and salt and cook until they break down and the oil starts to separate at the edges.|action|medium|480|P2|Thick masala, oil separating|salt|cooking_pot, wooden_spoon|—
-S|P4|P|Chicken in|Add the chicken and stir to coat, then the yogurt a spoonful at a time and the water.|action|medium|180|P3|Coated|yogurt; water|cooking_pot, wooden_spoon|—
+S|P2|P|Add the ginger, garlic and spices|Add the garlic, ginger (and chili) for a minute, then the turmeric, cumin, coriander and chili powder for 30 seconds.|action|medium|90|P1|Fragrant|turmeric_powder; cumin; coriander_seeds; chili_powder|cooking_pot, wooden_spoon|—
+S|P3|P|Add the tomatoes and cook them down|Add the tomatoes and salt and cook until they break down and the oil starts to separate at the edges.|action|medium|480|P2|Thick masala, oil separating|salt|cooking_pot, wooden_spoon|—
+S|P4|P|Add the chicken|Add the chicken and stir to coat, then the yogurt a spoonful at a time and the water.|action|medium|180|P3|Coated|yogurt; water|cooking_pot, wooden_spoon|—
 S|P5|P|Simmer|Cover and simmer gently until the chicken is tender and the sauce is thick. Stir in the garam masala.|wait|low|1200|P4|Chicken tender|garam_masala|cooking_pot|—
 S|R1|R|Cook the rice|Rinse the rice until the water runs clear and cook it (1 part rice to 1.5 parts water, covered, 12 min, then 5 min resting).|wait|low|1020|P3|Fluffy, separate grains|basmati_rice|saucepan, stovetop, sieve|opt_side = rice
 S|F1|F|Serve|Scatter with cilantro and serve with the rice (or naan).|action|off|30 + 15 × servings|P5, R1|Served|cilantro|ladle, plates|—
@@ -2025,8 +2025,8 @@ I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
 S|M1|M|Marinate the tikka|Mix the chicken with the yogurt, lemon juice, half the spices, half the salt and half the garlic and ginger. Chill at least 30 minutes.|action|—|(90 + 30 × servings) × skill_factor|—|Coated|chicken_breast; yogurt; lemon_juice|bowl, microplane|—|countertop
 S|M2|M|Rest|Let the chicken marinate in the fridge.|wait|—|1800|M1|Marinated|—|fridge|—
 S|M3|M|Grill the tikka|Thread onto skewers and grill under a very hot oven grill (or sear in a pan) until charred at the edges, turning once.|wait|grill|720|M2|Charred edges|—|oven, skewers, tray|—
-S|S1|S|Masala base|Fry the onion in the oil until golden, add the rest of the garlic and ginger and spices for a minute.|action|medium|600|M1|Golden, fragrant|oil; onion; garlic; ginger_root; garam_masala; turmeric_powder; cumin; paprika_powder; chili_powder|cooking_pot, stovetop, wooden_spoon|—
-S|S2|S|Tomato sauce|Add the passata, sugar and the rest of the salt and simmer until thick, then stir in the cream.|wait|low|600|S1|Thick, orange, creamy|tomato_passata; sugar; salt; cream|cooking_pot, wooden_spoon|—
+S|S1|S|Cook the masala base|Fry the onion in the oil until golden, add the rest of the garlic and ginger and spices for a minute.|action|medium|600|M1|Golden, fragrant|oil; onion; garlic; ginger_root; garam_masala; turmeric_powder; cumin; paprika_powder; chili_powder|cooking_pot, stovetop, wooden_spoon|—
+S|S2|S|Make the tomato sauce|Add the passata, sugar and the rest of the salt and simmer until thick, then stir in the cream.|wait|low|600|S1|Thick, orange, creamy|tomato_passata; sugar; salt; cream|cooking_pot, wooden_spoon|—
 S|F1|F|Combine and serve|Add the grilled chicken to the sauce, simmer 3 minutes and serve with cilantro, rice or naan.|action|low|180 + 15 × servings|M3, S2|Served|cilantro|cooking_pot, ladle, plates|—
 `
   },
@@ -2089,8 +2089,8 @@ I|lemon_juice|Lemon juice|img/350/lemon_juice.webp|1|tsp|5|linear|—|—
 I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
 S|P1|P|Cook the lentils|Simmer the rinsed lentils with the water, turmeric and salt, skimming the foam, until completely soft. Whisk to a creamy consistency.|wait|low|1500 (doc: 20 to 30 min)|—|Soft and creamy|red_lentil; water; turmeric_powder; salt|cooking_pot, stovetop, whisk|—
 S|K1|K|Chop|Chop the onion and tomato, slice the garlic and grate the ginger.|action|—|(90 + 60 × servings) × skill_factor|—|Chopped|onion; tomato; garlic; ginger_root|chef_knife, chopping_board|—
-S|P2|P|Masala|In a pan cook the onion in half the ghee until golden, add the ginger and tomato and cook until soft, then stir it into the dal and simmer 5 minutes.|action|medium|600|P1, K1|Combined|garam_masala|pan, stovetop, wooden_spoon|—
-S|T1|T|Tadka (tempering)|Heat the rest of the ghee until very hot. Add the cumin and mustard seeds; when they crackle add the garlic, chilies, asafoetida and chili powder and fry a few seconds until the garlic is golden.|action|high|90|P2|Sizzling, garlic golden|ghee; cumin; mustard_seed; dried_red_chilies; asafoetida; chili_powder|saucepan, stovetop, spoon|—
+S|P2|P|Cook the masala|In a pan cook the onion in half the ghee until golden, add the ginger and tomato and cook until soft, then stir it into the dal and simmer 5 minutes.|action|medium|600|P1, K1|Combined|garam_masala|pan, stovetop, wooden_spoon|—
+S|T1|T|Make the tadka (tempering)|Heat the rest of the ghee until very hot. Add the cumin and mustard seeds; when they crackle add the garlic, chilies, asafoetida and chili powder and fry a few seconds until the garlic is golden.|action|high|90|P2|Sizzling, garlic golden|ghee; cumin; mustard_seed; dried_red_chilies; asafoetida; chili_powder|saucepan, stovetop, spoon|—
 S|F1|F|Finish and serve|Pour the sizzling tadka over the dal, add the lemon juice and cilantro and serve with rice or roti.|action|off|30 + 15 × servings|T1|Served|lemon_juice; cilantro|ladle|—
 `
   },
@@ -2118,8 +2118,8 @@ I|lemon_juice|Lemon juice|img/350/lemon_juice.webp|1|tsp|5|linear|—|—
 I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
 S|K0|P|Boil the chickpeas|Boil the soaked chickpeas in fresh water until completely tender. Drain, keeping some cooking water.|wait|medium-low|3600 (doc: 1 to 1.5 h)|—|Tender|chickpea_dried|cooking_pot, stovetop, colander|opt_chickpeas = dried
 S|K1|K|Chop|Finely chop the onion and tomatoes, grate the garlic and ginger, chop the chili.|action|—|(120 + 90 × servings) × skill_factor|—|Chopped|onion; garlic; ginger_root; chili_pepper; tomato|chef_knife, chopping_board, microplane|—
-S|P1|P|Cumin and onion|Heat the oil, fry the cumin seeds until they crackle, then fry the onion until golden brown.|action|medium|600|K1|Golden brown|oil; cumin|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Masala|Add the garlic, ginger and chili, then the ground spices for 30 seconds, then the tomatoes and salt. Cook until thick and the oil separates.|action|medium|480|P1|Thick masala|coriander_seeds; turmeric_powder; chili_powder; salt|cooking_pot, wooden_spoon|—
+S|P1|P|Fry the cumin and onion|Heat the oil, fry the cumin seeds until they crackle, then fry the onion until golden brown.|action|medium|600|K1|Golden brown|oil; cumin|cooking_pot, stovetop, wooden_spoon|—
+S|P2|P|Cook the masala|Add the garlic, ginger and chili, then the ground spices for 30 seconds, then the tomatoes and salt. Cook until thick and the oil separates.|action|medium|480|P1|Thick masala|coriander_seeds; turmeric_powder; chili_powder; salt|cooking_pot, wooden_spoon|—
 S|P3|P|Simmer the chickpeas|Add the chickpeas and water and simmer, mashing a few chickpeas against the side to thicken the sauce.|wait|low|900|P2, K0|Thick and saucy|chickpea; water|cooking_pot, wooden_spoon|—
 S|F1|F|Finish and serve|Stir in the garam masala and lemon juice, scatter with cilantro and serve with rice, roti or naan.|action|off|30 + 15 × servings|P3|Served|garam_masala; lemon_juice; cilantro|ladle|—
 `
@@ -2149,8 +2149,8 @@ I|basmati_rice|Basmati rice|img/350/basmati_rice.webp|70|g|70|linear|—|—
 S|K0|P|Boil the beans|Boil the soaked beans hard in fresh water for 10 minutes, then simmer until creamy inside.|wait|high|3600 (doc: 1 to 1.5 h)|—|Creamy inside|kidney_beans_dried|cooking_pot, stovetop|opt_beans = dried
 S|K1|K|Chop|Finely chop the onion, grate the garlic and ginger.|action|—|(90 + 60 × servings) × skill_factor|—|Chopped|onion; garlic; ginger_root|chef_knife, chopping_board, microplane|—
 S|R1|R|Cook the rice|Rinse the rice and cook it (1 part rice to 1.5 parts water, covered, 12 min, rest 5 min).|wait|low|1020|K1|Fluffy|basmati_rice|saucepan, stovetop, sieve|—
-S|P1|P|Onion masala|Heat the ghee, fry the cumin and bay leaf, then the onion until deep golden. Add garlic and ginger, then the ground spices.|action|medium|660|K1|Deep golden, fragrant|ghee; cumin; bay_leaf; coriander_seeds; turmeric_powder; chili_powder|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Tomato|Add the tomato purée and salt and cook until thick and the oil separates.|action|medium|480|P1|Thick, oil separating|tomato_passata; salt|cooking_pot, wooden_spoon|—
+S|P1|P|Cook the onion masala|Heat the ghee, fry the cumin and bay leaf, then the onion until deep golden. Add garlic and ginger, then the ground spices.|action|medium|660|K1|Deep golden, fragrant|ghee; cumin; bay_leaf; coriander_seeds; turmeric_powder; chili_powder|cooking_pot, stovetop, wooden_spoon|—
+S|P2|P|Add the tomato|Add the tomato purée and salt and cook until thick and the oil separates.|action|medium|480|P1|Thick, oil separating|tomato_passata; salt|cooking_pot, wooden_spoon|—
 S|P3|P|Simmer the beans|Add the beans and water and simmer until thick and creamy, mashing a few beans.|wait|low|1200|P2, K0|Thick and creamy|kidney_beans; water|cooking_pot, wooden_spoon|—
 S|F1|F|Serve|Stir in the garam masala, scatter with cilantro and serve with rice (rajma chawal).|action|off|30 + 15 × servings|P3, R1|Served|garam_masala; cilantro|ladle, plates|—
 `
@@ -2176,8 +2176,8 @@ S|S1|S|Blanch the spinach|Drop the spinach into boiling water for 1 minute, then
 S|S2|S|Purée the spinach|Squeeze lightly and blend to a smooth purée with a splash of water.|action|—|(60 + 30 × servings) × skill_factor|S1|Smooth green purée|—|blender|—|countertop
 S|K1|K|Chop|Chop the onion, tomato and chili, grate the garlic and ginger, cube the paneer.|action|—|(120 + 60 × servings) × skill_factor|—|Chopped|onion; tomato; chili_pepper; garlic; ginger_root; paneer|chef_knife, chopping_board, microplane|—
 S|P1|P|Sear the paneer|Sear the paneer cubes in a little ghee until golden on two sides; set aside (soak in warm water to keep them soft).|action|medium-high|240|K1|Golden spots|—|pan, stovetop, tongs|opt_paneer = seared
-S|P2|P|Masala|Fry the cumin in the rest of the ghee, then the onion until golden, then garlic, ginger, chili and tomato until soft.|action|medium|600|P1, K1|Soft masala|ghee; cumin|pan, stovetop, wooden_spoon|—
-S|P3|P|Spinach in|Stir in the spinach purée, garam masala and salt and simmer 3 to 4 minutes. Do not cook longer or it turns dull.|action|low|240|P2, S2|Bright, thick|garam_masala; salt|pan, wooden_spoon|—
+S|P2|P|Cook the masala|Fry the cumin in the rest of the ghee, then the onion until golden, then garlic, ginger, chili and tomato until soft.|action|medium|600|P1, K1|Soft masala|ghee; cumin|pan, stovetop, wooden_spoon|—
+S|P3|P|Add the spinach|Stir in the spinach purée, garam masala and salt and simmer 3 to 4 minutes. Do not cook longer or it turns dull.|action|low|240|P2, S2|Bright, thick|garam_masala; salt|pan, wooden_spoon|—
 S|F1|F|Finish and serve|Add the paneer and cream and warm through. Serve with roti or rice.|action|low|120 + 15 × servings|P3|Served|cream|pan, ladle|—
 `
   },
@@ -2201,7 +2201,7 @@ I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
 I|garam_masala|Garam masala|img/350/garam_masala.webp|0.25|tsp|0.6|linear|—|—
 I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
 S|K1|K|Cut the vegetables|Cut the potatoes into cubes and the cauliflower into small florets. Chop the onion and tomato, grate the garlic and ginger.|action|—|(180 + 120 × servings) × skill_factor|—|Cut|potato; cauliflower; onion; garlic; ginger_root; tomato|chef_knife, chopping_board, microplane|—
-S|P1|P|Cumin and onion|Heat the oil, fry the cumin until it crackles, then the onion until soft. Add the garlic, ginger and ground spices.|action|medium|360|K1|Fragrant|oil; cumin; turmeric_powder; coriander_seeds; chili_powder|pan, stovetop, wooden_spoon|—
+S|P1|P|Fry the cumin and onion|Heat the oil, fry the cumin until it crackles, then the onion until soft. Add the garlic, ginger and ground spices.|action|medium|360|K1|Fragrant|oil; cumin; turmeric_powder; coriander_seeds; chili_powder|pan, stovetop, wooden_spoon|—
 S|P2|P|Cook covered|Add the potatoes, cauliflower, tomato and salt, toss to coat, cover and cook on low, stirring now and then, until tender. Add a splash of water only if it sticks.|wait|low|1200|P1|Tender|salt|pan, wooden_spoon|—
 S|P3|P|Brown|Uncover, turn up the heat and fry a few minutes so the edges brown.|action|medium-high|240|P2|Browned edges|garam_masala|pan, wooden_spoon|—
 S|F1|F|Serve|Scatter with cilantro and serve with roti or dal and rice.|action|off|30 + 15 × servings|P3|Served|cilantro|spoon, plates|—
@@ -2222,7 +2222,7 @@ S|D2|D|Rest|Cover and rest so the gluten relaxes.|wait|—|1200|D1|Rested|—|bo
 S|D3|D|Divide and roll|Divide into golf-ball pieces (2 per person). Dust with flour and roll each into a thin 15 cm circle.|action|—|(60 + 120 × servings) × skill_factor|D2|Thin circles|—|rolling_pin|—|countertop
 S|P1|P|Heat the pan|Heat a flat pan or tawa until very hot.|action|medium-high|120|D2|Very hot|—|pan, stovetop|—
 S|P2|P|Cook the rotis|Cook each roti until bubbles appear (about 30 s), flip and cook 30 s, then press the edges with a cloth or hold over the open flame with tongs so it puffs.|action|medium-high|90 × servings|P1, D3|Puffed, brown spots|—|pan, tongs, spatula|—
-S|F1|F|Ghee and serve|Brush with ghee and stack in a cloth to keep them soft.|action|—|20 + 20 × servings|P2|Served|ghee|pastry_brush, plates|—
+S|F1|F|Add the ghee and serve|Brush with ghee and stack in a cloth to keep them soft.|action|—|20 + 20 × servings|P2|Served|ghee|pastry_brush, plates|—
 `
   },
   {
@@ -2246,7 +2246,7 @@ S|D2|D|Let it rise|Cover and leave in a warm place until doubled.|wait|—|3600 
 S|D3|D|Shape|Divide into balls (2 per person) and stretch or roll each into a teardrop about 5 mm thick. Press garlic and cilantro on top if making garlic naan.|action|—|(60 + 90 × servings) × skill_factor|D2|Shaped|garlic; cilantro|rolling_pin|—|countertop
 S|P1|P|Heat the pan|Heat a heavy pan (cast iron is best) until very hot.|action|high|180|D2|Smoking hot|—|pan, stovetop|—
 S|P2|P|Cook the naan|Lay a naan in the dry pan. When big bubbles form (1 min), flip and cook until charred in spots. Cover with a lid for a softer naan.|action|high|150 × servings|P1, D3|Puffed, charred spots|—|pan, tongs|—
-S|F1|F|Butter and serve|Brush with melted butter while hot and serve.|action|—|20 + 20 × servings|P2|Served|butter|pastry_brush, plates|—
+S|F1|F|Add the butter and serve|Brush with melted butter while hot and serve.|action|—|20 + 20 × servings|P2|Served|butter|pastry_brush, plates|—
 `
   },
   {
@@ -2300,7 +2300,7 @@ S|B1|B|Soak|Soak the rice with the fenugreek seeds, and the urad dal separately,
 S|B2|B|Grind|Grind the dal to a fluffy paste, then the rice to a slightly grainy paste, using as little water as possible. Mix together with the salt.|action|—|(600 + 60 × servings) × skill_factor|B1|Thick, pourable batter|salt|blender, bowl|opt_batter = homemade|countertop
 S|B3|B|Ferment|Cover loosely and leave in a warm place until risen and slightly sour.|wait|—|36000 (doc: 8 to 12 h, overnight)|B2|Risen, bubbly|—|bowl|opt_batter = homemade
 S|M1|M|Boil the potatoes|Boil the potatoes until tender, peel and crush roughly.|wait|medium-high|1200|B3|Tender|potato|cooking_pot, stovetop|—
-S|M2|M|Potato masala|Fry the mustard seeds in half the oil until they pop, add the curry leaves, onion, ginger and chili and cook until soft. Add the turmeric, potatoes and a pinch of salt and mix with a splash of water.|action|medium|480|M1|Yellow, soft filling|mustard_seed; curry_leaves; onion; ginger_root; chili_pepper; turmeric_powder; salt; cilantro|pan, stovetop, wooden_spoon|—
+S|M2|M|Cook the potato masala|Fry the mustard seeds in half the oil until they pop, add the curry leaves, onion, ginger and chili and cook until soft. Add the turmeric, potatoes and a pinch of salt and mix with a splash of water.|action|medium|480|M1|Yellow, soft filling|mustard_seed; curry_leaves; onion; ginger_root; chili_pepper; turmeric_powder; salt; cilantro|pan, stovetop, wooden_spoon|—
 S|P1|P|Heat the pan|Heat a flat pan until a sprinkle of water sizzles away, then wipe with a little oil.|action|medium-high|120|B3|Hot|oil|pan, stovetop|—
 S|P2|P|Cook the dosas|Pour a ladle of batter in the middle and spread it in a spiral into a thin circle. Drizzle oil around the edge and cook until golden and crisp underneath (no need to flip). Add filling and fold. About 2 per person.|action|medium-high|180 × servings|P1, M2|Golden, crisp|dosa_batter|pan, ladle, spatula|—
 S|F1|F|Serve|Serve straight away with sambar or coconut chutney.|action|off|20 + 10 × servings|P2|Served|—|plates|—
@@ -2374,8 +2374,8 @@ I|water|Water|img/350/water.webp|140|ml|140|linear|—|—
 I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
 I|cilantro|Cilantro or mint|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
 S|K1|K|Soak the rice and chop|Rinse the rice until clear and soak it. Slice the onion, dice the carrot and cut the beans short.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|basmati_rice; onion; carrot; green_beans|sieve, bowl, chef_knife, chopping_board|—
-S|P1|P|Whole spices and onion|Heat the ghee (or oil), fry the cumin, bay leaf, cardamom, cloves and cinnamon for 30 seconds, then the onion until golden.|action|medium|420|K1|Golden onion|ghee; oil; cumin; bay_leaf; cardamom; cloves; cinnamon|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Vegetables and rice|Add the vegetables for 2 minutes, then the drained rice and stir gently for a minute.|action|medium|180|P1|Grains coated|pea|cooking_pot, wooden_spoon|—
+S|P1|P|Fry the whole spices and onion|Heat the ghee (or oil), fry the cumin, bay leaf, cardamom, cloves and cinnamon for 30 seconds, then the onion until golden.|action|medium|420|K1|Golden onion|ghee; oil; cumin; bay_leaf; cardamom; cloves; cinnamon|cooking_pot, stovetop, wooden_spoon|—
+S|P2|P|Add the vegetables and rice|Add the vegetables for 2 minutes, then the drained rice and stir gently for a minute.|action|medium|180|P1|Grains coated|pea|cooking_pot, wooden_spoon|—
 S|P3|P|Cook covered|Add the water and salt, bring to a boil, then cover tightly and cook on the lowest heat. Do not stir.|wait|low|720|P2|Water absorbed|water; salt|cooking_pot|—
 S|P4|P|Rest|Turn off the heat and leave covered.|wait|off|300|P3|Fluffy grains|—|cooking_pot|—
 S|F1|F|Fluff and serve|Fluff with a fork, remove the whole spices and serve with cilantro or mint.|action|off|30 + 15 × servings|P4|Served|cilantro|fork, plates|—
@@ -2406,7 +2406,7 @@ I|salt|Salt|img/350/salt.webp|0.5|tsp|3|linear|—|—
 I|garam_masala|Garam masala|img/350/garam_masala.webp|0.5|tsp|1.2|linear|—|—
 I|cilantro|Cilantro|img/350/cilantro.webp|1|tbsp|2|linear|—|chopped
 S|K1|K|Chop|Finely chop the onion, tomatoes and chili, grate the garlic and ginger.|action|—|(120 + 60 × servings) × skill_factor|—|Chopped|onion; garlic; ginger_root; chili_pepper; tomato|chef_knife, chopping_board, microplane|—
-S|P1|P|Onion masala|Fry the cumin in the oil, then the onion until golden. Add the garlic, ginger, chili and ground spices for a minute.|action|medium|600|K1|Golden, fragrant|oil; cumin; turmeric_powder; coriander_seeds; chili_powder|pan, stovetop, wooden_spoon|—
+S|P1|P|Cook the onion masala|Fry the cumin in the oil, then the onion until golden. Add the garlic, ginger, chili and ground spices for a minute.|action|medium|600|K1|Golden, fragrant|oil; cumin; turmeric_powder; coriander_seeds; chili_powder|pan, stovetop, wooden_spoon|—
 S|P2|P|Brown the mince|Add the mince and cook, breaking it up, until no longer pink.|action|medium-high|420|P1|Browned|ground_lamb; ground_beef|pan, wooden_spoon|—
 S|P3|P|Simmer|Add the tomatoes, yogurt and salt, cover and simmer, stirring now and then. Add the peas for the last 5 minutes.|wait|low|1200|P2|Thick, peas tender|yogurt; pea; salt|pan, wooden_spoon|—
 S|F1|F|Serve|Stir in the garam masala, top with cilantro and serve with rice, roti or naan.|action|off|30 + 15 × servings|P3|Served|garam_masala; cilantro|spoon, plates|—
@@ -2428,9 +2428,9 @@ I|light_soy_sauce|Light soy sauce|img/350/light_soy_sauce.webp|1|tbsp|15|linear|
 I|toasted_sesame_oil|Toasted sesame oil|img/350/toasted_sesame_oil.webp|0.5|tsp|2|linear|—|—
 I|white_pepper|White pepper|img/350/white_pepper.webp|0.0625|tsp|0.15|linear|—|—
 I|salt|Salt|img/350/salt.webp|0.125|tsp|0.7|linear|—|—
-S|K1|K|Prep|Break up any clumps in the cold rice. Beat the eggs with a pinch of salt. Mince the garlic, slice the green onions, dice the carrot.|action|—|(90 + 60 × servings) × skill_factor|—|Everything ready by the wok|white_rice; egg; garlic; green_onion; carrot; salt|bowl, fork, chef_knife, chopping_board|—
+S|K1|K|Break up the rice and prepare the eggs and vegetables|Break up any clumps in the cold rice. Beat the eggs with a pinch of salt. Mince the garlic, slice the green onions, dice the carrot.|action|—|(90 + 60 × servings) × skill_factor|—|Everything ready by the wok|white_rice; egg; garlic; green_onion; carrot; salt|bowl, fork, chef_knife, chopping_board|—
 S|W1|W|Scramble the eggs|Heat the wok until smoking, add half the oil and the eggs, scramble into soft curds and take them out.|action|high|60|K1|Soft curds|—|wok, stovetop, spatula|—
-S|W2|W|Aromatics and vegetables|Add the rest of the oil, the garlic and green onion whites for 15 seconds, then the carrot and peas for 1 minute.|action|high|90|W1|Fragrant|oil; pea|wok, spatula|—
+S|W2|W|Stir-fry the aromatics and vegetables|Add the rest of the oil, the garlic and green onion whites for 15 seconds, then the carrot and peas for 1 minute.|action|high|90|W1|Fragrant|oil; pea|wok, spatula|—
 S|W3|W|Fry the rice|Add the rice and toss over high heat, pressing out clumps, until every grain is hot and starting to crisp.|action|high|180 + 30 × servings|W2|Hot, separate grains|—|wok, spatula|—
 S|W4|W|Season|Pour the soy sauce around the edge of the wok, add the eggs, white pepper and sesame oil and toss. Finish with the green onion greens.|action|high|60|W3|Evenly coloured|light_soy_sauce; toasted_sesame_oil; white_pepper|wok, spatula|—
 S|F1|F|Serve|Serve straight away.|action|off|20 + 10 × servings|W4|Served|—|bowl|—
@@ -2462,9 +2462,9 @@ S|R1|R|Cook the rice|Rinse the rice and cook it (1 part rice to 1.25 parts water
 S|K1|K|Cut the vegetables|Cut everything into similar bite-size pieces; thinner for hard vegetables like carrot. Mince the garlic and ginger.|action|—|(180 + 150 × servings) × skill_factor|—|All cut|broccoli; carrot; red_bell_pepper; white_mushroom; bok_choy; garlic; ginger_root; tofu|chef_knife, chopping_board|—
 S|K2|K|Mix the sauce|Stir together the soy sauce, oyster sauce, cornstarch and water.|action|—|45|—|Smooth|light_soy_sauce; oyster_sauce; cornstarch; water|bowl, spoon|—|countertop
 S|W0|W|Crisp the tofu|Fry the tofu cubes in a little of the oil until golden on all sides. Set aside.|action|high|420|K1|Golden|—|wok, stovetop, spatula|opt_protein = tofu
-S|W1|W|Hard vegetables first|Heat the wok until smoking, add the oil, then the carrot and broccoli. Toss 2 minutes, adding a splash of water to steam the broccoli.|action|high|120|K1, W0|Bright, starting to soften|oil|wok, stovetop, spatula|—
-S|W2|W|The rest|Add the pepper, mushrooms, bok choy, garlic and ginger and toss 2 minutes more.|action|high|120|W1|Crisp-tender|—|wok, spatula|—
-S|W3|W|Sauce|Stir the sauce, pour it in (with the tofu) and toss until glossy. Finish with the sesame oil.|action|high|60|W2, K2|Glossy|toasted_sesame_oil|wok, spatula|—
+S|W1|W|Stir-fry the hard vegetables first|Heat the wok until smoking, add the oil, then the carrot and broccoli. Toss 2 minutes, adding a splash of water to steam the broccoli.|action|high|120|K1, W0|Bright, starting to soften|oil|wok, stovetop, spatula|—
+S|W2|W|Add the rest of the vegetables|Add the pepper, mushrooms, bok choy, garlic and ginger and toss 2 minutes more.|action|high|120|W1|Crisp-tender|—|wok, spatula|—
+S|W3|W|Add the sauce and toss|Stir the sauce, pour it in (with the tofu) and toss until glossy. Finish with the sesame oil.|action|high|60|W2, K2|Glossy|toasted_sesame_oil|wok, spatula|—
 S|F1|F|Serve|Serve straight away, with rice.|action|off|20 + 10 × servings|W3, R1|Served|—|plates|—
 `
   },
@@ -2493,8 +2493,8 @@ S|N1|N|Boil the noodles|Boil the noodles 1 minute less than the package says, dr
 S|K1|K|Cut|Cut the chicken into thin strips, shred the cabbage, cut the carrot into matchsticks, the green onions into lengths, mince the garlic.|action|—|(150 + 120 × servings) × skill_factor|—|Ready|chicken_breast; shrimp; cabbage; carrot; green_onion; garlic|chef_knife, chopping_board|—
 S|K2|K|Mix the sauce|Stir together both soy sauces, oyster sauce, sugar, sesame oil and white pepper.|action|—|45|—|Mixed|light_soy_sauce; dark_soy_sauce; oyster_sauce; sugar; toasted_sesame_oil; white_pepper|bowl, spoon|—|countertop
 S|W1|W|Cook the protein|Stir-fry the chicken or shrimp in half the oil on high heat until just cooked; take it out.|action|high|180|K1|Just cooked|—|wok, stovetop, spatula|—
-S|W2|W|Vegetables|Add the rest of the oil, the garlic, cabbage and carrot and toss 2 minutes.|action|high|120|W1|Wilting|oil|wok, spatula|—
-S|W3|W|Noodles and sauce|Add the noodles, sauce and protein and toss with tongs until the noodles are coated and slightly crisp in places. Add the bean sprouts and green onions for the last 30 seconds.|action|high|150|W2, N1, K2|Coated, sprouts still crunchy|bean_sprouts|wok, tongs|—
+S|W2|W|Stir-fry the vegetables|Add the rest of the oil, the garlic, cabbage and carrot and toss 2 minutes.|action|high|120|W1|Wilting|oil|wok, spatula|—
+S|W3|W|Add the noodles and sauce|Add the noodles, sauce and protein and toss with tongs until the noodles are coated and slightly crisp in places. Add the bean sprouts and green onions for the last 30 seconds.|action|high|150|W2, N1, K2|Coated, sprouts still crunchy|bean_sprouts|wok, tongs|—
 S|F1|F|Serve|Serve hot.|action|off|20 + 10 × servings|W3|Served|—|tongs, plates|—
 `
   },
@@ -2521,9 +2521,9 @@ I|sichuan_peppercorn|Sichuan peppercorns|img/350/sichuan_peppercorn.webp|0.25|ts
 I|green_onion|Green onions|img/350/green_onion.webp|10|g|10|linear|—|sliced
 I|white_rice|Rice|img/350/white_rice.webp|70|g|70|linear|—|—
 S|R1|R|Cook the rice|Rinse and cook the rice (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|—|Fluffy|white_rice|saucepan, stovetop|—
-S|K1|K|Prep|Cut the tofu into cubes and soak them in hot salted water while you prepare the rest (keeps them from breaking). Mince garlic and ginger, slice green onions. Toast and grind the Sichuan peppercorns.|action|—|(180 + 60 × servings) × skill_factor|—|Ready|tofu; garlic; ginger_root; green_onion; sichuan_peppercorn; shiitake_mushroom|chef_knife, chopping_board, mortar_and_pestle, bowl|—
+S|K1|K|Cube the tofu and prepare the aromatics|Cut the tofu into cubes and soak them in hot salted water while you prepare the rest (keeps them from breaking). Mince garlic and ginger, slice green onions. Toast and grind the Sichuan peppercorns.|action|—|(180 + 60 × servings) × skill_factor|—|Ready|tofu; garlic; ginger_root; green_onion; sichuan_peppercorn; shiitake_mushroom|chef_knife, chopping_board, mortar_and_pestle, bowl|—
 S|W1|W|Fry the meat|Fry the pork (or mushrooms) in the oil until crisp and browned.|action|high|240|K1|Crisp, browned|ground_pork; oil|wok, stovetop, spatula|—
-S|W2|W|Chili bean paste|Lower the heat, add the chili bean paste and chili flakes and fry until the oil turns red, then the garlic and ginger.|action|medium|90|W1|Red oil, fragrant|doubanjiang; chili_flakes|wok, spatula|—
+S|W2|W|Fry the chili bean paste|Lower the heat, add the chili bean paste and chili flakes and fry until the oil turns red, then the garlic and ginger.|action|medium|90|W1|Red oil, fragrant|doubanjiang; chili_flakes|wok, spatula|—
 S|W3|W|Simmer the tofu|Add the stock, soy sauce and sugar, slide in the drained tofu and simmer gently, pushing (not stirring) so the tofu stays whole.|wait|medium-low|300|W2|Tofu hot through|chicken_stock; light_soy_sauce; sugar|wok, spatula|—
 S|W4|W|Thicken|Add the cornstarch mixed with a little water in two or three additions until the sauce clings.|action|medium-low|60|W3|Glossy, clinging|cornstarch|wok, spoon|—
 S|F1|F|Serve|Sprinkle with the ground Sichuan pepper and green onions and serve over rice.|action|off|30 + 10 × servings|W4, R1|Served|—|ladle|—
@@ -2550,10 +2550,10 @@ I|peanut|Roasted peanuts (unsalted)|img/350/peanut.webp|25|g|25|linear|—|—
 I|white_rice|Rice|img/350/white_rice.webp|70|g|70|linear|—|—
 S|R1|R|Cook the rice|Rinse and cook the rice (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|—|Fluffy|white_rice|saucepan, stovetop|—
 S|K1|K|Marinate the chicken|Cube the chicken and mix with half the soy sauce, the wine and 1 tsp cornstarch. Let it sit 10 minutes.|action|—|(90 + 60 × servings) × skill_factor|—|Coated|chicken_breast; shaoxing_wine|chef_knife, chopping_board, bowl|—
-S|K2|K|Sauce and aromatics|Mix the rest of the soy sauce, the vinegar, sugar, the rest of the cornstarch and 2 tbsp water. Slice the garlic, ginger and green onions; halve the chilies.|action|—|(90 + 30 × servings) × skill_factor|—|Ready|light_soy_sauce; cornstarch; rice_vinegar; sugar; garlic; ginger_root; green_onion; dried_red_chilies|bowl, chef_knife, chopping_board|—
-S|W1|W|Chilies and peppercorns|Heat the oil on medium, fry the chilies and Sichuan peppercorns for 20 seconds until dark red but not black.|action|medium|30|K1, K2|Dark red, fragrant|oil; sichuan_peppercorn|wok, stovetop, spatula|—
+S|K2|K|Mix the sauce and prepare the aromatics|Mix the rest of the soy sauce, the vinegar, sugar, the rest of the cornstarch and 2 tbsp water. Slice the garlic, ginger and green onions; halve the chilies.|action|—|(90 + 30 × servings) × skill_factor|—|Ready|light_soy_sauce; cornstarch; rice_vinegar; sugar; garlic; ginger_root; green_onion; dried_red_chilies|bowl, chef_knife, chopping_board|—
+S|W1|W|Fry the chilies and peppercorns|Heat the oil on medium, fry the chilies and Sichuan peppercorns for 20 seconds until dark red but not black.|action|medium|30|K1, K2|Dark red, fragrant|oil; sichuan_peppercorn|wok, stovetop, spatula|—
 S|W2|W|Fry the chicken|Turn the heat to high, add the chicken and stir-fry until it turns white, then the garlic, ginger and green onion whites.|action|high|240|W1|Chicken white, fragrant|—|wok, spatula|—
-S|W3|W|Sauce and peanuts|Stir the sauce, pour it in and toss until thick and glossy, then toss in the peanuts and green onion tops.|action|high|60|W2|Glossy, peanuts coated|peanut|wok, spatula|—
+S|W3|W|Add the sauce and peanuts|Stir the sauce, pour it in and toss until thick and glossy, then toss in the peanuts and green onion tops.|action|high|60|W2|Glossy, peanuts coated|peanut|wok, spatula|—
 S|F1|F|Serve|Serve over the rice. Do not eat the whole chilies.|action|off|20 + 10 × servings|W3, R1|Served|—|plates|—
 `
   },
@@ -2578,10 +2578,10 @@ I|sesame_seeds|Sesame seeds (optional)|img/350/sesame_seeds.webp|0.5|tsp|1.5|lin
 I|white_rice|Rice|img/350/white_rice.webp|70|g|70|linear|opt_side = rice|—
 S|R1|R|Cook the rice|Rinse and cook the rice (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|—|Fluffy|white_rice|saucepan, stovetop|opt_side = rice
 S|K1|K|Slice and marinate the beef|Slice the beef thinly across the grain. Mix with the baking soda, 1 tsp cornstarch and a splash of the soy sauce; rest 15 minutes.|action|—|(120 + 60 × servings) × skill_factor|—|Coated|beef; baking_soda|chef_knife, chopping_board, bowl|—
-S|K2|K|Sauce and broccoli|Mix the rest of the soy sauce, the oyster sauce, brown sugar, the rest of the cornstarch and the water. Cut the broccoli into florets, mince the garlic and ginger.|action|—|(90 + 60 × servings) × skill_factor|—|Ready|light_soy_sauce; oyster_sauce; brown_sugar; cornstarch; water; broccoli; garlic; ginger_root|bowl, chef_knife, chopping_board|—
+S|K2|K|Mix the sauce and prepare the broccoli|Mix the rest of the soy sauce, the oyster sauce, brown sugar, the rest of the cornstarch and the water. Cut the broccoli into florets, mince the garlic and ginger.|action|—|(90 + 60 × servings) × skill_factor|—|Ready|light_soy_sauce; oyster_sauce; brown_sugar; cornstarch; water; broccoli; garlic; ginger_root|bowl, chef_knife, chopping_board|—
 S|W1|W|Steam-fry the broccoli|Toss the broccoli in a little oil, add 3 tbsp water, cover 2 minutes until bright green and crisp-tender. Take it out.|action|high|150|K2|Bright green|—|wok, stovetop, spatula|—
 S|W2|W|Sear the beef|Heat the rest of the oil until smoking and sear the beef in one layer, 1 minute per side. Add the garlic and ginger for 15 seconds.|action|high|150|W1, K1|Seared|oil|wok, tongs|—
-S|W3|W|Sauce|Pour in the sauce, return the broccoli and toss until glossy and thick. Finish with sesame oil and seeds.|action|high|60|W2|Glossy|toasted_sesame_oil; sesame_seeds|wok, spatula|—
+S|W3|W|Add the sauce and toss|Pour in the sauce, return the broccoli and toss until glossy and thick. Finish with sesame oil and seeds.|action|high|60|W2|Glossy|toasted_sesame_oil; sesame_seeds|wok, spatula|—
 S|F1|F|Serve|Serve with rice.|action|off|20 + 10 × servings|W3, R1|Served|—|plates|—
 `
   },
@@ -2608,11 +2608,11 @@ I|water|Water or pineapple juice|img/350/water.webp|3|tbsp|45|linear|—|—
 I|white_rice|Rice|img/350/white_rice.webp|70|g|70|linear|—|—
 S|R1|F|Cook the rice|Rinse and cook the rice (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|—|Fluffy|white_rice|saucepan, stovetop|—
 S|K1|K|Coat the pork|Cube the pork, season with salt, mix with the egg, then toss in the cornstarch and flour until each piece is dry and coated.|action|—|(120 + 60 × servings) × skill_factor|—|Coated|pork; salt; egg; cornstarch; flour|chef_knife, chopping_board, bowl|—
-S|K2|K|Vegetables and sauce|Cut the peppers, onion and pineapple into chunks. Mix the ketchup, vinegar, sugar, soy sauce and water.|action|—|(90 + 60 × servings) × skill_factor|—|Ready|red_bell_pepper; green_bell_pepper; onion; pineapple; ketchup; rice_vinegar; sugar; light_soy_sauce; water|chef_knife, chopping_board, bowl|—
+S|K2|K|Cut the vegetables and mix the sauce|Cut the peppers, onion and pineapple into chunks. Mix the ketchup, vinegar, sugar, soy sauce and water.|action|—|(90 + 60 × servings) × skill_factor|—|Ready|red_bell_pepper; green_bell_pepper; onion; pineapple; ketchup; rice_vinegar; sugar; light_soy_sauce; water|chef_knife, chopping_board, bowl|—
 S|P1|P|Heat the oil|Heat the oil in a deep pot to 175 °C. Never leave hot oil alone.|wait|medium-high|480|K1|175 °C|oil|cooking_pot, stovetop|—
 S|P2|P|Fry the pork twice|Fry the pork in batches 4 minutes and drain. Then fry all of it again 1 to 2 minutes for an extra-crisp crust.|action|medium-high|360 + 60 × servings|P1|Golden and crisp|—|cooking_pot, tongs|—
-S|W1|W|Vegetables|In a wok with 1 tbsp of the oil stir-fry the onion and peppers 1 minute, then the pineapple.|action|high|90|K2, P2|Bright, crisp|—|wok, stovetop, spatula|—
-S|W2|W|Sauce and pork|Pour in the sauce, let it bubble until glossy, toss in the pork and serve immediately so it stays crisp.|action|high|60|W1|Glossy, crisp pork|—|wok, spatula|—
+S|W1|W|Stir-fry the vegetables|In a wok with 1 tbsp of the oil stir-fry the onion and peppers 1 minute, then the pineapple.|action|high|90|K2, P2|Bright, crisp|—|wok, stovetop, spatula|—
+S|W2|W|Add the sauce and pork|Pour in the sauce, let it bubble until glossy, toss in the pork and serve immediately so it stays crisp.|action|high|60|W1|Glossy, crisp pork|—|wok, spatula|—
 S|F1|F|Serve|Serve with the rice.|action|off|20 + 10 × servings|W2, R1|Served|—|plates|—
 `
   },
@@ -2631,10 +2631,10 @@ I|ketchup|Ketchup (optional, deepens the colour)|img/350/ketchup.webp|1|tsp|6|li
 I|water|Water|img/350/water.webp|2|tbsp|30|linear|opt_style = saucy|—
 I|white_rice|Rice|img/350/white_rice.webp|70|g|70|linear|—|—
 S|R1|R|Cook the rice|Rinse and cook the rice (1 part rice to 1.5 parts water, covered, 15 min).|wait|low|1200|—|Fluffy|white_rice|saucepan, stovetop|—
-S|K1|K|Prep|Cut the tomatoes into wedges, slice the green onion and beat the eggs with a pinch of salt until frothy.|action|—|(60 + 45 × servings) × skill_factor|—|Ready|egg; tomato; green_onion|chef_knife, chopping_board, bowl, fork|—
+S|K1|K|Cut the tomatoes and beat the eggs|Cut the tomatoes into wedges, slice the green onion and beat the eggs with a pinch of salt until frothy.|action|—|(60 + 45 × servings) × skill_factor|—|Ready|egg; tomato; green_onion|chef_knife, chopping_board, bowl, fork|—
 S|W1|W|Scramble the eggs|Heat half the oil until very hot, pour in the eggs, let them puff for a few seconds, then push into large soft curds. Take them out while still a little wet.|action|high|45|K1|Large soft curds|—|wok, stovetop, spatula|—
 S|W2|W|Cook the tomatoes|Add the rest of the oil and the tomatoes; cook until they collapse and release their juice. Season with salt, sugar and ketchup (add the water for a saucier dish).|action|medium-high|180|W1|Juicy and soft|oil; salt; sugar; ketchup; water|wok, spatula|—
-S|W3|W|Eggs back in|Return the eggs, fold gently and turn off the heat. Scatter the green onion.|action|off|30|W2|Combined|—|wok, spatula|—
+S|W3|W|Return the eggs to the wok|Return the eggs, fold gently and turn off the heat. Scatter the green onion.|action|off|30|W2|Combined|—|wok, spatula|—
 S|F1|F|Serve|Serve over the rice.|action|off|20 + 10 × servings|W3, R1|Served|—|spoon|—
 `
   },
@@ -2708,7 +2708,7 @@ I|sesame_seeds|Sesame seeds|img/350/sesame_seeds.webp|0.5|tsp|1.5|linear|—|—
 I|green_onion|Green onion|img/350/green_onion.webp|5|g|5|linear|—|sliced
 I|short_grain_rice|Short-grain rice|img/350/short_grain_rice.webp|80|g|80|linear|opt_side = rice|—
 S|R1|R|Cook the rice|Rinse the rice and cook it (1 part rice to 1.2 parts water, covered, 13 min, rest 10 min).|wait|low|1380|—|Sticky and tender|short_grain_rice|saucepan, stovetop, sieve|opt_side = rice
-S|K1|K|Prep|Pat the chicken dry, prick the skin with a fork and season lightly with salt. Mix the soy sauce, mirin, sake and sugar.|action|—|(60 + 30 × servings) × skill_factor|—|Ready|chicken_legs; salt; light_soy_sauce; mirin; shaoxing_wine; sugar|fork, bowl|—
+S|K1|K|Prepare the chicken and mix the sauce|Pat the chicken dry, prick the skin with a fork and season lightly with salt. Mix the soy sauce, mirin, sake and sugar.|action|—|(60 + 30 × servings) × skill_factor|—|Ready|chicken_legs; salt; light_soy_sauce; mirin; shaoxing_wine; sugar|fork, bowl|—
 S|P1|P|Crisp the skin|Put the chicken skin-side down in the oiled cold pan, then heat to medium. Cook without moving until the skin is deep golden and crisp, then flip and cook the other side.|action|medium|660|K1|Crisp skin, cooked through|oil|pan, stovetop, spatula|—
 S|P2|P|Glaze|Wipe out most of the fat, pour in the sauce and let it bubble, turning the chicken until coated in a thick, shiny glaze.|action|medium|180|P1|Thick glaze|—|pan, spatula|—
 S|F1|F|Slice and serve|Slice, spoon over the glaze, sprinkle with sesame seeds and green onion, and serve with rice.|action|off|45 + 15 × servings|P2, R1|Served|sesame_seeds; green_onion|chef_knife, chopping_board, plates|—
@@ -2725,9 +2725,9 @@ I|wakame|Dried wakame seaweed|img/350/wakame.webp|1|g|1|linear|—|—
 I|tofu|Silken or soft tofu|img/350/tofu.webp|50|g|50|linear|—|1 cm cubes
 I|miso_paste|Miso paste|img/350/miso_paste.webp|1|tbsp|18|linear|—|—
 I|green_onion|Green onion|img/350/green_onion.webp|5|g|5|linear|—|thinly sliced
-S|K1|K|Prep|Soak the wakame in water for 5 minutes and drain. Cube the tofu and slice the green onion.|action|—|(60 + 30 × servings) × skill_factor|—|Ready|wakame; tofu; green_onion|bowl, knife, chopping_board|—
+S|K1|K|Soak the wakame and cut the tofu and green onion|Soak the wakame in water for 5 minutes and drain. Cube the tofu and slice the green onion.|action|—|(60 + 30 × servings) × skill_factor|—|Ready|wakame; tofu; green_onion|bowl, knife, chopping_board|—
 S|P1|P|Heat the dashi|Bring the water and dashi granules to a gentle simmer.|wait|medium|300|—|Simmering|water; dashi|saucepan, stovetop|—
-S|P2|P|Tofu and wakame|Add the tofu and wakame and warm for 1 minute.|action|low|60|P1, K1|Hot|—|saucepan, spoon|—
+S|P2|P|Add the tofu and wakame|Add the tofu and wakame and warm for 1 minute.|action|low|60|P1, K1|Hot|—|saucepan, spoon|—
 S|P3|P|Dissolve the miso|Turn off the heat. Put the miso in a ladle, lower it into the soup and stir with chopsticks until dissolved. Do not boil after adding the miso.|action|off|60|P2|Cloudy, no lumps|miso_paste|ladle, chopsticks|—
 S|F1|F|Serve|Serve in bowls topped with green onion.|action|off|20 + 10 × servings|P3|Served|—|ladle|—
 `
@@ -2752,10 +2752,10 @@ I|ketchup|Ketchup|img/350/ketchup.webp|1|tsp|6|linear|—|—
 I|light_soy_sauce|Soy sauce|img/350/light_soy_sauce.webp|1|tsp|5|linear|—|—
 I|sugar|Sugar|img/350/sugar.webp|0.5|tsp|2|linear|—|—
 I|nori_sheet|Nori (crumbled, to finish)|img/350/nori_sheet.webp|0.25|pcs|0.6|linear|—|—
-S|K1|K|Prep|Cut the cabbage, carrot, onion and meat. Mix the Worcestershire sauce, oyster sauce, ketchup, soy sauce and sugar. Loosen the noodles (rinse fresh ones under hot water).|action|—|(150 + 120 × servings) × skill_factor|—|Ready|egg_noodles; pork_belly; chicken_breast; cabbage; carrot; onion; worcestershire_sauce; oyster_sauce; ketchup; light_soy_sauce; sugar|chef_knife, chopping_board, bowl|—
+S|K1|K|Cut the vegetables and meat and mix the sauce|Cut the cabbage, carrot, onion and meat. Mix the Worcestershire sauce, oyster sauce, ketchup, soy sauce and sugar. Loosen the noodles (rinse fresh ones under hot water).|action|—|(150 + 120 × servings) × skill_factor|—|Ready|egg_noodles; pork_belly; chicken_breast; cabbage; carrot; onion; worcestershire_sauce; oyster_sauce; ketchup; light_soy_sauce; sugar|chef_knife, chopping_board, bowl|—
 S|W1|W|Cook the meat|Fry the meat in the oil until browned.|action|high|180|K1|Browned|oil|wok, stovetop, spatula|—
-S|W2|W|Vegetables|Add the onion, carrot and cabbage and stir-fry until just tender.|action|high|150|W1|Crisp-tender|—|wok, spatula|—
-S|W3|W|Noodles and sauce|Add the noodles with a splash of water, toss to separate, pour in the sauce and add the bean sprouts. Toss until evenly coated and slightly charred.|action|high|150|W2|Coated, a little charred|bean_sprouts|wok, tongs|—
+S|W2|W|Stir-fry the vegetables|Add the onion, carrot and cabbage and stir-fry until just tender.|action|high|150|W1|Crisp-tender|—|wok, spatula|—
+S|W3|W|Add the noodles and sauce|Add the noodles with a splash of water, toss to separate, pour in the sauce and add the bean sprouts. Toss until evenly coated and slightly charred.|action|high|150|W2|Coated, a little charred|bean_sprouts|wok, tongs|—
 S|F1|F|Serve|Serve topped with crumbled nori.|action|off|20 + 10 × servings|W3|Served|nori_sheet|tongs, plates|—
 `
   },
@@ -2825,9 +2825,9 @@ I|egg|Egg (fried, to top)|img/350/egg.webp|1|pcs|55|linear|—|—
 I|green_onion|Green onion|img/350/green_onion.webp|10|g|10|linear|—|sliced
 I|nori_sheet|Nori (crumbled)|img/350/nori_sheet.webp|0.25|pcs|0.6|linear|—|—
 I|sesame_seeds|Sesame seeds|img/350/sesame_seeds.webp|0.5|tsp|1.5|linear|—|—
-S|K1|K|Prep|Chop the kimchi, dice the onion (and bacon), slice the green onion and break up the cold rice.|action|—|(90 + 45 × servings) × skill_factor|—|Ready|white_rice; kimchi; onion; bacon; green_onion|chef_knife, chopping_board|—
+S|K1|K|Chop the kimchi and other ingredients|Chop the kimchi, dice the onion (and bacon), slice the green onion and break up the cold rice.|action|—|(90 + 45 × servings) × skill_factor|—|Ready|white_rice; kimchi; onion; bacon; green_onion|chef_knife, chopping_board|—
 S|W1|W|Fry the kimchi|Fry the bacon (if using) and onion in the oil, add the kimchi and fry until it softens and caramelises a little.|action|medium-high|300|K1|Kimchi softened|oil|pan, stovetop, spatula|—
-S|W2|W|Rice and seasoning|Add the gochujang, soy sauce, sugar and a splash of kimchi juice, then the rice. Toss until evenly red and hot, pressing it against the pan for crispy bits.|action|medium-high|240|W1|Evenly red, crispy bits|gochujang; light_soy_sauce; sugar|pan, spatula|—
+S|W2|W|Add the rice and seasoning|Add the gochujang, soy sauce, sugar and a splash of kimchi juice, then the rice. Toss until evenly red and hot, pressing it against the pan for crispy bits.|action|medium-high|240|W1|Evenly red, crispy bits|gochujang; light_soy_sauce; sugar|pan, spatula|—
 S|W3|W|Fry the egg|Push the rice aside (or use a second pan) and fry the egg sunny-side up. Stir the sesame oil into the rice.|action|medium|180|W2|Runny yolk|egg; toasted_sesame_oil|pan, spatula|—
 S|F1|F|Serve|Spoon into bowls, top with the egg, green onion, nori and sesame seeds.|action|off|30 + 15 × servings|W3|Served|nori_sheet; sesame_seeds|spoon|—
 `
@@ -2855,11 +2855,11 @@ I|peanut|Roasted peanuts|img/350/peanut.webp|15|g|15|linear|—|crushed
 I|chili_flakes|Chili flakes|img/350/chili_flakes.webp|0.25|tsp|0.5|linear; doubled if hot|—|—
 I|lime|Lime wedges|img/350/lime.webp|0.25|pcs|17|linear|—|—
 S|N1|N|Soak the noodles|Soak the noodles in lukewarm water until bendy but still firm, then drain.|wait|—|1800|—|Bendy, still firm|rice_noodles|bowl, colander|—
-S|K1|K|Sauce|Stir together the tamarind, fish sauce and sugar until the sugar dissolves.|action|—|60 + 15 × servings|—|Dissolved|tamarind; fish_sauce; brown_sugar|bowl, spoon|—
-S|K2|K|Prep|Chop the garlic, slice the shallot, cut the green onion and the protein, crush the peanuts.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|shrimp; chicken_breast; tofu; garlic; shallot; green_onion; peanut|chef_knife, chopping_board|—
+S|K1|K|Mix the sauce|Stir together the tamarind, fish sauce and sugar until the sugar dissolves.|action|—|60 + 15 × servings|—|Dissolved|tamarind; fish_sauce; brown_sugar|bowl, spoon|—
+S|K2|K|Chop the garlic, shallot, green onion and peanuts|Chop the garlic, slice the shallot, cut the green onion and the protein, crush the peanuts.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|shrimp; chicken_breast; tofu; garlic; shallot; green_onion; peanut|chef_knife, chopping_board|—
 S|W1|W|Cook the protein|Heat the oil in the wok until shimmering. Fry the garlic and shallot for 20 seconds, then the protein until just cooked.|action|high|180|K2|Just cooked|oil|wok, stovetop, spatula|—
-S|W2|W|Egg|Push everything aside, crack in the eggs, scramble briefly until half set.|action|high|45|W1|Half set|egg|wok, spatula|—
-S|W3|W|Noodles and sauce|Add the noodles and the sauce with a splash of water and toss until the noodles are soft and the sauce is absorbed.|action|high|180|W2, N1, K1|Soft, sauce absorbed|—|wok, tongs|—
+S|W2|W|Scramble the egg|Push everything aside, crack in the eggs, scramble briefly until half set.|action|high|45|W1|Half set|egg|wok, spatula|—
+S|W3|W|Add the noodles and sauce|Add the noodles and the sauce with a splash of water and toss until the noodles are soft and the sauce is absorbed.|action|high|180|W2, N1, K1|Soft, sauce absorbed|—|wok, tongs|—
 S|W4|W|Finish|Toss in the bean sprouts and green onion for 30 seconds.|action|high|30|W3|Sprouts warm, still crunchy|bean_sprouts|wok, tongs|—
 S|F1|F|Serve|Serve topped with peanuts and chili flakes, with lime wedges on the side.|action|off|30 + 15 × servings|W4|Served|chili_flakes; lime|tongs, plates|—
 `
@@ -2885,9 +2885,9 @@ I|thai_basil|Thai basil leaves|img/350/thai_basil.webp|5|g|5|linear|—|—
 I|chili_pepper|Red chili (to garnish)|img/350/chili_pepper.webp|0.25|pcs|3|linear; doubled if hot|—|sliced
 I|jasmine_rice|Jasmine rice|img/350/jasmine_rice.webp|80|g|80|linear|—|—
 S|R1|R|Cook the rice|Rinse the jasmine rice and cook it (1 part rice to 1.25 parts water, covered, 12 min, rest 10 min).|wait|low|1320|—|Fluffy|jasmine_rice|saucepan, stovetop, sieve|—
-S|K1|K|Prep|Cut the protein, eggplant and green beans; tear the lime leaves and slice the chili.|action|—|(120 + 90 × servings) × skill_factor|—|Ready|chicken_legs; tofu; eggplant; green_beans; kaffir_lime_leaves; chili_pepper|chef_knife, chopping_board|—
+S|K1|K|Cut the vegetables and protein and tear the lime leaves|Cut the protein, eggplant and green beans; tear the lime leaves and slice the chili.|action|—|(120 + 90 × servings) × skill_factor|—|Ready|chicken_legs; tofu; eggplant; green_beans; kaffir_lime_leaves; chili_pepper|chef_knife, chopping_board|—
 S|P1|P|Fry the paste|Heat the oil with a third of the coconut milk until it bubbles and the oil starts to separate, then fry the curry paste until fragrant.|action|medium|240|K1|Fragrant, oil separating|green_curry_paste; oil|wok, stovetop, wooden_spoon|—
-S|P2|P|Protein|Add the chicken (or tofu) and stir to coat.|action|medium|180|P1|Coated, outside cooked|—|wok, wooden_spoon|—
+S|P2|P|Add the protein|Add the chicken (or tofu) and stir to coat.|action|medium|180|P1|Coated, outside cooked|—|wok, wooden_spoon|—
 S|P3|P|Simmer|Pour in the rest of the coconut milk, add the eggplant, green beans and lime leaves and simmer until the chicken is cooked and the vegetables are tender. Season with fish sauce and sugar.|wait|low|600|P2|Vegetables tender|coconut_milk; fish_sauce; brown_sugar|wok, wooden_spoon|—
 S|F1|F|Serve|Stir in the Thai basil and serve with rice, topped with chili.|action|off|30 + 15 × servings|P3, R1|Served|thai_basil|ladle, bowl|—
 `
@@ -2911,9 +2911,9 @@ I|fish_sauce|Fish sauce|img/350/fish_sauce.webp|1|tbsp|15|linear|—|—
 I|lime|Lime juice|img/350/lime.webp|0.5|pcs|15|linear|—|—
 I|evaporated_milk|Evaporated milk|img/350/evaporated_milk.webp|2|tbsp|30|linear|opt_style = creamy|—
 I|cilantro|Cilantro|img/350/cilantro.webp|3|g|3|linear|—|—
-S|K1|K|Prep|Bruise and cut the lemongrass, slice the galangal, tear the lime leaves, smash the chilies, tear the mushrooms. Devein the shrimp, leaving the shells on.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|lemongrass; galangal; kaffir_lime_leaves; chili_pepper; shrimp; oyster_mushroom|chef_knife, chopping_board|—
+S|K1|K|Bruise and cut the lemongrass, galangal and other aromatics|Bruise and cut the lemongrass, slice the galangal, tear the lime leaves, smash the chilies, tear the mushrooms. Devein the shrimp, leaving the shells on.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|lemongrass; galangal; kaffir_lime_leaves; chili_pepper; shrimp; oyster_mushroom|chef_knife, chopping_board|—
 S|P1|P|Infuse|Bring the stock to a boil with the lemongrass, galangal and lime leaves and simmer to infuse.|wait|medium|480|K1|Fragrant broth|chicken_stock|saucepan, stovetop|—
-S|P2|P|Mushrooms and shrimp|Add the mushrooms and chili paste, then the shrimp and cook until they just turn pink.|action|medium|180|P1|Shrimp pink|thai_chili_paste|saucepan, ladle|—
+S|P2|P|Add the mushrooms and shrimp|Add the mushrooms and chili paste, then the shrimp and cook until they just turn pink.|action|medium|180|P1|Shrimp pink|thai_chili_paste|saucepan, ladle|—
 S|P3|P|Season off the heat|Turn off the heat. Stir in the fish sauce, lime juice and chilies (and the evaporated milk for the creamy version). Taste: it should be sour, salty and spicy.|action|off|60|P2|Sour, salty, spicy|fish_sauce; lime; evaporated_milk|saucepan, citrus_juicer, spoon|—
 S|F1|F|Serve|Ladle into bowls and top with cilantro.|action|off|20 + 10 × servings|P3|Served|cilantro|ladle|—
 `
@@ -2938,7 +2938,7 @@ I|chili_flakes|Chili flakes|img/350/chili_flakes.webp|0.25|tsp|0.5|linear|—|�
 I|cucumber|Cucumber|img/350/cucumber.webp|40|g|40|linear|—|chunks
 S|K1|K|Marinate|Mix the turmeric, coriander, cumin, soy sauce, sugar, garlic and oil, coat the chicken strips and leave for at least 30 minutes.|action|—|(90 + 45 × servings) × skill_factor|—|Coated|chicken_legs; turmeric_powder; coriander_seeds; cumin; light_soy_sauce; brown_sugar; garlic; oil|bowl, microplane|—
 S|K2|K|Skewer|After marinating, thread the chicken onto skewers (soak wooden ones in water first).|action|—|1800 + (60 + 60 × servings) × skill_factor|K1|Skewered|—|skewers, tray|—
-S|S1|S|Peanut sauce|Warm the peanut butter, coconut milk and chili flakes, stirring, until smooth; loosen with water. Finish with lime juice.|action|low|240|—|Smooth, pourable|peanut_butter; coconut_milk; chili_flakes; lime|saucepan, stovetop, whisk|—
+S|S1|S|Make the peanut sauce|Warm the peanut butter, coconut milk and chili flakes, stirring, until smooth; loosen with water. Finish with lime juice.|action|low|240|—|Smooth, pourable|peanut_butter; coconut_milk; chili_flakes; lime|saucepan, stovetop, whisk|—
 S|G1|G|Grill|Grill the skewers on a very hot grill pan (or under the oven grill), turning, until charred in spots and cooked through.|action|high|480|K2|Charred, cooked through|—|pan, stovetop, tongs|—
 S|F1|F|Serve|Serve the skewers with the peanut sauce and cucumber chunks.|action|off|45 + 15 × servings|G1, S1|Served|cucumber|chef_knife, chopping_board, plates|—
 `
@@ -2962,9 +2962,9 @@ I|egg|Egg (fried, to top)|img/350/egg.webp|1|pcs|55|linear|—|—
 I|cucumber|Cucumber|img/350/cucumber.webp|30|g|30|linear|—|sliced
 I|tomato|Tomato|img/350/tomato.webp|30|g|30|linear|—|sliced
 I|shallot_fried|Fried shallots (optional)|img/350/shallot.webp|1|tbsp|5|linear|—|—
-S|K1|K|Prep|Pound or finely chop the shallots, garlic and chili into a rough paste. Cut the chicken. Break up the cold rice. Slice the cucumber and tomato.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|white_rice; chicken_breast; shrimp; shallot; garlic; chili_pepper; cucumber; tomato|mortar_and_pestle, chef_knife, chopping_board|—
+S|K1|K|Pound the paste and cut the chicken|Pound or finely chop the shallots, garlic and chili into a rough paste. Cut the chicken. Break up the cold rice. Slice the cucumber and tomato.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|white_rice; chicken_breast; shrimp; shallot; garlic; chili_pepper; cucumber; tomato|mortar_and_pestle, chef_knife, chopping_board|—
 S|W1|W|Fry the paste|Fry the paste in the oil until fragrant, then add the chicken or shrimp and cook through.|action|high|240|K1|Cooked through|oil|wok, stovetop, spatula|—
-S|W2|W|Rice|Add the rice, kecap manis and soy sauce and toss on high heat until evenly brown and hot.|action|high|240|W1|Evenly brown, hot|kecap_manis; light_soy_sauce|wok, spatula|—
+S|W2|W|Add the rice|Add the rice, kecap manis and soy sauce and toss on high heat until evenly brown and hot.|action|high|240|W1|Evenly brown, hot|kecap_manis; light_soy_sauce|wok, spatula|—
 S|W3|W|Fry the egg|Fry the egg sunny-side up in a little oil until the edges are crisp.|action|medium-high|150|W2|Crisp edges, runny yolk|egg|pan, spatula|—
 S|F1|F|Serve|Plate the rice with the egg on top, cucumber and tomato on the side, and fried shallots.|action|off|30 + 15 × servings|W3|Served|shallot_fried|spatula, plates|—
 `
@@ -2990,10 +2990,10 @@ I|light_soy_sauce|Soy sauce|img/350/light_soy_sauce.webp|1|tsp|5|linear|—|—
 I|chili_flakes|Chili flakes or sambal|img/350/chili_flakes.webp|0.25|tsp|0.5|linear|—|—
 I|green_onion|Green onion|img/350/green_onion.webp|5|g|5|linear|—|sliced
 S|N1|N|Cook the noodles|Boil the noodles until just tender, drain and rinse under cold water.|wait|high|600|—|Just tender|egg_noodles|cooking_pot, stovetop, colander|—
-S|K1|K|Prep|Chop the garlic and shallot, cut the protein, shred the cabbage, chop the bok choy and slice the green onion. Mix the kecap manis, oyster sauce and soy sauce.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|chicken_breast; shrimp; garlic; shallot; cabbage; bok_choy; green_onion; kecap_manis; oyster_sauce; light_soy_sauce|chef_knife, chopping_board, bowl|—
-S|W1|W|Aromatics and protein|Fry the garlic and shallot in the oil until golden, add the protein and cook through.|action|high|210|K1|Cooked|oil|wok, stovetop, spatula|—
-S|W2|W|Egg and vegetables|Scramble the egg in the wok, then add the cabbage and bok choy and stir-fry until wilted.|action|high|150|W1|Wilted|egg|wok, spatula|—
-S|W3|W|Noodles|Add the noodles, the sauce and chili and toss until glossy and hot.|action|high|150|W2, N1|Glossy, hot|chili_flakes|wok, tongs|—
+S|K1|K|Chop the vegetables and protein|Chop the garlic and shallot, cut the protein, shred the cabbage, chop the bok choy and slice the green onion. Mix the kecap manis, oyster sauce and soy sauce.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|chicken_breast; shrimp; garlic; shallot; cabbage; bok_choy; green_onion; kecap_manis; oyster_sauce; light_soy_sauce|chef_knife, chopping_board, bowl|—
+S|W1|W|Fry the aromatics and protein|Fry the garlic and shallot in the oil until golden, add the protein and cook through.|action|high|210|K1|Cooked|oil|wok, stovetop, spatula|—
+S|W2|W|Add the egg and vegetables|Scramble the egg in the wok, then add the cabbage and bok choy and stir-fry until wilted.|action|high|150|W1|Wilted|egg|wok, spatula|—
+S|W3|W|Add the noodles|Add the noodles, the sauce and chili and toss until glossy and hot.|action|high|150|W2, N1|Glossy, hot|chili_flakes|wok, tongs|—
 S|F1|F|Serve|Serve topped with green onion.|action|off|20 + 10 × servings|W3|Served|—|tongs, plates|—
 `
   },
@@ -3019,10 +3019,10 @@ I|tamarind|Tamarind paste (or lime juice)|img/350/tamarind.webp|1|tsp|5|linear|�
 I|brown_sugar|Brown sugar|img/350/brown_sugar.webp|1|tsp|4|linear|—|—
 I|water|Hot water|img/350/water.webp|60|ml|60|linear|—|—
 I|shallot_fried|Fried shallots (optional)|img/350/shallot.webp|1|tbsp|5|linear|—|—
-S|P1|P|Potatoes and eggs|Boil the potatoes until tender (about 15 min) and the eggs for 9 minutes; cool the eggs in cold water.|wait|high|900|—|Potatoes tender|potato; egg|cooking_pot, stovetop, bowl|—
+S|P1|P|Boil the potatoes and eggs|Boil the potatoes until tender (about 15 min) and the eggs for 9 minutes; cool the eggs in cold water.|wait|high|900|—|Potatoes tender|potato; egg|cooking_pot, stovetop, bowl|—
 S|P2|P|Blanch the vegetables|In the same water, blanch the green beans 3 minutes, the cabbage 1 minute and the sprouts 20 seconds. Drain.|action|high|300|P1|Bright and crisp-tender|green_beans; cabbage; bean_sprouts|cooking_pot, colander|—
 S|T1|T|Fry tofu and tempeh|Fry the tofu and tempeh in the oil until golden on all sides.|action|medium-high|480|—|Golden|tofu; tempeh; oil|pan, stovetop, tongs|—
-S|S1|S|Peanut sauce|Blend or mash the peanut butter with garlic, chili, kecap manis, tamarind, sugar and hot water until smooth and pourable.|action|—|(120 + 30 × servings) × skill_factor|—|Smooth, pourable|peanut_butter; garlic; chili_pepper; kecap_manis; tamarind; brown_sugar; water|blender, microplane|—
+S|S1|S|Make the peanut sauce|Blend or mash the peanut butter with garlic, chili, kecap manis, tamarind, sugar and hot water until smooth and pourable.|action|—|(120 + 30 × servings) × skill_factor|—|Smooth, pourable|peanut_butter; garlic; chili_pepper; kecap_manis; tamarind; brown_sugar; water|blender, microplane|—
 S|K1|K|Slice|Slice the cucumber, peel and quarter the eggs, and cut the potatoes into chunks.|action|—|(60 + 60 × servings) × skill_factor|P2|Sliced|cucumber|chef_knife, chopping_board|—
 S|F1|F|Assemble|Arrange the vegetables, potatoes, eggs, tofu and tempeh on plates, pour over the peanut sauce and top with fried shallots.|action|—|60 + 30 × servings|K1, T1, S1|Served|shallot_fried|spoon, plates|—
 `
@@ -3047,9 +3047,9 @@ I|egg|Boiled egg (halved)|img/350/egg.webp|0.5|pcs|27|linear|—|—
 I|mint|Mint or Vietnamese mint|img/350/mint.webp|2|g|2|linear|—|—
 I|lime|Lime wedges|img/350/lime.webp|0.25|pcs|17|linear|—|—
 S|N1|N|Soak the noodles|Cover the vermicelli with boiling water for 5 minutes, then drain.|wait|—|300|—|Soft|rice_noodles|bowl, colander|—
-S|K1|K|Prep|Slice the chicken, peel the shrimp, halve the tofu puffs and the boiled eggs.|action|—|(90 + 60 × servings) × skill_factor|—|Ready|chicken_breast; shrimp; tofu; egg|chef_knife, chopping_board|—
+S|K1|K|Slice the chicken and peel the shrimp|Slice the chicken, peel the shrimp, halve the tofu puffs and the boiled eggs.|action|—|(90 + 60 × servings) × skill_factor|—|Ready|chicken_breast; shrimp; tofu; egg|chef_knife, chopping_board|—
 S|P1|P|Fry the paste|Fry the laksa paste in the oil until fragrant and darker.|action|medium|180|—|Fragrant|laksa_paste; oil|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Broth|Add the stock and coconut milk, bring to a simmer, then cook the chicken, shrimp and tofu puffs in it. Season with fish sauce and sugar.|wait|medium-low|480|P1, K1|Chicken cooked|chicken_stock; coconut_milk; fish_sauce; sugar|cooking_pot, ladle|—
+S|P2|P|Add the broth|Add the stock and coconut milk, bring to a simmer, then cook the chicken, shrimp and tofu puffs in it. Season with fish sauce and sugar.|wait|medium-low|480|P1, K1|Chicken cooked|chicken_stock; coconut_milk; fish_sauce; sugar|cooking_pot, ladle|—
 S|F1|F|Assemble|Put noodles and bean sprouts in bowls, ladle over the hot broth with the chicken, shrimp and tofu, top with egg and mint, and serve with lime.|action|off|45 + 30 × servings|P2, N1|Served|bean_sprouts; mint; lime|ladle, bowl|—
 `
   },
@@ -3110,8 +3110,8 @@ I|garlic|Garlic clove|img/350/garlic.webp|0.5|pcs|2.5|linear|—|minced
 I|chili_pepper|Red chili|img/350/chili_pepper.webp|0.25|pcs|3|linear|—|minced
 I|oil|Oil|img/350/oil.webp|1|tsp|4.5|linear|opt_filling = tofu|—
 S|P1|P|Cook noodles and shrimp|Boil the vermicelli 3 minutes and rinse cold. In the same water poach the shrimp until pink, cool and halve lengthwise (or fry the tofu strips in the oil until golden).|action|high|480|—|Cooked, cooled|rice_noodles; shrimp; tofu; oil|saucepan, stovetop, colander, chef_knife|—
-S|K1|K|Prep|Cut the cucumber and carrot into matchsticks, wash the lettuce and herbs.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|lettuce; cucumber; carrot; mint; cilantro|chef_knife, chopping_board, vegetable_peeler|—
-S|S1|S|Dipping sauce (nuoc cham)|Stir the fish sauce, lime juice, sugar and water until dissolved; add the garlic and chili.|action|—|(90 + 15 × servings) × skill_factor|—|Sweet, sour, salty|fish_sauce; lime; sugar; water; garlic; chili_pepper|bowl, spoon, citrus_juicer|—
+S|K1|K|Cut the vegetables and wash the herbs|Cut the cucumber and carrot into matchsticks, wash the lettuce and herbs.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|lettuce; cucumber; carrot; mint; cilantro|chef_knife, chopping_board, vegetable_peeler|—
+S|S1|S|Mix the dipping sauce (nuoc cham)|Stir the fish sauce, lime juice, sugar and water until dissolved; add the garlic and chili.|action|—|(90 + 15 × servings) × skill_factor|—|Sweet, sour, salty|fish_sauce; lime; sugar; water; garlic; chili_pepper|bowl, spoon, citrus_juicer|—
 S|F1|F|Roll|Dip a rice paper in warm water for 2 seconds and lay it flat. Put shrimp halves pink side down, then lettuce, noodles, vegetables and herbs. Fold the sides in and roll up tightly.|action|—|(90 + 150 × servings) × skill_factor|P1, K1|Tight rolls|rice_paper|plates|—|countertop
 S|F2|F|Serve|Serve right away with the dipping sauce (cover with a damp towel if waiting).|action|—|20 + 10 × servings|F1, S1|Served|—|chef_knife, plates|—
 `
@@ -3161,9 +3161,9 @@ I|fish_sauce|Fish sauce|img/350/fish_sauce.webp|1|tbsp|15|linear|—|—
 I|white_rice|White rice|img/350/white_rice.webp|80|g|80|linear|—|—
 S|P1|P|Simmer the meat|Bring the pork, water, onion and tomato to a boil, skim, and simmer until the pork is tender (shrimp version: simmer the onion and tomato 10 minutes only).|wait|low|3600 pork / 600 shrimp|—|Pork tender|pork; water; onion; tomato|cooking_pot, stovetop, ladle|—
 S|R1|R|Cook the rice|Rinse the rice and cook it (1 part rice to 1.5 parts water, covered, 15 min, rest 10 min).|wait|low|1500|—|Fluffy|white_rice|saucepan, stovetop, sieve|—
-S|K1|K|Prep the vegetables|Cut the daikon, beans and eggplant; trim the okra and the spinach.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|daikon; green_beans; eggplant; okra; spinach; chili_pepper|chef_knife, chopping_board, vegetable_peeler|—
-S|P2|P|Sour it|Stir in the tamarind and add the daikon; cook 5 minutes.|action|medium|300|P1, K1|Sour broth|tamarind|cooking_pot, wooden_spoon|—
-S|P3|P|Vegetables|Add the beans, eggplant, okra, chili (and the shrimp) and cook until tender. Season with fish sauce. Wilt in the spinach.|action|medium|360|P2|Vegetables tender|shrimp; fish_sauce|cooking_pot, wooden_spoon|—
+S|K1|K|Cut the vegetables|Cut the daikon, beans and eggplant; trim the okra and the spinach.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|daikon; green_beans; eggplant; okra; spinach; chili_pepper|chef_knife, chopping_board, vegetable_peeler|—
+S|P2|P|Make the broth sour|Stir in the tamarind and add the daikon; cook 5 minutes.|action|medium|300|P1, K1|Sour broth|tamarind|cooking_pot, wooden_spoon|—
+S|P3|P|Add the vegetables|Add the beans, eggplant, okra, chili (and the shrimp) and cook until tender. Season with fish sauce. Wilt in the spinach.|action|medium|360|P2|Vegetables tender|shrimp; fish_sauce|cooking_pot, wooden_spoon|—
 S|F1|F|Serve|Serve hot with rice on the side.|action|off|30 + 15 × servings|P3, R1|Served|—|ladle, bowl|—
 `
   },
@@ -3188,10 +3188,10 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125
 I|green_onion|Green onion|img/350/green_onion.webp|5|g|5|linear|—|sliced
 I|lime|Calamansi or lime wedges|img/350/lime.webp|0.25|pcs|17|linear|—|—
 S|N1|N|Soak the noodles|Soak the rice sticks in water for 10 minutes until pliable, then drain.|wait|—|600|—|Pliable|rice_noodles|bowl, colander|—
-S|K1|K|Prep|Cut the chicken, garlic, onion, carrot, beans and cabbage; peel the shrimp.|action|—|(150 + 90 × servings) × skill_factor|—|Ready|chicken_breast; shrimp; garlic; onion; carrot; green_beans; cabbage; green_onion|chef_knife, chopping_board, vegetable_peeler|—
-S|W1|W|Meat|Fry the garlic and onion in the oil, then the chicken (and shrimp) until cooked.|action|medium-high|300|K1|Cooked|oil|wok, stovetop, spatula|—
-S|W2|W|Vegetables|Add the carrot, beans and cabbage and stir-fry until crisp-tender; take everything out.|action|high|180|W1|Crisp-tender|—|wok, spatula|—
-S|W3|W|Noodles|Pour the stock, soy sauce, oyster sauce and pepper into the wok, bring to a boil and add the noodles. Toss until the liquid is absorbed, then return the meat and vegetables.|action|medium-high|300|W2, N1|Liquid absorbed|chicken_stock; light_soy_sauce; oyster_sauce; ground_black_pepper|wok, tongs|—
+S|K1|K|Cut the meat and vegetables|Cut the chicken, garlic, onion, carrot, beans and cabbage; peel the shrimp.|action|—|(150 + 90 × servings) × skill_factor|—|Ready|chicken_breast; shrimp; garlic; onion; carrot; green_beans; cabbage; green_onion|chef_knife, chopping_board, vegetable_peeler|—
+S|W1|W|Fry the meat|Fry the garlic and onion in the oil, then the chicken (and shrimp) until cooked.|action|medium-high|300|K1|Cooked|oil|wok, stovetop, spatula|—
+S|W2|W|Stir-fry the vegetables|Add the carrot, beans and cabbage and stir-fry until crisp-tender; take everything out.|action|high|180|W1|Crisp-tender|—|wok, spatula|—
+S|W3|W|Add the noodles|Pour the stock, soy sauce, oyster sauce and pepper into the wok, bring to a boil and add the noodles. Toss until the liquid is absorbed, then return the meat and vegetables.|action|medium-high|300|W2, N1|Liquid absorbed|chicken_stock; light_soy_sauce; oyster_sauce; ground_black_pepper|wok, tongs|—
 S|F1|F|Serve|Serve on a platter with green onion and calamansi or lime to squeeze over.|action|off|30 + 15 × servings|W3|Served|lime|tongs, plates|—
 `
   },
@@ -3216,11 +3216,11 @@ I|egg|Eggs|img/350/egg.webp|2|pcs|110|linear|—|—
 I|feta_cheese|Feta|img/350/feta_cheese.webp|25|g|25|linear|opt_feta = yes|crumbled
 I|parsley|Parsley or cilantro|img/350/parsley.webp|3|g|3|linear|—|chopped
 I|bread|Crusty bread or pita|img/350/bread.webp|60|g|60|linear|—|—
-S|K1|K|Prep|Dice the onion and pepper, slice the garlic, chop the herbs.|action|—|(120 + 45 × servings) × skill_factor|—|Ready|onion; red_bell_pepper; garlic; parsley|chef_knife, chopping_board|—
-S|P1|P|Soften|Cook the onion and pepper in the olive oil until soft and sweet, add the garlic and spices for 1 minute.|action|medium|540|K1|Soft and sweet|olive_oil; cumin; paprika_powder; chili_flakes|pan, stovetop, wooden_spoon|—
-S|P2|P|Sauce|Add the tomatoes, salt and sugar and simmer until thickened.|wait|medium-low|600|P1|Thick sauce|tomato; salt; sugar|pan, wooden_spoon|—
-S|P3|P|Eggs|Make wells in the sauce, crack in the eggs, cover and cook until the whites are set and the yolks still runny.|wait|low|420|P2|Whites set, yolks runny|egg|pan, spoon|—
-S|F1|F|Serve|Scatter with feta and herbs and serve in the pan with bread.|action|off|30 + 15 × servings|P3|Served|feta_cheese; bread|spoon, plates|—
+S|K1|K|Chop the onion, pepper, garlic and herbs|Dice the onion and pepper, slice the garlic, chop the herbs.|action|—|(120 + 45 × servings) × skill_factor|—|Ready|onion; red_bell_pepper; garlic; parsley|chef_knife, chopping_board|—
+S|P1|P|Cook the onion and pepper until soft|Cook the onion and pepper in the olive oil until soft and sweet, add the garlic and spices for 1 minute.|action|medium|540|K1|Soft and sweet|olive_oil; cumin; paprika_powder; chili_flakes|pan, stovetop, wooden_spoon|—
+S|P2|P|Add the tomatoes and simmer the sauce|Add the tomatoes, salt and sugar and simmer until thickened.|wait|medium-low|600|P1|Thick sauce|tomato; salt; sugar|pan, wooden_spoon|—
+S|P3|P|Crack the eggs into the sauce|Make wells in the sauce, crack in the eggs, cover and cook until the whites are set and the yolks still runny.|wait|low|420|P2|Whites set, yolks runny|egg|pan, spoon|—
+S|F1|F|Add the finishing touches and serve|Scatter with feta and herbs and serve in the pan with bread.|action|off|30 + 15 × servings|P3|Served|feta_cheese; bread|spoon, plates|—
 `
   },
   {
@@ -3242,7 +3242,7 @@ I|extra_virgin_olive_oil|Extra virgin olive oil|img/350/extra_virgin_olive_oil.w
 I|paprika_powder|Paprika (to finish)|img/350/paprika_powder.webp|0.125|tsp|0.3|linear|—|—
 I|parsley|Parsley|img/350/parsley.webp|1|g|1|linear|—|chopped
 S|P1|P|Cook the chickpeas soft|Simmer the chickpeas with the baking soda in plenty of water until very soft and falling apart (canned: 20 min; soaked dried: about 1 h). Drain.|wait|medium-low|1200 canned / 3600 dried|—|Mushy, skins loose|chickpea; chickpea_dried; baking_soda; water|saucepan, stovetop, colander|—
-S|B1|B|Tahini base|Blend the tahini, lemon juice, garlic and salt; it will seize, then loosen as you add the ice water.|action|—|120|—|Pale, fluffy|tahini; lemon_juice; garlic; salt; ice|blender|—
+S|B1|B|Blend the tahini base|Blend the tahini, lemon juice, garlic and salt; it will seize, then loosen as you add the ice water.|action|—|120|—|Pale, fluffy|tahini; lemon_juice; garlic; salt; ice|blender|—
 S|B2|B|Blend|Add the warm chickpeas and cumin and blend for 3 to 4 minutes, scraping down, until very smooth. Add more ice water if too thick.|action|—|300|P1, B1|Silky smooth|cumin|blender, spatula|—
 S|F1|F|Serve|Swirl onto a plate, make a well, pour in the olive oil and dust with paprika and parsley.|action|—|30 + 15 × servings|B2|Served|extra_virgin_olive_oil; paprika_powder; parsley|spoon, plates|—
 `
@@ -3272,7 +3272,7 @@ S|K1|K|Grind|Pulse the drained soaked chickpeas with onion, garlic, herbs and sp
 S|K2|K|Rest and shape|Chill the mix for 30 minutes, stir in the baking powder, then shape into walnut-size balls or patties.|action|—|1800 + (60 + 90 × servings) × skill_factor|K1|Shaped|baking_powder|bowl, fridge, tray|—
 S|P1|P|Heat the oil|Heat the oil in a deep pot to 175 °C (a piece of mix sizzles at once).|wait|medium-high|480|—|175 °C|oil|cooking_pot, stovetop|—
 S|P2|P|Fry|Fry in batches until deep brown and crisp, about 3 to 4 minutes. Drain on paper.|action|medium-high|240 + 120 × servings|P1, K2|Deep brown, crisp|—|cooking_pot, spoon, tray|—
-S|S1|S|Tahini sauce and salad|Whisk the tahini, lemon juice and cold water into a pourable sauce. Dice the tomato and cucumber.|action|—|(90 + 45 × servings) × skill_factor|—|Ready|tahini; lemon_juice; water; tomato; cucumber|bowl, whisk, chef_knife, chopping_board|—
+S|S1|S|Make the tahini sauce and the salad|Whisk the tahini, lemon juice and cold water into a pourable sauce. Dice the tomato and cucumber.|action|—|(90 + 45 × servings) × skill_factor|—|Ready|tahini; lemon_juice; water; tomato; cucumber|bowl, whisk, chef_knife, chopping_board|—
 S|F1|F|Serve|Stuff warm pitas with falafel and salad, or plate them, and drizzle with tahini sauce.|action|off|30 + 30 × servings|P2, S1|Served|pita|spoon, plates|—
 `
   },
@@ -3349,7 +3349,7 @@ S|K1|K|Marinate|Mix the yogurt, half the lemon juice, the oil, three quarters of
 S|K2|K|Rest|Leave in the fridge.|wait|—|3600 (doc: 1 h to overnight)|K1|Marinated|—|fridge|—
 S|R1|R|Cook the rice|Rinse the rice and cook it (1 part rice to 1.5 parts water, covered, 12 min, rest 10 min).|wait|low|1320|—|Fluffy|basmati_rice|saucepan, stovetop, sieve|opt_serve = plate
 S|O1|O|Roast|Spread the chicken on a lined tray and roast at 220 °C until charred at the edges, then rest 5 minutes and slice thinly.|wait|220 °C|1800|K2|Charred edges, cooked through|—|oven, tray, parchment_paper, chef_knife, chopping_board|—
-S|S1|S|Garlic sauce and salad|Stir the remaining garlic and lemon juice into the mayonnaise. Slice the tomato, cucumber and red onion.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|mayonnaise; tomato; cucumber; red_onion|bowl, chef_knife, chopping_board|—
+S|S1|S|Make the garlic sauce and the salad|Stir the remaining garlic and lemon juice into the mayonnaise. Slice the tomato, cucumber and red onion.|action|—|(120 + 60 × servings) × skill_factor|—|Ready|mayonnaise; tomato; cucumber; red_onion|bowl, chef_knife, chopping_board|—
 S|F1|F|Assemble|Spread pita with garlic sauce, fill with chicken, salad and pickles and roll up (or plate it all over rice).|action|off|45 + 45 × servings|O1, S1, R1|Served|pickles; pita|spoon, plates|—
 `
   },
@@ -3380,7 +3380,7 @@ I|tomato|Tomato|img/350/tomato.webp|40|g|40|linear|—|sliced
 I|red_onion|Red onion|img/350/red_onion.webp|15|g|15|linear|—|sliced
 S|K1|K|Mix|Mix the meat with the onion, garlic, parsley, spices, salt and pepper and knead for 2 minutes until sticky.|action|—|(150 + 45 × servings) × skill_factor|—|Sticky, well mixed|ground_lamb; ground_beef; onion; garlic; parsley; cumin; coriander_seeds; cinnamon; paprika_powder; salt; ground_black_pepper|bowl, microplane, chef_knife, chopping_board|—
 S|K2|K|Shape|With wet hands, mould the mix into long sausages around skewers (about 3 per person) and chill 20 minutes.|action|—|1200 + (60 + 90 × servings) × skill_factor|K1|Shaped, firm|—|skewers, tray, fridge|—
-S|S1|S|Yogurt sauce|Stir the yogurt with the tahini, lemon juice and a pinch of salt; slice the tomato and red onion.|action|—|(90 + 30 × servings) × skill_factor|—|Smooth|yogurt; tahini; lemon_juice; tomato; red_onion|bowl, spoon, chef_knife, chopping_board|—
+S|S1|S|Make the yogurt sauce|Stir the yogurt with the tahini, lemon juice and a pinch of salt; slice the tomato and red onion.|action|—|(90 + 30 × servings) × skill_factor|—|Smooth|yogurt; tahini; lemon_juice; tomato; red_onion|bowl, spoon, chef_knife, chopping_board|—
 S|G1|G|Grill|Brush with oil and grill on a very hot pan, turning, until browned outside and just cooked inside.|action|high|480|K2|Browned, juicy|oil|pan, stovetop, tongs, pastry_brush|—
 S|F1|F|Serve|Warm the pitas and serve the kofta with the yogurt sauce, tomato and onion.|action|off|45 + 15 × servings|G1, S1|Served|pita|tongs, plates|—
 `
@@ -3439,8 +3439,8 @@ I|egg_yolk|Egg yolk|img/350/egg_yolk.webp|0.5|pcs|9|linear|—|—
 I|parmesan|Kefalotyri or parmesan|img/350/parmesan.webp|20|g|20|linear|—|grated
 S|K1|K|Slice|Slice the eggplants and potatoes; dice the onion and chop the garlic.|action|—|(150 + 90 × servings) × skill_factor|—|Sliced|onion; garlic|chef_knife, chopping_board, vegetable_peeler|—
 S|E1|E|Roast the vegetables|Brush the eggplant and potato slices with oil, season with salt and roast on lined trays at 200 °C until soft and golden.|wait|200 °C|1500|K1|Soft, golden|eggplant; potato; olive_oil; salt|oven, tray, parchment_paper, pastry_brush|—
-S|M1|M|Meat sauce|Brown the meat, add the onion and garlic and cook until soft. Add the wine and let it bubble away, then the passata, tomato paste, cinnamon, allspice and oregano. Simmer until thick.|action|medium|1500|K1|Thick, not watery|ground_lamb; ground_beef; red_wine; tomato_passata; tomato_paste; cinnamon; allspice; oregano|pan, stovetop, wooden_spoon|—
-S|B1|B|Béchamel|Melt the butter, stir in the flour for 1 minute, whisk in the milk and cook until thick. Off the heat, whisk in the nutmeg, egg yolk and half the cheese.|action|medium-low|480|—|Thick, smooth|butter; flour; milk; nutmeg; egg_yolk|saucepan, stovetop, whisk|—
+S|M1|M|Cook the meat sauce|Brown the meat, add the onion and garlic and cook until soft. Add the wine and let it bubble away, then the passata, tomato paste, cinnamon, allspice and oregano. Simmer until thick.|action|medium|1500|K1|Thick, not watery|ground_lamb; ground_beef; red_wine; tomato_passata; tomato_paste; cinnamon; allspice; oregano|pan, stovetop, wooden_spoon|—
+S|B1|B|Make the béchamel|Melt the butter, stir in the flour for 1 minute, whisk in the milk and cook until thick. Off the heat, whisk in the nutmeg, egg yolk and half the cheese.|action|medium-low|480|—|Thick, smooth|butter; flour; milk; nutmeg; egg_yolk|saucepan, stovetop, whisk|—
 S|O1|O|Layer and bake|Layer potatoes, half the eggplant, the meat sauce, the rest of the eggplant, then the béchamel. Sprinkle with the remaining cheese and bake at 180 °C until deep golden.|wait|180 °C|2700|E1, M1, B1|Deep golden top|parmesan|oven, baking_dish, spatula, cheese_grater|—
 S|F1|F|Rest and serve|Let it rest for at least 30 minutes so it slices cleanly.|wait|off|1800|O1|Sliceable|—|knife, spatula, plates|—
 `
@@ -3465,7 +3465,7 @@ I|tomato|Tomato|img/350/tomato.webp|50|g|50|linear|—|sliced
 I|red_onion|Red onion|img/350/red_onion.webp|15|g|15|linear|—|thinly sliced
 S|K1|K|Marinate|Toss the pork with most of the oil, the lemon juice, two thirds of the garlic, oregano, salt and pepper. Marinate at least 1 hour.|action|—|(90 + 45 × servings) × skill_factor|—|Coated|pork; olive_oil; lemon_juice; garlic; oregano; salt; ground_black_pepper|bowl, chef_knife, chopping_board|—
 S|K2|K|Skewer|After marinating, thread the pork onto skewers.|action|—|3600 + (60 + 60 × servings) × skill_factor|K1|Skewered|—|skewers, fridge|—
-S|T1|T|Tzatziki|Grate and squeeze the cucumber, then mix with the yogurt, the rest of the garlic, dill, a drizzle of oil and a pinch of salt. Chill.|action|—|(120 + 30 × servings) × skill_factor|—|Thick, not watery|yogurt; cucumber; dill|bowl, cheese_grater, spoon|—
+S|T1|T|Make the tzatziki|Grate and squeeze the cucumber, then mix with the yogurt, the rest of the garlic, dill, a drizzle of oil and a pinch of salt. Chill.|action|—|(120 + 30 × servings) × skill_factor|—|Thick, not watery|yogurt; cucumber; dill|bowl, cheese_grater, spoon|—
 S|G1|G|Grill|Grill the skewers on a very hot pan, turning, until charred and just cooked through.|action|high|600|K2|Charred, juicy|—|pan, stovetop, tongs|—
 S|F1|F|Serve|Warm the pitas on the grill. Serve the skewers with pita, tzatziki, tomato and onion.|action|off|60 + 15 × servings|G1, T1|Served|pita; tomato; red_onion|chef_knife, chopping_board, plates|—
 `
@@ -3488,9 +3488,9 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125
 I|phyllo_dough|Phyllo sheets|img/350/phyllo_dough.webp|4|pcs|80|linear|—|—
 I|butter|Melted butter (or more oil)|img/350/butter.webp|15|g|15|linear|—|—
 I|sesame_seeds|Sesame seeds (optional)|img/350/sesame_seeds.webp|0.5|tsp|1.5|linear|—|—
-S|K1|K|Prep|Wash and roughly chop the fresh spinach (or squeeze the thawed spinach very dry). Slice the green onions, dice the onion, chop the herbs.|action|—|(180 + 90 × servings) × skill_factor|—|Ready|spinach; green_onion; onion; dill; parsley|chef_knife, chopping_board, colander|—
+S|K1|K|Wash and chop the spinach and other ingredients|Wash and roughly chop the fresh spinach (or squeeze the thawed spinach very dry). Slice the green onions, dice the onion, chop the herbs.|action|—|(180 + 90 × servings) × skill_factor|—|Ready|spinach; green_onion; onion; dill; parsley|chef_knife, chopping_board, colander|—
 S|P1|P|Wilt|Soften the onions in a third of the oil, add the spinach and cook until wilted and the liquid has evaporated. Cool, then squeeze out any remaining liquid.|action|medium|600|K1|Dry, wilted|—|pan, stovetop, wooden_spoon, colander|—
-S|A1|A|Filling|Mix the spinach with the herbs, feta, beaten eggs, nutmeg and pepper.|action|—|(90 + 30 × servings) × skill_factor|P1|Mixed|feta_cheese; egg; nutmeg; ground_black_pepper|bowl, fork|—
+S|A1|A|Mix the filling|Mix the spinach with the herbs, feta, beaten eggs, nutmeg and pepper.|action|—|(90 + 30 × servings) × skill_factor|P1|Mixed|feta_cheese; egg; nutmeg; ground_black_pepper|bowl, fork|—
 S|A2|A|Layer|Mix the rest of the oil with the butter. Line the dish with half the phyllo, brushing each sheet. Spread the filling, cover with the remaining sheets, brushing each, and tuck the edges. Score the top into squares and sprinkle with sesame.|action|—|(240 + 120 × servings) × skill_factor|A1|Assembled, scored|phyllo_dough; olive_oil; butter; sesame_seeds|baking_dish, knife, pastry_brush|—|countertop
 S|O1|O|Bake|Bake at 180 °C until deep golden and crisp.|wait|180 °C|2700|A2|Deep golden, crisp|—|oven|—
 S|F1|F|Serve|Cool 15 minutes, then cut along the score lines.|wait|off|900|O1|Served|—|knife, spatula, plates|—
@@ -3532,10 +3532,10 @@ I|egg|Eggs|img/350/egg.webp|2|pcs|110|linear|—|—
 I|feta_cheese|Feta (optional)|img/350/feta_cheese.webp|15|g|15|linear|—|—
 I|parsley|Parsley|img/350/parsley.webp|2|g|2|linear|—|chopped
 I|bread|Crusty bread|img/350/bread.webp|60|g|60|linear|—|—
-S|K1|K|Prep|Slice the peppers, grate or chop the tomatoes (and dice the onion).|action|—|(90 + 45 × servings) × skill_factor|—|Ready|onion; green_bell_pepper; tomato; parsley|chef_knife, chopping_board, cheese_grater|—
+S|K1|K|Slice the peppers and chop the tomatoes|Slice the peppers, grate or chop the tomatoes (and dice the onion).|action|—|(90 + 45 × servings) × skill_factor|—|Ready|onion; green_bell_pepper; tomato; parsley|chef_knife, chopping_board, cheese_grater|—
 S|P1|P|Soften the peppers|Cook the peppers (and onion) in the oil until soft.|action|medium|300|K1|Soft|olive_oil|pan, stovetop, wooden_spoon|—
-S|P2|P|Tomatoes|Add the tomatoes, salt and chili flakes and cook until most of the liquid has evaporated.|action|medium|480|P1|Jammy, little liquid|salt; chili_flakes|pan, wooden_spoon|—
-S|P3|P|Eggs|Crack in the eggs and stir gently, just a few times, until softly set and still glossy. Crumble in the feta.|action|low|150|P2|Soft, glossy curds|egg; feta_cheese|pan, spatula|—
+S|P2|P|Add the tomatoes and cook them down|Add the tomatoes, salt and chili flakes and cook until most of the liquid has evaporated.|action|medium|480|P1|Jammy, little liquid|salt; chili_flakes|pan, wooden_spoon|—
+S|P3|P|Crack in the eggs and stir gently|Crack in the eggs and stir gently, just a few times, until softly set and still glossy. Crumble in the feta.|action|low|150|P2|Soft, glossy curds|egg; feta_cheese|pan, spatula|—
 S|F1|F|Serve|Sprinkle with parsley and serve straight from the pan with bread.|action|off|20 + 10 × servings|P3|Served|bread|spoon, plates|—
 `
   },
@@ -3561,7 +3561,7 @@ I|white_rice|Long-grain parboiled rice|img/350/white_rice.webp|90|g|90|linear|�
 I|chicken_stock|Chicken stock|img/350/chicken_stock.webp|160|ml|160|linear|—|—
 I|butter|Butter|img/350/butter.webp|10|g|10|linear|—|—
 I|chicken_legs|Chicken thighs or drumsticks|img/350/chicken_legs.webp|200|g|200|linear|opt_protein = chicken|—
-S|B1|B|Pepper base|Blend the tomatoes, red pepper, half the onion and the chili until smooth.|action|—|(90 + 30 × servings) × skill_factor|—|Smooth|tomato; red_bell_pepper; onion; chili_pepper|blender, chef_knife, chopping_board|—
+S|B1|B|Blend the pepper base|Blend the tomatoes, red pepper, half the onion and the chili until smooth.|action|—|(90 + 30 × servings) × skill_factor|—|Smooth|tomato; red_bell_pepper; onion; chili_pepper|blender, chef_knife, chopping_board|—
 S|P1|P|Fry the base|Fry the rest of the onion (sliced) in the oil until soft, add the tomato paste and fry 3 minutes until darker, then pour in the blended base with the curry powder, thyme, bay leaves, crumbled stock cube and salt. Cook down until thick and the oil rises.|action|medium|1200|B1|Thick, oil on top|oil; tomato_paste; curry_powder; thyme; bay_leaf; bouillon_cube; salt|cooking_pot, stovetop, wooden_spoon|—
 S|C1|C|Fry the chicken|Season the chicken with salt and curry powder and fry until golden and cooked through.|action|medium|1200|—|Golden, cooked|chicken_legs|pan, stovetop, tongs|opt_protein = chicken
 S|P2|P|Cook the rice|Stir in the rinsed rice and stock, cover tightly (foil under the lid) and cook on the lowest heat without stirring until the rice is tender.|wait|low|1800|P1|Rice tender, liquid absorbed|white_rice; chicken_stock|cooking_pot, tin_foil|—
@@ -3586,10 +3586,10 @@ I|fish|Smoked or dried fish|img/350/fish.webp|30|g|30|linear|opt_protein = beef_
 I|spinach|Spinach or bitter leaf|img/350/spinach.webp|80|g|80|linear|—|chopped
 I|white_rice|Rice (or fufu / pounded yam)|img/350/white_rice.webp|80|g|80|linear|—|—
 S|M1|M|Cook the meat|Simmer the beef with half the onion, the stock cube, salt and water until tender. Keep the stock.|wait|low|2700|—|Beef tender|beef; bouillon_cube; salt; water|cooking_pot, stovetop|—
-S|K1|K|Egusi paste|Mix the ground egusi with the rest of the onion and a few tablespoons of water into a thick paste. Chop the chili and spinach, flake the fish.|action|—|(120 + 60 × servings) × skill_factor|—|Thick paste|egusi_seeds; onion; chili_pepper; fish; spinach|bowl, spoon, chef_knife, chopping_board|—
+S|K1|K|Mix the egusi paste|Mix the ground egusi with the rest of the onion and a few tablespoons of water into a thick paste. Chop the chili and spinach, flake the fish.|action|—|(120 + 60 × servings) × skill_factor|—|Thick paste|egusi_seeds; onion; chili_pepper; fish; spinach|bowl, spoon, chef_knife, chopping_board|—
 S|P1|P|Fry the egusi|Heat the palm oil, drop in spoonfuls of the egusi paste and fry, turning gently, until it forms golden curds.|action|medium|600|K1|Golden curds|red_palm_oil|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Simmer|Add the beef with its stock, the fish and chili and simmer until thick.|wait|low|900|P1, M1|Thick soup|—|cooking_pot, wooden_spoon|—
-S|P3|P|Greens|Stir in the spinach and cook 3 minutes. Taste for salt.|action|low|180|P2|Greens wilted|—|cooking_pot, wooden_spoon|—
+S|P3|P|Stir in the greens|Stir in the spinach and cook 3 minutes. Taste for salt.|action|low|180|P2|Greens wilted|—|cooking_pot, wooden_spoon|—
 S|F1|F|Serve|Serve with rice, fufu or pounded yam.|action|off|30 + 15 × servings|P3|Served|white_rice|ladle, bowl|—
 `
   },
@@ -3614,12 +3614,12 @@ I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
 I|spinach|Spinach|img/350/spinach.webp|40|g|40|linear|—|—
 I|peanut|Roasted peanuts (to finish)|img/350/peanut.webp|10|g|10|linear|—|chopped
 I|white_rice|White rice|img/350/white_rice.webp|80|g|80|linear|—|—
-S|K1|K|Prep|Chop the onion, garlic and chili, grate the ginger, cut the chicken (or sweet potato).|action|—|(120 + 60 × servings) × skill_factor|—|Ready|chicken_legs; sweet_potato; onion; garlic; ginger_root; chili_pepper|chef_knife, chopping_board, microplane|—
+S|K1|K|Chop the vegetables and cut the meat|Chop the onion, garlic and chili, grate the ginger, cut the chicken (or sweet potato).|action|—|(120 + 60 × servings) × skill_factor|—|Ready|chicken_legs; sweet_potato; onion; garlic; ginger_root; chili_pepper|chef_knife, chopping_board, microplane|—
 S|R1|R|Cook the rice|Rinse the rice and cook it (1 part rice to 1.5 parts water, covered, 15 min, rest 10 min).|wait|low|1500|—|Fluffy|white_rice|saucepan, stovetop, sieve|—
 S|P1|P|Brown|Brown the chicken in the oil and lift it out. Soften the onion, then add the garlic, ginger, chili and tomato paste for 2 minutes.|action|medium-high|600|K1|Fragrant, paste darker|oil; tomato_paste|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Peanut sauce|Whisk in the tomatoes, peanut butter, stock and salt until smooth; return the chicken (or add the sweet potato and chickpeas).|action|medium|180|P1|Smooth|tomato; peanut_butter; chicken_stock; salt; chickpea|cooking_pot, whisk|—
+S|P2|P|Add the peanut sauce|Whisk in the tomatoes, peanut butter, stock and salt until smooth; return the chicken (or add the sweet potato and chickpeas).|action|medium|180|P1|Smooth|tomato; peanut_butter; chicken_stock; salt; chickpea|cooking_pot, whisk|—
 S|P3|P|Simmer|Simmer gently, stirring now and then so it does not catch, until the chicken is tender and the sauce thick.|wait|low|1500|P2|Thick, tender|—|cooking_pot, wooden_spoon|—
-S|P4|P|Greens|Stir in the spinach until wilted.|action|low|120|P3|Wilted|spinach|cooking_pot, wooden_spoon|—
+S|P4|P|Stir in the greens|Stir in the spinach until wilted.|action|low|120|P3|Wilted|spinach|cooking_pot, wooden_spoon|—
 S|F1|F|Serve|Serve over rice topped with chopped peanuts.|action|off|30 + 15 × servings|P4, R1|Served|peanut|ladle, bowl|—
 `
   },
@@ -3647,8 +3647,8 @@ I|butter|Butter|img/350/butter.webp|5|g|5|linear|opt_side = couscous|—
 I|bread|Crusty bread|img/350/bread.webp|70|g|70|linear|opt_side = bread|—
 S|K1|K|Marinate|Rub the chicken with the oil, garlic, spices, salt and half the herbs; leave 30 minutes (or overnight).|action|—|1800 + (60 + 45 × servings) × skill_factor|—|Coated|chicken_legs; olive_oil; garlic; ginger_powder; turmeric_powder; cinnamon; saffron; ground_black_pepper; salt; cilantro|bowl, chef_knife, chopping_board|—
 S|P1|P|Brown and braise|Brown the chicken lightly in the pot with the onion, add the water, cover and simmer gently, turning occasionally.|wait|low|2700|K1|Chicken tender|onion; water|cooking_pot, stovetop, tongs|—
-S|P2|P|Lemon and olives|Add the preserved lemon and olives and cook uncovered until the sauce is reduced and thick. Scatter the rest of the herbs.|action|medium-low|600|P1|Thick, oily sauce|preserved_lemon; olives|cooking_pot, wooden_spoon|—
-S|C1|C|Couscous|Pour an equal volume of boiling salted water over the couscous with the butter, cover 5 minutes, then fluff with a fork.|action|—|360|P1|Fluffy|couscous; butter|bowl, fork, plates|opt_side = couscous
+S|P2|P|Add the lemon and olives|Add the preserved lemon and olives and cook uncovered until the sauce is reduced and thick. Scatter the rest of the herbs.|action|medium-low|600|P1|Thick, oily sauce|preserved_lemon; olives|cooking_pot, wooden_spoon|—
+S|C1|C|Prepare the couscous|Pour an equal volume of boiling salted water over the couscous with the butter, cover 5 minutes, then fluff with a fork.|action|—|360|P1|Fluffy|couscous; butter|bowl, fork, plates|opt_side = couscous
 S|F1|F|Serve|Serve the chicken and sauce with couscous or bread.|action|off|30 + 15 × servings|P2, C1|Served|bread|ladle, plates|—
 `
   },
@@ -3674,10 +3674,10 @@ I|couscous|Couscous|img/350/couscous.webp|80|g|80|linear|—|—
 I|butter|Butter|img/350/butter.webp|10|g|10|linear|—|—
 I|water|Boiling water|img/350/water.webp|100|ml|100|linear|—|—
 I|cilantro|Cilantro|img/350/cilantro.webp|3|g|3|linear|—|chopped
-S|K1|K|Prep|Chop the onion and tomato; cut the carrots, squash and zucchini into large pieces.|action|—|(150 + 90 × servings) × skill_factor|—|Ready|onion; tomato; carrot; squash; zucchini; cilantro|chef_knife, chopping_board, vegetable_peeler|—
-S|P1|P|Base|Soften the onion in the oil, add the spices and tomato paste for 1 minute, then the tomato.|action|medium|480|K1|Soft, fragrant|olive_oil; ras_el_hanout; turmeric_powder; tomato_paste|cooking_pot, stovetop, wooden_spoon|—
+S|K1|K|Chop the onion and cut the vegetables|Chop the onion and tomato; cut the carrots, squash and zucchini into large pieces.|action|—|(150 + 90 × servings) × skill_factor|—|Ready|onion; tomato; carrot; squash; zucchini; cilantro|chef_knife, chopping_board, vegetable_peeler|—
+S|P1|P|Cook the base|Soften the onion in the oil, add the spices and tomato paste for 1 minute, then the tomato.|action|medium|480|K1|Soft, fragrant|olive_oil; ras_el_hanout; turmeric_powder; tomato_paste|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Simmer|Add the carrots and stock with the salt and simmer 10 minutes; add the squash, zucchini, chickpeas and raisins and simmer until all are tender.|wait|low|1500|P1|Vegetables tender|vegetable_stock; salt; chickpea; raisins|cooking_pot, ladle|—
-S|C1|C|Couscous|Pour the boiling water over the couscous with the butter and a pinch of salt, cover 5 minutes, fluff with a fork.|action|—|360|P2|Fluffy|couscous; butter; water|bowl, fork|—
+S|C1|C|Prepare the couscous|Pour the boiling water over the couscous with the butter and a pinch of salt, cover 5 minutes, fluff with a fork.|action|—|360|P2|Fluffy|couscous; butter; water|bowl, fork|—
 S|F1|F|Serve|Mound the couscous on a platter, top with the vegetables, spoon over the broth and scatter cilantro.|action|off|45 + 15 × servings|C1|Served|—|ladle, plates|—
 `
   },
@@ -3702,7 +3702,7 @@ I|water|Water or stock|img/350/water.webp|200|ml|200|linear|—|—
 I|egg|Eggs|img/350/egg.webp|1|pcs|55|linear|—|—
 I|injera|Injera flatbread|— (placeholder: no image yet)|1.5|pcs|150|linear|opt_side = injera|—
 I|white_rice|White rice|img/350/white_rice.webp|80|g|80|linear|opt_side = rice|—
-S|K1|K|Prep|Score the chicken and rub with lemon juice and half the salt. Chop the onions very finely (a food processor helps), grate the garlic and ginger.|action|—|(240 + 90 × servings) × skill_factor|—|Ready|chicken_legs; lemon_juice; salt; onion; garlic; ginger_root|chef_knife, chopping_board, microplane, blender|—
+S|K1|K|Score the chicken and chop the onions|Score the chicken and rub with lemon juice and half the salt. Chop the onions very finely (a food processor helps), grate the garlic and ginger.|action|—|(240 + 90 × servings) × skill_factor|—|Ready|chicken_legs; lemon_juice; salt; onion; garlic; ginger_root|chef_knife, chopping_board, microplane, blender|—
 S|P1|P|Dry-cook the onions|Cook the onions in the dry pot, stirring often, until they are soft, deep golden and jammy. Add a splash of water if they catch.|action|medium-low|1800|K1|Deep golden, jammy|—|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Spice base|Add the ghee, then the garlic, ginger, berbere, cardamom and tomato paste and fry 5 minutes, stirring, until dark red and fragrant.|action|medium-low|300|P1|Dark red, oily|ghee; berbere; cardamom; tomato_paste|cooking_pot, wooden_spoon|—
 S|P3|P|Braise|Add the chicken and water and simmer gently, covered, until the chicken is very tender and the sauce thick.|wait|low|2700|P2|Tender, thick sauce|water|cooking_pot, ladle|—
@@ -3736,8 +3736,8 @@ I|almond|Flaked almonds (optional)|img/350/almond.webp|5|g|5|linear|—|—
 I|white_rice|White rice|img/350/white_rice.webp|80|g|80|linear|—|—
 S|K1|K|Soak and chop|Soak the bread in the milk. Chop the onion and garlic.|action|—|(90 + 30 × servings) × skill_factor|—|Bread soft|bread; milk; onion; garlic|bowl, chef_knife, chopping_board|—
 S|P1|P|Cook the filling|Soften the onion and garlic in the butter, add the meat and brown it, then stir in the curry powder, half the turmeric, jam, raisins, lemon juice and salt. Squeeze the bread (keep the milk) and mix it in.|action|medium|720|K1|Browned, fragrant|butter; ground_beef; ground_lamb; curry_powder; turmeric_powder; apricot_jam; raisins; lemon_juice; salt|pan, stovetop, wooden_spoon|—
-S|O1|O|Custard and bake|Press the filling into a baking dish. Beat the eggs into the reserved milk, pour over, tuck in the bay leaves and scatter almonds. Bake at 180 °C until the custard is set and golden.|wait|180 °C|2100|P1|Custard set, golden|egg; bay_leaf; almond|oven, baking_dish, fork|—
-S|R1|R|Yellow rice|Cook the rice with the rest of the turmeric and a pinch of salt (1 part rice to 1.5 parts water, covered, 15 min, rest 10 min).|wait|low|1500|—|Yellow, fluffy|white_rice|saucepan, stovetop, sieve|—
+S|O1|O|Add the custard and bake|Press the filling into a baking dish. Beat the eggs into the reserved milk, pour over, tuck in the bay leaves and scatter almonds. Bake at 180 °C until the custard is set and golden.|wait|180 °C|2100|P1|Custard set, golden|egg; bay_leaf; almond|oven, baking_dish, fork|—
+S|R1|R|Cook the yellow rice|Cook the rice with the rest of the turmeric and a pinch of salt (1 part rice to 1.5 parts water, covered, 15 min, rest 10 min).|wait|low|1500|—|Yellow, fluffy|white_rice|saucepan, stovetop, sieve|—
 S|F1|F|Serve|Rest 5 minutes and serve in squares with the yellow rice.|action|off|300 + 15 × servings|O1, R1|Served|—|spatula, plates|—
 `
   },
@@ -3755,7 +3755,7 @@ I|flour|Flour|img/350/flour.webp|40|g|40|linear|—|—
 I|baking_soda|Baking soda|img/350/baking_soda.webp|0.125|tsp|0.6|linear|—|—
 I|salt|Salt|img/350/salt.webp|0.125|tsp|0.7|linear|—|—
 I|chocolate_chips|Chocolate chips or chopped chocolate|img/350/chocolate_chips.webp|35|g|35|linear|—|—
-S|D1|D|Cream|Beat the butter with both sugars until fluffy, then beat in the egg and vanilla.|action|—|240|—|Pale, fluffy|butter; brown_sugar; sugar; egg; vanilla|bowl, mixer|—
+S|D1|D|Cream the butter and sugars|Beat the butter with both sugars until fluffy, then beat in the egg and vanilla.|action|—|240|—|Pale, fluffy|butter; brown_sugar; sugar; egg; vanilla|bowl, mixer|—
 S|D2|D|Dry ingredients|Stir in the flour, baking soda and salt until just combined, then the chocolate chips.|action|—|(90 + 15 × servings) × skill_factor|D1|No dry flour|flour; baking_soda; salt; chocolate_chips|kitchen_scale, bowl, spatula|—
 S|D3|D|Chill|Cover and chill the dough (makes thicker, chewier cookies).|wait|—|1800|D2|Firm|—|plastic_wrap, fridge|opt_texture = chewy
 S|O1|O|Preheat|Heat the oven to 180 °C (160 °C fan) and line a tray.|action|180 °C|60|D2|Oven on|—|oven, tray, parchment_paper|—
@@ -3829,7 +3829,7 @@ I|cornstarch|Cornstarch (or flour)|img/350/cornstarch.webp|0.5|tbsp|4|linear|—
 I|egg|Egg (wash)|img/350/egg.webp|0.125|pcs|7|linear, rounded up|—|—
 S|C1|C|Make the crust|Rub the cold butter into the flour and salt until like breadcrumbs with some pea-size pieces, add ice water until it just holds together. Make two discs, wrap and chill.|action|—|(300 + 30 × servings) × skill_factor|—|Holds together|flour; butter; water; salt|kitchen_scale, bowl, plastic_wrap, fridge|opt_crust = homemade
 S|C2|C|Chill|Chill the dough.|wait|—|3600|C1|Firm|—|fridge|opt_crust = homemade
-S|K1|K|Filling|Peel, core and slice the apples and toss with the sugar, lemon juice, spices and cornstarch.|action|—|(180 + 90 × servings) × skill_factor|—|Coated|apple; sugar; lemon_juice; cinnamon; nutmeg; cornstarch|vegetable_peeler, chef_knife, chopping_board, bowl|—
+S|K1|K|Make the filling|Peel, core and slice the apples and toss with the sugar, lemon juice, spices and cornstarch.|action|—|(180 + 90 × servings) × skill_factor|—|Coated|apple; sugar; lemon_juice; cinnamon; nutmeg; cornstarch|vegetable_peeler, chef_knife, chopping_board, bowl|—
 S|O1|O|Preheat|Heat the oven to 200 °C (180 °C fan) with a tray on the bottom shelf.|action|200 °C|60|K1|Oven on|—|oven, tray|—
 S|A1|A|Assemble|Roll out half the dough and line the pie dish (one pie serves 8). Pile in the apples, cover with the second sheet, crimp the edges, cut steam vents and brush with beaten egg.|action|—|(300 + 30 × servings) × skill_factor|K1, C2|Sealed, vented|dough; egg|rolling_pin, pie_dish, knife, pastry_brush|—|countertop
 S|O2|O|Bake|Bake 20 minutes, then lower to 180 °C and bake until deep golden and the juices bubble through the vents.|wait|200 °C then 180 °C|3300 (doc: 50 to 60 min)|A1, O1|Deep golden, bubbling|—|oven, pie_dish|—
@@ -3857,10 +3857,10 @@ I|powdered_sugar|Powdered sugar|img/350/powdered_sugar.webp|30|g|30|linear|—|�
 I|milk|Milk (frosting)|img/350/milk.webp|1|tsp|5|linear|opt_frosting = buttercream|—
 S|O1|O|Preheat|Heat the oven to 175 °C (155 °C fan). Grease two 20 cm cake tins and line the bases (one cake serves 10).|action|175 °C|180|—|Oven on, tins lined|—|oven, cake_tin, parchment_paper|—
 S|B1|B|Dry ingredients|Whisk the flour, sugar, cocoa, baking soda, baking powder and salt in a large bowl.|action|—|(60 + 15 × servings) × skill_factor|—|Even colour|flour; sugar; cocoa_powder; baking_soda; baking_powder; salt|kitchen_scale, bowl, whisk, sieve|—
-S|B2|B|Wet ingredients|Whisk in the eggs, buttermilk, oil and vanilla, then the hot coffee. The batter will be thin.|action|—|180|B1|Smooth, thin|egg; buttermilk; oil; vanilla; coffee|bowl, whisk|—
+S|B2|B|Whisk in the wet ingredients|Whisk in the eggs, buttermilk, oil and vanilla, then the hot coffee. The batter will be thin.|action|—|180|B1|Smooth, thin|egg; buttermilk; oil; vanilla; coffee|bowl, whisk|—
 S|O2|O|Bake|Divide between the tins and bake until a skewer comes out clean.|wait|175 °C|1800 (doc: 28 to 35 min)|B2, O1|Skewer clean|—|oven, cake_tin, skewers|—
 S|F1|F|Cool|Cool 10 minutes in the tins, then turn out onto a rack and cool completely.|wait|—|3600|O2|Completely cool|—|knife, cooling_rack|—
-S|C1|C|Buttercream|Beat the butter until pale, then beat in the powdered sugar, a little cocoa and the milk until fluffy.|action|—|(180 + 30 × servings) × skill_factor|O2|Fluffy, spreadable|butter; milk|bowl, mixer|opt_frosting = buttercream
+S|C1|C|Make the buttercream|Beat the butter until pale, then beat in the powdered sugar, a little cocoa and the milk until fluffy.|action|—|(180 + 30 × servings) × skill_factor|O2|Fluffy, spreadable|butter; milk|bowl, mixer|opt_frosting = buttercream
 S|F2|F|Fill and frost|Sandwich the layers with buttercream and spread the rest over the top and sides (or just dust with powdered sugar).|action|—|(300 + 30 × servings) × skill_factor|F1, C1|Frosted|powdered_sugar|spatula, plates|—
 `
   },
@@ -3880,8 +3880,8 @@ I|vanilla|Vanilla extract|img/350/vanilla.webp|0.25|tsp|1|linear|—|—
 I|lemon_zest|Lemon zest|img/350/lemon_zest.webp|0.125|tsp|0.3|linear|—|—
 I|raspberry|Fresh berries|img/350/raspberry.webp|25|g|25|linear|opt_topping = berries|—
 S|O1|O|Preheat|Heat the oven to 160 °C (140 °C fan). Line the base of a 20 cm springform tin (serves 10).|action|160 °C|120|—|Oven on|—|oven, cake_tin, parchment_paper|—
-S|B1|B|Biscuit base|Crush the biscuits finely, mix with the melted butter and press firmly into the tin. Bake 10 minutes.|action|160 °C|(180 + 15 × servings) × skill_factor + 600|O1|Firm, lightly toasted|digestive_biscuits; butter|kitchen_scale, bowl, spoon, cake_tin|—
-S|K1|K|Filling|Beat the cream cheese, sugar and cornstarch on low until smooth. Beat in the eggs one at a time, then the sour cream, vanilla and lemon zest. Do not whip in air.|action|—|360|—|Smooth, no lumps|cream_cheese; sugar; cornstarch; egg; sour_cream; vanilla; lemon_zest|bowl, mixer, spatula, microplane|—
+S|B1|B|Make the biscuit base|Crush the biscuits finely, mix with the melted butter and press firmly into the tin. Bake 10 minutes.|action|160 °C|(180 + 15 × servings) × skill_factor + 600|O1|Firm, lightly toasted|digestive_biscuits; butter|kitchen_scale, bowl, spoon, cake_tin|—
+S|K1|K|Make the filling|Beat the cream cheese, sugar and cornstarch on low until smooth. Beat in the eggs one at a time, then the sour cream, vanilla and lemon zest. Do not whip in air.|action|—|360|—|Smooth, no lumps|cream_cheese; sugar; cornstarch; egg; sour_cream; vanilla; lemon_zest|bowl, mixer, spatula, microplane|—
 S|O2|O|Bake low|Pour onto the base and bake until set at the edges but still wobbly in the middle. Turn off the oven, prop the door open and leave it for 1 hour (prevents cracks).|wait|160 °C|6300 (doc: 45 min bake + 1 h in the cooling oven)|B1, K1|Wobbly centre, no cracks|—|oven|—
 S|F1|F|Chill|Chill at least 6 hours or overnight.|wait|—|21600 (doc: 6 h to overnight)|O2|Firm, cold|—|fridge|—
 S|F2|F|Serve|Run a knife round the edge, unclip the tin, top with berries and slice with a hot knife.|action|—|60 + 15 × servings|F1|Served|raspberry|knife, plates|—
@@ -3900,9 +3900,9 @@ I|sugar|Sugar|img/350/sugar.webp|18|g|18|linear|—|—
 I|mascarpone|Mascarpone|img/350/mascarpone.webp|60|g|60|linear|—|—
 I|ladyfingers|Ladyfingers (savoiardi)|img/350/ladyfingers.webp|4|pcs|40|linear|—|—
 I|cocoa_powder|Cocoa powder (to dust)|img/350/cocoa_powder.webp|1|tsp|2|linear|—|—
-S|C1|C|Coffee|Pour the cooled coffee (and rum) into a shallow dish.|action|—|60|—|Ready|coffee; rum|bowl|—
-S|K1|K|Yolks and mascarpone|Beat the egg yolks with the sugar until pale and thick, then beat in the mascarpone until smooth.|action|—|300|—|Thick, smooth|egg_yolk; sugar; mascarpone|bowl, mixer|—
-S|K2|K|Whites|In a clean bowl, whisk the whites to stiff peaks and fold them gently into the mascarpone cream.|action|—|(180 + 30 × servings) × skill_factor|K1|Light, holds shape|egg_white|bowl, mixer, spatula|—
+S|C1|C|Pour the coffee into a dish|Pour the cooled coffee (and rum) into a shallow dish.|action|—|60|—|Ready|coffee; rum|bowl|—
+S|K1|K|Beat the yolks and mascarpone|Beat the egg yolks with the sugar until pale and thick, then beat in the mascarpone until smooth.|action|—|300|—|Thick, smooth|egg_yolk; sugar; mascarpone|bowl, mixer|—
+S|K2|K|Whisk the egg whites and fold them in|In a clean bowl, whisk the whites to stiff peaks and fold them gently into the mascarpone cream.|action|—|(180 + 30 × servings) × skill_factor|K1|Light, holds shape|egg_white|bowl, mixer, spatula|—
 S|A1|A|Layer|Dip each ladyfinger very briefly in the coffee (1 second per side) and lay them in the dish. Spread over half the cream, repeat with a second layer and finish with cream.|action|—|(120 + 90 × servings) × skill_factor|C1, K2|Two layers, smooth top|ladyfingers|baking_dish, spatula|—|countertop
 S|F1|F|Chill|Cover and chill at least 6 hours (overnight is best).|wait|—|21600 (doc: 6 h to overnight)|A1|Set|—|plastic_wrap, fridge|—
 S|F2|F|Dust and serve|Dust generously with cocoa through a sieve just before serving.|action|—|30 + 15 × servings|F1|Served|cocoa_powder|sieve, spoon, plates|—
@@ -3940,8 +3940,8 @@ I|condensed_milk|Sweetened condensed milk|img/350/condensed_milk.webp|70|g|70|li
 I|evaporated_milk|Evaporated milk|img/350/evaporated_milk.webp|70|ml|70|linear|—|—
 I|vanilla|Vanilla extract|img/350/vanilla.webp|0.25|tsp|1|linear|—|—
 S|O1|O|Preheat|Heat the oven to 160 °C (140 °C fan) and boil a kettle for the water bath.|action|160 °C|60|—|Oven on|—|oven|—
-S|C1|C|Caramel|Melt the sugar with the water without stirring, swirling the pan, until deep amber. Pour at once into the flan dish (or ramekins) and tilt to coat the base.|action|medium|480|—|Deep amber|sugar; water|saucepan, stovetop, baking_dish|—
-S|K1|K|Custard|Whisk the eggs gently with the condensed milk, evaporated milk and vanilla without making foam; strain through a sieve.|action|—|(120 + 15 × servings) × skill_factor|—|Smooth, no foam|egg; condensed_milk; evaporated_milk; vanilla|bowl, whisk, sieve|—
+S|C1|C|Make the caramel|Melt the sugar with the water without stirring, swirling the pan, until deep amber. Pour at once into the flan dish (or ramekins) and tilt to coat the base.|action|medium|480|—|Deep amber|sugar; water|saucepan, stovetop, baking_dish|—
+S|K1|K|Make the custard|Whisk the eggs gently with the condensed milk, evaporated milk and vanilla without making foam; strain through a sieve.|action|—|(120 + 15 × servings) × skill_factor|—|Smooth, no foam|egg; condensed_milk; evaporated_milk; vanilla|bowl, whisk, sieve|—
 S|O2|O|Bake in a water bath|Pour the custard over the caramel, cover with foil, set in a deep tray and pour hot water halfway up. Bake until set but still slightly wobbly in the centre.|wait|160 °C|3000 one / 1800 ramekins|C1, K1, O1|Set, slight wobble|—|oven, tray, tin_foil, ramekins|—
 S|F1|F|Chill|Cool, then chill at least 4 hours.|wait|—|14400 (doc: 4 h to overnight)|O2|Cold, firm|—|fridge|—
 S|F2|F|Turn out|Run a knife round the edge, put a plate on top and flip it so the caramel runs over.|action|—|60 + 15 × servings|F1|Served|—|knife, plates|—
@@ -3970,7 +3970,7 @@ S|K1|K|Chop|Finely dice the onion and mince the garlic.|action|—|(60 + 30 × s
 S|S1|S|Soften the onion|Fry the onion in the oil until soft, adding the garlic for the last minute.|action|medium|360|K1|Soft, fragrant|olive_oil|pan, stovetop, wooden_spoon|—
 S|S2|S|Brown the meat|Add the ground beef and fry, breaking it up, until browned.|action|medium-high|360|S1|Browned|ground_beef|pan, wooden_spoon|opt_meat = beef
 S|S3|S|Simmer the sauce|Stir in the passata, oregano and half the salt and simmer until slightly thickened.|wait|low|900|S2|Slightly thickened|tomato_passata; oregano; salt|pan, wooden_spoon|—
-S|C1|C|Ricotta mix|Mix the ricotta with the egg, half the Parmesan and the rest of the salt.|action|—|(60 + 15 × servings) × skill_factor|—|Smooth|ricotta; egg|bowl, fork|—
+S|C1|C|Mix the ricotta|Mix the ricotta with the egg, half the Parmesan and the rest of the salt.|action|—|(60 + 15 × servings) × skill_factor|—|Smooth|ricotta; egg|bowl, fork|—
 S|O1|O|Preheat the oven|Turn the oven on to 200 °C conventional (180 °C fan).|action|200 °C (180 °C fan)|15|S1|Oven on|—|oven|—
 S|P2|P|Cook the pasta|Cook the pasta 2 minutes less than the packet says; it finishes cooking in the oven.|wait|high|480|P1|Firm, still a little underdone|ziti|cooking_pot, stovetop|—
 S|P3|P|Drain|Drain the pasta.|action|—|30|P2|Drained|—|colander|—
@@ -4008,7 +4008,7 @@ S|P1|P|Brown the chicken|Heat the oil in a deep pan with a lid and brown the chi
 S|P2|P|Soften the vegetables|Fry the onion and pepper in the chicken fat until soft, adding the garlic for the last minute.|action|medium|360|P1, K2|Soft|—|pan, wooden_spoon|—
 S|P3|P|Coat the rice|Stir in the passata and the turmeric (or crushed saffron), then the rice, and stir for 2 minutes until coated.|action|medium|150|P2|Rice coated and glossy|tomato_passata; turmeric_powder; saffron; white_rice|pan, wooden_spoon|—
 S|P4|P|Simmer covered|Pour in the stock, put the chicken back on top, bring to the boil, then cover and cook on low without stirring.|wait|low|1200 (doc: 20 min)|P3|Most of the liquid absorbed|chicken_stock|pan|—
-S|P5|P|Peas and olives|Scatter over the peas (and the olives), cover again and cook until the rice is tender and the chicken is cooked through.|wait|low|300|P4|Rice tender, chicken cooked through|pea; olives|pan|—
+S|P5|P|Add the peas and olives|Scatter over the peas (and the olives), cover again and cook until the rice is tender and the chicken is cooked through.|wait|low|300|P4|Rice tender, chicken cooked through|pea; olives|pan|—
 S|F1|F|Rest and serve|Leave it covered off the heat for 5 minutes, fluff the rice and serve with cilantro.|wait|off|300|P5|Served|cilantro|spoon, plates|—
 `
   },
@@ -4030,7 +4030,7 @@ I|thyme|Fresh thyme sprig|img/350/thyme.webp|1|pcs|0.5|linear|—|—
 I|allspice|Allspice berries|img/350/allspice.webp|2|pcs|0.2|linear|—|—
 I|chili_pepper|Scotch bonnet chili|img/350/chili_pepper.webp|1|pcs|10|fixed|—|whole
 I|salt|Salt|img/350/salt.webp|0.25|tsp|1.5|linear|—|—
-S|K1|K|Prep|Rinse the rice until the water runs clear. Drain and rinse the beans, crush the garlic and bruise the spring onion with the back of a knife.|action|—|(90 + 30 × servings) × skill_factor|—|Ready|white_rice; kidney_beans; black_beans; garlic; green_onion|sieve, chef_knife, chopping_board|—
+S|K1|K|Rinse the rice and beans and crush the garlic|Rinse the rice until the water runs clear. Drain and rinse the beans, crush the garlic and bruise the spring onion with the back of a knife.|action|—|(90 + 30 × servings) × skill_factor|—|Ready|white_rice; kidney_beans; black_beans; garlic; green_onion|sieve, chef_knife, chopping_board|—
 S|P1|P|Infuse the coconut milk|Bring the coconut milk and water to a simmer with the beans, garlic, spring onion, thyme, allspice and salt. Add the whole chili (cut a slit in it for the hot version).|action|medium|300|K1|Simmering, fragrant|coconut_milk; water; thyme; allspice; chili_pepper; salt|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Cook the rice|Stir in the rice, bring back to the boil, then cover and cook on the lowest heat without stirring. Don't burst the chili.|wait|low|1200 (doc: 20 min)|P1|Liquid absorbed, rice tender|—|cooking_pot|—
 S|F1|F|Rest and serve|Leave it covered off the heat for 5 minutes. Remove the chili, thyme stems and spring onion, then fluff with a fork.|wait|off|300|P2|Fluffy|—|fork, plates|—
@@ -4064,7 +4064,7 @@ S|K1|K|Salt the cabbage|Mix the chopped cabbage with a pinch of the salt, leave 
 S|K2|K|Make the filling|Mix the pork with the cabbage, ginger, spring onion, two thirds of the soy sauce, the Shaoxing wine, sesame oil and white pepper. Stir in one direction until sticky.|action|—|(120 + 60 × servings) × skill_factor|K1|Sticky filling|ground_pork; ginger_root; green_onion; shaoxing_wine; toasted_sesame_oil; white_pepper|bowl, microplane, chef_knife, chopping_board|—
 S|D3|D|Roll the wrappers|Roll the dough into a log, cut it into walnut-size pieces and roll each into a thin 8 cm round, thinner at the edge.|action|—|(240 + 360 × servings) × skill_factor|D2|Thin rounds|—|rolling_pin, knife|opt_wrappers = homemade
 S|A1|A|Fill and fold|Put a teaspoon of filling in the middle of each wrapper, wet the edge with water, fold into a half-moon and pleat or press to seal.|action|—|(120 + 480 × servings) × skill_factor|K2, D3|All sealed|dumpling_wrappers|spoon, tray|—
-S|S1|S|Dipping sauce|Mix the vinegar with the rest of the soy sauce.|action|—|30 + 10 × servings|—|Mixed|rice_vinegar; light_soy_sauce|bowl, spoon|—
+S|S1|S|Mix the dipping sauce|Mix the vinegar with the rest of the soy sauce.|action|—|30 + 10 × servings|—|Mixed|rice_vinegar; light_soy_sauce|bowl, spoon|—
 S|B1|B|Boil the water|Bring a large pot of water to the boil.|wait|high|600|K2|Rolling boil|—|cooking_pot, stovetop|opt_cook = boiled
 S|B2|B|Boil the dumplings|Add the dumplings and stir gently. Each time it boils up again, add a cup of cold water; after the third time they float and puff up.|action|high|480|A1|Floating and puffed|—|cooking_pot, ladle|opt_cook = boiled
 S|B3|B|Serve the dumplings|Lift out the dumplings and serve hot with the dipping sauce.|action|off|30 + 15 × servings|B2, S1|Served|—|ladle, plates|opt_cook = boiled
@@ -4094,9 +4094,9 @@ I|thai_basil|Thai basil leaves|img/350/thai_basil.webp|5|g|5|linear|—|—
 I|chili_pepper|Red chili (to garnish)|img/350/chili_pepper.webp|0.25|pcs|3|linear; doubled if hot|—|sliced
 I|jasmine_rice|Jasmine rice|img/350/jasmine_rice.webp|80|g|80|linear|—|—
 S|R1|R|Cook the rice|Rinse the jasmine rice and cook it (1 part rice to 1.25 parts water, covered, 12 min, rest 10 min).|wait|low|1320|—|Fluffy|jasmine_rice|saucepan, stovetop, sieve|—
-S|K1|K|Prep|Slice the protein and the pepper, cut the green beans, tear the lime leaves and slice the chili.|action|—|(120 + 90 × servings) × skill_factor|—|Ready|chicken_legs; tofu; red_bell_pepper; green_beans; kaffir_lime_leaves; chili_pepper|chef_knife, chopping_board|—
+S|K1|K|Slice the protein and vegetables and tear the lime leaves|Slice the protein and the pepper, cut the green beans, tear the lime leaves and slice the chili.|action|—|(120 + 90 × servings) × skill_factor|—|Ready|chicken_legs; tofu; red_bell_pepper; green_beans; kaffir_lime_leaves; chili_pepper|chef_knife, chopping_board|—
 S|P1|P|Fry the paste|Heat the oil with a third of the coconut milk until it bubbles and the oil starts to separate, then fry the curry paste until fragrant.|action|medium|240|K1|Fragrant, oil separating|red_curry_paste; oil|wok, stovetop, wooden_spoon|—
-S|P2|P|Protein|Add the chicken (or tofu) and stir to coat.|action|medium|180|P1|Coated, outside cooked|—|wok, wooden_spoon|—
+S|P2|P|Add the protein|Add the chicken (or tofu) and stir to coat.|action|medium|180|P1|Coated, outside cooked|—|wok, wooden_spoon|—
 S|P3|P|Simmer|Pour in the rest of the coconut milk, add the pepper, green beans and lime leaves and simmer until the chicken is cooked and the vegetables are tender. Season with fish sauce and sugar.|wait|low|600|P2|Vegetables tender|coconut_milk; fish_sauce; brown_sugar|wok, wooden_spoon|—
 S|F1|F|Serve|Stir in the Thai basil and serve with rice, topped with chili.|action|off|30 + 15 × servings|P3, R1|Served|thai_basil|ladle, bowl|—
 `
@@ -4196,7 +4196,7 @@ S|K2|K|Mix the sauce|Mix the oyster sauce, both soy sauces, fish sauce, sugar an
 S|E1|E|Fry the eggs|Heat the oil in the wok until very hot and fry the eggs one at a time, spooning hot oil over them, until the edges are crispy and the yolk is still runny. Keep them on a plate.|action|high|120 × servings|R1|Crispy edges, runny yolk|egg; oil_egg|wok, stovetop, spatula, plates|opt_egg = egg
 S|W1|W|Fry the garlic and chilies|Heat the oil in the wok and fry the garlic and chili paste for a few seconds until fragrant.|action|high|30|K1, E1|Fragrant, not brown|oil|wok, stovetop, spatula|—
 S|W2|W|Fry the meat|Add the meat and stir-fry, breaking it up, until cooked through.|action|high|240|W1|Cooked through|ground_pork; chicken_breast|wok, spatula|—
-S|W3|W|Sauce and basil|Pour in the sauce and toss until glossy, then turn off the heat and stir in the basil until it wilts.|action|high|60|W2, K2|Glossy, basil wilted|thai_basil|wok, spatula|—
+S|W3|W|Add the sauce and basil|Pour in the sauce and toss until glossy, then turn off the heat and stir in the basil until it wilts.|action|high|60|W2, K2|Glossy, basil wilted|thai_basil|wok, spatula|—
 S|F1|F|Serve|Serve over the rice (with the fried egg on top).|action|off|30 + 15 × servings|W3, R1|Served|—|spoon, plates|—
 `
   },
@@ -4243,13 +4243,13 @@ I|flour|Flour|img/350/flour.webp|1|tbsp|8|linear|—|—
 I|white_vinegar|Vinegar|img/350/white_vinegar.webp|1|tsp|5|linear|—|—
 I|sugar|Sugar|img/350/sugar.webp|0.5|tsp|2|linear|—|—
 S|K1|K|Grate the squash|Peel the squash if the skin is tough, scoop out any big seeds and grate it coarsely into a bowl.|action|—|(120 + 60 × servings) × skill_factor|—|Grated|zucchini|vegetable_peeler, cheese_grater, bowl|—
-S|K2|K|Salt and wait|Mix in the salt and leave for 15 minutes so the squash lets out its water.|wait|—|900|K1|Liquid in the bowl|salt|bowl|—
+S|K2|K|Salt the squash and wait|Mix in the salt and leave for 15 minutes so the squash lets out its water.|wait|—|900|K1|Liquid in the bowl|salt|bowl|—
 S|K3|K|Chop the onion and dill|Finely chop the onion (and the fresh dill).|action|—|(60 + 30 × servings) × skill_factor|—|Chopped|onion; dill|chef_knife, chopping_board|—
 S|K4|K|Squeeze the squash|Squeeze the squash firmly by the handful and pour away the liquid.|action|—|60 + 30 × servings|K2|Squeezed dry|—|bowl|—
 S|P1|P|Soften the onion|Heat the oil in the pot and cook the onion gently until glassy; do not let it brown.|action|medium|240|K3|Soft and glassy|oil|cooking_pot, stovetop, wooden_spoon|—
-S|P2|P|Squash in|Take the pot off the heat, stir in the paprika, then add the squash, half the dill and the water.|action|off|60|P1, K4|Squash in the pot|paprika_powder; water; dill_dried|cooking_pot, wooden_spoon|—
+S|P2|P|Add the squash|Take the pot off the heat, stir in the paprika, then add the squash, half the dill and the water.|action|off|60|P1, K4|Squash in the pot|paprika_powder; water; dill_dried|cooking_pot, wooden_spoon|—
 S|P3|P|Simmer|Cover and cook until the squash is soft but still has a little bite, stirring now and then.|wait|low|600|P2|Soft, a little bite|—|cooking_pot|—
-S|K5|K|Sour cream mix|Whisk the sour cream and the flour smooth in a small bowl.|action|—|60|—|No lumps|sour_cream; flour|bowl, whisk|—
+S|K5|K|Whisk the sour cream mix|Whisk the sour cream and the flour smooth in a small bowl.|action|—|60|—|No lumps|sour_cream; flour|bowl, whisk|—
 S|P4|P|Thicken|Stir a ladle of the hot liquid into the sour cream mix, then stir it all into the pot. Simmer 2 to 3 minutes until thick.|action|medium|180|P3, K5|Thick and creamy|—|cooking_pot, ladle, wooden_spoon|—
 S|P5|P|Season|Turn off the heat. Add the vinegar, the sugar, the rest of the dill and salt to taste. It should taste gently sweet and sour.|action|off|60|P4|Gently sweet and sour|white_vinegar; sugar|cooking_pot, wooden_spoon|—
 S|F1|F|Serve|Ladle into deep plates. Serve with bread, or with a fried sausage or a meat patty on top.|action|off|30 + 15 × servings|P5|Served|—|ladle, plates|—
@@ -4284,14 +4284,14 @@ S|K1|K|Cut the beef|Cut the beef into 1.5 cm cubes.|action|—|(60 + 60 × servi
 S|K2|K|Chop the onion and garlic|Finely chop the onion; crush the garlic.|action|—|(60 + 30 × servings) × skill_factor|—|Chopped|onion; garlic|chef_knife, chopping_board|—
 S|P1|P|Soften the onion|Melt the lard in the large pot and cook the onion until soft and golden.|action|medium|360|K2|Soft, golden|lard|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Brown the beef|Turn up the heat, add the beef and stir until it has lost its red colour all over.|action|high|300|P1, K1|No red left|—|cooking_pot, wooden_spoon|—
-S|P3|P|Paprika off the heat|Pull the pot off the heat. Stir in the paprika, the crushed caraway and the garlic, then add a splash of water at once: paprika burns quickly and turns bitter.|action|off|30|P2|Red and fragrant|paprika_powder; caraway_seeds|cooking_pot, wooden_spoon|—
+S|P3|P|Stir in the paprika off the heat|Pull the pot off the heat. Stir in the paprika, the crushed caraway and the garlic, then add a splash of water at once: paprika burns quickly and turns bitter.|action|off|30|P2|Red and fragrant|paprika_powder; caraway_seeds|cooking_pot, wooden_spoon|—
 S|P4|P|Stew the beef|Add the salt, the pepper and enough water to just cover the meat. Cover and simmer gently, adding a little water when it gets low.|wait|low|3600 (doc: 1 h, until nearly tender)|P3|Beef nearly tender|salt; ground_black_pepper|cooking_pot|—
 S|K3|K|Cut the vegetables|Peel the carrot, parsley root, celery root and potatoes. Cut the roots into small cubes and the potatoes into 1.5 cm cubes; chop the tomato and pepper (and the chili).|action|—|(180 + 120 × servings) × skill_factor|—|All cut|carrot; parsley_root; celery_root; potato; tomato; green_bell_pepper; chili_pepper|vegetable_peeler, chef_knife, chopping_board|—
-S|P5|P|Roots, tomato and pepper|Add the carrot, parsley root, celery root, tomato, pepper (and chili) with the rest of the water. Bring back to a simmer.|wait|low|900|P4, K3|Roots softening|water|cooking_pot, wooden_spoon|—
+S|P5|P|Add the roots, tomato and pepper|Add the carrot, parsley root, celery root, tomato, pepper (and chili) with the rest of the water. Bring back to a simmer.|wait|low|900|P4, K3|Roots softening|water|cooking_pot, wooden_spoon|—
 S|C1|C|Make the csipetke dough|Knead the flour, the egg and a pinch of salt into a firm dough. Add a drop of water if it crumbles.|action|—|(120 + 30 × servings) × skill_factor|—|Firm, smooth dough|flour; egg|bowl|opt_csipetke = with
 S|C2|C|Pinch the csipetke|Flatten the dough thinly between your palms and pinch off pea-sized pieces onto a floured plate.|action|—|(120 + 60 × servings) × skill_factor|C1|Small pieces on the plate|—|plates|opt_csipetke = with
-S|P6|P|Potatoes in|Add the potatoes and simmer until soft.|wait|medium-low|1200|P5|Potatoes soft|—|cooking_pot|—
-S|P7|P|Csipetke in|Drop in the csipetke and cook until they float and are soft.|wait|medium|300|P6, C2|Csipetke floating, soft|—|cooking_pot, wooden_spoon|opt_csipetke = with
+S|P6|P|Add the potatoes|Add the potatoes and simmer until soft.|wait|medium-low|1200|P5|Potatoes soft|—|cooking_pot|—
+S|P7|P|Add the csipetke|Drop in the csipetke and cook until they float and are soft.|wait|medium|300|P6, C2|Csipetke floating, soft|—|cooking_pot, wooden_spoon|opt_csipetke = with
 S|P8|P|Taste|Turn off the heat. Taste and add salt if needed.|action|off|60|P7|Seasoned|—|cooking_pot, spoon|—
 S|F1|F|Serve|Ladle into bowls and serve with fresh bread.|action|off|30 + 15 × servings|P8|Served|—|ladle|—
 `
@@ -4324,7 +4324,7 @@ S|B2|B|Rest the batter|Let it rest so the flour swells; the crêpes tear less.|w
 S|K1|K|Chop the vegetables|Finely chop the onion; chop the tomato and the pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Chopped|onion; tomato; green_bell_pepper|chef_knife, chopping_board|—
 S|K2|K|Cut the meat|Cut the meat into 1 cm pieces.|action|—|(60 + 45 × servings) × skill_factor|—|Cut|chicken_legs; pork|chef_knife, chopping_board|—
 S|P1|P|Soften the onion|Heat the oil in the saucepan and cook the onion until soft and golden.|action|medium|300|K1|Soft, golden|oil|saucepan, stovetop, wooden_spoon|—
-S|P2|P|Paprika and meat|Take the pan off the heat and stir in the paprika. Add the meat, the tomato, the pepper, the salt and the water.|action|off|60|P1, K2|Meat in the red sauce|paprika_powder; salt; water_stew|saucepan, wooden_spoon|—|stove
+S|P2|P|Add the paprika and meat|Take the pan off the heat and stir in the paprika. Add the meat, the tomato, the pepper, the salt and the water.|action|off|60|P1, K2|Meat in the red sauce|paprika_powder; salt; water_stew|saucepan, wooden_spoon|—|stove
 S|P3|P|Stew|Cover and simmer gently until the meat is tender.|wait|low|1500 (doc: 25 to 30 min)|P2|Meat tender|—|saucepan|—
 S|P4|P|Lift out the meat|Lift the meat out with a slotted spoon onto the board; keep the juice in the pan.|action|off|60|P3|Juice left in the pan|—|saucepan, spoon, chopping_board|—|stove
 S|K3|K|Chop the filling|Chop the meat finely and mix it with 2 tablespoons of the sour cream and a spoonful of the juice.|action|—|(90 + 60 × servings) × skill_factor|P4|Juicy filling|sour_cream|chef_knife, chopping_board, bowl|—
@@ -4333,7 +4333,7 @@ S|C2|C|Cook the crêpes|Pour in a small ladle of batter and tilt the pan so it c
 S|O1|O|Preheat the oven|Turn the oven on to 180 °C conventional (160 °C fan).|action|180 °C (160 °C fan)|15|P3|Oven on|—|oven|—
 S|S1|S|Make the sauce|Whisk the rest of the sour cream with the flour, stir it into the juice with a splash of water and simmer 2 to 3 minutes until creamy.|action|medium|180|K3|Creamy, pourable|sour_cream; flour_sauce|saucepan, whisk|—
 S|A1|A|Fill and roll|Put a spoonful of filling on each crêpe, fold in the sides and roll it up. Lay them side by side in the baking dish.|action|—|(60 + 60 × servings) × skill_factor|C2, K3|All rolled|—|baking_dish, spoon|—|countertop
-S|O2|O|Sauce and bake|Pour the sauce over the crêpes and bake until bubbling.|wait|180 °C (160 °C fan)|720 (doc: 10 to 15 min)|O1, A1, S1|Bubbling sauce|—|oven, baking_dish|—
+S|O2|O|Pour on the sauce and bake|Pour the sauce over the crêpes and bake until bubbling.|wait|180 °C (160 °C fan)|720 (doc: 10 to 15 min)|O1, A1, S1|Bubbling sauce|—|oven, baking_dish|—
 S|F1|F|Serve|Serve hot, with a spoonful of the sauce and chopped parsley on top.|action|—|30 + 15 × servings|O2|Served|parsley|spatula, plates|—
 `
   },
@@ -4362,8 +4362,8 @@ I|butter|Butter or oil (to toss)|img/350/butter.webp|5|g|5|linear|—|—
 S|K1|K|Cut the chicken|Cut the legs at the joint into thighs and drumsticks. Pat dry and sprinkle with the salt and pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Cut and seasoned|chicken_legs; salt; ground_black_pepper|chef_knife, chopping_board|—
 S|K2|K|Chop the vegetables|Finely chop the onion; chop the tomato and the pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Chopped|onion; tomato; green_bell_pepper|chef_knife, chopping_board|—
 S|P1|P|Soften the onion|Melt the lard in the saucepan and cook the onion until soft and golden.|action|medium|420|K2|Soft, golden|lard|saucepan, stovetop, wooden_spoon|—
-S|P2|P|Paprika off the heat|Take the pan off the heat, stir in the paprika and add a splash of the water at once so the paprika doesn't burn.|action|off|30|P1|Red and fragrant|paprika_powder|saucepan, wooden_spoon|—|stove
-S|P3|P|Chicken in|Add the chicken and turn it in the paprika. Add the tomato, the pepper and the rest of the water.|action|medium|120|P2, K1|Chicken coated|water_stew|saucepan, tongs|—
+S|P2|P|Stir in the paprika off the heat|Take the pan off the heat, stir in the paprika and add a splash of the water at once so the paprika doesn't burn.|action|off|30|P1|Red and fragrant|paprika_powder|saucepan, wooden_spoon|—|stove
+S|P3|P|Add the chicken|Add the chicken and turn it in the paprika. Add the tomato, the pepper and the rest of the water.|action|medium|120|P2, K1|Chicken coated|water_stew|saucepan, tongs|—
 S|P4|P|Simmer|Cover and simmer gently, turning the chicken once, until it is tender and comes away from the bone.|wait|low|2100 (doc: 35 to 40 min)|P3|Tender at the bone|—|saucepan, tongs|—
 S|D1|D|Make the nokedli dough|Mix the flour, the eggs, the salt and the water into a thick, sticky dough that drops slowly from the spoon. Beat until smooth.|action|—|(120 + 30 × servings) × skill_factor|—|Thick, sticky, smooth|flour; egg; water; salt_dough|bowl, wooden_spoon|—
 S|D2|D|Rest the dough|Let the dough rest so it becomes smooth.|wait|—|600|D1|Rested|—|bowl|—
@@ -4372,7 +4372,7 @@ S|N2|N|Make the nokedli|Set the spaetzle maker over the boiling water, fill the 
 S|N3|N|Make the nokedli|Wet the chopping board and spread some dough near its edge. Hold it over the pot and scrape thin strips into the boiling water with a wet knife, dipping the knife in the water as you go. Work in batches.|action|high|(180 + 120 × servings) × skill_factor|N1, D2|Dough all in the water|—|cooking_pot, chopping_board, knife|opt_nokedli = board
 S|N4|N|Cook until they float|Boil until the nokedli float, then 1 more minute.|wait|high|120|—|Floating|—|cooking_pot|—
 S|N5|N|Drain and toss|Drain the nokedli in a colander, rinse quickly with hot water and toss with the butter or oil so they don't stick.|action|off|60|N4|Loose, not sticky|butter|colander, wooden_spoon|—
-S|K3|K|Sour cream mix|Whisk the sour cream and the flour smooth in a bowl.|action|—|60|—|No lumps|sour_cream; flour_sauce|bowl, whisk|—
+S|K3|K|Whisk the sour cream mix|Whisk the sour cream and the flour smooth in a bowl.|action|—|60|—|No lumps|sour_cream; flour_sauce|bowl, whisk|—
 S|P5|P|Thicken the sauce|Lift out the chicken. Stir a ladle of the hot sauce into the sour cream mix, then stir it all into the pan. Simmer 3 minutes and put the chicken back.|action|medium|240|P4, K3|Creamy, coats the spoon|—|saucepan, ladle, whisk, tongs|—
 S|F1|F|Serve|Serve the chicken and plenty of sauce with the nokedli.|action|off|30 + 20 × servings|P5, N5|Served|—|tongs, ladle, plates|—
 `
@@ -4398,11 +4398,11 @@ S|K2|K|Cut the peppers|Remove the stems and seeds and cut the peppers into 1 cm 
 S|K3|K|Cut the tomatoes|Cut the tomatoes into chunks.|action|—|(30 + 30 × servings) × skill_factor|—|Chunks|tomato|chef_knife, chopping_board|—
 S|K4|K|Slice the sausage|Slice the sausage into rounds.|action|—|(30 + 15 × servings) × skill_factor|—|Sliced|sausage|chef_knife, chopping_board|opt_sausage = with
 S|P1|P|Soften the onion|Heat the oil in the large frying pan and cook the onion until soft and glassy.|action|medium|300|K1|Soft, glassy|oil|pan, stovetop, wooden_spoon|—
-S|P2|P|Sausage in|Add the sausage and fry for 2 minutes so it releases its red fat.|action|medium|120|P1, K4|Red fat in the pan|—|pan, wooden_spoon|opt_sausage = with
-S|P3|P|Peppers in|Take the pan off the heat for a moment, stir in the paprika, then add the peppers. Cook, stirring now and then, until they soften and lose their bright colour.|action|medium|600|P2, K2|Peppers soft|paprika_powder|pan, wooden_spoon|—
-S|P4|P|Tomatoes in|Add the tomatoes, the salt and the sugar. Simmer uncovered until the tomatoes fall apart and most of the liquid is gone.|wait|medium|600|P3, K3|Thick, saucy|salt; sugar|pan, wooden_spoon|—
+S|P2|P|Add the sausage|Add the sausage and fry for 2 minutes so it releases its red fat.|action|medium|120|P1, K4|Red fat in the pan|—|pan, wooden_spoon|opt_sausage = with
+S|P3|P|Add the peppers|Take the pan off the heat for a moment, stir in the paprika, then add the peppers. Cook, stirring now and then, until they soften and lose their bright colour.|action|medium|600|P2, K2|Peppers soft|paprika_powder|pan, wooden_spoon|—
+S|P4|P|Add the tomatoes|Add the tomatoes, the salt and the sugar. Simmer uncovered until the tomatoes fall apart and most of the liquid is gone.|wait|medium|600|P3, K3|Thick, saucy|salt; sugar|pan, wooden_spoon|—
 S|K5|K|Beat the eggs|Beat the eggs with a fork in a bowl.|action|—|30 + 10 × servings|—|Beaten|egg|bowl, fork|opt_egg = with
-S|P5|P|Eggs in|Pour the eggs over the lecsó and stir gently until they have just set.|action|low|120|P4, K5|Eggs just set|—|pan, wooden_spoon|opt_egg = with
+S|P5|P|Add the eggs|Pour the eggs over the lecsó and stir gently until they have just set.|action|low|120|P4, K5|Eggs just set|—|pan, wooden_spoon|opt_egg = with
 S|F1|F|Serve|Serve hot with fresh bread (or rice).|action|off|30 + 15 × servings|P4, P5|Served|—|spoon, plates|—
 `
   },
@@ -4435,20 +4435,20 @@ S|O1|O|Preheat the oven|Turn the oven on to 180 °C conventional (160 °C fan). 
 S|R1|R|Soak the raisins|Put the raisins in a small bowl and pour half the rum over them (or a little warm water).|action|—|30|—|Soaking|raisins; rum|bowl|—
 S|S1|S|Separate the eggs|Separate the eggs for the sponge: whites into a clean bowl, yolks into another.|action|—|(30 + 30 × servings) × skill_factor|—|Separated|egg|bowl|—
 S|S2|S|Whisk the whites|Whisk the whites to soft peaks, then add half the sugar a little at a time and whisk until stiff and glossy.|action|—|240|S1|Stiff, glossy peaks|sugar|bowl, mixer|—
-S|S3|S|Yolks in|Beat the yolks with the rest of the sugar until pale, then fold them gently into the whites.|action|—|120|S2|Light and airy|—|bowl, mixer, spatula|—
+S|S3|S|Beat in the yolks|Beat the yolks with the rest of the sugar until pale, then fold them gently into the whites.|action|—|120|S2|Light and airy|—|bowl, mixer, spatula|—
 S|S4|S|Fold in the flour|Mix the flour with the baking powder and fold it in gently in two goes.|action|—|90|S3|No dry flour|flour; baking_powder|spatula|—|countertop
-S|S5|S|Walnut and cocoa|Divide the batter in two bowls. Fold the ground walnuts into one and the cocoa into the other.|action|—|90|S4|Two batters|walnut; cocoa_powder|bowl, spatula|—
+S|S5|S|Mix the walnut and cocoa|Divide the batter in two bowls. Fold the ground walnuts into one and the cocoa into the other.|action|—|90|S4|Two batters|walnut; cocoa_powder|bowl, spatula|—
 S|S6|S|Spread on the tray|Fold a ridge in the middle of the baking paper and spread the walnut batter on one half, the cocoa batter on the other, about 1 cm thick.|action|—|(60 + 15 × servings) × skill_factor|S5, O1|Evenly spread|—|tray, spatula|—|countertop
 S|S7|S|Bake the sponge|Bake until springy and a toothpick comes out clean.|wait|180 °C (160 °C fan)|780 (doc: 12 to 15 min)|S6|Springy, toothpick clean|—|oven, tray|—
 S|S8|S|Cool the sponge|Let the sponge cool on the rack.|wait|—|1800|S7|Cool|—|cooling_rack|—
-S|C1|C|Custard base|Whisk the yolks, the sugar and the flour smooth with a few spoons of the milk. Heat the rest of the milk in the saucepan until it steams.|action|medium|240|—|Smooth base, milk steaming|egg_yolk; sugar_custard; flour_custard; milk|saucepan, stovetop, bowl, whisk|—
+S|C1|C|Cook the custard base|Whisk the yolks, the sugar and the flour smooth with a few spoons of the milk. Heat the rest of the milk in the saucepan until it steams.|action|medium|240|—|Smooth base, milk steaming|egg_yolk; sugar_custard; flour_custard; milk|saucepan, stovetop, bowl, whisk|—
 S|C2|C|Cook the custard|Pour the hot milk onto the yolks while whisking, pour it all back into the pan and cook on low, whisking all the time, until thick. Stir in the vanilla.|action|low|360|C1|Thick, coats the whisk|vanilla|saucepan, whisk|—
 S|C3|C|Cool the custard|Pour into a bowl, press cling film onto the surface and let it cool.|wait|—|1800|C2|Cool, no skin|—|bowl, plastic_wrap|—|countertop
 S|Y1|Y|Make the syrup|Boil the water and the sugar with the lemon zest for 2 minutes. Take off the heat and add the rest of the rum.|action|medium|180|C2|Syrupy|water; sugar_syrup; lemon_zest|saucepan, stovetop|—
 S|K1|K|Chop the walnuts|Roughly chop the walnuts for the layers.|action|—|(30 + 15 × servings) × skill_factor|—|Chopped|walnut_top|chef_knife, chopping_board|—
 S|A1|A|Layer|Tear the sponges into rough pieces. In a deep dish, layer the walnut sponge, half the syrup, half the custard, half the raisins and walnuts; then the cocoa sponge, the rest of the syrup, raisins and walnuts, and finish with the custard.|action|—|(180 + 30 × servings) × skill_factor|S8, C3, Y1, K1, R1|Layered|—|baking_dish, spoon|—|countertop
 S|A2|A|Chill|Cover and chill for at least 4 hours; overnight is best.|wait|—|14400 (doc: 4 h to overnight)|A1|Set and cold|—|plastic_wrap, fridge|—
-S|H1|H|Chocolate sauce|Heat the cream for the sauce until it steams, take it off the heat and stir in the chocolate until smooth.|action|low|180|A2|Smooth, glossy|cream_sauce; dark_chocolate|saucepan, stovetop, spoon|—
+S|H1|H|Make the chocolate sauce|Heat the cream for the sauce until it steams, take it off the heat and stir in the chocolate until smooth.|action|low|180|A2|Smooth, glossy|cream_sauce; dark_chocolate|saucepan, stovetop, spoon|—
 S|W1|W|Whip the cream|Whip the cream to soft peaks.|action|—|120 + 15 × servings|A2|Soft peaks|cream|bowl, mixer|—
 S|F1|F|Scoop and serve|Scoop dumpling-sized portions into bowls with a big spoon, pour over the chocolate sauce and top with whipped cream.|action|—|30 + 20 × servings|H1, W1|Served|—|spoon, plates|—
 `
@@ -4511,7 +4511,7 @@ I|lingonberry_jam|Cranberry or lingonberry jam|—|1|tbsp|20|linear|—|—
 I|lemon|Lemon|img/350/lemon.webp|1|slices|10|linear|—|—
 S|K1|K|Cut the vegetables|Peel the carrot, parsley root and celery root and cut them into chunks; slice the onion.|action|—|(120 + 90 × servings) × skill_factor|—|All cut|carrot; parsley_root; celery_root; onion|vegetable_peeler, chef_knife, chopping_board|—
 S|P1|P|Brown the beef|Season the beef with the salt and pepper. Heat the butter in the large pot and brown the meat on all sides, then lift it out.|action|high|480|—|Browned all over|beef; salt; ground_black_pepper; butter|cooking_pot, stovetop, tongs|—
-S|P2|P|Bacon and vegetables|Fry the bacon in the same pot, then add the vegetables and cook until golden, stirring now and then.|action|medium|600|P1, K1|Vegetables golden|bacon|cooking_pot, wooden_spoon|—
+S|P2|P|Add the bacon and vegetables|Fry the bacon in the same pot, then add the vegetables and cook until golden, stirring now and then.|action|medium|600|P1, K1|Vegetables golden|bacon|cooking_pot, wooden_spoon|—
 S|P3|P|Braise the beef|Put the beef back with the allspice, peppercorns, bay leaf and water. Cover and simmer very gently until tender, turning the meat once and adding a little water if it gets low.|wait|low|7200 (doc: 1.5 to 2 h)|P2|Beef tender|allspice; black_peppercorn; bay_leaf; water|cooking_pot|—
 S|D1|D|Wake the yeast|Stir the yeast and a pinch of sugar into the lukewarm milk and leave until foamy.|wait|—|600|—|Foamy|milk; yeast|bowl|opt_dumplings = homemade
 S|D2|D|Cube the bread|Cut the stale bread into 1 cm cubes.|action|—|(30 + 20 × servings) × skill_factor|—|Cubed|bread|knife, chopping_board|opt_dumplings = homemade
@@ -4524,7 +4524,7 @@ S|W3|W|Slice the dumplings|Lift them out, prick them with a skewer to let the st
 S|W4|W|Heat the dumplings|Steam the ready-made dumpling slices until hot through, or heat them as the packet says.|wait|medium|600|P3|Hot through|bread_dumplings|steamer, stovetop|opt_dumplings = ready
 S|S1|S|Lift out the beef|Lift the beef onto a board and cover it with foil. Fish out the bay leaf.|action|off|60|P3|Beef resting|—|tongs, tin_foil, chopping_board|—
 S|S2|S|Blend the sauce|Blend the vegetables with the cooking liquid until completely smooth.|action|off|120|S1|Smooth|—|immersion_blender, cooking_pot|—
-S|S3|S|Cream the sauce|Stir in the cream and simmer for 5 minutes. Season with the lemon juice, sugar, mustard and salt: it should taste creamy, gently sweet and a little sour.|action|low|300|S2|Creamy, sweet and sour|cream; lemon_juice; sugar; mustard|cooking_pot, wooden_spoon|—
+S|S3|S|Stir the cream into the sauce|Stir in the cream and simmer for 5 minutes. Season with the lemon juice, sugar, mustard and salt: it should taste creamy, gently sweet and a little sour.|action|low|300|S2|Creamy, sweet and sour|cream; lemon_juice; sugar; mustard|cooking_pot, wooden_spoon|—
 S|K2|K|Whip the cream|Whip the cream to soft peaks.|action|—|120 + 15 × servings|—|Soft peaks|cream_whip|bowl, whisk|—
 S|S4|S|Slice the beef|Slice the beef across the grain, about 1 cm thick.|action|—|60 + 30 × servings|S1|Sliced|—|chef_knife, chopping_board|—
 S|F1|F|Serve|Lay the beef and the dumpling slices on warm plates and pour plenty of sauce over them. Top with a spoon of whipped cream, a slice of lemon and a spoon of cranberry jam.|action|off|30 + 20 × servings|S3, S4, K2, W3, W4|Served|lingonberry_jam; lemon|ladle, plates|—
@@ -4578,7 +4578,7 @@ S|M1|M|Mix the three milks|Whisk the milk, the cream and the condensed milk toge
 S|M2|M|Soak the sponge|Prick the warm sponge all over with a fork and pour the milk mix evenly over it.|action|—|120|O2, M1|All soaked up|—|fork|—
 S|C1|C|Make the caramel|Melt the sugar in the saucepan without stirring, just swirling the pan, until amber. Off the heat, whisk in the cream (it bubbles up) and the butter.|action|medium|480|—|Smooth amber caramel|sugar_caramel; cream_caramel; butter|saucepan, stovetop, whisk|—
 S|C2|C|Cool the caramel|Let the caramel cool until just warm.|wait|—|900|C1|Warm, pourable|—|saucepan|—
-S|M3|M|Caramel on top|Pour the caramel over the soaked sponge and spread it evenly.|action|—|60|M2, C2|Evenly covered|—|spatula|—
+S|M3|M|Pour the caramel on top|Pour the caramel over the soaked sponge and spread it evenly.|action|—|60|M2, C2|Evenly covered|—|spatula|—
 S|M4|M|Chill|Cover and chill in the fridge for at least 4 hours, overnight is best.|wait|—|14400 (doc: at least 4 h)|M3|Cold and set|—|plastic_wrap|—
 S|F1|F|Serve|Cut into squares and serve cold, with a spoon of the milk from the dish.|action|—|30 + 15 × servings|M4|Served|—|knife, spatula, plates|—
 `
@@ -4611,9 +4611,9 @@ S|P0|P|Heat the stock|Bring the vegetable stock to the boil in the large pot.|wa
 S|K1|K|Prepare the vegetables|Peel the vegetables. Grate the beetroot and the carrot coarsely, dice the onion, cut the potatoes into 2 cm cubes and shred the cabbage finely.|action|—|(240 + 120 × servings) × skill_factor|—|All prepared|beetroot; carrot; onion; potato; cabbage|vegetable_peeler, cheese_grater, chef_knife, chopping_board|—
 S|B1|B|Soften the onion and carrot|Heat the oil in the frying pan and cook the onion and the carrot until soft.|action|medium|300|K1|Soft|oil|pan, stovetop, wooden_spoon|—
 S|B2|B|Cook the beetroot|Add the beetroot, the tomato paste, the vinegar and the sugar. Cook gently, stirring, until the beetroot is soft. The vinegar keeps it bright red.|action|medium-low|600|B1|Beetroot soft, deep red|tomato_paste; white_vinegar; sugar|pan, wooden_spoon|—
-S|P2|P|Potatoes in|Add the potatoes to the pot and simmer.|wait|medium|600|P1, P0, K1|Potatoes nearly soft|—|cooking_pot|—
-S|P3|P|Cabbage in|Add the cabbage and simmer.|wait|medium|300|P2|Cabbage soft|—|cooking_pot|—
-S|P4|P|Beetroot in|Stir in the beetroot mix, the garlic, the bay leaf, the salt and the pepper. Simmer gently without boiling hard, so it stays red.|wait|low|600|P3, B2|Everything soft|garlic; bay_leaf; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
+S|P2|P|Add the potatoes|Add the potatoes to the pot and simmer.|wait|medium|600|P1, P0, K1|Potatoes nearly soft|—|cooking_pot|—
+S|P3|P|Add the cabbage|Add the cabbage and simmer.|wait|medium|300|P2|Cabbage soft|—|cooking_pot|—
+S|P4|P|Add the beetroot|Stir in the beetroot mix, the garlic, the bay leaf, the salt and the pepper. Simmer gently without boiling hard, so it stays red.|wait|low|600|P3, B2|Everything soft|garlic; bay_leaf; salt; ground_black_pepper|cooking_pot, wooden_spoon|—
 S|P5|P|Rest|Turn off the heat, stir in half the dill, taste for salt and leave covered for 10 minutes.|wait|off|600|P4|Rested|dill|cooking_pot|—
 S|F1|F|Serve|Ladle into bowls and top with a spoon of sour cream and the rest of the dill. Serve with rye bread.|action|off|30 + 15 × servings|P5|Served|sour_cream|ladle|—
 `
@@ -4657,7 +4657,7 @@ I|onion|Onion|img/350/onion.webp|60|g|60|linear|—|diced
 S|R1|R|Rinse the barley|Rinse the barley in a sieve until the water runs clear.|action|—|60|—|Rinsed|barley|sieve|—
 S|P1|P|Simmer the barley|Put the barley in the large pot with half the water and the salt. Bring to the boil, cover and simmer gently.|wait|low|1200 (doc: 20 min)|R1|Barley half cooked|water; salt|cooking_pot, stovetop|—
 S|K1|K|Cut the potatoes|Peel the potatoes and cut them into large chunks.|action|—|(60 + 60 × servings) × skill_factor|—|Cut|potato|vegetable_peeler, chef_knife, chopping_board|—
-S|P2|P|Potatoes in|Lay the potatoes on top of the barley and add the rest of the water, just to cover. Cover and cook until the potatoes are completely soft.|wait|medium-low|1200 (doc: 20 to 25 min)|P1, K1|Potatoes soft|—|cooking_pot|—
+S|P2|P|Add the potatoes|Lay the potatoes on top of the barley and add the rest of the water, just to cover. Cover and cook until the potatoes are completely soft.|wait|medium-low|1200 (doc: 20 to 25 min)|P1, K1|Potatoes soft|—|cooking_pot|—
 S|P3|P|Mash|Pour off most of the water, keeping a little, and mash the potatoes and barley together into a thick, rough mash. Taste for salt.|action|off|180|P2|Thick, rough mash|—|cooking_pot, potato_masher|—
 S|B1|B|Dice the bacon and onion|Cut the bacon into 1 cm cubes and dice the onion.|action|—|(60 + 45 × servings) × skill_factor|—|Diced|bacon; onion|chef_knife, chopping_board|—
 S|B2|B|Fry the topping|Fry the bacon slowly in the frying pan until the fat runs (or melt the butter), then add the onion and cook until golden.|action|medium|600|B1|Golden onion, crisp bacon|butter|pan, stovetop, wooden_spoon|—
@@ -4694,7 +4694,7 @@ S|M2|M|Mix the meat|Add the meats, the egg, the onion, the allspice, the salt an
 S|M3|M|Roll the meatballs|With wet hands, roll the mix into balls about 3 cm across.|action|—|(60 + 120 × servings) × skill_factor|M2|All rolled|—|plates|—
 S|P1|P|Fry the meatballs|Melt the butter in the frying pan and fry the meatballs in batches, rolling them around, until brown all over and cooked through. Keep them on a plate.|action|medium|600 + 60 × servings|M3|Brown, cooked through|butter|pan, stovetop, spatula, plates|—
 S|P2|P|Make the gravy|Stir the flour into the fat in the pan for 1 minute, then whisk in the stock and simmer until slightly thick. Add the cream and the soy sauce and simmer 2 minutes.|action|medium|300|P1|Smooth, light brown gravy|flour; beef_stock; cream; light_soy_sauce|pan, whisk|—
-S|P3|P|Meatballs back in|Put the meatballs back into the gravy and heat through. Taste for salt and pepper.|action|low|120|P2|Hot through|—|pan, spatula|—
+S|P3|P|Return the meatballs to the pan|Put the meatballs back into the gravy and heat through. Taste for salt and pepper.|action|low|120|P2|Hot through|—|pan, spatula|—
 S|Z1|Z|Cook the potatoes|Peel the potatoes, cut big ones in half and boil them in salted water until soft.|wait|medium|1200 (doc: 18 to 22 min)|—|Soft through|potato; salt_water|vegetable_peeler, cooking_pot, stovetop|—
 S|Z2|Z|Drain the potatoes|Drain the potatoes in a colander.|action|off|60|Z1|Drained|—|colander|—
 S|Z3|Z|Mash the potatoes|Mash the potatoes with the butter and the hot milk until smooth.|action|off|120|Z2|Smooth|butter_mash; milk_mash|cooking_pot, potato_masher|opt_side = mash
@@ -4818,10 +4818,10 @@ I|ground_black_pepper|Ground black pepper|img/350/ground_black_pepper.webp|0.125
 I|parsley|Parsley|img/350/parsley.webp|1|tbsp|3|linear|—|chopped
 S|K1|K|Chop the vegetables|Dice the onion and the pepper, chop the garlic finely and halve the cherry tomatoes.|action|—|(90 + 45 × servings) × skill_factor|—|All cut|onion; red_bell_pepper; garlic; cherry_tomato|chef_knife, chopping_board|—
 S|P1|P|Crisp the bacon|Fry the bacon in the frying pan until crisp, then lift it out and leave the fat in the pan.|action|medium|420|—|Crisp|bacon|pan, stovetop, spatula|opt_bacon = with
-S|P2|P|Onion and pepper|Add the butter to the pan and cook the onion and the pepper until soft. Add the garlic for the last minute.|action|medium|360|P1, K1|Soft, fragrant|butter|pan, stovetop, spatula|—
-S|P3|P|Lima beans in|Add the lima beans and the water, cover and cook until tender.|wait|medium-low|300|P2|Beans tender|lima_beans; water|pan|—
-S|P4|P|Corn in|Stir in the corn and cook until hot and just tender.|action|medium|240|P3|Corn tender|corn|pan, spatula|—
-S|P5|P|Tomatoes and seasoning|Stir in the tomatoes, the salt and the pepper and cook just until the tomatoes soften.|action|medium|120|P4|Tomatoes just soft|salt; ground_black_pepper|pan, spatula|—
+S|P2|P|Add the onion and pepper|Add the butter to the pan and cook the onion and the pepper until soft. Add the garlic for the last minute.|action|medium|360|P1, K1|Soft, fragrant|butter|pan, stovetop, spatula|—
+S|P3|P|Add the lima beans|Add the lima beans and the water, cover and cook until tender.|wait|medium-low|300|P2|Beans tender|lima_beans; water|pan|—
+S|P4|P|Add the corn|Stir in the corn and cook until hot and just tender.|action|medium|240|P3|Corn tender|corn|pan, spatula|—
+S|P5|P|Add the tomatoes and seasoning|Stir in the tomatoes, the salt and the pepper and cook just until the tomatoes soften.|action|medium|120|P4|Tomatoes just soft|salt; ground_black_pepper|pan, spatula|—
 S|F1|F|Serve|Sprinkle with the parsley and the crispy bacon and serve warm.|action|off|30 + 15 × servings|P5|Served|parsley|spoon, plates|—
 `
   },
@@ -4873,9 +4873,9 @@ S|K2|K|Cut the meat|Cut the chicken into 2 cm pieces and slice the sausage.|acti
 S|P1|P|Brown the sausage|Heat the oil in the large pot and fry the sausage until browned. Lift it out and leave the fat in the pot.|action|medium-high|300|K2|Browned|oil|cooking_pot, stovetop, wooden_spoon|—
 S|P2|P|Brown the chicken|Fry the chicken in the same pot until lightly browned on all sides, then lift it out too.|action|medium-high|360|P1|Lightly browned|—|cooking_pot, wooden_spoon|—
 S|P3|P|Soften the vegetables|Cook the onion, the pepper and the celery in the pot until soft. Add the garlic for the last minute.|action|medium|420|P2, K1|Soft|—|cooking_pot, wooden_spoon|—
-S|P4|P|Spices and rice|Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.|action|medium|90|P3|Rice coated|paprika_powder; cayenne_pepper; thyme; oregano; white_rice|cooking_pot, wooden_spoon|—
+S|P4|P|Add the spices and rice|Stir in the paprika, the cayenne, the thyme, the oregano and the rice and stir for 1 minute.|action|medium|90|P3|Rice coated|paprika_powder; cayenne_pepper; thyme; oregano; white_rice|cooking_pot, wooden_spoon|—
 S|P5|P|Simmer|Add the tomatoes, the stock, the bay leaf, the salt and the pepper and put the chicken and the sausage back in. Bring to the boil, cover and cook on low heat without stirring until the rice is tender.|wait|low|1200 (doc: 20 to 25 min)|P4|Rice tender, liquid absorbed|tomato; chicken_stock; bay_leaf; salt; ground_black_pepper|cooking_pot|—
-S|P6|P|Shrimp in|Push the shrimp into the rice, cover again and cook until pink.|wait|low|300|P5|Shrimp pink|shrimp|cooking_pot|opt_shrimp = with
+S|P6|P|Add the shrimp|Push the shrimp into the rice, cover again and cook until pink.|wait|low|300|P5|Shrimp pink|shrimp|cooking_pot|opt_shrimp = with
 S|P7|P|Rest|Take the pot off the heat and leave it covered for 5 minutes. Remove the bay leaf.|wait|off|300|P5, P6|Rested|—|cooking_pot|—
 S|F1|F|Serve|Fluff the rice with a fork and serve sprinkled with the green onions.|action|off|30 + 15 × servings|P7|Served|green_onion|fork, plates|—
 `
@@ -4902,13 +4902,13 @@ I|basil|Fresh basil|img/350/basil.webp|3|leaves|1.5|linear|—|torn
 I|penne|Penne or other short pasta|img/350/penne.webp|80|g|80|linear|opt_side = pasta|—
 I|salt_pasta|Salt (pasta water)|img/350/salt.webp|1|tsp|6|linear|opt_side = pasta|—
 S|K1|K|Prepare the chicken|Cut each chicken breast in half horizontally into two thin cutlets. Season them with the salt and the pepper and dust them lightly with flour.|action|—|(60 + 60 × servings) × skill_factor|—|Seasoned and floured|chicken_breast; salt; ground_black_pepper; flour|chef_knife, chopping_board|—
-S|K2|K|Garlic and tomatoes|Chop the garlic finely and the sun-dried tomatoes roughly.|action|—|(40 + 20 × servings) × skill_factor|—|Chopped|garlic; sun_dried_tomatoes|chef_knife, chopping_board|—
+S|K2|K|Chop the garlic and tomatoes|Chop the garlic finely and the sun-dried tomatoes roughly.|action|—|(40 + 20 × servings) × skill_factor|—|Chopped|garlic; sun_dried_tomatoes|chef_knife, chopping_board|—
 S|N1|N|Boil the water|Bring a large pot of salted water to the boil.|wait|high|600|—|Boiling|salt_pasta|cooking_pot, stovetop|opt_side = pasta
 S|N2|N|Cook the pasta|Cook the pasta until al dente, then drain it.|wait|high|660 (doc: see the packet)|N1|Al dente|penne|cooking_pot, colander|opt_side = pasta
 S|P1|P|Fry the chicken|Heat the oil and the butter in the large pan and fry the chicken until golden on both sides and cooked through. Lift it out onto a plate.|action|medium-high|480 (doc: 3 to 4 min per side)|K1|Golden, cooked through|olive_oil; butter|pan, stovetop, tongs|—
-S|P2|P|Garlic and tomatoes|Fry the garlic and the sun-dried tomatoes in the same pan for 1 minute.|action|medium|60|P1, K2|Fragrant|garlic; sun_dried_tomatoes|pan, wooden_spoon|—
+S|P2|P|Add the garlic and tomatoes|Fry the garlic and the sun-dried tomatoes in the same pan for 1 minute.|action|medium|60|P1, K2|Fragrant|garlic; sun_dried_tomatoes|pan, wooden_spoon|—
 S|P3|P|Make the sauce|Pour in the stock and the cream, stir in the parmesan, the chili flakes and the oregano and simmer until slightly thickened.|wait|medium-low|240|P2|Slightly thickened|chicken_stock; cream; parmesan; chili_flakes; oregano|pan, wooden_spoon|—
-S|P4|P|Chicken back in|Put the chicken back into the sauce and simmer for 2 minutes, spooning the sauce over it.|wait|low|120|P3|Hot through|—|pan, spoon|—
+S|P4|P|Return the chicken to the pan|Put the chicken back into the sauce and simmer for 2 minutes, spooning the sauce over it.|wait|low|120|P3|Hot through|—|pan, spoon|—
 S|F1|F|Serve|Toss the pasta with a little of the sauce, then serve the chicken on top with the rest of the sauce and the torn basil.|action|off|30 + 15 × servings|P4, N2|Served|basil|plates|opt_side = pasta
 S|F2|F|Serve|Serve the chicken with the sauce and the torn basil, with bread or rice on the side.|action|off|30 + 15 × servings|P4|Served|basil|plates|opt_side = none
 `
@@ -4942,7 +4942,7 @@ S|M1|M|Brown the beef|Salt the beef and brown it on all sides in the oil in the 
 S|M2|K|Blend the sauce|Blend the soaked chilies with the onion, the garlic, the tomato, the cumin, the oregano, the cinnamon, the vinegar and a little of the stock until smooth.|action|—|120|K2|Smooth|onion; garlic; tomato; cumin; oregano; cinnamon; apple_cider_vinegar|blender|—
 S|M3|M|Simmer|Pour the sauce and the rest of the stock over the beef, add the bay leaf, cover and cook on low heat until the beef falls apart.|wait|low|9000 (doc: 2.5 to 3 h)|M1, M2|Falls apart|beef_stock; bay_leaf|cooking_pot|—
 S|M4|M|Shred the beef|Lift the beef out and shred it with two forks. Keep the broth hot and add salt if needed.|action|low|180|M3|Shredded|—|fork, bowl, cooking_pot|—
-S|T1|T|Toppings|Finely dice the white onion, chop the cilantro and cut the lime into wedges.|action|—|(60 + 30 × servings) × skill_factor|—|Ready|white_onion; cilantro; lime|chef_knife, chopping_board|—
+S|T1|T|Prepare the toppings|Finely dice the white onion, chop the cilantro and cut the lime into wedges.|action|—|(60 + 30 × servings) × skill_factor|—|Ready|white_onion; cilantro; lime|chef_knife, chopping_board|—
 S|F1|F|Fry the tacos|Dip a tortilla in the fat on top of the broth and lay it in the hot pan. Put beef (and cheese) on one half, fold it over and fry until crispy on both sides. Repeat with the rest.|action|medium|60 + 180 × servings|M4|Crispy|corn_tortilla; mozzarella|pan, stovetop, tongs|—
 S|F2|F|Serve|Serve the tacos with a small bowl of the hot broth for dipping and the onion, the cilantro and the lime on the side.|action|off|30 + 15 × servings|F1, T1|Served|—|plates, ladle|—
 `
@@ -4962,11 +4962,11 @@ I|parsley|Fresh parsley|img/350/parsley.webp|1|tbsp|3|linear|—|finely chopped
 I|chili_flakes|Chili flakes|img/350/chili_flakes.webp|0.125|tsp|0.2|linear|opt_chili = with|—
 I|lemon_juice|Lemon juice|img/350/lemon_juice.webp|0.5|tsp|2.5|linear|—|—
 S|K1|K|Cut the steak|Pat the steak dry and cut it into 2 to 3 cm cubes. Season with the salt and the pepper.|action|—|(60 + 45 × servings) × skill_factor|—|Cubed and seasoned|beef; salt; ground_black_pepper|chef_knife, chopping_board|—
-S|K2|K|Garlic and parsley|Chop the garlic and the parsley finely.|action|—|(40 + 30 × servings) × skill_factor|—|Chopped|garlic; parsley|chef_knife, chopping_board|—
+S|K2|K|Chop the garlic and parsley|Chop the garlic and the parsley finely.|action|—|(40 + 30 × servings) × skill_factor|—|Chopped|garlic; parsley|chef_knife, chopping_board|—
 S|P1|P|Heat the pan|Heat the oil in the large pan until it just starts to smoke.|action|high|120|—|Smoking hot|oil|pan, stovetop|—
 S|P2|P|Sear the steak|Add the steak in a single layer (in batches if needed) and sear without moving for 1 to 2 minutes, then turn and sear the other sides.|action|high|150 + 60 × servings|P1, K1|Browned all over|—|pan, tongs|—
-S|P3|P|Garlic butter|Turn the heat down, add the butter and the garlic and toss for 1 minute, until the garlic smells good but is not brown.|action|medium|60|P2, K2|Coated in garlic butter|butter; garlic|pan, wooden_spoon|—
-S|P4|P|Chili flakes|Stir in the chili flakes.|action|medium|15|P3|Mixed in|chili_flakes|pan, wooden_spoon|opt_chili = with
+S|P3|P|Add the garlic butter|Turn the heat down, add the butter and the garlic and toss for 1 minute, until the garlic smells good but is not brown.|action|medium|60|P2, K2|Coated in garlic butter|butter; garlic|pan, wooden_spoon|—
+S|P4|P|Add the chili flakes|Stir in the chili flakes.|action|medium|15|P3|Mixed in|chili_flakes|pan, wooden_spoon|opt_chili = with
 S|F1|F|Serve|Squeeze over the lemon juice, sprinkle with the parsley and serve right away with the butter from the pan.|action|off|30 + 15 × servings|P3, P4|Served|lemon_juice; parsley|plates|—
 `
   },
@@ -4989,7 +4989,7 @@ S|B2|B|Drain and steam dry|Drain the potatoes and let them steam dry for 5 minut
 S|S1|S|Smash the potatoes|Oil the tray, put the potatoes on it and press each one flat with the bottom of a glass to about 1.5 cm thick.|action|—|(60 + 45 × servings) × skill_factor|B2|Flattened|olive_oil|tray|—
 S|S2|S|Season|Drizzle with the rest of the oil and sprinkle with the salt, the pepper, the garlic powder and the rosemary.|action|—|60|S1|Seasoned|salt; ground_black_pepper; garlic_powder; rosemary|tray|—
 S|R1|S|Roast|Roast until deep golden and crispy at the edges.|wait|220 °C (200 °C fan)|1800 (doc: 25 to 35 min)|S2, O1|Golden and crispy|—|tray, oven|—
-S|R2|S|Parmesan on top|Sprinkle the parmesan over the potatoes and roast until it melts.|wait|220 °C (200 °C fan)|180|R1|Cheese melted|parmesan|tray, oven|opt_parmesan = with
+S|R2|S|Add the parmesan and roast|Sprinkle the parmesan over the potatoes and roast until it melts.|wait|220 °C (200 °C fan)|180|R1|Cheese melted|parmesan|tray, oven|opt_parmesan = with
 S|F1|F|Serve|Serve hot.|action|off|30 + 15 × servings|R1, R2|Served|—|plates|—
 `
   },
@@ -5014,7 +5014,7 @@ S|K2|K|Slice the peaches|Cut the peaches into thin wedges.|action|—|(30 + 45 �
 S|T1|T|Toast the bread|Toast the bread slices in a dry pan until golden on both sides.|action|medium|180|—|Golden|bread|pan, stovetop|—
 S|A1|A|Arrange|Lay the slices on a plate and set the burrata in the middle.|action|—|30 + 15 × servings|W1, K1, K2|Arranged|—|plates|—
 S|A2|A|Dress|Tear the burrata open, drizzle everything with the olive oil and the balsamic vinegar, season with the salt and the pepper and scatter over the basil.|action|—|60|A1|Dressed|extra_virgin_olive_oil; balsamic_vinegar; salt; ground_black_pepper; basil|plates|—
-S|A3|A|Honey|Drizzle a little honey over the peaches.|action|—|15|A2|Drizzled|honey|plates|opt_fruit = peach
+S|A3|A|Drizzle on the honey|Drizzle a little honey over the peaches.|action|—|15|A2|Drizzled|honey|plates|opt_fruit = peach
 S|F1|F|Serve|Serve right away with the toasted bread.|action|off|15|A2, A3, T1|Served|—|plates|—
 `
   },
@@ -5062,9 +5062,9 @@ I|cherry_tomato|Cherry tomatoes|img/350/cherry_tomato.webp|30|g|30|linear|opt_to
 I|olives|Pitted olives|img/350/olives.webp|15|g|15|linear|opt_topping = tomato|—
 I|salt_top|Flaky sea salt (for the top)|img/350/salt.webp|0.125|tsp|0.6|linear|—|—
 S|D1|D|Mix the dough|In a big bowl, stir the flour, the yeast, the salt and the water into a sticky dough with no dry flour left.|action|—|(120 + 10 × servings) × skill_factor|—|No dry flour left|flour; yeast; salt; water|bowl, wooden_spoon|—
-S|D2|D|First rise|Pour a little of the olive oil over the dough, turn it to coat, cover and leave it in a warm place until doubled.|wait|—|5400 (doc: 1.5 to 2 h)|D1|Doubled|olive_oil|bowl|—
-S|D3|D|Into the tray|Oil the tray generously, tip the dough in and gently stretch it towards the corners. If it springs back, wait 10 minutes and stretch again.|action|—|120 + 10 × servings|D2|Stretched to the corners|—|tray|—
-S|D4|D|Second rise|Cover and leave until puffy and bubbly.|wait|—|2400 (doc: 30 to 45 min)|D3|Puffy and bubbly|—|tray|—
+S|D2|D|Let the dough rise (first rise)|Pour a little of the olive oil over the dough, turn it to coat, cover and leave it in a warm place until doubled.|wait|—|5400 (doc: 1.5 to 2 h)|D1|Doubled|olive_oil|bowl|—
+S|D3|D|Put the dough into the tray|Oil the tray generously, tip the dough in and gently stretch it towards the corners. If it springs back, wait 10 minutes and stretch again.|action|—|120 + 10 × servings|D2|Stretched to the corners|—|tray|—
+S|D4|D|Let the dough rise (second rise)|Cover and leave until puffy and bubbly.|wait|—|2400 (doc: 30 to 45 min)|D3|Puffy and bubbly|—|tray|—
 S|O1|O|Preheat the oven|Turn the oven on to 220 °C conventional (200 °C fan).|action|220 °C (200 °C fan)|15|D3|Oven on|—|oven|—
 S|D5|D|Dimple the dough|Oil your fingers and press deep dimples all over the dough, then drizzle with the rest of the oil.|action|—|60 + 5 × servings|D4|Dimpled|—|tray|—
 S|D6|D|Add the toppings|Scatter the rosemary and the flaky salt over the top.|action|—|30 + 5 × servings|D5|Topped|rosemary; salt_top|tray|opt_topping = rosemary
