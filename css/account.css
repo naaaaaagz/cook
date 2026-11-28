@@ -34,6 +34,10 @@
 @media (prefers-reduced-motion: reduce) { .slide-note { animation: none; transition: none; } }
 @media (max-width: 520px) { .account-content { padding: 22px; } }
 .field-note { display: block; margin-top: 4px; font-size: .8rem; color: var(--muted); }
+.field-error { margin: -12px 0 20px; color: var(--danger, #d32f2f); font-weight: 600; }
+.account-human-row { display: flex; align-items: center; gap: 10px; }
+.account-human-row span { white-space: nowrap; font-weight: 600; }
+.account-human-row input { width: 5em; }
 .account-name-form { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; align-items: end; margin: 8px 0 12px; }
 .account-name-form .field { margin: 0; }
 .account-name-form .field-note { grid-column: 1 / -1; margin-top: 0; }

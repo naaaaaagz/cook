@@ -116,8 +116,29 @@
     $('account-password').value = '';
     $('account-stay-field').hidden = value !== 'login';
     $('account-signup-name-field').hidden = value !== 'signup';
+    $('account-password2-field').hidden = value !== 'signup';
+    $('account-password2').required = value === 'signup';
+    $('account-password2').value = '';
+    $('account-password-mismatch').hidden = true;
+    $('account-human-field').hidden = value !== 'signup';
+    $('account-human').required = value === 'signup';
+    newSum();
     drawMode();
     status(null);
+  }
+  // Registration asks for the password twice. The mismatch warning appears only after leaving a password field.
+  function passwordsDiffer() { return $('account-password2').value !== '' && $('account-password').value !== $('account-password2').value; }
+  ['account-password', 'account-password2'].forEach(function (id) {
+    $(id).addEventListener('blur', function () { if (mode === 'signup') $('account-password-mismatch').hidden = !passwordsDiffer(); });
+    $(id).addEventListener('input', function () { if (!passwordsDiffer()) $('account-password-mismatch').hidden = true; });
+  });
+  // Simple human check: the sum of two random 1-digit numbers, checked in the browser.
+  var sumAnswer;
+  function newSum() {
+    var left = Math.floor(Math.random() * 9) + 1, right = Math.floor(Math.random() * 9) + 1;
+    sumAnswer = String(left + right);
+    $('account-human-sum').textContent = left + ' + ' + right + ' =';
+    $('account-human').value = '';
   }
   document.querySelectorAll('[data-account-mode]').forEach(function (el) { el.addEventListener('click', function () { setMode(el.dataset.accountMode); }); });
   $('account-switch').addEventListener('click', function () { setMode(mode === 'login' ? 'signup' : 'login'); });
@@ -372,9 +393,14 @@
     event.preventDefault();
     if (!client || busy) return;
     var email = $('account-email').value.trim(); // Never remove +tags or Gmail dots.
-    var password = $('account-password').value;
-    $('account-password').value = '';
     var action = mode;
+    if (action === 'signup') {
+      if (passwordsDiffer() || $('account-password2').value === '') { $('account-password-mismatch').hidden = false; $('account-password2').focus(); return; }
+      if ($('account-human').value.trim() !== sumAnswer) { status('accHumanWrong'); newSum(); $('account-human').focus(); return; }
+    }
+    var password = $('account-password').value;
+    $('account-password').value = ''; $('account-password2').value = '';
+    if (action === 'signup') newSum();
     if (action === 'signup' && !passwordOK(password)) { status('accPasswordRule'); return; }
     busy = true; $('account-submit').disabled = true;
     status('accWait');
